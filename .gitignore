@@ -1,0 +1,6 @@
+.DS_Store
+.env
+.empty
+
+__MACOSX/
+__pycache__/
