@@ -1,0 +1,24 @@
+You are given: (1) an image, and (2) the following EXISTING VQA pairs (gold annotations).
+Your task is to generate {{ num_questions }} NEW QA pairs grounded solely in the visible content.
+Do not overlap in meaning with the existing ones.
+
+Existing QAs:
+{% for qa in gt_qas %}
+- Q: {{ qa.question }}
+  A: {{ qa.answer }}
+{% endfor %}
+
+Requirements:
+- Each new QA must target a different visual fact from all existing QAs.
+- No rephrasing, no paraphrasing, no trivial restatements.
+- Answers must be short, factual, unambiguous.
+- No external/world knowledge.
+
+Output format:
+{
+  "items": [
+  {%- for i in range(1, num_questions+1) %}
+    { "question": "<new question {{ i }}>", "answer": "<new answer {{ i }}>" }{%- if not loop.last %},{% endif %}
+  {%- endfor %}
+  ]
+}
