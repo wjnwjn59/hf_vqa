@@ -5,6 +5,8 @@ import json
 import sys
 from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
 from jinja2 import Environment, FileSystemLoader
+from collections import defaultdict
+
 # Load the model in half-precision on the available device(s)
 model_path = "/mnt/dataset1/pretrained_fm/Qwen_Qwen2-VL-2B-Instruct/"
 model = Qwen2VLForConditionalGeneration.from_pretrained(model_path, device_map="auto")
@@ -39,7 +41,13 @@ elif isinstance(train_ann, dict):
 else:
     print("Unknown JSON structure:", type(train_ann))
 
-sys.exit(1)
+grouped = defaultdict(list)
+for d in train_ann["data"]:
+    grouped[d['image_local_name']].append(d)
+
+test_img_name = "70283.jpeg"
+
+print(grouped[test_img_name])
 
 n_gen_qas = 1
 vqg_template_path = "../prompts/vqg.jinja"
