@@ -1,0 +1,19 @@
+conda activate
+
+export PYTHONPATH="./:$PYTHONPATH"
+
+CUDA_VISIBLE_DEVICES=0 python src/data/create_data/qwen/generate_infographic_data.py \
+    --model_name "unsloth/Qwen3-8B" \
+    --input_data "./src/data/create_data/wikipedia/wikipedia_processed.json" \
+    --template_path "./src/prompts/bizgen.jinja" \
+    --start-wiki 0 \
+    --end-wiki 25800 \
+    --batch_size 8 
+
+CUDA_VISIBLE_DEVICES=0 python src/data/create_data/qwen/merge_infographic_bboxes.py \
+    --start-wiki 0 \
+    --end-wiki 25800 \
+    --seed 42
+
+bash scripts/run_generate_parallel.sh
+bash scripts/run_merge_parallel.sh

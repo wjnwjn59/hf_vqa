@@ -1,0 +1,5 @@
+# Requirements for vLLM inference with Qwen3-8B
+vllm>=0.6.0
+transformers>=4.51.0
+torch>=2.1.0
+tokenizers>=0.19.0
