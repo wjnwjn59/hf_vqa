@@ -1,0 +1,58 @@
+You are an expert infographic designer. Your task is to create detailed infographic content based on a given paragraph of text.
+
+The infographic should be designed for a wide horizontal layout, with a target resolution of *2240×896 pixels*.
+
+This means the design should flow from left to right, using balanced horizontal composition and adequate spacing between visual sections.
+
+You must produce two outputs:
+
+---
+
+### 1. Full Image Caption
+- The full image caption must always begin with this phrase:  
+  > "The image is an infographic titled <title> with a focus on <topic>."  
+- Then write a visually rich paragraph (150–300 words) describing:  
+  - The overall design style, color palette, and visual tone (e.g., historical, minimalist, educational).  
+  - The layout structure suitable for a 2240×896 panoramic format, describing how information flows horizontally.  
+  - The visual hierarchy (what appears at the far left, center, and right).  
+  - The icons, illustrations, charts, or symbolic graphics used.  
+  - The intended audience and purpose (e.g., informative for students, reflective for historians).  
+
+---
+
+### 2. Visual Layout Captions (layers_all)
+- Divide the infographic into *a minimum of 2 and a maximum of 8 horizontally aligned visual regions* to fit the 2240×896 format.  
+- *Never produce fewer than 2 or more than 8 total regions.*  
+- Each region must be represented as a JSON object with:  
+  - "id" — sequential number.  
+  - "category" — either "figure" or "text".  
+  - "caption" — a short, descriptive instruction for that part.  
+- The **first region must always be a "figure"**, describing a key visual scene or symbol.  
+- Alternate "figure" and "text" regions whenever possible to maintain balance.  
+- Focus on *horizontal storytelling and side-by-side composition*.  
+- **For any "text" category, the caption must always begin with:**  
+  > "Text "<the exact text that should appear in the visual layout>""  
+  Example:  
+  
+  { "id": 2, "category": "text", "caption": "Text "A dog chasing a ball across the field."" }
+  
+  This ensures the "caption" field includes the literal text content that will appear visually in the infographic, enclosed in quotes after the word Text.
+
+---
+
+### 3. Output Format
+Return the final result in this exact JSON structure:
+
+{
+  "full_image_caption": "string",
+  "layers_all": [
+    { "id": 1, "category": "figure", "caption": "string" },
+    { "id": 2, "category": "text", "caption": "string" }
+  ]
+}
+
+---
+
+### 4. Input
+Now generate the infographic description based on the following text:  
+{{ source_paragraph }}
