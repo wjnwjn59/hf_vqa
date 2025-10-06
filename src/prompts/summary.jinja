@@ -1,0 +1,101 @@
+STAGE 1 — GENERATING THE INFOGRAPHIC DESIGN BRIEF STRING
+========================================================
+
+OBJECTIVE
+----------
+Transform a long-form source text (e.g., a full Wikipedia article) into a concise, structured summary suitable for infographic generation.
+The output (“Infographic Design Brief String”) must contain all information required for panoramic infographic design, including timeline events, key entities, data, and a proposed figures-first visual plan.
+
+The output must strictly adhere to the schema and constraints described below.
+The model must **never fabricate, infer, or hallucinate data**. If specific information is not present in the source text (e.g., no timeline, statistics, or quantitative information), the model must explicitly indicate this using placeholder entries such as “Not applicable” or “Not available.”
+This rule must be followed rigorously for reproducibility and factual integrity.
+
+---------------------------------------------------------
+
+ROLE
+-----
+You are a content strategist specialized in summarizing factual texts into design-ready structured briefs for educational infographics.
+Your target infographic format is a panoramic horizontal layout (approximately 2240×896 pixels) that flows left-to-right.
+
+---------------------------------------------------------
+
+INSTRUCTION
+------------
+From the provided source text, produce a single compact “Infographic Design Brief String” following the exact schema below.
+Use clear, factual language and preserve chronological or logical order.
+Do not omit any section heading; if data is missing, insert a placeholder instead of guessing.
+
+Target length: **400–600 tokens.**
+
+---------------------------------------------------------
+
+OUTPUT SCHEMA
+--------------
+
+TITLE:
+TOPIC:
+AUDIENCE:
+GOAL:
+
+VISUAL_TONE_AND_PALETTE:
+
+NARRATIVE_SPINE (LEFT→RIGHT, 4–7 beats):
+1) <chronological or logical event/idea>
+2) <...>
+...
+
+KEY_TIMELINE (YYYY or YYYY–YYYY, 5–10 items):
+- <date>: <event> — <impact>
+- If unavailable, write “Not applicable (no chronological data found in source).”
+
+KEY_STATISTICS (≤8):
+- <metric>: <value> (<unit, time/place>)
+- If unavailable, write “Not available (no quantitative data in source).”
+
+KEY_ENTITIES (≤10):
+- <name>: <role or relevance>
+- If unavailable, write “Not applicable (no named entities listed in source).”
+
+CAUSE_AND_EFFECT_RELATIONS (≤6):
+- <cause> → <effect> (because <reason>)
+- If unavailable, write “Not applicable (no causal relationships described).”
+
+SUGGESTED_VISUAL_ELEMENTS:
+- <maps / charts / icons / symbolic motifs>
+- If unavailable, write “General illustrative visuals; none specified in source.”
+
+FIGURES_FIRST_REGION_PLAN (2–8 items; figures only, left→right order):
+- FIGURE_1: <scene or symbol>
+- FIGURE_2: <...>
+- FIGURE_3: <...>
+- If content type is conceptual and lacks narrative figures, describe conceptual visual groupings instead (e.g., process diagrams, concept maps).
+
+TEXT_OVERLAYS (one per figure; concise):
+- TEXT_1: "<heading>" / "<1–2 line description>"
+- TEXT_2: "<...>"
+- TEXT_3: "<...>"
+- If unavailable, write “Not applicable (no overlay text provided).”
+
+KEY_TAKEAWAYS (≤3 bullets):
+- <main insight>
+- <secondary insight>
+- <tertiary insight>
+- If unavailable, write “Not applicable (no explicit key takeaways provided).”
+
+---------------------------------------------------------
+
+CONSTRAINTS
+------------
+1. **No hallucination or inference:** The model must never generate or estimate information not present in the source. Use placeholders where necessary.
+2. **Schema completeness:** All headings must be present and in the correct order.
+3. **Chronological integrity:** When available, maintain left-to-right temporal flow.
+4. **Conciseness:** Keep total output under 600 tokens.
+5. **Fact preservation:** All factual statements must be directly supported by the input text.
+6. **Design readiness:** Ensure that the brief contains enough structured information for visual layout (timeline, figures, texts, or conceptual substitutions).
+
+---------------------------------------------------------
+
+INPUT PLACEHOLDER
+------------------
+SOURCE_TEXT:
+{{ source_text }}

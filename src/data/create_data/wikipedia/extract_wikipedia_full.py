@@ -8,8 +8,8 @@ import json
 from tqdm import tqdm
 
 
-class WikipediaIntroExtractor:
-    """Class to extract introductions from Wikipedia articles"""
+class WikipediaFullExtractor:
+    """Class to extract full Wikipedia articles"""
     
     # Keywords to filter out articles about history and politics
     EXCLUDED_CATEGORIES = {
@@ -29,10 +29,10 @@ class WikipediaIntroExtractor:
         'dynasties', 'dynasty'
     }
     
-    def __init__(self, min_words: int = 1024):
+    def __init__(self, min_words: int = 500):
         """
         Args:
-            min_words (int): Minimum number of words for the introduction
+            min_words (int): Minimum number of words for the full article
         """
         self.min_words = min_words
     
@@ -132,45 +132,27 @@ class WikipediaIntroExtractor:
         
         return text
     
-    def extract_introduction(self, text: str) -> Optional[str]:
+    def extract_full_article(self, text: str) -> Optional[str]:
         """
-        Extract introduction from a Wikipedia article
-        Introduction is the text before the first section (before ==)
+        Extract full Wikipedia article content (remove only reference sections)
         
         Args:
             text (str): Article content
             
         Returns:
-            Optional[str]: Introduction text or None if invalid
+            Optional[str]: Full article text or None if invalid
         """
-        # First, remove reference sections from the entire text
-        text = self.remove_reference_sections(text)
-        
-        # Find the position of the first section (== marker)
-        section_pattern = r'\n==\s*[^=]'
-        match = re.search(section_pattern, text)
-        
-        if match:
-            intro = text[:match.start()].strip()
-        else:
-            # If no section found, use entire text
-            intro = text.strip()
+        # Remove reference sections from the entire text
+        full_article = self.remove_reference_sections(text)
         
         # Count words
-        word_count = len(intro.split())
+        word_count = len(full_article.split())
         
-        # If intro is too short and entire article is also shorter than min_words
+        # Check if article meets minimum word requirement
         if word_count < self.min_words:
-            total_word_count = len(text.split())
-            if total_word_count < self.min_words:
-                # Use entire article (already cleaned of references)
-                intro = text.strip()
-                word_count = total_word_count
-            else:
-                # Intro is short but article is long -> skip
-                return None
+            return None
         
-        return intro
+        return full_article.strip()
     
     def process_dataset(
         self, 
@@ -180,7 +162,7 @@ class WikipediaIntroExtractor:
         save_format: str = 'json'
     ):
         """
-        Process Wikipedia dataset and extract introductions
+        Process Wikipedia dataset and extract full articles
         
         Args:
             dataset_path (str): Path to the downloaded dataset
@@ -204,7 +186,7 @@ class WikipediaIntroExtractor:
             print(f"Will stop after extracting {max_samples} valid samples")
         
         # Process until we have enough samples or run out of articles
-        for idx in tqdm(range(len(dataset['train'])), desc="Extracting introductions"):
+        for idx in tqdm(range(len(dataset['train'])), desc="Extracting full articles"):
             # Stop if we've reached the desired number of samples
             if max_samples and total_extracted >= max_samples:
                 break
@@ -227,10 +209,10 @@ class WikipediaIntroExtractor:
                 total_excluded_by_category += 1
                 continue
             
-            # Extract introduction
-            intro = self.extract_introduction(text)
+            # Extract full article
+            full_article = self.extract_full_article(text)
             
-            if intro is None:
+            if full_article is None:
                 total_excluded_by_length += 1
                 continue
             
@@ -238,7 +220,7 @@ class WikipediaIntroExtractor:
             extracted_articles.append({
                 'id': article_id,
                 'title': title,
-                'text': intro,
+                'text': full_article,
                 'categories': categories
             })
             total_extracted += 1
@@ -282,7 +264,7 @@ class WikipediaIntroExtractor:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Extract introductions from Wikipedia dataset"
+        description="Extract full articles from Wikipedia dataset"
     )
     parser.add_argument(
         "--dataset_path",
@@ -293,14 +275,14 @@ def main():
     parser.add_argument(
         "--output_path",
         type=str,
-        default="./src/data/create_data/wikipedia/wikipedia_processed",
+        default="./src/data/create_data/wikipedia/wikipedia_full_processed",
         help="Path to save results"
     )
     parser.add_argument(
         "--min_words",
         type=int,
         default=1024,
-        help="Minimum number of words for the introduction"
+        help="Minimum number of words for the full article"
     )
     parser.add_argument(
         "--max_samples",
@@ -318,9 +300,9 @@ def main():
     
     args = parser.parse_args()
     
-    print("=== Starting Wikipedia Introduction Extraction ===")
+    print("=== Starting Wikipedia Full Article Extraction ===")
     
-    extractor = WikipediaIntroExtractor(min_words=args.min_words)
+    extractor = WikipediaFullExtractor(min_words=args.min_words)
     extractor.process_dataset(
         dataset_path=args.dataset_path,
         output_path=args.output_path,
