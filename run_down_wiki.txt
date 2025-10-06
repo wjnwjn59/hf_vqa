@@ -5,8 +5,7 @@ conda activate
 python ./src/data/create_data/wikipedia/download_wikipedia.py \
     --output_dir ./src/data/create_data/wikipedia
 
-python extract_wikipedia_intro.py \
+python src/data/create_data/wikipedia/extract_wikipedia_full.py \
     --dataset_path ./src/data/create_data/wikipedia/wikipedia_en_20231101 \
     --output_path ./src/data/create_data/wikipedia/wikipedia_processed \
-    --min_words 1024 \
     --max_samples 232000
