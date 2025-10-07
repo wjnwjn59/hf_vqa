@@ -1,0 +1,666 @@
+{
+  "InternVL3_5-2B": {
+    "Overall": {
+      "accuracy": 49.34,
+      "anls": 60.1,
+      "llm_score": 0.0
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 19.78,
+        "anls": 48.87,
+        "llm_score": 0.0
+      },
+      "non-extractive": {
+        "accuracy": 24.95,
+        "anls": 34.22,
+        "llm_score": 0.0
+      },
+      "question span": {
+        "accuracy": 64.74,
+        "anls": 69.43,
+        "llm_score": 0.0
+      },
+      "single span": {
+        "accuracy": 57.93,
+        "anls": 67.81,
+        "llm_score": 0.0
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 50.0,
+        "anls": 50.0,
+        "llm_score": 0.0
+      },
+      "figure": {
+        "accuracy": 46.93,
+        "anls": 58.04,
+        "llm_score": 0.0
+      },
+      "map": {
+        "accuracy": 38.61,
+        "anls": 51.48,
+        "llm_score": 0.0
+      },
+      "table/list": {
+        "accuracy": 47.67,
+        "anls": 58.24,
+        "llm_score": 0.0
+      },
+      "text": {
+        "accuracy": 60.38,
+        "anls": 71.14,
+        "llm_score": 0.0
+      },
+      "visual/layout": {
+        "accuracy": 46.48,
+        "anls": 54.51,
+        "llm_score": 0.0
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 57.7,
+        "anls": 69.24,
+        "llm_score": 0.0
+      },
+      "arithmetic": {
+        "accuracy": 32.88,
+        "anls": 48.34,
+        "llm_score": 0.0
+      },
+      "comparison": {
+        "accuracy": 42.3,
+        "anls": 51.54,
+        "llm_score": 0.0
+      },
+      "counting": {
+        "accuracy": 16.78,
+        "anls": 19.0,
+        "llm_score": 0.0
+      }
+    }
+  },
+  "InternVL3_5-8B": {
+    "Overall": {
+      "accuracy": 66.01,
+      "anls": 75.81,
+      "llm_score": 74.22
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 41.21,
+        "anls": 68.29,
+        "llm_score": 69.31
+      },
+      "non-extractive": {
+        "accuracy": 53.71,
+        "anls": 61.65,
+        "llm_score": 67.0
+      },
+      "question span": {
+        "accuracy": 83.97,
+        "anls": 87.17,
+        "llm_score": 85.26
+      },
+      "single span": {
+        "accuracy": 70.73,
+        "anls": 79.81,
+        "llm_score": 76.08
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 100.0,
+        "anls": 100.0,
+        "llm_score": 100.0
+      },
+      "figure": {
+        "accuracy": 62.1,
+        "anls": 72.55,
+        "llm_score": 70.0
+      },
+      "map": {
+        "accuracy": 56.44,
+        "anls": 70.03,
+        "llm_score": 64.85
+      },
+      "table/list": {
+        "accuracy": 66.91,
+        "anls": 75.8,
+        "llm_score": 76.6
+      },
+      "text": {
+        "accuracy": 77.2,
+        "anls": 86.17,
+        "llm_score": 84.78
+      },
+      "visual/layout": {
+        "accuracy": 55.63,
+        "anls": 68.61,
+        "llm_score": 63.97
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 71.07,
+        "anls": 81.86,
+        "llm_score": 78.48
+      },
+      "arithmetic": {
+        "accuracy": 61.64,
+        "anls": 74.58,
+        "llm_score": 70.03
+      },
+      "comparison": {
+        "accuracy": 56.58,
+        "anls": 64.48,
+        "llm_score": 63.01
+      },
+      "counting": {
+        "accuracy": 47.2,
+        "anls": 49.21,
+        "llm_score": 64.69
+      }
+    }
+  },
+  "LLaVA-OneVision-1.5-4B-Instruct": {
+    "Overall": {
+      "accuracy": 70.15,
+      "anls": 78.82,
+      "llm_score": 0.0
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 58.24,
+        "anls": 77.1,
+        "llm_score": 0.0
+      },
+      "non-extractive": {
+        "accuracy": 58.41,
+        "anls": 65.16,
+        "llm_score": 0.0
+      },
+      "question span": {
+        "accuracy": 82.05,
+        "anls": 84.77,
+        "llm_score": 0.0
+      },
+      "single span": {
+        "accuracy": 74.09,
+        "anls": 82.59,
+        "llm_score": 0.0
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 50.0,
+        "anls": 50.0,
+        "llm_score": 0.0
+      },
+      "figure": {
+        "accuracy": 66.23,
+        "anls": 75.68,
+        "llm_score": 0.0
+      },
+      "map": {
+        "accuracy": 61.39,
+        "anls": 72.19,
+        "llm_score": 0.0
+      },
+      "table/list": {
+        "accuracy": 73.68,
+        "anls": 80.52,
+        "llm_score": 0.0
+      },
+      "text": {
+        "accuracy": 80.93,
+        "anls": 88.49,
+        "llm_score": 0.0
+      },
+      "visual/layout": {
+        "accuracy": 65.49,
+        "anls": 73.67,
+        "llm_score": 0.0
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 74.79,
+        "anls": 84.23,
+        "llm_score": 0.0
+      },
+      "arithmetic": {
+        "accuracy": 69.18,
+        "anls": 79.77,
+        "llm_score": 0.0
+      },
+      "comparison": {
+        "accuracy": 60.78,
+        "anls": 68.91,
+        "llm_score": 0.0
+      },
+      "counting": {
+        "accuracy": 50.35,
+        "anls": 52.28,
+        "llm_score": 0.0
+      }
+    }
+  },
+  "LLaVA-OneVision-1.5-8B-Instruct": {
+    "Overall": {
+      "accuracy": 72.01,
+      "anls": 80.6,
+      "llm_score": 79.7
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 56.59,
+        "anls": 76.6,
+        "llm_score": 81.46
+      },
+      "non-extractive": {
+        "accuracy": 62.39,
+        "anls": 69.95,
+        "llm_score": 72.6
+      },
+      "question span": {
+        "accuracy": 86.54,
+        "anls": 89.64,
+        "llm_score": 87.93
+      },
+      "single span": {
+        "accuracy": 75.41,
+        "anls": 83.51,
+        "llm_score": 81.14
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 50.0,
+        "anls": 50.0,
+        "llm_score": 50.0
+      },
+      "figure": {
+        "accuracy": 68.3,
+        "anls": 77.84,
+        "llm_score": 76.35
+      },
+      "map": {
+        "accuracy": 63.37,
+        "anls": 75.3,
+        "llm_score": 69.8
+      },
+      "table/list": {
+        "accuracy": 73.15,
+        "anls": 81.01,
+        "llm_score": 81.21
+      },
+      "text": {
+        "accuracy": 83.3,
+        "anls": 90.95,
+        "llm_score": 90.43
+      },
+      "visual/layout": {
+        "accuracy": 68.31,
+        "anls": 76.9,
+        "llm_score": 74.53
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 76.22,
+        "anls": 85.42,
+        "llm_score": 83.6
+      },
+      "arithmetic": {
+        "accuracy": 71.92,
+        "anls": 83.13,
+        "llm_score": 78.6
+      },
+      "comparison": {
+        "accuracy": 61.9,
+        "anls": 69.45,
+        "llm_score": 68.75
+      },
+      "counting": {
+        "accuracy": 54.9,
+        "anls": 57.58,
+        "llm_score": 67.83
+      }
+    }
+  },
+  "Ovis2.5-2B": {
+    "Overall": {
+      "accuracy": 69.12,
+      "anls": 77.23,
+      "llm_score": 0.0
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 46.7,
+        "anls": 68.92,
+        "llm_score": 0.0
+      },
+      "non-extractive": {
+        "accuracy": 54.07,
+        "anls": 62.6,
+        "llm_score": 0.0
+      },
+      "question span": {
+        "accuracy": 78.85,
+        "anls": 83.06,
+        "llm_score": 0.0
+      },
+      "single span": {
+        "accuracy": 74.9,
+        "anls": 81.77,
+        "llm_score": 0.0
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 100.0,
+        "anls": 100.0,
+        "llm_score": 0.0
+      },
+      "figure": {
+        "accuracy": 66.17,
+        "anls": 75.21,
+        "llm_score": 0.0
+      },
+      "map": {
+        "accuracy": 61.39,
+        "anls": 73.51,
+        "llm_score": 0.0
+      },
+      "table/list": {
+        "accuracy": 70.4,
+        "anls": 77.32,
+        "llm_score": 0.0
+      },
+      "text": {
+        "accuracy": 80.14,
+        "anls": 87.46,
+        "llm_score": 0.0
+      },
+      "visual/layout": {
+        "accuracy": 65.49,
+        "anls": 73.04,
+        "llm_score": 0.0
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 74.36,
+        "anls": 82.96,
+        "llm_score": 0.0
+      },
+      "arithmetic": {
+        "accuracy": 58.56,
+        "anls": 73.21,
+        "llm_score": 0.0
+      },
+      "comparison": {
+        "accuracy": 63.87,
+        "anls": 68.95,
+        "llm_score": 0.0
+      },
+      "counting": {
+        "accuracy": 49.65,
+        "anls": 51.21,
+        "llm_score": 0.0
+      }
+    }
+  },
+  "Ovis2.5-9B": {
+    "Overall": {
+      "accuracy": 76.54,
+      "anls": 83.22,
+      "llm_score": 83.17
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 60.99,
+        "anls": 79.53,
+        "llm_score": 83.35
+      },
+      "non-extractive": {
+        "accuracy": 62.39,
+        "anls": 69.77,
+        "llm_score": 74.59
+      },
+      "question span": {
+        "accuracy": 86.54,
+        "anls": 88.35,
+        "llm_score": 87.18
+      },
+      "single span": {
+        "accuracy": 81.5,
+        "anls": 87.14,
+        "llm_score": 85.43
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 100.0,
+        "anls": 100.0,
+        "llm_score": 100.0
+      },
+      "figure": {
+        "accuracy": 74.32,
+        "anls": 81.37,
+        "llm_score": 80.56
+      },
+      "map": {
+        "accuracy": 74.26,
+        "anls": 84.76,
+        "llm_score": 80.69
+      },
+      "table/list": {
+        "accuracy": 75.79,
+        "anls": 82.73,
+        "llm_score": 84.51
+      },
+      "text": {
+        "accuracy": 88.04,
+        "anls": 92.62,
+        "llm_score": 92.95
+      },
+      "visual/layout": {
+        "accuracy": 73.24,
+        "anls": 76.43,
+        "llm_score": 78.52
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 81.85,
+        "anls": 88.59,
+        "llm_score": 87.36
+      },
+      "arithmetic": {
+        "accuracy": 71.58,
+        "anls": 82.92,
+        "llm_score": 79.62
+      },
+      "comparison": {
+        "accuracy": 68.07,
+        "anls": 73.71,
+        "llm_score": 73.3
+      },
+      "counting": {
+        "accuracy": 54.9,
+        "anls": 57.47,
+        "llm_score": 70.28
+      }
+    }
+  },
+  "Qwen2.5-VL-3B-Instruct": {
+    "Overall": {
+      "accuracy": 63.98,
+      "anls": 73.91,
+      "llm_score": 0.0
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 45.05,
+        "anls": 71.95,
+        "llm_score": 0.0
+      },
+      "non-extractive": {
+        "accuracy": 51.54,
+        "anls": 59.96,
+        "llm_score": 0.0
+      },
+      "question span": {
+        "accuracy": 82.05,
+        "anls": 85.89,
+        "llm_score": 0.0
+      },
+      "single span": {
+        "accuracy": 68.39,
+        "anls": 77.47,
+        "llm_score": 0.0
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 100.0,
+        "anls": 100.0,
+        "llm_score": 0.0
+      },
+      "figure": {
+        "accuracy": 59.98,
+        "anls": 70.6,
+        "llm_score": 0.0
+      },
+      "map": {
+        "accuracy": 54.46,
+        "anls": 67.4,
+        "llm_score": 0.0
+      },
+      "table/list": {
+        "accuracy": 64.06,
+        "anls": 73.35,
+        "llm_score": 0.0
+      },
+      "text": {
+        "accuracy": 74.94,
+        "anls": 84.12,
+        "llm_score": 0.0
+      },
+      "visual/layout": {
+        "accuracy": 58.45,
+        "anls": 68.77,
+        "llm_score": 0.0
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 69.43,
+        "anls": 80.07,
+        "llm_score": 0.0
+      },
+      "arithmetic": {
+        "accuracy": 63.01,
+        "anls": 76.34,
+        "llm_score": 0.0
+      },
+      "comparison": {
+        "accuracy": 54.34,
+        "anls": 62.69,
+        "llm_score": 0.0
+      },
+      "counting": {
+        "accuracy": 39.51,
+        "anls": 42.83,
+        "llm_score": 0.0
+      }
+    }
+  },
+  "Qwen2.5-VL-7B-Instruct": {
+    "Overall": {
+      "accuracy": 73.37,
+      "anls": 80.6,
+      "llm_score": 79.45
+    },
+    "Answer type": {
+      "multi-span": {
+        "accuracy": 56.59,
+        "anls": 75.43,
+        "llm_score": 76.22
+      },
+      "non-extractive": {
+        "accuracy": 62.21,
+        "anls": 69.48,
+        "llm_score": 73.29
+      },
+      "question span": {
+        "accuracy": 83.33,
+        "anls": 86.45,
+        "llm_score": 83.97
+      },
+      "single span": {
+        "accuracy": 77.59,
+        "anls": 83.98,
+        "llm_score": 81.32
+      }
+    },
+    "Element": {
+      "[]": {
+        "accuracy": 100.0,
+        "anls": 100.0,
+        "llm_score": 100.0
+      },
+      "figure": {
+        "accuracy": 70.13,
+        "anls": 78.39,
+        "llm_score": 76.34
+      },
+      "map": {
+        "accuracy": 68.32,
+        "anls": 79.92,
+        "llm_score": 72.28
+      },
+      "table/list": {
+        "accuracy": 73.04,
+        "anls": 79.96,
+        "llm_score": 80.73
+      },
+      "text": {
+        "accuracy": 83.75,
+        "anls": 89.6,
+        "llm_score": 88.58
+      },
+      "visual/layout": {
+        "accuracy": 65.49,
+        "anls": 71.82,
+        "llm_score": 70.31
+      }
+    },
+    "Operation": {
+      "[]": {
+        "accuracy": 78.13,
+        "anls": 85.48,
+        "llm_score": 83.17
+      },
+      "arithmetic": {
+        "accuracy": 71.92,
+        "anls": 83.73,
+        "llm_score": 79.11
+      },
+      "comparison": {
+        "accuracy": 64.43,
+        "anls": 71.07,
+        "llm_score": 69.51
+      },
+      "counting": {
+        "accuracy": 53.15,
+        "anls": 55.4,
+        "llm_score": 67.24
+      }
+    }
+  }
+}
