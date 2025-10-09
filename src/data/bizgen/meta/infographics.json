@@ -1,0 +1,89 @@
+[
+  {
+    "index": 0,
+    "layers_all": [
+      {
+        "category": "element",
+        "top_left": [0, 0],
+        "bottom_right": [896, 2240],
+        "caption": "Illustrate a rustic Kentucky log cabin in a misty forest clearing, symbolizing Abraham Lincoln’s humble origins."
+      },
+      {
+        "category": "text",
+        "top_left": [0, 0],
+        "bottom_right": [896, 2240],
+        "caption": "Text \"Born in 1809 in a Kentucky log cabin, Lincoln rose from poverty through self-education and determination.\" in <color-1>, <en-font-1>.",
+        "text": "Born in 1809 in a Kentucky log cabin, Lincoln rose from poverty through self-education and determination."
+      },
+      {
+        "category": "element",
+        "top_left": [604, 1829],
+        "bottom_right": [896, 2240],
+        "caption": "Depict young Lincoln reading by candlelight beside a fireplace, surrounded by law books and frontier tools."
+      },
+      {
+        "category": "element",
+        "top_left": [310, 738],
+        "bottom_right": [664, 789],
+        "caption": "Show Lincoln debating Stephen A. Douglas with a captivated crowd, emphasizing his rise in national prominence."
+      },
+      {
+        "category": "element",
+        "top_left": [310, 865],
+        "bottom_right": [574, 917],
+        "caption": "Centerpiece: A grand portrait of Lincoln framed by the American flag and the Emancipation Proclamation scroll."
+      },
+            {
+        "category": "element",
+        "top_left": [604, 1300],
+        "bottom_right": [896, 1600],
+        "caption": "Depict the Civil War with contrasting imagery of Union and Confederate forces, smoke, and a symbolic torn map reuniting."
+      },
+            {
+        "category": "element",
+        "top_left": [118, 2115],
+        "bottom_right": [309, 2240],
+        "caption": "Conclude with imagery of the U.S. Capitol, expanding railroads, and sunrise over the horizon symbolizing progress and legacy."
+      },
+      {
+        "category": "text",
+        "top_left": [310, 675],
+        "bottom_right": [602, 726],
+        "caption": "Text \"As a self-taught lawyer and Illinois legislator, Lincoln became known for his honesty, logic, and eloquence.\" in <color-1>, <en-font-1>.",
+        "text": "As a self-taught lawyer and Illinois legislator, Lincoln became known for his honesty, logic, and eloquence."
+      },
+      {
+        "category": "text",
+        "top_left": [310, 803],
+        "bottom_right": [481, 854],
+        "caption": "Text \"His leadership in the 1858 debates propelled him to the national stage and led to his 1860 presidential victory.\" in <color-1>, <en-font-1>.",
+        "text": "His leadership in the 1858 debates propelled him to the national stage and led to his 1860 presidential victory."
+      },
+
+      {
+        "category": "text",
+        "top_left": [118, 1920],
+        "bottom_right": [309, 2112],
+        "caption": "Text \"As President, Lincoln preserved the Union, abolished slavery, and redefined freedom for the nation.\" in <color-1>, <en-font-1>.",
+        "text": "As President, Lincoln preserved the Union, abolished slavery, and redefined freedom for the nation."
+      },
+
+      {
+        "category": "text",
+        "top_left": [310, 1600],
+        "bottom_right": [574, 1700],
+        "caption": "Text \"Lincoln led the Union through the Civil War, balancing compassion with decisive action to restore the nation.\" in <color-1>, <en-font-1>.",
+        "text": "Lincoln led the Union through the Civil War, balancing compassion with decisive action to restore the nation."
+      },
+
+      {
+        "category": "text",
+        "top_left": [400, 2150],
+        "bottom_right": [700, 2240],
+        "caption": "Text \"Lincoln’s legacy endures as a symbol of unity, equality, and the enduring power of democracy.\" in <color-1>, <en-font-1>.",
+        "text": "Lincoln’s legacy endures as a symbol of unity, equality, and the enduring power of democracy."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled 'Abraham Lincoln: From Log Cabin to Legacy' with a focus on the life, leadership, and enduring impact of Abraham Lincoln. The design adopts an elegant educational tone, using a parchment-style background with subtle gradients of sepia, beige, and deep blue to evoke the 19th-century era. The 2240×896 panoramic layout flows seamlessly from left to right, guiding viewers through a visual narrative of Lincoln’s journey. The far-left begins with warm, rustic hues and imagery of a log cabin nestled among Kentucky woods, symbolizing Lincoln’s humble beginnings. As the composition progresses, illustrated scenes show Lincoln studying by firelight and working as a frontier lawyer, transitioning into muted civic imagery representing his early political life in Illinois. The central section serves as the emotional anchor: a dignified portrait of Lincoln surrounded by the U.S. flag and the Emancipation Proclamation, highlighting his moral leadership and historical significance. To the right, the tone intensifies with shadowed battlefields, divided flags, and symbolic cannons depicting the Civil War’s chaos—balanced by rays of sunlight breaking through clouds to suggest hope and union. The final section depicts post-war America’s reconstruction with imagery of railroads, factories, and a shining Capitol dome, representing national progress. Typography alternates between elegant serif titles and clean sans-serif explanatory text, ensuring readability. The infographic targets students, educators, and history enthusiasts, aiming to both inform and inspire reflection on leadership, equality, and perseverance."
+  }
+]
