@@ -4,70 +4,75 @@ Design target: panoramic horizontal layout at 2240×896 pixels with a left-to-ri
 
 You must produce exactly two outputs in JSON: a detailed "full_image_caption" and a structured "layers_all" array.
 
-1) FULL IMAGE CAPTION
+---
+
+### 1) FULL IMAGE CAPTION
 Begin with:
 "The image is an infographic titled `<TITLE>` with a focus on `<TOPIC>`."
-Then write 150–300 words describing: overall visual style, tone, and color palette; horizontal composition from left to right; layout hierarchy (left, center, right); types of visuals, symbols, charts, or diagrams; and intended audience and purpose, consistent with the brief.
-If style information is unspecified, use neutral phrasing such as “a clear and informative design.”
-If the brief contains KEY_STATISTICS or KEY_TIMELINE, explicitly mention that the design includes quantitative charts or a labeled timeline. Do not fabricate details.
 
-2) VISUAL LAYOUT CAPTIONS ("layers_all")
+Then write **200–350 words** describing:
+- The overall visual style, tone, and color palette.
+- The left-to-right layout composition (left, center, right).
+- The hierarchy of visual regions.
+- The types of visuals, symbols, charts, or diagrams included.
+- The intended audience and purpose.
+- **Every textual element that appears in the infographic must be explicitly included in the caption.**
+  
+Concretely, the "full_image_caption" must **restate all texts that appear later in the `"category": "text"` items**, in natural narrative form. For example, if the infographic contains text elements such as numbered points, slogans, or data labels, you must weave those lines directly into this caption exactly as written. The text must be fully quoted and not paraphrased in the form of \"<the exact text that should appear in the visual layout>\". For example: The image is an infographic titled \"Women's Skin Care Habits\".
+
+If style or visual detail is unspecified, use neutral phrasing such as “a clear and informative design.”
+
+---
+
+### 2) VISUAL LAYOUT CAPTIONS ("layers_all")
 Represent the infographic as a horizontally ordered list of regions corresponding to the panoramic layout.
-Choose the number of regions that best matches the brief; be concise and avoid filler or excessive splitting.
 
 Each region must be a JSON object with:
-- "id": sequential integer starting from 1
-- "category": one of four types: "figure", "text", "timeline", or "data"
-- "caption": a short descriptive instruction (for figures) or literal content (for others)
+- `"id"`: sequential integer starting from 1  
+- `"category"`: one of `"figure"` or `"text"`  
+- `"caption"`: short descriptive instruction (for visuals) or literal content (for text)
 
-Ordering rule:
-- All "figure" regions appear first (upper layer).
-- All "text", "timeline", and "data" regions appear after the figures (lower layer).
-- Keep logical alignment between figures and associated text, timeline, or data entries.
+**Ordering rule:**
+1. The first region must be `"category": "figure"` describing the full background appearance (colors, textures, or patterns that span the entire image).
+2. Subsequent `"figure"` elements (if any) describe local illustrations or icons.  
+3. All `"text"` elements appear afterward in reading order.
 
-For "figure" regions:
-- The caption must always begin with one of: "The picture contains", "The picture features", "The picture shows", or "The image features".
-- Describe the visual content, diagram, or chart based directly on the FIGURES_FIRST_REGION_PLAN or NARRATIVE_SPINE in the brief.
-- Each figure should illustrate a single, coherent idea.
+---
 
-For "text" regions:
-- The caption must begin with:
-  Text "<the exact text that should appear in the visual layout>"
-  Example:
-  { "id": 7, "category": "text", "caption": "Text \"Anxiety vs. Fear – Future threat vs. present danger.\"" }
+**Guidelines for each category:**
 
-For "timeline" regions:
-- Use this category for chronological or event-based data.
-- Include years, names, and short event descriptions as listed in the brief.
-- Keep the caption concise and structured for easy later parsing.
-- Example:
-  { "id": 11, "category": "timeline", "caption": "1844 Kierkegaard – existential anxiety; 1932 Rank – birth trauma; 2017 prevention review; 2023 physical activity study." }
+- For the first `"figure"`:
+  - Begin with: “The image background features …”
+  - Describe overall background tone, gradients, or patterns covering the full canvas.
 
-For "data" regions:
-- Use this category for numeric or quantitative information such as percentages, prevalence, or measurements.
-- Quote numbers and units exactly as written in the brief (do not round or estimate).
-- Example:
-  { "id": 12, "category": "data", "caption": "12% annual prevalence; 12–30% lifetime; 2–3% U.S. panic disorder; 30–40% genetic influence." }
-- If multiple statistics exist, separate them with semicolons or commas. These entries will later be programmatically split into smaller text boxes, so spacing is not required.
+- For `"figure"`:
+  - Begin with: “The picture contains”, “The picture features”, “The picture shows”, or “The image features”.
+  - Describe what the figure depicts, based strictly on the brief.
+  - No text mention unless it is part of the visual element.
 
-If the brief lacks figures, use conceptual diagrams or symbols. If it lacks text overlays, use concise factual labels derived from NARRATIVE_SPINE or KEY_TAKEAWAYS.
-Do not add or infer any information beyond what the brief provides.
+- For `"text"`:
+  - Begin each caption exactly as:
+    `Text "<the exact text that should appear in the visual layout>"`
+  - Do not paraphrase or summarize; copy the exact wording from the brief.
 
-3) OUTPUT FORMAT
+---
+
+### 3) OUTPUT FORMAT
 Return the result in exactly this JSON structure:
+
 {
   "full_image_caption": "string",
   "layers_all": [
     { "id": 1, "category": "figure", "caption": "string" },
     { "id": 2, "category": "figure", "caption": "string" },
-    { "id": 3, "category": "text",  "caption": "Text \"...\"" },
-    { "id": 4, "category": "timeline", "caption": "string" },
-    { "id": 5, "category": "data", "caption": "string" }
+    { "id": 3, "category": "figure", "caption": "string" },
+    { "id": 4, "category": "text",   "caption": "Text \"...\"" }
   ]
 }
-All figure regions must appear before all other categories.
 
-4) INPUT
+---
+
+### 4) INPUT
 Use the following Infographic Design Brief String as the only source of truth.
 Do not add, infer, or modify information beyond it.
 

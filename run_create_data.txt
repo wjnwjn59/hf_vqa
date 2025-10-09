@@ -26,6 +26,7 @@ python src/data/create_data/qwen/merge_infographic_bboxes.py \
     # Add --layout_timeline to enable timeline layers (may reduce image quality)
 
 cd <path-to-bizgen>
+conda activate khoina_bizgen
 CUDA_VISIBLE_DEVICES=0 python inference.py \
 --ckpt_dir checkpoints/lora/infographic \
 --output_dir infographic \
