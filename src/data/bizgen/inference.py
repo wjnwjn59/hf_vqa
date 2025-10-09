@@ -100,12 +100,9 @@ def main():
                         default='config/bizgen_base.py')
     parser.add_argument('--ckpt_dir', type=str,
                         default="checkpoints/lora/infographic")
-    parser.add_argument('--device', type=str, default='cuda:2')
-    # parser.add_argument('--sample_list', type=str,default='meta/infographics.json')
-    # parser.add_argument('--output_dir',type=str,default='infographic')
-    # parser.add_argument('--wiki_dir', type=str, default='../wiki/')  # new
-    parser.add_argument('--wiki_dir', type=str, default='../create_data/output/bizgen_format')  # new
-    parser.add_argument('--subset', type=str, default='0:2')  # new
+    parser.add_argument('--device', type=str, default='cuda:0')
+    parser.add_argument('--wiki_dir', type=str, default='../create_data/output/bizgen_format')
+    parser.add_argument('--subset', type=str, default='0:2')
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--global_ratio', type=float, default=0.2)
     parser.add_argument('--num_inference_steps', type=int, default=50)
@@ -336,7 +333,7 @@ def main():
         with open(file, 'r') as f:
             tot += len(json.load(f))
     
-    with tqdm(total=tot, desc="Tổng items", unit="item", dynamic_ncols=True) as pbar:
+    with tqdm(total=tot, desc="Total items", unit="item", dynamic_ncols=True) as pbar:
         for file in file_subset:
             with open(file, 'r') as f:
                 sample_list = json.load(f)

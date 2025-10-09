@@ -419,7 +419,7 @@ def main():
     parser.add_argument(
         '--infographic-dir',
         type=str,
-        default=None,
+        default="src/data/create_data/output/infographic",
         help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic)'
     )
     parser.add_argument(
@@ -432,7 +432,7 @@ def main():
         '--font-idx',
         type=str,
         default=None,
-        help='Path to font_uni_10-lang_idx.json (default: ../bizgen/glyph/font_uni_10-lang_idx.json)'
+        help='Path to font_idx.json (default: ../bizgen/glyph/font_idx.json)'
     )
     parser.add_argument(
         '--output',
