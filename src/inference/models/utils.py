@@ -22,9 +22,17 @@ def extract_clean_model_name(model_path_or_name: str):
 
 
 def extract_clean_filename(filename: str):
-    """Extracts clean model name from prediction filename."""
+    """
+    Extracts clean model name from prediction filename.
+    Format: {model}_{dataset}.json or {model}.json (legacy)
+    Returns: (model_name, dataset_name)
+    """
     base_name = filename.replace('.json', '')
-    if '_' in base_name:
-        parts = base_name.split('_')
-        return '_'.join(parts[1:]) if len(parts) > 2 else base_name
-    return base_name
+    known_datasets = ['chartgalaxy', 'infographicvqa']
+    
+    for dataset in known_datasets:
+        if base_name.endswith(f'_{dataset}'):
+            model_name = base_name[:-len(f'_{dataset}')]
+            return (model_name, dataset)
+
+    return (base_name, 'infographicvqa')

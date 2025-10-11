@@ -69,10 +69,69 @@ def parse_score(gen: str):
     return num / den if den else 0.0
 
 
+def is_numerical(text):
+    """Check if text represents a number."""
+    if not isinstance(text, str):
+        text = str(text)
+    cleaned = text.strip().replace(',', '').replace('%', '').replace('$', '')
+    try:
+        float(cleaned)
+        return True
+    except ValueError:
+        return False
+
+
+def parse_number(text):
+    """Parse text to number, handling common formats."""
+    if not isinstance(text, str):
+        text = str(text)
+    cleaned = text.strip().replace(',', '').replace('%', '').replace('$', '')
+    try:
+        return float(cleaned)
+    except ValueError:
+        return None
+
+
+def is_multiple_choice(answer):
+    """Check if answer is multiple choice (Yes/No type)."""
+    if not isinstance(answer, str):
+        answer = str(answer)
+    answer_lower = answer.strip().lower()
+    # Common multiple choice answers
+    mc_answers = {'yes', 'no', 'true', 'false', 'a', 'b', 'c', 'd', 'e'}
+    return answer_lower in mc_answers
+
+
+def compute_numerical_accuracy(gt, predict, tolerance: float = 0.05):
+    """
+    Computes numerical accuracy with relative tolerance (5% for ChartGalaxy).
+    Returns 1.0 if within tolerance, 0.0 otherwise.
+    """
+    gt_num = parse_number(gt)
+    pred_num = parse_number(predict)
+    
+    if gt_num is None or pred_num is None:
+        return 0.0
+    
+    # Exact match
+    if gt_num == pred_num:
+        return 1.0
+    
+    # Handle zero case
+    if gt_num == 0:
+        return 1.0 if pred_num == 0 else 0.0
+    
+    # Relative tolerance (5% = 0.05)
+    # Use small epsilon (1e-9) to handle floating point comparison
+    relative_diff = abs(gt_num - pred_num) / abs(gt_num)
+    return 1.0 if relative_diff <= tolerance + 1e-9 else 0.0
+
+
 def compute_anls(gt, predict, threshold: float = 0.5):
     """
     Computes ANLS (Average Normalized Levenshtein Similarity) score.
     If gt is a list, returns max score across all ground truths.
+    Used for: InfographicVQA (all samples) and ChartGalaxy (text answers only).
     """
     p = str(predict).replace('"', '').rstrip('.').lower()
     
@@ -87,6 +146,31 @@ def compute_anls(gt, predict, threshold: float = 0.5):
     # Handle single ground truth string
     score = Levenshtein.ratio(p, str(gt).lower())
     return score if score >= threshold else 0.0
+
+
+def compute_chartgalaxy_accuracy(gt, predict, answer_type=None):
+    """
+    Computes accuracy for ChartGalaxy dataset using appropriate metric.
+    
+    ChartGalaxy evaluation rules:
+    - Numerical: Relaxed accuracy with 5% tolerance
+    - Multiple choice (Yes/No): Exact match
+    - Text: ANLS with 0.5 threshold
+    """
+    pred_clean = str(predict).strip().lower().replace('"', '').rstrip('.').rstrip('>').lstrip('<')
+    gt_str = str(gt).strip()
+    
+    # 1. Numerical answers (calculation type or numerical format)
+    if is_numerical(gt_str):
+        return compute_numerical_accuracy(gt, predict, tolerance=0.05)
+    
+    # 2. Multiple choice (Yes/No, True/False, etc.)
+    if is_multiple_choice(gt_str):
+        gt_clean = gt_str.lower().strip()
+        return 1.0 if pred_clean == gt_clean else 0.0
+    
+    # 3. Text answers (use ANLS)
+    return compute_anls(gt, predict, threshold=0.5)
 
 
 def compute_llm_scores_batch(questions, gts, prs, tokenizer, model):
@@ -119,8 +203,8 @@ def analyze_by_categories(preds):
         "Operation": defaultdict(lambda: {"total_anls": 0.0, "total_accuracy": 0.0, "total_llm": 0.0, "count": 0}),
     }
     
-    # Mapping from original keys to category names
-    key_mapping = {
+    # InfographicVQA format mapping
+    infographic_mapping = {
         "answer_source": "Answer type",
         "answer_type": "Answer type",
         "element": "Element",
@@ -129,22 +213,41 @@ def analyze_by_categories(preds):
         "operation/reasoning": "Operation"
     }
     
+    # ChartGalaxy metadata mapping
+    chartgalaxy_metadata_mapping = {
+        "type": "Answer type",
+        "category": "Element",
+        "subcategory": "Operation"
+    }
+    
     for item in preds:
         gt_answer = item['answer']
         pred_answer = str(item.get('predict', ''))
         
         pr_clean = pred_answer.lower().strip().rstrip('.').replace('"', '').rstrip('>').lstrip('<')
         
-        # Compute ANLS (handles both list and string GT)
-        anls_score = compute_anls(gt_answer, pr_clean)
+        # Detect dataset type
+        is_chartgalaxy = 'metadata' in item and isinstance(item.get('metadata'), dict)
         
-        # Compute accuracy (if GT is list, check if pred matches any)
-        if isinstance(gt_answer, list):
-            gt_answers_clean = [str(g).lower().strip() for g in gt_answer]
-            accuracy_score = int(any(pr_clean == g for g in gt_answers_clean))
+        if is_chartgalaxy:
+            # ChartGalaxy: Use specialized accuracy metric
+            answer_type = item.get('metadata', {}).get('type', None)
+            accuracy_score = compute_chartgalaxy_accuracy(gt_answer, pred_answer, answer_type)
+            
+            # ANLS for ChartGalaxy is same as accuracy for consistency
+            # (since compute_chartgalaxy_accuracy already uses ANLS for text)
+            anls_score = accuracy_score
         else:
-            gt_clean = str(gt_answer).lower().strip()
-            accuracy_score = int(gt_clean == pr_clean)
+            # InfographicVQA: Use ANLS for all samples
+            anls_score = compute_anls(gt_answer, pr_clean)
+            
+            # Accuracy: exact match
+            if isinstance(gt_answer, list):
+                gt_answers_clean = [str(g).lower().strip() for g in gt_answer]
+                accuracy_score = int(any(pr_clean == g for g in gt_answers_clean))
+            else:
+                gt_clean = str(gt_answer).lower().strip()
+                accuracy_score = int(gt_clean == pr_clean)
         
         llm_score = float(item.get('llm_score', 0.0))
         
@@ -157,8 +260,8 @@ def analyze_by_categories(preds):
         overall["total_llm"] += llm_score
         overall["count"] += 1
         
-        # Process categories with flexible key mapping
-        for category_key_orig, category_key_mapped in key_mapping.items():
+        # Process InfographicVQA categories
+        for category_key_orig, category_key_mapped in infographic_mapping.items():
             value = item.get(category_key_orig)
             if value is None:
                 continue
@@ -168,6 +271,20 @@ def analyze_by_categories(preds):
             
             for sub_category in values_to_process:
                 normalized_key = str(sub_category).lower()
+                stats = category_scores[category_key_mapped][normalized_key]
+                stats["total_anls"] += anls_score
+                stats["total_accuracy"] += accuracy_score
+                stats["total_llm"] += llm_score
+                stats["count"] += 1
+        
+        # Process ChartGalaxy metadata (if present)
+        if 'metadata' in item and isinstance(item['metadata'], dict):
+            for meta_key, category_key_mapped in chartgalaxy_metadata_mapping.items():
+                value = item['metadata'].get(meta_key)
+                if value is None:
+                    continue
+                
+                normalized_key = str(value).lower()
                 stats = category_scores[category_key_mapped][normalized_key]
                 stats["total_anls"] += anls_score
                 stats["total_accuracy"] += accuracy_score
@@ -265,12 +382,13 @@ def save_file_data(fname, data):
 
 
 def compute_final_metrics(file_data):
-    """Computes final metrics for all prediction files."""
-    results = {}
-    detailed_analysis = {}
+    """Computes final metrics for all prediction files, grouped by dataset."""
+    # Group by dataset
+    results_by_dataset = defaultdict(dict)
+    analysis_by_dataset = defaultdict(dict)
     
     for fname, preds in file_data.items():
-        key = extract_clean_filename(fname)
+        model_name, dataset_name = extract_clean_filename(fname)
         
         # Compute average LLM score from multiple LLM judges
         llm_fields = [extract_clean_model_name(model_name) + "_score" for model_name in llms]
@@ -280,10 +398,13 @@ def compute_final_metrics(file_data):
                                 if valid_llm_scores else 0.0)
         
         category_scores = analyze_by_categories(preds)
-        detailed_analysis[key] = create_detailed_report(category_scores)
+        detailed_report = create_detailed_report(category_scores)
         
-        overall_metrics = detailed_analysis[key]['Overall']
-        results[key] = {
+        # Store by dataset
+        analysis_by_dataset[dataset_name][model_name] = detailed_report
+        
+        overall_metrics = detailed_report['Overall']
+        results_by_dataset[dataset_name][model_name] = {
             "accuracy": overall_metrics['accuracy'],
             "anls": overall_metrics['anls'],
             "llm_score": overall_metrics['llm_score']
@@ -291,7 +412,7 @@ def compute_final_metrics(file_data):
         
         save_file_data(fname, preds)
     
-    return results, detailed_analysis
+    return results_by_dataset, analysis_by_dataset
 
 
 def run_llm_scoring_for_files(file_data):
@@ -368,33 +489,47 @@ def main(llm_scores: bool = False):
         print("🧠 LLM scoring: DISABLED")
     
     print("📈 Computing final metrics...")
-    results, detailed_analysis = compute_final_metrics(file_data)
+    results_by_dataset, analysis_by_dataset = compute_final_metrics(file_data)
     
-    print("💾 Saving results...")
-    final_scores_path = os.path.join(RESULTS_DIR, "final_scores.json")
-    detailed_analysis_path = os.path.join(RESULTS_DIR, "detailed_analysis.json")
+    print("💾 Saving results by dataset...")
     
-    with open(final_scores_path, "w", encoding="utf-8") as fw:
-        json.dump(results, fw, indent=2, ensure_ascii=False)
+    # Save results for each dataset separately
+    for dataset_name in results_by_dataset.keys():
+        print(f"\n📊 Dataset: {dataset_name}")
+        
+        # Save JSON results
+        final_scores_path = os.path.join(RESULTS_DIR, f"final_scores_{dataset_name}.json")
+        detailed_analysis_path = os.path.join(RESULTS_DIR, f"detailed_analysis_{dataset_name}.json")
+        
+        with open(final_scores_path, "w", encoding="utf-8") as fw:
+            json.dump(results_by_dataset[dataset_name], fw, indent=2, ensure_ascii=False)
+        
+        with open(detailed_analysis_path, "w", encoding="utf-8") as fw:
+            json.dump(analysis_by_dataset[dataset_name], fw, indent=2, ensure_ascii=False)
+        
+        print(f"  ✅ Final scores: {final_scores_path}")
+        print(f"  ✅ Detailed analysis: {detailed_analysis_path}")
+        
+        # Save TXT reports
+        acc_path = os.path.join(RESULTS_DIR, f"scores_accuracy_{dataset_name}.txt")
+        anls_path = os.path.join(RESULTS_DIR, f"scores_anls_{dataset_name}.txt")
+        llm_path = os.path.join(RESULTS_DIR, f"scores_llm_{dataset_name}.txt")
+        
+        save_analysis_to_txt(analysis_by_dataset[dataset_name], acc_path, metric='accuracy')
+        save_analysis_to_txt(analysis_by_dataset[dataset_name], anls_path, metric='anls')
+        save_analysis_to_txt(analysis_by_dataset[dataset_name], llm_path, metric='llm_score')
+        
+        print(f"  ✅ Accuracy: {acc_path}")
+        print(f"  ✅ ANLS: {anls_path}")
+        print(f"  ✅ LLM scores: {llm_path}")
     
-    with open(detailed_analysis_path, "w", encoding="utf-8") as fw:
-        json.dump(detailed_analysis, fw, indent=2, ensure_ascii=False)
-    
-    print("✅ Final Results:")
-    print(json.dumps(results, indent=2, ensure_ascii=False))
-    
-    print("\n💾 Saving TXT reports...")
-    acc_path = os.path.join(RESULTS_DIR, "scores_accuracy.txt")
-    anls_path = os.path.join(RESULTS_DIR, "scores_anls.txt")
-    llm_path = os.path.join(RESULTS_DIR, "scores_llm.txt")
-    
-    save_analysis_to_txt(detailed_analysis, acc_path, metric='accuracy')
-    save_analysis_to_txt(detailed_analysis, anls_path, metric='anls')
-    save_analysis_to_txt(detailed_analysis, llm_path, metric='llm_score')
-    
-    print(f"✅ Accuracy scores saved to: {acc_path}")
-    print(f"✅ ANLS scores saved to: {anls_path}")
-    print(f"✅ LLM scores saved to: {llm_path}")
+    # Print summary
+    print("\n" + "="*60)
+    print("📊 SUMMARY BY DATASET")
+    print("="*60)
+    for dataset_name, results in results_by_dataset.items():
+        print(f"\n{dataset_name.upper()}:")
+        print(json.dumps(results, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

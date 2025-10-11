@@ -24,7 +24,7 @@ class LLaVAModel(VQAModel):
         """Loads LLaVA-OneVision model."""
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_path,
-            torch_dtype="auto",
+            dtype="auto",
             device_map="auto",
             trust_remote_code=True
         ).eval()

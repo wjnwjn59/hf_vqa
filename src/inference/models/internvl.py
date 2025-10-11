@@ -73,7 +73,7 @@ def dynamic_preprocess(image, min_num: int = 1, max_num: int = 12, image_size: i
 class InternVLModel(VQAModel):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.model_path = '/mnt/dataset1/pretrained_fm/OpenGVLab_InternVL3_5-2B'
+        self.model_path = '/mnt/dataset1/pretrained_fm/OpenGVLab_InternVL3_5-8B'
         self._set_clean_model_name()
         self.image_size = 448
         self.transform = build_transform(self.image_size)
@@ -82,7 +82,7 @@ class InternVLModel(VQAModel):
     def load_model(self):
         self.model = AutoModel.from_pretrained(
             self.model_path,
-            torch_dtype=torch.bfloat16,
+            dtype=torch.bfloat16,
             low_cpu_mem_usage=True,
             trust_remote_code=True,
             device_map="auto",

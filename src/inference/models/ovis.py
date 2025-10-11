@@ -11,7 +11,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class OvisModel(VQAModel):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.model_path = "/mnt/dataset1/pretrained_fm/AIDC-AI_Ovis2.5-2B"
+        self.model_path = "/mnt/dataset1/pretrained_fm/AIDC-AI_Ovis2.5-9B"
         self._set_clean_model_name()
         self.load_model()
 
