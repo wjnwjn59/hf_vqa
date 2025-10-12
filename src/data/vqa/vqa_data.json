@@ -1,0 +1,1753 @@
+[
+  {
+    "image_id": 1,
+    "image_filename": "1.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/1.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the range of Albedo for snow?",
+        "answer": "(0.9)"
+      },
+      {
+        "question": "What is the range of Albedo for charcoal?",
+        "answer": "(0.04)"
+      },
+      {
+        "question": "What is Earth's average Albedo?",
+        "answer": "~0.3"
+      },
+      {
+        "question": "What is the Albedo of Urbanization and Deforestation?",
+        "answer": "0.5%"
+      },
+      {
+        "question": "What is the Albedo of the Earth Dimmed by Urbanization and Deforestation?",
+        "answer": "0.5%"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 2,
+    "image_filename": "2.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/2.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the image?",
+        "answer": "The Principle of Altruism"
+      },
+      {
+        "question": "What does the brain with the compass symbolize?",
+        "answer": "Evolutionary Foundations"
+      },
+      {
+        "question": "What does the hands holding the compass represent?",
+        "answer": "Moral and Ethical Directions"
+      },
+      {
+        "question": "What does the network of hands symbolize?",
+        "answer": "Reciprocity and Cooperation"
+      },
+      {
+        "question": "What does the tree represent?",
+        "answer": "Kinship and Social Bonds"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 3,
+    "image_filename": "3.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/3.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "Who is the visionary leader of Taggart Transcontinental?",
+        "answer": "Dagny Taggart"
+      },
+      {
+        "question": "Who is the antagonist and symbol of corruption?",
+        "answer": "James Taggart"
+      },
+      {
+        "question": "Who is the philosopher who led the strike?",
+        "answer": "John Galt"
+      },
+      {
+        "question": "Who is the wealthy philosopher and innovator?",
+        "answer": "Francisco d'Anconia"
+      },
+      {
+        "question": "Who is the loyal assistant and moral compass?",
+        "answer": "Eddie Willers"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 4,
+    "image_filename": "4.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/4.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the timeline of Anthropology Development?",
+        "answer": "1666 Evolcien 117Anthorlooz Anthoogy Aanthyopy"
+      },
+      {
+        "question": "What is the difference between Biological and Cultural Anthropology?",
+        "answer": "Biological vs. Cultural Anthropology"
+      },
+      {
+        "question": "What is the main focus of Cultural Anthropology in Action?",
+        "answer": "Cultural Anthropology in Action"
+      },
+      {
+        "question": "What is the focus of Forensic Anthropology in Practice?",
+        "answer": "Forensic Anthropology in Practice"
+      },
+      {
+        "question": "What is the global spread of Anthropological Societies?",
+        "answer": "Global Spread of Anthropological Societies"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 5,
+    "image_filename": "5.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/5.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the original character encoding standard?",
+        "answer": "ASCII"
+      },
+      {
+        "question": "How many code points does the ASCII character set have?",
+        "answer": "128"
+      },
+      {
+        "question": "What is the comparison between ASCII and Unicode?",
+        "answer": "A Modern Comparison"
+      },
+      {
+        "question": "What is the evolution of the ASCII standard?",
+        "answer": "1961-1986: Evolution of the ASCII Standard"
+      },
+      {
+        "question": "What are the key differences between ASCII and EBCDIC?",
+        "answer": "ASCII vs. EBCDIC: Key Differences"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 6,
+    "image_filename": "6.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/6.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the first full-length film mentioned?",
+        "answer": "Snow White"
+      },
+      {
+        "question": "Which animation process is depicted in the image?",
+        "answer": "Cel Animation"
+      },
+      {
+        "question": "What is the early animated film mentioned?",
+        "answer": "The Haunted Hotel"
+      },
+      {
+        "question": "What is the early animation device featured?",
+        "answer": "Phénakisticope"
+      },
+      {
+        "question": "What is the synchronized sound film mentioned?",
+        "answer": "Steamboat Willie"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 7,
+    "image_filename": "7.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/7.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What are the twin deities depicted in the image?",
+        "answer": "Apollo and Artemis"
+      },
+      {
+        "question": "What is Apollo known as the Sun God?",
+        "answer": "Healer and Bringer of Disease"
+      },
+      {
+        "question": "What is the title of the artwork depicted in the image?",
+        "answer": "Apollo's Birth on Delos"
+      },
+      {
+        "question": "What are the two statues holding?",
+        "answer": "Tripods"
+      },
+      {
+        "question": "What is the name of the oracle mentioned in the image?",
+        "answer": "The Delphic Oracle"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 8,
+    "image_filename": "8.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/8.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is Andre Agassi known for?",
+        "answer": "1992 Wimbledon Champion"
+      },
+      {
+        "question": "What was the result of Andre Agassi's match at Nick Bollettieri's Academy?",
+        "answer": "World No. 1 (1995)"
+      },
+      {
+        "question": "Who is Andre Agassi married to?",
+        "answer": "Steffi Graf"
+      },
+      {
+        "question": "When did Andre Agassi retire?",
+        "answer": "2006"
+      },
+      {
+        "question": "What is Andre Agassi's foundation?",
+        "answer": "Andre Agassi Charitable Foundation"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 9,
+    "image_filename": "9.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/9.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the infographic?",
+        "answer": "Austroasiatic Languages: A Linguistic Overview"
+      },
+      {
+        "question": "What is shown on the map?",
+        "answer": "Timeline of Linguistic Evolution and Migration"
+      },
+      {
+        "question": "What are the phonological features and typology of Austroasiatic?",
+        "answer": "Phonological Features and Typology"
+      },
+      {
+        "question": "What is the significance of the trees in the bottom part of the infographic?",
+        "answer": "Register Contrast and Phonological Development"
+      },
+      {
+        "question": "What is the cultural and historical significance section about?",
+        "answer": "Austroasiatic Languages: A Linguistic Overview"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 10,
+    "image_filename": "10.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/10.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main focus of the image?",
+        "answer": "Afroasiatic Language Distribution"
+      },
+      {
+        "question": "How many branches of Afroasiatic languages are shown?",
+        "answer": "8"
+      },
+      {
+        "question": "What is the timeline of Proto-Afroasiatic and key events about?",
+        "answer": "Linguistic evolution"
+      },
+      {
+        "question": "Which languages belong to the Afroasiatic family?",
+        "answer": "Arabic, Hebrew, Berber, Cushitic, and Semitic"
+      },
+      {
+        "question": "What is the purpose of the tree in the image?",
+        "answer": "Symbolizing the origin and spread of Afroasiatic languages"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 11,
+    "image_filename": "11.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/11.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the topic of the first section?",
+        "answer": "Secondary Growth in Tree-Like Species"
+      },
+      {
+        "question": "What does the classification timeline section cover?",
+        "answer": "Secondary Growth in Tree-Like Species"
+      },
+      {
+        "question": "What is discussed in the Telomere Sequence Evolution section?",
+        "answer": "Phylogenetic Relationships of Asparagales"
+      },
+      {
+        "question": "What is covered in the Morphology and Flower Structure section?",
+        "answer": "Seed Coat Features and Phytomelanin"
+      },
+      {
+        "question": "What is the focus of the Economic Importance of Asparagales section?",
+        "answer": "Morphology and Flower Structure"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 12,
+    "image_filename": "12.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/12.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is Ceres?",
+        "answer": "The first asteroid discovered."
+      },
+      {
+        "question": "What is DART?",
+        "answer": "A spacecraft."
+      },
+      {
+        "question": "What are the early methods in asteroid detection?",
+        "answer": "Nanoracks"
+      },
+      {
+        "question": "What is OSIRIS-REx?",
+        "answer": "Sample collection spacecraft."
+      },
+      {
+        "question": "What is the timeline of asteroid discovery?",
+        "answer": "Timeline of asteroid discovery"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 13,
+    "image_filename": "13.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/13.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the Affidavit Definition and Structure?",
+        "answer": "The Affidavit Definition and Structure are not provided in the image, but it likely refers to the formal statement made under oath or affirmation, which is then verified by a notary."
+      },
+      {
+        "question": "What is the Global Jurisdictional Variations of Affidavits?",
+        "answer": "The Global Jurisdictional Variations of Affidavits are not provided in the image, but it likely refers to the differences in how affidavits are used and accepted across different countries and jurisdictions."
+      },
+      {
+        "question": "What are the Legal Professionals Involved in Affidavits?",
+        "answer": "The Legal Professionals Involved in Affidavits are not provided in the image, but it likely includes notaries, attorneys, and judges."
+      },
+      {
+        "question": "What is Ireland’s New Statement of Truth?",
+        "answer": "The Ireland’s New Statement of Truth is not provided in the image, but it likely refers to a new legal document or statement that is required in Ireland to replace the traditional affidavit."
+      },
+      {
+        "question": "What is Cross-Examination and Verification?",
+        "answer": "Cross-Examination and Verification are not provided in the image, but it likely refers to the process of questioning a witness or expert under oath and verifying the information they provided."
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 14,
+    "image_filename": "14.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/14.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the name of the ancient city in the top section?",
+        "answer": "Ancient Hattic and Phrygian Roots"
+      },
+      {
+        "question": "What is the subject of the middle section?",
+        "answer": "Ottoman Influence: Eyalets and Architecture"
+      },
+      {
+        "question": "What is the modern capital city mentioned in the middle section?",
+        "answer": "Modern Ankara"
+      },
+      {
+        "question": "What is the topic of the bottom section?",
+        "answer": "Roman Legacy: Monumentum Ancyranum"
+      },
+      {
+        "question": "What is the name of the structure in the bottom section?",
+        "answer": "Monumentum Ancyranum"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 15,
+    "image_filename": "15.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/15.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main language discussed in the image?",
+        "answer": "Arabic"
+      },
+      {
+        "question": "What is the title of the image?",
+        "answer": "Arabic"
+      },
+      {
+        "question": "What are the two modern dialects mentioned in the image?",
+        "answer": "Modern Standard Arabic, Modern Stadjects"
+      },
+      {
+        "question": "How many distinct stages of Arabic language evolution are mentioned?",
+        "answer": "3"
+      },
+      {
+        "question": "What is the linguistic and cultural significance of Arabic in the Arab world?",
+        "answer": "Arabic is a linguistic and cultural cornerstone of the Arab world."
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 16,
+    "image_filename": "16.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/16.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the topic of the image?",
+        "answer": "Uralo-Altaic and Mongolic Inscriptions, Early Japanese and Korean texts"
+      },
+      {
+        "question": "What is the family distribution mentioned in the image?",
+        "answer": "Altaic Language Family Distribution"
+      },
+      {
+        "question": "What is the topic related to the earliest Turkic texts and decipherment?",
+        "answer": "Earliest Turkic Texts and Decipherment"
+      },
+      {
+        "question": "What is the timeline related to in the image?",
+        "answer": "Timeline of the Altaic Hypothesis"
+      },
+      {
+        "question": "What is the language family shown on the map?",
+        "answer": "Altaic"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 17,
+    "image_filename": "17.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/17.png",
+    "num_questions_requested": 5,
+    "success": false,
+    "vqa_pairs": [],
+    "num_questions_generated": 0,
+    "error": "No valid JSON found in response",
+    "raw_response": "{\n  \"items\": [\n    { \"question\": \"What is the timeline of key events in language standardization?\", \"answer\": \"1771, 1911, 1961, 1981, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991"
+  },
+  {
+    "image_id": 18,
+    "image_filename": "18.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/18.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the Axiom of Choice?",
+        "answer": "A foundational principle in set theory"
+      },
+      {
+        "question": "Who formulated the Axiom of Choice?",
+        "answer": "Ernst Zermelo"
+      },
+      {
+        "question": "What is a choice function?",
+        "answer": "Selecting one element from each set"
+      },
+      {
+        "question": "Do real numbers require the Axiom of Choice for selection?",
+        "answer": "Yes"
+      },
+      {
+        "question": "Is the Axiom of Choice necessary for finite sets?",
+        "answer": "No"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 19,
+    "image_filename": "19.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/19.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main topic of the image?",
+        "answer": "The Aegean Sea: A Strategic and Cultural Crossroads"
+      },
+      {
+        "question": "What does the image suggest about the Aegean Sea?",
+        "answer": "A Strategic and Cultural Crossroads"
+      },
+      {
+        "question": "What time period does the image cover?",
+        "answer": "From Ancient Civilizations to Modern Conflicts"
+      },
+      {
+        "question": "What is the significance of the map in the image?",
+        "answer": "Geography and Subdivisions of the Aegean"
+      },
+      {
+        "question": "What additional information is provided about the Aegean Sea?",
+        "answer": "Political and Territorial Boundaries"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 21,
+    "image_filename": "21.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/21.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What was the founding year of A. Horch & Cie. in Cologne?",
+        "answer": "1899"
+      },
+      {
+        "question": "What is the significance of 17.9% in the context of DKW's market share?",
+        "answer": "DKW's market share in 1938"
+      },
+      {
+        "question": "What is the largest engine size of any Audi model?",
+        "answer": "5.7L"
+      },
+      {
+        "question": "Which series was introduced in 1965?",
+        "answer": "Audi F103 series"
+      },
+      {
+        "question": "When was Auto Union dismantled after World War II?",
+        "answer": "1945"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 22,
+    "image_filename": "22.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/22.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What are the two main types of aircraft classification?",
+        "answer": "Lighter-than-air and Heavier-than-air"
+      },
+      {
+        "question": "How are Fixed-Wing Aircraft classified?",
+        "answer": "Lift through Aerodynamic Principles"
+      },
+      {
+        "question": "What is the primary method of lift for Rotorcraft?",
+        "answer": "Spinning Rotors"
+      },
+      {
+        "question": "What is the difference between Airships and Balloons?",
+        "answer": "Powered vs. Unpowered Aerostats"
+      },
+      {
+        "question": "What are some examples of Early Forms of Flight?",
+        "answer": "Kites and Gliders"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 23,
+    "image_filename": "23.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/23.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the book?",
+        "answer": "NED NOVEL"
+      },
+      {
+        "question": "What is the main theme of the infographic?",
+        "answer": "Early Interest in Science"
+      },
+      {
+        "question": "What does the Nobel Prizes represent?",
+        "answer": "Legacy"
+      },
+      {
+        "question": "What is the invention associated with the man in the middle of the infographic?",
+        "answer": "Dynamite"
+      },
+      {
+        "question": "What is the title of the book on the right side of the infographic?",
+        "answer": "Academy"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 24,
+    "image_filename": "24.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/24.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What does UMN stand for?",
+        "answer": "Upper Motor Neuron"
+      },
+      {
+        "question": "What does LMN stand for?",
+        "answer": "Lower Motor Neuron"
+      },
+      {
+        "question": "What is the main focus of the infographic?",
+        "answer": "Upper vs. Lower Motor Pathways"
+      },
+      {
+        "question": "What is shown in the blue section?",
+        "answer": "Upper Motor Pathways"
+      },
+      {
+        "question": "What is shown in the black section?",
+        "answer": "Lower Motor Pathways"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 25,
+    "image_filename": "25.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/25.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main title of the image?",
+        "answer": "Phoenician Abjad: First Consonantal Script"
+      },
+      {
+        "question": "What is the timeline in the image about?",
+        "answer": "Evolution of Abjad Writing Systems"
+      },
+      {
+        "question": "What does Abjad represent?",
+        "answer": "only consonants, with vowels inferred or marked optionally"
+      },
+      {
+        "question": "What is Arabic Script and its features?",
+        "answer": "Vowel Diacritics and Matres Lectionis"
+      },
+      {
+        "question": "How did the Greek adaptation affect the Abjad script?",
+        "answer": "Adding Vowel Symbols"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 26,
+    "image_filename": "26.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/26.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What was the year ABBA formed?",
+        "answer": "1972"
+      },
+      {
+        "question": "What is ABBA Voyage?",
+        "answer": "Virtual Concert"
+      },
+      {
+        "question": "What is the title of the musical and film?",
+        "answer": "Mamma Mia!"
+      },
+      {
+        "question": "What year did ABBA win Eurovision?",
+        "answer": "1974"
+      },
+      {
+        "question": "What is the significance of the Brit Billion in relation to ABBA?",
+        "answer": "1972"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 27,
+    "image_filename": "27.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/27.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "Where was the person born?",
+        "answer": "Manitoba"
+      },
+      {
+        "question": "When was the person recognized as a Grand Master?",
+        "answer": "1995"
+      },
+      {
+        "question": "What inspired the person?",
+        "answer": "*Who Goes There?*"
+      },
+      {
+        "question": "Where did the person move to?",
+        "answer": "California"
+      },
+      {
+        "question": "What is Nexialism about?",
+        "answer": "A new way of thinking"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 28,
+    "image_filename": "28.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/28.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the 1999 Australian Open Champion?",
+        "answer": "Anna Kournikova"
+      },
+      {
+        "question": "Who is the trainer mentioned in the image?",
+        "answer": "Anna Kournikova"
+      },
+      {
+        "question": "What is Anna Kournikova's profession?",
+        "answer": "Tennis Star and Global Icon"
+      },
+      {
+        "question": "Who is the partner mentioned in the image?",
+        "answer": "Martina Hingis"
+      },
+      {
+        "question": "What is the title of the show referenced in the image?",
+        "answer": "The Biggest Loser"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 29,
+    "image_filename": "29.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/29.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the atomic number of Argon?",
+        "answer": "18"
+      },
+      {
+        "question": "What is the unique characteristic of Argon's emission spectrum?",
+        "answer": "Unique spectral lines identified in 1882"
+      },
+      {
+        "question": "What is Argon used for in welding?",
+        "answer": "Shielding gas prevents oxidation"
+      },
+      {
+        "question": "Where is Argon located on the periodic table?",
+        "answer": "Group 18, Atomic Number 18"
+      },
+      {
+        "question": "What is the symbol for Argon?",
+        "answer": "Ar"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 30,
+    "image_filename": "30.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/30.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What are the allotropes of Arsenic?",
+        "answer": "Grey, Yellow, and Black"
+      },
+      {
+        "question": "What is the atomic number of Arsenic?",
+        "answer": "33"
+      },
+      {
+        "question": "What is the toxicity level of Arsenic?",
+        "answer": "Toxic"
+      },
+      {
+        "question": "What are the health risks of Arsenic exposure?",
+        "answer": "Health Risks"
+      },
+      {
+        "question": "How does Arsenic contamination occur in groundwater?",
+        "answer": "Groundwater"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 31,
+    "image_filename": "31.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/31.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the primary ore mineral for industrial refining?",
+        "answer": "Stibnite"
+      },
+      {
+        "question": "What is the industrial refining process for stibnite?",
+        "answer": "Primary Ore Mineral"
+      },
+      {
+        "question": "What is a common use of stibnite?",
+        "answer": "Flame Retardant Additive"
+      },
+      {
+        "question": "What are the semiconductor applications of stibnite?",
+        "answer": "Industrial Refining Process"
+      },
+      {
+        "question": "What is the atomic structure of stibnite?",
+        "answer": "Group 15 Metalloid"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 32,
+    "image_filename": "32.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/32.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the atomic number of Actinium?",
+        "answer": "89"
+      },
+      {
+        "question": "What is the symbol for Actinium?",
+        "answer": "Ac"
+      },
+      {
+        "question": "How many protons does Actinium have?",
+        "answer": "89"
+      },
+      {
+        "question": "What is the atomic mass of Actinium?",
+        "answer": "227.03"
+      },
+      {
+        "question": "What are the chemical properties of Actinium?",
+        "answer": "Corrosive, radioactive"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 33,
+    "image_filename": "33.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/33.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the infographic?",
+        "answer": "Amerium on the Periodic Table"
+      },
+      {
+        "question": "What does the infographic represent about Americium?",
+        "answer": "Amerium in Smoke Detectors"
+      },
+      {
+        "question": "What does the infographic show about the crystal structure of Americium?",
+        "answer": "Amerium Decay Chain"
+      },
+      {
+        "question": "What does the infographic depict about the timeline of Americium in nuclear reactors?",
+        "answer": "Timeline of Americium in Nuclear Reactors"
+      },
+      {
+        "question": "What does the infographic mention about the locations of Americium contamination?",
+        "answer": "Locations of Americium Contamination"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 34,
+    "image_filename": "34.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/34.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the rarest halogen?",
+        "answer": "Astatine"
+      },
+      {
+        "question": "What is the atomic number of Astatine?",
+        "answer": "85"
+      },
+      {
+        "question": "What is the Periodic Table position of Astatine?",
+        "answer": "85"
+      },
+      {
+        "question": "What is the behavior of Astatine?",
+        "answer": "radioactive decay"
+      },
+      {
+        "question": "What is the electronegativity of Astatine?",
+        "answer": "Not applicable (no overlay text provided)"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 35,
+    "image_filename": "35.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/35.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is Isomerism?",
+        "answer": "Same formula, different structures"
+      },
+      {
+        "question": "What is Brownian Motion?",
+        "answer": "Proof of Atomic Existence"
+      },
+      {
+        "question": "What is Chemical Bonding?",
+        "answer": "Molecular Formation"
+      },
+      {
+        "question": "What is Atomic Theory?",
+        "answer": "40000C - diwvolvernt 1955"
+      },
+      {
+        "question": "What are Key Scientists in Atomic Discovery?",
+        "answer": "900, 190, 900"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 36,
+    "image_filename": "36.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/36.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main theme of the image?",
+        "answer": "Formation of Advanced Chemistry in Heidelberg, 1887"
+      },
+      {
+        "question": "What is shown at the top of the image?",
+        "answer": "Anti-immigrant sentiment post-reunification"
+      },
+      {
+        "question": "What is depicted in the second section?",
+        "answer": "Rivalry with Die Fantastischen Vier highlights ideological differences"
+      },
+      {
+        "question": "What is the focus of the third section?",
+        "answer": "Fremd im eigenen Land: Addressing racism and identity"
+      },
+      {
+        "question": "What is introduced in the fourth section?",
+        "answer": "Introducing the 'Afrin 'Afro-German' in hip hop"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 37,
+    "image_filename": "37.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/37.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What are the topics covered in the image?",
+        "answer": "Barthes: Death of the Author, Works for Hire and Joint Authorship, AI and the Future of Authorship, Monkey Selfie Copyright Dispute, Foucault: Author Function, Legal Definition of Authorship"
+      },
+      {
+        "question": "What is the central theme of the image?",
+        "answer": "The theme of authorship and its legal and philosophical implications"
+      },
+      {
+        "question": "What is the significance of the monkey selfie in the context of copyright?",
+        "answer": "The monkey selfie is significant because it led to a copyright dispute regarding the authorship of the photograph"
+      },
+      {
+        "question": "Who is Foucault in relation to the image?",
+        "answer": "Foucault is associated with the concept of author function, which is discussed in the image"
+      },
+      {
+        "question": "What is the authorship function according to Foucault?",
+        "answer": "The authorship function is the concept of the author as a creator of a text or work, which is discussed by Foucault"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 38,
+    "image_filename": "38.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/38.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the topic of the first section?",
+        "answer": "The Brain and Anxiety"
+      },
+      {
+        "question": "What does the heart symbolize in the second section?",
+        "answer": "Emotional States and Their Symbols"
+      },
+      {
+        "question": "What is the focus of the third section?",
+        "answer": "Philosophical Perspectives on Anxiety"
+      },
+      {
+        "question": "What are the physiological responses to anxiety about?",
+        "answer": "The Brain and Anxiety"
+      },
+      {
+        "question": "What is depicted in the fourth section?",
+        "answer": "Emotional Manifestations of Anxiety"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 39,
+    "image_filename": "39.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/39.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the image?",
+        "answer": "Aristotle and Euclid: Founders of Axiomatic Reasoning"
+      },
+      {
+        "question": "Who are the founders of axiomatic reasoning mentioned in the image?",
+        "answer": "Aristotle and Euclid"
+      },
+      {
+        "question": "What is the main focus of the image?",
+        "answer": "Modern Axiomatic Systems in Mathematics"
+      },
+      {
+        "question": "What is the name of the logical deduction and theorem derivation method mentioned in the image?",
+        "answer": "Euclid's Five Postulates and Common Notions"
+      },
+      {
+        "question": "Which mathematician's postulates and common notions are mentioned in the image?",
+        "answer": "Euclid"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 40,
+    "image_filename": "40.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/40.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What are the key concepts discussed in the image?",
+        "answer": "Global Reach of Toffler Associates, Information Overload and Digital Age, Influencing Business and Government Leaders, Collaboration with Steve Case and Zhao Ziyang"
+      },
+      {
+        "question": "What is the main focus of the image?",
+        "answer": "Alvin Toffler: Futurist and Visionary"
+      },
+      {
+        "question": "What does 'The Three Waves of Society' refer to?",
+        "answer": "The image does not provide specific information about 'The Three Waves of Society'."
+      },
+      {
+        "question": "Who collaborated with Steve Case and Zhao Ziyang?",
+        "answer": "Alvin Toffler"
+      },
+      {
+        "question": "What does 'Key Concepts and Their Impact' cover?",
+        "answer": "The image does not provide specific information about 'Key Concepts and Their Impact'."
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 41,
+    "image_filename": "41.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/41.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the poster?",
+        "answer": "High School Life and Rivalry Spider-Man's Origin and Debut"
+      },
+      {
+        "question": "What is the central theme of the poster?",
+        "answer": "Spider-Man's origin and debut in high school"
+      },
+      {
+        "question": "What is the main character in the poster?",
+        "answer": "Spider-Man"
+      },
+      {
+        "question": "What are the two main sections of the poster?",
+        "answer": "High School Life and Rivalry, Spider-Man's Origin and Debut"
+      },
+      {
+        "question": "What is the subtitle of the poster?",
+        "answer": "Legacy and Cultural Impact"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 42,
+    "image_filename": "42.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/42.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the infographic?",
+        "answer": "Apiaceae Family: Aromatic and Economically Important"
+      },
+      {
+        "question": "What are the main sections of the infographic?",
+        "answer": "Botanical Features and Morphology, Aromatic Compounds and Culinary Use, Floral Structure and Pollination, Ecological Relationships and Uses, Taxonomic Classification and Evolution, Geographic Distribution and Ecology"
+      },
+      {
+        "question": "What does the image of butterflies represent?",
+        "answer": "Ecological Relationships and Uses"
+      },
+      {
+        "question": "What is shown in the section about taxonomic classification and evolution?",
+        "answer": "Geographic Distribution and Ecology"
+      },
+      {
+        "question": "What is the purpose of the world map in the infographic?",
+        "answer": "Aromatic Compounds and Culinary Use"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 43,
+    "image_filename": "43.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/43.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the function of the corpus callosum?",
+        "answer": "Connects the two hemispheres of the brain"
+      },
+      {
+        "question": "What are the branches of the axon called?",
+        "answer": "Dendrites"
+      },
+      {
+        "question": "What is the difference between myelinated and unmyelinated axons?",
+        "answer": "Myelinated axons have a faster conduction speed"
+      },
+      {
+        "question": "What is the role of the axon hillock and initial segment?",
+        "answer": "Initiates the action potential"
+      },
+      {
+        "question": "What is the structure of a synapse?",
+        "answer": "Axon terminal to dendrite"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 44,
+    "image_filename": "44.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/44.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main topic of the image?",
+        "answer": "Phoenician to Aramaic: The Evolution of Lingua Franca"
+      },
+      {
+        "question": "What is the global reach of the Aramaic script according to the image?",
+        "answer": "A Legacy of Communication"
+      },
+      {
+        "question": "What does the timeline in the image represent?",
+        "answer": "Aramaic Influence and Script Development"
+      },
+      {
+        "question": "What are the alphabets being compared in the image?",
+        "answer": "Aramaic, Hebrew, Arabic Alphabets"
+      },
+      {
+        "question": "What is the relationship between Aramaic and Hebrew and Arabic in terms of script?",
+        "answer": "Script Lineage"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 45,
+    "image_filename": "45.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/45.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What does ADEM stand for?",
+        "answer": "Autoimmune Encephalomyelitis"
+      },
+      {
+        "question": "What is the difference between ADEM and MS in terms of lesions?",
+        "answer": "ADEM has different lesion patterns compared to MS."
+      },
+      {
+        "question": "What are the symptoms and progression timeline of ADEM?",
+        "answer": "The symptoms and progression timeline of ADEM are detailed in the image."
+      },
+      {
+        "question": "What is the seasonal incidence trend for ADEM?",
+        "answer": "The image shows a seasonal incidence trend for ADEM."
+      },
+      {
+        "question": "What is the role of immune response and autoantibodies in ADEM?",
+        "answer": "The image explains the role of immune response and autoantibodies in ADEM."
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 46,
+    "image_filename": "46.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/46.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main function of the cerebellum?",
+        "answer": "The Brain's Coordination Center"
+      },
+      {
+        "question": "What does the image illustrate?",
+        "answer": "Cerebellum: The Brain's Coordination Center"
+      },
+      {
+        "question": "What is the difference between normal and impaired ataxia gait?",
+        "answer": "Ataxia Gait: Normal vs. Impaired"
+      },
+      {
+        "question": "Where is the cerebellum located?",
+        "answer": "The Brain's Coordination Center"
+      },
+      {
+        "question": "What is the purpose of the diagrams?",
+        "answer": "Cerebellum: The Brain's Coordination Center"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 47,
+    "image_filename": "47.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/47.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is Ada Lovelace known for?",
+        "answer": "The First Computer Programmer"
+      },
+      {
+        "question": "Who are Ada Lovelace, Lord Byron, and William King?",
+        "answer": "Ada, Lord Byron, Lady Byron, and William King"
+      },
+      {
+        "question": "What is Ada Lovelace's role in the history of computing?",
+        "answer": "Legacy and Recognition in Computing History"
+      },
+      {
+        "question": "What is the timeline of Ada's life and contributions about?",
+        "answer": "Timeline of Ada's Life and Contributions"
+      },
+      {
+        "question": "What is the title of the book open on the table?",
+        "answer": "Translation and Notes on the Analytical Engine"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 48,
+    "image_filename": "48.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/48.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What was H.P. Lovecraft's legacy in Wisconsin?",
+        "answer": "Honored in Wisconsin and abroad"
+      },
+      {
+        "question": "Where did H.P. Lovecraft write the Cthulhu Mythos?",
+        "answer": "Cabin"
+      },
+      {
+        "question": "What role did H.P. Lovecraft play in American literature?",
+        "answer": "Influence on American literature"
+      },
+      {
+        "question": "What work did H.P. Lovecraft continue after his death?",
+        "answer": "April Rose Derleth"
+      },
+      {
+        "question": "What was the peak of regional storytelling during H.P. Lovecraft's time?",
+        "answer": "Sac Prairie Saga"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 49,
+    "image_filename": "49.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/49.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What are the highest peaks in the Alps?",
+        "answer": "The Highest Peaks in the Range"
+      },
+      {
+        "question": "What is the historical context of the Alps?",
+        "answer": "Historical Alpine Passes"
+      },
+      {
+        "question": "Who is Ötzi the Iceman?",
+        "answer": "The Iceman"
+      },
+      {
+        "question": "What is modern Alpine tourism?",
+        "answer": "Modern Alpine Tourism"
+      },
+      {
+        "question": "What are the formations of the Alps?",
+        "answer": "Formation of the Alps"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 50,
+    "image_filename": "50.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/50.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the date of birth mentioned in the image?",
+        "answer": "1913"
+      },
+      {
+        "question": "What did the person join in 1940?",
+        "answer": "French Resistance"
+      },
+      {
+        "question": "Which book did the person write?",
+        "answer": "The Stranger"
+      },
+      {
+        "question": "What did the person win in 1957?",
+        "answer": "Nobel Prize in Literature"
+      },
+      {
+        "question": "What is the title of the philosophy discussed in the image?",
+        "answer": "Philosophy of the Absurd"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 51,
+    "image_filename": "51.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/51.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the main topic of the image?",
+        "answer": "The Plague Sweeps Oran"
+      },
+      {
+        "question": "What is shown in the top left section?",
+        "answer": "The Human Condition in the Plague"
+      },
+      {
+        "question": "What does the top right section illustrate?",
+        "answer": "Grand's Struggles and Recovery"
+      },
+      {
+        "question": "What is depicted in the middle left section?",
+        "answer": "Dr. Rreuts the Sick"
+      },
+      {
+        "question": "What is shown in the middle right section?",
+        "answer": "Tarrou Organizes Volunteers"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 52,
+    "image_filename": "52.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/52.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What does the graph represent?",
+        "answer": "Graph of absolute value function"
+      },
+      {
+        "question": "How is absolute value defined on the real number line?",
+        "answer": "Distance from zero"
+      },
+      {
+        "question": "What is the notation for absolute value on the complex plane?",
+        "answer": "|z|"
+      },
+      {
+        "question": "What is the relationship between the sign function and absolute value?",
+        "answer": "z/|z| sign function"
+      },
+      {
+        "question": "What is the modulus in the complex plane?",
+        "answer": "Distance from the origin to the point"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 53,
+    "image_filename": "53.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/53.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the section that discusses the iconic look of the character?",
+        "answer": "Modern Adaptations The Iconic Look"
+      },
+      {
+        "question": "What element is highlighted in the section about the detective's attire?",
+        "answer": "The Spark of Genius"
+      },
+      {
+        "question": "What does the section titled 'A Master of Logic' emphasize?",
+        "answer": "The Crime Scene Detective Timeless Symbol of Precision"
+      },
+      {
+        "question": "What is the topic of the section that talks about the first appearance of the character?",
+        "answer": "Poirot's First Appearance"
+      },
+      {
+        "question": "What is the background of the image?",
+        "answer": "A dark blue and gold pattern"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 54,
+    "image_filename": "54.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/54.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the book mentioned in the image?",
+        "answer": "Miss Jane Marple: The Village Detective"
+      },
+      {
+        "question": "Who is the author of the book mentioned?",
+        "answer": "Raymond West"
+      },
+      {
+        "question": "What does the text 'From Cathedral Close to Crime Scene' refer to?",
+        "answer": "A timeline of literary appearances"
+      },
+      {
+        "question": "Who are the 'Housemaids and Orphanage Girls' mentioned in the image?",
+        "answer": "Allies and Observers: Sir Henry Clithering"
+      },
+      {
+        "question": "What is the setting of the first image?",
+        "answer": "A village"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 55,
+    "image_filename": "55.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/55.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What event is depicted in the first panel?",
+        "answer": "Aaron and Miriam in the Wilderness"
+      },
+      {
+        "question": "What did Aaron and his sons do in the second panel?",
+        "answer": "Killed for offering strange incense"
+      },
+      {
+        "question": "What are Aaron and Hur doing in the third panel?",
+        "answer": "Supporting Moses at Mount Sinai"
+      },
+      {
+        "question": "What is Aaron consecrated as in the fourth panel?",
+        "answer": "First High Priest"
+      },
+      {
+        "question": "What does Aaron transfer to the people in the fifth panel?",
+        "answer": "The people to Egypt"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 56,
+    "image_filename": "56.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/56.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the title of the first section?",
+        "answer": "Space and Aviation"
+      },
+      {
+        "question": "What is the title of the second section?",
+        "answer": "Ethnic Clashes and Social Tensions"
+      },
+      {
+        "question": "What is the title of the third section?",
+        "answer": "Early Medieval Politics and Conflicts"
+      },
+      {
+        "question": "What is the title of the fourth section?",
+        "answer": "20th-Century Global Conflicts"
+      },
+      {
+        "question": "What is the title of the fifth section?",
+        "answer": "Colonial Expansion and Warfare"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 57,
+    "image_filename": "57.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/57.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What event occurred in the year 1232?",
+        "answer": "Goseibai Shikimoku legal code"
+      },
+      {
+        "question": "What event occurred in the year 1689?",
+        "answer": "Treaty of Nerchinsk"
+      },
+      {
+        "question": "What event occurred in the year 1600?",
+        "answer": "Siege of Fushimi Castle"
+      },
+      {
+        "question": "What event occurred in the year 1597?",
+        "answer": "Battle of Chilcheollyang"
+      },
+      {
+        "question": "What event occurred in the year 410?",
+        "answer": "Visigoths sack Rome"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 58,
+    "image_filename": "58.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/58.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the key feature of alcohols?",
+        "answer": "The key feature of alcohols is the hydroxyl group."
+      },
+      {
+        "question": "What does the molecule on the left represent?",
+        "answer": "The molecule on the left represents an alcohol with a hydroxyl group."
+      },
+      {
+        "question": "How many hydroxyl groups does the molecule on the right have?",
+        "answer": "The molecule on the right has two hydroxyl groups."
+      },
+      {
+        "question": "What is the etymology of alcohol?",
+        "answer": "The etymology of alcohol is from Arabic to Latin."
+      },
+      {
+        "question": "What is the timeline of alcohol discovery?",
+        "answer": "The timeline of alcohol discovery is represented by a bottle and a glass."
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 59,
+    "image_filename": "59.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/59.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the subject of the infographic?",
+        "answer": "Achill Island: Geography and Population"
+      },
+      {
+        "question": "What are the topics covered in the infographic?",
+        "answer": "The Monastery and Local Education, St. Damhnait's Church and Holy Well, Tragedies of the 19th and 20th Centuries, The Achill Mission: Schools and Relief Work, Key Historical Events Timeline, Grace O'Malley: Pirate and Leader, Railway and Migration Patterns"
+      },
+      {
+        "question": "What is Achill Island known for?",
+        "answer": "Achill Island has a rich history dating back thousands of years."
+      },
+      {
+        "question": "What is the significance of St. Damhnait's Church and Holy Well?",
+        "answer": "The Monastery and Local Education"
+      },
+      {
+        "question": "What historical figure is featured in the infographic?",
+        "answer": "Grace O'Malley: Pirate and Leader"
+      }
+    ],
+    "num_questions_generated": 5
+  },
+  {
+    "image_id": 60,
+    "image_filename": "60.png",
+    "image_path": "./src/data/bizgen/output/subset_0_516/60.png",
+    "num_questions_requested": 5,
+    "success": true,
+    "vqa_pairs": [
+      {
+        "question": "What is the definition of an algebraically closed field?",
+        "answer": "A field where every non-constant polynomial has a root."
+      },
+      {
+        "question": "What are irreducible polynomials in algebraically closed fields?",
+        "answer": "Only degree one polynomials are irreducible in algebraically closed fields."
+      },
+      {
+        "question": "What is the cyclotomic closure?",
+        "answer": "Contains all roots of unity."
+      },
+      {
+        "question": "Are real numbers algebraically closed?",
+        "answer": "No."
+      },
+      {
+        "question": "What is the significance of the eigenvector condition?",
+        "answer": "Every linear map has an eigenvector."
+      }
+    ],
+    "num_questions_generated": 5
+  }
+]

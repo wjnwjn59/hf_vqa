@@ -68,7 +68,7 @@ conda activate wiki
 CUDA_VISIBLE_DEVICES=0 python src/data/create_data/qwen/generate_infographic_data.py \
     --model_name "unsloth/Qwen3-8B" \
     --input_data "./src/data/create_data/output/summarize" \
-    --template_path "./src/prompts/bizgen.jinja" \
+    --template_path "./src/prompts/bizgen_full.jinja" \
     --start-wiki 0 \
     --end-wiki 25800 \
     --batch_size 8 
@@ -81,12 +81,25 @@ conda activate wiki
 
 python src/data/create_data/qwen/merge_infographic_bboxes.py \
     --extracted-bboxes ./src/data/create_data/qwen/extracted_bboxes.json \
-    --infographic-generated ./src/data/create_data/output/bizgen_format \
     --infographic-dir ./src/data/create_data/output/infographic \
     --color-idx ./src/data/create_data/qwen/glyph/color_idx.json \
     --font-idx ./src/data/create_data/qwen/glyph/font_idx.json \
     --start-wiki 0 \
     --end-wiki 232000 \
+    --seed 42
+```
+
+## Split the BBoxes with the generated data
+
+```bash
+conda activate wiki
+
+python src/data/create_data/qwen/extract_infographic.py \
+    --infographic-dir ./src/data/create_data/output/infographic \
+    --color-idx ./src/data/create_data/qwen/glyph/color_idx.json \
+    --font-idx ./src/data/create_data/qwen/glyph/font_idx.json \
+    --start-wiki 0 \
+    --end-wiki 0 \
     --seed 42
 ```
 
@@ -101,4 +114,32 @@ CUDA_VISIBLE_DEVICES=0 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
     --wiki_dir ../create_data/output/bizgen_format/ \
     --subset 0:516
+```
+
+# Run OCR filter
+
+```bash
+conda activate wiki
+
+export PYTHONPATH="./:$PYTHONPATH"
+
+python src/data/ocr/ocr_filter.py \
+    --images-dir "src/data/create_data/output/infographic_data_no_parse" \
+    --start-id 1 \
+    --end-id 232000
+```
+
+# Create VQA data
+
+```bash
+conda activate wiki
+export PYTHONPATH="./:$PYTHONPATH"
+
+CUDA_VISIBLE_DEVICES=0 python src/data/vqa/generate_vqa_data.py \
+    --model_name "unsloth/Qwen2-VL-7B-Instruct" \
+    --images_dir "./src/data/bizgen/output/subset_0_516" \
+    --template_path "./src/prompts/vqg.jinja" \
+    --output_path "./src/data/vqa/vqa_data.json" \
+    --num_questions 25800 \
+    --batch_size 4
 ```

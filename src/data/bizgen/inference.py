@@ -78,7 +78,7 @@ def main():
         ckpt_dir (`str`):
             checkpoint directory contains the model weights for lora and byt5_mapper.
         output_dir (`str`):
-            output directory to save the generated images.
+            base output directory name. The final output will be saved to output_dir/subset_{start}_{end}.
         device (`str`):
             device to run the inference.
         sample_list (`str`):  
@@ -102,6 +102,8 @@ def main():
                         default="checkpoints/lora/infographic")
     parser.add_argument('--device', type=str, default='cuda:0')
     parser.add_argument('--wiki_dir', type=str, default='../create_data/output/bizgen_format')
+    parser.add_argument('--output_dir', type=str, default='output',
+                        help='Base output directory name')
     parser.add_argument('--subset', type=str, default='0:2')
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--global_ratio', type=float, default=0.2)
@@ -116,9 +118,8 @@ def main():
     config = parse_config(args.config_dir)
 
     start_subset, end_subset = [int(idx) for idx in args.subset.split(':')]
-    output_base_dir = "output"
     output_subset_dir = f'subset_{start_subset}_{end_subset}'
-    args.output_dir = osp.join(output_base_dir, output_subset_dir)
+    args.output_dir = osp.join(args.output_dir, output_subset_dir)
 
     if not osp.exists(args.output_dir):
         os.makedirs(args.output_dir)
