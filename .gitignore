@@ -6,5 +6,6 @@ __MACOSX/
 __pycache__/
 
 wikipedia_en*/
-
 wikipedia_processed.json
+
+src/data/bizgen/output*

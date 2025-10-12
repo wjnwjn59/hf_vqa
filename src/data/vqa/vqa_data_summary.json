@@ -1,0 +1,16 @@
+{
+  "total_images_processed": 59,
+  "successful_images": 58,
+  "failed_images": 1,
+  "success_rate": 98.30508474576271,
+  "total_vqa_pairs": 290,
+  "average_questions_per_image": 5.0,
+  "parameters": {
+    "model_name": "unsloth/Qwen2-VL-7B-Instruct",
+    "num_questions_per_image": 5,
+    "batch_size": 4,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_tokens": 2048
+  }
+}
