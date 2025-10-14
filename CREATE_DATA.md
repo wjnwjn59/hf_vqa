@@ -13,7 +13,7 @@ gdown ...
 ## Download the Wiki Data (Only once)
 
 ```bash
-conda env create -f ./src/data/create_data/bizgen/wiki.yaml
+conda env create -f ./src/data/create_data/wiki.yaml
 conda activate wiki
 
 export PYTHONPATH="./:$PYTHONPATH"
@@ -106,6 +106,7 @@ python src/data/create_data/qwen/extract_infographic.py \
 ## Run the script to create the data
 
 ```bash
+conda env create -f ./src/data/bizgen/wiki.yaml
 conda activate bizgen
 
 cd ./src/data/bizgen/
@@ -120,7 +121,6 @@ CUDA_VISIBLE_DEVICES=0 python inference.py \
 
 ```bash
 conda activate wiki
-
 export PYTHONPATH="./:$PYTHONPATH"
 
 python src/data/ocr/ocr_filter.py \

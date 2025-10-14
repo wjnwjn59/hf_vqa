@@ -405,12 +405,12 @@ def merge_narrator_data(
             }
             output_layers.append(bg_layer)
         else:
-            # Fallback: if no background bbox found, use a default full image background
+            # Fallback: if no background bbox found, use a default full image background with default caption
             bg_layer = {
                 'category': 'element',
                 'top_left': [0, 0],
                 'bottom_right': [896, 2240],
-                'caption': ''
+                'caption': "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no discernible features. It's a simple, unadorned white background with no additional elements."
             }
             output_layers.append(bg_layer)
 

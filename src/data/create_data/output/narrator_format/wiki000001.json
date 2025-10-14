@@ -12,7 +12,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's rise to fame\". The infographic uses a clean white background with a subtle gradient border and is divided into three vertical panels. The top panel features a large, stylized silhouette of Beyoncé in a red and black color scheme, labeled \"Beyoncé Giselle Knowles-Carter\". The middle panel includes a timeline with key events, including \"Destiny's Child (1990s)\" and \"Dangerously in Love (2003)\". The bottom panel lists her achievements, including \"5 Grammy Awards\" and \"Billboard Hot 100 number-one singles\". The overall style of the image is minimalist and informative."
+                "caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\" focused on \"Timeline of Beyoncé's Career\". The infographic uses a clean, modern design with a light blue background and a minimalist color palette. The layout starts with a top panel featuring the title \"Beyoncé's Rise to Fame\" in bold, uppercase letters. Below it, a timeline is presented with key dates and events, including \"1997: Joining Destiny's Child\" and \"2003: Release of Dangerously in Love\". In the middle, a figure line depicts a stylized, cartoonish image of Beyoncé in a red dress, holding a microphone, with a light blue background. At the bottom, a panel lists her achievements, including \"5 Grammy Awards\" and \"Billboard Hot 100 number-one singles\". The overall style of the image is modern and informative."
             },
             {
                 "category": "element",
@@ -36,31 +36,7 @@
                     868,
                     1213
                 ],
-                "caption": "A stylized silhouette of Beyoncé in red and black, positioned at the top center with a subtle gradient border."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    27,
-                    1307
-                ],
-                "bottom_right": [
-                    868,
-                    1690
-                ],
-                "caption": "A horizontal timeline with labeled events, featuring a bold, sans-serif font and a light gray background."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    27,
-                    1794
-                ],
-                "bottom_right": [
-                    868,
-                    2177
-                ],
-                "caption": "A bullet-point list with achievements, using a clean, modern font and a light blue background."
+                "caption": "decorative element"
             },
             {
                 "category": "text",
@@ -72,8 +48,8 @@
                     784,
                     202
                 ],
-                "caption": "Text \"Beyoncé's Career Timeline\" in <color-1>, <en-font-15>. ",
-                "text": "Beyoncé's Career Timeline"
+                "caption": "Text \"Beyoncé's Rise to Fame\" in <color-1>, <en-font-15>. ",
+                "text": "Beyoncé's Rise to Fame"
             },
             {
                 "category": "text",
@@ -85,8 +61,8 @@
                     836,
                     2107
                 ],
-                "caption": "Text \"Beyoncé's rise to fame\" in <color-1>, <en-font-15>. ",
-                "text": "Beyoncé's rise to fame"
+                "caption": "Text \"Timeline of Beyoncé's Career\" in <color-1>, <en-font-15>. ",
+                "text": "Timeline of Beyoncé's Career"
             },
             {
                 "category": "text",
@@ -98,8 +74,8 @@
                     836,
                     661
                 ],
-                "caption": "Text \"Beyoncé Giselle Knowles-Carter\" in <color-1>, <en-font-15>. ",
-                "text": "Beyoncé Giselle Knowles-Carter"
+                "caption": "Text \"Beyoncé's Rise to Fame\" in <color-1>, <en-font-15>. ",
+                "text": "Beyoncé's Rise to Fame"
             },
             {
                 "category": "text",
@@ -111,8 +87,8 @@
                     836,
                     1142
                 ],
-                "caption": "Text \"Destiny's Child (1990s)\" in <color-1>, <en-font-15>. ",
-                "text": "Destiny's Child (1990s)"
+                "caption": "Text \"1997: Joining Destiny's Child\" in <color-1>, <en-font-15>. ",
+                "text": "1997: Joining Destiny's Child"
             },
             {
                 "category": "text",
@@ -124,8 +100,8 @@
                     853,
                     1596
                 ],
-                "caption": "Text \"Dangerously in Love (2003)\" in <color-1>, <en-font-15>. ",
-                "text": "Dangerously in Love (2003)"
+                "caption": "Text \"2003: Release of Dangerously in Love\" in <color-1>, <en-font-15>. ",
+                "text": "2003: Release of Dangerously in Love"
             },
             {
                 "category": "text",
@@ -154,7 +130,7 @@
                 "text": "Billboard Hot 100 number-one singles"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's rise to fame\". The infographic uses a clean white background with a subtle gradient border and is divided into three vertical panels. The top panel features a large, stylized silhouette of Beyoncé in a red and black color scheme, labeled \"Beyoncé Giselle Knowles-Carter\". Figure: A stylized silhouette of Beyoncé in red and black, positioned at the top center with a subtle gradient border. The middle panel includes a timeline with key events, including \"Destiny's Child (1990s)\" and \"Dangerously in Love (2003)\". Figure: A horizontal timeline with labeled events, featuring a bold, sans-serif font and a light gray background. The bottom panel lists her achievements, including \"5 Grammy Awards\" and \"Billboard Hot 100 number-one singles\". Figure: A bullet-point list with achievements, using a clean, modern font and a light blue background. The overall style of the image is minimalist and informative.",
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\" focused on \"Timeline of Beyoncé's Career\". The infographic uses a clean, modern design with a light blue background and a minimalist color palette. The layout starts with a top panel featuring the title \"Beyoncé's Rise to Fame\" in bold, uppercase letters. Below it, a timeline is presented with key dates and events, including \"1997: Joining Destiny's Child\" and \"2003: Release of Dangerously in Love\". In the middle, a figure line depicts a stylized, cartoonish image of Beyoncé in a red dress, holding a microphone, with a light blue background. At the bottom, a panel lists her achievements, including \"5 Grammy Awards\" and \"Billboard Hot 100 number-one singles\". The overall style of the image is modern and informative.",
         "original_bbox_index": "de_2"
     },
     {
@@ -170,7 +146,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Beyoncé's Early Life and Career\" focused on \"Childhood Competitions and Early Fame\". The overall tone is informative and celebratory, with a pastel color palette featuring soft pinks, light blues, and cream tones on a white background. The layout is divided into three vertical panels, each with a distinct section. At the top, a large heading reads \"Beyoncé Giselle Knowles-Carter\" in bold, uppercase letters, centered above a Below this, a section titled \"Growing Up in Houston\" features a bullet list with three items: \"Singing competitions\", \"Dancing competitions\", and \"R&B performances\". To the right of this list, a At the bottom, a panel titled \"Destiny's Child\" includes a The overall style of the image is clean, modern, and visually engaging."
+                "caption": "The image is an infographic titled \"Beyoncé's Early Life and Career\" focused on \"Childhood Competitions and Early Fame\". The infographic uses a clean, modern design with a light pastel background and soft geometric patterns. The layout is divided into three main sections: top, middle, and bottom. At the top, the title \"Beyoncé's Early Life and Career\" is displayed in bold, uppercase, sans-serif font, with a dark blue border. Below it, the heading \"Childhood Competitions\" is in a slightly smaller font, and the text \"Beyoncé Giselle Knowles-Carter was born on September 4, 1981, in Houston, Texas\" is placed directly beneath it. In the middle section, the heading \"Rise to Fame\" is centered, with the text \"She performed in various singing and dancing competitions as a child\" listed below it. At the bottom, the heading \"Destiny's Child\" is followed by the text \"Managed by her father, Mathew Knowles, the group became one of the world's best-selling girl groups of all time.\" The overall style of the image is modern and informative with a focus on clarity and visual hierarchy."
             },
             {
                 "category": "element",
@@ -194,31 +170,7 @@
                     776,
                     2240
                 ],
-                "caption": "A stylized cartoonish illustration of a young Beyoncé in a competition, wearing a sequined outfit, with a microphone and a trophy, set against a vibrant, geometric-patterned background."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    119,
-                    53
-                ],
-                "bottom_right": [
-                    776,
-                    711
-                ],
-                "caption": "A flat, minimalist illustration of a Houston skyline with a small icon of a microphone and a heart, in light blue and white."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    693,
-                    0
-                ],
-                "bottom_right": [
-                    896,
-                    138
-                ],
-                "caption": "A silhouette of the group with a badge reading \"World's Best-Selling Girl Group\" in gold, with a background of a record album and a chart."
+                "caption": "decorative element"
             },
             {
                 "category": "text",
@@ -256,8 +208,8 @@
                     722,
                     1761
                 ],
-                "caption": "Text \"Beyoncé Giselle Knowles-Carter\" in <color-15>, <en-font-103>. ",
-                "text": "Beyoncé Giselle Knowles-Carter"
+                "caption": "Text \"Beyoncé's Early Life and Career\" in <color-15>, <en-font-103>. ",
+                "text": "Beyoncé's Early Life and Career"
             },
             {
                 "category": "text",
@@ -269,8 +221,8 @@
                     722,
                     2144
                 ],
-                "caption": "Text \"Growing Up in Houston\" in <color-15>, <en-font-103>. ",
-                "text": "Growing Up in Houston"
+                "caption": "Text \"Childhood Competitions\" in <color-15>, <en-font-103>. ",
+                "text": "Childhood Competitions"
             },
             {
                 "category": "text",
@@ -282,8 +234,8 @@
                     487,
                     1154
                 ],
-                "caption": "Text \"Singing competitions\" in <color-47>, <en-font-103>. ",
-                "text": "Singing competitions"
+                "caption": "Text \"Beyoncé Giselle Knowles-Carter was born on September 4, 1981, in Houston, Texas\" in <color-47>, <en-font-103>. ",
+                "text": "Beyoncé Giselle Knowles-Carter was born on September 4, 1981, in Houston, Texas"
             },
             {
                 "category": "text",
@@ -295,8 +247,8 @@
                     487,
                     1538
                 ],
-                "caption": "Text \"Dancing competitions\" in <color-15>, <en-font-103>. ",
-                "text": "Dancing competitions"
+                "caption": "Text \"Rise to Fame\" in <color-15>, <en-font-103>. ",
+                "text": "Rise to Fame"
             },
             {
                 "category": "text",
@@ -308,11 +260,11 @@
                     487,
                     1921
                 ],
-                "caption": "Text \"R&B performances\" in <color-47>, <en-font-103>. ",
-                "text": "R&B performances"
+                "caption": "Text \"She performed in various singing and dancing competitions as a child\" in <color-47>, <en-font-103>. ",
+                "text": "She performed in various singing and dancing competitions as a child"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Beyoncé's Early Life and Career\" focused on \"Childhood Competitions and Early Fame\". The overall tone is informative and celebratory, with a pastel color palette featuring soft pinks, light blues, and cream tones on a white background. The layout is divided into three vertical panels, each with a distinct section. At the top, a large heading reads \"Beyoncé Giselle Knowles-Carter\" in bold, uppercase letters, centered above a Figure: A stylized cartoonish illustration of a young Beyoncé in a competition, wearing a sequined outfit, with a microphone and a trophy, set against a vibrant, geometric-patterned background. Below this, a section titled \"Growing Up in Houston\" features a bullet list with three items: \"Singing competitions\", \"Dancing competitions\", and \"R&B performances\". To the right of this list, a Figure: A flat, minimalist illustration of a Houston skyline with a small icon of a microphone and a heart, in light blue and white. At the bottom, a panel titled \"Destiny's Child\" includes a Figure: A silhouette of the group with a badge reading \"World's Best-Selling Girl Group\" in gold, with a background of a record album and a chart. The overall style of the image is clean, modern, and visually engaging.",
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Early Life and Career\" focused on \"Childhood Competitions and Early Fame\". The infographic uses a clean, modern design with a light pastel background and soft geometric patterns. The layout is divided into three main sections: top, middle, and bottom. At the top, the title \"Beyoncé's Early Life and Career\" is displayed in bold, uppercase, sans-serif font, with a dark blue border. Below it, the heading \"Childhood Competitions\" is in a slightly smaller font, and the text \"Beyoncé Giselle Knowles-Carter was born on September 4, 1981, in Houston, Texas\" is placed directly beneath it. In the middle section, the heading \"Rise to Fame\" is centered, with the text \"She performed in various singing and dancing competitions as a child\" listed below it. At the bottom, the heading \"Destiny's Child\" is followed by the text \"Managed by her father, Mathew Knowles, the group became one of the world's best-selling girl groups of all time.\" The overall style of the image is modern and informative with a focus on clarity and visual hierarchy.",
         "original_bbox_index": "cn_0"
     },
     {
@@ -328,7 +280,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's transition from Destiny's Child to solo artist\". The infographic uses a clean, minimalist design with a light blue background and white borders, divided into three vertical panels. The top panel features a large, stylized portrait of Beyoncé in a cartoonish style, surrounded by the text \"Beyoncé Giselle Knowles-Carter\" and \"September 4, 1981\". Below this, The middle panel includes the text \"Lead Singer of Destiny's Child\" and \"2000-2005\" in a sans-serif font, with a small icon of a microphone and a group of four figures in a stylized silhouette. The bottom panel displays the text \"Solo Artist\" and \"2005-Present\" in a contrasting dark blue, alongside a figure of Beyoncé performing on stage in a flat vector style. The overall style of the image is modern and informative, emphasizing clarity and chronological progression."
+                "caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's transition from Destiny's Child to solo artist\". The infographic uses a clean, minimalist design with a light blue background and a horizontal layout divided into three sections. At the top, the text \"Beyoncé Giselle Knowles-Carter\" is displayed in bold, uppercase font, followed by \"Born September 4, 1981\" and \"Houston, Texas\". In the middle section, a timeline graphic shows a stylized arrow pointing from \"Destiny's Child (1990s)\" to \"Solo Career (2003)\". Below this, the text \"Debut Album: Dangerously in Love (2003)\" is listed with a small icon of a music note. At the bottom, the text \"Grammy Awards: 5\" and \"Billboard Hot 100 Hits: 2\" are displayed. The overall style of the image is modern and professional."
             },
             {
                 "category": "element",
@@ -352,7 +304,7 @@
                     896,
                     1783
                 ],
-                "caption": "A timeline graphic shows the year 2003 as a bold, red marker with the text \"Destiny's Child Hiatus\" and \"Debut Album: Dangerously in Love\"."
+                "caption": "decorative element"
             },
             {
                 "category": "text",
@@ -403,8 +355,8 @@
                     789,
                     2046
                 ],
-                "caption": "Text \"September 4, 1981\" in <color-1>, <en-font-278>. ",
-                "text": "September 4, 1981"
+                "caption": "Text \"Born September 4, 1981\" in <color-1>, <en-font-278>. ",
+                "text": "Born September 4, 1981"
             },
             {
                 "category": "text",
@@ -416,8 +368,8 @@
                     758,
                     700
                 ],
-                "caption": "Text \"Destiny's Child Hiatus\" in <color-1>, <en-font-278>. ",
-                "text": "Destiny's Child Hiatus"
+                "caption": "Text \"Houston, Texas\" in <color-1>, <en-font-278>. ",
+                "text": "Houston, Texas"
             },
             {
                 "category": "text",
@@ -429,8 +381,8 @@
                     530,
                     1345
                 ],
-                "caption": "Text \"Debut Album: Dangerously in Love\" in <color-1>, <en-font-278>. ",
-                "text": "Debut Album: Dangerously in Love"
+                "caption": "Text \"Destiny's Child (1990s)\" in <color-1>, <en-font-278>. ",
+                "text": "Destiny's Child (1990s)"
             },
             {
                 "category": "text",
@@ -442,8 +394,8 @@
                     701,
                     326
                 ],
-                "caption": "Text \"Lead Singer of Destiny's Child\" in <color-1>, <en-font-278>. ",
-                "text": "Lead Singer of Destiny's Child"
+                "caption": "Text \"Solo Career (2003)\" in <color-1>, <en-font-278>. ",
+                "text": "Solo Career (2003)"
             },
             {
                 "category": "text",
@@ -455,8 +407,8 @@
                     250,
                     1510
                 ],
-                "caption": "Text \"2000-2005\" in <color-1>, <en-font-278>. ",
-                "text": "2000-2005"
+                "caption": "Text \"Debut Album: Dangerously in Love (2003)\" in <color-1>, <en-font-278>. ",
+                "text": "Debut Album: Dangerously in Love (2003)"
             },
             {
                 "category": "text",
@@ -468,8 +420,8 @@
                     478,
                     865
                 ],
-                "caption": "Text \"Solo Artist\" in <color-1>, <en-font-278>. ",
-                "text": "Solo Artist"
+                "caption": "Text \"Grammy Awards: 5\" in <color-1>, <en-font-278>. ",
+                "text": "Grammy Awards: 5"
             },
             {
                 "category": "text",
@@ -481,11 +433,11 @@
                     467,
                     541
                 ],
-                "caption": "Text \"2005-Present\" in <color-1>, <en-font-278>. ",
-                "text": "2005-Present"
+                "caption": "Text \"Billboard Hot 100 Hits: 2\" in <color-1>, <en-font-278>. ",
+                "text": "Billboard Hot 100 Hits: 2"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's transition from Destiny's Child to solo artist\". The infographic uses a clean, minimalist design with a light blue background and white borders, divided into three vertical panels. The top panel features a large, stylized portrait of Beyoncé in a cartoonish style, surrounded by the text \"Beyoncé Giselle Knowles-Carter\" and \"September 4, 1981\". Below this, Figure: A timeline graphic shows the year 2003 as a bold, red marker with the text \"Destiny's Child Hiatus\" and \"Debut Album: Dangerously in Love\". The middle panel includes the text \"Lead Singer of Destiny's Child\" and \"2000-2005\" in a sans-serif font, with a small icon of a microphone and a group of four figures in a stylized silhouette. The bottom panel displays the text \"Solo Artist\" and \"2005-Present\" in a contrasting dark blue, alongside a figure of Beyoncé performing on stage in a flat vector style. The overall style of the image is modern and informative, emphasizing clarity and chronological progression.",
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's transition from Destiny's Child to solo artist\". The infographic uses a clean, minimalist design with a light blue background and a horizontal layout divided into three sections. At the top, the text \"Beyoncé Giselle Knowles-Carter\" is displayed in bold, uppercase font, followed by \"Born September 4, 1981\" and \"Houston, Texas\". In the middle section, a timeline graphic shows a stylized arrow pointing from \"Destiny's Child (1990s)\" to \"Solo Career (2003)\". Below this, the text \"Debut Album: Dangerously in Love (2003)\" is listed with a small icon of a music note. At the bottom, the text \"Grammy Awards: 5\" and \"Billboard Hot 100 Hits: 2\" are displayed. The overall style of the image is modern and professional.",
         "original_bbox_index": "it_9"
     },
     {
@@ -501,7 +453,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Beyoncé's Early Life\" focused on \"Beyoncé's upbringing and early career\". The overall tone is informative and straightforward, with a soft pastel color palette featuring light pinks, blues, and yellows on a white background, bordered by a thin black line and divided into three horizontal panels. At the top, a large, bold heading reads \"Beyoncé Giselle Knowles-Carter\". Below this, a smaller text item reads \"Born and raised in Houston, Texas\". Centered in the middle panel, a bullet list titled \"Early Life and Career\" includes the items: \"Singer, songwriter, record producer, and actress\", \"Performed in singing and dancing competitions as a child\", and \"Rise to fame in the late 1990s as lead singer of Destiny's Child\". At the bottom, a text item reads \"Managed by her father, Mathew Knowles\". The overall style of the image is clean, informative, and visually organized."
+                "caption": "The image is an infographic titled \"Beyoncé's Early Life and Career\" focused on \"Beyoncé's Background and Rise to Fame\". The infographic uses a clean, modern design with a light pastel background and a combination of text panels and simple icons. The layout begins at the top with a large header titled \"Beyoncé Giselle Knowles-Carter\" in bold, uppercase letters, followed by a subheader stating \"Born September 4, 1981\". In the middle section, a figure shows a stylized cartoon of a young girl in a city setting, with a \"Houston, Texas\" label beneath it. Below that, a list includes \"Singer, Songwriter, Record Producer, Actress\" in bullet points. At the bottom, a small panel states \"Destiny's Child - 2000s\" with a simple icon of a microphone and a group of four figures. The overall style of the image is modern and informative with a focus on clarity and visual hierarchy."
             },
             {
                 "category": "element",
@@ -525,31 +477,7 @@
                     844,
                     519
                 ],
-                "caption": "A stylized cartoonish illustration of a young Beyoncé stands in front of a cityscape with a rounded, geometric style, in light pink and blue, no text inside."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    51,
-                    559
-                ],
-                "bottom_right": [
-                    844,
-                    759
-                ],
-                "caption": "A flat, icon-based illustration of a microphone and a group of four silhouettes in a performance setting, in light blue and pink, no text inside."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    51,
-                    1281
-                ],
-                "bottom_right": [
-                    844,
-                    1481
-                ],
-                "caption": "A simple line drawing of a man with a business card in hand, in black and white, no text inside."
+                "caption": "decorative element"
             },
             {
                 "category": "text",
@@ -561,8 +489,8 @@
                     812,
                     219
                 ],
-                "caption": "Text \"Beyoncé's Early Life\" in <color-1>, <en-font-352>. ",
-                "text": "Beyoncé's Early Life"
+                "caption": "Text \"Beyoncé's Early Life and Career\" in <color-1>, <en-font-352>. ",
+                "text": "Beyoncé's Early Life and Career"
             },
             {
                 "category": "text",
@@ -574,8 +502,8 @@
                     489,
                     1690
                 ],
-                "caption": "Text \"Beyoncé's upbringing and early career\" in <color-1>, <en-font-352>. ",
-                "text": "Beyoncé's upbringing and early career"
+                "caption": "Text \"Beyoncé's Background and Rise to Fame\" in <color-1>, <en-font-352>. ",
+                "text": "Beyoncé's Background and Rise to Fame"
             },
             {
                 "category": "text",
@@ -600,8 +528,8 @@
                     813,
                     1448
                 ],
-                "caption": "Text \"Born and raised in Houston, Texas\" in <color-1>, <en-font-352>. ",
-                "text": "Born and raised in Houston, Texas"
+                "caption": "Text \"Born September 4, 1981\" in <color-1>, <en-font-352>. ",
+                "text": "Born September 4, 1981"
             },
             {
                 "category": "text",
@@ -613,8 +541,8 @@
                     851,
                     2072
                 ],
-                "caption": "Text \"Early Life and Career\" in <color-1>, <en-font-352>. ",
-                "text": "Early Life and Career"
+                "caption": "Text \"Houston, Texas\" in <color-1>, <en-font-352>. ",
+                "text": "Houston, Texas"
             },
             {
                 "category": "text",
@@ -626,8 +554,8 @@
                     510,
                     1198
                 ],
-                "caption": "Text \"Singer, songwriter, record producer, and actress\" in <color-1>, <en-font-352>. ",
-                "text": "Singer, songwriter, record producer, and actress"
+                "caption": "Text \"Singer, Songwriter, Record Producer, Actress\" in <color-1>, <en-font-352>. ",
+                "text": "Singer, Songwriter, Record Producer, Actress"
             },
             {
                 "category": "text",
@@ -639,37 +567,11 @@
                     497,
                     714
                 ],
-                "caption": "Text \"Performed in singing and dancing competitions as a child\" in <color-1>, <en-font-352>. ",
-                "text": "Performed in singing and dancing competitions as a child"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    415,
-                    365
-                ],
-                "bottom_right": [
-                    819,
-                    473
-                ],
-                "caption": "Text \"Rise to fame in the late 1990s as lead singer of Destiny's Child\" in <color-1>, <en-font-352>. ",
-                "text": "Rise to fame in the late 1990s as lead singer of Destiny's Child"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    415,
-                    851
-                ],
-                "bottom_right": [
-                    808,
-                    958
-                ],
-                "caption": "Text \"Managed by her father, Mathew Knowles\" in <color-1>, <en-font-352>. ",
-                "text": "Managed by her father, Mathew Knowles"
+                "caption": "Text \"Destiny's Child - 2000s\" in <color-1>, <en-font-352>. ",
+                "text": "Destiny's Child - 2000s"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Beyoncé's Early Life\" focused on \"Beyoncé's upbringing and early career\". The overall tone is informative and straightforward, with a soft pastel color palette featuring light pinks, blues, and yellows on a white background, bordered by a thin black line and divided into three horizontal panels. At the top, a large, bold heading reads \"Beyoncé Giselle Knowles-Carter\". Below this, a smaller text item reads \"Born and raised in Houston, Texas\". Figure: A stylized cartoonish illustration of a young Beyoncé stands in front of a cityscape with a rounded, geometric style, in light pink and blue, no text inside. Centered in the middle panel, a bullet list titled \"Early Life and Career\" includes the items: \"Singer, songwriter, record producer, and actress\", \"Performed in singing and dancing competitions as a child\", and \"Rise to fame in the late 1990s as lead singer of Destiny's Child\". Figure: A flat, icon-based illustration of a microphone and a group of four silhouettes in a performance setting, in light blue and pink, no text inside. At the bottom, a text item reads \"Managed by her father, Mathew Knowles\". Figure: A simple line drawing of a man with a business card in hand, in black and white, no text inside. The overall style of the image is clean, informative, and visually organized.",
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Early Life and Career\" focused on \"Beyoncé's Background and Rise to Fame\". The infographic uses a clean, modern design with a light pastel background and a combination of text panels and simple icons. The layout begins at the top with a large header titled \"Beyoncé Giselle Knowles-Carter\" in bold, uppercase letters, followed by a subheader stating \"Born September 4, 1981\". In the middle section, a figure shows a stylized cartoon of a young girl in a city setting, with a \"Houston, Texas\" label beneath it. Below that, a list includes \"Singer, Songwriter, Record Producer, Actress\" in bullet points. At the bottom, a small panel states \"Destiny's Child - 2000s\" with a simple icon of a microphone and a group of four figures. The overall style of the image is modern and informative with a focus on clarity and visual hierarchy.",
         "original_bbox_index": "kr_13"
     },
     {
@@ -685,7 +587,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Decade of Fame\" focused on \"Beyoncé's Career Timeline\". The overall tone is informative and chronological, with a neutral color palette of soft pastels on a light beige background, framed by a thin black border and divided into three vertical panels. The layout starts at the top with a large, bold heading, followed by a timeline visual, then a summary section at the bottom. The overall style of the image is clean, structured, and visually guided to support the question of Beyoncé's decade of fame."
+                "caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's rise to fame\". The infographic uses a clean, modern design with a light pastel background and a vertical layout. The top section features a large, stylized portrait of Beyoncé in a cartoonish style with a soft gradient background. Below the portrait, a timeline is presented with key events marked in bold, uppercase text: \"1990s: Destiny's Child\", \"2000s: Solo Career Begins\", and \"2010s: Global Icon\". In the middle section, a horizontal bar chart shows her career milestones with colored segments representing different decades, labeled with \"1990s\", \"2000s\", and \"2010s\". The bottom section includes a short paragraph in italicized text: \"Beyoncé rose to fame in the late 1990s as lead singer of Destiny's Child\". The overall style of the image is modern and informative."
             },
             {
                 "category": "element",
@@ -697,60 +599,101 @@
                     896,
                     2240
                 ],
-                "caption": ""
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features. It's a plain, empty canvas with no content to describe."
             },
             {
                 "category": "element",
                 "top_left": [
-                    604,
-                    1300
+                    0,
+                    653
                 ],
                 "bottom_right": [
                     896,
-                    1600
+                    1586
                 ],
-                "caption": "The graphic shows a stylized timeline with key events marked in chronological order, using flat vector icons in shades of blue and gold."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    118,
-                    2115
-                ],
-                "bottom_right": [
-                    309,
-                    2240
-                ],
-                "caption": "A panel at the top displays the text \"Beyoncé Giselle Knowles-Carter\" in uppercase, followed by \"Born September 4, 1981\" and \"Houston, Texas\" in smaller, italicized font."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    310,
-                    738
-                ],
-                "bottom_right": [
-                    664,
-                    789
-                ],
-                "caption": "The middle panel features a timeline with labeled events, including \"Destiny's Child (1990s)\" and \"Dangerously in Love (2003)\"."
+                "caption": "decorative element"
             },
             {
                 "category": "text",
                 "top_left": [
-                    0,
-                    0
+                    87,
+                    678
                 ],
                 "bottom_right": [
-                    896,
-                    2240
+                    808,
+                    988
                 ],
-                "caption": "Text \"Decade of Fame\" in <color-1>, <en-font-1>. ",
-                "text": "Decade of Fame"
+                "caption": "Text \"Beyoncé's Career Timeline\" in <color-6>, <en-font-196>. ",
+                "text": "Beyoncé's Career Timeline"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    264,
+                    1395
+                ],
+                "bottom_right": [
+                    647,
+                    1522
+                ],
+                "caption": "Text \"Beyoncé's rise to fame\" in <color-6>, <en-font-196>. ",
+                "text": "Beyoncé's rise to fame"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    256,
+                    1117
+                ],
+                "bottom_right": [
+                    639,
+                    1243
+                ],
+                "caption": "Text \"1990s: Destiny's Child\" in <color-7>, <en-font-196>. ",
+                "text": "1990s: Destiny's Child"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    245,
+                    1969
+                ],
+                "bottom_right": [
+                    650,
+                    2053
+                ],
+                "caption": "Text \"2000s: Solo Career Begins\" in <color-6>, <en-font-196>. ",
+                "text": "2000s: Solo Career Begins"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    272,
+                    1690
+                ],
+                "bottom_right": [
+                    656,
+                    1774
+                ],
+                "caption": "Text \"2010s: Global Icon\" in <color-6>, <en-font-196>. ",
+                "text": "2010s: Global Icon"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    45,
+                    47
+                ],
+                "bottom_right": [
+                    233,
+                    127
+                ],
+                "caption": "Text \"1990s\" in <color-6>, <en-font-196>. ",
+                "text": "1990s"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Decade of Fame\" focused on \"Beyoncé's Career Timeline\". The overall tone is informative and chronological, with a neutral color palette of soft pastels on a light beige background, framed by a thin black border and divided into three vertical panels. The layout starts at the top with a large, bold heading, followed by a timeline visual, then a summary section at the bottom. Figure: The graphic shows a stylized timeline with key events marked in chronological order, using flat vector icons in shades of blue and gold. Figure: A panel at the top displays the text \"Beyoncé Giselle Knowles-Carter\" in uppercase, followed by \"Born September 4, 1981\" and \"Houston, Texas\" in smaller, italicized font. Figure: The middle panel features a timeline with labeled events, including \"Destiny's Child (1990s)\" and \"Dangerously in Love (2003)\". Figure: The bottom panel contains the text \"Solo Career Begins\" and a small icon of a microphone. The overall style of the image is clean, structured, and visually guided to support the question of Beyoncé's decade of fame.",
-        "original_bbox_index": 0
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"Beyoncé's rise to fame\". The infographic uses a clean, modern design with a light pastel background and a vertical layout. The top section features a large, stylized portrait of Beyoncé in a cartoonish style with a soft gradient background. Below the portrait, a timeline is presented with key events marked in bold, uppercase text: \"1990s: Destiny's Child\", \"2000s: Solo Career Begins\", and \"2010s: Global Icon\". In the middle section, a horizontal bar chart shows her career milestones with colored segments representing different decades, labeled with \"1990s\", \"2000s\", and \"2010s\". The bottom section includes a short paragraph in italicized text: \"Beyoncé rose to fame in the late 1990s as lead singer of Destiny's Child\". The overall style of the image is modern and informative.",
+        "original_bbox_index": "jp_11"
     },
     {
         "index": 6,
@@ -765,7 +708,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"R&B Music Career\". The infographic uses a clean, minimalist design with a light blue background and a white border, divided into three horizontal panels. At the top, a large, bold heading reads \"Beyoncé Giselle Knowles-Carter\". Below this, a timeline chart labeled \"Career Highlights\" spans the width of the image, with key events marked in chronological order. In the middle panel, a section titled \"Destiny's Child\" is centered, with the text \"Lead Singer\" prominently displayed in bold, uppercase letters. At the bottom, a section labeled \"Debut Solo Album\" features the text \"Dangerously in Love (2003)\" and the album's chart success, including the number-one singles \"Crazy in Love\" and \"Baby Boy\". The overall style of the image is modern and professional."
+                "caption": "The image is an infographic titled \"Beyoncé's Career Overview\" focused on \"R&B Group and Solo Career\". The infographic uses a clean, modern design with a light blue background and a gradient pattern. The layout starts with a large header at the top, followed by a timeline in the middle, and a summary panel at the bottom. \"Beyoncé Giselle Knowles-Carter\" is the title at the top. \"Destiny's Child\" is the main heading in the middle section, with a figure depicting a stylized cartoon of a group of four girls in a performance pose, wearing matching outfits and holding microphones. Below this, the text \"Lead Singer\" is placed next to the figure. The bottom section features a brief summary with the text \"R&B girl-group\" and \"2000s\". The overall style of the image is modern and professional."
             },
             {
                 "category": "element",
@@ -777,178 +720,114 @@
                     896,
                     2240
                 ],
-                "caption": "The image is a plain, solid color with no distinguishable features or objects. It appears to be a uniform, light color, possibly a shade of beige or cream. There are no texts, patterns, or other elements present in the image. The background is not visible as the entire image is filled with the same color."
+                "caption": "The image you've provided appears to be a blank, textured background with a soft, faded color palette. It has a textured appearance, possibly resembling a wall or a piece of paper with a rough, uneven surface. The color is a blend of light pink and white, giving it a gentle and neutral look. There are no distinguishable objects, texts, or other elements that can be confidently identified within this image. It's a simple, minimalist background that could be used for various purposes, such as graphic design, photography, or as a backdrop for other elements."
             },
             {
                 "category": "element",
                 "top_left": [
-                    0,
-                    406
+                    16,
+                    442
                 ],
                 "bottom_right": [
-                    446,
-                    2240
+                    522,
+                    849
                 ],
-                "caption": "A stylized, flat illustration of a microphone and a stylized, cartoonish silhouette of a girl with a crown and a microphone, set against a gradient background of light blue and white, symbolizing her early career."
-            },
-            {
-                "category": "element",
-                "top_left": [
-                    509,
-                    593
-                ],
-                "bottom_right": [
-                    838,
-                    914
-                ],
-                "caption": "A small, geometric icon of a group of four girls holding hands, with a badge reading \"World's Best-Selling Girl Group\"."
+                "caption": "decorative element"
             },
             {
                 "category": "text",
                 "top_left": [
-                    268,
-                    152
+                    86,
+                    74
                 ],
                 "bottom_right": [
-                    621,
-                    362
+                    805,
+                    287
                 ],
-                "caption": "Text \"Beyoncé's Career Timeline\" in <color-1>, <en-font-69>. ",
-                "text": "Beyoncé's Career Timeline"
+                "caption": "Text \"Beyoncé's Career Overview\" in <color-7>, <en-font-107>. ",
+                "text": "Beyoncé's Career Overview"
             },
             {
                 "category": "text",
                 "top_left": [
-                    169,
-                    67
+                    406,
+                    977
                 ],
                 "bottom_right": [
-                    714,
-                    180
+                    802,
+                    1246
                 ],
-                "caption": "Text \"R&B Music Career\" in <color-1>, <en-font-69>. ",
-                "text": "R&B Music Career"
+                "caption": "Text \"R&B Group and Solo Career\" in <color-1>, <en-font-107>. ",
+                "text": "R&B Group and Solo Career"
             },
             {
                 "category": "text",
                 "top_left": [
-                    26,
-                    1692
+                    406,
+                    1860
                 ],
                 "bottom_right": [
-                    273,
-                    1891
+                    802,
+                    2128
                 ],
-                "caption": "Text \"Beyoncé Giselle Knowles-Carter\" in <color-1>, <en-font-69>. ",
+                "caption": "Text \"Beyoncé Giselle Knowles-Carter\" in <color-7>, <en-font-107>. ",
                 "text": "Beyoncé Giselle Knowles-Carter"
             },
             {
                 "category": "text",
                 "top_left": [
-                    576,
-                    984
+                    84,
+                    525
                 ],
                 "bottom_right": [
-                    854,
-                    1145
+                    481,
+                    792
                 ],
-                "caption": "Text \"Career Highlights\" in <color-1>, <en-font-69>. ",
-                "text": "Career Highlights"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    35,
-                    1458
-                ],
-                "bottom_right": [
-                    281,
-                    1617
-                ],
-                "caption": "Text \"Destiny's Child\" in <color-1>, <en-font-69>. ",
+                "caption": "Text \"Destiny's Child\" in <color-7>, <en-font-107>. ",
                 "text": "Destiny's Child"
             },
             {
                 "category": "text",
                 "top_left": [
-                    35,
-                    1209
+                    84,
+                    1415
                 ],
                 "bottom_right": [
-                    273,
-                    1367
+                    481,
+                    1681
                 ],
-                "caption": "Text \"Lead Singer\" in <color-1>, <en-font-69>. ",
+                "caption": "Text \"Lead Singer\" in <color-1>, <en-font-107>. ",
                 "text": "Lead Singer"
             },
             {
                 "category": "text",
                 "top_left": [
-                    592,
-                    1733
+                    193,
+                    387
                 ],
                 "bottom_right": [
-                    872,
-                    1853
+                    463,
+                    520
                 ],
-                "caption": "Text \"World's Best-Selling Girl Group\" in <color-1>, <en-font-69>. ",
-                "text": "World's Best-Selling Girl Group"
+                "caption": "Text \"R&B girl-group\" in <color-7>, <en-font-107>. ",
+                "text": "R&B girl-group"
             },
             {
                 "category": "text",
                 "top_left": [
-                    35,
-                    1005
+                    464,
+                    819
                 ],
                 "bottom_right": [
-                    273,
-                    1121
+                    683,
+                    947
                 ],
-                "caption": "Text \"Debut Solo Album\" in <color-1>, <en-font-69>. ",
-                "text": "Debut Solo Album"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    616,
-                    1218
-                ],
-                "bottom_right": [
-                    851,
-                    1334
-                ],
-                "caption": "Text \"Dangerously in Love (2003)\" in <color-1>, <en-font-69>. ",
-                "text": "Dangerously in Love (2003)"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    616,
-                    1477
-                ],
-                "bottom_right": [
-                    851,
-                    1555
-                ],
-                "caption": "Text \"Crazy in Love\" in <color-1>, <en-font-69>. ",
-                "text": "Crazy in Love"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    336,
-                    1239
-                ],
-                "bottom_right": [
-                    551,
-                    1311
-                ],
-                "caption": "Text \"Baby Boy\" in <color-1>, <en-font-69>. ",
-                "text": "Baby Boy"
+                "caption": "Text \"2000s\" in <color-1>, <en-font-107>. ",
+                "text": "2000s"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career Timeline\" focused on \"R&B Music Career\". The infographic uses a clean, minimalist design with a light blue background and a white border, divided into three horizontal panels. At the top, a large, bold heading reads \"Beyoncé Giselle Knowles-Carter\". Below this, a timeline chart labeled \"Career Highlights\" spans the width of the image, with key events marked in chronological order. Figure: A stylized, flat illustration of a microphone and a stylized, cartoonish silhouette of a girl with a crown and a microphone, set against a gradient background of light blue and white, symbolizing her early career. In the middle panel, a section titled \"Destiny's Child\" is centered, with the text \"Lead Singer\" prominently displayed in bold, uppercase letters. Figure: A small, geometric icon of a group of four girls holding hands, with a badge reading \"World's Best-Selling Girl Group\". At the bottom, a section labeled \"Debut Solo Album\" features the text \"Dangerously in Love (2003)\" and the album's chart success, including the number-one singles \"Crazy in Love\" and \"Baby Boy\". The overall style of the image is modern and professional.",
-        "original_bbox_index": "de_3"
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career Overview\" focused on \"R&B Group and Solo Career\". The infographic uses a clean, modern design with a light blue background and a gradient pattern. The layout starts with a large header at the top, followed by a timeline in the middle, and a summary panel at the bottom. \"Beyoncé Giselle Knowles-Carter\" is the title at the top. \"Destiny's Child\" is the main heading in the middle section, with a figure depicting a stylized cartoon of a group of four girls in a performance pose, wearing matching outfits and holding microphones. Below this, the text \"Lead Singer\" is placed next to the figure. The bottom section features a brief summary with the text \"R&B girl-group\" and \"2000s\". The overall style of the image is modern and professional.",
+        "original_bbox_index": "fr_7"
     },
     {
         "index": 7,
@@ -963,7 +842,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\" focused on \"her career milestones\". The overall tone is professional and celebratory, with a light blue background and a white border. The composition features a vertical layout divided into three panels. At the top, a large figure titled \"Beyoncé Giselle Knowles-Carter\" is shown in a stylized, cartoonish silhouette with a dark blue outline, set against a light blue background. Below this, a section titled \"Destiny's Child\" is displayed with a small group of four cartoonish figures in a rounded, geometric style, wearing matching outfits and holding microphones. The middle panel features a large, bold text item \"Dangerously in Love\" in a sans-serif font, with a red border and a white background, directly below which is a smaller text item \"2003\" in a light gray color. At the bottom, a section titled \"Grammy Awards\" is shown with a list of five icons, each representing a Grammy Award, arranged in a horizontal line. The overall style of the image is clean and informative."
+                "caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\" focused on \"Music Career and Breakthrough Album\". The tone is professional and informative, with a color palette of dark blues, golds, and white, complemented by a clean, modern layout. The background is a subtle geometric pattern in light gray, with major panels arranged vertically. At the top, the title \"Beyoncé's Rise to Fame\" is displayed in bold, uppercase, sans-serif font in dark blue. Below it, a header reads \"From Destiny's Child to Solo Stardom\" in a lighter blue, followed by a list of key milestones in a clean, white font. In the middle, a large, stylized figure of a record album in gold with the title \"Dangerously in Love\" is shown, surrounded by icons representing music, awards, and chart success. At the bottom, a brief summary states \"Released in 2003, this album established her as a solo artist worldwide\" in a dark blue font. The overall style of the image is modern and clean."
             },
             {
                 "category": "element",
@@ -975,101 +854,101 @@
                     896,
                     2240
                 ],
-                "caption": "The image you've provided is a plain, solid color with no distinguishable features or objects. It appears to be a uniform, light yellow or cream color, with no text, shapes, or other elements that can be confidently identified. The image is simple and lacks any complexity or detail that would allow for a more descriptive analysis."
+                "caption": "The image is a plain, solid color with no distinguishable features or objects. It appears to be a uniform, light color, possibly a shade of beige or cream. There are no texts, patterns, or other elements present in the image. The background is not visible, as the entire frame is filled with the same color."
             },
             {
                 "category": "element",
                 "top_left": [
-                    75,
-                    772
+                    65,
+                    831
                 ],
                 "bottom_right": [
-                    824,
-                    2176
+                    411,
+                    1111
                 ],
                 "caption": "decorative element"
             },
             {
                 "category": "text",
                 "top_left": [
-                    258,
-                    133
+                    35,
+                    71
                 ],
                 "bottom_right": [
-                    633,
-                    449
+                    849,
+                    149
                 ],
-                "caption": "Text \"Beyoncé's Rise to Fame\" in <color-74>, <en-font-250>. ",
+                "caption": "Text \"Beyoncé's Rise to Fame\" in <color-1>, <en-font-26>. ",
                 "text": "Beyoncé's Rise to Fame"
             },
             {
                 "category": "text",
                 "top_left": [
-                    143,
-                    507
+                    491,
+                    974
                 ],
                 "bottom_right": [
-                    764,
-                    670
+                    810,
+                    1099
                 ],
-                "caption": "Text \"her career milestones\" in <color-74>, <en-font-250>. ",
-                "text": "her career milestones"
+                "caption": "Text \"Music Career and Breakthrough Album\" in <color-1>, <en-font-26>. ",
+                "text": "Music Career and Breakthrough Album"
             },
             {
                 "category": "text",
                 "top_left": [
-                    268,
-                    881
+                    71,
+                    590
                 ],
                 "bottom_right": [
-                    635,
-                    1019
+                    387,
+                    715
                 ],
-                "caption": "Text \"Beyoncé Giselle Knowles-Carter\" in <color-74>, <en-font-250>. ",
-                "text": "Beyoncé Giselle Knowles-Carter"
+                "caption": "Text \"Beyoncé's Rise to Fame\" in <color-1>, <en-font-26>. ",
+                "text": "Beyoncé's Rise to Fame"
             },
             {
                 "category": "text",
                 "top_left": [
-                    288,
-                    1810
+                    491,
+                    1663
                 ],
                 "bottom_right": [
-                    654,
-                    1948
+                    810,
+                    1785
                 ],
-                "caption": "Text \"Destiny's Child\" in <color-74>, <en-font-250>. ",
-                "text": "Destiny's Child"
+                "caption": "Text \"From Destiny's Child to Solo Stardom\" in <color-1>, <en-font-26>. ",
+                "text": "From Destiny's Child to Solo Stardom"
             },
             {
                 "category": "text",
                 "top_left": [
-                    285,
-                    1481
+                    491,
+                    1316
                 ],
                 "bottom_right": [
-                    651,
-                    1619
+                    810,
+                    1437
                 ],
-                "caption": "Text \"Dangerously in Love\" in <color-74>, <en-font-250>. ",
+                "caption": "Text \"Dangerously in Love\" in <color-1>, <en-font-26>. ",
                 "text": "Dangerously in Love"
             },
             {
                 "category": "text",
                 "top_left": [
-                    261,
-                    1187
+                    74,
+                    1650
                 ],
                 "bottom_right": [
-                    627,
-                    1324
+                    390,
+                    1772
                 ],
-                "caption": "Text \"2003\" in <color-74>, <en-font-250>. ",
-                "text": "2003"
+                "caption": "Text \"Released in 2003, this album established her as a solo artist worldwide\" in <color-1>, <en-font-26>. ",
+                "text": "Released in 2003, this album established her as a solo artist worldwide"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\" focused on \"her career milestones\". The overall tone is professional and celebratory, with a light blue background and a white border. The composition features a vertical layout divided into three panels. At the top, a large figure titled \"Beyoncé Giselle Knowles-Carter\" is shown in a stylized, cartoonish silhouette with a dark blue outline, set against a light blue background. Below this, a section titled \"Destiny's Child\" is displayed with a small group of four cartoonish figures in a rounded, geometric style, wearing matching outfits and holding microphones. The middle panel features a large, bold text item \"Dangerously in Love\" in a sans-serif font, with a red border and a white background, directly below which is a smaller text item \"2003\" in a light gray color. At the bottom, a section titled \"Grammy Awards\" is shown with a list of five icons, each representing a Grammy Award, arranged in a horizontal line. The overall style of the image is clean and informative.",
-        "original_bbox_index": "kr_12"
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\" focused on \"Music Career and Breakthrough Album\". The tone is professional and informative, with a color palette of dark blues, golds, and white, complemented by a clean, modern layout. The background is a subtle geometric pattern in light gray, with major panels arranged vertically. At the top, the title \"Beyoncé's Rise to Fame\" is displayed in bold, uppercase, sans-serif font in dark blue. Below it, a header reads \"From Destiny's Child to Solo Stardom\" in a lighter blue, followed by a list of key milestones in a clean, white font. In the middle, a large, stylized figure of a record album in gold with the title \"Dangerously in Love\" is shown, surrounded by icons representing music, awards, and chart success. At the bottom, a brief summary states \"Released in 2003, this album established her as a solo artist worldwide\" in a dark blue font. The overall style of the image is modern and clean.",
+        "original_bbox_index": "pt_14"
     },
     {
         "index": 8,
@@ -1084,7 +963,7 @@
                     896,
                     2240
                 ],
-                "caption": "The image is an infographic titled \"Beyoncé's Career Overview\" focused on \"Destiny's Child Management.\" The overall tone is professional and informative, with a light blue background and a white border. The composition is divided into three vertical panels with a centered heading. At the top, the text \"Destiny's Child\" is bolded and centered. Below it, the text \"Managed by: \" is left-aligned, followed by a In the middle panel, the text \"Beyoncé Giselle Knowles-Carter\" is centered. At the bottom, the text \"Born: September 4, 1981\" is left-aligned, and the text \"Houston, Texas\" is right-aligned. The overall style of the image is clean and modern."
+                "caption": "The image is an infographic titled \"Beyoncé's Career and Destiny's Child\" focused on \"Management and Early Career\". The infographic uses a clean, modern design with a light blue background and white text. The layout starts with a top panel featuring a large, stylized portrait of Beyoncé with the text \"Beyoncé Giselle Knowles-Carter\" and \"Born: September 4, 1981\". Middle panels include a diagram showing the structure of Destiny's Child with the text \"Destiny's Child\" and \"Managed by: Mathew Knowles\". Below that, a timeline illustrates key events with labels such as \"1990s: Rise to Fame\" and \"2003: Solo Debut Album\". The bottom section highlights the group's success with a chart showing their status as \"One of the World's Best-Selling Girl Groups\". The overall style of the image is modern and professional."
             },
             {
                 "category": "element",
@@ -1096,113 +975,139 @@
                     896,
                     2240
                 ],
-                "caption": "The image you've provided is a solid, uniform color with no distinguishable features or objects. It appears to be a plain, flat surface with a consistent shade of purple. There are no texts, patterns, or other elements that can be discerned from this image. The background is not visible as the image is a solid color."
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features to describe. It's a plain, unadorned white space."
             },
             {
                 "category": "element",
                 "top_left": [
-                    0,
-                    1671
+                    92,
+                    740
                 ],
                 "bottom_right": [
-                    896,
-                    1959
+                    849,
+                    909
                 ],
-                "caption": "depicting a stylized cartoonish icon of a man in a suit, with a dark blue outline and light blue fill, positioned to the right of the text."
+                "caption": "decorative element"
             },
             {
                 "category": "text",
                 "top_left": [
-                    165,
-                    1793
+                    99,
+                    111
                 ],
                 "bottom_right": [
-                    719,
-                    1930
+                    796,
+                    281
                 ],
-                "caption": "Text \"Beyoncé's Career Overview\" in <color-9>, <en-font-323>. ",
-                "text": "Beyoncé's Career Overview"
+                "caption": "Text \"Beyoncé's Career and Destiny's Child\" in <color-1>, <en-font-10>. ",
+                "text": "Beyoncé's Career and Destiny's Child"
             },
             {
                 "category": "text",
                 "top_left": [
-                    32,
-                    408
+                    40,
+                    2021
                 ],
                 "bottom_right": [
-                    856,
-                    491
+                    855,
+                    2138
                 ],
-                "caption": "Text \"Destiny's Child Management.\" in <color-9>, <en-font-323>. ",
-                "text": "Destiny's Child Management."
+                "caption": "Text \"Management and Early Career\" in <color-1>, <en-font-10>. ",
+                "text": "Management and Early Career"
             },
             {
                 "category": "text",
                 "top_left": [
-                    299,
-                    1212
+                    47,
+                    301
                 ],
                 "bottom_right": [
-                    779,
-                    1352
+                    848,
+                    391
                 ],
-                "caption": "Text \"Destiny's Child\" in <color-9>, <en-font-323>. ",
-                "text": "Destiny's Child"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    14,
-                    323
-                ],
-                "bottom_right": [
-                    877,
-                    387
-                ],
-                "caption": "Text \"Managed by:\" in <color-9>, <en-font-323>. ",
-                "text": "Managed by:"
-            },
-            {
-                "category": "text",
-                "top_left": [
-                    224,
-                    1503
-                ],
-                "bottom_right": [
-                    779,
-                    1596
-                ],
-                "caption": "Text \"Beyoncé Giselle Knowles-Carter\" in <color-9>, <en-font-323>. ",
+                "caption": "Text \"Beyoncé Giselle Knowles-Carter\" in <color-19>, <en-font-10>. ",
                 "text": "Beyoncé Giselle Knowles-Carter"
             },
             {
                 "category": "text",
                 "top_left": [
-                    159,
-                    979
+                    296,
+                    760
                 ],
                 "bottom_right": [
-                    621,
-                    1075
+                    819,
+                    889
                 ],
-                "caption": "Text \"Born: September 4, 1981\" in <color-9>, <en-font-323>. ",
+                "caption": "Text \"Born: September 4, 1981\" in <color-19>, <en-font-10>. ",
                 "text": "Born: September 4, 1981"
             },
             {
                 "category": "text",
                 "top_left": [
-                    287,
-                    673
+                    296,
+                    1031
                 ],
                 "bottom_right": [
-                    756,
-                    767
+                    819,
+                    1160
                 ],
-                "caption": "Text \"Houston, Texas\" in <color-9>, <en-font-323>. ",
-                "text": "Houston, Texas"
+                "caption": "Text \"Destiny's Child\" in <color-19>, <en-font-10>. ",
+                "text": "Destiny's Child"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    297,
+                    1293
+                ],
+                "bottom_right": [
+                    820,
+                    1422
+                ],
+                "caption": "Text \"Managed by: Mathew Knowles\" in <color-1>, <en-font-10>. ",
+                "text": "Managed by: Mathew Knowles"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    297,
+                    1555
+                ],
+                "bottom_right": [
+                    820,
+                    1684
+                ],
+                "caption": "Text \"1990s: Rise to Fame\" in <color-1>, <en-font-10>. ",
+                "text": "1990s: Rise to Fame"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    297,
+                    1820
+                ],
+                "bottom_right": [
+                    820,
+                    1949
+                ],
+                "caption": "Text \"2003: Solo Debut Album\" in <color-19>, <en-font-10>. ",
+                "text": "2003: Solo Debut Album"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    296,
+                    488
+                ],
+                "bottom_right": [
+                    819,
+                    616
+                ],
+                "caption": "Text \"One of the World's Best-Selling Girl Groups\" in <color-1>, <en-font-10>. ",
+                "text": "One of the World's Best-Selling Girl Groups"
             }
         ],
-        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career Overview\" focused on \"Destiny's Child Management.\" The overall tone is professional and informative, with a light blue background and a white border. The composition is divided into three vertical panels with a centered heading. At the top, the text \"Destiny's Child\" is bolded and centered. Below it, the text \"Managed by: \" is left-aligned, followed by a Figure: depicting a stylized cartoonish icon of a man in a suit, with a dark blue outline and light blue fill, positioned to the right of the text. In the middle panel, the text \"Beyoncé Giselle Knowles-Carter\" is centered. At the bottom, the text \"Born: September 4, 1981\" is left-aligned, and the text \"Houston, Texas\" is right-aligned. The overall style of the image is clean and modern.",
-        "original_bbox_index": "cn_1"
+        "full_image_caption": "The image is an infographic titled \"Beyoncé's Career and Destiny's Child\" focused on \"Management and Early Career\". The infographic uses a clean, modern design with a light blue background and white text. The layout starts with a top panel featuring a large, stylized portrait of Beyoncé with the text \"Beyoncé Giselle Knowles-Carter\" and \"Born: September 4, 1981\". Middle panels include a diagram showing the structure of Destiny's Child with the text \"Destiny's Child\" and \"Managed by: Mathew Knowles\". Below that, a timeline illustrates key events with labels such as \"1990s: Rise to Fame\" and \"2003: Solo Debut Album\". The bottom section highlights the group's success with a chart showing their status as \"One of the World's Best-Selling Girl Groups\". The overall style of the image is modern and professional.",
+        "original_bbox_index": "ru_16"
     }
 ]
