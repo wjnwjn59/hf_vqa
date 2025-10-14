@@ -51,6 +51,10 @@ def draw_lcfg(index,bboxes,dir,guidance=7):
     ax.set_xticks([])
     ax.set_yticks([])
     fig.canvas.draw()
-    img = Image.frombytes('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb())
+    
+    # Convert matplotlib figure to PIL Image
+    buf = fig.canvas.buffer_rgba()
+    img = Image.frombuffer('RGBA', fig.canvas.get_width_height(), buf, 'raw', 'RGBA', 0, 1)
+    img = img.convert('RGB')
 
     img.save(f'{dir}/{index}_lcfg.png')

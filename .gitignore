@@ -9,3 +9,10 @@ wikipedia_en*/
 wikipedia_processed.json
 
 src/data/bizgen/output*
+
+src/data/create_data/output/infographic/
+src/data/create_data/output/narrator_format/
+
+*.zip
+*.tar.gz
+*.log

@@ -105,6 +105,8 @@ def main():
     parser.add_argument('--output_dir', type=str, default='output',
                         help='Base output directory name')
     parser.add_argument('--subset', type=str, default='0:2')
+    parser.add_argument('--dataset_name', type=str, default='squad_v2',
+                        help='Dataset name for output folder structure')
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--global_ratio', type=float, default=0.2)
     parser.add_argument('--num_inference_steps', type=int, default=50)
@@ -118,8 +120,9 @@ def main():
     config = parse_config(args.config_dir)
 
     start_subset, end_subset = [int(idx) for idx in args.subset.split(':')]
-    output_subset_dir = f'subset_{start_subset}_{end_subset}'
-    args.output_dir = osp.join(args.output_dir, output_subset_dir)
+    
+    # Create output directory with dataset name
+    args.output_dir = osp.join(args.output_dir, args.dataset_name)
 
     if not osp.exists(args.output_dir):
         os.makedirs(args.output_dir)
@@ -322,17 +325,31 @@ def main():
     args.height = int(args.height//32*32)
 
     # load layouts and captions
-    file_subset = [
-        os.path.join(args.wiki_dir, name)
-        for name in os.listdir(args.wiki_dir)
-        if name.startswith('wiki') and name.endswith('.json')
-        and int(name[4:-5]) in range(start_subset, end_subset)
-    ]
+    file_subset = []
+    
+    # Calculate which wiki files to load based on start_subset and end_subset
+    # Each wiki file contains 50 entries with index (file_num-1)*50 + 1 to file_num*50
+    start_file_num = ((start_subset - 1) // 50) + 1
+    end_file_num = ((end_subset - 1) // 50) + 1
+    
+    print(f"Loading wiki files: wiki{start_file_num:06d}.json to wiki{end_file_num:06d}.json")
+    
+    for file_num in range(start_file_num, end_file_num + 1):
+        wiki_file = f"wiki{file_num:06d}.json"
+        wiki_path = os.path.join(args.wiki_dir, wiki_file)
+        if os.path.exists(wiki_path):
+            file_subset.append(wiki_path)
+        else:
+            print(f"Warning: {wiki_file} not found, skipping")
     
     tot = 0
     for file in file_subset:
         with open(file, 'r') as f:
-            tot += len(json.load(f))
+            data = json.load(f)
+            # Only count items within our range
+            for item in data:
+                if start_subset <= item['index'] <= end_subset:
+                    tot += 1
     
     with tqdm(total=tot, desc="Total items", unit="item", dynamic_ncols=True) as pbar:
         for file in file_subset:
@@ -341,6 +358,20 @@ def main():
 
             for region_meta_item in sample_list:
                 index = region_meta_item["index"]
+                
+                # Skip if index is outside our range
+                if not (start_subset <= index <= end_subset):
+                    continue
+                
+                # Calculate folder name based on index (50 images per folder)
+                folder_num = ((index - 1) // 50) + 1
+                folder_name = f"narrator{folder_num:06d}"
+                folder_path = osp.join(args.output_dir, folder_name)
+                
+                # Create folder if it doesn't exist
+                if not osp.exists(folder_path):
+                    os.makedirs(folder_path, exist_ok=True)
+                
                 region_meta = region_meta_item["layers_all"]
                 full_img_caption = region_meta[0]['caption']
                 region_meta = region_meta[1:]
@@ -374,14 +405,14 @@ def main():
                             layer_cfg_ratio=args.lcfg_ratio,
                         ).images[0]
 
-                    output_img.save(osp.join(args.output_dir, f'{index}.png'))
+                    output_img.save(osp.join(folder_path, f'{index}.png'))
 
                     # draw the layout
-                    draw_bbox(index, region_meta, dir=args.output_dir)
+                    draw_bbox(index, region_meta, dir=folder_path)
                     # draw the lcfg map
-                    draw_lcfg(index, region_meta, dir=args.output_dir,
+                    draw_lcfg(index, region_meta, dir=folder_path,
                             guidance=args.guidance_scale)
-                    print(f"saved {index}.png")
+                    print(f"saved {index}.png to {args.dataset_name}/{folder_name}")
                 except Exception as e:
                     print(f"Error in {index}.png: {e}")
                 

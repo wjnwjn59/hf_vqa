@@ -1,20 +1,18 @@
 #!/bin/bash
 
 # ============================================================================
-# Narrator Pipeline for Squad v2 Dataset
+# BizGen Image Generation Pipeline
 # ============================================================================
-# This script runs the complete pipeline:
-# 1. Generate infographic data using Qwen
-# 2. Merge bounding boxes
-# 3. Generate images with BizGen
+# This script only runs BizGen image generation step
+# (assumes narrator format JSON files already exist)
 #
 # Usage:
-#   bash scripts/run_narrator_pipeline.sh <GPU_ID> <START_IDX> <END_IDX>
+#   bash scripts/run_bizgen_only.sh <GPU_ID> <START_IDX> <END_IDX> [DATASET_NAME]
 #
 # Example:
-#   bash scripts/run_narrator_pipeline.sh 0 0 10000      # GPU 0: images 0-10000
-#   bash scripts/run_narrator_pipeline.sh 1 10000 20000  # GPU 1: images 10000-20000
-#   bash scripts/run_narrator_pipeline.sh 2 20000 30000  # GPU 2: images 20000-30000
+#   bash scripts/run_bizgen_only.sh 0 0 10000                # GPU 0: images 0-10000, dataset "squad_v2"
+#   bash scripts/run_bizgen_only.sh 1 10000 20000            # GPU 1: images 10000-20000, dataset "squad_v2"
+#   bash scripts/run_bizgen_only.sh 2 20000 30000 "my_data"  # GPU 2: images 20000-30000, dataset "my_data"
 # ============================================================================
 
 set -e  # Exit on error
@@ -22,19 +20,21 @@ set -e  # Exit on error
 # ============================================================================
 # Parse Arguments
 # ============================================================================
-if [ $# -ne 3 ]; then
+if [ $# -lt 3 ] || [ $# -gt 4 ]; then
     echo "Error: Invalid number of arguments"
     echo ""
-    echo "Usage: $0 <GPU_ID> <START_IDX> <END_IDX>"
+    echo "Usage: $0 <GPU_ID> <START_IDX> <END_IDX> [DATASET_NAME]"
     echo ""
     echo "Arguments:"
-    echo "  GPU_ID    : GPU device ID (0, 1, 2, ...)"
-    echo "  START_IDX : Start index (inclusive)"
-    echo "  END_IDX   : End index (exclusive)"
+    echo "  GPU_ID       : GPU device ID (0, 1, 2, ...)"
+    echo "  START_IDX    : Start index (inclusive)"
+    echo "  END_IDX      : End index (exclusive)"
+    echo "  DATASET_NAME : Optional dataset name (default: squad_v2)"
     echo ""
     echo "Example:"
-    echo "  $0 0 0 10000      # GPU 0: process 10000 images (indices 0-9999)"
-    echo "  $0 1 10000 20000  # GPU 1: process 10000 images (indices 10000-19999)"
+    echo "  $0 0 0 10000             # GPU 0: process 10000 images with default dataset name"
+    echo "  $0 1 10000 20000         # GPU 1: process 10000 images with default dataset name"
+    echo "  $0 2 20000 30000 my_data # GPU 2: process 10000 images with custom dataset name"
     echo ""
     exit 1
 fi
@@ -42,31 +42,20 @@ fi
 GPU_ID=$1
 START_IDX=$2
 END_IDX=$3
+DATASET_NAME=${4:-"squad_v2"}  # Default to squad_v2 if not provided
 
 # ============================================================================
 # Configuration
 # ============================================================================
-# Do NOT set CUDA_VISIBLE_DEVICES - let inference.py handle GPU selection via --device
 export PYTHONPATH="./:$PYTHONPATH"
 
-# Conda environment paths
-CONDA_WIKI="/opt/miniconda3/envs/thinh_wiki/bin/python"
+# Conda environment path
 CONDA_BIZGEN="/opt/miniconda3/envs/khoina_bizgen/bin/python"
 
 # Paths
-SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
-TEMPLATE_PATH="./src/prompts/bizgen_context_qa_full.jinja"
-INFOGRAPHIC_DIR="src/data/create_data/output/infographic"
 NARRATOR_FORMAT_DIR="src/data/create_data/output/narrator_format"
 BIZGEN_DIR="./src/data/bizgen"
 CKPT_DIR="checkpoints/lora/infographic"
-
-# Model settings
-MODEL_NAME="unsloth/Qwen3-8B"
-BATCH_SIZE=8
-DATASET_TYPE="squad_v2"
-DATASET_NAME="squad_v2"
-SEED=42
 
 # Calculate expected outputs
 NUM_IMAGES=$((END_IDX - START_IDX))
@@ -83,7 +72,7 @@ SUBSET="${BIZGEN_START}:${BIZGEN_END}"
 # Print Configuration
 # ============================================================================
 echo "======================================================================"
-echo "Narrator Pipeline - GPU $GPU_ID"
+echo "BizGen Image Generation - GPU $GPU_ID"
 echo "======================================================================"
 echo ""
 echo "Configuration:"
@@ -91,85 +80,71 @@ echo "  GPU ID              : $GPU_ID"
 echo "  Start Index         : $START_IDX"
 echo "  End Index           : $END_IDX"
 echo "  Number of Images    : $NUM_IMAGES"
-echo "  Expected Files      : $NUM_FILES (infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json)"
+echo "  Expected Files      : $NUM_FILES (wiki$(printf '%06d' $FIRST_FILE_IDX).json - wiki$(printf '%06d' $LAST_FILE_IDX).json)"
 echo "  BizGen Subset       : $SUBSET"
+echo "  Dataset Name        : $DATASET_NAME"
 echo ""
 echo "Paths:"
-echo "  Input Dataset       : $SQUAD_TRAIN"
-echo "  Template            : $TEMPLATE_PATH"
-echo "  Infographic Output  : $INFOGRAPHIC_DIR"
 echo "  Narrator Format     : $NARRATOR_FORMAT_DIR"
 echo "  BizGen Directory    : $BIZGEN_DIR"
+echo "  Checkpoint Dir      : $CKPT_DIR"
 echo ""
 echo "======================================================================"
 echo ""
 
 # ============================================================================
-# Step 1: Generate Infographic Data using Qwen
+# Check Prerequisites
 # ============================================================================
 echo "======================================================================"
-echo "Step 1/3: Generating Infographic Data with Qwen"
+echo "Checking Prerequisites"
 echo "======================================================================"
-echo "Using conda environment: thinh_wiki"
-echo "Python: $CONDA_WIKI"
-echo "Using GPU: $GPU_ID"
-echo ""
 
-CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_infographic_data.py \
-    --model_name "$MODEL_NAME" \
-    --input_data "$SQUAD_TRAIN" \
-    --template_path "$TEMPLATE_PATH" \
-    --dataset_type "$DATASET_TYPE" \
-    --start $START_IDX \
-    --end $END_IDX \
-    --batch_size $BATCH_SIZE
-
-if [ $? -eq 0 ]; then
-    echo ""
-    echo "✓ Step 1 completed successfully!"
-    echo "  Generated files: infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json"
-else
-    echo ""
-    echo "✗ Step 1 failed!"
+# Check if narrator format directory exists
+if [ ! -d "$NARRATOR_FORMAT_DIR" ]; then
+    echo "✗ Error: Narrator format directory not found: $NARRATOR_FORMAT_DIR"
+    echo "  Please run the full pipeline first to generate narrator format files."
     exit 1
 fi
 
-# ============================================================================
-# Step 2: Merge Bounding Boxes
-# ============================================================================
-echo ""
-echo "======================================================================"
-echo "Step 2/3: Merging Bounding Boxes"
-echo "======================================================================"
-echo ""
+# Check if expected wiki files exist
+EXPECTED_FILES=0
+MISSING_FILES=0
 
-$CONDA_WIKI src/data/narrator/merge_narrator_bboxes.py \
-    --infographic-dir "$INFOGRAPHIC_DIR" \
-    --start $START_IDX \
-    --end $END_IDX \
-    --seed $SEED
+for ((i=FIRST_FILE_IDX; i<=LAST_FILE_IDX; i++)); do
+    WIKI_FILE="$NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $i).json"
+    EXPECTED_FILES=$((EXPECTED_FILES + 1))
+    
+    if [ ! -f "$WIKI_FILE" ]; then
+        if [ $MISSING_FILES -eq 0 ]; then
+            echo "✗ Missing narrator format files:"
+        fi
+        echo "  - $(basename $WIKI_FILE)"
+        MISSING_FILES=$((MISSING_FILES + 1))
+    fi
+done
 
-if [ $? -eq 0 ]; then
+if [ $MISSING_FILES -gt 0 ]; then
     echo ""
-    echo "✓ Step 2 completed successfully!"
-    echo "  Generated wiki files in: $NARRATOR_FORMAT_DIR"
-else
-    echo ""
-    echo "✗ Step 2 failed!"
+    echo "✗ Error: $MISSING_FILES out of $EXPECTED_FILES expected files are missing."
+    echo "  Please run the full pipeline first to generate these files:"
+    echo "  bash scripts/run_narrator_pipeline.sh $GPU_ID $START_IDX $END_IDX"
     exit 1
 fi
 
-# ============================================================================
-# Step 3: Generate Images with BizGen
-# ============================================================================
+echo "✓ All $EXPECTED_FILES narrator format files found"
 echo ""
+
+# ============================================================================
+# Generate Images with BizGen
+# ============================================================================
 echo "======================================================================"
-echo "Step 3/3: Generating Images with BizGen"
+echo "Generating Images with BizGen"
 echo "======================================================================"
 echo "Using conda environment: khoina_bizgen"
 echo "Python: $CONDA_BIZGEN"
 echo "Using GPU: cuda:$GPU_ID (via --device parameter)"
 echo "Subset: $SUBSET"
+echo "Dataset: $DATASET_NAME"
 echo ""
 
 cd "$BIZGEN_DIR"
@@ -183,10 +158,7 @@ $CONDA_BIZGEN inference.py \
 
 if [ $? -eq 0 ]; then
     echo ""
-    echo "✓ Step 3 completed successfully!"
-    
-    # Output is now in dataset_name/narratorXXXXXX folders
-    echo "  Generated images in: $BIZGEN_DIR/output/$DATASET_NAME/"
+    echo "✓ BizGen generation completed successfully!"
     
     # Count generated images across all narrator folders
     OUTPUT_DATASET_DIR="output/$DATASET_NAME"
@@ -195,10 +167,11 @@ if [ $? -eq 0 ]; then
         NUM_FOLDERS=$(find "$OUTPUT_DATASET_DIR" -mindepth 1 -maxdepth 1 -type d | wc -l)
         echo "  Total images generated: $NUM_GENERATED"
         echo "  Total folders created: $NUM_FOLDERS"
+        echo "  Generated images in: $BIZGEN_DIR/output/$DATASET_NAME/"
     fi
 else
     echo ""
-    echo "✗ Step 3 failed!"
+    echo "✗ BizGen generation failed!"
     cd - > /dev/null
     exit 1
 fi
@@ -210,20 +183,19 @@ cd - > /dev/null
 # ============================================================================
 echo ""
 echo "======================================================================"
-echo "Pipeline Completed Successfully! - GPU $GPU_ID"
+echo "BizGen Generation Completed Successfully! - GPU $GPU_ID"
 echo "======================================================================"
 echo ""
 echo "Summary:"
 echo "  GPU                 : $GPU_ID"
 echo "  Processed Range     : [$START_IDX, $END_IDX)"
 echo "  Number of Images    : $NUM_IMAGES"
-echo "  Infographic Files   : $NUM_FILES files"
+echo "  Dataset Name        : $DATASET_NAME"
 echo "  BizGen Subset       : $SUBSET"
 echo ""
 echo "Output Locations:"
-echo "  1. Infographic JSON : $INFOGRAPHIC_DIR/infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json"
-echo "  2. Narrator Format  : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $FIRST_FILE_IDX).json - wiki$(printf '%06d' $LAST_FILE_IDX).json"
-echo "  3. Generated Images : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
+echo "  Generated Images    : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
+echo "  Source Files        : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $FIRST_FILE_IDX).json - wiki$(printf '%06d' $LAST_FILE_IDX).json"
 echo ""
 echo "======================================================================"
 echo "All Done! 🎉"

@@ -53,7 +53,8 @@ cd ./src/data/bizgen/
 CUDA_VISIBLE_DEVICES=0 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
     --wiki_dir ../create_data/output/narrator_format/ \
-    --subset 0:516
+    --subset 0:516 \
+    --dataset_name squad_v2
 ```
 
 ## Running Full Pipeline on Multiple GPUs
@@ -157,9 +158,11 @@ src/data/create_data/output/
 │   └── wiki000600.json
 
 src/data/bizgen/output/
-├── subset_1_10000/              # GPU 0 output (200 folders, 10000 images)
-├── subset_10001_20000/          # GPU 1 output (200 folders, 10000 images)
-└── subset_20001_30000/          # GPU 2 output (200 folders, 10000 images)
+└── squad_v2/                    # Dataset output folder
+    ├── narrator000001/          # 50 images per folder
+    ├── narrator000002/
+    ├── ...
+    └── narrator000600/          # 600 folders total (30,000 images)
 ```
 
 ### Expected Results
@@ -167,7 +170,26 @@ src/data/bizgen/output/
 For 30,000 images (3 GPUs):
 - **Infographic JSON files**: 600 files (30,000 / 50)
 - **Wiki JSON files**: 600 files  
-- **BizGen output folders**: 600 folders
+- **BizGen output folders**: 600 folders in `squad_v2/narrator*/`
 - **Total PNG images**: 30,000
 
 Each file contains 50 entries, matching the chunk_size in the scripts.
+
+### Customizing Dataset Name
+
+You can change the output folder name by modifying the `DATASET_NAME` variable in the pipeline script:
+
+```bash
+# In scripts/run_narrator_pipeline.sh
+DATASET_NAME="my_custom_dataset"  # Will create output/my_custom_dataset/narrator*/
+```
+
+Or pass it directly when using inference.py:
+
+```bash
+python inference.py \
+    --ckpt_dir checkpoints/lora/infographic \
+    --wiki_dir ../create_data/output/narrator_format/ \
+    --subset 0:100 \
+    --dataset_name "my_custom_dataset"
+```
