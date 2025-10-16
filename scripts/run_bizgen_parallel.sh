@@ -31,9 +31,9 @@ DATASET_NAME=${1:-"squad_v2"}  # Default to squad_v2 if not provided
 # Define ranges for each GPU
 # Format: "GPU_ID START_IDX END_IDX"
 GPU_CONFIGS=(
-    "0 0 10000"       # GPU 0: images 0-9999 (10,000 images, 200 files)
-    "1 10000 20000"   # GPU 1: images 10000-19999 (10,000 images, 200 files)
-    "2 20000 30000"   # GPU 2: images 20000-29999 (10,000 images, 200 files)
+    # "0 1000 10000"    # GPU 0: images 0-9999 (10,000 images, 200 files)
+    "1 1400 10000"   # GPU 1: images 10000-19999 (10,000 images, 200 files)
+    # "2 21000 30000"   # GPU 2: images 20000-29999 (10,000 images, 200 files)
 )
 
 # Log directory

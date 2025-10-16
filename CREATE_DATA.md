@@ -106,7 +106,7 @@ python src/data/create_data/qwen/extract_infographic.py \
 ## Run the script to create the data
 
 ```bash
-conda env create -f ./src/data/bizgen/wiki.yaml
+conda env create -f ./src/data/bizgen/bizgen.yaml
 conda activate bizgen
 
 cd ./src/data/bizgen/

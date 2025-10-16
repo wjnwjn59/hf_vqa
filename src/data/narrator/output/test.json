@@ -1,0 +1,16 @@
+[
+  {
+    "id": "56be85543aeaaa14008c9063",
+    "image": "squad_v2/narrator000001/1.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhen did Beyonce start becoming popular?"
+      },
+      {
+        "from": "gpt",
+        "value": "in the late 1990s"
+      }
+    ]
+  }
+]
