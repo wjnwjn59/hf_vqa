@@ -19,11 +19,12 @@ set -e
 # ============================================================================
 
 # Define ranges for each GPU
-# Format: "GPU_ID START_IDX END_IDX"
+# Format: "GPU_ID START_FILE_IDX END_FILE_IDX"
+# Note: Each file contains 50 images
 GPU_CONFIGS=(
-    "0 0 10000"       # GPU 0: images 0-9999 (10,000 images, 200 files)
-    "1 10000 20000"   # GPU 1: images 10000-19999 (10,000 images, 200 files)
-    "2 20000 30000"   # GPU 2: images 20000-29999 (10,000 images, 200 files)
+    "0 1 201"       # GPU 0: files 1-200 (10,000 images)
+    "1 201 401"     # GPU 1: files 201-400 (10,000 images)  
+    "2 401 601"     # GPU 2: files 401-600 (10,000 images)
 )
 
 # Log directory
@@ -47,9 +48,9 @@ echo "GPU Configuration:"
 echo "------------------"
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
-    num_images=$((end - start))
-    num_files=$((num_images / 50))
-    echo "  GPU $gpu: [$start, $end) → $num_images images ($num_files files)"
+    num_files=$((end - start))
+    num_images=$((num_files * 50))
+    echo "  GPU $gpu: files [$start, $end) → $num_files files ($num_images images)"
 done
 echo ""
 echo "======================================================================"
@@ -64,10 +65,10 @@ LOG_FILES=()
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
     
-    LOG_FILE="$LOG_DIR/gpu${gpu}_${start}_${end}_${TIMESTAMP}.log"
+    LOG_FILE="$LOG_DIR/gpu${gpu}_files_${start}_${end}_${TIMESTAMP}.log"
     LOG_FILES+=("$LOG_FILE")
     
-    echo "Launching GPU $gpu: range [$start, $end)"
+    echo "Launching GPU $gpu: files [$start, $end)"
     echo "  Log file: $LOG_FILE"
     
     # Run the pipeline script in background
@@ -90,7 +91,7 @@ echo ""
 echo "Running processes:"
 for i in "${!PIDS[@]}"; do
     read -r gpu start end <<< "${GPU_CONFIGS[$i]}"
-    echo "  GPU $gpu (PID ${PIDS[$i]}): range [$start, $end)"
+    echo "  GPU $gpu (PID ${PIDS[$i]}): files [$start, $end)"
 done
 echo ""
 echo "Log files:"
@@ -152,19 +153,19 @@ if [ $FAILED -eq 0 ]; then
     echo ""
     
     # Calculate totals
-    TOTAL_IMAGES=0
     TOTAL_FILES=0
+    TOTAL_IMAGES=0
     for config in "${GPU_CONFIGS[@]}"; do
         read -r gpu start end <<< "$config"
-        num_images=$((end - start))
-        num_files=$((num_images / 50))
-        TOTAL_IMAGES=$((TOTAL_IMAGES + num_images))
+        num_files=$((end - start))
+        num_images=$((num_files * 50))
         TOTAL_FILES=$((TOTAL_FILES + num_files))
+        TOTAL_IMAGES=$((TOTAL_IMAGES + num_images))
     done
     
     echo "Summary:"
+    echo "  Total Files Generated  : $TOTAL_FILES"
     echo "  Total Images Generated : $TOTAL_IMAGES"
-    echo "  Total Files Created    : $TOTAL_FILES"
     echo "  Number of GPUs Used    : ${#GPU_CONFIGS[@]}"
     echo ""
     echo "Output Locations:"

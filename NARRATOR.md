@@ -50,10 +50,11 @@ conda activate bizgen
 
 cd ./src/data/bizgen/
 
-CUDA_VISIBLE_DEVICES=0 python inference.py \
+python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
     --wiki_dir ../create_data/output/narrator_format/ \
     --subset 0:516 \
+    --device cuda:2 \
     --dataset_name squad_v2
 ```
 
