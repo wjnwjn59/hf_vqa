@@ -18,18 +18,18 @@ def save_json(data: Any, filepath: str):
         json.dump(data, f, indent=4, ensure_ascii=False)
 
 
-def load_infographic_files_from_directory(directory_path: str, start_wiki: int, end_wiki: int) -> List[Dict]:
+def load_infographic_files_from_directory(directory_path: str, start_file_idx: int, end_file_idx: int) -> List[Dict]:
     """
-    Load infographic files from directory based on wiki ID range.
+    Load infographic files from directory based on file index range.
     Each file contains 50 entries with infographic_id starting from (file_index-1)*50 + 1
     
     Args:
         directory_path: Path to directory containing infographic*.json files
-        start_wiki: Start wiki ID (inclusive)
-        end_wiki: End wiki ID (exclusive)
+        start_file_idx: Start file index (inclusive, 1-based)
+        end_file_idx: End file index (exclusive, 1-based)
     
     Returns:
-        List of infographic data entries within the specified range
+        List of infographic data entries from the specified files
     """
     if not os.path.exists(directory_path):
         print(f"Warning: Directory {directory_path} does not exist")
@@ -37,14 +37,9 @@ def load_infographic_files_from_directory(directory_path: str, start_wiki: int, 
     
     infographic_data = []
     
-    # Calculate which files to load based on wiki ID range
-    # Each file contains 50 entries, file index is 1-based
-    start_file_index = (start_wiki // 50) + 1
-    end_file_index = ((end_wiki - 1) // 50) + 1
+    print(f"Loading files infographic{start_file_idx:06d}.json to infographic{end_file_idx-1:06d}.json")
     
-    print(f"Loading files infographic{start_file_index:06d}.json to infographic{end_file_index:06d}.json")
-    
-    for file_index in range(start_file_index, end_file_index + 1):
+    for file_index in range(start_file_idx, end_file_idx):
         filename = f"infographic{file_index:06d}.json"
         filepath = os.path.join(directory_path, filename)
         
@@ -54,17 +49,14 @@ def load_infographic_files_from_directory(directory_path: str, start_wiki: int, 
             
         try:
             data = load_json(filepath)
-            # Filter entries by infographic_id within range
-            for entry in data:
-                infographic_id = entry.get('infographic_id', 0)
-                if start_wiki < infographic_id <= end_wiki:
-                    infographic_data.append(entry)
+            infographic_data.extend(data)
+            print(f"  Loaded {len(data)} entries from {filename}")
             
         except Exception as e:
             print(f"Error loading {filename}: {e}")
             continue
     
-    print(f"Total loaded infographic entries in range [{start_wiki+1}:{end_wiki}]: {len(infographic_data)}")
+    print(f"Total loaded infographic entries from {end_file_idx - start_file_idx} files: {len(infographic_data)}")
     return infographic_data
 
 
@@ -291,6 +283,23 @@ def get_color_name_from_id(color_id: int, color_idx: Dict) -> str:
     return 'black'  # fallback
 
 
+def sort_by_reading_order(bboxes: List[Dict]) -> List[Dict]:
+    """
+    Sort bboxes by reading order (left to right, top to bottom).
+    
+    Args:
+        bboxes: List of bboxes with 'top_left' coordinates
+        
+    Returns:
+        Sorted list of bboxes
+    """
+    def reading_order_key(bbox):
+        x, y = bbox['top_left']
+        # Primary sort by y (top to bottom), secondary sort by x (left to right)
+        return (y, x)
+    
+    return sorted(bboxes, key=reading_order_key)
+
 def merge_narrator_data(
     infographic_generated: List[Dict],
     extracted_bboxes: List[Dict],
@@ -306,7 +315,7 @@ def merge_narrator_data(
         extracted_bboxes: List of bbox data from extracted_bboxes.json
         color_idx: Color index mapping
         font_idx: Font index mapping
-        start_wiki_idx: Starting wiki index for generating unique IDs
+        start_wiki_idx: Starting wiki data index (0-based) for generating unique IDs
     
     Returns:
         List of merged infographic data (full layout version only)
@@ -414,11 +423,13 @@ def merge_narrator_data(
             }
             output_layers.append(bg_layer)
 
-        # Strategy for remaining elements: Add 3-5 decorative elements
-        num_decorative = min(len(image_elements), random.randint(3, 5))
-
-        # Strategy for remaining elements: Add 3-5 decorative elements
-        num_decorative = min(len(image_elements), random.randint(3, 5))
+        # Select bbox elements based on available figure descriptions
+        # If not enough bbox elements, truncate figure list to match available bboxes
+        num_available_elements = len(regular_elements)
+        num_figures_to_use = min(len(image_elements), num_available_elements)
+        
+        # Truncate image_elements if needed (keep original order)
+        image_elements_to_use = image_elements[:num_figures_to_use]
 
         # Sort regular elements by area and select largest non-overlapping
         regular_elements.sort(key=calculate_bbox_area, reverse=True)
@@ -429,26 +440,24 @@ def merge_narrator_data(
             overlaps = any(bboxes_overlap(bbox, s) for s in selected_decorative)
             if not overlaps:
                 selected_decorative.append(bbox)
-                if len(selected_decorative) >= num_decorative:
+                if len(selected_decorative) >= num_figures_to_use:
                     break
 
-        # Use only decorative elements (no full image elements for figures)
-        selected_figure_bboxes = selected_decorative
-
-        # Add image elements as 'element' category
-        for idx, bbox in enumerate(selected_figure_bboxes):
-            if idx < len(image_elements):
-                img_elem = image_elements[idx]
-                # Use the full description including "Figure: " prefix
-                caption = img_elem['description']
+        # Create pairs of (bbox, caption) - bbox already selected by largest area
+        # Assign captions in original order to the largest bboxes
+        bbox_caption_pairs = []
+        for idx, bbox in enumerate(selected_decorative):
+            if idx < len(image_elements_to_use):
+                caption = image_elements_to_use[idx]['description']
             else:
-                # Fallback caption
-                is_full_image = bbox['bottom_right'] == [896, 2240]
-                if is_full_image:
-                    caption = "background image"
-                else:
-                    caption = "decorative element"
+                caption = "decorative element"  # Fallback (should not happen)
+            bbox_caption_pairs.append((bbox, caption))
 
+        # Sort pairs by reading order of bboxes (preserving caption assignment)
+        bbox_caption_pairs.sort(key=lambda pair: (pair[0]['top_left'][1], pair[0]['top_left'][0]))
+
+        # Add image elements as 'element' category with reading order of bboxes
+        for bbox, caption in bbox_caption_pairs:
             output_layer = {
                 'category': 'element',
                 'top_left': bbox['top_left'],
@@ -458,23 +467,60 @@ def merge_narrator_data(
             output_layers.append(output_layer)
 
         # Select bboxes for text (non-overlapping)
-        text_count = len(text_elements)
-        selected_text_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', text_count)
+        # Chỉ chọn các bbox text không phải full image
+        valid_text_bboxes = [b for b in bboxes if b.get('category') == 'text' and b.get('bottom_right') != [896, 2240]]
+        # Chọn không-overlap lớn nhất
+        selected_text_bboxes = select_largest_non_overlapping_bboxes(valid_text_bboxes, 'text', len(text_elements))
 
-        # Add text elements as 'text' category
+        # Create pairs of (bbox, text_content) - bbox already selected by largest area
+        # Assign text content in original order to the largest bboxes
+        text_bbox_pairs = []
         for idx, bbox in enumerate(selected_text_bboxes):
-            if idx < len(text_elements):
-                text_content = text_elements[idx]
+            text_content = text_elements[idx] if idx < len(text_elements) else ""
+            text_bbox_pairs.append((bbox, text_content))
+
+        # Sort pairs by reading order of bboxes (preserving text assignment)
+        text_bbox_pairs.sort(key=lambda pair: (pair[0]['top_left'][1], pair[0]['top_left'][0]))
+
+        # Process text pairs (bbox selected by area, text assigned in order, sorted by reading order)
+        for bbox, text_content in text_bbox_pairs:
+            
+            # Extract font and color from individual bbox
+            bbox_font_color_info = bbox.get('font_color_info', '')
+            
+            # Get font from this specific bbox, fallback to layout font
+            bbox_font_token = font_token  # Default fallback
+            if bbox_font_color_info:
+                font_match = re.search(r'<(en-font-\d+)>', bbox_font_color_info)
+                if font_match:
+                    bbox_font_token = font_match.group(1)
+                else:
+                    # If not English font, use random English font
+                    en_fonts = [k for k in font_idx.keys() if k.startswith('en-')]
+                    if en_fonts:
+                        selected_font = random.choice(en_fonts)
+                        font_id = font_idx[selected_font]
+                        bbox_font_token = f'en-font-{font_id}'
+            
+            # Get color from this specific bbox, fallback to layout colors
+            color_name = 'black'  # Default fallback
+            if bbox_font_color_info:
+                color_match = re.search(r'<color-(\d+)>', bbox_font_color_info)
+                if color_match:
+                    color_id = color_match.group(1)
+                    color_name = get_color_name_from_id(int(color_id), color_idx)
+                    if color_name == 'white':
+                        # If white, use random from layout colors
+                        color_name = random.choice(layout_colors) if layout_colors else 'black'
+                else:
+                    # Fallback to layout colors
+                    color_name = random.choice(layout_colors) if layout_colors else 'black'
             else:
-                text_content = ""
-
-            # Chọn màu từ layout_colors (không có thì random, đã loại màu trắng)
-            color_name = random.choice(layout_colors) if layout_colors else 'black'
+                # Fallback to layout colors
+                color_name = random.choice(layout_colors) if layout_colors else 'black'
+            
             color_id = color_idx[color_name]
-
-            # Dùng font_token cho toàn bộ layout
-            caption = f'Text "{text_content}" in <color-{color_id}>, <{font_token}>. '
-
+            caption = f'Text "{text_content}" in <color-{color_id}>, <{bbox_font_token}>. '
             output_layer = {
                 'category': 'text',
                 'top_left': bbox['top_left'],
@@ -488,7 +534,7 @@ def merge_narrator_data(
         result_item = {
             'index': wiki_id,
             'layers_all': output_layers,
-            'full_image_caption': full_image_caption,  # Keep original caption without cleaning
+            'full_image_caption': full_image_caption,
             'original_bbox_index': selected_bbox_index
         }
         result.append(result_item)
@@ -534,14 +580,14 @@ def main():
     parser.add_argument(
         '--start',
         type=int,
-        default=0,
-        help='Start index for infographic generation (inclusive)'
+        default=1,
+        help='Start file index for infographic generation (inclusive, 1-based)'
     )
     parser.add_argument(
         '--end',
         type=int,
         default=None,
-        help='End index for infographic generation (exclusive)'
+        help='End file index for infographic generation (exclusive, 1-based)'
     )
     parser.add_argument(
         '--output-dir',
@@ -594,13 +640,21 @@ def main():
     font_idx = load_json(font_idx_path)
     
     # Load infographic data
-    end_idx = args.end if args.end is not None else (args.start + 50000)  # Default large range
+    end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
+    
+    # Validate file indices
+    if args.start < 1:
+        raise ValueError("Start file index must be >= 1")
+    if args.end is not None and args.end <= args.start:
+        raise ValueError("End file index must be > start file index")
     
     print(f"  - Infographics: {infographic_dir} (directory)")
+    print(f"  - File index range: {args.start} to {end_file_idx-1} (files: {end_file_idx - args.start})")
+    
     infographic_generated = load_infographic_files_from_directory(
         infographic_dir, 
         args.start, 
-        end_idx
+        end_file_idx
     )
     
     print(f"\nLoaded {len(extracted_bboxes)} bbox entries")
@@ -609,12 +663,15 @@ def main():
     
     # Process data
     print("\nProcessing data...")
+    # Calculate starting wiki index based on start file index
+    start_wiki_idx = (args.start - 1) * 50
+    
     merged_data = merge_narrator_data(
         infographic_generated,
         extracted_bboxes,
         color_idx,
         font_idx,
-        start_wiki_idx=args.start
+        start_wiki_idx=start_wiki_idx
     )
     
     print(f"Generated {len(merged_data)} infographics")
@@ -629,9 +686,8 @@ def main():
     for i in range(0, len(merged_data), chunk_size):
         chunk = merged_data[i:i + chunk_size]
         
-        # Calculate file index based on first wiki ID in chunk
-        first_wiki_id = chunk[0]['index']
-        file_index = (first_wiki_id - 1) // chunk_size + 1
+        # Calculate file index based on position in merged_data and start file index
+        file_index = args.start + (i // chunk_size)
         
         filename = f"wiki{file_index:06d}.json"
         filepath = os.path.join(output_dir, filename)

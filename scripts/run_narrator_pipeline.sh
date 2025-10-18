@@ -9,12 +9,14 @@
 # 3. Generate images with BizGen
 #
 # Usage:
-#   bash scripts/run_narrator_pipeline.sh <GPU_ID> <START_IDX> <END_IDX>
+#   bash scripts/run_narrator_pipeline.sh <GPU_ID> <START_FILE_IDX> <END_FILE_IDX>
 #
 # Example:
-#   bash scripts/run_narrator_pipeline.sh 0 0 10000      # GPU 0: images 0-10000
-#   bash scripts/run_narrator_pipeline.sh 1 10000 20000  # GPU 1: images 10000-20000
-#   bash scripts/run_narrator_pipeline.sh 2 20000 30000  # GPU 2: images 20000-30000
+#   bash scripts/run_narrator_pipeline.sh 0 1 201      # GPU 0: files 1-200 (10,000 images)
+#   bash scripts/run_narrator_pipeline.sh 1 201 401   # GPU 1: files 201-400 (10,000 images)
+#   bash scripts/run_narrator_pipeline.sh 2 401 601   # GPU 2: files 401-600 (10,000 images)
+#
+# Note: Each file contains 50 images. File indices are 1-based.
 # ============================================================================
 
 set -e  # Exit on error
@@ -25,23 +27,45 @@ set -e  # Exit on error
 if [ $# -ne 3 ]; then
     echo "Error: Invalid number of arguments"
     echo ""
-    echo "Usage: $0 <GPU_ID> <START_IDX> <END_IDX>"
+    echo "Usage: $0 <GPU_ID> <START_FILE_IDX> <END_FILE_IDX>"
     echo ""
     echo "Arguments:"
-    echo "  GPU_ID    : GPU device ID (0, 1, 2, ...)"
-    echo "  START_IDX : Start index (inclusive)"
-    echo "  END_IDX   : End index (exclusive)"
+    echo "  GPU_ID        : GPU device ID (0, 1, 2, ...)"
+    echo "  START_FILE_IDX: Start file index (inclusive, 1-based)"
+    echo "  END_FILE_IDX  : End file index (exclusive, 1-based)"
+    echo ""
+    echo "Note: Each file contains 50 images. Use multiples of 50 for image counts."
     echo ""
     echo "Example:"
-    echo "  $0 0 0 10000      # GPU 0: process 10000 images (indices 0-9999)"
-    echo "  $0 1 10000 20000  # GPU 1: process 10000 images (indices 10000-19999)"
+    echo "  $0 0 1 201     # GPU 0: process files 1-200 (10,000 images)"
+    echo "  $0 1 201 401   # GPU 1: process files 201-400 (10,000 images)"
     echo ""
     exit 1
 fi
 
 GPU_ID=$1
-START_IDX=$2
-END_IDX=$3
+START_FILE_IDX=$2
+END_FILE_IDX=$3
+
+# ============================================================================
+# Validation
+# ============================================================================
+# Validate that file indices are positive integers
+if ! [[ "$START_FILE_IDX" =~ ^[1-9][0-9]*$ ]]; then
+    echo "Error: START_FILE_IDX must be a positive integer >= 1"
+    exit 1
+fi
+
+if ! [[ "$END_FILE_IDX" =~ ^[1-9][0-9]*$ ]]; then
+    echo "Error: END_FILE_IDX must be a positive integer >= 1"
+    exit 1
+fi
+
+# Validate that end > start
+if [ "$END_FILE_IDX" -le "$START_FILE_IDX" ]; then
+    echo "Error: END_FILE_IDX must be greater than START_FILE_IDX"
+    exit 1
+fi
 
 # ============================================================================
 # Configuration
@@ -69,14 +93,13 @@ DATASET_NAME="squad_v2"
 SEED=42
 
 # Calculate expected outputs
-NUM_IMAGES=$((END_IDX - START_IDX))
-NUM_FILES=$((NUM_IMAGES / 50))
-FIRST_FILE_IDX=$(((START_IDX / 50) + 1))
-LAST_FILE_IDX=$(((END_IDX - 1) / 50 + 1))
+NUM_FILES=$((END_FILE_IDX - START_FILE_IDX))
+NUM_IMAGES=$((NUM_FILES * 50))
 
-# Calculate subset for bizgen (1-based indexing)
-BIZGEN_START=$((START_IDX + 1))
-BIZGEN_END=$((END_IDX))
+# Calculate subset for bizgen (convert file indices to image indices for bizgen)
+# File index is 1-based, bizgen expects 1-based image indices
+BIZGEN_START=$(((START_FILE_IDX - 1) * 50 + 1))
+BIZGEN_END=$(((END_FILE_IDX - 1) * 50))
 SUBSET="${BIZGEN_START}:${BIZGEN_END}"
 
 # ============================================================================
@@ -88,10 +111,11 @@ echo "======================================================================"
 echo ""
 echo "Configuration:"
 echo "  GPU ID              : $GPU_ID"
-echo "  Start Index         : $START_IDX"
-echo "  End Index           : $END_IDX"
-echo "  Number of Images    : $NUM_IMAGES"
-echo "  Expected Files      : $NUM_FILES (infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json)"
+echo "  Start File Index    : $START_FILE_IDX"
+echo "  End File Index      : $END_FILE_IDX"
+echo "  Number of Files     : $NUM_FILES"
+echo "  Number of Images    : $NUM_IMAGES (50 images per file)"
+echo "  Expected Files      : wiki$(printf '%06d' $START_FILE_IDX).json - wiki$(printf '%06d' $((END_FILE_IDX-1))).json"
 echo "  BizGen Subset       : $SUBSET"
 echo ""
 echo "Paths:"
@@ -120,14 +144,14 @@ CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_infographic_
     --input_data "$SQUAD_TRAIN" \
     --template_path "$TEMPLATE_PATH" \
     --dataset_type "$DATASET_TYPE" \
-    --start $START_IDX \
-    --end $END_IDX \
+    --start $START_FILE_IDX \
+    --end $END_FILE_IDX \
     --batch_size $BATCH_SIZE
 
 if [ $? -eq 0 ]; then
     echo ""
     echo "✓ Step 1 completed successfully!"
-    echo "  Generated files: infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json"
+    echo "  Generated files: infographic$(printf '%06d' $START_FILE_IDX).json - infographic$(printf '%06d' $((END_FILE_IDX-1))).json"
 else
     echo ""
     echo "✗ Step 1 failed!"
@@ -145,8 +169,8 @@ echo ""
 
 $CONDA_WIKI src/data/narrator/merge_narrator_bboxes.py \
     --infographic-dir "$INFOGRAPHIC_DIR" \
-    --start $START_IDX \
-    --end $END_IDX \
+    --start $START_FILE_IDX \
+    --end $END_FILE_IDX \
     --seed $SEED
 
 if [ $? -eq 0 ]; then
@@ -215,14 +239,14 @@ echo "======================================================================"
 echo ""
 echo "Summary:"
 echo "  GPU                 : $GPU_ID"
-echo "  Processed Range     : [$START_IDX, $END_IDX)"
+echo "  Processed File Range: [$START_FILE_IDX, $END_FILE_IDX)"
+echo "  Number of Files     : $NUM_FILES"
 echo "  Number of Images    : $NUM_IMAGES"
-echo "  Infographic Files   : $NUM_FILES files"
 echo "  BizGen Subset       : $SUBSET"
 echo ""
 echo "Output Locations:"
-echo "  1. Infographic JSON : $INFOGRAPHIC_DIR/infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json"
-echo "  2. Narrator Format  : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $FIRST_FILE_IDX).json - wiki$(printf '%06d' $LAST_FILE_IDX).json"
+echo "  1. Infographic JSON : $INFOGRAPHIC_DIR/infographic$(printf '%06d' $START_FILE_IDX).json - infographic$(printf '%06d' $((END_FILE_IDX-1))).json"
+echo "  2. Narrator Format  : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $START_FILE_IDX).json - wiki$(printf '%06d' $((END_FILE_IDX-1))).json"
 echo "  3. Generated Images : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
 echo ""
 echo "======================================================================"

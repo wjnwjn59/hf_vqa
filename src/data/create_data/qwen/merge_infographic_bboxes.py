@@ -391,7 +391,7 @@ def merge_infographic_data(
             'index': wiki_id,
             'layers_all': output_layers,
             'full_image_caption': gen_info.get('full_image_caption', ''),
-            'original_bbox_index': selected_bbox_index,  # Keep track of original bbox for debugging
+            'original_bbox_index': selected_bbox_index,
             'original_infographic_id': infographic.get('id', '')
         }
         

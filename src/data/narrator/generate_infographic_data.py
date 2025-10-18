@@ -110,10 +110,10 @@ def main():
                         help='GPU memory utilization')
     parser.add_argument('--num-samples', type=int, default=None,
                         help='Number of samples to process (None for all)')
-    parser.add_argument('--start', type=int, default=0,
-                        help='Start index for data processing (inclusive)')
+    parser.add_argument('--start', type=int, default=1,
+                        help='Start file index for data processing (inclusive, 1-based)')
     parser.add_argument('--end', type=int, default=None,
-                        help='End index for data processing (exclusive)')
+                        help='End file index for data processing (exclusive, 1-based)')
     parser.add_argument('--output-dir', type=str, default=None,
                         help='Output directory for infographic files (default: src/data/create_data/output/infographic)')
     
@@ -144,10 +144,27 @@ def main():
     input_data_full = load_input_data(args.dataset_type, args.input_data, deduplicate_context=deduplicate_context)
     print(f"Total entries loaded: {len(input_data_full)}")
 
+    # Convert file indices to data indices (each file contains 50 images)
+    # File index is 1-based, data index is 0-based
+    start_data_idx = (args.start - 1) * 50
+    end_data_idx = (args.end - 1) * 50 if args.end is not None else len(input_data_full)
+    
+    # Validate file indices
+    max_files_needed = (len(input_data_full) + 49) // 50  # Round up
+    if args.start < 1:
+        raise ValueError("Start file index must be >= 1")
+    if args.end is not None and args.end <= args.start:
+        raise ValueError("End file index must be > start file index")
+    if args.start > max_files_needed:
+        raise ValueError(f"Start file index {args.start} exceeds available data (max files: {max_files_needed})")
+    
+    print(f"File indices: {args.start} to {args.end if args.end else 'end'}")
+    print(f"Data indices: {start_data_idx} to {end_data_idx}")
+    print(f"Images per file: 50")
+
     # Apply start and end slicing first
-    end_idx = args.end if args.end is not None else len(input_data_full)
-    input_data_sliced = input_data_full[args.start:end_idx]
-    print(f"Sliced data from index {args.start} to {end_idx}: {len(input_data_sliced)} samples")
+    input_data_sliced = input_data_full[start_data_idx:end_data_idx]
+    print(f"Sliced data from data index {start_data_idx} to {end_data_idx}: {len(input_data_sliced)} samples")
 
     # Then apply num_samples limit if specified
     if args.num_samples:
@@ -236,8 +253,8 @@ def main():
 
         # Process outputs
         for i, (item, parsed) in enumerate(zip(batch, parsed_responses)):
-            # Calculate global infographic_id based on start index
-            infographic_id = args.start + total_processed + 1
+            # Calculate global infographic_id based on start data index
+            infographic_id = start_data_idx + total_processed + 1
             result = {
                 "id": item.get("id", None),
                 "title": item.get("title", None),
@@ -280,9 +297,10 @@ def main():
     print("="*60)
     
     if total_processed > 0:
-        first_id = args.start + 1
-        last_id = args.start + total_processed
+        first_id = start_data_idx + 1
+        last_id = start_data_idx + total_processed
         print(f"Infographic ID range: {first_id:06d} - {last_id:06d}")
+        print(f"File index range: {args.start} - {args.end if args.end else args.start + (total_processed + 49) // 50}")
     
     print(f"Total samples processed: {total_processed}")
     print(f"Total files saved: {len(saved_files)}")
