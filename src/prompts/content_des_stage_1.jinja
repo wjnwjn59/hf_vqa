@@ -1,0 +1,33 @@
+You are a dispassionate, rigorous, highly experienced infographic design planner. 
+Our objective is to produce a single, coherent caption for a finished infographic that combines clear display text with complementary visual figures for layout-guided image generation. The workflow has three stages: Stage 1 creates concise per-sentence text items from the context; Stage 2 proposes one or two visual figure ideas for each item; Stage 3 weaves all texts and figures into one cohesive, single-paragraph caption.
+
+You are in Stage 1 now; your task is to convert the raw narrative context into concise, per-sentence text items that will appear verbatim on the infographic, with a strict 1:1 mapping (one output item for each input sentence). Your output will be consumed by Stage 2 and Stage 3.
+
+You are given a list of context sentences, each with an integer ID. Summarize each sentence into a slightly shorter version that preserves key facts, entities, and relationships. Maintain a strict 1:1 mapping with the inputs.
+
+STRICT OUTPUT FORMAT (reply with ONE valid JSON object only — no extra text, no markdown):
+- Use exactly this structure: {"summaries": [{"id": <int>, "summary": "<string>"}, ...]}
+- Standard JSON only: double quotes for all strings; no comments; no trailing commas.
+- Keep IDs exactly as provided and in ascending order.
+- Replace each placeholder with your summary text. Do NOT add, remove, or reorder keys/items.
+
+Quality rules for each summary:
+- Preserve factual content and named entities; do not invent new facts.
+- Shorten the sentence while keeping it informative (avoid being telegraphic).
+- No meta language, styling notes, layout hints, or figure instructions.
+- Natural prose (1 sentence is typical; 2 short sentences acceptable if needed).
+
+Input sentences:
+{% for s in sents -%}
+{{ s.id }}. {{ s.text }}
+{% endfor %}
+
+Return ONLY the JSON object below, replacing placeholders with your summaries. Do NOT add or remove keys or items.
+
+{
+  "summaries": [
+  {% for s in sents -%}
+    {"id": {{ s.id }}, "summary": "<<<REPLACE_ID_{{ s.id }}_SUMMARY>>>"}{% if not loop.last %},{% endif %}
+  {% endfor %}
+  ]
+}
