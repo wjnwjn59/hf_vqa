@@ -6,11 +6,11 @@ MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
 
 export PYTHONPATH=src:$PYTHONPATH
 
-deepspeed src/train/train_grpo.py \
+CUDA_VISIBLE_DEVICES=1 deepspeed src/train/train_grpo.py \
     --deepspeed scripts/zero3.json \
     --model_id $MODEL_NAME \
-    --data_path /path/to/your/training/data.json \
-    --image_folder /path/to/your/image/folder \
+    --data_path /home/thinhnp/hf_vqa/src/data/narrator/output/conversation_squad_v2_train.json \
+    --image_folder /home/thinhnp/hf_vqa/src/data/narrator/output/images/ \
     --freeze_vision_tower False \
     --freeze_llm True \
     --freeze_merger False \

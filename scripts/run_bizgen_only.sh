@@ -7,12 +7,14 @@
 # (assumes narrator format JSON files already exist)
 #
 # Usage:
-#   bash scripts/run_bizgen_only.sh <GPU_ID> <START_IDX> <END_IDX> [DATASET_NAME]
+#   bash scripts/run_bizgen_only.sh <GPU_ID> <START_FILE_IDX> <END_FILE_IDX> [DATASET_NAME]
 #
 # Example:
-#   bash scripts/run_bizgen_only.sh 0 0 10000                # GPU 0: images 0-10000, dataset "squad_v2"
-#   bash scripts/run_bizgen_only.sh 1 10000 20000            # GPU 1: images 10000-20000, dataset "squad_v2"
-#   bash scripts/run_bizgen_only.sh 2 20000 30000 "my_data"  # GPU 2: images 20000-30000, dataset "my_data"
+#   bash scripts/run_bizgen_only.sh 0 1 201 "squad_v2"       # GPU 0: files 1-200 (10,000 images), dataset "squad_v2"
+#   bash scripts/run_bizgen_only.sh 1 201 401 "squad_v2"     # GPU 1: files 201-400 (10,000 images), dataset "squad_v2"
+#   bash scripts/run_bizgen_only.sh 2 401 601 "my_data"      # GPU 2: files 401-600 (10,000 images), dataset "my_data"
+#
+# Note: Each file contains 50 images. File indices are 1-based.
 # ============================================================================
 
 set -e  # Exit on error
@@ -23,26 +25,48 @@ set -e  # Exit on error
 if [ $# -lt 3 ] || [ $# -gt 4 ]; then
     echo "Error: Invalid number of arguments"
     echo ""
-    echo "Usage: $0 <GPU_ID> <START_IDX> <END_IDX> [DATASET_NAME]"
+    echo "Usage: $0 <GPU_ID> <START_FILE_IDX> <END_FILE_IDX> [DATASET_NAME]"
     echo ""
     echo "Arguments:"
-    echo "  GPU_ID       : GPU device ID (0, 1, 2, ...)"
-    echo "  START_IDX    : Start index (inclusive)"
-    echo "  END_IDX      : End index (exclusive)"
-    echo "  DATASET_NAME : Optional dataset name (default: squad_v2)"
+    echo "  GPU_ID        : GPU device ID (0, 1, 2, ...)"
+    echo "  START_FILE_IDX: Start file index (inclusive, 1-based)"
+    echo "  END_FILE_IDX  : End file index (exclusive, 1-based)"
+    echo "  DATASET_NAME  : Optional dataset name (default: squad_v2)"
+    echo ""
+    echo "Note: Each file contains 50 images. Use multiples of 50 for image counts."
     echo ""
     echo "Example:"
-    echo "  $0 0 0 10000             # GPU 0: process 10000 images with default dataset name"
-    echo "  $0 1 10000 20000         # GPU 1: process 10000 images with default dataset name"
-    echo "  $0 2 20000 30000 my_data # GPU 2: process 10000 images with custom dataset name"
+    echo "  $0 0 1 201               # GPU 0: files 1-200 (10,000 images) with default dataset"
+    echo "  $0 1 201 401             # GPU 1: files 201-400 (10,000 images) with default dataset"
+    echo "  $0 2 401 601 my_data     # GPU 2: files 401-600 (10,000 images) with custom dataset"
     echo ""
     exit 1
 fi
 
 GPU_ID=$1
-START_IDX=$2
-END_IDX=$3
+START_FILE_IDX=$2
+END_FILE_IDX=$3
 DATASET_NAME=${4:-"squad_v2"}  # Default to squad_v2 if not provided
+
+# ============================================================================
+# Validation
+# ============================================================================
+# Validate that file indices are positive integers
+if ! [[ "$START_FILE_IDX" =~ ^[1-9][0-9]*$ ]]; then
+    echo "Error: START_FILE_IDX must be a positive integer >= 1"
+    exit 1
+fi
+
+if ! [[ "$END_FILE_IDX" =~ ^[1-9][0-9]*$ ]]; then
+    echo "Error: END_FILE_IDX must be a positive integer >= 1"
+    exit 1
+fi
+
+# Validate that end > start
+if [ "$END_FILE_IDX" -le "$START_FILE_IDX" ]; then
+    echo "Error: END_FILE_IDX must be greater than START_FILE_IDX"
+    exit 1
+fi
 
 # ============================================================================
 # Configuration
@@ -58,14 +82,13 @@ BIZGEN_DIR="./src/data/bizgen"
 CKPT_DIR="checkpoints/lora/infographic"
 
 # Calculate expected outputs
-NUM_IMAGES=$((END_IDX - START_IDX))
-NUM_FILES=$((NUM_IMAGES / 50))
-FIRST_FILE_IDX=$(((START_IDX / 50) + 1))
-LAST_FILE_IDX=$(((END_IDX - 1) / 50 + 1))
+NUM_FILES=$((END_FILE_IDX - START_FILE_IDX))
+NUM_IMAGES=$((NUM_FILES * 50))
 
-# Calculate subset for bizgen (1-based indexing)
-BIZGEN_START=$((START_IDX + 1))
-BIZGEN_END=$((END_IDX))
+# Calculate subset for bizgen (convert file indices to image indices for bizgen)
+# File index is 1-based, bizgen expects 1-based image indices
+BIZGEN_START=$(((START_FILE_IDX - 1) * 50 + 1))
+BIZGEN_END=$(((END_FILE_IDX - 1) * 50))
 SUBSET="${BIZGEN_START}:${BIZGEN_END}"
 
 # ============================================================================
@@ -77,10 +100,11 @@ echo "======================================================================"
 echo ""
 echo "Configuration:"
 echo "  GPU ID              : $GPU_ID"
-echo "  Start Index         : $START_IDX"
-echo "  End Index           : $END_IDX"
-echo "  Number of Images    : $NUM_IMAGES"
-echo "  Expected Files      : $NUM_FILES (wiki$(printf '%06d' $FIRST_FILE_IDX).json - wiki$(printf '%06d' $LAST_FILE_IDX).json)"
+echo "  Start File Index    : $START_FILE_IDX"
+echo "  End File Index      : $END_FILE_IDX"
+echo "  Number of Files     : $NUM_FILES"
+echo "  Number of Images    : $NUM_IMAGES (50 images per file)"
+echo "  Expected Files      : wiki$(printf '%06d' $START_FILE_IDX).json - wiki$(printf '%06d' $((END_FILE_IDX-1))).json"
 echo "  BizGen Subset       : $SUBSET"
 echo "  Dataset Name        : $DATASET_NAME"
 echo ""
@@ -110,7 +134,7 @@ fi
 EXPECTED_FILES=0
 MISSING_FILES=0
 
-for ((i=FIRST_FILE_IDX; i<=LAST_FILE_IDX; i++)); do
+for ((i=START_FILE_IDX; i<END_FILE_IDX; i++)); do
     WIKI_FILE="$NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $i).json"
     EXPECTED_FILES=$((EXPECTED_FILES + 1))
     
@@ -127,7 +151,7 @@ if [ $MISSING_FILES -gt 0 ]; then
     echo ""
     echo "✗ Error: $MISSING_FILES out of $EXPECTED_FILES expected files are missing."
     echo "  Please run the full pipeline first to generate these files:"
-    echo "  bash scripts/run_narrator_pipeline.sh $GPU_ID $START_IDX $END_IDX"
+    echo "  bash scripts/run_narrator_pipeline.sh $GPU_ID $START_FILE_IDX $END_FILE_IDX"
     exit 1
 fi
 
@@ -188,14 +212,15 @@ echo "======================================================================"
 echo ""
 echo "Summary:"
 echo "  GPU                 : $GPU_ID"
-echo "  Processed Range     : [$START_IDX, $END_IDX)"
+echo "  Processed File Range: [$START_FILE_IDX, $END_FILE_IDX)"
+echo "  Number of Files     : $NUM_FILES"
 echo "  Number of Images    : $NUM_IMAGES"
 echo "  Dataset Name        : $DATASET_NAME"
 echo "  BizGen Subset       : $SUBSET"
 echo ""
 echo "Output Locations:"
 echo "  Generated Images    : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
-echo "  Source Files        : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $FIRST_FILE_IDX).json - wiki$(printf '%06d' $LAST_FILE_IDX).json"
+echo "  Source Files        : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $START_FILE_IDX).json - wiki$(printf '%06d' $((END_FILE_IDX-1))).json"
 echo ""
 echo "======================================================================"
 echo "All Done! 🎉"

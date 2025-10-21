@@ -258,7 +258,8 @@ def main():
             result = {
                 "id": item.get("id", None),
                 "title": item.get("title", None),
-                "generated_infographic": parsed["response"],
+                # If parsing failed (invalid JSON), store None for generated_infographic
+                "generated_infographic": parsed["response"] if parsed["success"] else None,
                 "success": parsed["success"],
                 "infographic_id": infographic_id
             }

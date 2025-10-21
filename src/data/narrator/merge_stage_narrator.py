@@ -186,6 +186,35 @@ def extract_images_from_caption(full_caption: str) -> List[str]:
     return image_elements
 
 
+def extract_images_from_figures(figures: List[Dict]) -> List[Dict]:
+    """
+    Extract image descriptions from figures data by randomly selecting from ideas.
+    
+    Args:
+        figures: List of figure data with 'ideas' field
+        
+    Returns:
+        List of image descriptions
+    """
+    image_elements = []
+    
+    for figure in figures:
+        ideas = figure.get('ideas', [])
+        if ideas:
+            # Randomly select one idea from the available ideas
+            selected_idea = random.choice(ideas)
+            image_elements.append({
+                'description': selected_idea.strip()
+            })
+        else:
+            # Fallback if no ideas available
+            image_elements.append({
+                'description': "A simple abstract illustration relevant to the content."
+            })
+    
+    return image_elements
+
+
 def extract_text_elements(full_caption: str) -> List[str]:
     """
     Extract text content from caption (quoted text).
@@ -333,7 +362,11 @@ def merge_narrator_data(
         # Get the caption data from generated_infographic structure
         generated_infographic = infographic.get('generated_infographic', {})
         
-        # Handle case where generated_infographic is a JSON string instead of dict
+        # Handle case where generated_infographic is None, a JSON string, or empty
+        if generated_infographic is None:
+            print(f"Warning: generated_infographic is None for wiki {wiki_id}, skipping")
+            continue
+            
         if isinstance(generated_infographic, str):
             try:
                 generated_infographic = json.loads(generated_infographic)
@@ -341,15 +374,21 @@ def merge_narrator_data(
                 print(f"Warning: Could not parse generated_infographic for wiki {wiki_id}")
                 continue
         
+        if not isinstance(generated_infographic, dict):
+            print(f"Warning: generated_infographic is not a dict for wiki {wiki_id}, skipping")
+            continue
+        
         full_image_caption = generated_infographic.get('full_image_caption', '')
         background_caption = generated_infographic.get('background_caption', '')
+        figures = generated_infographic.get('figures', [])
         
         if not full_image_caption:
             print(f"Warning: No full_image_caption for wiki {wiki_id}, skipping")
             continue
         
-        # Extract image and text elements
-        image_elements = extract_images_from_caption(full_image_caption)
+        # Extract image elements from figures.ideas (new approach)
+        image_elements = extract_images_from_figures(figures)
+        # Extract text elements from full_image_caption (keep original approach for "titled" content)
         text_elements = extract_text_elements(full_image_caption)
         
         # Select a random bbox index from available indices
@@ -556,8 +595,8 @@ def main():
     parser.add_argument(
         '--infographic-dir',
         type=str,
-        default="src/data/create_data/output/infographic",
-        help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic)'
+        default="src/data/create_data/output/infographic_v2",
+        help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic_v2)'
     )
     parser.add_argument(
         '--color-idx',
@@ -593,7 +632,7 @@ def main():
         '--output-dir',
         type=str,
         default=None,
-        help='Output directory (default: src/data/create_data/output/narrator_format)'
+        help='Output directory (default: src/data/create_data/output/narrator_format_v2)'
     )
 
     args = parser.parse_args()
@@ -615,17 +654,17 @@ def main():
     if args.infographic_dir:
         infographic_dir = args.infographic_dir
     else:
-        # Default to output/infographic directory
+        # Default to output/infographic_v2 directory
         repo_root = os.path.abspath(os.path.join(script_dir, '../../../'))
-        infographic_dir = os.path.join(repo_root, 'src/data/create_data/output/infographic')
+        infographic_dir = os.path.join(repo_root, 'src/data/create_data/output/infographic_v2')
     
     # Set base output directory
     if args.output_dir:
         output_dir = args.output_dir
     else:
-        # Default to src/data/create_data/output/narrator_format from repository root
+        # Default to src/data/create_data/output/narrator_format_v2 from repository root
         repo_root = os.path.abspath(os.path.join(script_dir, '../../../'))
-        output_dir = os.path.join(repo_root, 'src/data/create_data/output/narrator_format')
+        output_dir = os.path.join(repo_root, 'src/data/create_data/output/narrator_format_v2')
     
     os.makedirs(output_dir, exist_ok=True)
     

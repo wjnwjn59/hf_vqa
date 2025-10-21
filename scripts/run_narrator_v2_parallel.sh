@@ -1,45 +1,34 @@
 #!/bin/bash
 
 # ============================================================================
-# Parallel BizGen Image Generation Launcher
+# Parallel Narrator v2 Pipeline Launcher
 # ============================================================================
-# This script launches BizGen image generation on multiple GPUs in parallel
-# (assumes narrator format JSON files already exist)
+# This script launches the narrator v2 pipeline on multiple GPUs in parallel
 #
 # Usage:
-#   bash scripts/run_bizgen_parallel.sh [DATASET_NAME]
-#
-# Example:
-#   bash scripts/run_bizgen_parallel.sh           # Use default dataset name "squad_v2"
-#   bash scripts/run_bizgen_parallel.sh my_data  # Use custom dataset name "my_data"
+#   bash scripts/run_narrator_v2_parallel.sh
 #
 # Configuration:
-#   Edit the GPU_CONFIGS array below to set file ranges for each GPU
-#   Note: Each file contains 50 images. File indices are 1-based.
+#   Edit the GPU_CONFIGS array below to set ranges for each GPU
 # ============================================================================
 
 set -e
-
-# ============================================================================
-# Parse Arguments
-# ============================================================================
-DATASET_NAME=${1:-"squad_v2"}  # Default to squad_v2 if not provided
 
 # ============================================================================
 # Configuration
 # ============================================================================
 
 # Define ranges for each GPU
-# Format: "GPU_ID START_FILE_IDX END_FILE_IDX"
-# Note: Each file contains 50 images
+# Format: "GPU_ID START_SUBSET END_SUBSET"
+# Note: Each subset contains 50 images
 GPU_CONFIGS=(
-    "0 83 90"     # GPU 0: files 1-200 (10,000 images)
-    "1 91 100"     # GPU 1: files 201-400 (10,000 images)  
-    # "2 90 100"    # GPU 2: files 401-600 (10,000 images)
+    # "0 1 20"
+    "1 1 20"
+    "2 20 40"
 )
 
 # Log directory
-LOG_DIR="logs/bizgen_only"
+LOG_DIR="logs/narrator_v2_pipeline"
 mkdir -p "$LOG_DIR"
 
 # Get current timestamp
@@ -49,67 +38,22 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 # Print Configuration
 # ============================================================================
 echo "======================================================================"
-echo "Parallel BizGen Image Generation Launcher"
+echo "Parallel Narrator v2 Pipeline Launcher"
 echo "======================================================================"
 echo ""
 echo "Timestamp: $TIMESTAMP"
 echo "Log Directory: $LOG_DIR"
-echo "Dataset Name: $DATASET_NAME"
 echo ""
 echo "GPU Configuration:"
 echo "------------------"
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
-    num_files=$((end - start))
-    num_images=$((num_files * 50))
-    echo "  GPU $gpu: files [$start, $end) → $num_files files ($num_images images)"
+    num_subsets=$((end - start))
+    num_images=$((num_subsets * 50))
+    echo "  GPU $gpu: subsets [$start, $end) → $num_subsets subsets ($num_images images)"
 done
 echo ""
 echo "======================================================================"
-echo ""
-
-# ============================================================================
-# Check Prerequisites
-# ============================================================================
-echo "Checking prerequisites..."
-
-NARRATOR_FORMAT_DIR="src/data/create_data/output/narrator_format"
-if [ ! -d "$NARRATOR_FORMAT_DIR" ]; then
-    echo "✗ Error: Narrator format directory not found: $NARRATOR_FORMAT_DIR"
-    echo "  Please run the full pipeline first to generate narrator format files."
-    exit 1
-fi
-
-# Check if any expected files exist
-TOTAL_EXPECTED=0
-TOTAL_MISSING=0
-
-for config in "${GPU_CONFIGS[@]}"; do
-    read -r gpu start end <<< "$config"
-    
-    for ((i=start; i<end; i++)); do
-        WIKI_FILE="$NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $i).json"
-        TOTAL_EXPECTED=$((TOTAL_EXPECTED + 1))
-        
-        if [ ! -f "$WIKI_FILE" ]; then
-            TOTAL_MISSING=$((TOTAL_MISSING + 1))
-        fi
-    done
-done
-
-if [ $TOTAL_MISSING -gt 0 ]; then
-    echo "✗ Warning: $TOTAL_MISSING out of $TOTAL_EXPECTED expected files are missing."
-    echo "  Some GPUs may fail. Consider running the full pipeline first."
-    echo ""
-    read -p "Continue anyway? (y/N): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
-    fi
-else
-    echo "✓ All $TOTAL_EXPECTED narrator format files found"
-fi
-
 echo ""
 
 # ============================================================================
@@ -121,14 +65,14 @@ LOG_FILES=()
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
     
-    LOG_FILE="$LOG_DIR/gpu${gpu}_${start}_${end}_${DATASET_NAME}_${TIMESTAMP}.log"
+    LOG_FILE="$LOG_DIR/gpu${gpu}_subsets_${start}_${end}_${TIMESTAMP}.log"
     LOG_FILES+=("$LOG_FILE")
     
-    echo "Launching GPU $gpu: files [$start, $end) for dataset '$DATASET_NAME'"
+    echo "Launching GPU $gpu: subsets [$start, $end)"
     echo "  Log file: $LOG_FILE"
     
-    # Run the BizGen-only script in background
-    bash scripts/run_bizgen_only.sh $gpu $start $end "$DATASET_NAME" > "$LOG_FILE" 2>&1 &
+    # Run the pipeline script in background
+    bash scripts/run_narrator_v2_pipeline.sh $gpu $start $end > "$LOG_FILE" 2>&1 &
     
     PID=$!
     PIDS+=($PID)
@@ -147,7 +91,7 @@ echo ""
 echo "Running processes:"
 for i in "${!PIDS[@]}"; do
     read -r gpu start end <<< "${GPU_CONFIGS[$i]}"
-    echo "  GPU $gpu (PID ${PIDS[$i]}): files [$start, $end)"
+    echo "  GPU $gpu (PID ${PIDS[$i]}): subsets [$start, $end)"
 done
 echo ""
 echo "Log files:"
@@ -159,7 +103,7 @@ echo "======================================================================"
 echo ""
 echo "Monitoring progress..."
 echo "You can tail the logs with:"
-echo "  tail -f $LOG_DIR/*_${DATASET_NAME}_${TIMESTAMP}.log"
+echo "  tail -f $LOG_DIR/*_${TIMESTAMP}.log"
 echo ""
 echo "Or monitor individual GPUs:"
 for i in "${!PIDS[@]}"; do
@@ -209,34 +153,25 @@ if [ $FAILED -eq 0 ]; then
     echo ""
     
     # Calculate totals
-    TOTAL_FILES=0
+    TOTAL_SUBSETS=0
     TOTAL_IMAGES=0
     for config in "${GPU_CONFIGS[@]}"; do
         read -r gpu start end <<< "$config"
-        num_files=$((end - start))
-        num_images=$((num_files * 50))
-        TOTAL_FILES=$((TOTAL_FILES + num_files))
+        num_subsets=$((end - start))
+        num_images=$((num_subsets * 50))
+        TOTAL_SUBSETS=$((TOTAL_SUBSETS + num_subsets))
         TOTAL_IMAGES=$((TOTAL_IMAGES + num_images))
     done
     
     echo "Summary:"
-    echo "  Total Files Used       : $TOTAL_FILES"
+    echo "  Total Subsets Generated: $TOTAL_SUBSETS"
     echo "  Total Images Generated : $TOTAL_IMAGES"
     echo "  Number of GPUs Used    : ${#GPU_CONFIGS[@]}"
-    echo "  Dataset Name           : $DATASET_NAME"
     echo ""
-    echo "Output Location:"
-    echo "  Generated Images : src/data/bizgen/output/$DATASET_NAME/"
-    echo ""
-    
-    # Try to count actual generated images
-    OUTPUT_DIR="src/data/bizgen/output/$DATASET_NAME"
-    if [ -d "$OUTPUT_DIR" ]; then
-        ACTUAL_IMAGES=$(find "$OUTPUT_DIR" -name "*.png" | grep -v "bbox" | grep -v "lcfg" | wc -l)
-        ACTUAL_FOLDERS=$(find "$OUTPUT_DIR" -mindepth 1 -maxdepth 1 -type d | wc -l)
-        echo "  Actual Images Generated: $ACTUAL_IMAGES"
-        echo "  Actual Folders Created : $ACTUAL_FOLDERS"
-    fi
+    echo "Output Locations:"
+    echo "  Infographic v2 JSON: src/data/create_data/output/infographic_v2/"
+    echo "  Narrator Format v2 : src/data/create_data/output/narrator_format_v2/"
+    echo "  Generated Images   : src/data/bizgen/output/squad_v2_new/"
 else
     echo "✗ $FAILED GPU(s) failed"
     echo ""

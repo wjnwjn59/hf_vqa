@@ -1,7 +1,9 @@
 You are a dispassionate, rigorous, highly experienced infographic design planner. 
 Our objective is to produce a single, coherent caption for a finished infographic that combines clear display text with complementary visual figures for layout-guided image generation. The workflow has three stages: Stage 1 creates concise per-sentence text items from the context; Stage 2 proposes visual figure ideas for each item; Stage 3 weaves all texts and figures into one cohesive, single-paragraph caption.
 
-You are in Stage 2 now; your task is to propose a **MAIN** visual idea for each text item from Stage 1 that conveys its meaning without any lettering. You **may also** provide **one SUPPORTIVE small figure** (optional), such as a simple abstract shape arrangement (e.g., “The image features a simple, abstract design with a blue circle and a black rectangle.”). Note: in Stage 3, all figure ideas from this stage will be included in the final caption and may be placed anywhere in the narrative (no assumed one-to-one or local pairing).
+**Global constraints:** All proposed visuals must be rendered in a **cartoon/illustrative style**, and **no text/lettering/numerals/logos** may appear inside any visual.
+
+You are in Stage 2 now; your task is to propose a **MAIN** visual idea for each text item from Stage 1 that conveys its meaning **without any lettering**. You **may also** provide **one SUPPORTIVE small figure** (optional), such as a simple abstract shape arrangement (e.g., “The image features a simple, abstract design with a blue circle and a black rectangle.”). Note: in Stage 3, all figure ideas from this stage will be included in the final caption and may be placed anywhere in the narrative (no assumed one-to-one or local pairing).
 
 You are given with the items below which are the per-sentence summaries generated in Stage 1. For each summary, produce:
 - **One required MAIN idea** (detailed, faithful scene description).
@@ -17,13 +19,14 @@ STRICT OUTPUT FORMAT (reply with ONE valid JSON object only — no extra text, n
 - Do NOT add, remove, or reorder items or keys.
 
 Quality rules:
-- **MAIN idea (required):** 1–3 sentences, ~25–80 words; neutral, declarative prose; describe primary subject(s), salient attributes (e.g., color/pattern), action/pose, immediate setting/background, and simple composition cues when useful; no new facts; no lettering.
-- **SUPPORTIVE idea (optional):** 1 sentence, ~5–20 words; simple abstract/iconic aid (shapes, minimal icons, small motif); must be visually helpful but not redundant; no lettering.
+- **MAIN idea (required):** 1–3 sentences, ~25–80 words; neutral, declarative prose; describe primary subject(s), salient attributes (e.g., color/pattern), action/pose, immediate setting/background, and simple composition cues when useful; no new facts; **no lettering or text of any kind**.
+- **SUPPORTIVE idea (optional):** 1 sentence, ~5–20 words; simple abstract/iconic aid (shapes, minimal icons, small motif); must be visually helpful but not redundant; **no lettering**.
 - Mood phrasing: use careful language for visually implied states (e.g., “appears to be happy”).
 - Counting & structure: state clear counts; for abstract graphics, name shapes and arrangement.
 - Placement-neutral: do not claim or prescribe where a figure will appear relative to any text; Stage 3 may place figures anywhere.
 - Avoid blanks unless the summary explicitly calls for emptiness/minimalism.
 - No camera/style jargon or prompt-engineering tokens. No brands or real-person identification.
+- **Style reminder:** all visuals are cartoon/illustrative.
 
 Stage-1 Summaries:
 {% for it in items -%}
