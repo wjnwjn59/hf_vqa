@@ -80,7 +80,7 @@ CONDA_BIZGEN="/opt/miniconda3/envs/khoina_bizgen/bin/python"
 # Paths
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
 TEMPLATE_PATH="./src/prompts/bizgen_context_qa_full.jinja"
-INFOGRAPHIC_DIR="src/data/create_data/output/infographic"
+INFOGRAPHIC_DIR="`src/data/create_data/output/infographic`"
 NARRATOR_FORMAT_DIR="src/data/create_data/output/narrator_format"
 BIZGEN_DIR="./src/data/bizgen"
 CKPT_DIR="checkpoints/lora/infographic"

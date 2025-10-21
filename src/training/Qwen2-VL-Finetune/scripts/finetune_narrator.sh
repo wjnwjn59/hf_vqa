@@ -4,7 +4,8 @@
 # MODEL_NAME="Qwen/Qwen2-VL-7B-Instruct"
 # MODEL_NAME="Qwen/Qwen2-VL-2B-Instruct"
 # MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
-MODEL_NAME="Qwen/Qwen2.5-VL-7B-Instruct"
+# MODEL_NAME="Qwen/Qwen2.5-VL-7B-Instruct"
+MODEL_NAME="OpenGVLab/InternVL3_5-2B"
 
 GLOBAL_BATCH_SIZE=128
 BATCH_PER_DEVICE=4
@@ -13,7 +14,7 @@ GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
 export PYTHONPATH=src:$PYTHONPATH
 
-CUDA_VISIBLE_DEVICES=1 deepspeed src/train/train_sft.py \
+CUDA_VISIBLE_DEVICES=2 deepspeed src/train/train_sft.py \
     --use_liger True \
     --lora_enable True \
     --use_dora False \

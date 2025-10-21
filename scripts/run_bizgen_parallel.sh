@@ -14,7 +14,8 @@
 #   bash scripts/run_bizgen_parallel.sh my_data  # Use custom dataset name "my_data"
 #
 # Configuration:
-#   Edit the GPU_CONFIGS array below to set ranges for each GPU
+#   Edit the GPU_CONFIGS array below to set file ranges for each GPU
+#   Note: Each file contains 50 images. File indices are 1-based.
 # ============================================================================
 
 set -e
@@ -29,11 +30,12 @@ DATASET_NAME=${1:-"squad_v2"}  # Default to squad_v2 if not provided
 # ============================================================================
 
 # Define ranges for each GPU
-# Format: "GPU_ID START_IDX END_IDX"
+# Format: "GPU_ID START_FILE_IDX END_FILE_IDX"
+# Note: Each file contains 50 images
 GPU_CONFIGS=(
-    # "0 1000 10000"    # GPU 0: images 0-9999 (10,000 images, 200 files)
-    "1 1400 10000"   # GPU 1: images 10000-19999 (10,000 images, 200 files)
-    # "2 21000 30000"   # GPU 2: images 20000-29999 (10,000 images, 200 files)
+    "0 83 90"     # GPU 0: files 1-200 (10,000 images)
+    "1 91 100"     # GPU 1: files 201-400 (10,000 images)  
+    # "2 90 100"    # GPU 2: files 401-600 (10,000 images)
 )
 
 # Log directory
@@ -58,9 +60,9 @@ echo "GPU Configuration:"
 echo "------------------"
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
-    num_images=$((end - start))
-    num_files=$((num_images / 50))
-    echo "  GPU $gpu: [$start, $end) → $num_images images ($num_files files)"
+    num_files=$((end - start))
+    num_images=$((num_files * 50))
+    echo "  GPU $gpu: files [$start, $end) → $num_files files ($num_images images)"
 done
 echo ""
 echo "======================================================================"
@@ -84,10 +86,8 @@ TOTAL_MISSING=0
 
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
-    first_file_idx=$(((start / 50) + 1))
-    last_file_idx=$(((end - 1) / 50 + 1))
     
-    for ((i=first_file_idx; i<=last_file_idx; i++)); do
+    for ((i=start; i<end; i++)); do
         WIKI_FILE="$NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $i).json"
         TOTAL_EXPECTED=$((TOTAL_EXPECTED + 1))
         
@@ -124,7 +124,7 @@ for config in "${GPU_CONFIGS[@]}"; do
     LOG_FILE="$LOG_DIR/gpu${gpu}_${start}_${end}_${DATASET_NAME}_${TIMESTAMP}.log"
     LOG_FILES+=("$LOG_FILE")
     
-    echo "Launching GPU $gpu: range [$start, $end) for dataset '$DATASET_NAME'"
+    echo "Launching GPU $gpu: files [$start, $end) for dataset '$DATASET_NAME'"
     echo "  Log file: $LOG_FILE"
     
     # Run the BizGen-only script in background
@@ -147,7 +147,7 @@ echo ""
 echo "Running processes:"
 for i in "${!PIDS[@]}"; do
     read -r gpu start end <<< "${GPU_CONFIGS[$i]}"
-    echo "  GPU $gpu (PID ${PIDS[$i]}): range [$start, $end)"
+    echo "  GPU $gpu (PID ${PIDS[$i]}): files [$start, $end)"
 done
 echo ""
 echo "Log files:"
@@ -209,19 +209,19 @@ if [ $FAILED -eq 0 ]; then
     echo ""
     
     # Calculate totals
-    TOTAL_IMAGES=0
     TOTAL_FILES=0
+    TOTAL_IMAGES=0
     for config in "${GPU_CONFIGS[@]}"; do
         read -r gpu start end <<< "$config"
-        num_images=$((end - start))
-        num_files=$((num_images / 50))
-        TOTAL_IMAGES=$((TOTAL_IMAGES + num_images))
+        num_files=$((end - start))
+        num_images=$((num_files * 50))
         TOTAL_FILES=$((TOTAL_FILES + num_files))
+        TOTAL_IMAGES=$((TOTAL_IMAGES + num_images))
     done
     
     echo "Summary:"
-    echo "  Total Images Generated : $TOTAL_IMAGES"
     echo "  Total Files Used       : $TOTAL_FILES"
+    echo "  Total Images Generated : $TOTAL_IMAGES"
     echo "  Number of GPUs Used    : ${#GPU_CONFIGS[@]}"
     echo "  Dataset Name           : $DATASET_NAME"
     echo ""

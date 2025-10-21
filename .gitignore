@@ -13,6 +13,8 @@ src/data/bizgen/output*
 src/data/create_data/output/infographic/
 src/data/create_data/output/narrator_format/
 
+output/
+
 *.zip
 *.tar.gz
 *.log
