@@ -6,7 +6,17 @@ __MACOSX/
 __pycache__/
 
 wikipedia_en*/
-
 wikipedia_processed.json
 
- src/inference/results/*.json
+src/data/bizgen/output*
+
+src/data/create_data/output/infographic/
+src/data/create_data/output/narrator_format/
+
+output/
+
+*.zip
+*.tar.gz
+*.log
+
+src/inference/results/*.json
