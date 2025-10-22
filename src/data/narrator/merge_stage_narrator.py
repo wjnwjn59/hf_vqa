@@ -329,6 +329,86 @@ def sort_by_reading_order(bboxes: List[Dict]) -> List[Dict]:
     
     return sorted(bboxes, key=reading_order_key)
 
+
+def text_overlaps_with_image(text_bbox: Dict, image_bbox: Dict, threshold: float = 0.1) -> bool:
+    """
+    Check if a text bbox overlaps with an image bbox.
+    Uses a lower threshold since we want to avoid any text-image overlap.
+    
+    Args:
+        text_bbox: Text bounding box
+        image_bbox: Image bounding box  
+        threshold: Overlap threshold (default: 0.1 for stricter checking)
+        
+    Returns:
+        True if text overlaps with image
+    """
+    return bboxes_overlap(text_bbox, image_bbox, threshold)
+
+
+def count_text_overlaps_per_image(text_bboxes: List[Dict], image_bboxes: List[Dict]) -> Dict[int, int]:
+    """
+    Count how many text bboxes overlap with each image bbox.
+    
+    Args:
+        text_bboxes: List of text bboxes
+        image_bboxes: List of image bboxes
+        
+    Returns:
+        Dictionary mapping image_bbox_index -> count_of_overlapping_text_bboxes
+    """
+    overlap_counts = {}
+    
+    for img_idx, img_bbox in enumerate(image_bboxes):
+        overlap_count = 0
+        for txt_bbox in text_bboxes:
+            if text_overlaps_with_image(txt_bbox, img_bbox):
+                overlap_count += 1
+        overlap_counts[img_idx] = overlap_count
+    
+    return overlap_counts
+
+
+def select_non_overlapping_text_bboxes(
+    text_bboxes: List[Dict], 
+    image_bboxes: List[Dict],
+    required_count: int
+) -> List[Dict]:
+    """
+    Select text bboxes that don't overlap with any image bboxes.
+    If not enough non-overlapping text bboxes, return as many as possible.
+    
+    Args:
+        text_bboxes: List of text bboxes (already sorted by area)
+        image_bboxes: List of image bboxes to avoid
+        required_count: Number of text bboxes needed
+        
+    Returns:
+        List of non-overlapping text bboxes
+    """
+    selected_text = []
+    
+    for txt_bbox in text_bboxes:
+        # Check if this text bbox overlaps with any image bbox
+        overlaps_with_image = any(
+            text_overlaps_with_image(txt_bbox, img_bbox) 
+            for img_bbox in image_bboxes
+        )
+        
+        if not overlaps_with_image:
+            # Also check if it overlaps with other selected text bboxes
+            overlaps_with_text = any(
+                bboxes_overlap(txt_bbox, selected_txt) 
+                for selected_txt in selected_text
+            )
+            
+            if not overlaps_with_text:
+                selected_text.append(txt_bbox)
+                if len(selected_text) >= required_count:
+                    break
+    
+    return selected_text
+
 def merge_narrator_data(
     infographic_generated: List[Dict],
     extracted_bboxes: List[Dict],
@@ -505,11 +585,51 @@ def merge_narrator_data(
             }
             output_layers.append(output_layer)
 
-        # Select bboxes for text (non-overlapping)
-        # Chỉ chọn các bbox text không phải full image
+        # Get valid text bboxes (non-full image)
         valid_text_bboxes = [b for b in bboxes if b.get('category') == 'text' and b.get('bottom_right') != [896, 2240]]
-        # Chọn không-overlap lớn nhất
-        selected_text_bboxes = select_largest_non_overlapping_bboxes(valid_text_bboxes, 'text', len(text_elements))
+        # Sort text bboxes by area (largest first) for better selection
+        valid_text_bboxes.sort(key=calculate_bbox_area, reverse=True)
+
+        # Try to find enough non-overlapping text bboxes
+        required_text_count = len(text_elements)
+        selected_text_bboxes = select_non_overlapping_text_bboxes(
+            valid_text_bboxes, 
+            selected_decorative, 
+            required_text_count
+        )
+
+        # If not enough text bboxes, iteratively remove images that cause most overlaps
+        while len(selected_text_bboxes) < required_text_count and selected_decorative:
+            # Count overlaps for each image
+            overlap_counts = count_text_overlaps_per_image(valid_text_bboxes, selected_decorative)
+            
+            # Find image with most overlaps
+            max_overlap_img_idx = max(overlap_counts, key=overlap_counts.get)
+            max_overlap_count = overlap_counts[max_overlap_img_idx]
+            
+            # If no overlaps found, break (shouldn't happen, but safety check)
+            if max_overlap_count == 0:
+                break
+                
+            # Remove the image with most overlaps
+            print(f"  Removing image at index {max_overlap_img_idx} (causes {max_overlap_count} text overlaps)")
+            selected_decorative.pop(max_overlap_img_idx)
+            
+            # Also remove corresponding image element
+            if max_overlap_img_idx < len(image_elements_to_use):
+                image_elements_to_use.pop(max_overlap_img_idx)
+            
+            # Re-try selecting text bboxes with reduced image set
+            selected_text_bboxes = select_non_overlapping_text_bboxes(
+                valid_text_bboxes, 
+                selected_decorative, 
+                required_text_count
+            )
+
+        # Adjust text_elements if we have fewer text bboxes than needed
+        if len(selected_text_bboxes) < len(text_elements):
+            text_elements = text_elements[:len(selected_text_bboxes)]
+            print(f"  Adjusted text elements count to {len(text_elements)} to match available non-overlapping text bboxes")
 
         # Create pairs of (bbox, text_content) - bbox already selected by largest area
         # Assign text content in original order to the largest bboxes

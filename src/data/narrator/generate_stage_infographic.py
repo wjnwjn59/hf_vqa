@@ -171,13 +171,65 @@ def parse_stage_b(text: str, summaries: List[Dict]) -> List[Dict[str, Any]]:
 # ======================
 
 def set_random_seed(seed: Optional[int] = None) -> int:
-    """Set random seed for reproducibility and return the seed used"""
+    """Set random seed for reproducibility and return the seed used
+    
+    Sets seeds for all commonly used libraries in LLM training:
+    - Python random
+    - NumPy
+    - PyTorch
+    - CUDA (if available)
+    - Transformers
+    - Environment variables for additional determinism
+    """
     if seed is None:
         seed = random.randint(1, 1000000)
     
+    # Python random
     random.seed(seed)
-    # Note: We don't set torch/numpy seeds here since they might not be available
-    # The model's temperature/top_p will provide randomness
+    
+    # NumPy
+    try:
+        import numpy as np
+        np.random.seed(seed)
+    except ImportError:
+        pass
+    
+    # PyTorch
+    try:
+        import torch
+        torch.manual_seed(seed)
+        
+        # CUDA seeds
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed(seed)
+            torch.cuda.manual_seed_all(seed)  # For multi-GPU setups
+            
+        # Additional PyTorch determinism settings
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+        
+    except ImportError:
+        pass
+    
+    # Transformers library seed
+    try:
+        from transformers import set_seed as transformers_set_seed
+        transformers_set_seed(seed)
+    except ImportError:
+        pass
+    
+    # Environment variables for additional determinism
+    import os
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'  # For deterministic CUDA operations
+    
+    # TensorFlow (if used)
+    try:
+        import tensorflow as tf
+        tf.random.set_seed(seed)
+    except ImportError:
+        pass
+    
     return seed
 
 # ======================
@@ -185,16 +237,38 @@ def set_random_seed(seed: Optional[int] = None) -> int:
 # ======================
 
 def extract_answer_keywords(qa_pairs: List[Dict]) -> List[str]:
-    """Extract all answer keywords from QA pairs"""
+    """Extract all answer keywords from QA pairs, excluding impossible questions"""
     keywords = []
     for qa in qa_pairs:
         answers = qa.get('answers', {})
+        
+        # Skip questions without answers (Squad v2 impossible questions)
+        if not answers or not answers.get('text') or len(answers.get('text', [])) == 0:
+            continue
+            
+        # Also check if the answer is empty or only contains empty strings
         if 'text' in answers and isinstance(answers['text'], list):
-            for answer_text in answers['text']:
-                if answer_text and answer_text.strip():
-                    # Keep original case for exact matching
-                    keywords.append(answer_text.strip())
+            valid_answers = [ans for ans in answers['text'] if ans and ans.strip()]
+            if not valid_answers:  # Skip if no valid answers
+                continue
+                
+            for answer_text in valid_answers:
+                # Keep original case for exact matching
+                keywords.append(answer_text.strip())
     return keywords
+
+def has_answerable_questions(qa_pairs: List[Dict]) -> bool:
+    """Check if there are any answerable questions in the QA pairs"""
+    for qa in qa_pairs:
+        answers = qa.get('answers', {})
+        
+        # Check if this question has valid answers
+        if answers and answers.get('text') and len(answers.get('text', [])) > 0:
+            if 'text' in answers and isinstance(answers['text'], list):
+                valid_answers = [ans for ans in answers['text'] if ans and ans.strip()]
+                if valid_answers:  # Found at least one valid answer
+                    return True
+    return False
 
 def check_keywords_in_caption(caption: str, keywords: List[str]) -> tuple[bool, List[str]]:
     """Check if any of the keywords appear in the caption (case insensitive)"""
@@ -290,7 +364,13 @@ def process_sample(
     qa_pairs = item.get('qa_pairs', [])
     keywords = extract_answer_keywords(qa_pairs)
     
-    print(f"Processing infographic {infographic_id}, Keywords to check: {keywords}")
+    # Check if there are any answerable questions
+    has_answers = has_answerable_questions(qa_pairs)
+    
+    if not has_answers:
+        print(f"Processing infographic {infographic_id}, No answerable questions (Squad v2 impossible questions) - skipping keyword check")
+    else:
+        print(f"Processing infographic {infographic_id}, Keywords to check: {keywords}")
 
     for retry_count in range(max_retries + 1):  # +1 because we include the first attempt
         try:
@@ -321,10 +401,18 @@ def process_sample(
             final_desc = stage_c_compose(qwen_inference, merged_items, stage_c_tmpl_text, sents_enum)
 
             # Check if keywords are present in the final caption
-            keywords_found, found_keywords = check_keywords_in_caption(final_desc, keywords)
+            # Skip keyword checking if there are no answerable questions (Squad v2 impossible questions)
+            if not has_answers:
+                # No answerable questions, accept the result without keyword checking
+                keywords_found = True
+                found_keywords = []
+                print(f"  ✓ No answerable questions - accepting result without keyword check")
+            else:
+                keywords_found, found_keywords = check_keywords_in_caption(final_desc, keywords)
             
             if keywords_found or not keywords:  # Success if keywords found or no keywords to check
-                print(f"  ✓ Keywords found: {found_keywords}")
+                if has_answers:
+                    print(f"  ✓ Keywords found: {found_keywords}")
                 
                 # Combined result in format compatible with generate_infographic_data.py
                 result = {
@@ -334,6 +422,8 @@ def process_sample(
                     "qa_pairs": qa_pairs,
                     "keywords": keywords,
                     "keywords_found": found_keywords,
+                    "has_answerable_questions": has_answers,
+                    "skipped_keyword_check": not has_answers,
                     "retry_count": retry_count,
                     "final_seed": current_seed,
                     "generated_infographic": {
@@ -370,6 +460,8 @@ def process_sample(
                     "qa_pairs": qa_pairs,
                     "keywords": keywords,
                     "keywords_found": [],
+                    "has_answerable_questions": has_answers,
+                    "skipped_keyword_check": not has_answers,
                     "retry_count": retry_count,
                     "final_seed": None,
                     "generated_infographic": None,
@@ -579,6 +671,7 @@ def main():
     successful_count = 0
     failed_count = 0
     keyword_failed_count = 0
+    skipped_keyword_check_count = 0
 
     for i, item in enumerate(tqdm(input_data, desc="Processing samples")):
         # Calculate global infographic_id based on start data index
@@ -601,6 +694,9 @@ def main():
             failed_count += 1
         elif result["success"]:
             successful_count += 1
+            # Count cases where keyword check was skipped
+            if result.get("skipped_keyword_check", False):
+                skipped_keyword_check_count += 1
         else:
             # Other errors (exception during processing)
             failed_count += 1
@@ -656,6 +752,8 @@ def main():
     print(f"Total samples processed: {total_processed}")
     print(f"Total files saved: {len(saved_files)}")
     print(f"Successful: {successful_count} ({successful_count/total_processed*100:.1f}%)")
+    print(f"  - With keyword check: {successful_count - skipped_keyword_check_count} ({(successful_count - skipped_keyword_check_count)/total_processed*100:.1f}%)")
+    print(f"  - Skipped keyword check (no answers): {skipped_keyword_check_count} ({skipped_keyword_check_count/total_processed*100:.1f}%)")
     print(f"Failed (errors): {failed_count - keyword_failed_count} ({(failed_count - keyword_failed_count)/total_processed*100:.1f}%)")
     print(f"Failed (keywords not found): {keyword_failed_count} ({keyword_failed_count/total_processed*100:.1f}%)")
     print(f"Total failed: {failed_count} ({failed_count/total_processed*100:.1f}%)")
@@ -666,6 +764,10 @@ def main():
         print(f"\nNote: Failed cases were distributed across multiple files.")
         print(f"Check individual files for 'success': false entries.")
         print(f"Keyword failures result in None entries (not saved to files).")
+    
+    if skipped_keyword_check_count > 0:
+        print(f"\nNote: {skipped_keyword_check_count} samples had no answerable questions (Squad v2 impossible questions)")
+        print(f"These samples were processed successfully without keyword checking.")
     
     print(f"\nFiles saved:")
     for filename in saved_files:

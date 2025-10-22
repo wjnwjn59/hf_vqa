@@ -29,6 +29,13 @@ def save_json(data: Any, file_path: str):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
+def save_jsonl(data: List[Dict], file_path: str):
+    """Save data to JSONL file (one JSON object per line)."""
+    with open(file_path, 'w', encoding='utf-8') as f:
+        for item in data:
+            f.write(json.dumps(item, ensure_ascii=False) + '\n')
+
+
 def find_image_files(image_base_dir: str, dataset_name: str) -> Dict[str, str]:
     """
     Find all image files in the dataset directory.
@@ -228,6 +235,7 @@ def create_training_dataset(
     dataset_name: str,
     dataset_type: str,
     output_file: str,
+    output_jsonl_file: str = None,
     max_samples: int = None,
     seed: int = None
 ) -> None:
@@ -240,6 +248,7 @@ def create_training_dataset(
         dataset_name: Name of dataset (subfolder name)
         dataset_type: Type of dataset for proper parsing
         output_file: Output JSON file path
+        output_jsonl_file: Output JSONL file path (optional, auto-generated if not provided)
         max_samples: Maximum number of samples to include
         seed: Random seed for reproducibility
     """
@@ -306,12 +315,26 @@ def create_training_dataset(
     
     print(f"Created {len(training_data)} training samples")
     
-    # Save the training dataset
-    print(f"Saving training dataset to {output_file}")
+    # Generate JSONL file path if not provided
+    if output_jsonl_file is None:
+        # Convert JSON path to JSONL path (replace .json with .jsonl)
+        if output_file.endswith('.json'):
+            output_jsonl_file = output_file[:-5] + '.jsonl'
+        else:
+            output_jsonl_file = output_file + '.jsonl'
+    
+    # Save the training dataset in both formats
+    print(f"Saving training dataset to {output_file} (JSON format)")
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     save_json(training_data, output_file)
     
-    print(f"Training dataset saved successfully!")
+    print(f"Saving training dataset to {output_jsonl_file} (JSONL format)")
+    os.makedirs(os.path.dirname(output_jsonl_file), exist_ok=True)
+    save_jsonl(training_data, output_jsonl_file)
+    
+    print(f"Training datasets saved successfully!")
+    print(f"JSON file: {output_file}")
+    print(f"JSONL file: {output_jsonl_file}")
     print(f"Total samples: {len(training_data)}")
     
     # Print some statistics
@@ -366,6 +389,13 @@ def main():
     )
     
     parser.add_argument(
+        "--output-jsonl-file",
+        type=str,
+        default=None,
+        help="Output JSONL file path (optional, auto-generated from JSON path if not provided)"
+    )
+    
+    parser.add_argument(
         "--max-samples",
         type=int,
         default=None,
@@ -387,6 +417,7 @@ def main():
         dataset_name=args.dataset_name,
         dataset_type=args.dataset_type,
         output_file=args.output_file,
+        output_jsonl_file=args.output_jsonl_file,
         max_samples=args.max_samples,
         seed=args.seed
     )

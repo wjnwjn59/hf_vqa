@@ -39774,6 +39774,1154 @@
     ]
   },
   {
+    "id": "56ceee04aab44d1400b88cd5",
+    "image": "squad_v2/narrator000058/2860.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat percentage of Spectre reviews did Rotten Tomatoes find to be in favor of the film?"
+      },
+      {
+        "from": "gpt",
+        "value": "64%"
+      }
+    ]
+  },
+  {
+    "id": "56ceee04aab44d1400b88cd6",
+    "image": "squad_v2/narrator000058/2861.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWho did CinemaScore ask for input on the film?"
+      },
+      {
+        "from": "gpt",
+        "value": "Audiences"
+      }
+    ]
+  },
+  {
+    "id": "56cf5dccaab44d1400b8913f",
+    "image": "squad_v2/narrator000058/2862.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat percentage of review on Rotten Tomatoes were positive?"
+      },
+      {
+        "from": "gpt",
+        "value": "64"
+      }
+    ]
+  },
+  {
+    "id": "56cf5dccaab44d1400b89140",
+    "image": "squad_v2/narrator000058/2863.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat was the movie's rating on Metacritic?"
+      },
+      {
+        "from": "gpt",
+        "value": "60 out of 100"
+      }
+    ]
+  },
+  {
+    "id": "5ad245e3d7d075001a428ab8",
+    "image": "squad_v2/narrator000058/2864.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat film received all positive reviews?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad245e3d7d075001a428ab9",
+    "image": "squad_v2/narrator000058/2865.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nMany critics praised the film's ending what?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad245e3d7d075001a428aba",
+    "image": "squad_v2/narrator000058/2866.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nIn all early review, the film was compared favorably with what movie?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad245e3d7d075001a428abb",
+    "image": "squad_v2/narrator000058/2867.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nOn Metacritic, the film has a rating of 70 out of what?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "56ceef67aab44d1400b88ce6",
+    "image": "squad_v2/narrator000058/2868.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWho gave Spectre a perfect rating in The Daily Telegraph?"
+      },
+      {
+        "from": "gpt",
+        "value": "Robbie Collin"
+      }
+    ]
+  },
+  {
+    "id": "56ceef67aab44d1400b88ce7",
+    "image": "squad_v2/narrator000058/2869.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nA writer for which publication rated the film 7.2/10?"
+      },
+      {
+        "from": "gpt",
+        "value": "IGN"
+      }
+    ]
+  },
+  {
+    "id": "56ceef67aab44d1400b88ce8",
+    "image": "squad_v2/narrator000058/2870.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat score did Mark Kermode give Spectre?"
+      },
+      {
+        "from": "gpt",
+        "value": "four out of five stars"
+      }
+    ]
+  },
+  {
+    "id": "56cf5e5eaab44d1400b8914f",
+    "image": "squad_v2/narrator000058/2871.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many stars did Mark Kermode of the Guardian aware Spectre prior to its release?"
+      },
+      {
+        "from": "gpt",
+        "value": "four out of five"
+      }
+    ]
+  },
+  {
+    "id": "5ad24658d7d075001a428aee",
+    "image": "squad_v2/narrator000058/2872.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nSpectre received mostly positive reviews prior to its release in what country?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad24658d7d075001a428aef",
+    "image": "squad_v2/narrator000058/2873.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nJohn Kermode from the Guardian, gave the film how many out of five stars?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad24658d7d075001a428af0",
+    "image": "squad_v2/narrator000058/2874.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nThe Daily Mail's Robbie Collin described the film as what?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad24658d7d075001a428af1",
+    "image": "squad_v2/narrator000058/2875.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nGIN's Chris Tully said what about the film?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "56cef51daab44d1400b88d11",
+    "image": "squad_v2/narrator000058/2876.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhich journalist considered Spectre the worst James Bond movie in three decades?"
+      },
+      {
+        "from": "gpt",
+        "value": "Scott Mendelson"
+      }
+    ]
+  },
+  {
+    "id": "56cef51daab44d1400b88d12",
+    "image": "squad_v2/narrator000058/2877.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhich writer for the San Francisco Chronicle awarded Spectre with a perfect score?"
+      },
+      {
+        "from": "gpt",
+        "value": "Mick LaSalle"
+      }
+    ]
+  },
+  {
+    "id": "56cef51daab44d1400b88d13",
+    "image": "squad_v2/narrator000058/2878.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat score did the writer from the Chicago Tribune give to Spectre?"
+      },
+      {
+        "from": "gpt",
+        "value": "75"
+      }
+    ]
+  },
+  {
+    "id": "56cef51daab44d1400b88d14",
+    "image": "squad_v2/narrator000058/2879.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nThe reviewer from Variety compares Spectre to which other Bond movie?"
+      },
+      {
+        "from": "gpt",
+        "value": "Skyfall"
+      }
+    ]
+  },
+  {
+    "id": "5ad246ecd7d075001a428b08",
+    "image": "squad_v2/narrator000058/2880.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nCritics were entirely positive about the film in what country?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad246ecd7d075001a428b09",
+    "image": "squad_v2/narrator000058/2881.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nOn Today.com, Matt Zoller Seitz gave the film how many stars?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad246ecd7d075001a428b0a",
+    "image": "squad_v2/narrator000058/2882.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWho described the film as consistent and capable of capitalizing on its potential?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad246ecd7d075001a428b0b",
+    "image": "squad_v2/narrator000058/2883.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nForbes' Scott Mendelson described the movie as the best what in 30 years?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "56cef65baab44d1400b88d35",
+    "image": "squad_v2/narrator000058/2884.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhich Atlantic writer gave a negative review of Spectre?"
+      },
+      {
+        "from": "gpt",
+        "value": "Christopher Orr"
+      }
+    ]
+  },
+  {
+    "id": "56cef65baab44d1400b88d36",
+    "image": "squad_v2/narrator000058/2885.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat adjective did Lawrence Toppman use to describe Craig's portrayal of James Bond?"
+      },
+      {
+        "from": "gpt",
+        "value": "Bored"
+      }
+    ]
+  },
+  {
+    "id": "56cef65baab44d1400b88d37",
+    "image": "squad_v2/narrator000058/2886.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat publication does Alyssa Rosenberg write for?"
+      },
+      {
+        "from": "gpt",
+        "value": "The Washington Post"
+      }
+    ]
+  },
+  {
+    "id": "56cf6093aab44d1400b89180",
+    "image": "squad_v2/narrator000058/2887.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat was the catch phrase Lawrence Toppman of the Charlotte Observer used for the film?"
+      },
+      {
+        "from": "gpt",
+        "value": "Bored, James Bored"
+      }
+    ]
+  },
+  {
+    "id": "5ad24762d7d075001a428b32",
+    "image": "squad_v2/narrator000058/2888.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nChristopher Orr of the New Yorker said what about Spectre?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad24762d7d075001a428b33",
+    "image": "squad_v2/narrator000058/2889.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLawrence Toppman of The Boston Observer called Craig's performance what?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad24762d7d075001a428b34",
+    "image": "squad_v2/narrator000058/2890.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nAlyssa Rosenberg of The Washington Observer said what about the film?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad24762d7d075001a428b35",
+    "image": "squad_v2/narrator000058/2891.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLawrence Orr writes for The Charlotte what?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "56cef6ccaab44d1400b88d48",
+    "image": "squad_v2/narrator000058/2892.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhic organization is responsible for filtering movie content in India?"
+      },
+      {
+        "from": "gpt",
+        "value": "Indian Central Board of Film Certification"
+      }
+    ]
+  },
+  {
+    "id": "56cf6133aab44d1400b89191",
+    "image": "squad_v2/narrator000058/2893.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhich social media site was used for complaining about the Indian censoring?"
+      },
+      {
+        "from": "gpt",
+        "value": "Twitter."
+      }
+    ]
+  },
+  {
+    "id": "5ad247c0d7d075001a428b4c",
+    "image": "squad_v2/narrator000058/2894.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat country censored hand-holding scenes?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad247c0d7d075001a428b4d",
+    "image": "squad_v2/narrator000058/2895.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWho censored talking scenes?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad247c0d7d075001a428b4e",
+    "image": "squad_v2/narrator000058/2896.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nProfanity was not muted in which country?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "5ad247c0d7d075001a428b4f",
+    "image": "squad_v2/narrator000058/2897.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhere was support expressed for the censored film?"
+      },
+      {
+        "from": "gpt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "56cef706aab44d1400b88d4f",
+    "image": "squad_v2/narrator000058/2898.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nChristoph Waltz's appearance in future Bond movies is contingent on the appearance of which other actor?"
+      },
+      {
+        "from": "gpt",
+        "value": "Craig"
+      }
+    ]
+  },
+  {
+    "id": "56cef706aab44d1400b88d50",
+    "image": "squad_v2/narrator000058/2899.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhen will work being on the follow-up to Spectre?"
+      },
+      {
+        "from": "gpt",
+        "value": "spring 2016"
+      }
+    ]
+  },
+  {
+    "id": "56cf61b5aab44d1400b8919d",
+    "image": "squad_v2/narrator000058/2900.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhen will the sequel to Spectre being development?"
+      },
+      {
+        "from": "gpt",
+        "value": "spring 2016."
+      }
+    ]
+  },
+  {
+    "id": "56d4f9902ccc5a1400d833c2",
+    "image": "squad_v2/narrator000059/2910.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat day did the earthquake occur?"
+      },
+      {
+        "from": "gpt",
+        "value": "May 12"
+      }
+    ]
+  },
+  {
+    "id": "56d4f9902ccc5a1400d833c3",
+    "image": "squad_v2/narrator000059/2911.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat time of the day did the quake happen?"
+      },
+      {
+        "from": "gpt",
+        "value": "02:28:01 PM China Standard Time"
+      }
+    ]
+  },
+  {
+    "id": "56d4f9902ccc5a1400d833c4",
+    "image": "squad_v2/narrator000059/2912.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people died?"
+      },
+      {
+        "from": "gpt",
+        "value": "69,197"
+      }
+    ]
+  },
+  {
+    "id": "56cdcb2c62d2951400fa6830",
+    "image": "squad_v2/narrator000059/2913.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhich far away cities in other countries could feel the earthquake?"
+      },
+      {
+        "from": "gpt",
+        "value": "Beijing and Shanghai"
+      }
+    ]
+  },
+  {
+    "id": "56cdcb2c62d2951400fa6833",
+    "image": "squad_v2/narrator000059/2914.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat was the focal depth of the earthquake?"
+      },
+      {
+        "from": "gpt",
+        "value": "19 km"
+      }
+    ]
+  },
+  {
+    "id": "56cdcb2c62d2951400fa6834",
+    "image": "squad_v2/narrator000059/2915.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow long after the earthquake were aftershocks felt?"
+      },
+      {
+        "from": "gpt",
+        "value": "months after"
+      }
+    ]
+  },
+  {
+    "id": "56d4fb6f2ccc5a1400d833d4",
+    "image": "squad_v2/narrator000059/2916.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat is another name for the earthquake in Sichuan?"
+      },
+      {
+        "from": "gpt",
+        "value": "the Wenchuan earthquake"
+      }
+    ]
+  },
+  {
+    "id": "56d4fb6f2ccc5a1400d833d5",
+    "image": "squad_v2/narrator000059/2917.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhere was the epicenter of the earthquake?"
+      },
+      {
+        "from": "gpt",
+        "value": "Wenchuan County, Sichuan"
+      }
+    ]
+  },
+  {
+    "id": "56d4fb6f2ccc5a1400d833d6",
+    "image": "squad_v2/narrator000059/2918.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow far was it from Chengdu?"
+      },
+      {
+        "from": "gpt",
+        "value": "80 kilometres"
+      }
+    ]
+  },
+  {
+    "id": "56d4fb6f2ccc5a1400d833d7",
+    "image": "squad_v2/narrator000059/2919.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat was the focal depth of the quake?"
+      },
+      {
+        "from": "gpt",
+        "value": "19 km"
+      }
+    ]
+  },
+  {
+    "id": "56cdcbb762d2951400fa683a",
+    "image": "squad_v2/narrator000059/2920.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people were confirmed dead?"
+      },
+      {
+        "from": "gpt",
+        "value": "69,197"
+      }
+    ]
+  },
+  {
+    "id": "56cdcbb762d2951400fa683b",
+    "image": "squad_v2/narrator000059/2921.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people were confirmed dead only in the Sichuan province?"
+      },
+      {
+        "from": "gpt",
+        "value": "68,636"
+      }
+    ]
+  },
+  {
+    "id": "56cdcbb762d2951400fa683c",
+    "image": "squad_v2/narrator000059/2922.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people were left homeless because of the earthquake?"
+      },
+      {
+        "from": "gpt",
+        "value": "4.8 million"
+      }
+    ]
+  },
+  {
+    "id": "56cdcbb762d2951400fa683d",
+    "image": "squad_v2/narrator000059/2923.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people lived in the affected area?"
+      },
+      {
+        "from": "gpt",
+        "value": "15 million"
+      }
+    ]
+  },
+  {
+    "id": "56cdcbb762d2951400fa683e",
+    "image": "squad_v2/narrator000059/2924.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow much money was dedicated to rebuild ravaged areas?"
+      },
+      {
+        "from": "gpt",
+        "value": "1 trillion RMB"
+      }
+    ]
+  },
+  {
+    "id": "56d4fca52ccc5a1400d833de",
+    "image": "squad_v2/narrator000059/2925.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people died in Sichuan Province?"
+      },
+      {
+        "from": "gpt",
+        "value": "68,636"
+      }
+    ]
+  },
+  {
+    "id": "56d4fca52ccc5a1400d833df",
+    "image": "squad_v2/narrator000059/2926.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many were injured in Sichuan?"
+      },
+      {
+        "from": "gpt",
+        "value": "374,176"
+      }
+    ]
+  },
+  {
+    "id": "56d4fca52ccc5a1400d833e0",
+    "image": "squad_v2/narrator000059/2927.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people are listed as missing?"
+      },
+      {
+        "from": "gpt",
+        "value": "18,222"
+      }
+    ]
+  },
+  {
+    "id": "56d4fca52ccc5a1400d833e1",
+    "image": "squad_v2/narrator000059/2928.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow many people are homeless because of the quake?"
+      },
+      {
+        "from": "gpt",
+        "value": "4.8 million"
+      }
+    ]
+  },
+  {
+    "id": "56d4fca52ccc5a1400d833e2",
+    "image": "squad_v2/narrator000059/2929.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow high could the homeless number possibly go?"
+      },
+      {
+        "from": "gpt",
+        "value": "11 million"
+      }
+    ]
+  },
+  {
+    "id": "56cdcc5562d2951400fa6845",
+    "image": "squad_v2/narrator000059/2930.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhere was the epicenter?"
+      },
+      {
+        "from": "gpt",
+        "value": "Wenchuan County, Ngawa Tibetan and Qiang Autonomous Prefecture"
+      }
+    ]
+  },
+  {
+    "id": "56cdcc5562d2951400fa6847",
+    "image": "squad_v2/narrator000059/2931.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow long did the earthquake last?"
+      },
+      {
+        "from": "gpt",
+        "value": "2 minutes"
+      }
+    ]
+  },
+  {
+    "id": "56cdcc5562d2951400fa6848",
+    "image": "squad_v2/narrator000059/2932.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat percentage of buildings were destroyed?"
+      },
+      {
+        "from": "gpt",
+        "value": "80%"
+      }
+    ]
+  },
+  {
+    "id": "56d4fe332ccc5a1400d833e8",
+    "image": "squad_v2/narrator000059/2933.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat was the magnitude of the earthquake?"
+      },
+      {
+        "from": "gpt",
+        "value": "8.0 Ms and 7.9 Mw"
+      }
+    ]
+  },
+  {
+    "id": "56d4fe332ccc5a1400d833eb",
+    "image": "squad_v2/narrator000059/2934.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow long did the main tremor last?"
+      },
+      {
+        "from": "gpt",
+        "value": "2 minutes"
+      }
+    ]
+  },
+  {
+    "id": "56d4fe332ccc5a1400d833ec",
+    "image": "squad_v2/narrator000059/2935.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat percentage of buildings were destroyed during the quake?"
+      },
+      {
+        "from": "gpt",
+        "value": "almost 80%"
+      }
+    ]
+  },
+  {
+    "id": "56cdccd962d2951400fa684e",
+    "image": "squad_v2/narrator000059/2936.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nOn what fault did the earthquake occur?"
+      },
+      {
+        "from": "gpt",
+        "value": "Longmenshan fault"
+      }
+    ]
+  },
+  {
+    "id": "56cdccd962d2951400fa684f",
+    "image": "squad_v2/narrator000059/2937.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhere is the Longmenshan fault located?"
+      },
+      {
+        "from": "gpt",
+        "value": "along the border of the Indo-Australian Plate and Eurasian Plate"
+      }
+    ]
+  },
+  {
+    "id": "56cdccd962d2951400fa6850",
+    "image": "squad_v2/narrator000059/2938.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow long did the rupture last?"
+      },
+      {
+        "from": "gpt",
+        "value": "120 sec"
+      }
+    ]
+  },
+  {
+    "id": "56cdccd962d2951400fa6852",
+    "image": "squad_v2/narrator000059/2939.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nHow deep was the focus of the earthquake?"
+      },
+      {
+        "from": "gpt",
+        "value": "10 km"
+      }
+    ]
+  },
+  {
+    "id": "56d5005d2ccc5a1400d833f2",
+    "image": "squad_v2/narrator000059/2940.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nAlong what fault line did the quake happen?"
+      },
+      {
+        "from": "gpt",
+        "value": "Longmenshan fault"
+      }
+    ]
+  },
+  {
+    "id": "56d5005d2ccc5a1400d833f4",
+    "image": "squad_v2/narrator000059/2941.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nOn which fracture did the quake focus?"
+      },
+      {
+        "from": "gpt",
+        "value": "Yingxiu-Beichuan fracture"
+      }
+    ]
+  },
+  {
+    "id": "56d5005d2ccc5a1400d833f5",
+    "image": "squad_v2/narrator000059/2942.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhen wasmost of the energy released during the initial eruption?"
+      },
+      {
+        "from": "gpt",
+        "value": "first 80 sec."
+      }
+    ]
+  },
+  {
+    "id": "56d5005d2ccc5a1400d833f6",
+    "image": "squad_v2/narrator000059/2943.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat was the most displacement caused by the earthquake?"
+      },
+      {
+        "from": "gpt",
+        "value": "9 meters"
+      }
+    ]
+  },
+  {
+    "id": "56cdce0b62d2951400fa6858",
+    "image": "squad_v2/narrator000059/2944.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhen was the confidential written report sent to the State Seismological Bureau?"
+      },
+      {
+        "from": "gpt",
+        "value": "April 30, 2008"
+      }
+    ]
+  },
+  {
+    "id": "56cdce0b62d2951400fa685b",
+    "image": "squad_v2/narrator000059/2945.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhen was Geng's drought-earthquake correlation theory released?"
+      },
+      {
+        "from": "gpt",
+        "value": "1972"
+      }
+    ]
+  },
+  {
+    "id": "56d67a8d1c8504140094714d",
+    "image": "squad_v2/narrator000059/2946.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat did researcher Geng Qingguo say was sent to the State Seismological Bureau?"
+      },
+      {
+        "from": "gpt",
+        "value": "written report"
+      }
+    ]
+  },
+  {
+    "id": "56d67a8d1c8504140094714e",
+    "image": "squad_v2/narrator000059/2947.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat did this report warn about?"
+      },
+      {
+        "from": "gpt",
+        "value": "significant earthquake in Ngawa Prefecture"
+      }
+    ]
+  },
+  {
+    "id": "56d67a8d1c8504140094714f",
+    "image": "squad_v2/narrator000059/2948.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat was the predicted time of the quake?"
+      },
+      {
+        "from": "gpt",
+        "value": "around May 8"
+      }
+    ]
+  },
+  {
+    "id": "56d67a8d1c85041400947150",
+    "image": "squad_v2/narrator000059/2949.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat did Geng long try to establish as a relationship with earthquakes?"
+      },
+      {
+        "from": "gpt",
+        "value": "droughts"
+      }
+    ]
+  },
+  {
+    "id": "56d67a8d1c85041400947151",
+    "image": "squad_v2/narrator000059/2950.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat did an official with the Seismological Bureau deny receiving?"
+      },
+      {
+        "from": "gpt",
+        "value": "reports predicting the earthquake"
+      }
+    ]
+  },
+  {
     "id": "56d504539d1b871400ae05ec",
     "image": "squad_v2/narrator000060/2960.png",
     "conversations": [
