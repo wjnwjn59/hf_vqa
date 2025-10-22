@@ -2,6 +2,7 @@ import json
 import os
 import argparse
 import time
+import random
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 from jinja2 import Template
@@ -166,6 +167,50 @@ def parse_stage_b(text: str, summaries: List[Dict]) -> List[Dict[str, Any]]:
     return items
 
 # ======================
+# Seed management utilities
+# ======================
+
+def set_random_seed(seed: Optional[int] = None) -> int:
+    """Set random seed for reproducibility and return the seed used"""
+    if seed is None:
+        seed = random.randint(1, 1000000)
+    
+    random.seed(seed)
+    # Note: We don't set torch/numpy seeds here since they might not be available
+    # The model's temperature/top_p will provide randomness
+    return seed
+
+# ======================
+# Keyword checking utilities
+# ======================
+
+def extract_answer_keywords(qa_pairs: List[Dict]) -> List[str]:
+    """Extract all answer keywords from QA pairs"""
+    keywords = []
+    for qa in qa_pairs:
+        answers = qa.get('answers', {})
+        if 'text' in answers and isinstance(answers['text'], list):
+            for answer_text in answers['text']:
+                if answer_text and answer_text.strip():
+                    # Keep original case for exact matching
+                    keywords.append(answer_text.strip())
+    return keywords
+
+def check_keywords_in_caption(caption: str, keywords: List[str]) -> tuple[bool, List[str]]:
+    """Check if any of the keywords appear in the caption (case insensitive)"""
+    if not caption or not keywords:
+        return False, []
+    
+    caption_lower = caption.lower()
+    found_keywords = []
+    
+    for keyword in keywords:
+        if keyword.lower() in caption_lower:
+            found_keywords.append(keyword)
+    
+    return len(found_keywords) > 0, found_keywords
+
+# ======================
 # Pipeline stages using Qwen3Inference
 # ======================
 
@@ -214,21 +259,23 @@ def process_sample(
     stage_a_path: str,
     stage_b_path: str,
     stage_c_path: str,
-    infographic_id: int
-) -> Dict[str, Any]:
+    infographic_id: int,
+    max_retries: int = 2
+) -> Optional[Dict[str, Any]]:
     """
-    Process a single sample through all 3 stages
+    Process a single sample through all 3 stages with keyword checking and retry logic
     
     Args:
         qwen_inference: Qwen3Inference instance
-        item: Input data item (should contain 'context')
+        item: Input data item (should contain 'context' and 'qa_pairs')
         stage_a_path: Path to Stage 1 template
         stage_b_path: Path to Stage 2 template  
         stage_c_path: Path to Stage 3 template
         infographic_id: Unique infographic ID
+        max_retries: Maximum number of retry attempts
         
     Returns:
-        Dictionary with processed results
+        Dictionary with processed results or None if keywords not found after retries
     """
     # Ensure template files exist
     ensure_file(stage_a_path, "Stage 1")
@@ -239,63 +286,109 @@ def process_sample(
     stage_b_tmpl_text = read_text(stage_b_path)
     stage_c_tmpl_text = read_text(stage_c_path)
 
-    try:
-        # Stage 0: sentence segmentation
-        context = item.get('context', '')
-        sents = split_into_sentences(context)
-        sents_enum = enumerate_sentences(sents)
+    # Extract keywords from QA pairs
+    qa_pairs = item.get('qa_pairs', [])
+    keywords = extract_answer_keywords(qa_pairs)
+    
+    print(f"Processing infographic {infographic_id}, Keywords to check: {keywords}")
 
-        # Stage 1: summaries
-        summaries = stage_a_summarize(qwen_inference, sents_enum, stage_a_tmpl_text)
+    for retry_count in range(max_retries + 1):  # +1 because we include the first attempt
+        try:
+            # Set different seed for each retry attempt
+            current_seed = set_random_seed()
+            if retry_count > 0:
+                print(f"  Retry attempt {retry_count}/{max_retries} with seed {current_seed}")
 
-        # Stage 2: figures
-        figures = stage_b_figures(qwen_inference, summaries, stage_b_tmpl_text)
+            # Stage 0: sentence segmentation
+            context = item.get('context', '')
+            sents = split_into_sentences(context)
+            sents_enum = enumerate_sentences(sents)
 
-        # Merge 1 + 2 by id
-        merged = {it["id"]: {"id": it["id"], "summary": it["summary"], "ideas": []} for it in summaries}
-        for it in figures:
-            if it["id"] in merged:
-                merged[it["id"]]["ideas"] = it["ideas"]
-        merged_items = [merged[k] for k in sorted(merged.keys())]
+            # Stage 1: summaries
+            summaries = stage_a_summarize(qwen_inference, sents_enum, stage_a_tmpl_text)
 
-        # Stage 3: final caption
-        final_desc = stage_c_compose(qwen_inference, merged_items, stage_c_tmpl_text, sents_enum)
+            # Stage 2: figures
+            figures = stage_b_figures(qwen_inference, summaries, stage_b_tmpl_text)
 
-        # Combined result in format compatible with generate_infographic_data.py
-        result = {
-            "id": item.get("id", None),
-            "title": item.get("title", None),
-            "generated_infographic": {
-                "sentences": sents_enum,
-                "summaries": summaries,
-                "figures": merged_items,
-                "full_image_caption": final_desc
-            },
-            "success": True,
-            "infographic_id": infographic_id
-        }
-        
-        return result
-        
-    except Exception as e:
-        # Return error result in same format
-        return {
-            "id": item.get("id", None),
-            "title": item.get("title", None),
-            "generated_infographic": None,
-            "success": False,
-            "infographic_id": infographic_id,
-            "error": str(e)
-        }
+            # Merge 1 + 2 by id
+            merged = {it["id"]: {"id": it["id"], "summary": it["summary"], "ideas": []} for it in summaries}
+            for it in figures:
+                if it["id"] in merged:
+                    merged[it["id"]]["ideas"] = it["ideas"]
+            merged_items = [merged[k] for k in sorted(merged.keys())]
+
+            # Stage 3: final caption
+            final_desc = stage_c_compose(qwen_inference, merged_items, stage_c_tmpl_text, sents_enum)
+
+            # Check if keywords are present in the final caption
+            keywords_found, found_keywords = check_keywords_in_caption(final_desc, keywords)
+            
+            if keywords_found or not keywords:  # Success if keywords found or no keywords to check
+                print(f"  ✓ Keywords found: {found_keywords}")
+                
+                # Combined result in format compatible with generate_infographic_data.py
+                result = {
+                    "id": item.get("id", None),
+                    "title": item.get("title", None),
+                    "context": context,
+                    "qa_pairs": qa_pairs,
+                    "keywords": keywords,
+                    "keywords_found": found_keywords,
+                    "retry_count": retry_count,
+                    "final_seed": current_seed,
+                    "generated_infographic": {
+                        "sentences": sents_enum,
+                        "summaries": summaries,
+                        "figures": merged_items,
+                        "full_image_caption": final_desc
+                    },
+                    "success": True,
+                    "infographic_id": infographic_id
+                }
+                
+                return result
+            else:
+                print(f"  ✗ Keywords not found in caption. Required: {keywords}")
+                if retry_count < max_retries:
+                    print(f"    Retrying with different seed...")
+                    continue
+                else:
+                    print(f"    Max retries ({max_retries}) reached. Returning None.")
+                    return None
+                    
+        except Exception as e:
+            print(f"  ✗ Error in attempt {retry_count + 1}: {str(e)}")
+            if retry_count < max_retries:
+                print(f"    Retrying due to error...")
+                continue
+            else:
+                # Return error result after all retries failed
+                return {
+                    "id": item.get("id", None),
+                    "title": item.get("title", None),
+                    "context": item.get('context', ''),
+                    "qa_pairs": qa_pairs,
+                    "keywords": keywords,
+                    "keywords_found": [],
+                    "retry_count": retry_count,
+                    "final_seed": None,
+                    "generated_infographic": None,
+                    "success": False,
+                    "infographic_id": infographic_id,
+                    "error": str(e)
+                }
+    
+    # This should never be reached, but just in case
+    return None
 
 # ======================
 # Data loading (from JSONL file)
 # ======================
 
 def load_squad_v2_data(input_path: str) -> List[Dict[str, Any]]:
-    """Load Squad v2 data from JSONL file with context deduplication"""
+    """Load Squad v2 data from JSONL file with context deduplication, keeping all QA pairs for each unique context"""
     all_data = []
-    seen_contexts = set()
+    seen_contexts = {}  # Map context to list of QA pairs
     total_entries = 0
     
     with open(input_path, 'r', encoding='utf-8') as f:
@@ -307,39 +400,63 @@ def load_squad_v2_data(input_path: str) -> List[Dict[str, Any]]:
             if 'context' in item:
                 context = item['context']
                 
-                # Skip if we've already seen this context
-                if context in seen_contexts:
-                    continue
-                    
-                seen_contexts.add(context)
-                all_data.append({
-                    'context': context,
+                # Create QA pair info
+                qa_info = {
                     'question': item.get('question', ''),
-                    'answer': item.get('answer', ''),
+                    'answers': item.get('answers', {}),
                     'id': item.get('id', None),
                     'title': item.get('title', None)
-                })
+                }
+                
+                if context in seen_contexts:
+                    # Add this QA pair to existing context
+                    seen_contexts[context]['qa_pairs'].append(qa_info)
+                else:
+                    # First time seeing this context
+                    seen_contexts[context] = {
+                        'context': context,
+                        'qa_pairs': [qa_info]
+                    }
     
+    # Convert to list format
+    for context_data in seen_contexts.values():
+        all_data.append(context_data)
+    
+    total_qa_pairs = sum(len(item['qa_pairs']) for item in all_data)
     print(f"Loaded {total_entries} total entries from Squad v2 file: {input_path}")
     print(f"Unique contexts: {len(all_data)} (deduplication removed {total_entries - len(all_data)} entries)")
+    print(f"Total QA pairs: {total_qa_pairs}")
     return all_data
 
 # ======================
 # File saving (compatible with generate_infographic_data.py)
 # ======================
 
-def save_chunk_to_file(chunk: List[Dict], output_dir: str, file_index: int) -> Optional[str]:
+def save_chunk_to_file(chunk: List[Optional[Dict]], output_dir: str, file_index: int) -> Optional[str]:
     """Save a chunk of results to file"""
     if not chunk:
+        return None
+    
+    # Filter out None results (failed keyword checks)
+    valid_results = [result for result in chunk if result is not None]
+    
+    if not valid_results:
+        print(f"  ✗ No valid results to save for file {file_index:06d}")
         return None
     
     filename = f"infographic{file_index:06d}.json"
     filepath = os.path.join(output_dir, filename)
     
     with open(filepath, 'w', encoding='utf-8') as f:
-        json.dump(chunk, f, ensure_ascii=False, indent=2)
+        json.dump(valid_results, f, ensure_ascii=False, indent=2)
     
-    print(f"  ✓ Saved {len(chunk)} infographics to {filename} (IDs: {chunk[0]['infographic_id']}-{chunk[-1]['infographic_id']})")
+    none_count = len(chunk) - len(valid_results)
+    none_info = f" ({none_count} failed keyword checks)" if none_count > 0 else ""
+    
+    print(f"  ✓ Saved {len(valid_results)} infographics to {filename}{none_info}")
+    if valid_results:
+        print(f"    IDs: {valid_results[0]['infographic_id']}-{valid_results[-1]['infographic_id']}")
+    
     return filename
 
 # ======================
@@ -381,6 +498,8 @@ def main():
                         help='End file index for data processing (exclusive, 1-based)')
     parser.add_argument('--num_samples', type=int, default=None,
                         help='Number of samples to process (None for all)')
+    parser.add_argument('--max_retries', type=int, default=2,
+                        help='Maximum number of retry attempts when keywords not found (default: 2)')
     
     args = parser.parse_args()
     
@@ -392,6 +511,12 @@ def main():
     print(f"\n[1/4] Loading input data from: {args.input_data}")
     input_data_full = load_squad_v2_data(args.input_data)
     print(f"Total unique contexts loaded: {len(input_data_full)}")
+    
+    # Print sample keywords for verification
+    if input_data_full:
+        sample_item = input_data_full[0]
+        sample_keywords = extract_answer_keywords(sample_item.get('qa_pairs', []))
+        print(f"Sample keywords from first context: {sample_keywords[:5]}")  # Show first 5
 
     # Convert file indices to data indices (each file contains 50 unique contexts)
     chunk_size = 50
@@ -444,6 +569,7 @@ def main():
     print(f"  Stage 1: {args.stage_a}")
     print(f"  Stage 2: {args.stage_b}")
     print(f"  Stage 3: {args.stage_c}")
+    print(f"Max retries: {args.max_retries}")
     print("-"*60)
     
     # Initialize variables for incremental saving
@@ -452,34 +578,47 @@ def main():
     total_processed = 0
     successful_count = 0
     failed_count = 0
+    keyword_failed_count = 0
 
     for i, item in enumerate(tqdm(input_data, desc="Processing samples")):
         # Calculate global infographic_id based on start data index
         infographic_id = start_data_idx + i + 1
         
-        # Process single sample through 3-stage pipeline
+        # Process single sample through 3-stage pipeline with keyword checking
         result = process_sample(
             qwen_inference,
             item,
             args.stage_a,
             args.stage_b,
             args.stage_c,
-            infographic_id
+            infographic_id,
+            args.max_retries
         )
         
-        if result["success"]:
+        if result is None:
+            # Keywords not found after all retries
+            keyword_failed_count += 1
+            failed_count += 1
+        elif result["success"]:
             successful_count += 1
         else:
+            # Other errors (exception during processing)
             failed_count += 1
             
-        results.append(result)
+        results.append(result)  # Can be None
         total_processed += 1
         
         # Save to file when we have enough results
         if len(results) >= chunk_size:
-            # Calculate file index based on first infographic_id in chunk
-            first_infographic_id = results[0]['infographic_id']
-            file_index = (first_infographic_id - 1) // chunk_size + 1
+            # Calculate file index based on first non-None infographic_id in chunk
+            valid_results = [r for r in results if r is not None]
+            if valid_results:
+                first_infographic_id = valid_results[0]['infographic_id']
+                file_index = (first_infographic_id - 1) // chunk_size + 1
+            else:
+                # If all results are None, use the expected file index
+                file_index = (start_data_idx + i - len(results) + 2) // chunk_size + 1
+            
             filename = save_chunk_to_file(results, args.output_dir, file_index)
             if filename:
                 saved_files.append(filename)
@@ -490,9 +629,15 @@ def main():
         print("\n" + "="*60)
         print("Saving final chunk")
         print("="*60)
-        # Calculate file index based on first infographic_id in chunk
-        first_infographic_id = results[0]['infographic_id']
-        file_index = (first_infographic_id - 1) // chunk_size + 1
+        # Calculate file index based on first non-None infographic_id in chunk
+        valid_results = [r for r in results if r is not None]
+        if valid_results:
+            first_infographic_id = valid_results[0]['infographic_id']
+            file_index = (first_infographic_id - 1) // chunk_size + 1
+        else:
+            # If all results are None, use the expected file index
+            file_index = (start_data_idx + total_processed - len(results) + 1) // chunk_size + 1
+        
         filename = save_chunk_to_file(results, args.output_dir, file_index)
         if filename:
             saved_files.append(filename)
@@ -511,13 +656,16 @@ def main():
     print(f"Total samples processed: {total_processed}")
     print(f"Total files saved: {len(saved_files)}")
     print(f"Successful: {successful_count} ({successful_count/total_processed*100:.1f}%)")
-    print(f"Failed: {failed_count} ({failed_count/total_processed*100:.1f}%)")
+    print(f"Failed (errors): {failed_count - keyword_failed_count} ({(failed_count - keyword_failed_count)/total_processed*100:.1f}%)")
+    print(f"Failed (keywords not found): {keyword_failed_count} ({keyword_failed_count/total_processed*100:.1f}%)")
+    print(f"Total failed: {failed_count} ({failed_count/total_processed*100:.1f}%)")
     print(f"Output directory: {args.output_dir}")
     
     # Save a summary of failed cases if any
     if failed_count > 0:
         print(f"\nNote: Failed cases were distributed across multiple files.")
         print(f"Check individual files for 'success': false entries.")
+        print(f"Keyword failures result in None entries (not saved to files).")
     
     print(f"\nFiles saved:")
     for filename in saved_files:

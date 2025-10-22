@@ -74,7 +74,7 @@ fi
 export PYTHONPATH="./:$PYTHONPATH"
 
 # Conda environment path
-CONDA_BIZGEN="/opt/miniconda3/envs/khoina_bizgen/bin/python"
+CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 
 # Paths
 NARRATOR_FORMAT_DIR="src/data/create_data/output/narrator_format"
