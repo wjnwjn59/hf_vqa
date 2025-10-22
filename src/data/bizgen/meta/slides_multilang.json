@@ -1,0 +1,3884 @@
+[
+    {
+        "index": "cn_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a stylized illustration of a woman with a warm and welcoming expression. She has dark hair styled in an updo with a flower tucked into it. The woman is wearing a purple top adorned with a floral pattern. She is positioned in the center of the image, with her face taking up a significant portion of the space.\n\nAbove the woman, there is text that reads \"Hello, I'm Kate\" in a playful, handwritten font. Below this, additional text states \"I'm Your teacher. I will guide you during the lessons.\" This text is in a more formal, yet still friendly, font.\n\nThe background of the image is a soft, pastel pink, which adds to the gentle and approachable atmosphere of the illustration. Scattered around the edges of the image are various decorative elements such as a rainbow, a cloud, and a pair of flowers, which contribute to the cheerful and inviting theme of the image.\n\nIn the bottom right corner, there is a small signature or logo that appears to be a stylized letter 'E' with a heart above it, possibly indicating the artist or the brand associated with the image.\n\nOverall, the image is designed to convey a sense of warmth, friendliness, and educational guidance, likely intended for a classroom or educational setting."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank. It appears to be a solid, uniform color with no distinguishable features, objects, or text. The color is a light beige or cream, and there are no shadows, textures, or patterns that can be discerned. The image does not contain any information that can be described in detail."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    94,
+                    85
+                ],
+                "bottom_right": [
+                    279,
+                    145
+                ],
+                "caption": "The image is a black circle with a red outline."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1341,
+                    737
+                ],
+                "bottom_right": [
+                    1454,
+                    789
+                ],
+                "caption": "The picture features a stylized logo with a red swoosh and a blue triangle."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    882,
+                    145
+                ],
+                "bottom_right": [
+                    1224,
+                    748
+                ],
+                "caption": "The image features a stylized illustration of a woman with a large, round head. She has blue hair with a flower on top, and her face is adorned with red blush and freckles. She is wearing a purple dress with a floral pattern."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    383,
+                    62
+                ],
+                "bottom_right": [
+                    694,
+                    174
+                ],
+                "caption": "The picture features a stylized, cartoon-like depiction of a flower with multiple petals. Each petal has a light blue color with white speckles, giving it a textured appearance. The flower is centered in the image, and there is no text or additional elements visible. The style of the image is simplistic and child-friendly, with a focus on the flower's design."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1189,
+                    64
+                ],
+                "bottom_right": [
+                    1493,
+                    237
+                ],
+                "caption": "The picture features a colorful rainbow with a dark background. The rainbow has multiple vibrant colors and is arched, with two ends touching the ground. At the base of the rainbow, there are two fluffy white clouds."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    279
+                ],
+                "bottom_right": [
+                    69,
+                    584
+                ],
+                "caption": "The picture features a colorful rainbow with a cloud at the bottom."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    334,
+                    226
+                ],
+                "bottom_right": [
+                    396,
+                    298
+                ],
+                "caption": "The picture features a pink butterfly with a simple, stylized design."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1246,
+                    393
+                ],
+                "bottom_right": [
+                    1388,
+                    560
+                ],
+                "caption": "The picture features a stylized red flower with a purple stem and blue leaves."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    84,
+                    646
+                ],
+                "bottom_right": [
+                    186,
+                    779
+                ],
+                "caption": "The picture features a stylized, cartoon-like depiction of a sunflower. The sunflower has a vibrant yellow petal and a red center with blue dots. It is attached to a green stem with two leaves."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    190,
+                    704
+                ],
+                "bottom_right": [
+                    250,
+                    782
+                ],
+                "caption": "The picture features a stylized illustration of a sunflower with a vibrant yellow petal and a red center with blue dots. The sunflower has a green stem and leaves."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    282,
+                    420
+                ],
+                "bottom_right": [
+                    782,
+                    508
+                ],
+                "caption": "Text \"我是你的老师。我会在课程中指导你。\" in <color-5>, <cn-font-9>. ",
+                "text": "我是你的老师。我会在课程中指导你。"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    233,
+                    220
+                ],
+                "bottom_right": [
+                    831,
+                    381
+                ],
+                "caption": "Text \"你好，\n我是凯特\" in <color-5>, <cn-font-110>. ",
+                "text": "你好，\n我是凯特"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    110,
+                    103
+                ],
+                "bottom_right": [
+                    279,
+                    128
+                ],
+                "caption": "Text \"你的学校\" in <color-1>, <cn-font-9>. ",
+                "text": "你的学校"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    292,
+                    560
+                ],
+                "bottom_right": [
+                    772,
+                    632
+                ],
+                "caption": "Text \"我们班是学校里最好的班级之一。环境非常舒适和整洁。让我们在课堂上愉快地学习吧！\" in <color-1>, <cn-font-8>. ",
+                "text": "我们班是学校里最好的班级之一。环境非常舒适和整洁。让我们在课堂上愉快地学习吧！"
+            }
+        ],
+        "full_image_caption": "The image is a colorful illustration with a warm, pastel color palette. It features a central figure that appears to be a stylized female character with a large head and a small body. The character has a simple face with a small nose, eyes, and mouth, and her hair is styled in a bun with a flower on top. She is wearing a purple top with a floral pattern.\n\nSurrounding the central character are various elements that contribute to a whimsical and cheerful atmosphere. To the left, there is a cloud with a face, and to the right, there is a rainbow. Below the rainbow, there are two sunflowers with bright yellow petals and brown centers.\n\nThe background is a soft, light beige color, which provides a neutral backdrop for the vibrant elements. There is text in the image, which appears to be in Chinese, but without a specific context or understanding of the language, I cannot provide a translation or interpretation of the text.\n\nThe overall style of the image is reminiscent of children's book illustrations or a greeting card, with a playful and friendly aesthetic."
+    },
+    {
+        "index": "cn_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a colorful and stylized graphic with a theme of school rules. It features a large, friendly-looking giraffe on the left side, which is a prominent element in the composition. The giraffe is depicted with a simple, cartoon-like style, and it appears to be standing on a plain background.\n\nOn the right side of the image, there is a text box with the title \"Class Rules\" in bold, capital letters. Below the title, there are four bullet points, each outlining a different rule:\n\n1. \"Respecting the teacher when explaining\"\n2. \"It is forbidden to cheat while doing tasks\"\n3. \"Mutual respect and respect between friends\"\n4. \"Carrying out class pickets\"\n\nEach bullet point is accompanied by a small, decorative element such as a flower or a leaf, adding to the playful and educational theme of the image.\n\nIn the bottom right corner, there is a small, stylized depiction of a hand with a pen, suggesting the idea of writing or drawing. The overall style of the image is educational and child-friendly, likely intended for a classroom setting to teach students about proper behavior and respect."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and does not contain any visible content. It appears to be a solid color, possibly a light beige or cream color, with no distinguishable features, objects, or text. If there is supposed to be something specific in the image, it is not visible to me."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    94,
+                    79
+                ],
+                "bottom_right": [
+                    426,
+                    794
+                ],
+                "caption": "The picture features a cartoon giraffe with a long neck and a pattern of spots."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    94,
+                    85
+                ],
+                "bottom_right": [
+                    279,
+                    145
+                ],
+                "caption": "The image is a black circle with a red outline."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1341,
+                    737
+                ],
+                "bottom_right": [
+                    1454,
+                    789
+                ],
+                "caption": "The image features a stylized logo with a red swoosh and a blue triangle."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    592,
+                    109
+                ],
+                "bottom_right": [
+                    684,
+                    229
+                ],
+                "caption": "The picture features a vibrant cartoon sunflower with a red center and yellow petals. The sunflower has a green stem and two green leaves."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1386,
+                    273
+                ],
+                "bottom_right": [
+                    1446,
+                    343
+                ],
+                "caption": "The picture features a vibrant red flower with a purple stem and blue leaves."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    910,
+                    439
+                ],
+                "bottom_right": [
+                    967,
+                    505
+                ],
+                "caption": "The picture features a pink butterfly with a simple, stylized design."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    410,
+                    692
+                ],
+                "bottom_right": [
+                    487,
+                    780
+                ],
+                "caption": "The picture features a stylized green leaf with a simple, clean design."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1165,
+                    89
+                ],
+                "bottom_right": [
+                    1474,
+                    201
+                ],
+                "caption": "The picture shows a stylized, cartoon-like depiction of a flower with a blue petal and white dots."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    501,
+                    269
+                ],
+                "bottom_right": [
+                    896,
+                    347
+                ],
+                "caption": "Text \"尊重老师在讲解时\" in <color-5>, <cn-font-9>. ",
+                "text": "尊重老师在讲解时"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    660,
+                    129
+                ],
+                "bottom_right": [
+                    1205,
+                    210
+                ],
+                "caption": "Text \"Class Rules\" in <color-5>, <en-font-110>. ",
+                "text": "Class Rules"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    502,
+                    376
+                ],
+                "bottom_right": [
+                    896,
+                    464
+                ],
+                "caption": "Text \"最简单的尊重形式是友好地问候老师。还要通过倾听和遵循老师的指示来注意\" in <color-1>, <cn-font-8>. ",
+                "text": "最简单的尊重形式是友好地问候老师。还要通过倾听和遵循老师的指示来注意"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    110,
+                    103
+                ],
+                "bottom_right": [
+                    279,
+                    128
+                ],
+                "caption": "Text \"YOUR SCHOOL\" in <color-1>, <en-font-438>. ",
+                "text": "YOUR SCHOOL"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    982,
+                    269
+                ],
+                "bottom_right": [
+                    1378,
+                    346
+                ],
+                "caption": "Text \"互相尊重和朋友之间的尊重\" in <color-5>, <cn-font-9>. ",
+                "text": "互相尊重和朋友之间的尊重"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    967,
+                    376
+                ],
+                "bottom_right": [
+                    1392,
+                    420
+                ],
+                "caption": "Text \"表示尊重的最好方法之一是真正倾听他们\" in <color-1>, <cn-font-8>. ",
+                "text": "表示尊重的最好方法之一是真正倾听他们"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    504,
+                    508
+                ],
+                "bottom_right": [
+                    900,
+                    584
+                ],
+                "caption": "Text \"禁止在做任务时作弊\" in <color-5>, <cn-font-9>. ",
+                "text": "禁止在做任务时作弊"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    490,
+                    614
+                ],
+                "bottom_right": [
+                    915,
+                    702
+                ],
+                "caption": "Text \"作弊对这些事务中的人的情感和心理影响可能是严重的。事务中的人可能会感到焦虑或抑郁增加\" in <color-1>, <cn-font-8>. ",
+                "text": "作弊对这些事务中的人的情感和心理影响可能是严重的。事务中的人可能会感到焦虑或抑郁增加"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    985,
+                    508
+                ],
+                "bottom_right": [
+                    1381,
+                    546
+                ],
+                "caption": "Text \"执行班级值日\" in <color-5>, <cn-font-9>. ",
+                "text": "执行班级值日"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    971,
+                    588
+                ],
+                "bottom_right": [
+                    1396,
+                    655
+                ],
+                "caption": "Text \"忠诚的学生需要按照各自班主任给出的时间表进行班级值日\" in <color-1>, <cn-font-8>. ",
+                "text": "忠诚的学生需要按照各自班主任给出的时间表进行班级值日"
+            }
+        ],
+        "full_image_caption": "The image is a digital illustration with a light beige background. On the left side, there is a stylized depiction of a giraffe with a long neck and spots, standing next to a green plant with a red flower. The giraffe is smiling and appears friendly.\n\nIn the center of the image, there is a large text that reads \"Class Rules\" in a decorative, cursive font. The text is in a darker shade, possibly black or dark blue, and is surrounded by a thin line border.\n\nTo the right of the text, there are three smaller illustrations of flowers: a red flower with a green stem, a pink flower with a purple stem, and a blue flower with a white stem. Each flower is accompanied by a small text bubble containing Chinese characters, which likely represent the names of the flowers.\n\nAt the bottom right corner of the image, there is a small signature or logo with the letters \"LE\" in a stylized font, followed by a small red arrow pointing to the left.\n\nThe overall style of the image is playful and educational, likely intended for a classroom setting to teach children about class rules and possibly the names of different flowers."
+    },
+    {
+        "index": "cn_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a colorful infographic titled \"ACTIVITIES OUTSIDE THE CLASSROOM.\" It features a variety of activities with percentages indicating their popularity or frequency. The activities listed are:\n\n1. Camping - 60%\n2. Nature Walks - 15%\n3. Museums - 15%\n4. Amusement Parks - 10%\n\nEach activity is accompanied by a small, stylized icon representing it. For example, camping is depicted with a tent, nature walks with a tree, museums with a museum building, and amusement parks with a roller coaster.\n\nAt the top of the infographic, there's a small graphic of a schoolhouse with the text \"Voor school\" which translates to \"For school\" in Dutch. This suggests that the infographic might be related to educational activities outside the classroom.\n\nThe background of the infographic is a light beige color, and the text and icons are in a variety of colors, including blue, green, red, and orange, which adds to the visual appeal of the infographic. The overall style is clean and modern, with a clear focus on the information being presented."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and does not contain any visible content. It appears to be a solid color, possibly a light pink or beige, without any distinguishable features or objects. If there is supposed to be something specific in the image, it is not visible to me."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    94,
+                    85
+                ],
+                "bottom_right": [
+                    279,
+                    145
+                ],
+                "caption": "The image is a black circle with a red outline."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1341,
+                    737
+                ],
+                "bottom_right": [
+                    1454,
+                    789
+                ],
+                "caption": "The picture features a logo with a stylized letter \"V\" in red, accompanied by a blue triangle."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    323,
+                    80
+                ],
+                "bottom_right": [
+                    514,
+                    224
+                ],
+                "caption": "The picture features a cute cartoon lion with a friendly expression."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1054,
+                    526
+                ],
+                "bottom_right": [
+                    1133,
+                    643
+                ],
+                "caption": "The picture features a stylized, colorful animal with a vibrant pattern on its body. The animal appears to be a blend of different species, with a head resembling a pig and a body that could be interpreted as a horse or a similar quadruped. It is adorned with a necklace and a decorative garment that adds to its whimsical and fantastical appearance."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    674,
+                    526
+                ],
+                "bottom_right": [
+                    746,
+                    618
+                ],
+                "caption": "The picture features a vase with a decorative pattern. The vase has a dark blue background with red and white floral designs. It also has a gold rim and a pattern of blue and white stripes around the neck."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    658,
+                    249
+                ],
+                "bottom_right": [
+                    762,
+                    353
+                ],
+                "caption": "The picture features a stylized tree with a green body and a red trunk. The tree has three red apples on it."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1047,
+                    272
+                ],
+                "bottom_right": [
+                    1139,
+                    353
+                ],
+                "caption": "The picture features a stylized, cartoon-like depiction of a red bird with a blue outline. The bird has a simple design with a prominent beak and a small, round eye. It appears to be in a relaxed position, possibly sitting or standing. The background is not visible, focusing the viewer's attention on the bird."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    964,
+                    81
+                ],
+                "bottom_right": [
+                    1024,
+                    150
+                ],
+                "caption": "The picture features a pink butterfly with a simple, stylized design."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1280,
+                    70
+                ],
+                "bottom_right": [
+                    1488,
+                    189
+                ],
+                "caption": "The picture features a colorful rainbow with a series of vibrant stripes, and it is set against a black background. The rainbow is arched and has a pair of fluffy white clouds at its ends."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    785,
+                    313
+                ],
+                "bottom_right": [
+                    952,
+                    351
+                ],
+                "caption": "Text \"露营\" in <color-5>, <cn-font-9>. ",
+                "text": "露营"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    62,
+                    278
+                ],
+                "bottom_right": [
+                    608,
+                    520
+                ],
+                "caption": "Text \"课堂外的活动\" in <color-5>, <cn-font-110>. ",
+                "text": "课堂外的活动"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    110,
+                    103
+                ],
+                "bottom_right": [
+                    279,
+                    128
+                ],
+                "caption": "Text \"你的学校\" in <color-1>, <cn-font-9>. ",
+                "text": "你的学校"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    652,
+                    388
+                ],
+                "bottom_right": [
+                    937,
+                    454
+                ],
+                "caption": "Text \"露营是一种户外活动，涉及在大自然中度过时间\" in <color-1>, <cn-font-8>. ",
+                "text": "露营是一种户外活动，涉及在大自然中度过时间"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    62,
+                    574
+                ],
+                "bottom_right": [
+                    584,
+                    728
+                ],
+                "caption": "Text \"课堂外的学习帮助许多孩子理解之前不清楚的概念\" in <color-5>, <cn-font-9>. ",
+                "text": "课堂外的学习帮助许多孩子理解之前不清楚的概念"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    785,
+                    249
+                ],
+                "bottom_right": [
+                    920,
+                    305
+                ],
+                "caption": "Text \"60%\" in <color-5>, <en-font-110>. ",
+                "text": "60%"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1074,
+                    388
+                ],
+                "bottom_right": [
+                    1360,
+                    432
+                ],
+                "caption": "Text \"自然漫步让孩子们保持运动和锻炼\" in <color-1>, <cn-font-8>. ",
+                "text": "自然漫步让孩子们保持运动和锻炼"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1150,
+                    314
+                ],
+                "bottom_right": [
+                    1402,
+                    352
+                ],
+                "caption": "Text \"自然漫步\" in <color-5>, <cn-font-9>. ",
+                "text": "自然漫步"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1150,
+                    251
+                ],
+                "bottom_right": [
+                    1284,
+                    306
+                ],
+                "caption": "Text \"15%\" in <color-5>, <en-font-110>. ",
+                "text": "15%"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    785,
+                    565
+                ],
+                "bottom_right": [
+                    952,
+                    603
+                ],
+                "caption": "Text \"博物馆\" in <color-5>, <cn-font-9>. ",
+                "text": "博物馆"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    652,
+                    640
+                ],
+                "bottom_right": [
+                    937,
+                    728
+                ],
+                "caption": "Text \"画廊漫步是一种在课堂上分享信息的有效方式，让孩子们动起来\" in <color-1>, <cn-font-8>. ",
+                "text": "画廊漫步是一种在课堂上分享信息的有效方式，让孩子们动起来"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    785,
+                    502
+                ],
+                "bottom_right": [
+                    920,
+                    557
+                ],
+                "caption": "Text \"15%\" in <color-5>, <en-font-110>. ",
+                "text": "15%"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1058,
+                    667
+                ],
+                "bottom_right": [
+                    1344,
+                    711
+                ],
+                "caption": "Text \"游乐园有很多不同类型的游乐设施\" in <color-1>, <cn-font-8>. ",
+                "text": "游乐园有很多不同类型的游乐设施"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1150,
+                    566
+                ],
+                "bottom_right": [
+                    1402,
+                    643
+                ],
+                "caption": "Text \"游乐园\" in <color-5>, <cn-font-9>. ",
+                "text": "游乐园"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1150,
+                    503
+                ],
+                "bottom_right": [
+                    1284,
+                    558
+                ],
+                "caption": "Text \"10%\" in <color-5>, <en-font-110>. ",
+                "text": "10%"
+            }
+        ],
+        "full_image_caption": "The image is a digital graphic with a light beige background. It features a variety of elements, including text, illustrations, and percentages. The text is predominantly in Chinese, with some English words interspersed. The illustrations include a cartoon-style lion, a tree, a bird, a vase, and a rainbow. The percentages are associated with the illustrations, suggesting some form of data or statistics related to the depicted items. The overall style of the image is playful and colorful, with a casual and friendly aesthetic."
+    },
+    {
+        "index": "de_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a vibrant yellow sofa with three cushions, placed against a bright orange background. To the left of the sofa, there is a small green plant in a matching green pot, sitting on a white round side table. The plant appears to be a type of succulent or cactus. Below the sofa, there is a brown section with the word \"CONTACTS\" in white capital letters. Beneath this heading, there are two phone numbers and an address provided, suggesting that this image might be part of a contact page or a directory. The overall style of the image is clean and modern, with a focus on simplicity and color contrast."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is a solid, uniform color with no distinguishable features or objects. It appears to be a plain, flat surface with a single color filling the entire frame. The color is a shade of brown, and there are no texts, patterns, or other elements visible. The image is simple and lacks any complexity or detail that would allow for a more descriptive analysis."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    182,
+                    0
+                ],
+                "bottom_right": [
+                    1353,
+                    433
+                ],
+                "caption": "The picture shows a yellow armchair with four matching pillows against an orange background. A green potted plant is placed on a small white table to the left of the armchair."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    542,
+                    473
+                ],
+                "bottom_right": [
+                    993,
+                    577
+                ],
+                "caption": "Text \"Kontakte\" in <color-0>, <en-font-399>. ",
+                "text": "Kontakte"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    182,
+                    648
+                ],
+                "bottom_right": [
+                    523,
+                    672
+                ],
+                "caption": "Text \"Telefonnummer\" in <color-0>, <en-font-399>. ",
+                "text": "Telefonnummer"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    182,
+                    689
+                ],
+                "bottom_right": [
+                    523,
+                    713
+                ],
+                "caption": "Text \"+123 456 7890\" in <color-0>, <en-font-366>. ",
+                "text": "+123 456 7890"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    182,
+                    728
+                ],
+                "bottom_right": [
+                    523,
+                    752
+                ],
+                "caption": "Text \"+098 765 4321\" in <color-0>, <en-font-366>. ",
+                "text": "+098 765 4321"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1012,
+                    648
+                ],
+                "bottom_right": [
+                    1352,
+                    672
+                ],
+                "caption": "Text \"Adresse\" in <color-0>, <en-font-399>. ",
+                "text": "Adresse"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1012,
+                    693
+                ],
+                "bottom_right": [
+                    1353,
+                    755
+                ],
+                "caption": "Text \"123 Gebäude, Irgendwo Str., Irgendeine Stadt, St 12345\" in <color-0>, <en-font-399>. ",
+                "text": "123 Gebäude, Irgendwo Str., Irgendeine Stadt, St 12345"
+            }
+        ],
+        "full_image_caption": "The image shows a vibrant and colorful scene. In the foreground, there is a bright yellow sofa with two cushions. The sofa is positioned against a backdrop of a solid, warm orange wall. On the left side of the sofa, there is a small, round, white side table. On top of this table, there is a green plant with glossy leaves, which appears to be a potted plant. The plant is in a green pot that matches the color of the leaves.\n\nBelow the image, there is text in German. The word \"Kontakte\" is prominently displayed, which translates to \"Contacts\" in English. Below this, there are two phone numbers provided, suggesting that these are contact numbers for the entity or individual associated with the image. The first number is \"123 456 7890\" and the second number is \"098 765 4321\". Additionally, there is an address provided: \"123 Gebäude, Irgendwo St., Irgendwoe Stadt, St. 12345\". This address is likely a fictional example and not a real location.\n\nThe overall style of the image is clean and modern, with a focus on the sofa and the plant, which are the main subjects of the photograph. The use of bright colors and the minimalist design give the image a cheerful and inviting"
+    },
+    {
+        "index": "de_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a graphic design that appears to be an infographic or an advertisement for a service. It is divided into three sections, each labeled with a number from 01 to 03. The background color of each section is a shade of yellow, and the text is in black, which provides a high contrast for readability.\n\nIn the first section, labeled \"01,\" there is a photograph of a room with a desk, a chair, and a computer monitor. The room has a yellow wall, and the desk is positioned against the wall. The chair is white, and the computer monitor is black.\n\nThe second section, labeled \"02,\" contains text that reads, \"Meet our representatives online or offline and select a designer for your next interior overhaul.\" This suggests that the service being advertised involves interior design services.\n\nThe third section, labeled \"03,\" also contains text that reads, \"We keep you updated on every single step of the work, take care of shipping and ordering the details.\" This implies that the service provides updates on the progress of the interior design project and handles logistics such as shipping and ordering.\n\nOverall, the image is a promotional material that outlines the steps involved in the service offered by the company, which seems to be related to interior design and project management."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is a solid white color with no distinguishable features or objects. It's a simple, flat color with no variations or patterns."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    432
+                ],
+                "caption": "The image you've provided is a solid, uniform color with no distinguishable features or objects. It appears to be a plain, dark brown or black background with no text or additional elements. The image is simple and lacks any complexity or detail that would allow for a more descriptive analysis."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    606,
+                    216
+                ],
+                "bottom_right": [
+                    930,
+                    648
+                ],
+                "caption": "The picture shows a round wooden table with a flat top and four legs, placed on a light-colored floor against a yellow wall."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1116,
+                    216
+                ],
+                "bottom_right": [
+                    1440,
+                    648
+                ],
+                "caption": "The picture features a modern floor lamp with a white shade and a wooden base, standing next to a yellow armchair with a matching yellow cushion. The lamp and chair are set against a vibrant yellow wall."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    92,
+                    216
+                ],
+                "bottom_right": [
+                    416,
+                    648
+                ],
+                "caption": "The picture shows a modern workspace with a desk, a white chair, a computer monitor, and a keyboard. The desk is made of wood and has a simple design. The chair is white and has a modern style. The computer monitor is turned off and is placed on the desk. The keyboard is also placed on the desk. The workspace is clean and organized."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    240,
+                    55
+                ],
+                "bottom_right": [
+                    1295,
+                    159
+                ],
+                "caption": "Text \"wie es funktioniert\" in <color-0>, <en-font-399>. ",
+                "text": "wie es funktioniert"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    164,
+                    159
+                ],
+                "bottom_right": [
+                    344,
+                    263
+                ],
+                "caption": "Text \"01.\" in <color-0>, <en-font-366>. ",
+                "text": "01."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    679,
+                    164
+                ],
+                "bottom_right": [
+                    860,
+                    268
+                ],
+                "caption": "Text \"02.\" in <color-0>, <en-font-366>. ",
+                "text": "02."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1188,
+                    164
+                ],
+                "bottom_right": [
+                    1368,
+                    268
+                ],
+                "caption": "Text \"03.\" in <color-0>, <en-font-366>. ",
+                "text": "03."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    48,
+                    706
+                ],
+                "bottom_right": [
+                    466,
+                    826
+                ],
+                "caption": "Text \"Wählen Sie einen Raum, den Sie auffrischen oder neu gestalten möchten, legen Sie Ihr Budget fest und teilen Sie uns Ihre Vision eines idealen Innendesigns mit.\" in <color-1>, <en-font-399>. ",
+                "text": "Wählen Sie einen Raum, den Sie auffrischen oder neu gestalten möchten, legen Sie Ihr Budget fest und teilen Sie uns Ihre Vision eines idealen Innendesigns mit."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    564,
+                    706
+                ],
+                "bottom_right": [
+                    981,
+                    796
+                ],
+                "caption": "Text \"Treffen Sie unsere Vertreter online oder offline und wählen Sie einen Designer für die Überholung Ihres nächsten Innenraums.\" in <color-1>, <en-font-399>. ",
+                "text": "Treffen Sie unsere Vertreter online oder offline und wählen Sie einen Designer für die Überholung Ihres nächsten Innenraums."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1072,
+                    706
+                ],
+                "bottom_right": [
+                    1490,
+                    796
+                ],
+                "caption": "Text \"Wir halten Sie über jeden einzelnen Schritt der Arbeit auf dem Laufenden, kümmern uns um den Versand und die Bestellung der Details.\" in <color-1>, <en-font-399>. ",
+                "text": "Wir halten Sie über jeden einzelnen Schritt der Arbeit auf dem Laufenden, kümmern uns um den Versand und die Bestellung der Details."
+            }
+        ],
+        "full_image_caption": "The image is a graphic design with a yellow background and a series of three photographs arranged in a horizontal row. Each photograph depicts a different interior design setting, and there are texts accompanying each photo.\n\nIn the first photograph on the left, there is a modern workspace setup with a white desk, a black computer monitor, a white chair, and a small wooden side table. The desk is equipped with a keyboard and a mouse, and there is a cup on the side table.\n\nThe second photograph in the middle shows a minimalist living room setting with a wooden floor and a yellow wall. There is a small wooden table with a white lamp on it, and a yellow armchair with a wooden frame.\n\nThe third photograph on the right features a cozy living room with a yellow wall and a wooden floor. There is a yellow armchair with a wooden frame, a wooden side table, and a white lamp on the table.\n\nBelow each photograph, there is a text in German. The text in the first photograph reads \"Wenn Sie ein Raum, den Sie auffrischen oder neu gestalten möchten, legen Sie Ihr Budget fest und teilen Sie uns Ihre Vision eines idealen Innendesigns mit.\" The text in the second photograph reads \"Treffen Sie sich unser Vertretter online oder offline und wenn Sie einen Designer für Ihr Proj"
+    },
+    {
+        "index": "de_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image shows a modern, minimalist desk against a vibrant yellow wall. The desk has a simple, clean design with a light wood top and white metal legs. On the left side of the desk, there is a small, white drawer. The desk is positioned in the center of the image, with the yellow wall providing a bright backdrop.\n\nOn the right side of the image, there is a text box with the word \"ABOUT\" in bold, black letters at the top. Below this title, there are three colored circles—yellow, orange, and brown—arranged vertically. To the right of these circles, there is a paragraph of text that reads:\n\n\"Our personal approach to designing is located on the intersection of creativity and rationality. We provide only unique refresh plans, furniture, and decor items to your taste and budget.\"\n\nThe text is in a sans-serif font and is black, which contrasts with the white background of the text box. The overall style of the image suggests it may be part of a website or promotional material for a design service."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is a solid white color with no distinguishable features or objects. It's a simple, flat color with no variations or patterns."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    224
+                ],
+                "bottom_right": [
+                    852,
+                    864
+                ],
+                "caption": "The image shows a modern, minimalist desk with a light wood finish. The desk has a rectangular top with a flat surface, and it features two open shelving spaces on the top, which could be used for storage or display. The desk is supported by a white, X-shaped frame that provides stability and a contemporary aesthetic. The desk is positioned against a bright yellow wall, which contrasts with the desk's natural wood color. The floor appears to be a light-colored hardwood or laminate, complementing the overall clean and modern look of the setting. There are no visible texts or additional objects in the image. The style of the image is a straightforward product photograph with a focus on the desk, intended to showcase its design and color."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    875,
+                    150
+                ],
+                "bottom_right": [
+                    1008,
+                    284
+                ],
+                "caption": "The picture features a large, bright yellow circle."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1040,
+                    150
+                ],
+                "bottom_right": [
+                    1174,
+                    284
+                ],
+                "caption": "The picture features a large, solid yellow circle."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1208,
+                    150
+                ],
+                "bottom_right": [
+                    1341,
+                    284
+                ],
+                "caption": "The picture contains a large, solid orange circle."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1374,
+                    150
+                ],
+                "bottom_right": [
+                    1507,
+                    284
+                ],
+                "caption": "The picture features a brown circle."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    198,
+                    69
+                ],
+                "bottom_right": [
+                    654,
+                    173
+                ],
+                "caption": "Text \"über\" in <color-1>, <en-font-399>. ",
+                "text": "über"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    875,
+                    474
+                ],
+                "bottom_right": [
+                    1507,
+                    613
+                ],
+                "caption": "Text \"unser persönlicher Ansatz beim Designen liegt an der Schnittstelle von Kreativität und Rationalität. Wir bieten nur einzigartige Auffrischungspläne, Möbel und Dekorationsartikel nach Ihrem Geschmack und Budget an.\" in <color-1>, <en-font-399>. ",
+                "text": "unser persönlicher Ansatz beim Designen liegt an der Schnittstelle von Kreativität und Rationalität. Wir bieten nur einzigartige Auffrischungspläne, Möbel und Dekorationsartikel nach Ihrem Geschmack und Budget an."
+            }
+        ],
+        "full_image_caption": "The image shows a modern, minimalist desk with a simple design. The desk has a flat top and appears to be made of a light-colored wood or wood-like material. It is supported by a white metal frame that includes two vertical legs and a horizontal crossbar. The desk is positioned against a vibrant yellow wall, which provides a strong contrast to the desk's lighter tones.\n\nOn the left side of the image, there is a text that reads \"über,\" which is likely a part of a larger text or title that is not fully visible. Below the desk, there is a smaller text in German, which translates to: \"Our personal approach to design is based on the principle of creativity and rationality. We do not offer any additional services, furniture, and decoration articles according to their price.\"\n\nThe image also includes a color palette at the top right, consisting of four circles in different shades of yellow and brown, which might be related to the color scheme of the desk or the brand's design philosophy. The overall style of the image is clean and professional, with a focus on the desk and the color scheme it represents."
+    },
+    {
+        "index": "es_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a graphic design with a light beige background. At the top, there is a stylized sun with rays extending outward. Below the sun, there are three triangular shapes resembling mountains, with the largest one on the left and the smallest on the right. The mountains are colored in shades of brown and beige, giving them a textured appearance.\n\nCentered in the image is the text \"DANNETTE\" in a large, serif font, which is likely the name of the person or entity associated with the content. Below the name, there is a phrase \"Basic steps to turn your hobby into a business\" in a smaller, sans-serif font. The text is in a darker shade of brown, contrasting with the lighter background.\n\nThe overall style of the image is clean and modern, with a clear focus on the text and the sun graphic, which may symbolize inspiration or enlightenment. The design is simple and appears to be intended for a professional or educational context, possibly related to entrepreneurship or personal development."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no discernible features. It's a plain, empty canvas with no content to describe."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    438
+                ],
+                "bottom_right": [
+                    800,
+                    864
+                ],
+                "caption": "The image features a stylized representation of a mountain range with three peaks, each decreasing in size from left to right. The mountains are depicted in a minimalist, geometric style with a limited color palette, primarily using shades of brown and beige. The background is black, which contrasts with the mountains, making them stand out. The overall design is simple and modern."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    133,
+                    55
+                ],
+                "bottom_right": [
+                    643,
+                    432
+                ],
+                "caption": "The picture features a stylized sun with rays extending outward, set against a dark background with small, star-like shapes scattered around it."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    694,
+                    307
+                ],
+                "bottom_right": [
+                    1383,
+                    438
+                ],
+                "caption": "Text \"dannette\" in <color-7>, <en-font-337>. ",
+                "text": "dannette"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    754,
+                    467
+                ],
+                "bottom_right": [
+                    1334,
+                    556
+                ],
+                "caption": "Text \"pasos básicos para convertir tu pasatiempo en un negocio\" in <color-7>, <en-font-63>. ",
+                "text": "pasos básicos para convertir tu pasatiempo en un negocio"
+            }
+        ],
+        "full_image_caption": "The image features a stylized graphic with a warm, earthy color palette. At the top, there is a sun with rays extending outward, suggesting a bright, sunny day. Below the sun, there are three triangular shapes that resemble mountains or hills, with varying shades of brown and beige, giving a sense of depth and perspective. The background is a light beige color, which complements the overall theme of the image.\n\nIn the center of the image, there is text that reads \"dannette\" in a cursive, script font. The text is in a darker brown color, which stands out against the lighter background. Below the name, there is a phrase in Spanish that translates to \"basic steps to convert your time into a negotiation.\" The phrase is written in a smaller, sans-serif font, and it is also in brown, maintaining the color consistency with the rest of the image.\n\nThe overall style of the image is clean and modern, with a clear focus on the text and the sun graphic. The use of geometric shapes and the limited color palette give the image a minimalist and professional appearance."
+    },
+    {
+        "index": "es_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a stylized graphic with a minimalist design. At the top, there is a large, bold text that reads \"DANNETTE.\" Below this, in a smaller font, is the phrase \"Done is better than perfect.\" The background is a light beige color, and there are several decorative elements. On the left side, there is a crescent moon with a few stars around it. To the right, there are three stylized mountains with a gradient of colors ranging from light to dark brown. The overall style of the image is modern and clean, with a focus on typography and simple shapes."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank. It's a plain, solid color with no distinguishable features or objects. The color appears to be a light beige or off-white. There are no texts, no shapes, no patterns, and no signs of any activity or life. It's a simple, unadorned, and unremarkable image."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    838,
+                    85
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The picture features a stylized night sky with a crescent moon and stars, set against a backdrop of a mountain range."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    120,
+                    326
+                ],
+                "bottom_right": [
+                    809,
+                    457
+                ],
+                "caption": "Text \"dannette\" in <color-7>, <en-font-313>. ",
+                "text": "dannette"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    180,
+                    485
+                ],
+                "bottom_right": [
+                    760,
+                    530
+                ],
+                "caption": "Text \"hecho es mejor que perfecto\" in <color-7>, <en-font-63>. ",
+                "text": "hecho es mejor que perfecto"
+            }
+        ],
+        "full_image_caption": "The image features a minimalist and stylized graphic design. At the top, there is a text that reads \"damnétte\" in a cursive, elegant font. Below this, there is a phrase \"hecho es mejor que perfecto\" which translates to \"done is better than perfect\" in English. The background is a soft, light beige color.\n\nIn the center of the image, there is a crescent moon depicted in a darker shade of brown, giving a sense of depth. Surrounding the moon are small, golden stars scattered across the sky, adding a touch of whimsy to the design.\n\nAt the bottom of the image, there is a stylized representation of mountains. The mountains are depicted in a simple, geometric shape with varying shades of brown, creating a sense of elevation and distance. The overall design is clean, modern, and conveys a message of acceptance and the value of completion over perfection."
+    },
+    {
+        "index": "es_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a digital graphic with a light beige background. It features a series of five circular icons, each with a different symbol and a label. Starting from the left, the first icon has a symbol of a plant in a pot, labeled \"STEPS.\" Next to it, the second icon depicts a plant in a vase, labeled \"CHOICE.\" The third icon shows a plant with a ladder, labeled \"APPROACH.\" The fourth icon has a plant with a moon and a sun, labeled \"VALUE.\" The final icon on the right displays a plant with a crescent moon and a sun, labeled \"MOTIF.\"\n\nBelow the icons, there is a block of text in a serif font that reads: \"Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment. Bring to the table win-win survival strategies to ensure proactive domination.\" The text is in a darker shade of brown, contrasting with the light background. The overall style of the image is clean and modern, with a focus on simplicity and the use of plants as a recurring motif."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features. It's a plain, unadorned white space with no additional context or content."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    130,
+                    224
+                ],
+                "bottom_right": [
+                    335,
+                    429
+                ],
+                "caption": "The image features a stylized representation of a person's face, with a simple design using geometric shapes. The face consists of a black outline with a white oval for the eye, a red shape for the mouth, and a green shape for the hair. The background is a solid color, providing a clear contrast to the face."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    399,
+                    224
+                ],
+                "bottom_right": [
+                    608,
+                    430
+                ],
+                "caption": "The picture features a plant with a long, thin leaf sprouting from a dark-colored vase. Next to the vase, there is a white vase. The vases are placed on a light-colored surface."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    669,
+                    224
+                ],
+                "bottom_right": [
+                    877,
+                    432
+                ],
+                "caption": "The image features a stylized depiction of a building with stairs and a door."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    929,
+                    224
+                ],
+                "bottom_right": [
+                    1138,
+                    433
+                ],
+                "caption": "The picture features a stylized palm tree with a full canopy of leaves, set against a circular backdrop with a gradient of colors."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1193,
+                    224
+                ],
+                "bottom_right": [
+                    1399,
+                    430
+                ],
+                "caption": "The image features a circular logo with a stylized letter \"C\" in the center. The \"C\" is composed of two curved lines that intersect at the top, creating a loop. The logo is set against a light background."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    126,
+                    607
+                ],
+                "bottom_right": [
+                    1409,
+                    703
+                ],
+                "caption": "Text \"Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment. Bring to the table win-win survival strategies to ensure proactive domination\" in <color-7>, <en-font-57>. ",
+                "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment. Bring to the table win-win survival strategies to ensure proactive domination"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    127,
+                    471
+                ],
+                "bottom_right": [
+                    347,
+                    513
+                ],
+                "caption": "Text \"pasos\" in <color-7>, <en-font-337>. ",
+                "text": "pasos"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    393,
+                    471
+                ],
+                "bottom_right": [
+                    614,
+                    513
+                ],
+                "caption": "Text \"elección\" in <color-7>, <en-font-337>. ",
+                "text": "elección"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    669,
+                    471
+                ],
+                "bottom_right": [
+                    889,
+                    513
+                ],
+                "caption": "Text \"enfoque\" in <color-7>, <en-font-337>. ",
+                "text": "enfoque"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    929,
+                    471
+                ],
+                "bottom_right": [
+                    1150,
+                    513
+                ],
+                "caption": "Text \"valor\" in <color-7>, <en-font-337>. ",
+                "text": "valor"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1188,
+                    471
+                ],
+                "bottom_right": [
+                    1408,
+                    513
+                ],
+                "caption": "Text \"motivo\" in <color-7>, <en-font-337>. ",
+                "text": "motivo"
+            }
+        ],
+        "full_image_caption": "The image displays a collection of six circular icons, each with a unique symbol and a word in Spanish. The icons are arranged in a horizontal row against a light beige background. Starting from the left, the first icon features a stack of books with the word \"pasos\" (steps). The second icon shows a plant in a pot with the word \"elección\" (choice). The third icon depicts a building with the word \"enfoque\" (focus). The fourth icon has a plant with the word \"valor\" (value). The fifth icon shows a crescent moon with the word \"motivo\" (motivation).\n\nBelow the icons, there is a block of text in a darker shade of brown, which appears to be a statement or a slogan. The text is too small to read in detail, but it seems to be related to the theme of the icons, possibly suggesting a holistic approach to innovation or a strategy for workplace diversity and empowerment. The overall style of the image is clean and modern, with a clear emphasis on the icons and their associated words."
+    },
+    {
+        "index": "fr_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a graphic with a light pink background. At the top, there is a large, bold text that reads \"Hello!\" Below this, there is a smaller text that introduces a character named Kate, who is described as a teacher. The text states that Kate will guide the reader during the lessons. The next sentence mentions that the class is one of the best in the school and that the situation is very comfortable and tidy. The text concludes with an invitation to have fun learning in the class.\n\nThe graphic is adorned with various geometric shapes and patterns, including triangles, squares, and circles, which are scattered around the text. The shapes are in different colors such as black, green, and yellow, adding a playful and colorful element to the overall design. The style of the image is simple and clean, with a clear focus on the text and the accompanying decorative elements."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features. It's a simple, unadorned white background with no additional elements."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    122
+                ],
+                "bottom_right": [
+                    190,
+                    357
+                ],
+                "caption": "The picture features a colorful abstract design with geometric shapes, including triangles and squares, in a variety of colors such as pink, purple, and yellow."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1243,
+                    687
+                ],
+                "bottom_right": [
+                    1464,
+                    864
+                ],
+                "caption": "The picture features a stylized, cartoon-like depiction of a face with a simple, curved line for a mouth and a small, triangular shape for an eye. The face is set against a black background."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    508,
+                    747
+                ],
+                "bottom_right": [
+                    749,
+                    864
+                ],
+                "caption": "The image is completely black, with no visible elements or content."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1189,
+                    68
+                ],
+                "bottom_right": [
+                    1455,
+                    331
+                ],
+                "caption": "The picture features a triangular shape with a pink background and a yellow stripe pattern."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    230,
+                    0
+                ],
+                "bottom_right": [
+                    407,
+                    77
+                ],
+                "caption": "The image features a green arch with a black background."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    107,
+                    663
+                ],
+                "bottom_right": [
+                    225,
+                    772
+                ],
+                "caption": "The picture features a black and white explosion graphic."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    833,
+                    104
+                ],
+                "bottom_right": [
+                    972,
+                    234
+                ],
+                "caption": "The picture features a black and white explosion graphic with multiple lines radiating outward from a central point."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    382,
+                    203
+                ],
+                "bottom_right": [
+                    980,
+                    318
+                ],
+                "caption": "Text \"bonjour !\" in <color-1>, <en-font-144>. ",
+                "text": "bonjour !"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    382,
+                    369
+                ],
+                "bottom_right": [
+                    1005,
+                    465
+                ],
+                "caption": "Text \"I’m Kate, I’m your teacher. I will guide you during the lessons.\" in <color-1>, <en-font-354>. ",
+                "text": "I’m Kate, I’m your teacher. I will guide you during the lessons."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    382,
+                    516
+                ],
+                "bottom_right": [
+                    1306,
+                    660
+                ],
+                "caption": "Text \"notre classe est l'une des meilleures classes de l'école. la situation est très confortable et propre. amusons-nous à apprendre dans notre classe !\" in <color-1>, <en-font-367>. ",
+                "text": "notre classe est l'une des meilleures classes de l'école. la situation est très confortable et propre. amusons-nous à apprendre dans notre classe !"
+            }
+        ],
+        "full_image_caption": "The image is a graphic design with a playful and colorful style. It features a large, bold text that reads \"bonjour!\" in the center, which is French for \"hello.\" Below this, there is a smaller text in French that translates to \"In class, with your teacher, I'll guide you during the lessons.\" The background is a soft pink, and there are various geometric shapes and patterns scattered throughout, including triangles, rectangles, and lines. The overall design is modern and vibrant, with a friendly and welcoming vibe."
+    },
+    {
+        "index": "fr_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a vibrant and colorful illustration with a playful and whimsical style. It features a variety of characters and objects that seem to be floating or flying in the air against a pink background. The characters are stylized with simple lines and shapes, and they appear to be engaged in different activities or poses.\n\nAt the center of the image, there is a large text that reads \"WELCOME BACK TO SCHOOL\" in bold, capital letters. The text is black and stands out against the lighter background.\n\nThe characters and objects include:\n- A figure on the left that appears to be a person with a purple shirt and a yellow patterned object, possibly a backpack or a piece of clothing.\n- Another figure on the right that seems to be a person with a pink shirt and a yellow patterned object, also possibly a backpack or a piece of clothing.\n- A character in the top left corner that looks like a person with a purple shirt and a yellow patterned object, similar to the one on the left.\n- A character in the top right corner that appears to be a person with a purple shirt and a yellow patterned object, similar to the one on the right.\n- A character in the bottom left corner that seems to be a person with a purple shirt and a yellow patterned object, similar to the one on the left.\n- A character in the bottom right corner that appears to be a person with a purple shirt and a yellow patterned object, similar to the one on the right.\n- A character in the top center that looks like a person with a purple shirt and a yellow patterned object, similar to the one on the left.\n- A character in the bottom center that appears to be a person with a purple shirt and a yellow patterned object, similar to the one on the right.\n- A character in the top right corner that seems to be a person with a purple shirt and a yellow patterned object, similar to the one on the right.\n- A character in the bottom right corner that appears to be a person with a purple shirt and a yellow patterned object, similar to the one on the right.\n- A character in the top left corner that looks like a person with a purple shirt and a yellow patterned object, similar to the one on the left.\n- A character in the bottom left corner that appears to be a person with a"
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no actions taking place. It's a simple, unadorned, and uniform white space."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    127,
+                    516
+                ],
+                "bottom_right": [
+                    377,
+                    864
+                ],
+                "caption": "The image features a stylized figure, likely a human, holding a large, yellow, checkered object above their head. The figure appears to be in a joyful or playful pose, with their arms raised high. The background is not described."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    992,
+                    594
+                ],
+                "bottom_right": [
+                    1273,
+                    864
+                ],
+                "caption": "The picture shows a person holding a large, pink, abstract-designed object."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    57,
+                    162
+                ],
+                "bottom_right": [
+                    314,
+                    387
+                ],
+                "caption": "The image features a stylized illustration of a person in mid-run, with a purple and orange patterned garment draped over their shoulder. The person is depicted with a simplified, cartoon-like style, and the background is not visible."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1011,
+                    0
+                ],
+                "bottom_right": [
+                    1383,
+                    176
+                ],
+                "caption": "The picture features a stylized, purple humanoid figure with one leg raised, holding a green and yellow striped object. The figure appears to be in motion, possibly running or dancing."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    659,
+                    672
+                ],
+                "bottom_right": [
+                    880,
+                    864
+                ],
+                "caption": "The image features a stylized representation of a chat bubble with a wavy line, suggesting a conversation or interaction."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    519,
+                    59
+                ],
+                "bottom_right": [
+                    680,
+                    220
+                ],
+                "caption": "The image features a colorful abstract design with geometric shapes, including a green circle, a purple curved line, and a pink triangle."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1297,
+                    184
+                ],
+                "bottom_right": [
+                    1398,
+                    282
+                ],
+                "caption": "The picture features a colorful abstract design with geometric shapes, including triangles and rectangles, in various colors such as pink, purple, and yellow."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    93,
+                    26
+                ],
+                "bottom_right": [
+                    160,
+                    91
+                ],
+                "caption": "The picture features a purple starburst shape with multiple points radiating outward from the center."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1426,
+                    274
+                ],
+                "bottom_right": [
+                    1536,
+                    476
+                ],
+                "caption": "The picture shows a circular object with a green and black color scheme."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    847,
+                    209
+                ],
+                "bottom_right": [
+                    941,
+                    297
+                ],
+                "caption": "The picture features a black and white image of a starburst or explosion-like pattern."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    537,
+                    574
+                ],
+                "bottom_right": [
+                    614,
+                    646
+                ],
+                "caption": "The image features a black and white graphic of a starburst pattern."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    284,
+                    336
+                ],
+                "bottom_right": [
+                    1252,
+                    528
+                ],
+                "caption": "Text \"bienvenue de retour à l'école\" in <color-1>, <en-font-144>. ",
+                "text": "bienvenue de retour à l'école"
+            }
+        ],
+        "full_image_caption": "The image is a vibrant and colorful illustration with a playful and whimsical style. It features a variety of abstract and geometric shapes, as well as stylized figures that appear to be in motion. The background is a soft pink, which contrasts with the bold colors of the shapes and figures.\n\nAt the center of the image, there is a large text that reads \"BIENVENUE DE RETOUR À L'ÉCOLE,\" which translates to \"WELCOME BACK TO SCHOOL\" in English. This suggests that the image is likely related to a school event or the start of a new school year.\n\nThe figures in the image are depicted in a simplified manner, with minimal detail. They are shown in different poses, some running, others jumping, and a few carrying items like backpacks and books, which further reinforces the school theme.\n\nThe shapes include stars, triangles, and other geometric forms, which are scattered throughout the image, adding to its dynamic and energetic feel. The overall composition is balanced, with the text centrally placed and the figures and shapes distributed around it. The image has a cheerful and inviting atmosphere, likely intended to welcome students back to school."
+    },
+    {
+        "index": "fr_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a graphic with a pink background featuring a list titled \"THE BASICS OF BEING A GOOD STUDENT.\" The list contains six numbered points, each providing a brief statement about academic habits. The points are as follows:\n\n1. Prioritize your life: Doing well in school should be your top priority.\n2. Study: There is no substitute.\n3. Always attend class.\n4. Do all of the homework and assigned reading.\n5. Develop self-discipline.\n6. Manage your time.\n\nThe text is in black, and there are decorative elements such as a purple and yellow abstract design at the top left corner and a green abstract design at the bottom right corner. The overall style of the image is modern and educational, with a focus on providing guidance for students."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no discernible features. It's a plain, unadorned white space."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1240,
+                    0
+                ],
+                "bottom_right": [
+                    1459,
+                    170
+                ],
+                "caption": "The picture features a purple square with a pattern of orange circles and curved lines."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    581,
+                    741
+                ],
+                "bottom_right": [
+                    797,
+                    864
+                ],
+                "caption": "The image features a stylized, abstract figure with a yellow background and a purple grid pattern."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    27,
+                    489
+                ],
+                "caption": "The image features a series of purple and pink stripes that are curved and overlapping each other."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    878,
+                    528
+                ],
+                "bottom_right": [
+                    946,
+                    594
+                ],
+                "caption": "The picture features a purple starburst design with multiple points radiating outward from the center."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    946,
+                    255
+                ],
+                "bottom_right": [
+                    1032,
+                    335
+                ],
+                "caption": "The picture features a black and white graphic of a starburst or explosion-like pattern."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1356,
+                    519
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The picture features a green and black circular object with a curved shape."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    103,
+                    133
+                ],
+                "bottom_right": [
+                    1130,
+                    277
+                ],
+                "caption": "Text \"les bases pour être un bon étudiant\" in <color-1>, <en-font-144>. ",
+                "text": "les bases pour être un bon étudiant"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    103,
+                    435
+                ],
+                "bottom_right": [
+                    498,
+                    528
+                ],
+                "caption": "Text \"priorisez votre vie : bien réussir à l'école doit être votre priorité absolue.\" in <color-1>, <en-font-367>. ",
+                "text": "priorisez votre vie : bien réussir à l'école doit être votre priorité absolue."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    103,
+                    388
+                ],
+                "bottom_right": [
+                    174,
+                    426
+                ],
+                "caption": "Text \"1.\" in <color-1>, <en-font-138>. ",
+                "text": "1."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1037,
+                    435
+                ],
+                "bottom_right": [
+                    1431,
+                    466
+                ],
+                "caption": "Text \"assistez toujours aux cours.\" in <color-1>, <en-font-367>. ",
+                "text": "assistez toujours aux cours."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1037,
+                    388
+                ],
+                "bottom_right": [
+                    1107,
+                    426
+                ],
+                "caption": "Text \"3.\" in <color-1>, <en-font-138>. ",
+                "text": "3."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    571,
+                    435
+                ],
+                "bottom_right": [
+                    965,
+                    497
+                ],
+                "caption": "Text \"étudiez : il n'y a pas de substitut.\" in <color-1>, <en-font-367>. ",
+                "text": "étudiez : il n'y a pas de substitut."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    570,
+                    388
+                ],
+                "bottom_right": [
+                    641,
+                    426
+                ],
+                "caption": "Text \"2.\" in <color-1>, <en-font-138>. ",
+                "text": "2."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    104,
+                    669
+                ],
+                "bottom_right": [
+                    499,
+                    730
+                ],
+                "caption": "Text \"faites tous les devoirs et les lectures assignées.\" in <color-1>, <en-font-367>. ",
+                "text": "faites tous les devoirs et les lectures assignées."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    104,
+                    621
+                ],
+                "bottom_right": [
+                    174,
+                    659
+                ],
+                "caption": "Text \"4.\" in <color-1>, <en-font-138>. ",
+                "text": "4."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1037,
+                    668
+                ],
+                "bottom_right": [
+                    1432,
+                    699
+                ],
+                "caption": "Text \"gérez votre temps.\" in <color-1>, <en-font-367>. ",
+                "text": "gérez votre temps."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1037,
+                    621
+                ],
+                "bottom_right": [
+                    1108,
+                    659
+                ],
+                "caption": "Text \"6.\" in <color-1>, <en-font-138>. ",
+                "text": "6."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    571,
+                    669
+                ],
+                "bottom_right": [
+                    966,
+                    700
+                ],
+                "caption": "Text \"développez l'autodiscipline\" in <color-1>, <en-font-367>. ",
+                "text": "développez l'autodiscipline"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    571,
+                    621
+                ],
+                "bottom_right": [
+                    641,
+                    659
+                ],
+                "caption": "Text \"5.\" in <color-1>, <en-font-138>. ",
+                "text": "5."
+            }
+        ],
+        "full_image_caption": "The image is a graphic with a pink background and contains text in French. The text is organized into numbered points, suggesting a list or a set of guidelines. The points are as follows:\n\n1. Prioritize your life: don't let school be your absolute priority.\n2. Study: there is no substitute.\n3. Attend classes regularly.\n4. Fulfill all the requirements and attend all the lectures.\n5. Develop self-discipline.\n6. Manage your time.\n\nThe text is in black, and there are decorative elements such as stars and a puzzle piece in the background. The overall style of the image is simple and educational, likely intended to provide advice or reminders for students."
+    },
+    {
+        "index": "it_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image displays a graphic design with a dark blue background. On the left side, there is a vertical decorative element resembling a column with intricate patterns, possibly inspired by Gothic or Baroque architectural styles. The patterns include floral motifs and what appears to be a stylized representation of a bird.\n\nCentered in the image is a circular emblem with a cross at its center, suggesting a Christian theme. The emblem is encased within a double-lined border, and the cross is also outlined by a double line, giving it a prominent and central position within the circle.\n\nOn the right side of the image, there is text that reads \"Kenner Church\" in a serif font, which is likely the name of the church. Below the name, there is an address provided: \"950 Fountainbleau Dr\". Additionally, there is a phone number \"+850 308 185\", which is presumably the contact number for the church.\n\nThe overall style of the image is formal and appears to be a promotional or informational graphic, possibly for a church bulletin, website, or signage. The use of dark blue and gold tones gives the image a solemn and dignified appearance."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely black. There are no visible objects, texts, or any other distinguishable features. The color is uniform, and there is no variation or contrast that would allow for a detailed description. If there is supposed to be something in the image, it is not visible to me."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    961,
+                    193
+                ],
+                "bottom_right": [
+                    1078,
+                    310
+                ],
+                "caption": "The image features a stylized logo with a cross, a bird, and a sun or moon motif. The bird appears to be a dove, and the sun or moon is depicted with a crescent shape. The overall design is simple and uses a limited color palette."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    258,
+                    0
+                ],
+                "bottom_right": [
+                    502,
+                    864
+                ],
+                "caption": "The image features a decorative design with a combination of geometric shapes and patterns. The design is symmetrical and includes intricate lines and curves, creating a sense of balance and harmony. The color scheme is primarily black and gold, giving the design a luxurious and elegant appearance. The overall style of the image suggests it could be a piece of art or a decorative element in a building or home."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    879,
+                    481
+                ],
+                "bottom_right": [
+                    1159,
+                    483
+                ],
+                "caption": "The picture is a plain, solid color with no visible objects or text. It is a simple, unadorned image with no additional elements."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    921,
+                    336
+                ],
+                "bottom_right": [
+                    1117,
+                    428
+                ],
+                "caption": "Text \"Kenner\nchiesa\" in <color-35>, <en-font-393>. ",
+                "text": "Kenner\nchiesa"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    851,
+                    536
+                ],
+                "bottom_right": [
+                    1186,
+                    614
+                ],
+                "caption": "Text \"950 Fountainbleau Dr\n+83 038 398 1183\" in <color-35>, <en-font-382>. ",
+                "text": "950 Fountainbleau Dr\n+83 038 398 1183"
+            }
+        ],
+        "full_image_caption": "The image displays a graphic design with a dark blue background. On the left side, there is a vertical decorative element with a pattern that resembles a column or pillar with intricate designs, possibly inspired by classical architecture. The right side of the image features a logo with the text \"Kenner Chiesa\" in a serif font, suggesting it may be a name or brand. Above the text, there is a circular emblem with a cross and a dove, which could symbolize a religious affiliation or theme. Below the logo, there is a phone number \"053 338 183\" presented in a simple, unadorned font. The overall style of the image is formal and professional, with a clear emphasis on the logo and contact information."
+    },
+    {
+        "index": "it_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a photograph of a church interior, with a focus on architectural elements. The church has a high ceiling with exposed beams and a vaulted design. The walls are adorned with intricate stone carvings and sculptures, including a prominent statue of a figure that appears to be a religious icon. The lighting in the church is soft and diffused, creating a serene atmosphere.\n\nOn the right side of the image, there is a graphic overlay with text and a logo. The text reads \"Kenner Church\" and \"Church architectural elements.\" Below the text is a circular logo with a stylized depiction of a bird, possibly a dove, which is a common symbol in Christian iconography. The overall style of the image suggests it may be used for educational or promotional purposes related to the church's architecture."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image depicts an interior view of a grand, possibly Gothic-style cathedral or church. The architecture features tall, slender columns with intricate carvings, and the ceiling is vaulted with ribbed arches. The lighting is soft and warm, suggesting the presence of stained glass windows that are not visible in the frame.\n\nIn the foreground, there is a statue of a figure that appears to be a woman, possibly a representation of a saint or a religious figure. The statue is positioned on a pedestal and is dressed in a flowing garment, with one hand raised as if in a gesture of blessing or prayer. The figure's expression is serene and contemplative.\n\nThe overall atmosphere of the image is one of solemnity and reverence, typical of religious spaces designed to inspire awe and reflection. The photograph captures the scale and detail of the architecture and the statue, conveying a sense of the cathedral's historical and cultural significance."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    63,
+                    63
+                ],
+                "bottom_right": [
+                    1472,
+                    800
+                ],
+                "caption": "The image is a solid dark blue color with a horizontal white line at the bottom."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    956,
+                    147
+                ],
+                "bottom_right": [
+                    1072,
+                    264
+                ],
+                "caption": "The image features a stylized logo with a cross, a bird, and a sun or moon motif. The bird appears to be in flight, and the sun or moon is depicted with a curved shape. The logo is designed with a combination of gold and black colors."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    258,
+                    0
+                ],
+                "bottom_right": [
+                    502,
+                    864
+                ],
+                "caption": "The image features a decorative design with intricate patterns and shapes. The design includes a combination of geometric and organic elements, such as circles, lines, and swirls. The color scheme is primarily black and gold, giving the design a luxurious and elegant appearance. The overall style suggests a blend of Art Nouveau and Art Deco influences, characterized by its flowing lines and symmetry."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    715,
+                    583
+                ],
+                "bottom_right": [
+                    1314,
+                    636
+                ],
+                "caption": "Text \"elementi architettonici\" in <color-35>, <en-font-393>. ",
+                "text": "elementi architettonici"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    896,
+                    290
+                ],
+                "bottom_right": [
+                    1131,
+                    381
+                ],
+                "caption": "Text \"kenner\nchiesa\" in <color-35>, <en-font-393>. ",
+                "text": "kenner\nchiesa"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    663,
+                    421
+                ],
+                "bottom_right": [
+                    1363,
+                    583
+                ],
+                "caption": "Text \"chiesa\" in <color-35>, <en-font-393>. ",
+                "text": "chiesa"
+            }
+        ],
+        "full_image_caption": "The image appears to be a book cover with a predominantly dark blue background. On the left side, there is a vertical decorative element that resembles a column with intricate patterns, possibly representing architectural details. The right side of the cover features the title and author's name in a serif font. The title is \"CHIESA,\" which translates to \"CHURCH\" in Italian, and the subtitle \"elementi architettonici\" means \"architectural elements.\" Above the title, there is a circular emblem with a bird, possibly a dove, which is a common symbol in Christian iconography. The author's name, \"KENNER CHIESA,\" is displayed in a larger font size than the title. The overall style of the image suggests a scholarly or historical publication related to the architecture of churches."
+    },
+    {
+        "index": "it_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a composite of two distinct sections. On the left side, there is a photograph of a church interior. The photograph captures the architectural details of the church, including the arches, columns, and a statue of a figure that appears to be a woman, possibly a religious figure or a saint, given the context. The statue is centrally placed within the frame, and the lighting suggests a serene and solemn atmosphere.\n\nOn the right side of the image, there is a graphic design with a large, bold letter \"D\" followed by the word \"Decorations\" in a smaller font. Below the title, there are three bullet points with text that reads: \"Leverage agile frameworks to provide a robust synopsis for high level overviews.\" This text is likely a placeholder or a mock-up for a presentation or a brochure, as it does not provide any specific information about the decorations or the church.\n\nThe overall style of the image is a blend of photography and graphic design, possibly intended for a promotional or informational purpose related to the church's decorations. The image is well-composed, with the left and right sections balanced against each other, and the text is clear and legible."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is a solid white color with no distinguishable features or objects. It's a simple, flat color with no variations or patterns."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    711
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is a plain, solid color with no distinguishable features or objects. It appears to be a simple, unadorned background with a uniform color throughout. There are no texts, people, animals, or any other identifiable elements present in the image. The color is a light, neutral tone, which could be described as a light beige or a very light yellow. The image is devoid of any context or content that would allow for a more detailed description."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    560,
+                    756
+                ],
+                "bottom_right": [
+                    1338,
+                    820
+                ],
+                "caption": "The picture is a black rectangle with a thin, vertical gold line in the center."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    849,
+                    711
+                ],
+                "caption": "The picture features a large, detailed statue of a woman, prominently displayed on a stone pillar. The statue is intricately carved, showcasing the woman's flowing hair and draped clothing. The stone pillar and the statue are set against a backdrop of a large, ornate archway, which adds to the grandeur of the scene. The overall composition suggests a setting of historical significance, possibly a church or a public building."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    63,
+                    747
+                ],
+                "bottom_right": [
+                    136,
+                    820
+                ],
+                "caption": "The picture features a stylized bird with a cross on its back, set against a circular background."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    948,
+                    366
+                ],
+                "bottom_right": [
+                    999,
+                    416
+                ],
+                "caption": "The picture shows a large, solid, circular object with a light brown or beige color."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    710
+                ],
+                "bottom_right": [
+                    1536,
+                    712
+                ],
+                "caption": "The picture is a plain, solid color with no distinguishable objects or text. It appears to be a simple, unadorned background."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    257,
+                    476
+                ],
+                "bottom_right": [
+                    332,
+                    551
+                ],
+                "caption": "The picture features a large, circular object with a golden hue."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    948,
+                    463
+                ],
+                "bottom_right": [
+                    999,
+                    513
+                ],
+                "caption": "The picture shows a large, circular object with a golden-yellow color."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    210,
+                    133
+                ],
+                "bottom_right": [
+                    284,
+                    208
+                ],
+                "caption": "The picture shows a large, circular, yellow object."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    948,
+                    560
+                ],
+                "bottom_right": [
+                    999,
+                    610
+                ],
+                "caption": "The picture features a large, circular, yellow object."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    651,
+                    125
+                ],
+                "bottom_right": [
+                    701,
+                    176
+                ],
+                "caption": "The picture shows a large, circular object with a golden hue."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    639,
+                    113
+                ],
+                "bottom_right": [
+                    713,
+                    188
+                ],
+                "caption": "The picture features a large, circular object with a golden hue."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1410,
+                    775
+                ],
+                "bottom_right": [
+                    1474,
+                    793
+                ],
+                "caption": "Text \"02 | 04\" in <color-35>, <en-font-0>. ",
+                "text": "02 | 04"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    671,
+                    758
+                ],
+                "bottom_right": [
+                    899,
+                    814
+                ],
+                "caption": "Text \"elementi architettonici della chiesa. elemento\" in <color-2>, <en-font-393>. ",
+                "text": "elementi architettonici della chiesa. elemento"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    164,
+                    759
+                ],
+                "bottom_right": [
+                    244,
+                    815
+                ],
+                "caption": "Text \"chiesa di kenner\" in <color-2>, <en-font-393>. ",
+                "text": "chiesa di kenner"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1039,
+                    757
+                ],
+                "bottom_right": [
+                    1279,
+                    813
+                ],
+                "caption": "Text \"950 Fountainbleau Dr\n+83 038 398 1183\" in <color-2>, <en-font-382>. ",
+                "text": "950 Fountainbleau Dr\n+83 038 398 1183"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    913,
+                    10
+                ],
+                "bottom_right": [
+                    1173,
+                    299
+                ],
+                "caption": "Text \"D\" in <color-35>, <en-font-382>. ",
+                "text": "D"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    987,
+                    180
+                ],
+                "bottom_right": [
+                    1487,
+                    267
+                ],
+                "caption": "Text \"decorazioni\" in <color-2>, <en-font-393>. ",
+                "text": "decorazioni"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1060,
+                    364
+                ],
+                "bottom_right": [
+                    1485,
+                    422
+                ],
+                "caption": "Text \"sfruttare framework agili per fornire una sinossi robusta per panoramiche di alto livello.\" in <color-1>, <en-font-0>. ",
+                "text": "sfruttare framework agili per fornire una sinossi robusta per panoramiche di alto livello."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    963,
+                    382
+                ],
+                "bottom_right": [
+                    983,
+                    400
+                ],
+                "caption": "Text \"01\" in <color-0>, <en-font-0>. ",
+                "text": "01"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1060,
+                    461
+                ],
+                "bottom_right": [
+                    1485,
+                    519
+                ],
+                "caption": "Text \"sfruttare framework agili per fornire una sinossi robusta per panoramiche di alto livello.\" in <color-1>, <en-font-0>. ",
+                "text": "sfruttare framework agili per fornire una sinossi robusta per panoramiche di alto livello."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    963,
+                    480
+                ],
+                "bottom_right": [
+                    986,
+                    497
+                ],
+                "caption": "Text \"02\" in <color-0>, <en-font-0>. ",
+                "text": "02"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    284,
+                    504
+                ],
+                "bottom_right": [
+                    303,
+                    522
+                ],
+                "caption": "Text \"01\" in <color-0>, <en-font-0>. ",
+                "text": "01"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1060,
+                    557
+                ],
+                "bottom_right": [
+                    1485,
+                    615
+                ],
+                "caption": "Text \"sfruttare framework agili per fornire una sinossi robusta per panoramiche di alto livello.\" in <color-1>, <en-font-0>. ",
+                "text": "sfruttare framework agili per fornire una sinossi robusta per panoramiche di alto livello."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    962,
+                    577
+                ],
+                "bottom_right": [
+                    985,
+                    595
+                ],
+                "caption": "Text \"03\" in <color-0>, <en-font-0>. ",
+                "text": "03"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    236,
+                    162
+                ],
+                "bottom_right": [
+                    259,
+                    179
+                ],
+                "caption": "Text \"02\" in <color-0>, <en-font-0>. ",
+                "text": "02"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    664,
+                    141
+                ],
+                "bottom_right": [
+                    687,
+                    159
+                ],
+                "caption": "Text \"03\" in <color-0>, <en-font-0>. ",
+                "text": "03"
+            }
+        ],
+        "full_image_caption": "The image is a composite of two distinct sections. On the left, there is a photograph of a classical architectural structure, possibly a part of a church or a historical building. The architecture features ornate columns and a statue of a figure, which appears to be a woman, positioned centrally within the frame. The statue is detailed and seems to be made of a material that could be marble or a similar stone.\n\nOn the right side of the image, there is a text section with the word \"DECORAZIONI\" prominently displayed at the top in large, bold letters. Below this title, there are three bullet points with text in Italian, which likely describe the services or products offered by a company specializing in decorations or architectural elements. The text is too small to read in detail, but it seems to be structured in a way that suggests a list of features or benefits.\n\nAt the bottom of the image, there is a section with the text \"CHIESA DI KENNER\" and \"ELEMENTI ARCHITETTONICI,\" which translates to \"CHURCH OF KENNER\" and \"ARCHITECTURAL ELEMENTS,\" respectively. This suggests that the image may be related to a church in Kenner and could be an advertisement or informational graphic for architectural elements or decorations for churches.\n\nThe overall style of the image is a blend of photography and graphic design, with the photograph serving as a visual reference for"
+    },
+    {
+        "index": "jp_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a woman standing in an office environment. She is holding a folder in her hands and appears to be smiling. The woman is wearing a white blouse and has short hair. Behind her, there is a bookshelf filled with various books and a desk with a chair. The office has a modern and organized look.\n\nOverlaying the image is text that reads \"WEDDING JOURNEY\" in large, bold letters, followed by \"with L'ORELINE AGENCY\" in smaller font. The text suggests that the image is related to a wedding planning service provided by L'ORELINE AGENCY. The overall style of the image is promotional, likely intended for advertising or marketing purposes."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image shows a woman standing in an indoor setting that appears to be a home or office. She is holding a large, open book or folder in her hands, which she seems to be examining or presenting. The woman is dressed in a white blouse and has short, dark hair. She is smiling and looking directly at the camera, giving a friendly and approachable impression.\n\nBehind her, there is a bookshelf filled with various books, suggesting a space that is used for reading or studying. The bookshelf is made of wood and has a warm, natural color. To the right of the woman, there is a potted plant adding a touch of greenery to the scene.\n\nThe room has a cozy and comfortable atmosphere, with a wooden floor and a simple, uncluttered design. There are no visible texts or distinctive brands in the image. The overall style of the image is a candid, real-life photograph with a focus on the woman and her interaction with the book or folder."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    700,
+                    198
+                ],
+                "bottom_right": [
+                    1360,
+                    676
+                ],
+                "caption": "The image is completely black, with no visible elements or content."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    703,
+                    180
+                ],
+                "bottom_right": [
+                    1360,
+                    670
+                ],
+                "caption": "The picture is blank and white."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    776,
+                    269
+                ],
+                "bottom_right": [
+                    1306,
+                    455
+                ],
+                "caption": "Text \"結婚式\n旅\" in <color-1>, <jp-font-67>. ",
+                "text": "結婚式\n旅"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    849,
+                    532
+                ],
+                "bottom_right": [
+                    1208,
+                    550
+                ],
+                "caption": "Text \"l’orelineエージェンシーと共に\" in <color-1>, <jp-font-0>. ",
+                "text": "l’orelineエージェンシーと共に"
+            }
+        ],
+        "full_image_caption": "The image features a woman standing in an indoor setting that appears to be a home or office environment. She is holding a large, open book or folder in her hands, which she seems to be reading or examining. The woman is smiling and looking directly at the camera, giving a friendly and approachable impression.\n\nIn the background, there is a bookshelf filled with various books, suggesting a space that is used for reading or studying. The bookshelf is wooden and spans a significant portion of the wall. To the right of the woman, there is a potted plant adding a touch of greenery to the scene.\n\nThe image also contains text in Japanese characters, which translates to \"I am a professional.\" This text is likely intended to convey the woman's professional status or the context of the image, possibly related to her work or expertise in a particular field.\n\nThe overall style of the image is a professional portrait with a focus on the individual and the books, which may imply a theme of knowledge, learning, or work. The lighting is soft and even, highlighting the subject without creating harsh shadows."
+    },
+    {
+        "index": "jp_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image appears to be a screenshot of a webpage or a digital document titled \"OUR SERVICES\" from a website named \"L-ORELINE.COM\". The page number is indicated as \"PAGE 02\". The content of the page includes text that describes various services offered, such as \"large variety of wedding packages\" and \"small, medium, and large weddings\". The text also mentions that they start working on a dream wedding from the very first day and that they can make it as big or as small as the client wants their wedding to be.\n\nOn the right side of the image, there is a photograph of a wooden surface with a few green leaves scattered across it. The leaves are of different sizes and appear to be fresh. In the center of the photograph, there is a pair of silver rings, possibly wedding rings, placed on the wooden surface. The overall style of the image is clean and professional, with a focus on providing information about wedding services."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no actions taking place. It's a simple, unadorned white space with no discernible features or content."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    224,
+                    100
+                ],
+                "bottom_right": [
+                    540,
+                    101
+                ],
+                "caption": "The image is completely black, with no visible elements or content. It appears to be a blank or empty space."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    143,
+                    396
+                ],
+                "bottom_right": [
+                    608,
+                    436
+                ],
+                "caption": "The picture is completely black."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    218,
+                    761
+                ],
+                "bottom_right": [
+                    533,
+                    762
+                ],
+                "caption": "The picture is completely black, with no visible elements or content. It appears to be a blank or empty image."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    721,
+                    204
+                ],
+                "bottom_right": [
+                    1382,
+                    681
+                ],
+                "caption": "The image is completely black, with no visible elements or content."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    724,
+                    184
+                ],
+                "bottom_right": [
+                    1380,
+                    674
+                ],
+                "caption": "The picture shows a pair of silver rings and a leaf with a red stem on a wooden surface."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1146,
+                    660
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The picture features a plant with several leaves."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    270,
+                    93
+                ],
+                "bottom_right": [
+                    511,
+                    111
+                ],
+                "caption": "Text \"l-oreline.com\" in <color-1>, <jp-font-0>. ",
+                "text": "l-oreline.com"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    330,
+                    752
+                ],
+                "bottom_right": [
+                    434,
+                    770
+                ],
+                "caption": "Text \"ページ02\" in <color-1>, <jp-font-0>. ",
+                "text": "ページ02"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    235,
+                    496
+                ],
+                "bottom_right": [
+                    531,
+                    615
+                ],
+                "caption": "Text \"私たちは最初の日からあなたの夢の結婚式に取り組み始めます。規模の大小に関わらず。\" in <color-1>, <jp-font-0>. ",
+                "text": "私たちは最初の日からあなたの夢の結婚式に取り組み始めます。規模の大小に関わらず。"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    128,
+                    202
+                ],
+                "bottom_right": [
+                    658,
+                    357
+                ],
+                "caption": "Text \"私たちのサービス\" in <color-1>, <jp-font-67>. ",
+                "text": "私たちのサービス"
+            }
+        ],
+        "full_image_caption": "The image is a digital graphic with a combination of text and a photograph. The text is in Japanese and English, with the Japanese text being larger and more prominent. The English text reads \"I-Oreline.com\" at the top, followed by \"I-Oreline offer a large variety of wedding accessories\" and \"including small, medium, and large accessories.\" Below this, there is a smaller text in Japanese.\n\nThe photograph in the center of the image shows a collection of green leaves, possibly maple leaves, arranged on a wooden surface. The leaves are spread out and overlap each other, creating a natural and organic pattern. In the bottom right corner of the photograph, there are two rings, one larger and one smaller, placed on the wooden surface. The rings appear to be wedding bands, suggesting a connection to the text about wedding accessories.\n\nThe overall style of the image is clean and modern, with a focus on simplicity and elegance, which is consistent with the theme of wedding accessories. The use of natural elements like leaves and the rustic texture of the wooden surface adds a touch of warmth and organic beauty to the composition."
+    },
+    {
+        "index": "jp_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a digital composite that appears to be a page from a wedding or event planning brochure. On the left side of the image, there is a text that reads \"Let's Get in Touch\" in a large, bold font. Below this headline, there is a smaller text that says \"And let your wedding be anything you could only imagine.\" This text is followed by a series of contact information, including phone numbers, email addresses, and a website URL. The website is \"l-oreline.com.\"\n\nOn the right side of the image, there is a photograph of a bouquet of flowers. The bouquet consists of white flowers, possibly roses, and green foliage. The flowers are arranged in a loose, natural style, and the bouquet is held by a person whose body is not visible in the image. The person is wearing a white dress, which suggests that the bouquet might be a wedding accessory.\n\nThe overall style of the image is clean and professional, with a focus on providing contact information for potential clients interested in wedding or event planning services. The use of a real bouquet in the photograph adds a touch of elegance and personalization to the brochure."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features. It's a plain, uniform white color across the entire image."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    741,
+                    0
+                ],
+                "bottom_right": [
+                    1384,
+                    864
+                ],
+                "caption": "The picture shows a bouquet of flowers held by a person. The bouquet consists of white flowers and green leaves. The person is wearing a white dress, and the bouquet is held in front of them. The focus of the image is on the bouquet, with the person's face and upper body being out of focus. The overall style of the image is soft and romantic, with a focus on the floral arrangement."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    224,
+                    100
+                ],
+                "bottom_right": [
+                    540,
+                    101
+                ],
+                "caption": "The picture is completely black. There are no visible elements or objects to describe. The background is also black, and there is no text or other content present. The image is devoid of any content, making it impossible to provide a detailed description. The main elements in the picture are the absence of any visible content and the uniform black color."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    223,
+                    396
+                ],
+                "bottom_right": [
+                    530,
+                    436
+                ],
+                "caption": "The picture is completely black, with no visible elements or content."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    218,
+                    761
+                ],
+                "bottom_right": [
+                    533,
+                    762
+                ],
+                "caption": "The picture is completely black. There are no visible elements or objects. It is a solid black background with no additional details."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    270,
+                    93
+                ],
+                "bottom_right": [
+                    511,
+                    111
+                ],
+                "caption": "Text \"L-ORELINE.COM\" in <color-1>, <en-font-0>. ",
+                "text": "L-ORELINE.COM"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    329,
+                    752
+                ],
+                "bottom_right": [
+                    435,
+                    770
+                ],
+                "caption": "Text \"PAGE 04\" in <color-1>, <en-font-0>. ",
+                "text": "PAGE 04"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    179,
+                    536
+                ],
+                "bottom_right": [
+                    364,
+                    630
+                ],
+                "caption": "Text \"(445) 5684 5586\n(568) 6584 2254\ninfo@l-oreline.com\ncontact@l-oreline.com\" in <color-1>, <en-font-0>. ",
+                "text": "(445) 5684 5586\n(568) 6584 2254\ninfo@l-oreline.com\ncontact@l-oreline.com"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    389,
+                    534
+                ],
+                "bottom_right": [
+                    570,
+                    629
+                ],
+                "caption": "Text \"(856) 5844 6558\n(558) 6958 5684\norder@l-oreline.com\ninquiry@l-oreline.com\" in <color-1>, <en-font-0>. ",
+                "text": "(856) 5844 6558\n(558) 6958 5684\norder@l-oreline.com\ninquiry@l-oreline.com"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    93,
+                    216
+                ],
+                "bottom_right": [
+                    692,
+                    372
+                ],
+                "caption": "Text \"連絡を取りましょう\" in <color-1>, <jp-font-67>. ",
+                "text": "連絡を取りましょう"
+            }
+        ],
+        "full_image_caption": "The image is a digital composite that appears to be a page from a wedding-related website or brochure. On the left side of the image, there is text in both English and Japanese. The English text reads \"L-ORELINE.com\" at the top, followed by a phrase in Japanese characters. Below this, there is a sentence in English that says, \"And let your wedding can be anything you could imagine.\" Below the text, there are two phone numbers and two email addresses provided for contact. The bottom left corner of the image has the text \"PAGE 04\" in bold, indicating that this is the fourth page of a series.\n\nOn the right side of the image, there is a photograph of a bouquet of flowers. The bouquet consists of white flowers, possibly roses, and green foliage. The flowers are arranged in a loose, natural style, and the bouquet is held by a person whose body is not visible in the image. The person is wearing a white dress with a sheer overlay, suggesting that the bouquet might be a bridal bouquet. The overall style of the image is clean and elegant, with a focus on simplicity and the beauty of the floral arrangement."
+    },
+    {
+        "index": "kr_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a close-up of a plant with green leaves. The leaves are densely packed, creating a lush and vibrant green background. Overlaid on this background is text in Korean. The text is in white, which stands out against the green background, making it easily readable. The text appears to be a quote or a statement, but without a translation, the specific content of the text is not clear. The overall style of the image suggests a motivational or inspirational theme, often used in social media posts or personal blogs."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image shows a close-up view of a plant with green leaves. The leaves are arranged in a spiral pattern, with the central part of the plant appearing to be a flower or bud, which is not fully bloomed. The plant's leaves are elongated and have a glossy surface, suggesting they are healthy and well-nourished. The background is blurred, which helps to emphasize the plant in the foreground. The overall color palette of the image is dominated by shades of green, which is typical for plant life. The image does not contain any text or other objects that can be confidently identified."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    175,
+                    195
+                ],
+                "bottom_right": [
+                    1359,
+                    571
+                ],
+                "caption": "Text \"군중을\n자신감 있게\n마주하세요\" in <color-0>, <kr-font-0>. ",
+                "text": "군중을\n자신감 있게\n마주하세요"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    175,
+                    630
+                ],
+                "bottom_right": [
+                    1359,
+                    667
+                ],
+                "caption": "Text \"대중 연설 공포를 극복하는 방법\" in <color-0>, <kr-font-4>. ",
+                "text": "대중 연설 공포를 극복하는 방법"
+            }
+        ],
+        "full_image_caption": "The image features a close-up of a plant with green leaves. The leaves are densely packed, creating a lush and vibrant green background. Overlaid on this background is text in Korean. The text is in white, which stands out against the green background, making it easily readable. The text appears to be a quote or a statement, but without a translation, the specific content of the text is not clear. The overall style of the image suggests a motivational or inspirational theme, often used in social media posts or personal blogs."
+    },
+    {
+        "index": "kr_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a young plant with a slender stem and several green leaves. The plant is placed in a woven basket, which appears to be made of a natural fiber, possibly rattan or bamboo. The background is a plain, light-colored surface that provides a neutral backdrop, allowing the plant and basket to stand out. On the right side of the image, there is text in Korean, which seems to be a quote or a statement related to the image. The overall style of the image is simple and clean, with a focus on the plant and the basket."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a blank white canvas with no visible content or objects. It is a simple, unadorned, and uniform color that fills the entire frame. There are no texts, shapes, or other elements present in the picture. The background is not described as it is not part of the image content."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    593,
+                    864
+                ],
+                "caption": "The picture shows a small potted plant with green leaves, placed in a woven basket."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    703,
+                    654
+                ],
+                "bottom_right": [
+                    1419,
+                    716
+                ],
+                "caption": "Text \"프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다.\" in <color-2>, <kr-font-0>. ",
+                "text": "프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    703,
+                    145
+                ],
+                "bottom_right": [
+                    1419,
+                    450
+                ],
+                "caption": "Text \"순간을 즐기고\n축하하세요\" in <color-3>, <kr-font-0>. ",
+                "text": "순간을 즐기고\n축하하세요"
+            }
+        ],
+        "full_image_caption": "The image features a young plant with a slender stem and several green leaves. The plant is placed in a woven basket, which appears to be made of a natural fiber, possibly rattan or bamboo. The background is a plain, light-colored surface that provides a neutral backdrop, allowing the plant and basket to stand out. On the right side of the image, there is text in Korean, which seems to be a quote or a statement related to the image. The overall style of the image is simple and clean, with a focus on the plant and the basket."
+    },
+    {
+        "index": "kr_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image displays a simple, clean layout with text in Korean. At the top, there is a phrase that translates to \"Let's learn about the human body.\" Below this, there are three numbered sections, each containing a brief description. The numbers are 01, 02, and 03, and the text beneath each number provides information about the human body, likely in a structured, educational format. The style of the image is minimalistic, with a white background and a straightforward presentation of the text."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely white. There are no objects, texts, or any other visual elements present. The background is also white, creating a uniform and blank canvas."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    175,
+                    164
+                ],
+                "bottom_right": [
+                    1359,
+                    265
+                ],
+                "caption": "Text \"당신의 두려움이 무엇인지 알아보세요.\" in <color-3>, <kr-font-0>. ",
+                "text": "당신의 두려움이 무엇인지 알아보세요."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    175,
+                    482
+                ],
+                "bottom_right": [
+                    477,
+                    680
+                ],
+                "caption": "Text \"프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다. 주로 청중 앞에서 발표됩니다.\" in <color-2>, <kr-font-0>. ",
+                "text": "프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다. 주로 청중 앞에서 발표됩니다."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    175,
+                    360
+                ],
+                "bottom_right": [
+                    477,
+                    449
+                ],
+                "caption": "Text \"01\" in <color-3>, <en-font-4>. ",
+                "text": "01"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    616,
+                    482
+                ],
+                "bottom_right": [
+                    918,
+                    680
+                ],
+                "caption": "Text \"프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다. 주로 청중 앞에서 발표됩니다.\" in <color-2>, <kr-font-0>. ",
+                "text": "프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다. 주로 청중 앞에서 발표됩니다."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    616,
+                    360
+                ],
+                "bottom_right": [
+                    918,
+                    449
+                ],
+                "caption": "Text \"02\" in <color-3>, <en-font-4>. ",
+                "text": "02"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1057,
+                    482
+                ],
+                "bottom_right": [
+                    1359,
+                    680
+                ],
+                "caption": "Text \"프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다. 주로 청중 앞에서 발표됩니다.\" in <color-2>, <kr-font-0>. ",
+                "text": "프레젠테이션은 강의, 연설, 보고서 등으로 사용할 수 있는 도구입니다. 주로 청중 앞에서 발표됩니다."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1057,
+                    360
+                ],
+                "bottom_right": [
+                    1359,
+                    449
+                ],
+                "caption": "Text \"03\" in <color-3>, <en-font-4>. ",
+                "text": "03"
+            }
+        ],
+        "full_image_caption": "The image displays a simple, clean layout with text in Korean. At the top, there is a phrase that translates to \"Let's learn about the human body.\" Below this, there are three numbered sections, each containing a brief description. The numbers are 01, 02, and 03, and the text beneath each number provides information about the human body, likely in a structured, educational format. The style of the image is minimalistic, with a white background and a straightforward presentation of the text."
+    },
+    {
+        "index": "pt_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a white bowl filled with food, placed on a surface with a geometric pattern. The bowl contains what appears to be a dish consisting of grilled vegetables and possibly some meat or fish, accompanied by a sauce or condiment. There is a fork resting on the side of the bowl, suggesting that the dish is ready to be eaten. The text on the image is in Portuguese and reads \"VARANDA DE OLIVEIRAS ORGANICOS,\" which translates to \"ORGANIC OLIVE TERRACE\" in English. Below this, there is a smaller line of text that says \"SERVÍO DE ENTREGA DE MERCADO FRESCO,\" which translates to \"FRESH MARKET DELIVERY SERVICE.\" The overall style of the image is clean and modern, with a focus on the food and the branding message."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is completely blank. There are no objects, no text, no colors, and no discernible features. It's a uniform, solid color that fills the entire frame. If there is supposed to be content in the image, it is not visible or identifiable."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    768,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The picture shows a white bowl filled with food, including what appears to be grilled vegetables and possibly some type of meat or fish. There is a fork resting on the food. The bowl is placed on a surface with a geometric pattern."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    85,
+                    255
+                ],
+                "bottom_right": [
+                    695,
+                    535
+                ],
+                "caption": "Text \"varanda de oliveiras\norgânicos\" in <color-7>, <en-font-41>. ",
+                "text": "varanda de oliveiras\norgânicos"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    85,
+                    566
+                ],
+                "bottom_right": [
+                    596,
+                    611
+                ],
+                "caption": "Text \"serviço de entrega de mercado fresco\" in <color-1>, <en-font-41>. ",
+                "text": "serviço de entrega de mercado fresco"
+            }
+        ],
+        "full_image_caption": "The image features a white bowl filled with food, placed on a surface with a geometric pattern. The bowl contains what appears to be a dish consisting of grilled vegetables and possibly some meat or fish, accompanied by a sauce or condiment. There is a fork resting on the side of the bowl, suggesting that the dish is ready to be eaten. The text on the image is in Portuguese and reads \"VARANDA DE OLIVEIRAS ORGANICOS,\" which translates to \"ORGANIC OLIVE TERRACE\" in English. Below this, there is a smaller line of text that says \"SERVÍO DE ENTREGA DE MERCADO FRESCO,\" which translates to \"FRESH MARKET DELIVERY SERVICE.\" The overall style of the image is clean and modern, with a focus on the food and the branding message."
+    },
+    {
+        "index": "pt_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a digital graphic with a warm, earthy color palette. It features two circular portraits of individuals, each with a different background. The portrait on the left shows a woman with blonde hair, smiling and looking directly at the viewer. The portrait on the right depicts a man with dark hair, wearing glasses, and also looking directly at the viewer.\n\nAbove the portraits, there is text in a script that appears to be Portuguese. The text reads \"azietona varanda\" and \"organicos\". Below the portraits, there are two lines of text. The first line reads \"teresa harlan presidente\" and the second line reads \"harry ellis co-fundador\". The overall style of the image suggests it may be related to a company or organization, possibly one that deals with organic products or services, as indicated by the text. The design is clean and professional, with a focus on the individuals and the text."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is a solid, uniform color with no distinguishable features or objects. It appears to be a plain, flat surface with a single color filling the entire frame. There are no texts, patterns, or other elements that can be identified. The color is a shade of brown, but without any context or additional details, it's difficult to provide a more precise description."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    829,
+                    150
+                ],
+                "bottom_right": [
+                    1042,
+                    362
+                ],
+                "caption": "The picture features a woman with blonde hair smiling at the camera. She is wearing a necklace and a grey top."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    829,
+                    501
+                ],
+                "bottom_right": [
+                    1042,
+                    713
+                ],
+                "caption": "The picture features a man with glasses, looking to the side."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    85,
+                    342
+                ],
+                "bottom_right": [
+                    689,
+                    519
+                ],
+                "caption": "Text \"azeitona\nvaranda\norgânicos\" in <color-11>, <en-font-41>. ",
+                "text": "azeitona\nvaranda\norgânicos"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1099,
+                    220
+                ],
+                "bottom_right": [
+                    1448,
+                    292
+                ],
+                "caption": "Text \"teresa harlan\npresidente\" in <color-11>, <en-font-41>. ",
+                "text": "teresa harlan\npresidente"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1099,
+                    570
+                ],
+                "bottom_right": [
+                    1448,
+                    642
+                ],
+                "caption": "Text \"harry ellis\nco-fundador\" in <color-11>, <en-font-41>. ",
+                "text": "harry ellis\nco-fundador"
+            }
+        ],
+        "full_image_caption": "The image is a digital graphic with a warm, earthy color palette. It features two circular portraits of individuals, each with a different background. The portrait on the left shows a woman with blonde hair, smiling and looking directly at the viewer. The portrait on the right depicts a man with dark hair, wearing glasses, and also looking directly at the viewer.\n\nAbove the portraits, there is text in a script that appears to be Portuguese. The text reads \"azietona varanda\" and \"organicos\". Below the portraits, there are two lines of text. The first line reads \"teresa harlan presidente\" and the second line reads \"harry ellis co-fundador\". The overall style of the image suggests it may be related to a company or organization, possibly one that deals with organic products or services, as indicated by the text. The design is clean and professional, with a focus on the individuals and the text."
+    },
+    {
+        "index": "pt_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image displays a slide with a beige background. At the top, there is a question in Portuguese, \"não sabe por onde começar viver um estilo de vida saudável?\" which translates to \"don't know where to start living a healthy lifestyle?\" Below this question, there are two smaller questions in Portuguese, \"organização aperta?\" and \"sem tempo para fazer compras?\" which translate to \"tight organization?\" and \"no time to shop?\" respectively.\n\nBelow these questions, there are two statements in English. The first statement reads, \"Presentations are communication tools that can be used as lectures.\" The second statement is similar, \"Presentations are communication tools that can be used as lectures.\"\n\nThe text is presented in a simple, sans-serif font, and the overall style of the image is minimalistic and educational. The slide appears to be part of a presentation or lecture, possibly discussing the topic of healthy living and the challenges associated with it."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image you've provided is a plain, solid color with no distinguishable features or objects. It appears to be a simple, unadorned background with a uniform color that could be described as a shade of brown or beige. There are no texts, patterns, or other elements that can be confidently identified within this image."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    119,
+                    424
+                ],
+                "bottom_right": [
+                    735,
+                    744
+                ],
+                "caption": "The picture is a plain, solid brown color with no visible elements or objects."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    800,
+                    424
+                ],
+                "bottom_right": [
+                    1416,
+                    744
+                ],
+                "caption": "The image is a blank, white canvas with no visible content or elements."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    209,
+                    119
+                ],
+                "bottom_right": [
+                    1323,
+                    310
+                ],
+                "caption": "Text \"não sabe por onde começar\nviver um estilo de vida saudável?\" in <color-11>, <en-font-41>. ",
+                "text": "não sabe por onde começar\nviver um estilo de vida saudável?"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    183,
+                    587
+                ],
+                "bottom_right": [
+                    669,
+                    659
+                ],
+                "caption": "Text \"Presentations are\ncommunication tools that can be\nused as lectures.\" in <color-11>, <en-font-41>. ",
+                "text": "Presentations are\ncommunication tools that can be\nused as lectures."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    183,
+                    505
+                ],
+                "bottom_right": [
+                    669,
+                    552
+                ],
+                "caption": "Text \"orçamento apertado?\" in <color-11>, <en-font-41>. ",
+                "text": "orçamento apertado?"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    865,
+                    587
+                ],
+                "bottom_right": [
+                    1351,
+                    659
+                ],
+                "caption": "Text \"Presentations are\ncommunication tools that can be\nused as lectures.\" in <color-7>, <en-font-41>. ",
+                "text": "Presentations are\ncommunication tools that can be\nused as lectures."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    865,
+                    505
+                ],
+                "bottom_right": [
+                    1351,
+                    552
+                ],
+                "caption": "Text \"sem tempo para fazer compras?\" in <color-7>, <en-font-41>. ",
+                "text": "sem tempo para fazer compras?"
+            }
+        ],
+        "full_image_caption": "The image displays a slide with a beige background. At the top, there is a question in Portuguese, \"não sabe por onde começar viver um estilo de vida saudável?\" which translates to \"don't know where to start living a healthy lifestyle?\" Below this question, there are two smaller questions in Portuguese, \"organização aperta?\" and \"sem tempo para fazer compras?\" which translate to \"tight organization?\" and \"no time to shop?\" respectively.\n\nBelow these questions, there are two statements in English. The first statement reads, \"Presentations are communication tools that can be used as lectures.\" The second statement is similar, \"Presentations are communication tools that can be used as lectures.\"\n\nThe text is presented in a simple, sans-serif font, and the overall style of the image is minimalistic and educational. The slide appears to be part of a presentation or lecture, possibly discussing the topic of healthy living and the challenges associated with it."
+    },
+    {
+        "index": "ru_0_0",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a quote in Russian, which translates to \"Whoever is silent, he is a fool.\" The quote is attributed to a Yiddish proverb. The text is presented in a decorative font, with the first line in a larger font size than the rest. The background is white, and there are blue floral patterns at the top and bottom of the image. The overall style of the image is simple and elegant, with a focus on the text and the decorative elements."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is completely white, with no visible content or objects. The background is not described, as per your request."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1202,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    286
+                ],
+                "caption": "The picture features a blue flower with a detailed stem and leaves. The flower has a central, darker blue area that could be interpreted as a stamen or a stylized center. The leaves are intricately drawn with a variety of shapes and textures, giving the image a dynamic and organic feel. The overall style of the image is illustrative, with a focus on the floral elements."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    1202,
+                    574
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The picture features a single flower with a detailed blue outline. The flower has a large, open bloom with multiple petals and a central, darker blue area that could represent the flower's stamen or center. The petals are textured, suggesting a realistic representation of the flower's surface. The stem and leaves of the flower are also outlined, adding to the overall botanical depiction."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    336,
+                    289
+                ],
+                "caption": "The picture features a blue flower with a detailed design, including petals and a central pattern."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    580
+                ],
+                "bottom_right": [
+                    336,
+                    864
+                ],
+                "caption": "The picture features a blue flower with a detailed design, including petals and a center. The flower is the main focus of the image."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    282,
+                    358
+                ],
+                "bottom_right": [
+                    1251,
+                    522
+                ],
+                "caption": "Text \"\"Что мыло для тела,\nто смех для души.\"\" in <color-5>, <en-font-385>. ",
+                "text": "\"Что мыло для тела,\nто смех для души.\""
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    498,
+                    85
+                ],
+                "bottom_right": [
+                    1035,
+                    123
+                ],
+                "caption": "Text \"всесторонняя чистота\" in <color-5>, <en-font-244>. ",
+                "text": "всесторонняя чистота"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    498,
+                    746
+                ],
+                "bottom_right": [
+                    1035,
+                    776
+                ],
+                "caption": "Text \"- YIDDISH PROVERB\" in <color-5>, <en-font-55>. ",
+                "text": "- YIDDISH PROVERB"
+            }
+        ],
+        "full_image_caption": "The image features a quote in Russian, which translates to \"Whoever is silent, he is a fool.\" The quote is attributed to a Yiddish proverb. The text is presented in a decorative font, with the first line in a larger font size than the rest. The background is white, and there are blue floral patterns at the top and bottom of the image. The overall style of the image is simple and elegant, with a focus on the text and the decorative elements."
+    },
+    {
+        "index": "ru_0_1",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image features a graphic design with a combination of text and illustration. On the left side of the image, there is a detailed blue line drawing of a flower with broad petals and a central stamen. The flower is depicted with a realistic level of detail, including the texture of the petals and the veins on the leaves.\n\nOn the right side of the image, there is a large, stylized text in a script that appears to be Cyrillic. The text reads \"ПАНИ МИЛИЯ,\" which translates to \"Gentle Ladies\" in English. The font is elegant and decorative, with a slight slant to the letters, giving it a dynamic and friendly appearance.\n\nBelow the text, there is a smaller line of text in a simpler, sans-serif font. It reads \"Наталья Барановская,\" which is likely the name of the artist or the person associated with the image.\n\nThe overall style of the image is clean and modern, with a clear separation between the text and the illustration. The color scheme is monochromatic, using shades of blue and white, which gives the image a calm and serene feel."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a blank, white canvas with no visible content or objects. The background is not described, as per the instructions provided. The image is devoid of any text, shapes, or colors that can be confidently identified."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    94,
+                    132
+                ],
+                "bottom_right": [
+                    673,
+                    731
+                ],
+                "caption": "The picture features a blue line drawing of a flower with leaves."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    768,
+                    132
+                ],
+                "bottom_right": [
+                    769,
+                    731
+                ],
+                "caption": "The image is a solid blue color with no visible elements or objects."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    866,
+                    131
+                ],
+                "bottom_right": [
+                    1294,
+                    166
+                ],
+                "caption": "Text \"наслаждайтесь блаженством времени в ванной.\" in <color-5>, <en-font-244>. ",
+                "text": "наслаждайтесь блаженством времени в ванной."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    866,
+                    394
+                ],
+                "bottom_right": [
+                    1448,
+                    776
+                ],
+                "caption": "Text \"рай мыла\" in <color-5>, <en-font-385>. ",
+                "text": "рай мыла"
+            }
+        ],
+        "full_image_caption": "The image features a graphic design with a combination of text and illustration. On the left side of the image, there is a detailed blue line drawing of a flower with broad petals and a central stamen. The flower is depicted with a realistic level of detail, including the texture of the petals and the veins on the leaves.\n\nOn the right side of the image, there is a large, stylized text in a script that appears to be Cyrillic. The text reads \"ПАНИ МИЛИЯ,\" which translates to \"Gentle Ladies\" in English. The font is elegant and decorative, with a slight slant to the letters, giving it a dynamic and friendly appearance.\n\nBelow the text, there is a smaller line of text in a simpler, sans-serif font. It reads \"Наталья Барановская,\" which is likely the name of the artist or the person associated with the image.\n\nThe overall style of the image is clean and modern, with a clear separation between the text and the illustration. The color scheme is monochromatic, using shades of blue and white, which gives the image a calm and serene feel."
+    },
+    {
+        "index": "ru_0_2",
+        "layers_all": [
+            {
+                "category": "base",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image displays a graphic design with a light blue background. At the top, there is a decorative element consisting of a floral pattern with leaves and flowers, rendered in a darker shade of blue. Below this, centered on the image, is a text in Cyrillic script. The text is in a serif font and reads \"РЕДАКЦИЯ МИЛИО ПАРИ\". Below the text, there are three lines of smaller text, also in Cyrillic script, which appear to be names or titles. The overall style of the image is simple and clean, with a clear emphasis on the text and the decorative floral element."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    864
+                ],
+                "caption": "The image is a plain white background with no visible content or objects. It appears to be a blank canvas or a simple, unadorned space."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    114,
+                    776
+                ],
+                "bottom_right": [
+                    1421,
+                    777
+                ],
+                "caption": "The picture is a solid blue background with no other elements or objects. It is a simple and unadorned image."
+            },
+            {
+                "category": "element",
+                "top_left": [
+                    0,
+                    0
+                ],
+                "bottom_right": [
+                    1536,
+                    267
+                ],
+                "caption": "The picture features a detailed blue line drawing of a plant with flowers and leaves."
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    207,
+                    402
+                ],
+                "bottom_right": [
+                    1326,
+                    514
+                ],
+                "caption": "Text \"где купить мыло\nрай\" in <color-5>, <en-font-385>. ",
+                "text": "где купить мыло\nрай"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    114,
+                    701
+                ],
+                "bottom_right": [
+                    497,
+                    731
+                ],
+                "caption": "Text \"sierralane organic\nбазар\" in <color-5>, <en-font-244>. ",
+                "text": "sierralane organic\nбазар"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    576,
+                    701
+                ],
+                "bottom_right": [
+                    958,
+                    731
+                ],
+                "caption": "Text \"crystalshore eco fair\" in <color-5>, <en-font-55>. ",
+                "text": "crystalshore eco fair"
+            },
+            {
+                "category": "text",
+                "top_left": [
+                    1035,
+                    701
+                ],
+                "bottom_right": [
+                    1418,
+                    731
+                ],
+                "caption": "Text \"organika lifestyle\nцентр\" in <color-5>, <en-font-244>. ",
+                "text": "organika lifestyle\nцентр"
+            }
+        ],
+        "full_image_caption": "The image displays a graphic design with a light blue background. At the top, there is a decorative element consisting of a floral pattern with leaves and flowers, rendered in a darker shade of blue. Below this, centered on the image, is a text in Cyrillic script. The text is in a serif font and reads \"РЕДАКЦИЯ МИЛИО ПАРИ\". Below the text, there are three lines of smaller text, also in Cyrillic script, which appear to be names or titles. The overall style of the image is simple and clean, with a clear emphasis on the text and the decorative floral element."
+    }
+]
