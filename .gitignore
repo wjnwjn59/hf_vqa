@@ -18,3 +18,5 @@ output/
 *.zip
 *.tar.gz
 *.log
+
+src/inference/results/*.json
