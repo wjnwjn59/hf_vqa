@@ -66,6 +66,11 @@ def calculate_bbox_area(bbox: Dict) -> int:
     bottom_right = bbox['bottom_right']
     width = bottom_right[0] - top_left[0]
     height = bottom_right[1] - top_left[1]
+    
+    # Validate coordinates
+    if width <= 0 or height <= 0:
+        return 0
+        
     return width * height
 
 
@@ -251,10 +256,10 @@ def clean_caption_text(caption: str) -> str:
     return caption
 
 
-def extract_font_color_from_bboxes(bboxes: List[Dict], font_idx: Dict) -> Tuple[str, List[str]]:
+def extract_font_color_from_bboxes(bboxes: List[Dict], font_idx: Dict) -> Tuple[str, List[int]]:
     """
     Extract font and colors from text bboxes in the layout.
-    Returns a tuple of (font_token, list_of_color_names).
+    Returns a tuple of (font_token, list_of_color_ids).
     If no English font is found, returns a random English font.
     
     Args:
@@ -262,7 +267,7 @@ def extract_font_color_from_bboxes(bboxes: List[Dict], font_idx: Dict) -> Tuple[
         font_idx: Font index mapping
         
     Returns:
-        Tuple of (font_token like 'en-font-1', list of color names)
+        Tuple of (font_token like 'en-font-1', list of color IDs)
     """
     text_bboxes = [b for b in bboxes if b.get('category') == 'text']
     
@@ -475,9 +480,10 @@ def merge_narrator_data(
         if not available_indices:
             print("Warning: No more bbox indices available, wrapping around")
             available_indices = list(bbox_by_index.keys())
+            print(f"  Reset available indices count: {len(available_indices)}")
         
         selected_bbox_index = random.choice(available_indices)
-        # Remove the selected index to avoid reuse
+        # Remove the selected index to avoid immediate reuse
         available_indices.remove(selected_bbox_index)
         
         bbox_data = bbox_by_index[selected_bbox_index]
@@ -611,13 +617,16 @@ def merge_narrator_data(
             if max_overlap_count == 0:
                 break
                 
-            # Remove the image with most overlaps
+            # Remove the image with most overlaps from selected_decorative
             print(f"  Removing image at index {max_overlap_img_idx} (causes {max_overlap_count} text overlaps)")
-            selected_decorative.pop(max_overlap_img_idx)
+            removed_bbox = selected_decorative.pop(max_overlap_img_idx)
             
-            # Also remove corresponding image element
-            if max_overlap_img_idx < len(image_elements_to_use):
-                image_elements_to_use.pop(max_overlap_img_idx)
+            # Find corresponding index in image_elements_to_use by matching the removed bbox
+            # Since both lists were created from the same source with same order initially
+            for i, element in enumerate(image_elements_to_use):
+                if i == max_overlap_img_idx and i < len(image_elements_to_use):
+                    image_elements_to_use.pop(i)
+                    break
             
             # Re-try selecting text bboxes with reduced image set
             selected_text_bboxes = select_non_overlapping_text_bboxes(
