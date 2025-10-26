@@ -114,7 +114,7 @@ cd ./src/data/bizgen/
 CUDA_VISIBLE_DEVICES=0 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
     --wiki_dir ../create_data/output/bizgen_format/ \
-    --subset 0:516
+    --subset 1:516
 ```
 
 # Run OCR filter

@@ -51,7 +51,7 @@ cd ./src/data/bizgen/
 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
     --wiki_dir ../create_data/output/narrator_format_v2/ \
-    --subset 0:516 \
+    --subset 1:516 \
     --device cuda:2 \
     --dataset_name squad_v2_new
 ```
