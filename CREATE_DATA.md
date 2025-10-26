@@ -80,10 +80,10 @@ CUDA_VISIBLE_DEVICES=0 python src/data/create_data/qwen/generate_infographic_dat
 conda activate wiki
 
 python src/data/create_data/qwen/merge_infographic_bboxes.py \
-    --extracted-bboxes ./src/data/create_data/qwen/extracted_bboxes.json \
+    --extracted-bboxes ./src/data/narrator/extracted_bboxes.json \
     --infographic-dir ./src/data/create_data/output/infographic \
-    --color-idx ./src/data/create_data/qwen/glyph/color_idx.json \
-    --font-idx ./src/data/create_data/qwen/glyph/font_idx.json \
+    --color-idx ./src/data/narrator/glyph/color_idx.json \
+    --font-idx ./src/data/narrator/glyph/font_uni_10-lang_idx.json \
     --start-wiki 0 \
     --end-wiki 232000 \
     --seed 42
@@ -96,8 +96,8 @@ conda activate wiki
 
 python src/data/create_data/qwen/extract_infographic.py \
     --infographic-dir ./src/data/create_data/output/infographic \
-    --color-idx ./src/data/create_data/qwen/glyph/color_idx.json \
-    --font-idx ./src/data/create_data/qwen/glyph/font_idx.json \
+    --color-idx ./src/data/narrator/glyph/color_idx.json \
+    --font-idx ./src/data/narrator/glyph/font_uni_10-lang_idx.json \
     --start-wiki 0 \
     --end-wiki 0 \
     --seed 42

@@ -4,6 +4,7 @@ import json
 import os
 import os.path as osp
 import time
+import random
 
 import torch
 import torch.utils.checkpoint
@@ -45,6 +46,60 @@ byt5_mapper_dict = {mapper.__name__: mapper for mapper in byt5_mapper_dict}
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.26.1")
+
+
+def set_random_seed(seed: int) -> int:
+    """Set random seed for reproducibility and return the seed used
+    
+    Sets seeds for all commonly used libraries in diffusion model training/inference:
+    - Python random
+    - NumPy
+    - PyTorch
+    - CUDA (if available)
+    - Transformers
+    - Environment variables for additional determinism
+    """
+    # Python random
+    random.seed(seed)
+    
+    # NumPy
+    try:
+        import numpy as np
+        np.random.seed(seed)
+    except ImportError:
+        pass
+    
+    # PyTorch
+    torch.manual_seed(seed)
+    
+    # CUDA seeds
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)  # For multi-GPU setups
+        
+    # Additional PyTorch determinism settings
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    
+    # Transformers library seed
+    try:
+        from transformers import set_seed as transformers_set_seed
+        transformers_set_seed(seed)
+    except ImportError:
+        pass
+    
+    # Environment variables for additional determinism
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'  # For deterministic CUDA operations
+    
+    # TensorFlow (if used)
+    try:
+        import tensorflow as tf
+        tf.random.set_seed(seed)
+    except ImportError:
+        pass
+    
+    return seed
 
 
 def import_model_class_from_model_name_or_path(
@@ -317,6 +372,11 @@ def main():
 
     config.seed = args.seed
 
+    # Set comprehensive random seed for reproducibility
+    if config.seed is not None:
+        print(f"Setting random seed to: {config.seed}")
+        set_random_seed(config.seed)
+
     # run inference
     generator = torch.Generator(device=args.device).manual_seed(
         config.seed) if config.seed else None
@@ -391,6 +451,11 @@ def main():
                         item["bottom_right"][1]/orig_height*args.height)
 
                 try:
+                    # Set deterministic seed for this specific image based on index and base seed
+                    if config.seed is not None:
+                        image_seed = config.seed + index
+                        generator = torch.Generator(device=args.device).manual_seed(image_seed)
+                    
                     with torch.cuda.amp.autocast():
                         output_img = pipeline(
                             full_img_caption=full_img_caption,

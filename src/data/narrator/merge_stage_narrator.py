@@ -4,7 +4,460 @@ import os
 import argparse
 import random
 import re
+import sys
 
+
+# ============================================================================
+# IMPROVED LAYOUT ALGORITHMS
+# ============================================================================
+
+def calculate_text_readability_score(text_bbox: Dict, text_content: str) -> float:
+    """
+    Calculate readability score for text based on area vs content length.
+    
+    Args:
+        text_bbox: Text bounding box
+        text_content: Text content string
+    
+    Returns:
+        Readability score (higher is better)
+    """
+    area = calculate_bbox_area(text_bbox)
+    char_count = len(text_content)
+    
+    if char_count == 0:
+        return 1.0
+    
+    # Minimum area per character (empirical value)
+    min_area_per_char = 30  # pixels per character
+    ideal_area = char_count * min_area_per_char
+    
+    # Score based on ratio of actual area to ideal area
+    score = min(area / ideal_area, 1.0) if ideal_area > 0 else 0.0
+    return score
+
+
+def add_safe_margins(bbox: Dict, margin: int = 20, canvas_width: int = 896, canvas_height: int = 2240) -> Dict:
+    """
+    Add safe margins to a bounding box to avoid edge placement.
+    
+    Args:
+        bbox: Original bounding box
+        margin: Margin size in pixels
+        canvas_width: Canvas width
+        canvas_height: Canvas height
+    
+    Returns:
+        Adjusted bounding box with safe margins
+    """
+    top_left = bbox['top_left']
+    bottom_right = bbox['bottom_right']
+    
+    # Adjust position if too close to edges
+    new_x = max(margin, top_left[0])
+    new_y = max(margin, top_left[1])
+    
+    # Calculate width and height
+    width = bottom_right[0] - top_left[0]
+    height = bottom_right[1] - top_left[1]
+    
+    # Ensure it doesn't go beyond canvas with margin
+    if new_x + width > canvas_width - margin:
+        new_x = canvas_width - margin - width
+    
+    if new_y + height > canvas_height - margin:
+        new_y = canvas_height - margin - height
+    
+    # Ensure coordinates are still valid
+    new_x = max(margin, new_x)
+    new_y = max(margin, new_y)
+    
+    return {
+        'category': bbox['category'],
+        'top_left': [new_x, new_y],
+        'bottom_right': [new_x + width, new_y + height],
+        'caption': bbox.get('caption', ''),
+        'text': bbox.get('text', '')
+    }
+
+
+def calculate_overlap_penalty(text_bbox: Dict, image_bboxes: List[Dict]) -> float:
+    """
+    Calculate overlap penalty score for a text bbox against image bboxes.
+    
+    Args:
+        text_bbox: Text bounding box
+        image_bboxes: List of image bounding boxes
+    
+    Returns:
+        Penalty score (higher means more overlap, worse placement)
+    """
+    total_penalty = 0.0
+    
+    for img_bbox in image_bboxes:
+        overlap_ratio = check_overlap_ratio(text_bbox, img_bbox)
+        # Heavy penalty for any overlap
+        if overlap_ratio > 0:
+            total_penalty += overlap_ratio * 10  # Scale penalty
+    
+    return total_penalty
+
+
+def find_best_text_positions(
+    text_elements: List[str],
+    candidate_text_bboxes: List[Dict],
+    image_bboxes: List[Dict],
+    margin: int = 20
+) -> List[Tuple[Dict, str]]:
+    """
+    Find optimal text positions to minimize overlaps and improve readability.
+    
+    Args:
+        text_elements: List of text content strings
+        candidate_text_bboxes: Available text bounding boxes
+        image_bboxes: List of image bounding boxes to avoid
+        margin: Safe margin for text placement
+    
+    Returns:
+        List of (optimized_bbox, text_content) pairs
+    """
+    if not text_elements or not candidate_text_bboxes:
+        return []
+    
+    # Score each text bbox position
+    bbox_scores = []
+    for bbox in candidate_text_bboxes:
+        # Add safe margins
+        safe_bbox = add_safe_margins(bbox, margin)
+        
+        # Calculate penalties
+        overlap_penalty = calculate_overlap_penalty(safe_bbox, image_bboxes)
+        
+        # Calculate area score (prefer larger areas for better readability)
+        area_score = calculate_bbox_area(safe_bbox) / 50000.0  # Normalize
+        
+        # Calculate position score (prefer positions not at extreme edges)
+        x, y = safe_bbox['top_left']
+        position_score = min(x / 100.0, 1.0) * min(y / 100.0, 1.0)
+        
+        # Combined score (lower is better)
+        total_score = overlap_penalty - area_score - position_score
+        
+        bbox_scores.append((safe_bbox, total_score))
+    
+    # Sort by score (best first)
+    bbox_scores.sort(key=lambda x: x[1])
+    
+    # Assign text to best positions
+    result_pairs = []
+    used_bboxes = []
+    
+    for i, text_content in enumerate(text_elements):
+        if i >= len(bbox_scores):
+            break
+            
+        best_bbox = None
+        best_score = float('inf')
+        
+        # Find best available bbox for this text
+        for bbox, score in bbox_scores:
+            if bbox in used_bboxes:
+                continue
+                
+            # Check readability for this specific text
+            readability_score = calculate_text_readability_score(bbox, text_content)
+            
+            # Penalty for poor readability
+            if readability_score < 0.5:
+                score += 5.0  # Add penalty
+            
+            # Check overlap with already selected text
+            text_overlap_penalty = 0.0
+            for used_bbox in used_bboxes:
+                if used_bbox.get('category') == 'text':
+                    overlap_ratio = check_overlap_ratio(bbox, used_bbox)
+                    if overlap_ratio > 0.1:
+                        text_overlap_penalty += overlap_ratio * 5.0
+            
+            final_score = score + text_overlap_penalty
+            
+            if final_score < best_score:
+                best_score = final_score
+                best_bbox = bbox
+        
+        if best_bbox:
+            # Update caption with proper text
+            best_bbox = dict(best_bbox)  # Make a copy
+            used_bboxes.append(best_bbox)
+            result_pairs.append((best_bbox, text_content))
+    
+    return result_pairs
+
+
+def smart_image_selection(
+    image_elements: List[Dict], 
+    candidate_element_bboxes: List[Dict],
+    reserved_text_areas: List[Dict] = None
+) -> List[Tuple[Dict, str]]:
+    """
+    Smart selection of image positions to minimize conflicts with text areas.
+    
+    Args:
+        image_elements: List of image descriptions
+        candidate_element_bboxes: Available element bounding boxes
+        reserved_text_areas: Areas reserved for text (to avoid)
+    
+    Returns:
+        List of (bbox, caption) pairs for images
+    """
+    if not image_elements or not candidate_element_bboxes:
+        return []
+    
+    reserved_text_areas = reserved_text_areas or []
+    
+    # Score each image bbox
+    bbox_scores = []
+    for bbox in candidate_element_bboxes:
+        score = 0.0
+        
+        # Penalty for overlapping with reserved text areas
+        for text_area in reserved_text_areas:
+            overlap_ratio = check_overlap_ratio(bbox, text_area)
+            if overlap_ratio > 0:
+                score += overlap_ratio * 8.0  # Heavy penalty
+        
+        # Prefer larger areas for images
+        area_score = calculate_bbox_area(bbox) / 100000.0
+        score -= area_score
+        
+        bbox_scores.append((bbox, score))
+    
+    # Sort by score (best first)
+    bbox_scores.sort(key=lambda x: x[1])
+    
+    # Select non-overlapping images
+    result_pairs = []
+    used_bboxes = []
+    
+    for i, image_element in enumerate(image_elements):
+        if i >= len(bbox_scores):
+            break
+        
+        best_bbox = None
+        best_score = float('inf')
+        
+        for bbox, score in bbox_scores:
+            if bbox in used_bboxes:
+                continue
+                
+            # Check overlap with already selected images
+            image_overlap_penalty = 0.0
+            for used_bbox in used_bboxes:
+                overlap_ratio = check_overlap_ratio(bbox, used_bbox)
+                if overlap_ratio > 0.3:  # Allow some small overlap for images
+                    image_overlap_penalty += overlap_ratio * 3.0
+            
+            final_score = score + image_overlap_penalty
+            
+            if final_score < best_score:
+                best_score = final_score
+                best_bbox = bbox
+        
+        if best_bbox:
+            used_bboxes.append(best_bbox)
+            caption = image_element.get('description', 'decorative element')
+            result_pairs.append((best_bbox, caption))
+    
+    return result_pairs
+
+
+def validate_layout_quality(layers: List[Dict]) -> Dict:
+    """
+    Validate the quality of a generated layout.
+    
+    Args:
+        layers: List of layout layers
+    
+    Returns:
+        Quality metrics and pass/fail status
+    """
+    text_layers = [l for l in layers if l.get('category') == 'text']
+    image_layers = [l for l in layers if l.get('category') == 'element' and l.get('bottom_right') != [896, 2240]]
+    
+    issues = []
+    
+    # Check text-image overlaps
+    severe_overlaps = 0
+    for text_layer in text_layers:
+        for image_layer in image_layers:
+            overlap_ratio = check_overlap_ratio(text_layer, image_layer)
+            if overlap_ratio > 0.3:
+                severe_overlaps += 1
+                issues.append(f"Text '{text_layer.get('text', '')[:30]}...' overlaps with image")
+    
+    # Check text readability
+    readability_issues = 0
+    for text_layer in text_layers:
+        text_content = text_layer.get('text', '')
+        readability_score = calculate_text_readability_score(text_layer, text_content)
+        if readability_score < 0.4:
+            readability_issues += 1
+            issues.append(f"Poor readability for text '{text_content[:30]}...'")
+    
+    # Check edge proximity
+    edge_issues = 0
+    for text_layer in text_layers:
+        x, y = text_layer['top_left']
+        if x < 15 or y < 15:
+            edge_issues += 1
+            issues.append(f"Text too close to edge: {text_layer.get('text', '')[:30]}...")
+    
+    # Overall quality score
+    quality_score = 1.0
+    if severe_overlaps > 0:
+        quality_score -= 0.4
+    if readability_issues > 0:
+        quality_score -= 0.3
+    if edge_issues > 0:
+        quality_score -= 0.2
+    
+    return {
+        'quality_score': max(0.0, quality_score),
+        'severe_overlaps': severe_overlaps,
+        'readability_issues': readability_issues,
+        'edge_issues': edge_issues,
+        'issues': issues,
+        'passes_quality': quality_score > 0.6
+    }
+
+
+def check_overlap_ratio(bbox1: Dict, bbox2: Dict) -> float:
+    """Calculate overlap ratio (intersection / smaller_area)."""
+    x1_min, y1_min = bbox1['top_left']
+    x1_max, y1_max = bbox1['bottom_right']
+    x2_min, y2_min = bbox2['top_left']
+    x2_max, y2_max = bbox2['bottom_right']
+    
+    # Calculate intersection
+    x_overlap = max(0, min(x1_max, x2_max) - max(x1_min, x2_min))
+    y_overlap = max(0, min(y1_max, y2_max) - max(y1_min, y2_min))
+    intersection = x_overlap * y_overlap
+    
+    if intersection == 0:
+        return 0.0
+    
+    # Calculate areas
+    area1 = calculate_bbox_area(bbox1)
+    area2 = calculate_bbox_area(bbox2)
+    smaller_area = min(area1, area2)
+    
+    return intersection / smaller_area if smaller_area > 0 else 0.0
+
+
+def auto_scale_small_text_bboxes(
+    layers: List[Dict], 
+    canvas_width: int = 896, 
+    canvas_height: int = 2240,
+    min_text_area: int = 2000
+) -> List[Dict]:
+    """
+    Auto-scale small text bboxes to improve readability.
+    
+    Args:
+        layers: List of layout layers
+        canvas_width: Canvas width
+        canvas_height: Canvas height
+        min_text_area: Minimum area for text bboxes
+    
+    Returns:
+        Updated layers with scaled text bboxes
+    """
+    updated_layers = []
+    
+    for layer in layers:
+        if layer.get('category') == 'text':
+            area = calculate_bbox_area(layer)
+            text_content = layer.get('text', '')
+            
+            if area < min_text_area and len(text_content) > 10:
+                # Calculate scale factor based on text length
+                char_count = len(text_content)
+                ideal_area = char_count * 40  # pixels per character
+                scale_factor = min(2.0, (ideal_area / area) ** 0.5) if area > 0 else 1.5
+                
+                # Get current dimensions
+                top_left = layer['top_left']
+                bottom_right = layer['bottom_right']
+                width = bottom_right[0] - top_left[0]
+                height = bottom_right[1] - top_left[1]
+                
+                # Calculate new dimensions
+                new_width = int(width * scale_factor)
+                new_height = int(height * scale_factor)
+                
+                # Ensure it fits within canvas
+                if top_left[0] + new_width > canvas_width:
+                    new_width = canvas_width - top_left[0] - 10
+                if top_left[1] + new_height > canvas_height:
+                    new_height = canvas_height - top_left[1] - 10
+                
+                # Update layer
+                scaled_layer = dict(layer)
+                scaled_layer['bottom_right'] = [top_left[0] + new_width, top_left[1] + new_height]
+                updated_layers.append(scaled_layer)
+            else:
+                updated_layers.append(layer)
+        else:
+            updated_layers.append(layer)
+    
+    return updated_layers
+
+
+def validate_and_fix_layout_bounds(
+    layers: List[Dict], 
+    canvas_width: int = 896, 
+    canvas_height: int = 2240
+) -> List[Dict]:
+    """
+    Validate and fix layout bounds to ensure all elements are within canvas.
+    
+    Args:
+        layers: List of layout layers
+        canvas_width: Canvas width
+        canvas_height: Canvas height
+    
+    Returns:
+        Updated layers with fixed bounds
+    """
+    updated_layers = []
+    
+    for layer in layers:
+        top_left = layer['top_left']
+        bottom_right = layer['bottom_right']
+        
+        # Fix coordinates if out of bounds
+        fixed_top_left = [
+            max(0, min(top_left[0], canvas_width - 50)),  # Minimum 50px width
+            max(0, min(top_left[1], canvas_height - 50))   # Minimum 50px height
+        ]
+        
+        fixed_bottom_right = [
+            max(fixed_top_left[0] + 50, min(bottom_right[0], canvas_width)),
+            max(fixed_top_left[1] + 50, min(bottom_right[1], canvas_height))
+        ]
+        
+        # Update layer
+        fixed_layer = dict(layer)
+        fixed_layer['top_left'] = fixed_top_left
+        fixed_layer['bottom_right'] = fixed_bottom_right
+        updated_layers.append(fixed_layer)
+    
+    return updated_layers
+
+
+# ============================================================================
+# ORIGINAL FUNCTIONS
+# ============================================================================
 
 def load_json(filepath: str) -> Any:
     """Load JSON file."""
@@ -66,6 +519,11 @@ def calculate_bbox_area(bbox: Dict) -> int:
     bottom_right = bbox['bottom_right']
     width = bottom_right[0] - top_left[0]
     height = bottom_right[1] - top_left[1]
+    
+    # Validate coordinates
+    if width <= 0 or height <= 0:
+        return 0
+        
     return width * height
 
 
@@ -251,10 +709,10 @@ def clean_caption_text(caption: str) -> str:
     return caption
 
 
-def extract_font_color_from_bboxes(bboxes: List[Dict], font_idx: Dict) -> Tuple[str, List[str]]:
+def extract_font_color_from_bboxes(bboxes: List[Dict], font_idx: Dict) -> Tuple[str, List[int]]:
     """
     Extract font and colors from text bboxes in the layout.
-    Returns a tuple of (font_token, list_of_color_names).
+    Returns a tuple of (font_token, list_of_color_ids).
     If no English font is found, returns a random English font.
     
     Args:
@@ -262,7 +720,7 @@ def extract_font_color_from_bboxes(bboxes: List[Dict], font_idx: Dict) -> Tuple[
         font_idx: Font index mapping
         
     Returns:
-        Tuple of (font_token like 'en-font-1', list of color names)
+        Tuple of (font_token like 'en-font-1', list of color IDs)
     """
     text_bboxes = [b for b in bboxes if b.get('category') == 'text']
     
@@ -475,9 +933,10 @@ def merge_narrator_data(
         if not available_indices:
             print("Warning: No more bbox indices available, wrapping around")
             available_indices = list(bbox_by_index.keys())
+            print(f"  Reset available indices count: {len(available_indices)}")
         
         selected_bbox_index = random.choice(available_indices)
-        # Remove the selected index to avoid reuse
+        # Remove the selected index to avoid immediate reuse
         available_indices.remove(selected_bbox_index)
         
         bbox_data = bbox_by_index[selected_bbox_index]
@@ -585,67 +1044,51 @@ def merge_narrator_data(
             }
             output_layers.append(output_layer)
 
+        # === IMPROVED LAYOUT ALGORITHM ===
         # Get valid text bboxes (non-full image)
         valid_text_bboxes = [b for b in bboxes if b.get('category') == 'text' and b.get('bottom_right') != [896, 2240]]
         # Sort text bboxes by area (largest first) for better selection
         valid_text_bboxes.sort(key=calculate_bbox_area, reverse=True)
 
-        # Try to find enough non-overlapping text bboxes
-        required_text_count = len(text_elements)
-        selected_text_bboxes = select_non_overlapping_text_bboxes(
-            valid_text_bboxes, 
-            selected_decorative, 
-            required_text_count
+        # Use improved algorithm to find optimal text positions
+        optimized_text_pairs = find_best_text_positions(
+            text_elements,
+            valid_text_bboxes,
+            selected_decorative,
+            margin=25  # Safe margin for text
         )
 
-        # If not enough text bboxes, iteratively remove images that cause most overlaps
-        while len(selected_text_bboxes) < required_text_count and selected_decorative:
-            # Count overlaps for each image
-            overlap_counts = count_text_overlaps_per_image(valid_text_bboxes, selected_decorative)
+        # If we got fewer text positions than needed, adjust
+        if len(optimized_text_pairs) < len(text_elements):
+            # Try to remove some images that cause conflicts
+            remaining_text = text_elements[len(optimized_text_pairs):]
             
-            # Find image with most overlaps
-            max_overlap_img_idx = max(overlap_counts, key=overlap_counts.get)
-            max_overlap_count = overlap_counts[max_overlap_img_idx]
-            
-            # If no overlaps found, break (shouldn't happen, but safety check)
-            if max_overlap_count == 0:
-                break
-                
-            # Remove the image with most overlaps
-            print(f"  Removing image at index {max_overlap_img_idx} (causes {max_overlap_count} text overlaps)")
-            selected_decorative.pop(max_overlap_img_idx)
-            
-            # Also remove corresponding image element
-            if max_overlap_img_idx < len(image_elements_to_use):
-                image_elements_to_use.pop(max_overlap_img_idx)
-            
-            # Re-try selecting text bboxes with reduced image set
-            selected_text_bboxes = select_non_overlapping_text_bboxes(
-                valid_text_bboxes, 
-                selected_decorative, 
-                required_text_count
+            # Use smart image selection to avoid text conflicts
+            reserved_text_areas = [pair[0] for pair in optimized_text_pairs]
+            optimized_image_pairs = smart_image_selection(
+                image_elements_to_use,
+                selected_decorative,
+                reserved_text_areas
             )
+            
+            # Update selected_decorative with optimized selection
+            selected_decorative = [pair[0] for pair in optimized_image_pairs]
+            
+            # Try text positioning again with reduced image set
+            additional_text_pairs = find_best_text_positions(
+                remaining_text,
+                valid_text_bboxes[len(optimized_text_pairs):],
+                selected_decorative,
+                margin=25
+            )
+            
+            optimized_text_pairs.extend(additional_text_pairs)
 
-        # Adjust text_elements if we have fewer text bboxes than needed
-        if len(selected_text_bboxes) < len(text_elements):
-            text_elements = text_elements[:len(selected_text_bboxes)]
-            print(f"  Adjusted text elements count to {len(text_elements)} to match available non-overlapping text bboxes")
-
-        # Create pairs of (bbox, text_content) - bbox already selected by largest area
-        # Assign text content in original order to the largest bboxes
-        text_bbox_pairs = []
-        for idx, bbox in enumerate(selected_text_bboxes):
-            text_content = text_elements[idx] if idx < len(text_elements) else ""
-            text_bbox_pairs.append((bbox, text_content))
-
-        # Sort pairs by reading order of bboxes (preserving text assignment)
-        text_bbox_pairs.sort(key=lambda pair: (pair[0]['top_left'][1], pair[0]['top_left'][0]))
-
-        # Process text pairs (bbox selected by area, text assigned in order, sorted by reading order)
-        for bbox, text_content in text_bbox_pairs:
+        # Process optimized text pairs
+        for text_bbox, text_content in optimized_text_pairs:
             
             # Extract font and color from individual bbox
-            bbox_font_color_info = bbox.get('font_color_info', '')
+            bbox_font_color_info = text_bbox.get('font_color_info', '')
             
             # Get font from this specific bbox, fallback to layout font
             bbox_font_token = font_token  # Default fallback
@@ -682,19 +1125,38 @@ def merge_narrator_data(
             caption = f'Text "{text_content}" in <color-{color_id}>, <{bbox_font_token}>. '
             output_layer = {
                 'category': 'text',
-                'top_left': bbox['top_left'],
-                'bottom_right': bbox['bottom_right'],
+                'top_left': text_bbox['top_left'],
+                'bottom_right': text_bbox['bottom_right'],
                 'caption': caption,
                 'text': text_content
             }
             output_layers.append(output_layer)
+        
+        # === AUTO-SCALE SMALL TEXT BBOXES ===
+        print(f"🔧 Auto-scaling small text bboxes for wiki {wiki_id}...")
+        output_layers = auto_scale_small_text_bboxes(output_layers, canvas_width=896, canvas_height=2240)
+        
+        # === VALIDATE AND FIX CANVAS BOUNDS ===
+        print(f"📐 Validating canvas bounds for wiki {wiki_id}...")
+        output_layers = validate_and_fix_layout_bounds(output_layers, canvas_width=896, canvas_height=2240)
+        
+        # === QUALITY VALIDATION ===
+        layout_quality = validate_layout_quality(output_layers)
+        
+        if not layout_quality['passes_quality']:
+            print(f"⚠️  Layout quality warning for wiki {wiki_id}: score={layout_quality['quality_score']:.2f}")
+            for issue in layout_quality['issues'][:3]:  # Show first 3 issues
+                print(f"   - {issue}")
+        else:
+            print(f"✅ Good layout quality for wiki {wiki_id}: score={layout_quality['quality_score']:.2f}")
         
         # Create the final structure with unique wiki ID
         result_item = {
             'index': wiki_id,
             'layers_all': output_layers,
             'full_image_caption': full_image_caption,
-            'original_bbox_index': selected_bbox_index
+            'original_bbox_index': selected_bbox_index,
+            'layout_quality': layout_quality  # Add quality metrics for analysis
         }
         result.append(result_item)
     
@@ -710,7 +1172,7 @@ def main():
         '--extracted-bboxes',
         type=str,
         default=None,
-        help='Path to extracted_bboxes.json (default: ../create_data/qwen/extracted_bboxes.json)'
+        help='Path to extracted_bboxes.json (default: ./extracted_bboxes.json)'
     )
     parser.add_argument(
         '--infographic-dir',
@@ -722,13 +1184,13 @@ def main():
         '--color-idx',
         type=str,
         default=None,
-        help='Path to color_idx.json (default: ../bizgen/glyph/color_idx.json)'
+        help='Path to color_idx.json (default: ./glyph/color_idx.json)'
     )
     parser.add_argument(
         '--font-idx',
         type=str,
         default=None,
-        help='Path to font_idx.json (default: ../bizgen/glyph/font_uni_10-lang_idx.json)'
+        help='Path to font_idx.json (default: ./glyph/font_uni_10-lang_idx.json)'
     )
     parser.add_argument(
         '--seed',
@@ -766,9 +1228,9 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
     # Define file paths
-    extracted_bboxes_path = args.extracted_bboxes or os.path.join(script_dir, '../create_data/qwen/extracted_bboxes.json')
-    color_idx_path = args.color_idx or os.path.join(script_dir, '../bizgen/glyph/color_idx.json')
-    font_idx_path = args.font_idx or os.path.join(script_dir, '../bizgen/glyph/font_uni_10-lang_idx.json')
+    extracted_bboxes_path = args.extracted_bboxes or os.path.join(script_dir, 'extracted_bboxes.json')
+    color_idx_path = args.color_idx or os.path.join(script_dir, 'glyph/color_idx.json')
+    font_idx_path = args.font_idx or os.path.join(script_dir, 'glyph/font_uni_10-lang_idx.json')
     
     # Determine infographic data source
     if args.infographic_dir:
