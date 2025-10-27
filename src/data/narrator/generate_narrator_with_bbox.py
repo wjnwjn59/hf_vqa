@@ -211,15 +211,32 @@ def extract_answer_keywords(qa_pairs: List[Dict]) -> List[str]:
                 if answer_lower.isdigit():
                     continue
                 
-                # Skip single letters or very common short words
-                if len(answer_lower) <= 3 and answer_lower in {'the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'had', 'her', 'was', 'one', 'our', 'out', 'day', 'get', 'has', 'him', 'his', 'how', 'its', 'may', 'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did', 'man', 'men', 'put', 'say', 'she', 'too', 'use'}:
+                # Skip dates that are just years (hard to visualize)
+                if len(answer_lower) == 4 and answer_lower.isdigit():
                     continue
                 
-                filtered_answers.append(answer)
+                # Skip single letters or very common short words
+                if len(answer_lower) <= 3 and answer_lower in {'the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'had', 'her', 'was', 'one', 'our', 'out', 'day', 'get', 'has', 'him', 'his', 'how', 'its', 'may', 'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did', 'man', 'men', 'put', 'say', 'she', 'too', 'use', 'six'}:
+                    continue
+                
+                # Keep answers that are likely to appear in visual content
+                # Proper names, specific terms, multi-word phrases are more likely to be kept
+                if len(answer_lower) >= 4 or answer.isupper() or any(char.isupper() for char in answer):
+                    filtered_answers.append(answer)
+                elif len(answer.split()) > 1:  # Multi-word answers
+                    filtered_answers.append(answer)
             
             keywords.extend(filtered_answers)
     
-    return keywords
+    # Remove duplicates while preserving order
+    unique_keywords = []
+    seen = set()
+    for kw in keywords:
+        if kw.lower() not in seen:
+            unique_keywords.append(kw)
+            seen.add(kw.lower())
+    
+    return unique_keywords
 
 def has_answerable_questions(qa_pairs: List[Dict]) -> bool:
     """Check if there are any answerable questions in the QA pairs"""
@@ -242,8 +259,30 @@ def check_keywords_in_caption(caption: str, keywords: List[str]) -> tuple[bool, 
     found_keywords = []
     
     for keyword in keywords:
-        if keyword.lower() in caption_lower:
+        keyword_lower = keyword.lower()
+        
+        # Direct match first
+        if keyword_lower in caption_lower:
             found_keywords.append(keyword)
+            continue
+        
+        # For multi-word keywords, check if any individual word appears
+        if ' ' in keyword_lower:
+            words = keyword_lower.split()
+            # Check if any significant word (>3 chars) from the keyword appears
+            for word in words:
+                if len(word) > 3 and word in caption_lower:
+                    found_keywords.append(keyword)
+                    break
+        else:
+            # For single words, check partial matches for longer keywords
+            if len(keyword_lower) > 4:
+                # Check if keyword is part of any word in caption
+                words_in_caption = caption_lower.split()
+                for word in words_in_caption:
+                    if keyword_lower in word or word in keyword_lower:
+                        found_keywords.append(keyword)
+                        break
     
     return len(found_keywords) > 0, found_keywords
 
@@ -1628,6 +1667,26 @@ def process_sample_with_bbox_matching(
                         continue
                     else:
                         print(f"    Keywords not found after {max_retries + 1} attempts, skipping sample")
+                        
+                        # DEBUG: Save failed sample for analysis
+                        debug_data = {
+                            'infographic_id': infographic_id,
+                            'keywords_to_find': keywords,
+                            'generated_caption': full_image_caption,
+                            'text_elements': [elem.get('summary', '') for elem in matched_text_elements],
+                            'figure_elements': [elem.get('description', '') for elem in matched_figure_elements],
+                            'context': item.get('context', ''),
+                            'qa_pairs': qa_pairs,
+                            'stage_1_summaries': stage_1_summaries,
+                            'stage_2_figures': stage_2_figures,
+                            'caption_lower': full_image_caption.lower(),
+                            'keywords_lower': [k.lower() for k in keywords]
+                        }
+                        
+                        debug_file = f"debug_failed_sample_{infographic_id}.json"
+                        save_json(debug_file, debug_data)
+                        print(f"    DEBUG: Saved failed sample to {debug_file}")
+                        
                         return None
                 else:
                     print(f"    Keywords found: {found_keywords[:3]}...")  # Show first 3

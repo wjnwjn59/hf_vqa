@@ -1,0 +1,334 @@
+[
+  {
+    "index": 2,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"The Great Barrier Reef: A Natural Wonder of the World\". This infographic presents key facts about the Great Barrier Reef in a visually engaging and informative layout, using a combination of text and illustrations to guide the viewer through its ecological and historical significance. At the top left, the text \"<The Great Barrier Reef is the world's largest coral reef system>\" is prominently displayed, positioned above the main visual elements. In the upper left section, a cartoon of a coral reef with a large sign showing 'world's largest coral reef system' in stylized shapes is placed, anchoring the visual theme. Centered in the middle section, a cartoon of a vibrant underwater scene with a variety of fish in different colors captures the biodiversity of the reef. To the right of this, a cartoon of a coral reef with a variety of coral types in different shapes and colors highlights the reef's structural diversity. Below the fish illustration, the text \"<It spans over 2,300 kilometers along the northeastern coast of Australia>\" is placed at the lower left, complementing the visual of the reef's vast expanse. On the right side, a cartoon of a coral reef with a UNESCO emblem and a plaque showing '1981' in stylized shapes is positioned, visually reinforcing the text \"<The reef is a UNESCO World Heritage Site since 1981>\". Further down, the text \"<It supports over 400 species of coral>\" is placed at the lower right, adjacent to the coral illustration. Finally, the text \"<The reef is home to more than 1,500 species of fish>\" is located in the lower middle, directly below the fish illustration. The overall style of the image is a playful yet informative cartoon style with bright colors and stylized elements that make the information easily digestible and visually engaging."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "Clean white background with professional layout"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          1492
+        ],
+        "bottom_right": [
+          302,
+          2240
+        ],
+        "caption": "a cartoon of a coral reef with a large sign showing 'world's largest coral reef system' in stylized shapes"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          336,
+          621
+        ],
+        "bottom_right": [
+          849,
+          904
+        ],
+        "caption": "a cartoon of a coral reef with a large sign showing 'world's largest coral reef system' in stylized shapes"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          336,
+          323
+        ],
+        "bottom_right": [
+          849,
+          603
+        ],
+        "caption": "a cartoon of a vibrant underwater scene with a variety of fish in different colors"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          336,
+          922
+        ],
+        "bottom_right": [
+          849,
+          1202
+        ],
+        "caption": "a cartoon of a coral reef with a variety of coral types in different shapes and colors"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          43,
+          1220
+        ],
+        "bottom_right": [
+          317,
+          1503
+        ],
+        "caption": "a cartoon of a coral reef with a UNESCO emblem and a plaque showing '1981' in stylized shapes"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          84,
+          186
+        ],
+        "bottom_right": [
+          802,
+          284
+        ],
+        "caption": "Text \"The Great Barrier Reef is the world's largest coral reef system\" in <color-1>, <en-font-101>. ",
+        "text": "The Great Barrier Reef is the world's largest coral reef system"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          56,
+          85
+        ],
+        "bottom_right": [
+          831,
+          170
+        ],
+        "caption": "Text \"It spans over 2,300 kilometers along the northeastern coast of Australia\" in <color-1>, <en-font-15>. ",
+        "text": "It spans over 2,300 kilometers along the northeastern coast of Australia"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          348,
+          1945
+        ],
+        "bottom_right": [
+          828,
+          2146
+        ],
+        "caption": "Text \"The reef is home to more than 1,500 species of fish\" in <color-1>, <en-font-154>. ",
+        "text": "The reef is home to more than 1,500 species of fish"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          348,
+          1610
+        ],
+        "bottom_right": [
+          828,
+          1808
+        ],
+        "caption": "Text \"It supports over 400 species of coral\" in <color-1>, <en-font-101>. ",
+        "text": "It supports over 400 species of coral"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          348,
+          1311
+        ],
+        "bottom_right": [
+          828,
+          1474
+        ],
+        "caption": "Text \"The reef is a UNESCO World Heritage Site since 1981\" in <color-1>, <en-font-15>. ",
+        "text": "The reef is a UNESCO World Heritage Site since 1981"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"The Great Barrier Reef: A Natural Wonder of the World\". This infographic presents key facts about the Great Barrier Reef in a visually engaging and informative layout, using a combination of text and illustrations to guide the viewer through its ecological and historical significance. At the top left, the text \"<The Great Barrier Reef is the world's largest coral reef system>\" is prominently displayed, positioned above the main visual elements. In the upper left section, a cartoon of a coral reef with a large sign showing 'world's largest coral reef system' in stylized shapes is placed, anchoring the visual theme. Centered in the middle section, a cartoon of a vibrant underwater scene with a variety of fish in different colors captures the biodiversity of the reef. To the right of this, a cartoon of a coral reef with a variety of coral types in different shapes and colors highlights the reef's structural diversity. Below the fish illustration, the text \"<It spans over 2,300 kilometers along the northeastern coast of Australia>\" is placed at the lower left, complementing the visual of the reef's vast expanse. On the right side, a cartoon of a coral reef with a UNESCO emblem and a plaque showing '1981' in stylized shapes is positioned, visually reinforcing the text \"<The reef is a UNESCO World Heritage Site since 1981>\". Further down, the text \"<It supports over 400 species of coral>\" is placed at the lower right, adjacent to the coral illustration. Finally, the text \"<The reef is home to more than 1,500 species of fish>\" is located in the lower middle, directly below the fish illustration. The overall style of the image is a playful yet informative cartoon style with bright colors and stylized elements that make the information easily digestible and visually engaging.",
+    "original_bbox_index": 46,
+    "layout_quality": {
+      "quality_score": 1.0,
+      "severe_overlaps": 0,
+      "readability_issues": 0,
+      "edge_issues": 0,
+      "issues": [],
+      "passes_quality": true
+    }
+  },
+  {
+    "index": 3,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"The Great Barrier Reef: A Natural Wonder of the World\". This infographic presents key facts about the Great Barrier Reef through a combination of text and visual elements, arranged in a clear and informative layout. At the top left, the text \"<The Great Barrier Reef is the world's largest coral reef system>\" is placed, while directly below it, \"<It spans over 2,300 kilometers along the northeastern coast of Australia>\" is positioned in the upper middle section. In the upper left section, a cartoon of a coral reef with a large, intricate structure in the foreground is displayed, anchoring the visual narrative. To the right of this, a cartoon map showing a long, curved line along the northeastern coast of Australia is placed, aligning with the textual information about the reef's geographic extent. In the middle section, \"<The reef is home to more than 1,500 species of fish>\" is centered, with a cartoon of various colorful fish swimming around a coral structure placed just below it. On the right side, a cartoon of different coral types with vibrant colors and textures is shown, complementing the text \"<It supports over 400 species of coral>\" which is positioned above it. Below that, \"<The reef is a UNESCO World Heritage Site since 1981>\" is located, with a cartoon of a star-shaped emblem with the words 'UNESCO World Heritage Site' around it placed just beneath it. The overall style of the image is clean, bright, and informative, with a cartoonish aesthetic that makes the content accessible and engaging."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "Clean white background with professional layout"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          1030
+        ],
+        "caption": "a cartoon of a coral reef with a large, intricate structure in the foreground"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          584,
+          1603
+        ],
+        "bottom_right": [
+          896,
+          2193
+        ],
+        "caption": "a cartoon map showing a long, curved line along the northeastern coast of Australia"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          330,
+          1674
+        ],
+        "bottom_right": [
+          565,
+          1910
+        ],
+        "caption": "a cartoon of various colorful fish swimming around a coral structure"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          392,
+          2023
+        ],
+        "bottom_right": [
+          504,
+          2135
+        ],
+        "caption": "a cartoon of different coral types with vibrant colors and textures"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          330,
+          1393
+        ],
+        "bottom_right": [
+          565,
+          1628
+        ],
+        "caption": "a cartoon of a star-shaped emblem with the words 'UNESCO World Heritage Site' around it"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          411,
+          2000
+        ],
+        "bottom_right": [
+          500,
+          2050
+        ],
+        "caption": "Text \"The Great Barrier Reef is the world's largest coral reef system\" in <color-1>, <en-font-101>. ",
+        "text": "The Great Barrier Reef is the world's largest coral reef system"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          270,
+          2157
+        ],
+        "bottom_right": [
+          626,
+          2207
+        ],
+        "caption": "Text \"It spans over 2,300 kilometers along the northeastern coast of Australia\" in <color-1>, <en-font-15>. ",
+        "text": "It spans over 2,300 kilometers along the northeastern coast of Australia"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          136,
+          535
+        ],
+        "bottom_right": [
+          759,
+          905
+        ],
+        "caption": "Text \"The reef is home to more than 1,500 species of fish\" in <color-1>, <en-font-154>. ",
+        "text": "The reef is home to more than 1,500 species of fish"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          412,
+          1334
+        ],
+        "bottom_right": [
+          483,
+          1450
+        ],
+        "caption": "Text \"It supports over 400 species of coral\" in <color-1>, <en-font-101>. ",
+        "text": "It supports over 400 species of coral"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          412,
+          1071
+        ],
+        "bottom_right": [
+          483,
+          1187
+        ],
+        "caption": "Text \"The reef is a UNESCO World Heritage Site since 1981\" in <color-1>, <en-font-15>. ",
+        "text": "The reef is a UNESCO World Heritage Site since 1981"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"The Great Barrier Reef: A Natural Wonder of the World\". This infographic presents key facts about the Great Barrier Reef through a combination of text and visual elements, arranged in a clear and informative layout. At the top left, the text \"<The Great Barrier Reef is the world's largest coral reef system>\" is placed, while directly below it, \"<It spans over 2,300 kilometers along the northeastern coast of Australia>\" is positioned in the upper middle section. In the upper left section, a cartoon of a coral reef with a large, intricate structure in the foreground is displayed, anchoring the visual narrative. To the right of this, a cartoon map showing a long, curved line along the northeastern coast of Australia is placed, aligning with the textual information about the reef's geographic extent. In the middle section, \"<The reef is home to more than 1,500 species of fish>\" is centered, with a cartoon of various colorful fish swimming around a coral structure placed just below it. On the right side, a cartoon of different coral types with vibrant colors and textures is shown, complementing the text \"<It supports over 400 species of coral>\" which is positioned above it. Below that, \"<The reef is a UNESCO World Heritage Site since 1981>\" is located, with a cartoon of a star-shaped emblem with the words 'UNESCO World Heritage Site' around it placed just beneath it. The overall style of the image is clean, bright, and informative, with a cartoonish aesthetic that makes the content accessible and engaging.",
+    "original_bbox_index": 92,
+    "layout_quality": {
+      "quality_score": 0.6,
+      "severe_overlaps": 3,
+      "readability_issues": 0,
+      "edge_issues": 0,
+      "issues": [
+        "Text 'The Great Barrier Reef is the ...' overlaps with image",
+        "Text 'The reef is home to more than ...' overlaps with image",
+        "Text 'It supports over 400 species o...' overlaps with image"
+      ],
+      "passes_quality": false
+    }
+  }
+]

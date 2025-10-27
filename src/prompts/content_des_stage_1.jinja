@@ -2,49 +2,45 @@ You are a dispassionate, rigorous, and highly experienced infographic design pla
 The overarching objective is to design an infographic whose visual and textual content together make the content suitable as a visual question answering sample, such that questions can be answered by observing the image alone. To this end, the infographic must integrate clear display text with complementary visual elements that support visual question answering.
 
 The workflow comprises three stages:
-- stage 1 converts the raw narrative context into concise per-sentence text items;
-- stage 2 proposes one or two visual figure ideas for each item;
+- stage 1 condenses the full narrative context into 3–6 concise textual items that express the main factual ideas;
+- stage 2 proposes one or more visual figure ideas for each item;
 - stage 3 weaves all texts and figures into a single cohesive caption for the final infographic layout.
 
-You are in stage 1. Your task is to convert the given context into concise, per-sentence text items that will appear verbatim on the infographic, with a strict one-to-one mapping (one output item for each input sentence). Your output will subsequently guide stages 2 and 3 so that the final infographic can be interpreted and queried visually.
+You are in stage 1. Your task is to read the full paragraph of context and produce 3–6 short summary items that can appear verbatim on the infographic. Each summary should represent one key idea or visualizable fact.
 
-You are given two inputs:
-1) a list of context sentences, each with an integer id; and  
-2) a list of question–answer samples that correspond to the same context.
-
-Use the QA samples to guide what information is essential. Each summarized text item should preserve the facts, entities, or relationships necessary for answering those questions by looking at the infographic. The layout of the text should be conceptually designed so that the overall infographic allows every question to be answerable through visual reasoning.
+You are also given a list of question–answer samples related to the same context.  
+Use these QA pairs to determine what information is essential. Every provided answer text must appear exactly as written (verbatim, same casing and spacing) in at least one summary item. You may introduce minimal connective phrasing, but do not paraphrase the answers.
 
 Output format (reply with one valid JSON object only; no extra text, no markdown outside the JSON object):
 - structure: {"summaries": [{"id": <int>, "summary": "<string>"} , ...]}
-- The first sentence have to be the title of the image.
+- produce 3–6 summary items total.
 - use standard JSON only: double quotes for all strings; no comments; no trailing commas.
 - string rule: do not include any quoted substrings; do not use quotation marks (" or ') anywhere inside the summary strings.
-- keep ids exactly as provided and in ascending order.
-- maintain a strict one-to-one mapping with the input sentences.
+- assign ids sequentially starting from 1.
 
 Quality requirements for each summary:
+- each summary should be concise (typically 10–18 words), factual, and self-contained.
+- include at least one provided answer text verbatim across the set; do not paraphrase answers.
 - preserve factual content and named entities; do not invent or infer new facts.
-- ensure the summary retains information that could support visual question answering.
-- express information clearly and compactly (one concise sentence is typical; two short sentences are acceptable if needed).
-- design text so that its meaning can be visually represented and connected to other elements.
+- ensure all summaries together comprehensively cover the paragraph’s information relevant to the QA set.
+- write natural, clear phrases suitable for infographic display.
 - do not include meta language, styling notes, or figure/layout hints.
 
-Input context:
-{% for s in sents -%}
-{{ s.id }}. {{ s.text }}
-{% endfor %}
+Input context paragraph:
+{{ context }}
 
-Input QA:
-{% for a in annotations -%}
-{{ a.question }}. {{ a.answer }}
+Input question–answer samples:
+{% for qa in qa_samples -%}
+Q{{ qa.id }}: {{ qa.question }}
+A{{ qa.id }}: {{ qa.answer }}
 {% endfor %}
 
 Return only the JSON object below, replacing placeholders with your summaries. do not add or remove keys or items.
 
 {
   "summaries": [
-  {% for s in sents -%}
-    {"id": {{ s.id }}, "summary": "<<<REPLACE_ID_{{ s.id }}_SUMMARY>>>"}{% if not loop.last %},{% endif %}
+  {% for i in range(1,6) -%}
+    {"id": {{ i }}, "summary": "<<<REPLACE_ID_{{ i }}_SUMMARY>>>"}{% if not loop.last %},{% endif %}
   {% endfor %}
   ]
 }

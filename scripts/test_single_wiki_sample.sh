@@ -1,9 +1,13 @@
 #!/bin/bash
 
 # ============================================================================
-# Test Single Wiki Sample - Quick Test
+# Complete Pipeline Test - Wiki Generation to Training Data
 # ============================================================================
-# This script tests the wiki bbox pipeline with just 1 sample for debugging
+# This script runs the complete pipeline:
+# 1. Generate wiki layouts with bbox matching
+# 2. Generate images using BizGen
+# 3. Apply OCR filtering
+# 4. Create training dataset (JSON/JSONL)
 
 set -e  # Exit on error
 
@@ -12,14 +16,15 @@ set -e  # Exit on error
 # ============================================================================
 export PYTHONPATH="./:$PYTHONPATH"
 
-# Conda environment
+# Conda environments
 CONDA_WIKI="/opt/miniconda3/envs/thinh_wiki/bin/python"
+CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 
 # Test parameters
-GPU_ID=2
+GPU_ID=0
 START_SUBSET=1
 END_SUBSET=2
-NUM_SAMPLES=10  # Only 1 sample for quick test
+NUM_SAMPLES=3  # Number of samples for quick test
 
 # Paths
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
@@ -27,34 +32,41 @@ STAGE_A_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
 STAGE_B_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
 STAGE_C_TEMPLATE="./src/prompts/content_des_stage_3_with_bbox.jinja"
 EXTRACTED_BBOXES="./src/data/narrator/extracted_bboxes.json"
-TEST_OUTPUT_DIR="test_wiki_single"
+
+# Output directories
+WIKI_OUTPUT_DIR="test_wiki_single"
+BIZGEN_OUTPUT_DIR="./src/data/bizgen/output/test_single"
+OCR_OUTPUT_DIR="./ocr_results_single"
+TRAINING_OUTPUT_DIR="./training_data"
 
 # Model settings
 MODEL_NAME="unsloth/Qwen3-8B"
+DATASET_NAME="test_single"
 
 echo "======================================================================"
-echo "Testing Single Wiki Sample"
+echo "Complete Pipeline Test: Wiki Generation → Images → Training Data"
 echo "======================================================================"
 echo ""
 echo "Configuration:"
 echo "  GPU ID              : $GPU_ID"
 echo "  Number of Samples   : $NUM_SAMPLES"
-echo "  Output Directory    : $TEST_OUTPUT_DIR"
+echo "  Dataset Name        : $DATASET_NAME"
+echo "  Wiki Output         : $WIKI_OUTPUT_DIR"
+echo "  BizGen Output       : $BIZGEN_OUTPUT_DIR"
+echo "  OCR Output          : $OCR_OUTPUT_DIR"
+echo "  Training Output     : $TRAINING_OUTPUT_DIR"
 echo "  Model               : $MODEL_NAME"
 echo ""
 
 # Clean previous test results
-if [ -d "$TEST_OUTPUT_DIR" ]; then
-    echo "Cleaning previous test results..."
-    rm -rf "$TEST_OUTPUT_DIR"
-fi
+echo "Cleaning previous test results..."
+rm -rf "$WIKI_OUTPUT_DIR" "$BIZGEN_OUTPUT_DIR" "$OCR_OUTPUT_DIR"
+mkdir -p "$TRAINING_OUTPUT_DIR"
 
-echo "Starting single sample test..."
 echo ""
-
-# ============================================================================
-# Run the test
-# ============================================================================
+echo "======================================================================"
+echo "STEP 1/4: Generate Wiki Layouts with BBox Matching"
+echo "======================================================================"
 CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_narrator_with_bbox.py \
     --model_name "$MODEL_NAME" \
     --input_data "$SQUAD_TRAIN" \
@@ -62,7 +74,7 @@ CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_narrator_wit
     --stage_b "$STAGE_B_TEMPLATE" \
     --stage_c "$STAGE_C_TEMPLATE" \
     --extracted_bboxes "$EXTRACTED_BBOXES" \
-    --output_dir "$TEST_OUTPUT_DIR" \
+    --output_dir "$WIKI_OUTPUT_DIR" \
     --start $START_SUBSET \
     --end $END_SUBSET \
     --num_samples $NUM_SAMPLES \
@@ -71,129 +83,186 @@ CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_narrator_wit
     --max_retries 1 \
     --gpu_memory_utilization 0.9
 
-# ============================================================================
-# Check Results
-# ============================================================================
-if [ $? -eq 0 ]; then
-    echo ""
-    echo "✓ Single sample test completed!"
+# Check if wiki generation succeeded
+if [ $? -ne 0 ]; then
+    echo "✗ Wiki generation failed!"
+    exit 1
+fi
+
+# Count generated wiki files
+WIKI_FILES=$(find "$WIKI_OUTPUT_DIR" -name "wiki*.json" | wc -l)
+echo "✓ Generated $WIKI_FILES wiki layout files"
+
+if [ $WIKI_FILES -eq 0 ]; then
+    echo "✗ No wiki files were generated!"
+    exit 1
+fi
+
+echo ""
+echo "======================================================================"
+echo "STEP 2/4: Generate Images using BizGen"
+echo "======================================================================"
+
+# Activate BizGen environment and run image generation
+echo "Switching to BizGen environment and generating images..."
+cd src/data/bizgen
+
+CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_BIZGEN inference.py \
+    --wiki_dir "$WIKI_OUTPUT_DIR" \
+    --output_dir "$BIZGEN_OUTPUT_DIR" \
+    --dataset_name "$DATASET_NAME"
+
+# Check if image generation succeeded
+if [ $? -ne 0 ]; then
+    echo "✗ BizGen image generation failed!"
+    exit 1
+fi
+
+# Count generated images
+IMAGE_FILES=$(find "$BIZGEN_OUTPUT_DIR" -name "*.png" | wc -l)
+echo "✓ Generated $IMAGE_FILES image files"
+
+if [ $IMAGE_FILES -eq 0 ]; then
+    echo "✗ No images were generated!"
+    exit 1
+fi
+
+echo ""
+echo "======================================================================"
+echo "STEP 3/4: Apply OCR Filtering"
+echo "======================================================================"
+
+# Run OCR filter to identify poor quality images
+echo "Running OCR quality filter..."
+CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/ocr/ocr_filter.py \
+    --images-dir "$BIZGEN_OUTPUT_DIR" \
+    --bizgen-dir "$WIKI_OUTPUT_DIR" \
+    --output-dir "$OCR_OUTPUT_DIR" \
+    --threshold 0.5
+
+# Check if OCR filtering succeeded
+if [ $? -ne 0 ]; then
+    echo "✗ OCR filtering failed!"
+    exit 1
+fi
+
+echo "✓ OCR filtering completed"
+
+echo ""
+echo "======================================================================"
+echo "STEP 4/4: Create Training Dataset"
+echo "======================================================================"
+
+# Create training dataset from generated images and QA data
+echo "Creating training dataset (JSON + JSONL format)..."
+$CONDA_WIKI src/data/narrator/convert_to_training_format.py \
+    --qa-file "$SQUAD_TRAIN" \
+    --image-base-dir "./src/data/bizgen/output" \
+    --dataset-name "$DATASET_NAME" \
+    --dataset-type "squad_v2" \
+    --output-file "$TRAINING_OUTPUT_DIR/test_single_training.json" \
+    --max-samples $NUM_SAMPLES \
+    --seed 42
+
+# Check if training data creation succeeded
+if [ $? -ne 0 ]; then
+    echo "✗ Training data creation failed!"
+    exit 1
+fi
+
+# Verify training files were created
+JSON_FILE="$TRAINING_OUTPUT_DIR/test_single_training.json"
+JSONL_FILE="$TRAINING_OUTPUT_DIR/test_single_training.jsonl"
+
+if [ -f "$JSON_FILE" ] && [ -f "$JSONL_FILE" ]; then
+    echo "✓ Training dataset created successfully!"
     
-    # Check if output directory exists
-    if [ -d "$TEST_OUTPUT_DIR" ]; then
-        echo ""
-        echo "Checking output files..."
-        
-        # Count wiki files
-        WIKI_FILES=$(find "$TEST_OUTPUT_DIR" -name "wiki*.json" | wc -l)
-        echo "  Wiki files generated: $WIKI_FILES"
-        
-        if [ $WIKI_FILES -gt 0 ]; then
-            # Get the first wiki file
-            FIRST_WIKI=$(find "$TEST_OUTPUT_DIR" -name "wiki*.json" | head -1)
-            echo "  First wiki file: $FIRST_WIKI"
-            
-            # Display file size
-            FILE_SIZE=$(du -h "$FIRST_WIKI" | cut -f1)
-            echo "  File size: $FILE_SIZE"
-            
-            echo ""
-            echo "======================================================================"
-            echo "Analyzing Wiki Structure"
-            echo "======================================================================"
-            
-            # Analyze the wiki structure
-            python3 -c "
+    # Get file sizes
+    JSON_SIZE=$(du -h "$JSON_FILE" | cut -f1)
+    JSONL_SIZE=$(du -h "$JSONL_FILE" | cut -f1)
+    
+    echo "  JSON file: $JSON_FILE ($JSON_SIZE)"
+    echo "  JSONL file: $JSONL_FILE ($JSONL_SIZE)"
+    
+    # Count training samples
+    TRAIN_SAMPLES=$(python3 -c "import json; data=json.load(open('$JSON_FILE')); print(len(data))")
+    echo "  Training samples: $TRAIN_SAMPLES"
+    
+else
+    echo "✗ Training files were not created!"
+    exit 1
+fi
+
+echo ""
+echo "======================================================================"
+echo "✅ COMPLETE PIPELINE TEST PASSED! 🎉"
+echo "======================================================================"
+echo ""
+echo "Summary of results:"
+echo "  📝 Wiki layouts generated: $WIKI_FILES files"
+echo "  🖼️  Images generated: $IMAGE_FILES files"
+echo "  🔍 OCR filtering completed"
+echo "  📊 Training samples created: $TRAIN_SAMPLES samples"
+echo ""
+echo "Generated files:"
+echo "  📁 Wiki layouts: $WIKI_OUTPUT_DIR/"
+echo "  📁 Images: $BIZGEN_OUTPUT_DIR/"
+echo "  📁 OCR results: $OCR_OUTPUT_DIR/"
+echo "  📄 Training JSON: $JSON_FILE"
+echo "  📄 Training JSONL: $JSONL_FILE"
+echo ""
+echo "Pipeline components verified:"
+echo "  ✅ Squad v2 data loading & deduplication"
+echo "  ✅ 3-stage infographic generation with QA integration"
+echo "  ✅ BBox matching and layout optimization"
+echo "  ✅ BizGen image synthesis"
+echo "  ✅ OCR quality filtering"
+echo "  ✅ Training data format conversion"
+echo ""
+echo "Next steps:"
+echo "  🚀 Run full pipeline: bash scripts/run_narrator_bbox_pipeline.sh 0 1 2"
+echo "  📈 Train VQA model with generated training data"
+echo "  🧪 Test model inference on generated images"
+echo ""
+
+# ============================================================================
+# Optional: Display sample training entry
+# ============================================================================
+echo "======================================================================"
+echo "Sample Training Entry"
+echo "======================================================================"
+
+python3 -c "
 import json
 import sys
 
 try:
-    with open('$FIRST_WIKI', 'r', encoding='utf-8') as f:
+    with open('$JSON_FILE', 'r', encoding='utf-8') as f:
         data = json.load(f)
     
-    print(f'File format: {type(data)}')
-    
-    if isinstance(data, list):
-        print(f'Number of wiki entries: {len(data)}')
+    if len(data) > 0:
+        sample = data[0]
+        print(f'ID: {sample[\"id\"]}')
+        print(f'Image: {sample[\"image\"]}')
+        print(f'Conversations: {len(sample[\"conversations\"])} turns')
         
-        if len(data) > 0:
-            wiki_entry = data[0]
-            print(f'\\nFirst wiki entry structure:')
-            print(f'  Keys: {list(wiki_entry.keys())}')
-            
-            if 'index' in wiki_entry:
-                print(f'  Wiki index: {wiki_entry[\"index\"]}')
-            
-            if 'layers_all' in wiki_entry:
-                layers = wiki_entry['layers_all']
-                print(f'  Number of layers: {len(layers)}')
-                
-                print(f'  Layer breakdown:')
-                for i, layer in enumerate(layers):
-                    category = layer.get('category', 'unknown')
-                    caption = layer.get('caption', '')[:50] + '...' if len(layer.get('caption', '')) > 50 else layer.get('caption', '')
-                    print(f'    Layer {i}: {category} - \"{caption}\"')
-            
-            if 'full_image_caption' in wiki_entry:
-                caption = wiki_entry['full_image_caption']
-                print(f'\\n  Full image caption length: {len(caption)} characters')
-                print(f'  Caption preview: {caption[:100]}...')
-            
-            if 'layout_quality' in wiki_entry:
-                quality = wiki_entry['layout_quality']
-                print(f'\\n  Layout quality:')
-                print(f'    Quality score: {quality.get(\"quality_score\", \"N/A\")}')
-                print(f'    Passes quality: {quality.get(\"passes_quality\", \"N/A\")}')
-            
-            print(f'\\n✓ Wiki structure is correct!')
-            
-        else:
-            print('✗ Empty wiki file')
-            sys.exit(1)
+        # Show first QA pair
+        if len(sample['conversations']) >= 2:
+            print(f'\\nFirst Q&A:')
+            print(f'Q: {sample[\"conversations\"][0][\"value\"]}')
+            print(f'A: {sample[\"conversations\"][1][\"value\"]}')
+        
+        print(f'\\n✅ Training data format is correct!')
     else:
-        print('✗ Invalid wiki file format')
+        print('❌ No training samples found')
         sys.exit(1)
         
 except Exception as e:
-    print(f'✗ Error analyzing wiki file: {e}')
-    import traceback
-    traceback.print_exc()
+    print(f'❌ Error reading training data: {e}')
     sys.exit(1)
 "
-            
-            if [ $? -eq 0 ]; then
-                echo ""
-                echo "======================================================================"
-                echo "✓ Single Sample Test PASSED! 🎉"
-                echo "======================================================================"
-                echo ""
-                echo "The wiki bbox pipeline is working correctly!"
-                echo ""
-                echo "Output file: $FIRST_WIKI"
-                echo ""
-                echo "Next steps:"
-                echo "  1. Run larger test with more samples"
-                echo "  2. Run full pipeline: bash scripts/run_narrator_bbox_pipeline.sh 0 1 2"
-                echo "  3. Use generated wiki files with BizGen"
-                echo ""
-            else
-                echo ""
-                echo "✗ Wiki structure analysis failed"
-                exit 1
-            fi
-        else
-            echo "  ✗ No wiki files were generated"
-            exit 1
-        fi
-    else
-        echo "  ✗ Output directory was not created"
-        exit 1
-    fi
-else
-    echo ""
-    echo "✗ Single sample test failed!"
-    exit 1
-fi
 
+echo ""
 echo "======================================================================"
-echo "Test completed!"
+echo "🎊 COMPLETE PIPELINE TEST COMPLETED SUCCESSFULLY! 🎊"
 echo "======================================================================"

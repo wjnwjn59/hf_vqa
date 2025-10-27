@@ -3,13 +3,20 @@
 # ============================================================================
 # Parallel Narrator Pipeline Launcher
 # ============================================================================
-# This script launches the narrator pipeline on multiple GPUs in parallel
+# This script launches the complete narrator pipeline on multiple GPUs in parallel:
+# 1. Generate 3-stage infographic data using Qwen
+# 2. Merge bounding boxes 
+# 3. Generate images with BizGen
+# 4. Create training datasets (JSON/JSONL format)
 #
 # Usage:
 #   bash scripts/run_narrator_parallel.sh
 #
 # Configuration:
 #   Edit the GPU_CONFIGS array below to set ranges for each GPU
+#
+# Post-processing:
+#   After completion, run: python scripts/merge_training_data.py
 # ============================================================================
 
 set -e
@@ -172,6 +179,12 @@ if [ $FAILED -eq 0 ]; then
     echo "  Infographic v2 JSON: src/data/create_data/output/infographic_v2/"
     echo "  Narrator Format v2 : src/data/create_data/output/narrator_format_v2/"
     echo "  Generated Images   : src/data/bizgen/output/squad_v2_new/"
+    echo "  Training Data      : training_data/narrator_*_training.json"
+    echo ""
+    echo "Next Steps:"
+    echo "  1. Merge all training data files: python scripts/merge_training_data.py"
+    echo "  2. Run OCR filtering: python src/data/ocr/ocr_filter.py"
+    echo "  3. Train VQA model with generated data"
 else
     echo "✗ $FAILED GPU(s) failed"
     echo ""
