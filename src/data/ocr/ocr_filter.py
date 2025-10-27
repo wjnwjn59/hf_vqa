@@ -191,12 +191,36 @@ def process_single_image(
     print(f"  Should filter: {should_filter} (Jaccard similarity {similarity_ratio:.3f} < threshold {threshold:.3f})")
     
     if should_filter:
+        # Rename the image file to add a _faults suffix before the extension
+        try:
+            image_dir = os.path.dirname(image_path)
+            image_base = os.path.basename(image_path)
+            name, ext = os.path.splitext(image_base)
+            # Avoid double-appending if already suffixed
+            if not name.endswith('_faults'):
+                new_name = f"{name}_faults{ext}"
+                new_path = os.path.join(image_dir, new_name)
+                # If target exists, append a counter
+                counter = 1
+                while os.path.exists(new_path):
+                    new_name = f"{name}_faults_{counter}{ext}"
+                    new_path = os.path.join(image_dir, new_name)
+                    counter += 1
+                os.rename(image_path, new_path)
+                print(f"  Renamed image: {image_base} -> {os.path.basename(new_path)}")
+                # Update local variables so returned paths point to the new file
+                image_path = new_path
+                image_base = os.path.basename(new_path)
+        except Exception as e:
+            print(f"  Warning: failed to rename image {image_path}: {e}")
+
         return {
             'image_id': image_id,
             'image_filename': os.path.basename(image_path),
             'image_path': image_path,
             'wiki_file': os.path.basename(wiki_file_path),
             'text_similarity_ratio': similarity_ratio,
+            'ocr_percentage': round(similarity_ratio * 100.0, 2),
             'json_texts': json_texts,
             'ocr_texts': ocr_texts,
             'reason': f'Jaccard similarity ({similarity_ratio:.3f}) between JSON and OCR texts is below threshold ({threshold:.3f})'
@@ -252,17 +276,21 @@ def main():
     # Ensure output directory exists
     os.makedirs(args.output_dir, exist_ok=True)
     
-    # Get list of image files
+    # Get list of image files (search recursively in subdirectories)
     if not os.path.exists(args.images_dir):
         print(f"Error: Images directory not found: {args.images_dir}")
         return
     
     image_files = []
-    for filename in os.listdir(args.images_dir):
-        if filename.endswith('.png') and not filename.endswith('_bbox.png'):
-            image_id = get_image_id_from_filename(filename)
-            if image_id is not None:
-                image_files.append((image_id, filename))
+    # Walk through all subdirectories to find images
+    for root, dirs, files in os.walk(args.images_dir):
+        for filename in files:
+            if filename.endswith('.png') and not filename.endswith('_bbox.png') and not filename.endswith('_lcfg.png'):
+                image_id = get_image_id_from_filename(filename)
+                if image_id is not None:
+                    # Store full path relative to the images_dir for processing
+                    full_path = os.path.join(root, filename)
+                    image_files.append((image_id, full_path))
     
     # Sort by image ID
     image_files.sort(key=lambda x: x[0])
@@ -271,10 +299,14 @@ def main():
     if args.end_id is None:
         args.end_id = max(img_id for img_id, _ in image_files) if image_files else args.start_id
     
-    image_files = [(img_id, filename) for img_id, filename in image_files 
+    image_files = [(img_id, full_path) for img_id, full_path in image_files 
                    if args.start_id <= img_id <= args.end_id]
     
     print(f"Found {len(image_files)} images to process (ID range: {args.start_id}-{args.end_id})")
+    if len(image_files) > 0:
+        print("Sample images found:")
+        for img_id, img_path in image_files[:5]:  # Show first 5 as examples
+            print(f"  ID {img_id}: {os.path.relpath(img_path, args.images_dir)}")
     print(f"Using Jaccard similarity threshold: {args.threshold:.3f}")
     print(f"Images directory: {args.images_dir}")
     print(f"Bizgen directory: {args.bizgen_dir}")
@@ -291,8 +323,8 @@ def main():
     filtered_results = []
     processed_count = 0
     
-    for image_id, filename in image_files:
-        image_path = os.path.join(args.images_dir, filename)
+    for image_id, full_path in image_files:
+        image_path = full_path  # full_path already contains the complete path
         
         result = process_single_image(
             image_path, 

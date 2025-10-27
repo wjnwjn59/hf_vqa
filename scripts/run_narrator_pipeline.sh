@@ -7,6 +7,7 @@
 # 1. Generate 3-stage infographic data using Qwen (generate_stage_infographic.py)
 # 2. Merge bounding boxes (merge_stage_narrator.py)
 # 3. Generate images with BizGen
+# 4. Create training dataset (JSON/JSONL format)
 #
 # Usage:
 #   bash scripts/run_narrator_pipeline.sh <GPU_ID> <START_SUBSET> <END_SUBSET>
@@ -134,7 +135,7 @@ echo ""
 # Step 1: Generate 3-Stage Infographic Data using Qwen
 # ============================================================================
 echo "======================================================================"
-echo "Step 1/3: Generating 3-Stage Infographic Data with Qwen"
+echo "Step 1/4: Generating 3-Stage Infographic Data with Qwen"
 echo "======================================================================"
 echo "Using conda environment: thinh_wiki"
 echo "Python: $CONDA_WIKI"
@@ -167,7 +168,7 @@ fi
 # ============================================================================
 echo ""
 echo "======================================================================"
-echo "Step 2/3: Merging Bounding Boxes"
+echo "Step 2/4: Merging Bounding Boxes"
 echo "======================================================================"
 echo ""
 
@@ -193,7 +194,7 @@ fi
 # ============================================================================
 echo ""
 echo "======================================================================"
-echo "Step 3/3: Generating Images with BizGen"
+echo "Step 3/4: Generating Images with BizGen"
 echo "======================================================================"
 echo "Using conda environment: khoina_bizgen"
 echo "Python: $CONDA_BIZGEN"
@@ -253,6 +254,60 @@ echo "Output Locations:"
 echo "  1. Infographic v2   : $INFOGRAPHIC_V2_DIR/infographic$(printf '%06d' $START_SUBSET).json - infographic$(printf '%06d' $((END_SUBSET-1))).json"
 echo "  2. Narrator Format  : $NARRATOR_FORMAT_V2_DIR/wiki$(printf '%06d' $START_SUBSET).json - wiki$(printf '%06d' $((END_SUBSET-1))).json"
 echo "  3. Generated Images : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
+echo "  4. Training Data    : training_data/narrator_${START_SUBSET}_${END_SUBSET}_training.json"
+echo ""
+
+# ============================================================================
+# STEP 4: Create Training Dataset
+# ============================================================================
+echo "======================================================================"
+echo "STEP 4/4: Creating Training Dataset"
+echo "======================================================================"
+echo ""
+echo "Converting images and QA data to training format..."
+
+# Create training data output directory
+TRAINING_DIR="training_data"
+mkdir -p "$TRAINING_DIR"
+
+# Training output files
+TRAINING_JSON="$TRAINING_DIR/narrator_${START_SUBSET}_${END_SUBSET}_training.json"
+TRAINING_JSONL="$TRAINING_DIR/narrator_${START_SUBSET}_${END_SUBSET}_training.jsonl"
+
+# Run training data conversion
+echo "Creating training dataset for subsets $START_SUBSET to $((END_SUBSET-1))..."
+$CONDA_WIKI src/data/narrator/convert_to_training_format.py \
+    --qa-file "$SQUAD_TRAIN" \
+    --image-base-dir "$BIZGEN_DIR/output" \
+    --dataset-name "$DATASET_NAME" \
+    --dataset-type "squad_v2" \
+    --output-file "$TRAINING_JSON" \
+    --seed $SEED
+
+# Check if training data creation succeeded
+if [ $? -eq 0 ]; then
+    echo "✓ Training dataset created successfully!"
+    
+    # Verify training files were created
+    if [ -f "$TRAINING_JSON" ] && [ -f "$TRAINING_JSONL" ]; then
+        # Get file sizes
+        JSON_SIZE=$(du -h "$TRAINING_JSON" | cut -f1)
+        JSONL_SIZE=$(du -h "$TRAINING_JSONL" | cut -f1)
+        
+        echo "  JSON file: $TRAINING_JSON ($JSON_SIZE)"
+        echo "  JSONL file: $TRAINING_JSONL ($JSONL_SIZE)"
+        
+        # Count training samples
+        TRAIN_SAMPLES=$(python3 -c "import json; data=json.load(open('$TRAINING_JSON')); print(len(data))" 2>/dev/null || echo "unknown")
+        echo "  Training samples: $TRAIN_SAMPLES"
+    else
+        echo "⚠ Training files may not have been created properly"
+    fi
+else
+    echo "✗ Training data creation failed!"
+    echo "⚠ Pipeline completed but training data step failed"
+fi
+
 echo ""
 echo "======================================================================"
 echo "All Done! 🎉"

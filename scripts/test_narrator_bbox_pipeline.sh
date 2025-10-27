@@ -270,3 +270,25 @@ else
 fi
 
 cd - > /dev/null
+
+# ============================================================================
+# Optional OCR filter step on BizGen output
+# This will compare OCR text from images with the JSON layout and rename images
+# with low OCR similarity (append _faults). The results are saved under test_ocr_output.
+# ============================================================================
+BIZGEN_OUTPUT_DIR="$TEST_BIZGEN_DIR/output/$DATASET_NAME"
+TEST_OCR_OUTPUT_DIR="test_ocr_output"
+
+if [ -d "$BIZGEN_OUTPUT_DIR" ] && find "$BIZGEN_OUTPUT_DIR" -name "*.png" -print -quit | grep -q .; then
+    echo "\nRunning OCR filter on BizGen output: $BIZGEN_OUTPUT_DIR"
+    mkdir -p "$TEST_OCR_OUTPUT_DIR"
+    # Use the wiki python environment which typically has PaddleOCR installed
+    $CONDA_WIKI src/data/ocr/ocr_filter.py \
+        --images-dir "$BIZGEN_OUTPUT_DIR" \
+        --bizgen-dir "../create_data/output/narrator_format_v2" \
+        --output-dir "$TEST_OCR_OUTPUT_DIR" \
+        --threshold 0.5
+    echo "OCR filtering finished. Results saved to: $TEST_OCR_OUTPUT_DIR"
+else
+    echo "\nNo BizGen images found at $BIZGEN_OUTPUT_DIR; skipping OCR filter"
+fi
