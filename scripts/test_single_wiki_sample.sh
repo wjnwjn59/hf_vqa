@@ -34,7 +34,7 @@ STAGE_C_TEMPLATE="./src/prompts/content_des_stage_3_with_bbox.jinja"
 EXTRACTED_BBOXES="./src/data/narrator/extracted_bboxes.json"
 
 # Output directories
-WIKI_OUTPUT_DIR="test_wiki_single"
+WIKI_OUTPUT_DIR="/home/thinhnp/hf_vqa/test_wiki_single"
 BIZGEN_OUTPUT_DIR="./src/data/bizgen/output/test_single"
 OCR_OUTPUT_DIR="./ocr_results_single"
 TRAINING_OUTPUT_DIR="./training_data"
@@ -108,6 +108,7 @@ echo "Switching to BizGen environment and generating images..."
 cd src/data/bizgen
 
 CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_BIZGEN inference.py \
+    --subset "1:10" \
     --wiki_dir "$WIKI_OUTPUT_DIR" \
     --output_dir "$BIZGEN_OUTPUT_DIR" \
     --dataset_name "$DATASET_NAME"
