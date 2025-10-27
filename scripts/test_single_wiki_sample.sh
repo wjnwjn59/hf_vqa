@@ -16,10 +16,10 @@ export PYTHONPATH="./:$PYTHONPATH"
 CONDA_WIKI="/opt/miniconda3/envs/thinh_wiki/bin/python"
 
 # Test parameters
-GPU_ID=0
+GPU_ID=2
 START_SUBSET=1
 END_SUBSET=2
-NUM_SAMPLES=1  # Only 1 sample for quick test
+NUM_SAMPLES=10  # Only 1 sample for quick test
 
 # Paths
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"

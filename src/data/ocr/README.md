@@ -47,10 +47,10 @@ python src/data/ocr/ocr_filter.py --start-id 1 --end-id 16
 ```bash
 python src/data/ocr/ocr_filter.py \
     --start-id 1 \
-    --end-id 100 \
+    --end-id 200 \
     --threshold 0.3 \
-    --images-dir "src/data/create_data/bizgen/output/infographic_data_no_parse" \
-    --bizgen-dir "src/data/create_data/output/bizgen_format" \
+    --images-dir "/home/thinhnp/hf_vqa/src/data/bizgen/output/test" \
+    --bizgen-dir "/home/thinhnp/hf_vqa/src/data/create_data/output/test_font" \
     --output-dir "src/data/create_data/output/ocr_filter"
 ```
 

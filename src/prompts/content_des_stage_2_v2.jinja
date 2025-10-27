@@ -16,18 +16,25 @@ Global constraint: all visuals must be rendered in a cartoon or illustrative sty
 
 Use the QA list to decide which entities, relationships, quantities, or scenes are most important to visualize. Each figure idea should directly or indirectly help answer these questions by visual means.
 
-For each summary, produce 1 to 3 visual ideas that collectively illustrate the main content while remaining faithful to the summary. Each idea must be a self-contained description of what should appear visually, without any text or labels.
+For each summary, generate:
+- 1 to 3 figure ideas that illustrate its main information and reasoning content; and  
+- a refined, shorter summary that removes any detail already covered visually while preserving core meaning.
 
-Output format (reply with one valid JSON object only; no extra text, no markdown outside the JSON object):
-- structure: {"figures": [{"id": <int>, "ideas": ["<FIGURE_1>", "<FIGURE_2?>", "<FIGURE_3?>"]}, ...]}
+output format (reply with one valid JSON object only; no extra text, no markdown outside the JSON object):
+- structure:
+  {
+    "figures": [{"id": <int>, "ideas": ["<FIGURE_1>", "<FIGURE_2?>", "<FIGURE_3?>"]}, ...],
+    "summaries": [{"id": <int>, "summary": "<shorter_summary>"} , ...]
+  }
 - use standard JSON only: double quotes for all strings; no comments; no trailing commas.
-- string rule: do not include any quoted substrings or quotation marks (" or ') inside the text.
+- string rule: do not include any quoted substrings or quotation marks (" or ') inside any string value.
 - keep ids exactly as provided and in ascending order.
-- the first element in each "ideas" array must be the primary or most representative figure.
+- the first element in each "ideas" array must be the main or most representative figure.
 - if fewer than 3 figures are proposed, remove unused placeholders and their commas.
 
 Quality requirements:
 - each figure idea: 1–3 sentences; neutral and descriptive; depict main subjects, key attributes, and spatial or visual relationships relevant to answering questions.
+- shorter_summary: one concise sentence, shorter than the stage-1 summary; preserve core facts not fully depicted by the figures; no new facts; no layout guidance.
 - figures must be visually distinct but coherent when considered together.
 - no new facts, no text, and no lettering of any kind.
 - do not include any harmful, violent, discriminatory, or otherwise unsafe language in any description.
@@ -45,7 +52,7 @@ Input QA:
 {{ a.question }}. {{ a.answer }}
 {% endfor %}
 
-Return only the JSON object below, replacing placeholders with your figure ideas. do not add or remove keys or items. if you provide fewer than three figures, delete unused placeholders (and their commas).
+Return only the JSON object below, replacing placeholders with your outputs. do not add or remove keys or items. if you provide fewer than three figures, delete unused placeholders (and their commas).
 
 {
   "figures": [
@@ -55,6 +62,11 @@ Return only the JSON object below, replacing placeholders with your figure ideas
       , "<<<REPLACE_ID_{{ it.id }}_FIGURE_2>>>"
       , "<<<REPLACE_ID_{{ it.id }}_FIGURE_3>>>"
     ]}{% if not loop.last %},{% endif %}
+  {% endfor %}
+  ],
+  "summaries": [
+  {% for it in items -%}
+    {"id": {{ it.id }}, "summary": "<<<REPLACE_ID_{{ it.id }}_SHORTER_SUMMARY>>>"}{% if not loop.last %},{% endif %}
   {% endfor %}
   ]
 }

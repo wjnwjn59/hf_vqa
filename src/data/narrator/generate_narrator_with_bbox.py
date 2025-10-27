@@ -252,16 +252,74 @@ def check_keywords_in_caption(caption: str, keywords: List[str]) -> tuple[bool, 
 # STAGE PROCESSING FUNCTIONS
 # ============================================================================
 
-def stage_a_summarize(qwen_inference: Qwen3Inference, sents_enum: List[Dict], stage_a_tmpl_text: str):
-    prompt = render_template(stage_a_tmpl_text, sents=sents_enum)
+def stage_a_summarize(qwen_inference: Qwen3Inference, sents_enum: List[Dict], stage_a_tmpl_text: str, qa_pairs: List[Dict] = None):
+    # Prepare annotations for template
+    annotations = []
+    if qa_pairs:
+        for qa in qa_pairs:
+            # Extract the answer text from the answers structure
+            answer_text = ""
+            if 'answers' in qa and qa['answers']:
+                if isinstance(qa['answers'], dict):
+                    # Handle different answer structures
+                    if 'text' in qa['answers']:
+                        if isinstance(qa['answers']['text'], list) and qa['answers']['text']:
+                            answer_text = qa['answers']['text'][0]
+                        else:
+                            answer_text = str(qa['answers']['text'])
+                    elif 'answer_start' in qa['answers'] and 'text' in qa['answers']:
+                        # SQuAD format
+                        if isinstance(qa['answers']['text'], list) and qa['answers']['text']:
+                            answer_text = qa['answers']['text'][0]
+                elif isinstance(qa['answers'], list) and qa['answers']:
+                    # List of answers, take the first one
+                    answer_text = str(qa['answers'][0])
+                else:
+                    answer_text = str(qa['answers'])
+            
+            annotations.append({
+                'question': qa.get('question', ''),
+                'answer': answer_text
+            })
+    
+    prompt = render_template(stage_a_tmpl_text, sents=sents_enum, annotations=annotations)
     response = qwen_inference.generate_single(
         prompt,
         enable_thinking=False
     )
     return parse_stage_a(response, sents_enum)
 
-def stage_b_figures(qwen_inference: Qwen3Inference, items: List[Dict], stage_b_tmpl_text: str):
-    prompt = render_template(stage_b_tmpl_text, items=items)
+def stage_b_figures(qwen_inference: Qwen3Inference, items: List[Dict], stage_b_tmpl_text: str, qa_pairs: List[Dict] = None):
+    # Prepare annotations for template
+    annotations = []
+    if qa_pairs:
+        for qa in qa_pairs:
+            # Extract the answer text from the answers structure
+            answer_text = ""
+            if 'answers' in qa and qa['answers']:
+                if isinstance(qa['answers'], dict):
+                    # Handle different answer structures
+                    if 'text' in qa['answers']:
+                        if isinstance(qa['answers']['text'], list) and qa['answers']['text']:
+                            answer_text = qa['answers']['text'][0]
+                        else:
+                            answer_text = str(qa['answers']['text'])
+                    elif 'answer_start' in qa['answers'] and 'text' in qa['answers']:
+                        # SQuAD format
+                        if isinstance(qa['answers']['text'], list) and qa['answers']['text']:
+                            answer_text = qa['answers']['text'][0]
+                elif isinstance(qa['answers'], list) and qa['answers']:
+                    # List of answers, take the first one
+                    answer_text = str(qa['answers'][0])
+                else:
+                    answer_text = str(qa['answers'])
+            
+            annotations.append({
+                'question': qa.get('question', ''),
+                'answer': answer_text
+            })
+    
+    prompt = render_template(stage_b_tmpl_text, items=items, annotations=annotations)
     response = qwen_inference.generate_single(
         prompt,
         enable_thinking=False
@@ -1505,10 +1563,10 @@ def process_sample_with_bbox_matching(
             sents_enum = enumerate_sentences(sentences)
             
             # Step 2: Stage 1 - Generate summaries
-            stage_1_summaries = stage_a_summarize(qwen_inference, sents_enum, stage_a_tmpl_text)
+            stage_1_summaries = stage_a_summarize(qwen_inference, sents_enum, stage_a_tmpl_text, qa_pairs)
             
             # Step 3: Stage 2 - Generate figures
-            stage_2_figures = stage_b_figures(qwen_inference, stage_1_summaries, stage_b_tmpl_text)
+            stage_2_figures = stage_b_figures(qwen_inference, stage_1_summaries, stage_b_tmpl_text, qa_pairs)
             
             # Step 4: Extract text and figure elements
             text_elements = []
