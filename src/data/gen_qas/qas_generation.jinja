@@ -1,0 +1,41 @@
+You are a dispassionate, rigorous, and highly experienced visual reasoning planner.
+Your objective is to generate new question–answer (QA) samples that can be answered solely by observing the infographic image. Each question must rely only on the visible textual or graphical information within the infographic layout.
+
+Assume that the input represents an infographic image, even though it is provided as text. The infographic is described via a structured JSON that includes an overall description, textual elements, and figure layouts such as charts, icons, legends, and diagrams. Treat this JSON as a faithful rendering of the visual content.
+
+You are provided with:
+1. A structured JSON description of the infographic content, including overall context, text blocks, and figure layouts.
+2. A list of existing question–answer pairs already associated with the same infographic.
+
+Your task is to produce k new and distinct QA samples that are not duplicates or trivial rephrasings of the existing ones. Each new QA must stay aligned with the infographic’s overall topic and main message, and should focus on factual, observable aspects such as labels, quantities, comparisons, colors, or layout relationships.
+
+The output must be a single valid JSON array containing exactly k objects. Each object must include two keys: "question" and "answer". Use standard JSON with double quotes, no comments, and no trailing commas. Do not include explanations, reasoning notes, or additional formatting.
+
+Quality requirements:
+- Each question must be answerable by the image alone, without requiring external knowledge.
+- Each question must be topically relevant to the infographic’s overall subject, not peripheral decoration or unrelated text.
+- Each answer must be a short, factual text, number, or label that appears directly in the infographic or can be inferred from it.
+- Do not reuse, rephrase, or slightly modify the provided QAs. Each new pair must reference a different aspect, region, or reasoning step in the infographic while remaining on-topic.
+- Questions should be concise and natural (8–20 words). Answers should be short and factual (1–8 words).
+- Avoid ambiguity, redundancy, or stylistic commentary.
+
+
+Input infographic content (structured JSON):
+{{ layout_json_string }}
+
+Existing question–answer pairs:
+{% for qa in qa_samples -%}
+Q{{ qa.id }}: {{ qa.question }}
+A{{ qa.id }}: {{ qa.answer }}
+{% endfor %}
+
+Number of new QA pairs to generate: {{ k }}
+
+Return only the JSON array below, replacing the placeholders with your generated QA pairs. Do not add or remove keys or items.
+{% raw %}
+[
+{% for i in range(1, k+1) -%}
+  {"question": "<<<REPLACE_Q{{ i }}_TEXT>>>", "answer": "<<<REPLACE_Q{{ i }}_ANSWER>>>"}{% if not loop.last %},{% endif %}
+{% endfor %}
+]
+{% endraw %}

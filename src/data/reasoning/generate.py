@@ -5,6 +5,8 @@ from transformers import Qwen3VLForConditionalGeneration, AutoProcessor
 from typing import Dict, Any, List
 from pathlib import Path
 from tqdm import tqdm
+from jinja2 import Environment, FileSystemLoader
+
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 
@@ -20,56 +22,16 @@ model = Qwen3VLForConditionalGeneration.from_pretrained(
 )
 processor = AutoProcessor.from_pretrained(MODEL_NAME)
 print("✅ Model and processor loaded successfully.")
-PROMPT_TEMPLATE = """
-You are an expert AI assistant specializing in infographic analysis and visual reasoning.
-Your primary task is to generate a concise, step-by-step reasoning process that explains how to derive a given answer from an infographic.
+script_dir = Path(__file__).resolve().parent
 
-Inputs:
-1.  `Infographic Content`: A JSON object representing the structured content of an image.
-2.  `Question`: The question to be answered.
-3.  `Ground-Truth Answer`: The correct answer to be used as the target.
-
-Output Structure and Generation Rules:
-Your entire output must be a single, valid JSON object.
-This object must have exactly three top-level keys: `understand`, `think`, and `answer`.
-The structure is designed to be parsable: you must generate unique IDs for elements and reference them in the prose text so they can be "stitched" together later.
-All coordinates (bounding boxes) must be contained exclusively within the JSON keys specified.
-
-The required JSON format is as follows:
-{{
-  "understand": {{
-    "analysis": "A brief, natural summary of the question's keywords and the infographic content. This summary MUST reference the 'id' of the elements below (e.g., 'The question asks for X [U1]. I need to find the text block [U2] defining it.')",
-    "relevant_elements": [
-      {{
-        "id": "A unique identifier (e.g., 'U1', 'U2')",
-        "element_description": "The text content or a brief object description (e.g., 'Blue bar chart')",
-        "coordinates": "[x1, y1, x2, y2]"
-      }},
-      ...(more elements)
-    ]
-  }},
-  "think": {{
-    "evidence_array": [
-      {{
-        "id": "A unique identifier (e.g., 'T1', 'T2')",
-        "text": "The text content",
-        "text_style": "Description of font, color, size, or style (e.g., 'bold, large font', 'red color')",
-        "spatial_context": "Description of location relative to other elements (e.g., 'above text X', 'inside the blue box', 'on the far left')"
-      }},
-      ...(more elements)
-    ],
-    "logical_reasoning": "A brief, focused, and natural-sounding prose explanation. This reasoning must succinctly build a logical chain by explicitly referencing the 'id' of the elements from the 'evidence_array' above (e.g., 'The element [T1] acts as the main title... This is confirmed by [T2] which is located below it...'). This analysis of relationships and layout clues should build a direct, connected logical chain from the question to the answer. No coordinates may be mentioned in this prose."
-  }},
-  "answer": "The Ground-Truth Answer."
-}}
-
-Infographic Content:
-{layout_json_string}
-
-Question: {question}
-
-Ground-Truth Answer: {answer}
-""".strip()
+try:
+    jinja_env = Environment(loader=FileSystemLoader(script_dir))
+    PROMPT_TEMPLATE_JINJA = jinja_env.get_template("reasoning_generation.jinja")
+    print("✅ Template 'reasoning_generation.jinja' loaded.")
+except Exception as e:
+    print(f"❌ Error loading Jinja template 'reasoning_generation.jinja': {e}")
+    print("Please make sure the file exists in the same directory as the script.")
+    exit(1)
 
 
 def generate_reasoning_chain(
@@ -81,7 +43,7 @@ def generate_reasoning_chain(
     
     layout_json_string = json.dumps(layout_data, indent=2)
     
-    prompt = PROMPT_TEMPLATE.format(
+    prompt = PROMPT_TEMPLATE_JINJA.render(
         layout_json_string=layout_json_string,
         question=question,
         answer=ground_truth_answer
@@ -146,7 +108,9 @@ def load_layout_data(layout_dir: Path) -> Dict[str, Dict[int, Any]]:
     return layout_data
 
 def stitch_reasoning_json(json_string: str) -> str:
-
+    """
+    Analyze the reasoning JSON and replace [ID] references to create a natural, cohesive text.
+    """
     stitched_understand = "Error: Could not parse generated JSON."
     stitched_think = "Error: Could not parse generated JSON."
     stitched_answer = "Error: No answer found."
@@ -154,9 +118,10 @@ def stitch_reasoning_json(json_string: str) -> str:
     
     try:
         data = json.loads(json_string.strip())
+        
         replacement_map = {}
 
-        # 2. Điền map từ 'understand.relevant_elements'
+        # 2. Fill map from 'understand.relevant_elements'
         if "understand" in data and "relevant_elements" in data["understand"]:
             for el in data["understand"].get("relevant_elements", []):
                 if 'id' in el:
@@ -166,7 +131,7 @@ def stitch_reasoning_json(json_string: str) -> str:
                     value = f"({desc} {coords})" 
                     replacement_map[key] = value
 
-        # 3. Điền map từ 'think.evidence_array'
+        # 3. Fill map from 'think.evidence_array'
         if "think" in data and "evidence_array" in data["think"]:
             for ev in data["think"].get("evidence_array", []):
                 if 'id' in ev:
@@ -193,7 +158,8 @@ def stitch_reasoning_json(json_string: str) -> str:
         else:
             stitched_think = "Error: Missing 'think' or 'logical_reasoning' structure."
 
-        stitched_answer = data['answer']
+        # 6. Lấy câu trả lời
+        stitched_answer = data.get('answer', 'Error: Missing "answer" key.') # Sửa lỗi KeyError
 
     except json.JSONDecodeError:
         stitched_understand = f"Error: Failed to decode JSON. Raw output: {json_string[:200]}..."
@@ -204,6 +170,8 @@ def stitch_reasoning_json(json_string: str) -> str:
         stitched_think = f"Error during stitching: {e}"
         stitched_answer = f"Error during stitching: {e}"
 
+    # 7. Trả về một đoạn văn duy nhất, liền mạch.
+    # Thêm dấu chấm nếu bị thiếu để đảm bảo ngữ pháp
     if not stitched_understand.strip().endswith('.'):
         stitched_understand += '.'
     

@@ -1,0 +1,49 @@
+You are a dispassionate, rigorous, and highly experienced visual reasoning planner.
+Your objective is to produce a precise, stepwise explanation showing how the given answer can be derived by observing the infographic image alone.
+
+Assume that the input you receive represents an infographic image, even though it is provided in text form. The infographic is described through a structured JSON that contains an overall description of the scene, along with detailed listings of textual elements and figure layouts such as charts, icons, legends, or diagrams. Treat this JSON as a faithful representation of the visual content of the infographic.
+
+You are provided with:
+1. A structured JSON description of the infographic content, including overall context, text blocks, and figure layouts.
+2. A question to be answered based on the infographic.
+3. A ground-truth answer that is visually verifiable from the infographic content.
+
+Your task is to return a single valid JSON object with exactly three top-level keys: understand, think, and answer.
+Use unique element IDs and refer to them consistently in the prose so the reasoning can be precisely linked to the listed elements.
+Include all coordinates only under the designated keys.
+Do not rely on any information that is not contained in the infographic JSON, and do not add stylistic or interpretive commentary.
+
+The required JSON format is as follows:
+{% raw %}{{
+  "understand": {{
+    "analysis": "A brief, natural summary of the question's keywords and the infographic content. This summary MUST reference the 'id' of the elements below (e.g., 'The question asks for X [U1]. I need to find the text block [U2] defining it.')",
+    "relevant_elements": [
+      {{
+        "id": "A unique identifier (e.g., 'U1', 'U2')",
+        "element_description": "The text content or a brief object description (e.g., 'Blue bar chart')",
+        "coordinates": "[x1, y1, x2, y2]"
+      }},
+      ...(more elements)
+    ]
+  }},
+  "think": {{
+    "evidence_array": [
+      {{
+        "id": "A unique identifier (e.g., 'T1', 'T2')",
+        "text": "The text content",
+        "text_style": "Description of font, color, size, or style (e.g., 'bold, large font', 'red color')",
+        "spatial_context": "Description of location relative to other elements (e.g., 'above text X', 'inside the blue box', 'on the far left')"
+      }},
+      ...(more elements)
+    ],
+    "logical_reasoning": "A brief, focused, and natural-sounding prose explanation. This reasoning must succinctly build a logical chain by explicitly referencing the 'id' of the elements from the 'evidence_array' above (e.g., 'The element [T1] acts as the main title... This is confirmed by [T2] which is located below it...'). This analysis of relationships and layout clues should build a direct, connected logical chain from the question to the answer. No coordinates may be mentioned in this prose."
+  }},
+  "answer": "The Ground-Truth Answer."
+}}{% endraw %}
+
+Infographic Content:
+{{ layout_json_string }}
+
+Question: {{ question }}
+
+Ground-Truth Answer: {{ answer }}
