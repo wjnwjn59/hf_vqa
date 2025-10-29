@@ -69,9 +69,8 @@ CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
 
 # Template paths
-STAGE_A_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
-STAGE_B_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
-STAGE_C_TEMPLATE="./src/prompts/content_des_stage_3_with_bbox.jinja"
+STAGE_1_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
+STAGE_2_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
 EXTRACTED_BBOXES="./src/data/narrator/extracted_bboxes.json"
 
 # Test output directories (prefixed with "test_")
@@ -113,9 +112,8 @@ echo "  Max Retries         : $MAX_RETRIES"
 echo ""
 echo "Paths:"
 echo "  Input Dataset       : $SQUAD_TRAIN"
-echo "  Stage 1 Template    : $STAGE_A_TEMPLATE"
-echo "  Stage 2 Template    : $STAGE_B_TEMPLATE"
-echo "  Stage 3 Template    : $STAGE_C_TEMPLATE"
+echo "  Stage 1 Template    : $STAGE_1_TEMPLATE"
+echo "  Stage 2 Template    : $STAGE_2_TEMPLATE"
 echo "  Extracted BBoxes    : $EXTRACTED_BBOXES"
 echo "  Wiki Output Dir     : $TEST_WIKI_DIR"
 echo "  BizGen Directory    : $TEST_BIZGEN_DIR"

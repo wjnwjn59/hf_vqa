@@ -76,9 +76,8 @@ CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 
 # Paths
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
-STAGE_A_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
-STAGE_B_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
-STAGE_C_TEMPLATE="./src/prompts/content_des_stage_3_with_bbox.jinja"
+STAGE_1_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
+STAGE_2_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
 EXTRACTED_BBOXES="./src/data/narrator/extracted_bboxes.json"
 BBOX_OUTPUT_DIR="src/data/create_data/output/wiki_bbox_v2"
 BIZGEN_DIR="./src/data/bizgen"
@@ -118,9 +117,8 @@ echo "  BizGen Subset       : $BIZGEN_SUBSET"
 echo ""
 echo "Paths:"
 echo "  Input Dataset       : $SQUAD_TRAIN"
-echo "  Stage 1 Template    : $STAGE_A_TEMPLATE"
-echo "  Stage 2 Template    : $STAGE_B_TEMPLATE"
-echo "  Stage 3 Template    : $STAGE_C_TEMPLATE"
+echo "  Stage 1 Template    : $STAGE_1_TEMPLATE"
+echo "  Stage 2 Template    : $STAGE_2_TEMPLATE"
 echo "  Extracted BBoxes    : $EXTRACTED_BBOXES"
 echo "  BBox Output Dir     : $BBOX_OUTPUT_DIR"
 echo "  BizGen Directory    : $BIZGEN_DIR"
@@ -129,10 +127,10 @@ echo "======================================================================"
 echo ""
 
 # ============================================================================
-# Step 1: Generate 3-Stage Infographic Data with BBox Matching using Qwen
+# Step 1: Generate 2-Stage Infographic Data with BBox Matching using Qwen
 # ============================================================================
 echo "======================================================================"
-echo "Step 1/2: Generating 3-Stage Infographic Data with BBox Matching"
+echo "Step 1/2: Generating 2-Stage Infographic Data with BBox Matching"
 echo "======================================================================"
 echo "Using conda environment: thinh_wiki"
 echo "Python: $CONDA_WIKI"
@@ -142,9 +140,8 @@ echo ""
 CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_narrator_with_bbox.py \
     --model_name "$MODEL_NAME" \
     --input_data "$SQUAD_TRAIN" \
-    --stage_a "$STAGE_A_TEMPLATE" \
-    --stage_b "$STAGE_B_TEMPLATE" \
-    --stage_c "$STAGE_C_TEMPLATE" \
+    --stage_1 "$STAGE_1_TEMPLATE" \
+    --stage_2 "$STAGE_2_TEMPLATE" \
     --extracted_bboxes "$EXTRACTED_BBOXES" \
     --output_dir "$BBOX_OUTPUT_DIR" \
     --start $START_SUBSET \
@@ -227,9 +224,9 @@ echo "  1. Wiki Layouts     : $BBOX_OUTPUT_DIR/wiki$(printf '%06d' $START_SUBSET
 echo "  2. Generated Images : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
 echo ""
 echo "Key Improvements:"
-echo "  ✓ Integrated 3-stage processing with bbox matching in single step"
+echo "  ✓ Integrated 2-stage processing with bbox matching in single step"
 echo "  ✓ Smart text-image layout optimization"
-echo "  ✓ Spatial-aware Stage 3 generation with bbox coordinates"
+echo "  ✓ Direct title + segments + figures generation from context"
 echo "  ✓ Automated quality validation and layout bounds checking"
 echo ""
 echo "======================================================================"

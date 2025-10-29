@@ -21,21 +21,20 @@ CONDA_WIKI="/opt/miniconda3/envs/thinh_wiki/bin/python"
 CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 
 # Test parameters
-GPU_ID=0
+GPU_ID=2
 START_SUBSET=1
 END_SUBSET=2
 NUM_SAMPLES=3  # Number of samples for quick test
 
 # Paths
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
-STAGE_A_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
-STAGE_B_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
-STAGE_C_TEMPLATE="./src/prompts/content_des_stage_3_with_bbox.jinja"
+STAGE_1_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
+STAGE_2_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
 EXTRACTED_BBOXES="./src/data/narrator/extracted_bboxes.json"
 
 # Output directories
 WIKI_OUTPUT_DIR="/home/thinhnp/hf_vqa/test_wiki_single"
-BIZGEN_OUTPUT_DIR="./src/data/bizgen/output/test_single"
+BIZGEN_OUTPUT_DIR="output/test_single"
 OCR_OUTPUT_DIR="./ocr_results_single"
 TRAINING_OUTPUT_DIR="./training_data"
 
@@ -65,14 +64,13 @@ mkdir -p "$TRAINING_OUTPUT_DIR"
 
 echo ""
 echo "======================================================================"
-echo "STEP 1/4: Generate Wiki Layouts with BBox Matching"
+echo "STEP 1/4: Generate Wiki Layouts with BBox Matching (2-Stage Pipeline)"
 echo "======================================================================"
 CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_narrator_with_bbox.py \
     --model_name "$MODEL_NAME" \
     --input_data "$SQUAD_TRAIN" \
-    --stage_a "$STAGE_A_TEMPLATE" \
-    --stage_b "$STAGE_B_TEMPLATE" \
-    --stage_c "$STAGE_C_TEMPLATE" \
+    --stage_1 "$STAGE_1_TEMPLATE" \
+    --stage_2 "$STAGE_2_TEMPLATE" \
     --extracted_bboxes "$EXTRACTED_BBOXES" \
     --output_dir "$WIKI_OUTPUT_DIR" \
     --start $START_SUBSET \
@@ -135,10 +133,12 @@ echo "======================================================================"
 
 # Run OCR filter to identify poor quality images
 echo "Running OCR quality filter..."
+cd ../../..
+
 CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/ocr/ocr_filter.py \
-    --images-dir "$BIZGEN_OUTPUT_DIR" \
+    --images-dir "src/data/bizgen/$BIZGEN_OUTPUT_DIR" \
     --bizgen-dir "$WIKI_OUTPUT_DIR" \
-    --output-dir "$OCR_OUTPUT_DIR" \
+    --output-dir "src/data/bizgen/$BIZGEN_OUTPUT_DIR" \
     --threshold 0.5
 
 # Check if OCR filtering succeeded
@@ -214,7 +214,7 @@ echo "  📄 Training JSONL: $JSONL_FILE"
 echo ""
 echo "Pipeline components verified:"
 echo "  ✅ Squad v2 data loading & deduplication"
-echo "  ✅ 3-stage infographic generation with QA integration"
+echo "  ✅ 2-stage infographic generation with QA integration"
 echo "  ✅ BBox matching and layout optimization"
 echo "  ✅ BizGen image synthesis"
 echo "  ✅ OCR quality filtering"

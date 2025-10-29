@@ -109,38 +109,58 @@ def extract_first_json(text: str) -> Optional[Dict[str, Any]]:
 # STAGE PARSERS
 # ============================================================================
 
-def parse_stage_1(text: str) -> Dict[str, Any]:
-    """Parse Stage 1 response to extract segments and figures"""
+def parse_stage_a(text: str, sents_enum: List[Dict]) -> List[Dict[str, Any]]:
     js = extract_first_json(text)
-    if not js:
-        raise ValueError(f"No valid JSON found in Stage 1 response: {text[:200]}...")
+    if not js or "summaries" not in js:
+        # Fallback: create summaries from original sentences
+        print("Warning: Stage 1 JSON parsing failed, using original sentences as summaries")
+        items = []
+        for sent in sents_enum:
+            items.append({
+                "id": sent["id"],
+                "summary": sent["text"]
+            })
+        return items
     
-    if "segments" not in js or "figures" not in js:
-        raise ValueError(f"Missing 'segments' or 'figures' in Stage 1 response: {js}")
+    items = js["summaries"]
+    for it in items:
+        if "id" not in it or "summary" not in it:
+            print(f"Warning: Stage 1 item missing required fields: {it}")
+            continue
+        it["id"] = int(it["id"])
+        it["summary"] = str(it["summary"]).strip()
+    items.sort(key=lambda x: x["id"])
+    return items
+
+def parse_stage_b(text: str, summaries: List[Dict]) -> List[Dict[str, Any]]:
+    js = extract_first_json(text)
+    if not js or "figures" not in js:
+        # Fallback: create generic figure ideas from summaries
+        print("Warning: Stage 2 JSON parsing failed, using generic figure ideas")
+        items = []
+        for summary in summaries:
+            items.append({
+                "id": summary["id"],
+                "ideas": ["A relevant illustration or diagram"]
+            })
+        return items
     
-    # Validate segments
-    segments = js["segments"]
-    for segment in segments:
-        if "id" not in segment or "text" not in segment:
-            raise ValueError(f"Invalid segment format: {segment}")
-        segment["id"] = int(segment["id"])
-    
-    # Validate figures
-    figures = js["figures"]
-    for figure in figures:
-        if "id" not in figure or "description" not in figure:
-            raise ValueError(f"Invalid figure format: {figure}")
-        figure["id"] = int(figure["id"])
-    
-    # Sort by id
-    segments.sort(key=lambda x: x["id"])
-    figures.sort(key=lambda x: x["id"])
-    
-    return {
-        'title': js.get('title', ''),
-        'segments': segments,
-        'figures': figures
-    }
+    items = js["figures"]
+    for it in items:
+        if "id" not in it or "ideas" not in it:
+            print(f"Warning: Stage 2 item missing required fields: {it}")
+            continue
+        it["id"] = int(it["id"])
+        if isinstance(it["ideas"], list):
+            it["ideas"] = [str(idea).strip() for idea in it["ideas"]]
+        else:
+            it["ideas"] = [str(it["ideas"]).strip()]
+        if len(it["ideas"]) == 0:
+            it["ideas"] = ["A relevant illustration"]
+        if len(it["ideas"]) > 2:
+            it["ideas"] = it["ideas"][:2]  # Keep only first 2 ideas
+    items.sort(key=lambda x: x["id"])
+    return items
 
 
 # ============================================================================
@@ -271,14 +291,11 @@ def check_keywords_in_caption(caption: str, keywords: List[str]) -> tuple[bool, 
 # STAGE PROCESSING FUNCTIONS
 # ============================================================================
 
-def stage_1_generate_content(qwen_inference: Qwen3Inference, context: str, qa_pairs: List[Dict], stage_1_tmpl_text: str) -> Dict[str, Any]:
-    """
-    Stage 1: Generate segments and figures from context and QA pairs
-    """
-    # Prepare QA samples for template
-    qa_samples = []
+def stage_a_summarize(qwen_inference: Qwen3Inference, sents_enum: List[Dict], stage_a_tmpl_text: str, qa_pairs: List[Dict] = None):
+    # Prepare annotations for template
+    annotations = []
     if qa_pairs:
-        for i, qa in enumerate(qa_pairs):
+        for qa in qa_pairs:
             # Extract the answer text from the answers structure
             answer_text = ""
             if 'answers' in qa and qa['answers']:
@@ -299,34 +316,54 @@ def stage_1_generate_content(qwen_inference: Qwen3Inference, context: str, qa_pa
                 else:
                     answer_text = str(qa['answers'])
             
-            qa_samples.append({
-                'id': i + 1,
+            annotations.append({
                 'question': qa.get('question', ''),
                 'answer': answer_text
             })
     
-    prompt = render_template(stage_1_tmpl_text, context=context, qa_samples=qa_samples)
+    prompt = render_template(stage_a_tmpl_text, sents=sents_enum, annotations=annotations)
     response = qwen_inference.generate_single(
         prompt,
         enable_thinking=False
     )
-    return parse_stage_1(response)
+    return parse_stage_a(response, sents_enum)
 
-def stage_2_generate_caption(qwen_inference: Qwen3Inference, layout_elements: List[Dict], stage_2_tmpl_text: str, canvas_width: int = 896, canvas_height: int = 2240) -> str:
-    """
-    Stage 2: Generate full image caption from layout elements
-    """
-    prompt = render_template(
-        stage_2_tmpl_text, 
-        layout_elements=layout_elements,
-        canvas_width=canvas_width,
-        canvas_height=canvas_height
-    )
+def stage_b_figures(qwen_inference: Qwen3Inference, items: List[Dict], stage_b_tmpl_text: str, qa_pairs: List[Dict] = None):
+    # Prepare annotations for template
+    annotations = []
+    if qa_pairs:
+        for qa in qa_pairs:
+            # Extract the answer text from the answers structure
+            answer_text = ""
+            if 'answers' in qa and qa['answers']:
+                if isinstance(qa['answers'], dict):
+                    # Handle different answer structures
+                    if 'text' in qa['answers']:
+                        if isinstance(qa['answers']['text'], list) and qa['answers']['text']:
+                            answer_text = qa['answers']['text'][0]
+                        else:
+                            answer_text = str(qa['answers']['text'])
+                    elif 'answer_start' in qa['answers'] and 'text' in qa['answers']:
+                        # SQuAD format
+                        if isinstance(qa['answers']['text'], list) and qa['answers']['text']:
+                            answer_text = qa['answers']['text'][0]
+                elif isinstance(qa['answers'], list) and qa['answers']:
+                    # List of answers, take the first one
+                    answer_text = str(qa['answers'][0])
+                else:
+                    answer_text = str(qa['answers'])
+            
+            annotations.append({
+                'question': qa.get('question', ''),
+                'answer': answer_text
+            })
+    
+    prompt = render_template(stage_b_tmpl_text, items=items, annotations=annotations)
     response = qwen_inference.generate_single(
         prompt,
         enable_thinking=False
     )
-    return response.strip()
+    return parse_stage_b(response, items)
 
 
 # ============================================================================
@@ -1381,188 +1418,6 @@ def stage_3_compose_with_bbox(
 
 
 # ============================================================================
-# LAYOUT CREATION HELPERS
-# ============================================================================
-
-def create_layout_elements_from_stage1(
-    stage_1_result: Dict[str, Any],
-    bboxes: List[Dict],
-    title: str = None
-) -> List[Dict]:
-    """
-    Create layout elements by matching Stage 1 content (title + segments + figures) to bboxes
-    Using optimized bbox assignment to avoid overlaps
-    """
-    layout_elements = []
-    
-    # Get title from stage_1_result (takes priority over parameter)
-    stage_1_title = stage_1_result.get('title', '')
-    final_title = stage_1_title if stage_1_title else title
-    
-    # Separate text and element bboxes
-    text_bboxes = [b for b in bboxes if b.get('category') == 'text' and b.get('bottom_right') != [896, 2240]]
-    element_bboxes = [b for b in bboxes if b.get('category') == 'element' and b.get('bottom_right') != [896, 2240]]
-    
-    # Prepare text elements list (title + segments)
-    text_contents = []
-    if final_title:
-        text_contents.append(final_title)
-    
-    segments = stage_1_result.get('segments', [])
-    for segment in segments:
-        text_contents.append(segment['text'])
-    
-    # Use optimized text positioning to avoid overlaps with element bboxes
-    optimized_text_pairs = find_best_text_positions(
-        text_contents,
-        text_bboxes,
-        element_bboxes,  # Pass element bboxes to avoid overlap
-        margin=25  # Use larger margin for safety
-    )
-    
-    # Add optimized text elements
-    for i, (bbox, text_content) in enumerate(optimized_text_pairs):
-        is_title = (i == 0 and final_title)  # First element is title if exists
-        layout_elements.append({
-            'category': 'text',
-            'content': text_content,
-            'bbox': bbox,
-            'is_title': is_title
-        })
-    
-    # Get reserved text areas for smart figure placement
-    reserved_text_areas = [elem['bbox'] for elem in layout_elements if elem['category'] == 'text']
-    
-    # Prepare figure elements
-    figures = stage_1_result.get('figures', [])
-    figure_elements = []
-    for figure in figures:
-        figure_elements.append({
-            'description': figure.get('description', 'decorative element')
-        })
-    
-    # Use smart image selection to avoid text conflicts
-    optimized_figure_pairs = smart_image_selection(
-        figure_elements,
-        element_bboxes,
-        reserved_text_areas
-    )
-    
-    # Add optimized figure elements
-    for bbox, description in optimized_figure_pairs:
-        layout_elements.append({
-            'category': 'element',
-            'content': description,
-            'bbox': bbox
-        })
-    
-    return layout_elements
-
-def create_wiki_layout_from_layout_elements(
-    layout_elements: List[Dict],
-    full_image_caption: str,
-    bbox_set: Dict,
-    wiki_id: int
-) -> Dict:
-    """
-    Create wiki layout structure from layout elements following the correct format
-    """
-    # Clean caption (remove tags but keep content)
-    cleaned_caption = clean_caption_text(full_image_caption)
-    
-    # ===== BUILD WIKI LAYOUT =====
-    output_layers = []
-    
-    # Layer 0: Add base layer (full image, always first) - using stage 2 output as caption
-    base_layer = {
-        'category': 'base',
-        'top_left': [0, 0],
-        'bottom_right': [896, 2240],
-        'caption': full_image_caption  # Use stage 2 output directly
-    }
-    output_layers.append(base_layer)
-    
-    # Layer 1: Add background layer from bbox_set (always second)
-    bboxes = bbox_set.get('bboxes', [])
-    background_bboxes = [b for b in bboxes if b.get('category') == 'background']
-    if background_bboxes:
-        # Use the first background bbox directly (already has proper format)
-        background_layer = background_bboxes[0].copy()  # Make a copy to avoid modifying original
-        output_layers.append(background_layer)
-    else:
-        # Fallback background if no background bbox found
-        fallback_bg_layer = {
-            'category': 'background',
-            'top_left': [0, 0],
-            'bottom_right': [896, 2240],
-            'caption': 'Clean white background with professional layout'
-        }
-        output_layers.append(fallback_bg_layer)
-    
-    # Extract text and element layers from layout_elements
-    text_elements = [elem for elem in layout_elements if elem['category'] == 'text']
-    element_elements = [elem for elem in layout_elements if elem['category'] == 'element']
-    
-    # Add element layers first
-    for elem in element_elements:
-        bbox = elem['bbox']
-        element_layer = {
-            'category': 'element',
-            'top_left': bbox['top_left'],
-            'bottom_right': bbox['bottom_right'],
-            'caption': elem.get('content', 'decorative element')
-        }
-        output_layers.append(element_layer)
-    
-    # Add text layers with proper formatting
-    default_fonts = ['en-font-101', 'en-font-15', 'en-font-154']
-    default_color = 'color-1'  # Black color
-    
-    for i, elem in enumerate(text_elements):
-        bbox = elem['bbox']
-        text_content = elem.get('content', '')
-        is_title = elem.get('is_title', False)
-        
-        # Select font - title gets first font, others cycle through
-        if is_title:
-            selected_font = default_fonts[0]  # en-font-101 for titles
-        else:
-            selected_font = default_fonts[(i % len(default_fonts))]
-        
-        # Create caption with proper font and color format
-        caption = f'Text "{text_content}" in <{default_color}>, <{selected_font}>. '
-        
-        text_layer = {
-            'category': 'text',
-            'top_left': bbox['top_left'],
-            'bottom_right': bbox['bottom_right'],
-            'caption': caption,
-            'text': text_content
-        }
-        
-        output_layers.append(text_layer)
-    
-    # Auto-scale small text bboxes for readability
-    output_layers = auto_scale_small_text_bboxes(output_layers, canvas_width=896, canvas_height=2240)
-    
-    # Validate and fix canvas bounds
-    output_layers = validate_and_fix_layout_bounds(output_layers, canvas_width=896, canvas_height=2240)
-    
-    # Quality validation
-    layout_quality = validate_layout_quality(output_layers)
-    
-    # Return wiki format
-    wiki_result = {
-        'index': wiki_id,
-        'layers_all': output_layers,
-        'full_image_caption': full_image_caption,
-        'original_bbox_index': bbox_set.get('index', -1),
-        'layout_quality': layout_quality
-    }
-    
-    return wiki_result
-
-# ============================================================================
 # WIKI LAYOUT CREATION
 # ============================================================================
 
@@ -1689,20 +1544,22 @@ def create_wiki_layout_from_elements(
 def process_sample_with_bbox_matching(
     qwen_inference: Qwen3Inference,
     item: Dict[str, Any],
-    stage_1_path: str,
-    stage_2_path: str,
+    stage_a_path: str,
+    stage_b_path: str,
+    stage_c_path: str,
     extracted_bboxes: List[Dict],
     infographic_id: int,
     max_retries: int = 2
 ) -> Optional[Dict]:
     """
-    Process a single sample through 2-stage pipeline with bbox matching and keyword checking.
+    Process a single sample through all 3 stages with bbox matching and keyword checking.
     
     Args:
         qwen_inference: Qwen3Inference instance
         item: Input data item (should contain 'context' and 'qa_pairs')
-        stage_1_path: Path to Stage 1 template
-        stage_2_path: Path to Stage 2 template
+        stage_a_path: Path to Stage 1 template
+        stage_b_path: Path to Stage 2 template  
+        stage_c_path: Path to Stage 3 template
         extracted_bboxes: Available bounding boxes
         infographic_id: Unique infographic ID
         max_retries: Maximum number of retry attempts
@@ -1711,11 +1568,13 @@ def process_sample_with_bbox_matching(
         Dictionary with processed results or None if keywords not found after retries
     """
     # Ensure template files exist
-    ensure_file(stage_1_path, "Stage 1")
-    ensure_file(stage_2_path, "Stage 2")
+    ensure_file(stage_a_path, "Stage 1")
+    ensure_file(stage_b_path, "Stage 2")
+    ensure_file(stage_c_path, "Stage 3")
 
-    stage_1_tmpl_text = read_text(stage_1_path)
-    stage_2_tmpl_text = read_text(stage_2_path)
+    stage_a_tmpl_text = read_text(stage_a_path)
+    stage_b_tmpl_text = read_text(stage_b_path)
+    stage_c_tmpl_text = read_text(stage_c_path)
 
     # Extract keywords from QA pairs
     qa_pairs = item.get('qa_pairs', [])
@@ -1734,37 +1593,72 @@ def process_sample_with_bbox_matching(
             if retry_count > 0:
                 print(f"  Retry attempt {retry_count}/{max_retries}")
             
-            # Step 1: Get context
+            # Step 1: Split context into sentences
             context = item.get('context', '')
             if not context:
                 raise ValueError("No context provided")
             
-            # Step 2: Stage 1 - Generate segments and figures from context + QA pairs
-            stage_1_result = stage_1_generate_content(qwen_inference, context, qa_pairs, stage_1_tmpl_text)
+            sentences = split_into_sentences(context)
+            sents_enum = enumerate_sentences(sentences)
             
-            # Step 3: Select random bbox set from extracted_bboxes
+            # Step 2: Stage 1 - Generate summaries
+            stage_1_summaries = stage_a_summarize(qwen_inference, sents_enum, stage_a_tmpl_text, qa_pairs)
+            
+            # Step 3: Stage 2 - Generate figures
+            stage_2_figures = stage_b_figures(qwen_inference, stage_1_summaries, stage_b_tmpl_text, qa_pairs)
+            
+            # Step 4: Extract text and figure elements
+            text_elements = []
+            for summary in stage_1_summaries:
+                text_elements.append(summary.get('summary', ''))
+            
+            figure_elements = []
+            for figure in stage_2_figures:
+                ideas = figure.get('ideas', [])
+                if ideas:
+                    # Select first idea for each figure
+                    figure_elements.append({
+                        'description': ideas[0] if isinstance(ideas, list) else str(ideas)
+                    })
+            
+            # Step 5: Select random bbox set from extracted_bboxes
             if not extracted_bboxes:
                 raise ValueError("No bboxes available")
             
             bbox_set = random.choice(extracted_bboxes)
             bboxes = bbox_set.get('bboxes', [])
             
-            # Step 4: Create layout elements by matching content to bboxes
-            layout_elements = create_layout_elements_from_stage1(
-                stage_1_result,
-                bboxes
+            # Separate text and element bboxes
+            text_bboxes = [b for b in bboxes if b.get('category') == 'text' and b.get('bottom_right') != [896, 2240]]
+            element_bboxes = [b for b in bboxes if b.get('category') == 'element' and b.get('bottom_right') != [896, 2240]]
+            
+            # Step 6: Match text elements to bboxes
+            matched_text_elements = match_text_to_bboxes(
+                text_elements,
+                text_bboxes,
+                element_bboxes
             )
             
-            # Step 5: Stage 2 - Generate full image caption from complete layout
-            full_image_caption = stage_2_generate_caption(
+            # Step 7: Match figure elements to bboxes (avoid text areas)
+            reserved_text_areas = [elem['bbox'] for elem in matched_text_elements]
+            matched_figure_elements = match_figures_to_bboxes(
+                figure_elements,
+                element_bboxes,
+                reserved_text_areas
+            )
+            
+            # Step 8: Generate final description using Stage 3 with bbox information
+            full_image_caption = stage_3_compose_with_bbox(
                 qwen_inference,
-                layout_elements,
-                stage_2_tmpl_text,
+                matched_text_elements,
+                matched_figure_elements,
+                stage_c_tmpl_text,
                 canvas_width=896,
-                canvas_height=2240
+                canvas_height=2240,
+                sents_enum=sents_enum
             )
             
-            # Step 6: Check keywords if there are answerable questions
+            # Step 9: Check keywords if there are answerable questions
             if has_answers:
                 keywords_found, found_keywords = check_keywords_in_caption(full_image_caption, keywords)
                 if not keywords_found:
@@ -1779,10 +1673,12 @@ def process_sample_with_bbox_matching(
                             'infographic_id': infographic_id,
                             'keywords_to_find': keywords,
                             'generated_caption': full_image_caption,
-                            'layout_elements': layout_elements,
+                            'text_elements': [elem.get('summary', '') for elem in matched_text_elements],
+                            'figure_elements': [elem.get('description', '') for elem in matched_figure_elements],
                             'context': item.get('context', ''),
                             'qa_pairs': qa_pairs,
-                            'stage_1_result': stage_1_result,
+                            'stage_1_summaries': stage_1_summaries,
+                            'stage_2_figures': stage_2_figures,
                             'caption_lower': full_image_caption.lower(),
                             'keywords_lower': [k.lower() for k in keywords]
                         }
@@ -1795,22 +1691,31 @@ def process_sample_with_bbox_matching(
                 else:
                     print(f"    Keywords found: {found_keywords[:3]}...")  # Show first 3
             
-            # Step 7: Create wiki layout from layout elements
-            wiki_layout = create_wiki_layout_from_layout_elements(
-                layout_elements,
+            # Step 10: Create wiki layout from matched elements
+            wiki_layout = create_wiki_layout_from_elements(
+                matched_text_elements,
+                matched_figure_elements,
                 full_image_caption,
                 bbox_set,
                 infographic_id
             )
             
-            # Step 8: Return successful result in wiki format
+            # Step 11: Return successful result in wiki format
             return {
                 'infographic_id': infographic_id,
                 'wiki_layout': wiki_layout,  # Main wiki result
                 'full_image_caption': full_image_caption,
                 'background_caption': 'Clean white background with professional layout',
-                'stage_1_result': stage_1_result,
-                'layout_elements': layout_elements,
+                'figures': [
+                    {
+                        'id': i + 1,
+                        'ideas': [fig['description']] if 'description' in fig else ['A relevant illustration']
+                    } for i, fig in enumerate(matched_figure_elements)
+                ],
+                'stage_1_summaries': stage_1_summaries,
+                'stage_2_figures': stage_2_figures,
+                'matched_text_elements': matched_text_elements,
+                'matched_figure_elements': matched_figure_elements,
                 'bbox_set_index': bbox_set.get('index', -1),
                 'success': True,
                 'skipped_keyword_check': not has_answers
@@ -2138,23 +2043,26 @@ def main():
     """
     Main function for processing narrator data with bbox matching pipeline.
     """
-    parser = argparse.ArgumentParser(description='Generate 2-stage infographic data with bbox matching using Qwen3 with vLLM')
+    parser = argparse.ArgumentParser(description='Generate 3-stage infographic data with bbox matching using Qwen3 with vLLM')
     parser.add_argument('--model_name', type=str, default='unsloth/Qwen3-8B',
                         help='Model name or path')
     parser.add_argument('--input_data', type=str, 
                         default='/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl',
                         help='Path to Squad v2 JSONL file')
-    parser.add_argument('--stage_1', type=str,
-                        default='./src/prompts/content_des_stage_1.jinja',
+    parser.add_argument('--stage_a', type=str,
+                        default='/home/thinhnp/hf_vqa/src/prompts/content_des_stage_1.jinja',
                         help='Path to Stage 1 Jinja template')
-    parser.add_argument('--stage_2', type=str,
-                        default='./src/prompts/content_des_stage_2.jinja',
+    parser.add_argument('--stage_b', type=str,
+                        default='/home/thinhnp/hf_vqa/src/prompts/content_des_stage_2.jinja',
                         help='Path to Stage 2 Jinja template')
+    parser.add_argument('--stage_c', type=str,
+                        default='/home/thinhnp/hf_vqa/src/prompts/content_des_stage_3_with_bbox.jinja',
+                        help='Path to Stage 3 Jinja template with bbox support')
     parser.add_argument('--extracted_bboxes', type=str,
-                        default='./src/data/narrator/extracted_bboxes.json',
+                        default='/home/thinhnp/hf_vqa/src/data/narrator/extracted_bboxes.json',
                         help='Path to extracted bboxes JSON file')
     parser.add_argument('--output_dir', type=str,
-                        default='./src/data/create_data/output/narrator_format',
+                        default='/home/thinhnp/hf_vqa/src/data/create_data/output/wiki_bbox_v2',
                         help='Output directory for wiki files')
     parser.add_argument('--batch_size', type=int, default=8,
                         help='Batch size for processing')
@@ -2178,7 +2086,7 @@ def main():
     args = parser.parse_args()
     
     print("="*60)
-    print("Initializing 2-Stage Wiki Layout Generation with BBox Matching")
+    print("Initializing 3-Stage Wiki Layout Generation with BBox Matching")
     print("="*60)
     
     # Load input data
@@ -2250,10 +2158,11 @@ def main():
     ensure_dir(args.output_dir)
     
     # Process data
-    print(f"\n[5/5] Processing samples through 2-stage pipeline with bbox matching")
+    print(f"\n[5/5] Processing samples through 3-stage pipeline with bbox matching")
     print(f"Templates:")
-    print(f"  Stage 1: {args.stage_1}")
-    print(f"  Stage 2: {args.stage_2}")
+    print(f"  Stage 1: {args.stage_a}")
+    print(f"  Stage 2: {args.stage_b}")
+    print(f"  Stage 3: {args.stage_c}")
     print(f"Max retries: {args.max_retries}")
     print("-"*60)
     
@@ -2270,12 +2179,13 @@ def main():
         # Calculate global infographic_id based on start data index
         infographic_id = start_data_idx + i + 1
         
-        # Process single sample through 2-stage pipeline with bbox matching
+        # Process single sample through 3-stage pipeline with bbox matching
         result = process_sample_with_bbox_matching(
             qwen_inference,
             item,
-            args.stage_1,
-            args.stage_2,
+            args.stage_a,
+            args.stage_b,
+            args.stage_c,
             extracted_bboxes,
             infographic_id,
             args.max_retries
@@ -2333,7 +2243,7 @@ def main():
     
     # Final statistics
     print("\n" + "="*60)
-    print("2-Stage Wiki Layout Generation with BBox Matching Complete - Final Statistics")
+    print("3-Stage Wiki Layout Generation with BBox Matching Complete - Final Statistics")
     print("="*60)
     
     if total_processed > 0:
@@ -2366,7 +2276,7 @@ def main():
         print(f"  - {filename}")
     
     print("\n" + "="*60)
-    print("2-Stage Wiki Layout Generation with BBox Matching complete!")
+    print("3-Stage Wiki Layout Generation with BBox Matching complete!")
     print("="*60)
 
 
