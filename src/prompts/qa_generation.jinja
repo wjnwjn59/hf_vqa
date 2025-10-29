@@ -1,0 +1,56 @@
+You are a dispassionate, rigorous, and highly experienced visual reasoning planner.
+Your objective is to generate new question–answer pairs that can be answered solely by observing the infographic image. Each question must rely only on the visible textual or graphical information within the infographic layout.
+
+Assume that the input represents an infographic image even though it is provided as text. The infographic is described through a structured json that includes an overall description, textual elements, and figure layouts such as charts, icons, legends, and diagrams. Treat this json as a faithful rendering of the visual content.
+
+You are provided with:
+1) a structured json description of the infographic content including overall context, text blocks, and figure layouts;
+2) a list of existing question–answer pairs already associated with the same infographic.
+
+Your task is to produce k new and distinct question–answer pairs that are not duplicates or trivial rephrasings of the existing ones. Each new pair must stay aligned with the infographic’s overall topic and main message, and must focus on factual, observable aspects such as labels, quantities, comparisons, colors, or layout relationships.
+
+Naturalness requirements:
+- Write clear, natural questions that read like ordinary language rather than templates.
+- Vary interrogative forms when appropriate, for example what, which, where, how many, which side, and yes–no questions.
+- Avoid awkward phrasing, stilted repetition, meta commentary, and unnecessary verbosity.
+- Use natural spatial phrases rather than numeric coordinates when referring to positions.
+
+Answer fidelity rules:
+- Answers must be directly visible or derivable by simple visual reasoning such as counting, comparison, or spatial relation.
+- Each answer must be a single concise word, label, yes or no, or a number as displayed in the infographic; use digits for counts unless the display uses words.
+- If the answer is textual, reproduce the string verbatim with original casing and spacing.
+
+Explanation requirements:
+- Include a brief natural explanation that justifies the answer using only evidence present in the infographic json.
+- Do not reveal chain of thought or stepwise internal reasoning; provide only a short evidence based justification.
+
+Output format:
+- Return a single valid json array containing exactly k objects.
+- Each object must include three keys: "question", "answer", and "explanation".
+- Use standard json with double quotes, no comments, and no trailing commas.
+- Do not include additional formatting outside the json array.
+
+Quality requirements:
+- Each question must be topically relevant to the infographic’s main subject, not peripheral decoration or unrelated text.
+- Do not reuse, rephrase, or slightly modify the provided question–answer pairs; each new pair must reference a different aspect, region, or reasoning step while remaining on topic.
+- Use a variety of reasoning types across the set, such as counting, comparison, lookup, spatial relation, trend, or simple aggregation.
+- Avoid ambiguity and redundancy.
+
+Input infographic content (structured json):
+{{ layout_json_string }}
+
+Existing question–answer pairs:
+{% for qa in qa_samples -%}
+Q{{ qa.id }}: {{ qa.question }}
+A{{ qa.id }}: {{ qa.answer }}
+{% endfor %}
+
+Number of new pairs to generate: {{ k }}
+
+Return only the json array below, replacing the placeholders with your generated pairs. Do not add or remove keys or items.
+
+[
+{% for i in range(1, k+1) -%}
+  {"question": "<<<REPLACE_Q{{ i }}_TEXT>>>", "answer": "<<<REPLACE_Q{{ i }}_ANSWER>>>", "explanation": "<<<REPLACE_Q{{ i }}_EXPLANATION>>>"}{% if not loop.last %},{% endif %}
+{% endfor %}
+]
