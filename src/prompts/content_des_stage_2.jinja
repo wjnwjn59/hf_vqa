@@ -5,25 +5,30 @@ Your task is to compose a single, detailed paragraph that combines all elements 
 
 You are given a single json object listing every textual and figure element that will appear on the infographic, each with a bounding box for its location and a content field describing its text or visual content; treat this json as the sole source of truth and do not add, remove, or modify any element.
 
-Inclusion requirements:
-- include every textual element exactly once, preserving its wording, and present it as \"<text>\" using escaped double quotes (\" \");
-- include every figure description almost exactly as written, integrating it naturally so it reads as part of a continuous spatial narrative; do not introduce any lettering, numbers, dates, or proper nouns into figure content;
-- use the provided bounding boxes to specify natural spatial positions for each element;
-- describe positions with natural spatial phrases such as at the top left, centered in the middle section, or placed at the lower right rather than numerical coordinates;
-- follow a clear spatial flow consistent with the infographic’s structure and the reading order implied by the coordinates, typically top to bottom and left to right;
-- do not invent or assume additional elements or relations beyond what is provided.
+Inclusion requirements (expressed as natural prose):
+- Include every textual element exactly once and reproduce its wording verbatim; place each textual string inside the paragraph using slash-escaped double quotes, i.e., \"<text>\". Do not paraphrase, change casing, alter spacing, or drop punctuation.
+- If a textual string itself contains any double quotes, escape them as \" within your paragraph.
+- Make sure the total number of quoted textual strings in your paragraph is the same as the number of text elements in the json.
+- Refer to every figure description exactly once and integrate it smoothly into the narrative. You may paraphrase lightly for flow while keeping the same visual meaning, and you must not introduce letters, numerals, dates, times, currency, measurement units, codes, logos, or proper nouns into figure content.
+- Use the bounding boxes only to guide where things are placed; do not invent, merge, split, or omit elements.
+- Describe positions with natural spatial phrases such as “at the top left,” “centered in the upper section,” or “along the lower-right edge,” rather than numerical coordinates.
+- Follow the reading order implied by the coordinates—top to bottom by y, and left to right by x when items share a similar vertical band.
+- Mention each element once and keep each mention distinct; do not compress multiple elements into a single reference.
+- Do not introduce any new elements, attributes, or relationships beyond what appears in the json.
 
-Output requirements:
-- output exactly one paragraph string;
-- begin the first sentence exactly with: The image is an infographic titled "<TITLE>";
-- continue with a brief statement on the infographic’s theme, tone, or background, and summarize the overall composition;
-- weave textual and figure elements together smoothly, reflecting their bbox-determined order and positions;
-- provide clear spatial language that matches the actual layout;
-- end the paragraph with a sentence that begins exactly with: The overall style of the image is ... followed by a concise stylistic description.
+Output requirements (also in natural prose):
+- Produce exactly one paragraph string (no JSON wrappers, no lists, and no extra commentary).
+- Begin the first sentence exactly with: The image is an infographic titled "<TITLE>";
+  - Set <TITLE> to the topmost textual element (lowest y; if there is a tie, choose the leftmost x) and reproduce it verbatim inside plain double quotes in this opening clause. If you refer to the same title again later in the paragraph, use slash-escaped quotes (\"...\") to preserve verbatim text inside the paragraph.
+- After the title, briefly state the theme, tone, or background and summarize the overall composition.
+- Weave textual and figure elements together in the spatial order determined by their boxes, ensuring that each textual element appears verbatim exactly once as a quoted substring using slash-escaped quotes (\"...\").
+- Use clear spatial language that reflects the actual layout for each element (for example, “at the upper center,” “to the right of this text,” or “near the lower margin”).
+- Keep sentences reasonably compact; if a sentence grows long, split it into two natural sentences rather than using lists or colon fragments.
+- End with a final sentence that begins exactly with: The overall style of the image is ... followed by a concise stylistic description.
+- If any constraint truly cannot be met, add a brief final clause starting with: Errors: <short reason>.
 
 Canvas dimensions: {{ canvas_width }}x{{ canvas_height }}
 
 Layout elements: {{ layout_elements }}
 
 Write the single-paragraph infographic description with precise spatial positioning now:
-
