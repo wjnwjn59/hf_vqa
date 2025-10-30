@@ -1,20 +1,18 @@
 #!/bin/bash
 
 # ============================================================================
-# Narrator v2 Pipeline for Squad v2 Dataset
+# Narrator BBox Pipeline for Squad v2 Dataset
 # ============================================================================
-# This script runs the complete NARRATOR v2 pipeline:
-# 1. Generate 3-stage infographic data using Qwen (generate_stage_infographic.py)
-# 2. Merge bounding boxes (merge_stage_narrator.py)
-# 3. Generate images with BizGen
+# This script runs the complete NARRATOR BBOX pipeline:
+# 1. Generate 3-stage infographic data with bbox matching using Qwen (generate_narrator_with_bbox.py)
+# 2. Generate images with BizGen
 #
 # Usage:
-#   bash scripts/run_narrator_v2_pipeline.sh <GPU_ID> <START_SUBSET> <END_SUBSET>
+#   bash scripts/run_narrator_bbox_pipeline.sh <GPU_ID> <START_SUBSET> <END_SUBSET>
 #
 # Example:
-#   bash scripts/run_narrator_v2_pipeline.sh 0 1 201      # GPU 0: subsets 1-200 (10,000 images)
-#   bash scripts/run_narrator_v2_pipeline.sh 1 201 401   # GPU 1: subsets 201-400 (10,000 images)
-#   bash scripts/run_narrator_v2_pipeline.sh 2 401 601   # GPU 2: subsets 401-600 (10,000 images)
+#   bash scripts/run_narrator_bbox_pipeline.sh 0 1 201      # GPU 0: subsets 1-200 (10,000 images)
+#   bash scripts/run_narrator_bbox_pipeline.sh 1 201 401   # GPU 1: subsets 201-400 (10,000 images)
 #
 # Note: Each subset contains 50 images. Subset indices are 1-based.
 # ============================================================================
@@ -78,18 +76,17 @@ CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 
 # Paths
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
-STAGE_A_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
-STAGE_B_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
-STAGE_C_TEMPLATE="./src/prompts/content_des_stage_3.jinja"
-INFOGRAPHIC_V2_DIR="src/data/create_data/output/infographic_v2"
-NARRATOR_FORMAT_V2_DIR="src/data/create_data/output/narrator_format_v2"
+STAGE_1_TEMPLATE="./src/prompts/content_des_stage_1.jinja"
+STAGE_2_TEMPLATE="./src/prompts/content_des_stage_2.jinja"
+EXTRACTED_BBOXES="./src/data/narrator/extracted_bboxes.json"
+BBOX_OUTPUT_DIR="src/data/create_data/output/wiki_bbox_v2"
 BIZGEN_DIR="./src/data/bizgen"
 CKPT_DIR="checkpoints/lora/infographic"
 
 # Model settings
 MODEL_NAME="unsloth/Qwen3-8B"
 BATCH_SIZE=8
-DATASET_NAME="squad_v2_new"
+DATASET_NAME="squad_v2_bbox"
 SEED=42
 
 # Calculate expected outputs
@@ -106,7 +103,7 @@ BIZGEN_SUBSET="${BIZGEN_START}:${BIZGEN_END}"
 # Print Configuration
 # ============================================================================
 echo "======================================================================"
-echo "Narrator v2 Pipeline - GPU $GPU_ID"
+echo "Narrator BBox Pipeline - GPU $GPU_ID"
 echo "======================================================================"
 echo ""
 echo "Configuration:"
@@ -115,39 +112,38 @@ echo "  Start Subset        : $START_SUBSET"
 echo "  End Subset          : $END_SUBSET"
 echo "  Number of Subsets   : $NUM_SUBSETS"
 echo "  Number of Images    : $NUM_IMAGES (50 images per subset)"
-echo "  Expected Files      : infographic$(printf '%06d' $START_SUBSET).json - infographic$(printf '%06d' $((END_SUBSET-1))).json"
+echo "  Expected Files      : wiki$(printf '%06d' $START_SUBSET).json - wiki$(printf '%06d' $((END_SUBSET-1))).json"
 echo "  BizGen Subset       : $BIZGEN_SUBSET"
 echo ""
 echo "Paths:"
 echo "  Input Dataset       : $SQUAD_TRAIN"
-echo "  Stage 1 Template    : $STAGE_A_TEMPLATE"
-echo "  Stage 2 Template    : $STAGE_B_TEMPLATE"
-echo "  Stage 3 Template    : $STAGE_C_TEMPLATE"
-echo "  Infographic v2 Out  : $INFOGRAPHIC_V2_DIR"
-echo "  Narrator Format v2  : $NARRATOR_FORMAT_V2_DIR"
+echo "  Stage 1 Template    : $STAGE_1_TEMPLATE"
+echo "  Stage 2 Template    : $STAGE_2_TEMPLATE"
+echo "  Extracted BBoxes    : $EXTRACTED_BBOXES"
+echo "  BBox Output Dir     : $BBOX_OUTPUT_DIR"
 echo "  BizGen Directory    : $BIZGEN_DIR"
 echo ""
 echo "======================================================================"
 echo ""
 
 # ============================================================================
-# Step 1: Generate 3-Stage Infographic Data using Qwen
+# Step 1: Generate 2-Stage Infographic Data with BBox Matching using Qwen
 # ============================================================================
 echo "======================================================================"
-echo "Step 1/3: Generating 3-Stage Infographic Data with Qwen"
+echo "Step 1/2: Generating 2-Stage Infographic Data with BBox Matching"
 echo "======================================================================"
 echo "Using conda environment: thinh_wiki"
 echo "Python: $CONDA_WIKI"
 echo "Using GPU: $GPU_ID"
 echo ""
 
-CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_stage_infographic.py \
+CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_narrator_with_bbox.py \
     --model_name "$MODEL_NAME" \
     --input_data "$SQUAD_TRAIN" \
-    --stage_a "$STAGE_A_TEMPLATE" \
-    --stage_b "$STAGE_B_TEMPLATE" \
-    --stage_c "$STAGE_C_TEMPLATE" \
-    --output_dir "$INFOGRAPHIC_V2_DIR" \
+    --stage_1 "$STAGE_1_TEMPLATE" \
+    --stage_2 "$STAGE_2_TEMPLATE" \
+    --extracted_bboxes "$EXTRACTED_BBOXES" \
+    --output_dir "$BBOX_OUTPUT_DIR" \
     --start $START_SUBSET \
     --end $END_SUBSET \
     --batch_size $BATCH_SIZE
@@ -155,7 +151,7 @@ CUDA_VISIBLE_DEVICES=$GPU_ID $CONDA_WIKI src/data/narrator/generate_stage_infogr
 if [ $? -eq 0 ]; then
     echo ""
     echo "✓ Step 1 completed successfully!"
-    echo "  Generated files: infographic$(printf '%06d' $START_SUBSET).json - infographic$(printf '%06d' $((END_SUBSET-1))).json"
+    echo "  Generated files: wiki$(printf '%06d' $START_SUBSET).json - wiki$(printf '%06d' $((END_SUBSET-1))).json"
 else
     echo ""
     echo "✗ Step 1 failed!"
@@ -163,39 +159,13 @@ else
 fi
 
 # ============================================================================
-# Step 2: Merge Bounding Boxes
+# Step 2: Generate Images with BizGen
 # ============================================================================
 echo ""
 echo "======================================================================"
-echo "Step 2/3: Merging Bounding Boxes"
+echo "Step 2/2: Generating Images with BizGen"
 echo "======================================================================"
-echo ""
-
-$CONDA_WIKI src/data/narrator/merge_stage_narrator.py \
-    --infographic-dir "$INFOGRAPHIC_V2_DIR" \
-    --output-dir "$NARRATOR_FORMAT_V2_DIR" \
-    --start $START_SUBSET \
-    --end $END_SUBSET \
-    --seed $SEED
-
-if [ $? -eq 0 ]; then
-    echo ""
-    echo "✓ Step 2 completed successfully!"
-    echo "  Generated wiki files in: $NARRATOR_FORMAT_V2_DIR"
-else
-    echo ""
-    echo "✗ Step 2 failed!"
-    exit 1
-fi
-
-# ============================================================================
-# Step 3: Generate Images with BizGen
-# ============================================================================
-echo ""
-echo "======================================================================"
-echo "Step 3/3: Generating Images with BizGen"
-echo "======================================================================"
-echo "Using conda environment: khoina_bizgen"
+echo "Using conda environment: bizgen"
 echo "Python: $CONDA_BIZGEN"
 echo "Using GPU: cuda:$GPU_ID (via --device parameter)"
 echo "Subset: $BIZGEN_SUBSET"
@@ -205,14 +175,14 @@ cd "$BIZGEN_DIR"
 
 $CONDA_BIZGEN inference.py \
     --ckpt_dir "$CKPT_DIR" \
-    --wiki_dir "../create_data/output/narrator_format_v2/" \
+    --wiki_dir "../create_data/output/wiki_bbox_v2/" \
     --subset "$BIZGEN_SUBSET" \
     --dataset_name "$DATASET_NAME" \
     --device "cuda:$GPU_ID"
 
 if [ $? -eq 0 ]; then
     echo ""
-    echo "✓ Step 3 completed successfully!"
+    echo "✓ Step 2 completed successfully!"
     
     # Output is now in dataset_name/narratorXXXXXX folders
     echo "  Generated images in: $BIZGEN_DIR/output/$DATASET_NAME/"
@@ -227,7 +197,7 @@ if [ $? -eq 0 ]; then
     fi
 else
     echo ""
-    echo "✗ Step 3 failed!"
+    echo "✗ Step 2 failed!"
     cd - > /dev/null
     exit 1
 fi
@@ -239,7 +209,7 @@ cd - > /dev/null
 # ============================================================================
 echo ""
 echo "======================================================================"
-echo "Pipeline Completed Successfully! - GPU $GPU_ID"
+echo "BBox Pipeline Completed Successfully! - GPU $GPU_ID"
 echo "======================================================================"
 echo ""
 echo "Summary:"
@@ -250,9 +220,14 @@ echo "  Number of Images    : $NUM_IMAGES"
 echo "  BizGen Subset       : $BIZGEN_SUBSET"
 echo ""
 echo "Output Locations:"
-echo "  1. Infographic v2   : $INFOGRAPHIC_V2_DIR/infographic$(printf '%06d' $START_SUBSET).json - infographic$(printf '%06d' $((END_SUBSET-1))).json"
-echo "  2. Narrator Format  : $NARRATOR_FORMAT_V2_DIR/wiki$(printf '%06d' $START_SUBSET).json - wiki$(printf '%06d' $((END_SUBSET-1))).json"
-echo "  3. Generated Images : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
+echo "  1. Wiki Layouts     : $BBOX_OUTPUT_DIR/wiki$(printf '%06d' $START_SUBSET).json - wiki$(printf '%06d' $((END_SUBSET-1))).json"
+echo "  2. Generated Images : $BIZGEN_DIR/output/$DATASET_NAME/narrator*/"
+echo ""
+echo "Key Improvements:"
+echo "  ✓ Integrated 2-stage processing with bbox matching in single step"
+echo "  ✓ Smart text-image layout optimization"
+echo "  ✓ Direct title + segments + figures generation from context"
+echo "  ✓ Automated quality validation and layout bounds checking"
 echo ""
 echo "======================================================================"
 echo "All Done! 🎉"

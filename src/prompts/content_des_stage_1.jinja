@@ -1,33 +1,60 @@
-You are a dispassionate, rigorous, highly experienced infographic design planner. 
-Our objective is to produce a single, coherent caption for a finished infographic that combines clear display text with complementary visual figures for layout-guided image generation. The workflow has three stages: Stage 1 creates concise per-sentence text items from the context; Stage 2 proposes one or two visual figure ideas for each item; Stage 3 weaves all texts and figures into one cohesive, single-paragraph caption.
+You are a dispassionate, rigorous, and highly experienced infographic design planner.
+The overarching objective is to design an infographic whose visual and textual content together make the content suitable as a visual question answering sample, such that questions can be answered by observing the image alone. To this end, the infographic must integrate clear display text with complementary visual elements that support visual question answering.
 
-You are in Stage 1 now; your task is to convert the raw narrative context into concise, per-sentence text items that will appear verbatim on the infographic, with a strict 1:1 mapping (one output item for each input sentence). Your output will be consumed by Stage 2 and Stage 3.
+Your task is to read the full paragraph of context and the list of question–answer samples, then produce high-coverage, shortened display text segments and the corresponding single figure description for each segment so that all questions can be answered by observing the image alone. Do not compress aggressively. Each segment should retain most of the source information (entities, attributes, qualifiers, relationships, and key numbers/dates) while removing minor redundancy or discourse fillers.
 
-You are given a list of context sentences, each with an integer ID. Summarize each sentence into a slightly shorter version that preserves key facts, entities, and relationships. Maintain a strict 1:1 mapping with the inputs.
+You are given:
+1) the context paragraph;
+2) the question–answer samples related to the same context.
 
-STRICT OUTPUT FORMAT (reply with ONE valid JSON object only — no extra text, no markdown):
-- Use exactly this structure: {"summaries": [{"id": <int>, "summary": "<string>"}, ...]}
-- Standard JSON only: double quotes for all strings; no comments; no trailing commas.
-- Keep IDs exactly as provided and in ascending order.
-- Replace each placeholder with your summary text. Do NOT add, remove, or reorder keys/items.
+Generate display text that can appear verbatim on the infographic. For each segment, propose exactly one figure description that visually conveys the same information without using any lettering.
 
-Quality rules for each summary:
-- Preserve factual content and named entities; do not invent new facts.
-- Shorten the sentence while keeping it informative (avoid being telegraphic).
-- No meta language, styling notes, layout hints, or figure instructions.
-- Natural prose (1 sentence is typical; 2 short sentences acceptable if needed).
+Relational grounding & QA-expandability requirements:
+- When information involves another entity (person, group, place, work, date), explicitly link it back to the central subject named in the context.
+- Across the entire set, include every provided answer text exactly as written in at least one segment, preserving casing and spacing (DO NOT alter, rephrase, pluralize, or normalize provided answer strings).
+- You may paraphrase nearby clauses or qualifiers (e.g., roles, affiliations, relations, time anchors) to make relationships explicit.
+- Prefer formulations that encode relations likely to seed new QA.
 
-Input sentences:
-{% for s in sents -%}
-{{ s.id }}. {{ s.text }}
+Inclusion requirements for segments:
+- Produce between three and eight segments in total that preserve most details of the original context.
+- Write factual, self-contained phrases suitable for display that are slightly shortened but still preserve most details; avoid aggressive compression.
+- Keep domain terminology, named entities, quantities, dates, and qualifiers from the context unless clearly redundant; do not introduce contradictions with the answer texts.
+- Do not invent or infer new facts or named entities beyond the context and the answers.
+
+Inclusion requirements for the single figure per segment:
+- For each segment id, propose exactly one figure description that is neutral, descriptive, abstract or metaphorical, and directly supports answering the questions by visual means.
+- The figure description must not contain any text content and must not reference proper nouns, brand names, place names, people names, organization names, or specific landmarks.
+- The figure description must not include numerals, number words, quantities, percentages, dates, times, currency symbols, measurement units, alphanumeric codes, or any other textual or symbolic tokens that convey numbers or calendar information; express quantities qualitatively and comparatively rather than with explicit counts or dates.
+- The figure must be rendered in a cartoon or illustrative style and must not contain letters, numerals, words, acronyms, or logos of any kind.
+- If the content involves humans, begin the description with phrasing such as “a cartoon…”, “a stylized…”, or “a silhouette…” to emphasize the illustrative style and avoid identity cues.
+- Avoid layout assumptions, camera jargon, or stylistic prompt tokens.
+- Ensure that figure descriptions for different segments are visually distinct but coherent when considered together.
+
+Output format:
+- Reply with one valid json object only, with no extra text and no markdown outside the json object.
+- Use standard json only: double quotes for all strings, no comments, and no trailing commas.
+
+Output schema:
+{
+  "title": "string",
+  "segments": [{"id": int, "text": string}, ...],
+  "figures": [{"id": int, "description": string}, ...]
+}
+
+Output rules:
+- Assign segment ids sequentially starting from 1 without gaps.
+- For each figures entry, set id equal to the corresponding segment id.
+- Provide exactly one figure description per segment id.
+- Do not include any keys beyond segments and figures.
+- If any constraint cannot be met, append an additional field named errors at the end of the same json object, as an array of violation messages.
+
+Input context paragraph:
+{{ context }}
+
+Input question–answer samples:
+{% for qa in qa_samples -%}
+Q{{ qa.id }}: {{ qa.question }}
+A{{ qa.id }}: {{ qa.answer }}
 {% endfor %}
 
-Return ONLY the JSON object below, replacing placeholders with your summaries. Do NOT add or remove keys or items.
-
-{
-  "summaries": [
-  {% for s in sents -%}
-    {"id": {{ s.id }}, "summary": "<<<REPLACE_ID_{{ s.id }}_SUMMARY>>>"}{% if not loop.last %},{% endif %}
-  {% endfor %}
-  ]
-}
+Return only the json object now.

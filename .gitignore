@@ -20,3 +20,6 @@ output/
 *.log
 
 src/inference/results/*.json
+
+src/data/bizgen/checkpoints
+test*

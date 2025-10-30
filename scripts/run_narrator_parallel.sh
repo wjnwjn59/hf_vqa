@@ -3,13 +3,20 @@
 # ============================================================================
 # Parallel Narrator Pipeline Launcher
 # ============================================================================
-# This script launches the narrator pipeline on multiple GPUs in parallel
+# This script launches the complete narrator pipeline on multiple GPUs in parallel:
+# 1. Generate 3-stage infographic data using Qwen
+# 2. Merge bounding boxes 
+# 3. Generate images with BizGen
+# 4. Create training datasets (JSON/JSONL format)
 #
 # Usage:
 #   bash scripts/run_narrator_parallel.sh
 #
 # Configuration:
 #   Edit the GPU_CONFIGS array below to set ranges for each GPU
+#
+# Post-processing:
+#   After completion, run: python scripts/merge_training_data.py
 # ============================================================================
 
 set -e
@@ -19,12 +26,12 @@ set -e
 # ============================================================================
 
 # Define ranges for each GPU
-# Format: "GPU_ID START_FILE_IDX END_FILE_IDX"
-# Note: Each file contains 50 images
+# Format: "GPU_ID START_SUBSET END_SUBSET"
+# Note: Each subset contains 50 images
 GPU_CONFIGS=(
-    "0 1 201"       # GPU 0: files 1-200 (10,000 images)
-    "1 201 401"     # GPU 1: files 201-400 (10,000 images)  
-    "2 401 601"     # GPU 2: files 401-600 (10,000 images)
+    # "0 1 20"
+    "1 1 20"
+    "2 20 40"
 )
 
 # Log directory
@@ -48,9 +55,9 @@ echo "GPU Configuration:"
 echo "------------------"
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
-    num_files=$((end - start))
-    num_images=$((num_files * 50))
-    echo "  GPU $gpu: files [$start, $end) → $num_files files ($num_images images)"
+    num_subsets=$((end - start))
+    num_images=$((num_subsets * 50))
+    echo "  GPU $gpu: subsets [$start, $end) → $num_subsets subsets ($num_images images)"
 done
 echo ""
 echo "======================================================================"
@@ -65,10 +72,10 @@ LOG_FILES=()
 for config in "${GPU_CONFIGS[@]}"; do
     read -r gpu start end <<< "$config"
     
-    LOG_FILE="$LOG_DIR/gpu${gpu}_files_${start}_${end}_${TIMESTAMP}.log"
+    LOG_FILE="$LOG_DIR/gpu${gpu}_subsets_${start}_${end}_${TIMESTAMP}.log"
     LOG_FILES+=("$LOG_FILE")
     
-    echo "Launching GPU $gpu: files [$start, $end)"
+    echo "Launching GPU $gpu: subsets [$start, $end)"
     echo "  Log file: $LOG_FILE"
     
     # Run the pipeline script in background
@@ -91,7 +98,7 @@ echo ""
 echo "Running processes:"
 for i in "${!PIDS[@]}"; do
     read -r gpu start end <<< "${GPU_CONFIGS[$i]}"
-    echo "  GPU $gpu (PID ${PIDS[$i]}): files [$start, $end)"
+    echo "  GPU $gpu (PID ${PIDS[$i]}): subsets [$start, $end)"
 done
 echo ""
 echo "Log files:"
@@ -153,25 +160,31 @@ if [ $FAILED -eq 0 ]; then
     echo ""
     
     # Calculate totals
-    TOTAL_FILES=0
+    TOTAL_SUBSETS=0
     TOTAL_IMAGES=0
     for config in "${GPU_CONFIGS[@]}"; do
         read -r gpu start end <<< "$config"
-        num_files=$((end - start))
-        num_images=$((num_files * 50))
-        TOTAL_FILES=$((TOTAL_FILES + num_files))
+        num_subsets=$((end - start))
+        num_images=$((num_subsets * 50))
+        TOTAL_SUBSETS=$((TOTAL_SUBSETS + num_subsets))
         TOTAL_IMAGES=$((TOTAL_IMAGES + num_images))
     done
     
     echo "Summary:"
-    echo "  Total Files Generated  : $TOTAL_FILES"
+    echo "  Total Subsets Generated: $TOTAL_SUBSETS"
     echo "  Total Images Generated : $TOTAL_IMAGES"
     echo "  Number of GPUs Used    : ${#GPU_CONFIGS[@]}"
     echo ""
     echo "Output Locations:"
-    echo "  Infographic JSON  : src/data/create_data/output/infographic/"
-    echo "  Narrator Format   : src/data/create_data/output/narrator_format/"
-    echo "  Generated Images  : src/data/bizgen/output/"
+    echo "  Infographic v2 JSON: src/data/create_data/output/infographic_v2/"
+    echo "  Narrator Format v2 : src/data/create_data/output/narrator_format_v2/"
+    echo "  Generated Images   : src/data/bizgen/output/squad_v2_new/"
+    echo "  Training Data      : training_data/narrator_*_training.json"
+    echo ""
+    echo "Next Steps:"
+    echo "  1. Merge all training data files: python scripts/merge_training_data.py"
+    echo "  2. Run OCR filtering: python src/data/ocr/ocr_filter.py"
+    echo "  3. Train VQA model with generated data"
 else
     echo "✗ $FAILED GPU(s) failed"
     echo ""

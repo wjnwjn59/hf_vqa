@@ -1,47 +1,34 @@
-You are a dispassionate, rigorous, highly experienced infographic design planner. 
-Our objective is to produce a single, coherent caption for a finished infographic that combines clear display text with complementary visual figures for layout-guided image generation. The workflow has three stages: Stage 1 creates concise per-sentence text items from the context; Stage 2 proposes visual figure ideas for each item; Stage 3 weaves all texts and figures into one cohesive, single-paragraph caption.
+You are a dispassionate, rigorous, and highly experienced infographic design planner.
+The overarching objective is to design an infographic whose visual and textual content together make the content suitable as a visual question answering sample, such that questions can be answered by observing the image alone. To this end, the infographic must integrate clear display text with complementary visual elements that support visual question answering.
 
-**Global constraints:** All proposed visuals must be rendered in a **cartoon/illustrative style**, and **no text/lettering/numerals/logos** may appear inside any visual.
+Your task is to compose a single, detailed paragraph that combines all elements from the provided json into a coherent spatial narrative for layout-guided image generation.
 
-You are in Stage 2 now; your task is to propose a **MAIN** visual idea for each text item from Stage 1 that conveys its meaning **without any lettering**. You **may also** provide **one SUPPORTIVE small figure** (optional), such as a simple abstract shape arrangement (e.g., “The image features a simple, abstract design with a blue circle and a black rectangle.”). Note: in Stage 3, all figure ideas from this stage will be included in the final caption and may be placed anywhere in the narrative (no assumed one-to-one or local pairing).
+You are given a single json object listing every textual and figure element that will appear on the infographic, each with a bounding box for its location and a content field describing its text or visual content; treat this json as the sole source of truth and do not add, remove, or modify any element.
 
-You are given with the items below which are the per-sentence summaries generated in Stage 1. For each summary, produce:
-- **One required MAIN idea** (detailed, faithful scene description).
-- **Zero or one optional SUPPORTIVE micro-figure** (brief abstract/iconic aid).
+Inclusion requirements (expressed as natural prose):
+- Include every textual element exactly once and reproduce its wording verbatim; place each textual string inside the paragraph using slash-escaped double quotes, i.e., \"<text>\". Do not paraphrase, change casing, alter spacing, or drop punctuation.
+- If a textual string itself contains any double quotes, escape them as \" within your paragraph.
+- Make sure the total number of quoted textual strings in your paragraph is the same as the number of text elements in the json.
+- Refer to every figure description exactly once and integrate it smoothly into the narrative. You may paraphrase lightly for flow while keeping the same visual meaning, and you must not introduce letters, numerals, dates, times, currency, measurement units, codes, logos, or proper nouns into figure content.
+- Use the bounding boxes only to guide where things are placed; do not invent, merge, split, or omit elements.
+- Describe positions with natural spatial phrases such as “at the top left,” “centered in the upper section,” or “along the lower-right edge,” rather than numerical coordinates.
+- Follow the reading order implied by the coordinates—top to bottom by y, and left to right by x when items share a similar vertical band.
+- Mention each element once and keep each mention distinct; do not compress multiple elements into a single reference.
+- Do not introduce any new elements, attributes, or relationships beyond what appears in the json.
 
-STRICT OUTPUT FORMAT (reply with ONE valid JSON object only — no extra text, no markdown):
-- Use exactly these keys and structure: {"figures": [{"id": <int>, "ideas": ["<MAIN>", "<SUPPORTIVE?>"]}, ...]}
-- Use standard JSON with double quotes for all strings.
-- No comments, no trailing commas.
-- Keep IDs exactly as provided and in ascending order.
-- The **first element** of each "ideas" array **must be the MAIN idea**.
-- If you do **not** provide a supportive idea, **delete** the second placeholder **and its comma** so the JSON remains valid.
-- Do NOT add, remove, or reorder items or keys.
+Output requirements (also in natural prose):
+- Produce exactly one paragraph string (no JSON wrappers, no lists, and no extra commentary).
+- Begin the first sentence exactly with: The image is an infographic titled "<TITLE>";
+  - Set <TITLE> to the topmost textual element (lowest y; if there is a tie, choose the leftmost x) and reproduce it verbatim inside plain double quotes in this opening clause. If you refer to the same title again later in the paragraph, use slash-escaped quotes (\"...\") to preserve verbatim text inside the paragraph.
+- After the title, briefly state the theme, tone, or background and summarize the overall composition.
+- Weave textual and figure elements together in the spatial order determined by their boxes, ensuring that each textual element appears verbatim exactly once as a quoted substring using slash-escaped quotes (\"...\").
+- Use clear spatial language that reflects the actual layout for each element (for example, “at the upper center,” “to the right of this text,” or “near the lower margin”).
+- Keep sentences reasonably compact; if a sentence grows long, split it into two natural sentences rather than using lists or colon fragments.
+- End with a final sentence that begins exactly with: The overall style of the image is ... followed by a concise stylistic description.
+- If any constraint truly cannot be met, add a brief final clause starting with: Errors: <short reason>.
 
-Quality rules:
-- **MAIN idea (required):** 1–3 sentences, ~25–80 words; neutral, declarative prose; describe primary subject(s), salient attributes (e.g., color/pattern), action/pose, immediate setting/background, and simple composition cues when useful; no new facts; **no lettering or text of any kind**.
-- **SUPPORTIVE idea (optional):** 1 sentence, ~5–20 words; simple abstract/iconic aid (shapes, minimal icons, small motif); must be visually helpful but not redundant; **no lettering**.
-- Mood phrasing: use careful language for visually implied states (e.g., “appears to be happy”).
-- Counting & structure: state clear counts; for abstract graphics, name shapes and arrangement.
-- Placement-neutral: do not claim or prescribe where a figure will appear relative to any text; Stage 3 may place figures anywhere.
-- Avoid blanks unless the summary explicitly calls for emptiness/minimalism.
-- No camera/style jargon or prompt-engineering tokens. No brands or real-person identification.
-- **Style reminder:** all visuals are cartoon/illustrative.
+Canvas dimensions: {{ canvas_width }}x{{ canvas_height }}
 
-Stage-1 Summaries:
-{% for it in items -%}
-{{ it.id }}. {{ it.summary }}
-{% endfor %}
+Layout elements: {{ layout_elements }}
 
-Return ONLY the JSON object below, replacing placeholders with your descriptions. Do NOT add or remove keys or items. If you provide only the MAIN idea, delete the second placeholder (and its comma).
-
-{
-  "figures": [
-  {% for it in items -%}
-    {"id": {{ it.id }}, "ideas": [
-      "<<<REPLACE_ID_{{ it.id }}_MAIN>>>"
-      , "<<<REPLACE_ID_{{ it.id }}_SUPPORTIVE>>>"
-    ]}{% if not loop.last %},{% endif %}
-  {% endfor %}
-  ]
-}
+Write the single-paragraph infographic description with precise spatial positioning now:

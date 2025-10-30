@@ -456,7 +456,7 @@ def validate_and_fix_layout_bounds(
 
 
 # ============================================================================
-# ORIGINAL FUNCTIONS
+# HELPER FUNCTIONS
 # ============================================================================
 
 def load_json(filepath: str) -> Any:
@@ -467,50 +467,9 @@ def load_json(filepath: str) -> Any:
 
 def save_json(data: Any, filepath: str):
     """Save data to JSON file."""
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
-
-
-def load_infographic_files_from_directory(directory_path: str, start_file_idx: int, end_file_idx: int) -> List[Dict]:
-    """
-    Load infographic files from directory based on file index range.
-    Each file contains 50 entries with infographic_id starting from (file_index-1)*50 + 1
-    
-    Args:
-        directory_path: Path to directory containing infographic*.json files
-        start_file_idx: Start file index (inclusive, 1-based)
-        end_file_idx: End file index (exclusive, 1-based)
-    
-    Returns:
-        List of infographic data entries from the specified files
-    """
-    if not os.path.exists(directory_path):
-        print(f"Warning: Directory {directory_path} does not exist")
-        return []
-    
-    infographic_data = []
-    
-    print(f"Loading files infographic{start_file_idx:06d}.json to infographic{end_file_idx-1:06d}.json")
-    
-    for file_index in range(start_file_idx, end_file_idx):
-        filename = f"infographic{file_index:06d}.json"
-        filepath = os.path.join(directory_path, filename)
-        
-        if not os.path.exists(filepath):
-            print(f"Warning: File {filename} does not exist, skipping")
-            continue
-            
-        try:
-            data = load_json(filepath)
-            infographic_data.extend(data)
-            print(f"  Loaded {len(data)} entries from {filename}")
-            
-        except Exception as e:
-            print(f"Error loading {filename}: {e}")
-            continue
-    
-    print(f"Total loaded infographic entries from {end_file_idx - start_file_idx} files: {len(infographic_data)}")
-    return infographic_data
 
 
 def calculate_bbox_area(bbox: Dict) -> int:
@@ -867,6 +826,156 @@ def select_non_overlapping_text_bboxes(
     
     return selected_text
 
+
+def validate_input_format(data: List[Dict]) -> Tuple[bool, str]:
+    """
+    Validate the input data format.
+    
+    Args:
+        data: List of infographic data entries
+    
+    Returns:
+        Tuple of (is_valid, error_message)
+    """
+    if not isinstance(data, list):
+        return False, "Input data should be a list"
+    
+    if not data:
+        return False, "Input data is empty"
+    
+    for i, entry in enumerate(data):
+        if not isinstance(entry, dict):
+            return False, f"Entry {i} is not a dictionary"
+        
+        required_fields = ['full_image_caption', 'background_caption', 'figures']
+        for field in required_fields:
+            if field not in entry:
+                return False, f"Entry {i} missing required field: {field}"
+        
+        # Check if full_image_caption has some content
+        if not entry['full_image_caption'].strip():
+            return False, f"Entry {i} has empty full_image_caption"
+        
+        # Check figures format
+        if not isinstance(entry['figures'], list):
+            return False, f"Entry {i} figures field should be a list"
+    
+    return True, "Format is valid"
+
+
+# ============================================================================
+# MAIN FUNCTION FOR COLAB
+# ============================================================================
+
+def merge_narrator_data_from_string(
+    input_json_string: str,
+    max_samples: int = 10,
+    output_path: str = "meta/test_infographics.json"
+) -> List[Dict]:
+    """
+    Process narrator-generated infographic data from JSON string and merge with bboxes.
+    Modified version of merge_narrator_data that takes JSON string input instead of files.
+    
+    Args:
+        input_json_string: JSON string containing infographic data
+        max_samples: Maximum number of samples to generate
+        output_path: Path to save the output file
+    
+    Returns:
+        List of merged infographic data (same format as wiki000001.json)
+    """
+    print("=== Merge Stage Narrator ===")
+    print("Processing narrator-generated infographic data from JSON string...")
+    
+    # Set random seed for reproducibility
+    random.seed(42)
+    
+    # File paths (assuming we're in the bizgen directory)
+    extracted_bboxes_path = "glyph/extracted_bboxes.json"
+    color_idx_path = "glyph/color_idx.json"
+    font_idx_path = "glyph/font_uni_10-lang_idx.json"
+    
+    # Check if required files exist
+    required_files = [extracted_bboxes_path, color_idx_path, font_idx_path]
+    for filepath in required_files:
+        if not os.path.exists(filepath):
+            print(f"Error: Required file not found: {filepath}")
+            print("Please ensure you have cloned BizGen and are in the correct directory.")
+            return []
+    
+    # Load required data
+    print("Loading required data files...")
+    try:
+        extracted_bboxes = load_json(extracted_bboxes_path)
+        color_idx = load_json(color_idx_path)
+        font_idx = load_json(font_idx_path)
+        
+        # Parse input JSON string
+        input_data = json.loads(input_json_string)
+        
+        # Validate input format
+        is_valid, error_msg = validate_input_format(input_data)
+        if not is_valid:
+            print(f"Error: Invalid input format - {error_msg}")
+            return []
+        
+        print(f"  - Loaded {len(extracted_bboxes)} bbox sets")
+        print(f"  - Loaded {len(color_idx)} colors")
+        print(f"  - Loaded {len(font_idx)} fonts")
+        print(f"  - Parsed {len(input_data)} infographic entries from JSON string")
+        print(f"  - Input format validation: {error_msg}")
+        
+    except json.JSONDecodeError as e:
+        print(f"Error parsing JSON string: {e}")
+        return []
+    except Exception as e:
+        print(f"Error loading data files: {e}")
+        return []
+    
+    # Process data using original merge_narrator_data logic
+    print("\nProcessing infographic data...")
+    try:
+        # Convert input format to match original expected format
+        infographic_generated = []
+        for entry in input_data[:max_samples]:
+            # Transform format to match original structure
+            transformed_entry = {
+                'generated_infographic': {
+                    'full_image_caption': entry['full_image_caption'],
+                    'background_caption': entry['background_caption'],
+                    'figures': entry['figures']
+                }
+            }
+            infographic_generated.append(transformed_entry)
+        
+        # Call original merge_narrator_data function
+        result = merge_narrator_data(
+            infographic_generated=infographic_generated,
+            extracted_bboxes=extracted_bboxes,
+            color_idx=color_idx,
+            font_idx=font_idx,
+            start_wiki_idx=0
+        )
+        
+        if not result:
+            print("No data generated. Please check your input data format.")
+            return []
+        
+        # Save results
+        save_json(result, output_path)
+        print(f"\nSuccess! Generated {len(result)} wiki entries")
+        print(f"Output saved to: {output_path}")
+        print("Data format matches merge_stage_narrator.py output")
+        
+        return result
+        
+    except Exception as e:
+        print(f"Error generating data: {e}")
+        import traceback
+        traceback.print_exc()
+        return []
+
+
 def merge_narrator_data(
     infographic_generated: List[Dict],
     extracted_bboxes: List[Dict],
@@ -876,6 +985,7 @@ def merge_narrator_data(
 ) -> List[Dict]:
     """
     Process narrator-generated infographic data and merge with bboxes.
+    Same as original but handles simplified input format.
     
     Args:
         infographic_generated: List of infographic data with full_image_caption and background_caption
@@ -1133,22 +1243,20 @@ def merge_narrator_data(
             output_layers.append(output_layer)
         
         # === AUTO-SCALE SMALL TEXT BBOXES ===
-        print(f"🔧 Auto-scaling small text bboxes for wiki {wiki_id}...")
+        print(f"Auto-scaling small text bboxes for wiki {wiki_id}...")
         output_layers = auto_scale_small_text_bboxes(output_layers, canvas_width=896, canvas_height=2240)
         
         # === VALIDATE AND FIX CANVAS BOUNDS ===
-        print(f"📐 Validating canvas bounds for wiki {wiki_id}...")
+        print(f"Validating canvas bounds for wiki {wiki_id}...")
         output_layers = validate_and_fix_layout_bounds(output_layers, canvas_width=896, canvas_height=2240)
         
         # === QUALITY VALIDATION ===
         layout_quality = validate_layout_quality(output_layers)
         
         if not layout_quality['passes_quality']:
-            print(f"⚠️  Layout quality warning for wiki {wiki_id}: score={layout_quality['quality_score']:.2f}")
-            for issue in layout_quality['issues'][:3]:  # Show first 3 issues
-                print(f"   - {issue}")
+            print(f"Layout quality warning for wiki {wiki_id}: score={layout_quality['quality_score']:.2f}")
         else:
-            print(f"✅ Good layout quality for wiki {wiki_id}: score={layout_quality['quality_score']:.2f}")
+            print(f"Good layout quality for wiki {wiki_id}: score={layout_quality['quality_score']:.2f}")
         
         # Create the final structure with unique wiki ID
         result_item = {
@@ -1163,178 +1271,6 @@ def merge_narrator_data(
     return result
 
 
-def main():
-    """Main function."""
-    parser = argparse.ArgumentParser(
-        description='Merge narrator-generated infographic data with extracted bounding boxes'
-    )
-    parser.add_argument(
-        '--extracted-bboxes',
-        type=str,
-        default=None,
-        help='Path to extracted_bboxes.json (default: ./extracted_bboxes.json)'
-    )
-    parser.add_argument(
-        '--infographic-dir',
-        type=str,
-        default="src/data/create_data/output/infographic_v2",
-        help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic_v2)'
-    )
-    parser.add_argument(
-        '--color-idx',
-        type=str,
-        default=None,
-        help='Path to color_idx.json (default: ./glyph/color_idx.json)'
-    )
-    parser.add_argument(
-        '--font-idx',
-        type=str,
-        default=None,
-        help='Path to font_idx.json (default: ./glyph/font_uni_10-lang_idx.json)'
-    )
-    parser.add_argument(
-        '--seed',
-        type=int,
-        default=None,
-        help='Random seed for reproducibility'
-    )
-    parser.add_argument(
-        '--start',
-        type=int,
-        default=1,
-        help='Start file index for infographic generation (inclusive, 1-based)'
-    )
-    parser.add_argument(
-        '--end',
-        type=int,
-        default=None,
-        help='End file index for infographic generation (exclusive, 1-based)'
-    )
-    parser.add_argument(
-        '--output-dir',
-        type=str,
-        default=None,
-        help='Output directory (default: src/data/create_data/output/narrator_format_v2)'
-    )
-
-    args = parser.parse_args()
-    
-    # Set random seed if provided
-    if args.seed is not None:
-        random.seed(args.seed)
-        print(f"Random seed set to: {args.seed}")
-    
-    # Get the directory of this script
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    
-    # Define file paths
-    extracted_bboxes_path = args.extracted_bboxes or os.path.join(script_dir, 'extracted_bboxes.json')
-    color_idx_path = args.color_idx or os.path.join(script_dir, 'glyph/color_idx.json')
-    font_idx_path = args.font_idx or os.path.join(script_dir, 'glyph/font_uni_10-lang_idx.json')
-    
-    # Determine infographic data source
-    if args.infographic_dir:
-        infographic_dir = args.infographic_dir
-    else:
-        # Default to output/infographic_v2 directory
-        repo_root = os.path.abspath(os.path.join(script_dir, '../../../'))
-        infographic_dir = os.path.join(repo_root, 'src/data/create_data/output/infographic_v2')
-    
-    # Set base output directory
-    if args.output_dir:
-        output_dir = args.output_dir
-    else:
-        # Default to src/data/create_data/output/narrator_format_v2 from repository root
-        repo_root = os.path.abspath(os.path.join(script_dir, '../../../'))
-        output_dir = os.path.join(repo_root, 'src/data/create_data/output/narrator_format_v2')
-    
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Load data
-    print("Loading data...")
-    print(f"  - Bboxes: {extracted_bboxes_path}")
-    print(f"  - Colors: {color_idx_path}")
-    print(f"  - Fonts: {font_idx_path}")
-    
-    extracted_bboxes = load_json(extracted_bboxes_path)
-    color_idx = load_json(color_idx_path)
-    font_idx = load_json(font_idx_path)
-    
-    # Load infographic data
-    end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
-    
-    # Validate file indices
-    if args.start < 1:
-        raise ValueError("Start file index must be >= 1")
-    if args.end is not None and args.end <= args.start:
-        raise ValueError("End file index must be > start file index")
-    
-    print(f"  - Infographics: {infographic_dir} (directory)")
-    print(f"  - File index range: {args.start} to {end_file_idx-1} (files: {end_file_idx - args.start})")
-    
-    infographic_generated = load_infographic_files_from_directory(
-        infographic_dir, 
-        args.start, 
-        end_file_idx
-    )
-    
-    print(f"\nLoaded {len(extracted_bboxes)} bbox entries")
-    print(f"Loaded {len(color_idx)} colors")
-    print(f"Loaded {len(font_idx)} fonts")
-    
-    # Process data
-    print("\nProcessing data...")
-    # Calculate starting wiki index based on start file index
-    start_wiki_idx = (args.start - 1) * 50
-    
-    merged_data = merge_narrator_data(
-        infographic_generated,
-        extracted_bboxes,
-        color_idx,
-        font_idx,
-        start_wiki_idx=start_wiki_idx
-    )
-    
-    print(f"Generated {len(merged_data)} infographics")
-    
-    # Save results in chunks of 50 per file
-    chunk_size = 50
-    
-    # Save results
-    print(f"\nSaving to {output_dir}...")
-    saved_files = []
-    
-    for i in range(0, len(merged_data), chunk_size):
-        chunk = merged_data[i:i + chunk_size]
-        
-        # Calculate file index based on position in merged_data and start file index
-        file_index = args.start + (i // chunk_size)
-        
-        filename = f"wiki{file_index:06d}.json"
-        filepath = os.path.join(output_dir, filename)
-        
-        save_json(chunk, filepath)
-        saved_files.append(filename)
-        
-        print(f"  Saved {len(chunk)} infographics to {filename} (wiki IDs: {chunk[0]['index']}-{chunk[-1]['index']})")
-    
-    print(f"\nSaved {len(saved_files)} files total")
-    print("Done!")
-    
-    # Print summary statistics
-    print("\n=== Summary ===")
-    total_layers = sum(len(item['layers_all']) for item in merged_data)
-    
-    if merged_data:
-        first_wiki_id = merged_data[0]['index']
-        last_wiki_id = merged_data[-1]['index']
-        print(f"Wiki ID range: {first_wiki_id:06d} - {last_wiki_id:06d}")
-    
-    print(f"Total infographics: {len(merged_data)}")
-    print(f"Total files saved: {len(saved_files)}")
-    print(f"Total layers: {total_layers}")
-    print(f"Output directory: {output_dir}")
-
-
 if __name__ == '__main__':
-    main()
+    print("This is the Colab version of merge_stage_narrator.py")
+    print("Use merge_narrator_data_from_string() function to process JSON string input.")
