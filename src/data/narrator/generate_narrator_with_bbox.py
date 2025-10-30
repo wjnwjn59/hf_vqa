@@ -472,11 +472,13 @@ def find_best_text_positions(
 
         overlap_penalty = calculate_overlap_penalty(safe_bbox, image_bboxes)
 
+        # Larger area is better, so we add area_score (not subtract)
         area_score = calculate_bbox_area(safe_bbox) / 50000.0
 
         x, y = safe_bbox['top_left']
         position_score = min(x / 100.0, 1.0) * min(y / 100.0, 1.0)
 
+        # Lower score is better: penalty (high=bad) - benefits (high=good)
         total_score = overlap_penalty - area_score - position_score
 
         bbox_scores.append((safe_bbox, total_score))
@@ -544,6 +546,7 @@ def smart_image_selection(
             if overlap_ratio > 0:
                 score += overlap_ratio * 8.0
 
+        # Larger area gets lower score (better), so we subtract area_score
         area_score = calculate_bbox_area(bbox) / 100000.0
         score -= area_score
 
@@ -660,40 +663,90 @@ def auto_scale_small_text_bboxes(
     layers: List[Dict],
     canvas_width: int = 896,
     canvas_height: int = 2240,
-    min_text_area: int = 2000
 ) -> List[Dict]:
     """
-    Auto-scale small text bboxes to improve readability.
+    Auto-scale text bboxes based on word count and line calculation.
+    
+    Each 7 words is considered as 1 line.
+    Each word has area ≈ 66,000 pixels (based on example: "Planning" = 689×96 = 66,144 pixels).
     """
     updated_layers = []
 
     for layer in layers:
         if layer.get('category') == 'text':
-            area = calculate_bbox_area(layer)
             text_content = layer.get('text', '')
-
-            if area < min_text_area and len(text_content) > 10:
-                char_count = len(text_content)
-                ideal_area = char_count * 40
-                scale_factor = min(2.0, (ideal_area / area) ** 0.5) if area > 0 else 1.5
-
+            
+            if text_content and len(text_content.strip()) > 0:
+                # Calculate number of words
+                words = text_content.strip().split()
+                word_count = len(words)
+                
+                # Calculate number of lines: 7 words per line (round up)
+                line_count = max(1, (word_count + 6) // 7)  # Round up division
+                
+                # Calculate dimensions based on word count and line structure
+                # Each word ≈ 66,000 pixels, assume reasonable aspect ratio
+                # For single line: width ≈ word_count * avg_word_width, height ≈ line_height
+                
+                # Estimated dimensions (based on "Planning" example):
+                # Average word width ≈ 689/1 = 689 pixels for 1 word
+                # Average line height ≈ 96 pixels
+                avg_word_width = 60  # More reasonable estimate for average word
+                line_height = 40      # Reasonable line height
+                
+                # Calculate ideal dimensions
+                words_per_line = min(7, word_count)  # Max 7 words per line
+                ideal_width = words_per_line * avg_word_width
+                ideal_height = line_count * line_height
+                
+                # For very long words or single word, ensure minimum reasonable size
+                if word_count == 1:
+                    # Single word case - estimate based on character count
+                    single_word = words[0]
+                    char_count = len(single_word)
+                    ideal_width = max(char_count * 15, 200)  # At least 15px per char, min 200px
+                    ideal_height = max(line_height, 60)      # At least 60px height
+                
                 top_left = layer['top_left']
-                bottom_right = layer['bottom_right']
-                width = bottom_right[0] - top_left[0]
-                height = bottom_right[1] - top_left[1]
-
-                new_width = int(width * scale_factor)
-                new_height = int(height * scale_factor)
-
-                if top_left[0] + new_width > canvas_width:
-                    new_width = canvas_width - top_left[0] - 10
-                if top_left[1] + new_height > canvas_height:
-                    new_height = canvas_height - top_left[1] - 10
-
+                
+                # Set new dimensions based on calculated size
+                new_width = int(ideal_width)
+                new_height = int(ideal_height)
+                
+                # Calculate new position to ensure bbox stays within canvas
+                new_x = top_left[0]
+                new_y = top_left[1]
+                
+                # If width exceeds canvas, adjust width and position
+                if new_x + new_width > canvas_width:
+                    if new_width <= canvas_width:
+                        # Move bbox to the left to fit
+                        new_x = canvas_width - new_width
+                    else:
+                        # Resize width to fit canvas
+                        new_x = 0
+                        new_width = canvas_width
+                
+                # If height exceeds canvas, adjust height and position
+                if new_y + new_height > canvas_height:
+                    if new_height <= canvas_height:
+                        # Move bbox up to fit
+                        new_y = canvas_height - new_height
+                    else:
+                        # Resize height to fit canvas
+                        new_y = 0
+                        new_height = canvas_height
+                
+                # Ensure minimum position (avoid negative coordinates)
+                new_x = max(0, new_x)
+                new_y = max(0, new_y)
+                
                 scaled_layer = dict(layer)
-                scaled_layer['bottom_right'] = [top_left[0] + new_width, top_left[1] + new_height]
+                scaled_layer['top_left'] = [new_x, new_y]
+                scaled_layer['bottom_right'] = [new_x + new_width, new_y + new_height]
                 updated_layers.append(scaled_layer)
             else:
+                # Keep original layer if no text content
                 updated_layers.append(layer)
         else:
             updated_layers.append(layer)
@@ -902,10 +955,13 @@ def select_non_overlapping_text_bboxes(
 ) -> List[Dict]:
     """
     Select text bboxes that don't overlap with any image bboxes.
+    Prioritizes larger bboxes first.
     """
+    # Sort by area descending to prioritize larger bboxes
+    sorted_text_bboxes = sorted(text_bboxes, key=calculate_bbox_area, reverse=True)
     selected_text = []
 
-    for txt_bbox in text_bboxes:
+    for txt_bbox in sorted_text_bboxes:
         overlaps_with_image = any(
             text_overlaps_with_image(txt_bbox, img_bbox)
             for img_bbox in image_bboxes
@@ -1076,8 +1132,8 @@ def optimize_bbox_assignment(
     text_bboxes = [b for b in bboxes if b.get('category') == 'text' and b.get('bottom_right') != [896, 2240]]
     element_bboxes = [b for b in bboxes if b.get('category') == 'element' and b.get('bottom_right') != [896, 2240]]
     
-    # Sort text bboxes by reading order
-    text_bboxes = sort_by_reading_order(text_bboxes)
+    # Sort text bboxes by area (largest first) for better selection
+    text_bboxes.sort(key=calculate_bbox_area, reverse=True)
     
     # Select largest non-overlapping image bboxes initially
     max_images = min(len(figure_elements), len(element_bboxes), 3)  # Limit to reasonable number

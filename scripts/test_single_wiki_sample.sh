@@ -21,7 +21,7 @@ CONDA_WIKI="/opt/miniconda3/envs/thinh_wiki/bin/python"
 CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 
 # Test parameters
-GPU_ID=2
+GPU_ID=0
 START_SUBSET=1
 END_SUBSET=2
 NUM_SAMPLES=3  # Number of samples for quick test
