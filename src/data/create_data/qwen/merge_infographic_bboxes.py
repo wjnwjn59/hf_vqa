@@ -1,5 +1,6 @@
 import json
 import random
+import re
 from typing import List, Dict, Any, Tuple
 import os
 import argparse
@@ -169,143 +170,7 @@ def extract_text_from_caption(caption: str) -> str:
     return ""
 
 
-def find_background_bboxes_for_data(bboxes: List[Dict], count: int = 1) -> List[Dict]:
-    """
-    Find suitable background text bboxes for data placement (can overlap with other elements).
-    
-    Args:
-        bboxes: List of available bboxes
-        count: Number of bboxes to select for data placement
-    
-    Returns:
-        List of selected background bboxes for data
-    """
-    # Filter text bboxes (data will be placed as text elements)
-    text_bboxes = [b for b in bboxes if b.get('category') == 'text']
-    
-    # Sort by area (largest first) - prefer larger areas for data display
-    text_bboxes.sort(key=calculate_bbox_area, reverse=True)
-    
-    # Return the largest text bboxes (no overlap checking needed since data goes to background)
-    return text_bboxes[:count]
 
-
-def split_data_caption(data_caption: str) -> List[str]:
-    """
-    Split data caption by semicolons and clean up the text.
-    
-    Args:
-        data_caption: Data caption string with semicolon-separated items
-    
-    Returns:
-        List of individual data items (max 10)
-    """
-    # Split by semicolon and clean up
-    items = [item.strip() for item in data_caption.split(';') if item.strip()]
-    
-    # Limit to 10 items maximum
-    return items[:10]
-
-
-def create_data_text_bboxes(
-    background_bbox: Dict, 
-    data_items: List[str], 
-    selected_colors: List[str], 
-    color_idx: Dict, 
-    font_idx: Dict,
-    selected_font_id: Any
-) -> List[Dict]:
-    """
-    Create individual text bboxes for data items within the background bbox.
-    Data items will be placed as background elements that can overlap with other layers.
-    
-    Args:
-        background_bbox: The background bbox to place data items in
-        data_items: List of data text items
-        selected_colors: Available colors
-        color_idx: Color index mapping
-        selected_font_id: Font ID to use
-    
-    Returns:
-        List of text bbox layers for background data
-    """
-    if not data_items:
-        return []
-    
-    x1, y1 = background_bbox['top_left']
-    x2, y2 = background_bbox['bottom_right']
-    
-    bbox_width = x2 - x1
-    bbox_height = y2 - y1
-    
-    num_items = len(data_items)
-    
-    # Decide layout based on bbox aspect ratio and number of items
-    is_wide = bbox_width > bbox_height
-    
-    if num_items <= 5:
-        # Single row or column
-        if is_wide:
-            # Single row layout
-            rows, cols = 1, num_items
-        else:
-            # Single column layout
-            rows, cols = num_items, 1
-    else:
-        # Multiple rows/columns (max 2 rows/cols)
-        if is_wide:
-            # 2 rows layout
-            rows = 2
-            cols = (num_items + 1) // 2  # Ceiling division
-        else:
-            # 2 columns layout
-            cols = 2
-            rows = (num_items + 1) // 2  # Ceiling division
-    
-    # Calculate individual item dimensions
-    item_width = bbox_width // cols
-    item_height = bbox_height // rows
-    
-    text_bboxes = []
-    
-    for i, data_item in enumerate(data_items):
-        # Calculate position
-        row = i // cols
-        col = i % cols
-        
-        item_x1 = x1 + col * item_width
-        item_y1 = y1 + row * item_height
-        item_x2 = item_x1 + item_width
-        item_y2 = item_y1 + item_height
-        
-        # Select random color for this data item
-        color = random.choice(selected_colors)
-        color_id = color_idx[color]
-        
-        # Format caption similar to regular text (line 343 format)
-        if selected_font_id is None:
-            # Fallback font
-            try:
-                any_en_font_id = next(v for k, v in font_idx.items() if k.startswith('en-'))
-            except StopIteration:
-                any_en_font_id = 0
-            font_token = f'en-font-{any_en_font_id}'
-        else:
-            font_token = f'en-font-{selected_font_id}'
-
-        caption = f'Text "{data_item}" in <color-{color_id}>, <{font_token}>. '
-        
-        text_bbox = {
-            'category': 'text',
-            'top_left': [item_x1, item_y1],
-            'bottom_right': [item_x2, item_y2],
-            'caption': caption,
-            'text': data_item
-        }
-        
-        text_bboxes.append(text_bbox)
-    
-    return text_bboxes
 
 
 def determine_language_prefix(index_str: str) -> str:
@@ -337,9 +202,7 @@ def merge_infographic_data(
     infographic_generated: List[Dict],
     color_idx: Dict,
     font_idx: Dict,
-    start_wiki_idx: int = 0,
-    include_data: bool = False,
-    include_timeline: bool = False
+    start_wiki_idx: int = 0
 ) -> List[Dict]:
     """
     Merge extracted bboxes with generated infographic data.
@@ -350,8 +213,6 @@ def merge_infographic_data(
         color_idx: Color index mapping
         font_idx: Font index mapping
         start_wiki_idx: Starting wiki index for generating unique IDs
-        include_data: Whether to include data layers in the merged layout (default: False)
-        include_timeline: Whether to include timeline layers in the merged layout (default: False)
     
     Returns:
         List of merged infographic data with unique wiki IDs
@@ -388,27 +249,10 @@ def merge_infographic_data(
         # Separate layers by category
         figure_layers = [l for l in all_layers if l.get('category') == 'figure']
         text_layers = [l for l in all_layers if l.get('category') == 'text']
-        data_layers = [l for l in all_layers if l.get('category') == 'data'] if include_data else []
-        timeline_layers = [l for l in all_layers if l.get('category') == 'timeline'] if include_timeline else []
-        
-        # Check if we should skip data/timeline layers based on count
-        text_figure_count = len(text_layers) + len(figure_layers)
-        if text_figure_count > 20:
-            # Skip data and timeline layers regardless of user preference
-            data_layers = []
-            timeline_layers = []
-            print(f"Skipping data/timeline layers for wiki {wiki_id:06d}: text+figure count ({text_figure_count}) > 20")
-        elif not include_data and not include_timeline:
-            print(f"Skipping data/timeline layers for wiki {wiki_id:06d}: disabled by user (recommended for better image quality)")
-        elif include_data and data_layers:
-            print(f"Including {len(data_layers)} data layers for wiki {wiki_id:06d} (may affect image quality)")
-        elif include_timeline and timeline_layers:
-            print(f"Including {len(timeline_layers)} timeline layers for wiki {wiki_id:06d} (may affect image quality)")
         
         # Reconstruct layers list for processing
-        layers = figure_layers + text_layers + data_layers + timeline_layers
+        layers = figure_layers + text_layers
 
-        
         # Select a random bbox index from available indices
         if not available_indices:
             print(f"Warning: No more available bbox indices for wiki {wiki_id:06d}")
@@ -540,57 +384,14 @@ def merge_infographic_data(
             }
             output_layers.append(output_layer)
         
-        # Process data layers if they exist and are enabled (place them at the beginning as background)
-        data_layers_filtered = [l for l in layers if l.get('category') == 'data']
-        if data_layers_filtered and include_data:
-            # Find background bboxes for data placement (can overlap with other elements)
-            data_background_bboxes = find_background_bboxes_for_data(bboxes, count=len(data_layers_filtered))
-            
-            if data_background_bboxes:
-                # Process each data layer
-                for data_idx, data_layer in enumerate(data_layers_filtered):
-                    if data_idx >= len(data_background_bboxes):
-                        break  # No more background bboxes available
-                    
-                    background_bbox = data_background_bboxes[data_idx]
-                    data_caption = data_layer.get('caption', '')
-                    
-                    # Split data caption by semicolons
-                    data_items = split_data_caption(data_caption)
-                    
-                    if data_items:
-                        # Create individual text bboxes for data items
-                        data_text_bboxes = create_data_text_bboxes(
-                            background_bbox,
-                            data_items,
-                            selected_colors,
-                            color_idx,
-                            font_idx,
-                            selected_font_id
-                        )
-                        
-                        # Insert data text bboxes at the beginning (background layer)
-                        # This ensures they render behind other elements
-                        for i, data_bbox in enumerate(data_text_bboxes):
-                            output_layers.insert(i + 1, data_bbox)  # Insert after base layer
-                        
-                        print(f"Added {len(data_text_bboxes)} background data text bboxes for wiki {wiki_id:06d}")
-            else:
-                print(f"No suitable background bboxes found for data placement in wiki {wiki_id:06d}")
-        
-        # Process timeline layers if they exist and are enabled
-        # Note: Timeline processing is not fully implemented yet - placeholder for future development
-        timeline_layers_filtered = [l for l in layers if l.get('category') == 'timeline']
-        if timeline_layers_filtered and include_timeline:
-            print(f"Timeline layer processing is not yet implemented for wiki {wiki_id:06d}")
-            # TODO: Implement timeline layer processing if needed in the future
+
         
         # Create the final structure with unique wiki ID
         result_item = {
             'index': wiki_id,
             'layers_all': output_layers,
             'full_image_caption': gen_info.get('full_image_caption', ''),
-            'original_bbox_index': selected_bbox_index,  # Keep track of original bbox for debugging
+            'original_bbox_index': selected_bbox_index,
             'original_infographic_id': infographic.get('id', '')
         }
         
@@ -619,7 +420,7 @@ def main():
     parser.add_argument(
         '--infographic-dir',
         type=str,
-        default=None,
+        default="src/data/create_data/output/infographic",
         help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic)'
     )
     parser.add_argument(
@@ -632,7 +433,7 @@ def main():
         '--font-idx',
         type=str,
         default=None,
-        help='Path to font_uni_10-lang_idx.json (default: ../bizgen/glyph/font_uni_10-lang_idx.json)'
+        help='Path to font_idx.json (default: ../bizgen/glyph/font_idx.json)'
     )
     parser.add_argument(
         '--output',
@@ -664,18 +465,7 @@ def main():
         default=None,
         help='Output directory for wiki files (default: src/data/create_data/output/bizgen_format)'
     )
-    parser.add_argument(
-        '--layout_data',
-        action='store_true',
-        default=False,
-        help='Include data layers in the merged layout (default: False, as it may reduce image quality)'
-    )
-    parser.add_argument(
-        '--layout_timeline',
-        action='store_true', 
-        default=False,
-        help='Include timeline layers in the merged layout (default: False, as it may reduce image quality)'
-    )
+
     
     args = parser.parse_args()
     
@@ -756,17 +546,12 @@ def main():
     
     # Merge data
     print("\nMerging data...")
-    print(f"Layout options: data={args.layout_data}, timeline={args.layout_timeline}")
-    if not args.layout_data and not args.layout_timeline:
-        print("Note: Data and timeline layers are disabled by default for better image quality.")
     merged_data = merge_infographic_data(
         extracted_bboxes,
         infographic_generated,
         color_idx,
         font_idx,
-        start_wiki_idx=args.start_wiki,
-        include_data=args.layout_data,
-        include_timeline=args.layout_timeline
+        start_wiki_idx=args.start_wiki
     )
     
     print(f"Generated {len(merged_data)} merged infographics")

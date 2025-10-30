@@ -1,9 +1,11 @@
 import json
+import re
 from pathlib import Path
 
 def extract_bboxes_from_file(json_file_path):
     """
     Extract bounding boxes and categories from a JSON file.
+    Also extracts the second element (index 1) as background.
     
     Args:
         json_file_path: Path to the JSON file
@@ -27,12 +29,35 @@ def extract_bboxes_from_file(json_file_path):
         if index not in grouped_data:
             grouped_data[index] = []
         
-        for layer in layers_all:
+        for layer_idx, layer in enumerate(layers_all):
+            # Check if this is the second element (index 1) with category "element"
+            # and it should be a full-size background (896x2240)
+            is_background = (
+                layer_idx == 1 and 
+                layer.get('category', '') == 'element' and
+                layer.get('top_left', []) == [0, 0] and
+                layer.get('bottom_right', []) == [896, 2240]
+            )
+            
             bbox_info = {
-                'category': layer.get('category', ''),
+                'category': 'background' if is_background else layer.get('category', ''),
                 'top_left': layer.get('top_left', []),
                 'bottom_right': layer.get('bottom_right', [])
             }
+            
+            # Add caption if it's a background
+            if is_background:
+                bbox_info['caption'] = layer.get('caption', '')
+            
+            # Extract font and color information for text layers
+            if layer.get('category', '') == 'text':
+                caption = layer.get('caption', '')
+                # Pattern to match: "in <color-X>, <font-info>."
+                # This captures everything from "in" to the final period
+                match = re.search(r'(in <color-\d+>, <[^>]+>\.)\s*$', caption)
+                if match:
+                    bbox_info['font_color_info'] = match.group(1)
+            
             grouped_data[index].append(bbox_info)
             total_bboxes += 1
     
@@ -42,7 +67,7 @@ def extract_bboxes_from_file(json_file_path):
 
 def main():
     # Define paths
-    base_dir = Path("bizgen/meta")  # Directory containing the JSON files
+    base_dir = Path("src/data/bizgen/meta")  # Directory containing the JSON files
     infographics_file = base_dir / 'infographics.json'
     multilang_file = base_dir / 'infographics_multilang.json'
     output_file = Path(__file__).parent / 'extracted_bboxes.json'
