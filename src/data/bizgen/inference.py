@@ -133,11 +133,16 @@ def main():
         ckpt_dir (`str`):
             checkpoint directory contains the model weights for lora and byt5_mapper.
         output_dir (`str`):
-            base output directory name. The final output will be saved to output_dir/subset_{start}_{end}.
+            base output directory name. The final output will be saved to output_dir/dataset_name.
         device (`str`):
             device to run the inference.
-        sample_list (`str`):  
-            sample list contains the meta information (layout and caption) for the generated images.
+        wiki_dir (`str`):
+            directory containing wiki files (wikixxxxxx.json format), each containing 50 layouts.
+        subset (`str`):
+            file range to process in format "start:end" (1-based). Each file contains 50 layouts.
+            Example: "1:10" will process wiki000001.json to wiki000010.json (500 images total).  
+        dataset_name (`str`):
+            dataset name for output folder structure.
         seed (`int`):
             seed for the random number generator.
         global_ratio (`float`):
@@ -159,7 +164,8 @@ def main():
     parser.add_argument('--wiki_dir', type=str, default='../create_data/output/bizgen_format')
     parser.add_argument('--output_dir', type=str, default='output',
                         help='Base output directory name')
-    parser.add_argument('--subset', type=str, default='0:2')
+    parser.add_argument('--subset', type=str, default='1:2', 
+                        help='File range to process (1-based): "start:end". Each file contains 50 layouts. Example: "1:10" processes wiki000001.json to wiki000010.json')
     parser.add_argument('--dataset_name', type=str, default='squad_v2',
                         help='Dataset name for output folder structure')
     parser.add_argument('--seed', type=int, default=1234)
@@ -174,7 +180,8 @@ def main():
     args = parser.parse_args()
     config = parse_config(args.config_dir)
 
-    start_subset, end_subset = [int(idx) for idx in args.subset.split(':')]
+    # Parse subset as file numbers (1-based), not item indices
+    start_file_subset, end_file_subset = [int(idx) for idx in args.subset.split(':')]
     
     # Create output directory with dataset name
     args.output_dir = osp.join(args.output_dir, args.dataset_name)
@@ -387,14 +394,10 @@ def main():
     # load layouts and captions
     file_subset = []
     
-    # Calculate which wiki files to load based on start_subset and end_subset
-    # Each wiki file contains 50 entries with index (file_num-1)*50 + 1 to file_num*50
-    start_file_num = ((start_subset - 1) // 50) + 1
-    end_file_num = ((end_subset - 1) // 50) + 1
+    # Load wiki files based on subset numbers (1-based file indices)
+    print(f"Loading wiki files: wiki{start_file_subset:06d}.json to wiki{end_file_subset:06d}.json")
     
-    print(f"Loading wiki files: wiki{start_file_num:06d}.json to wiki{end_file_num:06d}.json")
-    
-    for file_num in range(start_file_num, end_file_num + 1):
+    for file_num in range(start_file_subset, end_file_subset + 1):
         wiki_file = f"wiki{file_num:06d}.json"
         wiki_path = os.path.join(args.wiki_dir, wiki_file)
         if os.path.exists(wiki_path):
@@ -402,14 +405,12 @@ def main():
         else:
             print(f"Warning: {wiki_file} not found, skipping")
     
+    # Count total items to process (all items in selected files)
     tot = 0
     for file in file_subset:
         with open(file, 'r') as f:
             data = json.load(f)
-            # Only count items within our range
-            for item in data:
-                if start_subset <= item['index'] <= end_subset:
-                    tot += 1
+            tot += len(data)  # Count all items in each file
     
     with tqdm(total=tot, desc="Total items", unit="item", dynamic_ncols=True) as pbar:
         for file in file_subset:
@@ -419,9 +420,7 @@ def main():
             for region_meta_item in sample_list:
                 index = region_meta_item["index"]
                 
-                # Skip if index is outside our range
-                if not (start_subset <= index <= end_subset):
-                    continue
+                # Process all items in the selected files (no need to skip based on index)
                 
                 # Calculate folder name based on index (50 images per folder)
                 folder_num = ((index - 1) // 50) + 1
