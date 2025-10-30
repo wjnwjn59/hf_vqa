@@ -8,15 +8,19 @@ from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
-script_dir = Path(__file__).resolve().parent
+script_file_path = Path(__file__).resolve()
+src_dir = script_file_path.parent.parent.parent
+
+template_dir = src_dir / "prompts"
+template_name = "qa_generation.jinja"
 
 try:
-    jinja_env = Environment(loader=FileSystemLoader(script_dir))
-    PROMPT_TEMPLATE_JINJA = jinja_env.get_template("qas_generation.jinja")
-    print("✅ Template 'qas_generation.jinja' loaded.")
+    jinja_env = Environment(loader=FileSystemLoader(template_dir))
+    PROMPT_TEMPLATE_JINJA = jinja_env.get_template(template_name)
+    print(f"✅ Template '{template_name}' loaded from '{template_dir}'.")
 except Exception as e:
-    print(f"❌ Error loading Jinja template 'qas_generation.jinja': {e}")
-    print("Please make sure the file exists in the same directory as the script.")
+    print(f"❌ Error loading Jinja template '{template_name}' from '{template_dir}': {e}")
+    print("Please make sure the file exists and paths are correct.")
     exit(1)
     
 

@@ -22,15 +22,19 @@ model = Qwen3VLForConditionalGeneration.from_pretrained(
 )
 processor = AutoProcessor.from_pretrained(MODEL_NAME)
 print("✅ Model and processor loaded successfully.")
-script_dir = Path(__file__).resolve().parent
+script_file_path = Path(__file__).resolve()
+src_dir = script_file_path.parent.parent.parent
+
+template_dir = src_dir / "prompts"
+template_name = "reasoning_generation.jinja"
 
 try:
-    jinja_env = Environment(loader=FileSystemLoader(script_dir))
-    PROMPT_TEMPLATE_JINJA = jinja_env.get_template("reasoning_generation.jinja")
-    print("✅ Template 'reasoning_generation.jinja' loaded.")
+    jinja_env = Environment(loader=FileSystemLoader(template_dir))
+    PROMPT_TEMPLATE_JINJA = jinja_env.get_template(template_name)
+    print(f"✅ Template '{template_name}' loaded from '{template_dir}'.")
 except Exception as e:
-    print(f"❌ Error loading Jinja template 'reasoning_generation.jinja': {e}")
-    print("Please make sure the file exists in the same directory as the script.")
+    print(f"❌ Error loading Jinja template '{template_name}' from '{template_dir}': {e}")
+    print("Please make sure the file exists and paths are correct.")
     exit(1)
 
 
@@ -115,10 +119,8 @@ def stitch_reasoning_json(json_string: str) -> str:
     stitched_think = "Error: Could not parse generated JSON."
     stitched_answer = "Error: No answer found."
     data = {}
-    
     try:
-        data = json.loads(json_string.strip())
-        
+        data = json.loads(json_string.strip())        
         replacement_map = {}
 
         # 2. Fill map from 'understand.relevant_elements'
@@ -187,10 +189,11 @@ def stitch_reasoning_json(json_string: str) -> str:
 
 if __name__ == '__main__':
     SQUAD_FILE_PATH = Path("/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl")
-    LAYOUT_DIR = Path("/home/thinhnp/hf_vqa/src/data/create_data/output/narrator_format_v2")
+    # LAYOUT_DIR = Path("/home/thinhnp/hf_vqa/src/data/create_data/output/narrator_format_v2")
+    LAYOUT_DIR = Path("/home/binhdt/hf_vqa/src/data/reasoning/")
     LINK_DIR = Path("/home/thinhnp/hf_vqa/src/data/create_data/output/infographic_v2")
     IMAGE_DIR = Path("/home/thinhnp/hf_vqa/src/data/bizgen/output/squad_v2")
-    OUTPUT_FILE_PATH = Path("./reasoning_results.jsonl")
+    OUTPUT_FILE_PATH = Path("./50_results.jsonl")
 
     squad_data_map = load_squad_data(SQUAD_FILE_PATH)
     layout_data_map = load_layout_data(LAYOUT_DIR)
