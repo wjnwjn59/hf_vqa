@@ -1171,8 +1171,8 @@ def main():
     parser.add_argument(
         '--extracted-bboxes',
         type=str,
-        default=None,
-        help='Path to extracted_bboxes.json (default: ./extracted_bboxes.json)'
+        default="./src/data/narrator/extracted_bboxes.json",
+        help='Path to extracted_bboxes.json'
     )
     parser.add_argument(
         '--infographic-dir',
@@ -1183,13 +1183,13 @@ def main():
     parser.add_argument(
         '--color-idx',
         type=str,
-        default=None,
+        default="./src/data/narrator/glyph/color_idx.json",
         help='Path to color_idx.json (default: ./glyph/color_idx.json)'
     )
     parser.add_argument(
         '--font-idx',
         type=str,
-        default=None,
+        default="./src/data/narrator/glyph/font_idx.json",
         help='Path to font_idx.json (default: ./glyph/font_uni_10-lang_idx.json)'
     )
     parser.add_argument(
