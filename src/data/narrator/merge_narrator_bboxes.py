@@ -290,6 +290,73 @@ def get_color_name_from_id(color_id: int, color_idx: Dict) -> str:
     return 'black'  # fallback
 
 
+def find_best_layout_for_content(
+    image_count: int,
+    text_count: int,
+    extracted_bboxes: List[Dict],
+    min_text_area: int = 36000
+) -> Dict:
+    """
+    Find the best layout that can accommodate the required number of images and text elements.
+    Uses greedy algorithm to score each layout based on capacity.
+    
+    Args:
+        image_count: Number of image elements needed
+        text_count: Number of text elements needed
+        extracted_bboxes: List of all available layouts
+        min_text_area: Minimum area for text bboxes
+    
+    Returns:
+        Best layout dict or None if no suitable layout found
+    """
+    best_score = -1
+    best_layout = None
+    
+    print(f"  Searching for layout: need {image_count} images, {text_count} texts (min area: {min_text_area})")
+    
+    for bbox_data in extracted_bboxes:
+        bboxes = bbox_data['bboxes']
+        
+        # Count available element bboxes (excluding background)
+        element_bboxes = [b for b in bboxes if b.get('category') == 'element']
+        regular_elements = [b for b in element_bboxes if b['bottom_right'] != [896, 2240]]
+        
+        # Count available text bboxes with sufficient area
+        text_bboxes = [b for b in bboxes if b.get('category') == 'text']
+        valid_text_bboxes = [b for b in text_bboxes if calculate_bbox_area(b) >= min_text_area]
+        
+        # Apply non-overlapping selection to get realistic counts
+        available_elements = select_largest_non_overlapping_bboxes(bboxes, 'element', image_count + 10)  # Extra margin
+        available_texts = select_largest_non_overlapping_bboxes(bboxes, 'text', text_count + 5, min_text_area)  # Extra margin
+        
+        element_capacity = len(available_elements)
+        text_capacity = len(available_texts)
+        
+        # Calculate score based on how well this layout matches requirements
+        element_score = min(element_capacity, image_count) / max(image_count, 1)
+        text_score = min(text_capacity, text_count) / max(text_count, 1)
+        
+        # Bonus for exact match or having more capacity than needed
+        element_bonus = 1.0 if element_capacity >= image_count else 0.0
+        text_bonus = 1.0 if text_capacity >= text_count else 0.0
+        
+        # Combined score (weighted towards text since it has area constraints)
+        total_score = (element_score * 0.4 + text_score * 0.6) + (element_bonus * 0.2 + text_bonus * 0.3)
+        
+        if total_score > best_score:
+            best_score = total_score
+            best_layout = bbox_data
+            
+        print(f"    Layout {bbox_data['index']}: elements={element_capacity}/{image_count}, texts={text_capacity}/{text_count}, score={total_score:.3f}")
+    
+    if best_layout:
+        print(f"  Selected layout {best_layout['index']} with score {best_score:.3f}")
+    else:
+        print(f"  Warning: No suitable layout found!")
+    
+    return best_layout
+
+
 def merge_narrator_data(
     infographic_generated: List[Dict],
     extracted_bboxes: List[Dict],
@@ -299,6 +366,7 @@ def merge_narrator_data(
 ) -> List[Dict]:
     """
     Process narrator-generated infographic data and merge with bboxes.
+    Uses greedy algorithm to find best layout for each infographic.
     
     Args:
         infographic_generated: List of infographic data with full_image_caption and background_caption
@@ -311,10 +379,6 @@ def merge_narrator_data(
         List of merged infographic data (full layout version only)
     """
     result = []
-    
-    # Create a mapping of indices from extracted_bboxes
-    bbox_by_index = {item['index']: item for item in extracted_bboxes}
-    available_indices = list(bbox_by_index.keys())
     
     for wiki_idx, infographic in enumerate(infographic_generated):
         # Generate unique wiki index based on start_wiki_idx
@@ -342,17 +406,23 @@ def merge_narrator_data(
         image_elements = extract_images_from_caption(full_image_caption)
         text_elements = extract_text_elements(full_image_caption)
         
-        # Select a random bbox index from available indices
-        if not available_indices:
-            print("Warning: No more bbox indices available, wrapping around")
-            available_indices = list(bbox_by_index.keys())
+        print(f"\nProcessing wiki {wiki_id}:")
+        print(f"  Found {len(image_elements)} image elements, {len(text_elements)} text elements")
         
-        selected_bbox_index = random.choice(available_indices)
-        # Remove the selected index to avoid reuse
-        available_indices.remove(selected_bbox_index)
+        # Find best layout using greedy algorithm
+        best_layout = find_best_layout_for_content(
+            len(image_elements), 
+            len(text_elements), 
+            extracted_bboxes, 
+            min_text_area=36000
+        )
         
-        bbox_data = bbox_by_index[selected_bbox_index]
-        bboxes = bbox_data['bboxes']
+        if not best_layout:
+            print(f"  Warning: No suitable layout found for wiki {wiki_id}, skipping")
+            continue
+            
+        selected_bbox_index = best_layout['index']
+        bboxes = best_layout['bboxes']
         
         # Extract font and colors from the selected layout
         font_token, layout_color_ids = extract_font_color_from_bboxes(bboxes, font_idx)
@@ -413,12 +483,9 @@ def merge_narrator_data(
             }
             output_layers.append(bg_layer)
 
-        # Strategy for remaining elements: Add 3-5 decorative elements
-        num_decorative = min(len(image_elements), random.randint(3, 5))
-
-        # Strategy for remaining elements: Add 3-5 decorative elements
-        num_decorative = min(len(image_elements), random.randint(3, 5))
-
+        # Select figure bboxes to match all image elements
+        num_figures_needed = len(image_elements)
+        
         # Sort regular elements by area and select largest non-overlapping
         regular_elements.sort(key=calculate_bbox_area, reverse=True)
         selected_decorative = []
@@ -428,11 +495,12 @@ def merge_narrator_data(
             overlaps = any(bboxes_overlap(bbox, s) for s in selected_decorative)
             if not overlaps:
                 selected_decorative.append(bbox)
-                if len(selected_decorative) >= num_decorative:
+                if len(selected_decorative) >= num_figures_needed:
                     break
 
-        # Use only decorative elements (no full image elements for figures)
-        selected_figure_bboxes = selected_decorative
+        # Use selected decorative elements for figures
+        selected_figure_bboxes = selected_decorative[:num_figures_needed]
+        print(f"  Selected {len(selected_figure_bboxes)}/{num_figures_needed} figure bboxes")
 
         # Add image elements as 'element' category
         for idx, bbox in enumerate(selected_figure_bboxes):
@@ -456,32 +524,45 @@ def merge_narrator_data(
             }
             output_layers.append(output_layer)
 
-        # Select bboxes for text (non-overlapping, area >= 36000)
+        # Select bboxes for text to match all text elements (non-overlapping, area >= 36000)
         text_count = len(text_elements)
         selected_text_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', text_count, min_area=36000)
+        
+        print(f"  Selected {len(selected_text_bboxes)}/{text_count} text bboxes")
 
         # Add text elements as 'text' category
-        for idx, bbox in enumerate(selected_text_bboxes):
-            if idx < len(text_elements):
-                text_content = text_elements[idx]
+        # Special handling: First text (title) gets the largest bbox, others follow bbox size order
+        for idx, text_content in enumerate(text_elements):
+            if idx < len(selected_text_bboxes):
+                # For title (first text), always use the largest bbox (index 0)
+                # For other texts, use remaining bboxes in order
+                if idx == 0:
+                    bbox = selected_text_bboxes[0]  # Largest bbox for title
+                else:
+                    bbox = selected_text_bboxes[idx]  # Regular assignment for others
+                
+                # Chọn màu từ layout_colors (không có thì random, đã loại màu trắng)
+                color_name = random.choice(layout_colors) if layout_colors else 'black'
+                color_id = color_idx[color_name]
+
+                # Dùng font_token cho toàn bộ layout
+                caption = f'Text "{text_content}" in <color-{color_id}>, <{font_token}>. '
+
+                output_layer = {
+                    'category': 'text',
+                    'top_left': bbox['top_left'],
+                    'bottom_right': bbox['bottom_right'],
+                    'caption': caption,
+                    'text': text_content
+                }
+                output_layers.append(output_layer)
             else:
-                text_content = ""
-
-            # Chọn màu từ layout_colors (không có thì random, đã loại màu trắng)
-            color_name = random.choice(layout_colors) if layout_colors else 'black'
-            color_id = color_idx[color_name]
-
-            # Dùng font_token cho toàn bộ layout
-            caption = f'Text "{text_content}" in <color-{color_id}>, <{font_token}>. '
-
-            output_layer = {
-                'category': 'text',
-                'top_left': bbox['top_left'],
-                'bottom_right': bbox['bottom_right'],
-                'caption': caption,
-                'text': text_content
-            }
-            output_layers.append(output_layer)
+                print(f"    Warning: No bbox available for text element {idx+1}: '{text_content[:50]}...'")
+        
+        # Report final counts
+        final_elements = len([l for l in output_layers if l['category'] == 'element' and 'background' not in l.get('caption', '').lower()])
+        final_texts = len([l for l in output_layers if l['category'] == 'text'])
+        print(f"  Final output: {final_elements} figure elements, {final_texts} text elements")
         
         # Extract context and QA from infographic data
         context = infographic.get('context', '')

@@ -58,6 +58,6 @@ e) Clarity, grounding, color, and safety
 
 Inputs:
 – CONTEXT: {{ context }}
-– QA_LIST: {{ qa_list }}
+– QA_LIST: {% for qa in qa_list %}Q: {{ qa.question }} | A: {{ qa.answer }}{% if not loop.last %} || {% endif %}{% endfor %}
 
 Return only the JSON object specified above.

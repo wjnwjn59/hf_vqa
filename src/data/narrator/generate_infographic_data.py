@@ -14,7 +14,49 @@ def load_bizgen_template(template_path):
         template_content = f.read()
     return Template(template_content)
 
-def load_input_data(dataset_type, input_path, deduplicate_context=False):
+def group_qa_by_context(data):
+    """
+    Group QA pairs by context.
+    
+    Args:
+        data: List of items with 'context', 'question', 'answer' fields
+        
+    Returns:
+        List of items where each item has 'context' and 'qa_list' (list of Q&A pairs)
+    """
+    context_groups = {}
+    
+    for item in data:
+        context = item['context']
+        qa_pair = {
+            'question': item['question'],
+            'answer': item['answer']
+        }
+        
+        if context not in context_groups:
+            context_groups[context] = {
+                'context': context,
+                'qa_list': [],
+                'ids': [],
+                'title': item.get('title', None)
+            }
+        
+        context_groups[context]['qa_list'].append(qa_pair)
+        if item.get('id'):
+            context_groups[context]['ids'].append(item['id'])
+    
+    # Convert to list and add summary info
+    grouped_data = []
+    for context, group_info in context_groups.items():
+        group_info['qa_count'] = len(group_info['qa_list'])
+        grouped_data.append(group_info)
+    
+    print(f"Grouped {len(data)} QA pairs into {len(grouped_data)} unique contexts")
+    print(f"Average QA pairs per context: {len(data) / len(grouped_data):.2f}")
+    
+    return grouped_data
+
+def load_input_data(dataset_type, input_path, deduplicate_context=False, group_by_context=False):
     """
     Load input data based on dataset type.
     For 'squad_v2', read from a single .jsonl file and extract 'context' and 'question'.
@@ -24,6 +66,7 @@ def load_input_data(dataset_type, input_path, deduplicate_context=False):
         dataset_type: Type of dataset ('squad_v2' or other)
         input_path: Path to the input file or directory
         deduplicate_context: If True, keep only unique contexts (for templates that don't need questions)
+        group_by_context: If True, group QA pairs by context (for content_des_all.jinja template)
     """
     if dataset_type == "squad_v2":
         all_data = []
@@ -37,7 +80,7 @@ def load_input_data(dataset_type, input_path, deduplicate_context=False):
                     context = item['context']
                     
                     # If deduplication is enabled, skip duplicate contexts
-                    if deduplicate_context:
+                    if deduplicate_context and not group_by_context:
                         if context in seen_contexts:
                             continue
                         seen_contexts.add(context)
@@ -50,7 +93,11 @@ def load_input_data(dataset_type, input_path, deduplicate_context=False):
                         'title': item.get('title', None)
                     })
         
-        if deduplicate_context:
+        # Group by context if requested
+        if group_by_context:
+            all_data = group_qa_by_context(all_data)
+            print(f"Final grouped data: {len(all_data)} unique contexts")
+        elif deduplicate_context:
             print(f"Loaded {len(all_data)} unique contexts from Squad v2 file: {input_path}")
         else:
             print(f"Loaded {len(all_data)} entries from Squad v2 file: {input_path}")
@@ -127,21 +174,25 @@ def main():
     print(f"\n[1/4] Loading bizgen template from: {args.template_path}")
     template = load_bizgen_template(args.template_path)
     
-    # Determine if we need to deduplicate contexts based on template type
+    # Determine template type and data processing strategy
     template_name = os.path.basename(args.template_path)
     deduplicate_context = template_name in ["bizgen_faithful_reproduction.jinja", "bizgen_design_drive_reproduction.jinja"]
+    group_by_context = template_name == "content_des_all.jinja"
+    requires_answer = template_name in ["bizgen_context_qa_full.jinja", "content_des_all.jinja"]
     
     if deduplicate_context:
         print(f"Template '{template_name}' detected - will deduplicate contexts")
+    elif group_by_context:
+        print(f"Template '{template_name}' detected - will group QA pairs by context")
     
-    # Check if template requires answer field
-    requires_answer = template_name == "bizgen_context_qa_full.jinja"
     if requires_answer:
         print(f"Template '{template_name}' detected - will include answer field")
     
     # Load input data
     print(f"\n[2/4] Loading input data from: {args.input_data}")
-    input_data_full = load_input_data(args.dataset_type, args.input_data, deduplicate_context=deduplicate_context)
+    input_data_full = load_input_data(args.dataset_type, args.input_data, 
+                                      deduplicate_context=deduplicate_context,
+                                      group_by_context=group_by_context)
     print(f"Total entries loaded: {len(input_data_full)}")
 
     # Apply start and end slicing first
@@ -205,20 +256,25 @@ def main():
         for item in batch:
             # Switch-case for prompt construction
             if args.dataset_type == "squad_v2":
-                # For bizgen_faithful_reproduction.jinja or bizgen_design_drive_reproduction.jinja, only use context
-                # For bizgen_context_qa.jinja, use context and question
-                # For bizgen_context_qa_full.jinja, use context, question, and answer
-                # Detect template type by filename
                 template_name = os.path.basename(args.template_path)
                 if template_name in ["bizgen_faithful_reproduction.jinja", "bizgen_design_drive_reproduction.jinja"]:
+                    # Only use context
                     rendered_prompt = template.render(paragraph_input=item["context"])
                 elif template_name == "bizgen_context_qa.jinja":
+                    # Use context and question
                     rendered_prompt = template.render(paragraph_input=item["context"], qa_pairs=item["question"])
                 elif template_name == "bizgen_context_qa_full.jinja":
+                    # Use context, question, and answer
                     rendered_prompt = template.render(
                         context=item["context"], 
                         question=item["question"],
                         answer=item["answer"]
+                    )
+                elif template_name == "content_des_all.jinja":
+                    # Use context and list of QA pairs
+                    rendered_prompt = template.render(
+                        context=item["context"],
+                        qa_list=item["qa_list"]
                     )
                 else:
                     # Default: just use context
@@ -227,6 +283,9 @@ def main():
                 # Fallback for other dataset types (define as needed)
                 rendered_prompt = template.render(brief_input=item.get("generated_summary", ""))
             batch_prompts.append(rendered_prompt)
+
+        if batch_idx == 0:
+            print(batch_prompts[0])
 
         # Generate and parse responses for batch
         parsed_responses = qwen_inference.generate_and_parse_json(
@@ -238,13 +297,30 @@ def main():
         for i, (item, parsed) in enumerate(zip(batch, parsed_responses)):
             # Calculate global infographic_id based on start index
             infographic_id = args.start + total_processed + 1
+            
+            # Base result structure
             result = {
-                "id": item.get("id", None),
-                "title": item.get("title", None),
                 "generated_infographic": parsed["response"],
                 "success": parsed["success"],
                 "infographic_id": infographic_id
             }
+            
+            # Add different fields based on data structure
+            if group_by_context:
+                # For content_des_all.jinja: include context, qa_count, and ids
+                result.update({
+                    "context": item["context"],
+                    "qa_count": item.get("qa_count", len(item.get("qa_list", []))),
+                    "ids": item.get("ids", []),
+                    "title": item.get("title", None)
+                })
+            else:
+                # For other templates: include individual id and title
+                result.update({
+                    "id": item.get("id", None),
+                    "title": item.get("title", None)
+                })
+            
             if not parsed["success"]:
                 result["error"] = parsed["error"]
                 failed_count += 1
