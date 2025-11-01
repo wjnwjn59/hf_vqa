@@ -290,21 +290,115 @@ def get_color_name_from_id(color_id: int, color_idx: Dict) -> str:
     return 'black'  # fallback
 
 
+def calculate_bbox_center_y(bbox: Dict) -> float:
+    """Calculate the vertical center of a bounding box."""
+    return (bbox['top_left'][1] + bbox['bottom_right'][1]) / 2
+
+
+def calculate_canvas_coverage_score(selected_bboxes: List[Dict], canvas_height: int = 2240) -> float:
+    """
+    Calculate how well the selected bboxes cover the entire canvas vertically.
+    Returns a score from 0 to 1, where 1 means perfect coverage.
+    """
+    if not selected_bboxes:
+        return 0.0
+    
+    # Divide canvas into regions and check coverage
+    num_regions = 4  # Top, upper-mid, lower-mid, bottom
+    region_height = canvas_height // num_regions
+    region_coverage = [False] * num_regions
+    
+    for bbox in selected_bboxes:
+        center_y = calculate_bbox_center_y(bbox)
+        region_idx = min(int(center_y // region_height), num_regions - 1)
+        region_coverage[region_idx] = True
+    
+    return sum(region_coverage) / num_regions
+
+
+def select_spatially_distributed_bboxes(
+    bboxes: List[Dict], 
+    target_count: int, 
+    canvas_height: int = 2240
+) -> List[Dict]:
+    """
+    Select bboxes that provide good spatial distribution across the canvas
+    while prioritizing larger bboxes.
+    
+    Args:
+        bboxes: List of available bboxes
+        target_count: Number of bboxes to select
+        canvas_height: Height of the canvas for spatial calculation
+    
+    Returns:
+        List of selected bboxes with good spatial distribution
+    """
+    if not bboxes or target_count <= 0:
+        return []
+    
+    if len(bboxes) <= target_count:
+        return bboxes
+    
+    # Sort by area (largest first) as base priority
+    sorted_bboxes = sorted(bboxes, key=calculate_bbox_area, reverse=True)
+    
+    selected = []
+    
+    # Greedy selection with spatial awareness
+    for candidate in sorted_bboxes:
+        if len(selected) >= target_count:
+            break
+            
+        # Check overlap with already selected bboxes
+        overlaps_with_selected = any(bboxes_overlap(candidate, s) for s in selected)
+        
+        if not overlaps_with_selected:
+            # Calculate coverage improvement
+            coverage_before = calculate_canvas_coverage_score(selected, canvas_height)
+            coverage_after = calculate_canvas_coverage_score(selected + [candidate], canvas_height)
+            coverage_improvement = coverage_after - coverage_before
+            
+            # Area-based priority score
+            area_score = calculate_bbox_area(candidate) / max(calculate_bbox_area(b) for b in sorted_bboxes)
+            
+            # Combined score: prioritize area but boost coverage improvement
+            combined_score = area_score + (coverage_improvement * 2.0)
+            
+            # Accept if it's beneficial or we need more bboxes
+            if coverage_improvement > 0 or len(selected) < target_count // 2:
+                selected.append(candidate)
+    
+    # If we still don't have enough, fill with largest remaining non-overlapping bboxes
+    if len(selected) < target_count:
+        for candidate in sorted_bboxes:
+            if len(selected) >= target_count:
+                break
+            if candidate not in selected:
+                overlaps_with_selected = any(bboxes_overlap(candidate, s) for s in selected)
+                if not overlaps_with_selected:
+                    selected.append(candidate)
+    
+    print(f"    Spatial distribution: {len(selected)}/{target_count} bboxes, coverage score: {calculate_canvas_coverage_score(selected, canvas_height):.2f}")
+    
+    return selected[:target_count]
+
+
 def find_best_layout_for_content(
     image_count: int,
     text_count: int,
     extracted_bboxes: List[Dict],
-    min_text_area: int = 36000
+    min_text_area: int = 24000
 ) -> Dict:
     """
     Find the best layout that can accommodate the required number of images and text elements.
     Uses greedy algorithm to score each layout based on capacity.
+    Note: Title (first text) can use any text bbox, other texts need area >= min_text_area.
     
     Args:
         image_count: Number of image elements needed
         text_count: Number of text elements needed
         extracted_bboxes: List of all available layouts
-        min_text_area: Minimum area for text bboxes
+        min_text_area: Minimum area for non-title text bboxes (default 24000)
     
     Returns:
         Best layout dict or None if no suitable layout found
@@ -312,7 +406,7 @@ def find_best_layout_for_content(
     best_score = -1
     best_layout = None
     
-    print(f"  Searching for layout: need {image_count} images, {text_count} texts (min area: {min_text_area})")
+    print(f"  Searching for layout: need {image_count} images, {text_count} texts (title: any size, others: >= {min_text_area})")
     
     for bbox_data in extracted_bboxes:
         bboxes = bbox_data['bboxes']
@@ -321,16 +415,33 @@ def find_best_layout_for_content(
         element_bboxes = [b for b in bboxes if b.get('category') == 'element']
         regular_elements = [b for b in element_bboxes if b['bottom_right'] != [896, 2240]]
         
-        # Count available text bboxes with sufficient area
+        # Count available text bboxes with new logic
         text_bboxes = [b for b in bboxes if b.get('category') == 'text']
-        valid_text_bboxes = [b for b in text_bboxes if calculate_bbox_area(b) >= min_text_area]
         
-        # Apply non-overlapping selection to get realistic counts
+        # For capacity calculation, simulate the new selection logic
+        if text_count > 0:
+            # Title can use any text bbox (select largest)
+            title_available = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
+            
+            # Other texts need min_area threshold
+            if text_count > 1:
+                other_texts_available = select_largest_non_overlapping_bboxes(bboxes, 'text', text_count, min_area=min_text_area)
+                # Remove title bbox if it overlaps
+                if title_available and other_texts_available:
+                    title_bbox = title_available[0]
+                    other_texts_available = [bbox for bbox in other_texts_available 
+                                           if not (bbox['top_left'] == title_bbox['top_left'] and 
+                                                 bbox['bottom_right'] == title_bbox['bottom_right'])]
+                text_capacity = min(1 + len(other_texts_available), text_count)
+            else:
+                text_capacity = len(title_available)
+        else:
+            text_capacity = 0
+        
+        # Apply non-overlapping selection for elements
         available_elements = select_largest_non_overlapping_bboxes(bboxes, 'element', image_count + 10)  # Extra margin
-        available_texts = select_largest_non_overlapping_bboxes(bboxes, 'text', text_count + 5, min_text_area)  # Extra margin
         
         element_capacity = len(available_elements)
-        text_capacity = len(available_texts)
         
         # Calculate score based on how well this layout matches requirements
         element_score = min(element_capacity, image_count) / max(image_count, 1)
@@ -414,7 +525,7 @@ def merge_narrator_data(
             len(image_elements), 
             len(text_elements), 
             extracted_bboxes, 
-            min_text_area=36000
+            min_text_area=24000
         )
         
         if not best_layout:
@@ -483,23 +594,13 @@ def merge_narrator_data(
             }
             output_layers.append(bg_layer)
 
-        # Select figure bboxes to match all image elements
+        # Select figure bboxes to match all image elements with better canvas coverage
         num_figures_needed = len(image_elements)
         
-        # Sort regular elements by area and select largest non-overlapping
-        regular_elements.sort(key=calculate_bbox_area, reverse=True)
-        selected_decorative = []
-
-        for bbox in regular_elements:
-            # Only check overlap with other decorative elements
-            overlaps = any(bboxes_overlap(bbox, s) for s in selected_decorative)
-            if not overlaps:
-                selected_decorative.append(bbox)
-                if len(selected_decorative) >= num_figures_needed:
-                    break
-
-        # Use selected decorative elements for figures
-        selected_figure_bboxes = selected_decorative[:num_figures_needed]
+        # Use area-weighted spatial distribution algorithm
+        selected_figure_bboxes = select_spatially_distributed_bboxes(
+            regular_elements, num_figures_needed, canvas_height=2240
+        )
         print(f"  Selected {len(selected_figure_bboxes)}/{num_figures_needed} figure bboxes")
 
         # Add image elements as 'element' category
@@ -524,22 +625,49 @@ def merge_narrator_data(
             }
             output_layers.append(output_layer)
 
-        # Select bboxes for text to match all text elements (non-overlapping, area >= 36000)
+        # Select bboxes for text elements with spatial distribution and title priority
         text_count = len(text_elements)
-        selected_text_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', text_count, min_area=36000)
         
-        print(f"  Selected {len(selected_text_bboxes)}/{text_count} text bboxes")
+        if text_count > 0:
+            # Get all text bboxes meeting area requirements
+            all_text_bboxes = [b for b in bboxes if b.get('category') == 'text']
+            
+            if text_count == 1:
+                # Only title: Select the largest text bbox
+                selected_text_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
+            else:
+                # Multiple texts: Title + spatially distributed others
+                # Step 1: Get title (largest bbox)
+                title_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
+                
+                # Step 2: Get other text candidates (area >= 24000, excluding title area)
+                other_candidates = [b for b in all_text_bboxes 
+                                  if calculate_bbox_area(b) >= 24000]
+                
+                # Remove title bbox from candidates if it exists
+                if title_bboxes:
+                    title_bbox = title_bboxes[0]
+                    other_candidates = [bbox for bbox in other_candidates 
+                                      if not (bbox['top_left'] == title_bbox['top_left'] and 
+                                            bbox['bottom_right'] == title_bbox['bottom_right'])]
+                
+                # Step 3: Select remaining texts with spatial distribution
+                other_text_count = text_count - 1
+                other_selected = select_spatially_distributed_bboxes(
+                    other_candidates, other_text_count, canvas_height=2240
+                )
+                
+                # Combine: title first, then spatially distributed others
+                selected_text_bboxes = title_bboxes + other_selected
+        else:
+            selected_text_bboxes = []
+        
+        print(f"  Selected {len(selected_text_bboxes)}/{text_count} text bboxes (title: no min area, others: >= 24k)")
 
         # Add text elements as 'text' category
-        # Special handling: First text (title) gets the largest bbox, others follow bbox size order
         for idx, text_content in enumerate(text_elements):
             if idx < len(selected_text_bboxes):
-                # For title (first text), always use the largest bbox (index 0)
-                # For other texts, use remaining bboxes in order
-                if idx == 0:
-                    bbox = selected_text_bboxes[0]  # Largest bbox for title
-                else:
-                    bbox = selected_text_bboxes[idx]  # Regular assignment for others
+                bbox = selected_text_bboxes[idx]
                 
                 # Chọn màu từ layout_colors (không có thì random, đã loại màu trắng)
                 color_name = random.choice(layout_colors) if layout_colors else 'black'
