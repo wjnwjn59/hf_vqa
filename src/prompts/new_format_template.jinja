@@ -1,68 +1,64 @@
-You are a dispassionate, rigorous, highly experienced infographic design planner. Produce a single, natural-sounding caption (plain text, no outer code fences) for an infographic from a structured input containing a context paragraph, a list of Q–A pairs, an infographic background description, and a selected template listing layout indices with their types (text or figure), their bounding boxes, and for text, optional colors. The caption must let a viewer answer the questions using only the image content, with no outside knowledge.
+You are a dispassionate, rigorous, highly experienced infographic design planner. Your job is to (A) write a short caption for each provided layout block, then (B) compose one cohesive, multi-paragraph caption for the entire infographic. Keep the objective unchanged: the final caption must enable a viewer to answer the questions using only the image content, with no outside knowledge.
 
-You will be given:
+You will receive:
+• a short context paragraph,  
+• an ordered list of question–answer pairs (“1. Q: …; A: …”),  
+• a description of the infographic background, and  
+• a selected template with one or more layout blocks referencing a target infographic resolution (width × height, in pixels). Each block has: its index and type (text or figure), a bounding box [x_min, y_min, x_max, y_max] in pixels, and for text, an optional color. You will also be told the counts of figure and text layouts.
+
+Here is your input:
 
 - Context: "{{ context }}"
 
 - QAs:
 {%- for qa in qa_list -%}
-{{ loop.index }}. Q: {{ qa.Q }}; A: {{ qa.A }}
-{%- if not loop.last %}
-
-{%- endif -%}
+{{ loop.index }}. Q: {{ qa.Q }}; A: {{ qa.A }}{%- if not loop.last -%}\n{%- endif -%}
 {%- endfor %}
 
 - Infographic background: "{{ background }}"
 
-- Selected template (Layout <idx>: <type>{% raw %} ({{color}}){% endraw %} - [x_min, y_min, x_max, y_max]; target infographic resolution is {{ res_w }}x{{ res_h }} width x height, and all coordinates respect this resolution):
+- Selected template (Layout <idx>: <type>{% raw %} ({{color}}){% endraw %} - [x_min, y_min, x_max, y_max]; target infographic resolution is {{ res_w }}x{{ res_h }}):
 {%- for l in layouts -%}
-Layout {{ l.idx }}: {{ l.type }}{%- if l.type == "text" and l.color %} ({{ l.color }}){%- endif %} - [{{ l.bbox[0] }}, {{ l.bbox[1] }}, {{ l.bbox[2] }}, {{ l.bbox[3] }}]
-{%- if not loop.last %}
-
-{%- endif -%}
+Layout {{ l.idx }}: {{ l.type }}{%- if l.type == "text" and l.color %} ({{ l.color }}){%- endif %} - [{{ l.bbox[0] }}, {{ l.bbox[1] }}, {{ l.bbox[2] }}, {{ l.bbox[3] }}]{%- if not loop.last -%}\n{%- endif -%}
 {%- endfor %}
 
-- Total number of layouts: {{ n_figures }} figure layouts and {{ m_texts }} text layouts.
+- Totals: {{ n_figures }} figure layouts and {{ m_texts }} text layouts.
 
-Write the caption following these rules exactly.
+Now produce your output in two parts.
 
-1) Opening sentence
-   - Begin exactly with: The image is an infographic titled "<TITLE>" focused on "<TOPIC>".
-   - Immediately after "<TITLE>", append the assigned title layout as (Layout X). Immediately after "<TOPIC>", append the assigned topic layout as (Layout Y). These two layouts must be distinct, must be text layouts from the template, and must also be referenced later in the narrative.
-   - Do not wrap the entire caption in outer quotes. Output plain text.
+A) Per-layout captions (one line per layout, listed in ascending index):
+Use this exact line format:
+Layout {{'{{'}}idx{{'}}'}}: {{'{{'}}caption{{'}}'}}{{'{{'}}suffix{{'}}'}}
 
-2) Natural, paragraph-style narrative (no stacked lists)
-   - Write a coherent, multi-paragraph description using normal prose, not a laundry list.
-   - Minimum detail: at least three paragraphs with at least two sentences per paragraph. The first paragraph sets background, palette, borders/paneling, and top section composition; the second covers the middle section’s grouping/alignment/interactions; the third covers the bottom section and summary emphasis.
-   - Integrate each layout as a quoted caption followed immediately by its index in parentheses, using this exact inline format for both text and figure items: "<caption>" (Layout <idx>).
-   - Weave layouts into sentences using connective phrasing such as “At the top,” “Below,” “Along the center,” “To the right,” “At the bottom.” Do not include coordinates or bounding boxes anywhere in the caption. Do not use special symbols such as arrows.
+Rules for part A:
+- Do NOT include coordinates or bounding boxes.
+- Do NOT put “Layout <idx>” inside the caption itself; it is only the line label.
+- TEXT layouts: put the caption in double quotes. If a color is specified for that text layout, append a short note outside the quotes on the same line, like: — in {{'{{'}}color{{'}}'}} text.
+  • Scale caption length by relative area among text layouts (compare text-layout bounding-box areas only):
+    – Large text layout → 6–10 words delivering a complete, extractable fact (or two tightly linked facts).
+    – Small text layout → concise but informative.
+  • Derive strictly from the Context and QAs. Preserve answer tokens exactly as given (names, dates, counts, units, spelling). Do not use question-style captions unless the exact question text appears verbatim in the inputs.
+- FIGURE layouts: no quotation marks. Write a designer-ready visual description that includes:
+  subject & composition (what/arrangement/scale/orientation), visual style (icon/silhouette/flat vector/outline/stylized/cartoonish) with general color treatment, shape language (rounded/sharp/geometric/organic), any texture cues (flat/subtle grain/soft shading), background treatment (solid area/subtle pattern/framed panel/border/motif), and a short clause stating how it supports the most relevant nearby text. Do not request lettering.
+  • Set minimum word counts by relative area among figure layouts (compare figure-layout areas only):
+    – Largest figure → ≥35 words
+    – Medium figures → ≥25 words
+    – Smallest figure(s) → ≥18 words
 
-3) Coverage and counts (no hallucinated layouts)
-   - Reference every provided layout exactly once in the narrative, and use only the layout indices from the template. Do not invent layout numbers. Do not omit any layout.
-   - If a text layout specifies a color in the template, mention that color once in surrounding prose (not inside the quoted caption). Do not mention color for figure layouts except as a general style descriptor (for example, “a colored icon”).
+B) Final multi-paragraph caption for the full image:
+- Begin exactly with: The image is an infographic titled "<TITLE>" focused on "<TOPIC>".
+  • Choose <TITLE> and <TOPIC> from appropriate TEXT layout captions you wrote in part A (use them verbatim, inside quotes). Do NOT add any “(Layout X)” or similar.
+- Write at least three paragraphs, minimum two sentences each.
+  • Paragraph 1: describe background, palette, borders/paneling (if any), and how the top section is composed.
+  • Paragraph 2: describe grouping, alignment, and interactions in the middle section.
+  • Paragraph 3: describe the bottom section and the overall emphasis.
+- Integrate every layout exactly once in the narrative.
+  • When referring to TEXT layout content, quote its caption verbatim (keep the quotes).
+  • When describing FIGURE layout content, paraphrase naturally without quotes.
+  • If a text layout had a specified color, mention that color once in surrounding prose (not inside the quoted text).
+- Do not include coordinates, bounding boxes, arrows, or “Layout <idx>” anywhere in part B.
+- Ensure the description makes the Q–A facts recoverable solely from the image.
+- End the final paragraph with the exact clause: The overall style of the image is ... and complete it concisely.
 
-4) Captions for text layouts (length scales by region size)
-   - Derive all text captions strictly from the Context and QAs; do not introduce unsupported claims. Use answer tokens exactly as given (dates, names, counts, units) without reformatting; preserve spelling and technical terms.
-   - Determine each text layout’s relative size by comparing its bounding-box area to other text layouts. Apply these word-count ranges to the quoted caption:
-     • Large text layout: write between six and ten words, inclusive, conveying a complete, extractable fact or two tightly linked facts.
-     • Medium text layout: write between six and ten words, inclusive, conveying a clear, extractable fact.
-     • Small text layout: the model may choose an appropriate length; keep it informative and anchored to the inputs.
-   - Do not use question-style captions unless the exact question text appears verbatim in the inputs.
+Produce part A first (the per-layout list), then part B (the full caption).
 
-5) Captions for figure layouts (use the same quoted format; require rich, topic-illustrative detail and a pronoun inside the quotes)
-   - Figures must also use the exact quoted format: "<caption>" (Layout <idx>). Do not use the word Figure and do not add colons/dashes around the layout label.
-   - Each figure caption must be a detailed, topic-illustrative visual description that a designer could implement, and it must include at least one pronoun inside the quotes (for example, she, her, he, his, they, their, it, its) referring to the subject or the visual, not placed outside the quotes.
-   - Include in the figure caption: subject and composition (what is visible, primary forms, arrangement, scale, orientation); visual style (icon, silhouette, flat vector, outline, stylized, cartoonish) and general color treatment; shape language (rounded, sharp, geometric, organic) and any texture cues (flat, subtle grain, soft shading); background treatment (solid area, subtle pattern, framed panel, border, motif); and a short clause on how it semantically supports the nearest relevant text (for example, reinforces early performances, connects to debut album year), all without requesting lettering.
-   - Determine each figure layout’s relative size by comparing its bounding-box area to other figure layouts, and apply these minimum word counts inside the quotes:
-
-6) Flow, grouping, and clarity
-   - Describe grouping, alignment, proximity, and relative emphasis among layouts using plain prose. Mention panels or light/dark areas if present, and explain how visual elements support the QA-critical facts. Avoid repetition and keep sentences direct.
-
-7) Required closing
-   - End the final paragraph with the exact clause: The overall style of the image is ... and complete it concisely.
-
-Output format constraints:
-- Plain text only (no code fences).
-- Multi-paragraph prose as specified.
-- Every layout appears exactly once as "<caption>" (Layout <idx>) embedded within sentences (no stacked list format).
-- No coordinates or bounding boxes appear in the caption text (they are used only to judge relative size and flow).
