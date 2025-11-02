@@ -23,3 +23,7 @@ src/inference/results/*.json
 
 src/data/bizgen/checkpoints
 test*
+
+*.mdc
+convert_to_infographic.py
+.gitignore

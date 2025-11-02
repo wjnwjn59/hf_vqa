@@ -17,20 +17,33 @@ After downloading and extracting the [Squad 2 dataset](https://rajpurkar.github.
 
 ## Using Qwen to generate layout
 
-```python
+```bash
 conda env create -f ./src/data/create_data/bizgen/wiki.yaml
 conda activate wiki
 
 export PYTHONPATH="./:$PYTHONPATH"
 
-CUDA_VISIBLE_DEVICES=0 python src/data/narrator/generate_narrator_with_bbox.py \
-    --model_name "unsloth/Qwen3-8B" \
-    --input_data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
-    --stage_1 "./src/prompts/content_des_stage_1.jinja" \
-    --stage_2 "./src/prompts/content_des_stage_2.jinja" \
-    --start 1 \
-    --end 10 \
-    --batch_size 8
+CUDA_VISIBLE_DEVICE=1 python src/data/narrator/generate_infographic_data.py \
+  --model_name "unsloth/Qwen3-8B" \
+  --input_data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
+  --dataset_type "squad_v2" \
+  --template_path "./src/prompts/content_des_all.jinja" \
+  --output_dir "./src/data/create_data/output/infographic" \
+  --batch_size 8 \
+  --num-samples 8 \
+  --start 0 \
+  --end 10
+```
+
+## Choose bbox for image caption
+
+```bash
+conda activate wiki
+
+export PYTHONPATH="./:$PYTHONPATH"
+
+python src/data/narrator/merge_narrator_bboxes.py \
+    --infographic-dir "./src/data/create_data/output/infographic"
 ```
 
 ## Create bizgen data
