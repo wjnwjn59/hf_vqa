@@ -1,9 +1,11 @@
 import json
 import os
+import re
 from pathlib import Path
 from jinja2 import Template
 from tqdm import tqdm
 import argparse
+from typing import List, Dict, Any, Set
 
 # Import the Qwen3 inference module
 from src.inference.qwen3_inference import Qwen3Inference
@@ -13,6 +15,89 @@ def load_bizgen_template(template_path):
     with open(template_path, 'r', encoding='utf-8') as f:
         template_content = f.read()
     return Template(template_content)
+
+def extract_keywords_from_answers(qa_list: List[Dict]) -> Set[str]:
+    """
+    Extract keywords from answers for validation.
+    
+    Args:
+        qa_list: List of QA pairs with 'question' and 'answer' fields
+        
+    Returns:
+        Set of lowercase keywords from answers
+    """
+    keywords = set()
+    
+    for qa in qa_list:
+        answer = qa.get('answer', '')
+        if not answer:
+            continue
+        
+        # Handle different answer formats
+        answer_text = ""
+        if isinstance(answer, dict):
+            # SQuAD format: {"text": ["answer1", "answer2"], "answer_start": [pos1, pos2]}
+            if 'text' in answer:
+                if isinstance(answer['text'], list) and answer['text']:
+                    answer_text = answer['text'][0]  # Take first answer
+                else:
+                    answer_text = str(answer['text'])
+        elif isinstance(answer, list):
+            # List of answers
+            if answer:
+                answer_text = str(answer[0])
+        else:
+            # Direct string
+            answer_text = str(answer)
+        
+        if not answer_text:
+            continue
+            
+        # Convert to lowercase for matching
+        answer_text = answer_text.lower()
+        
+        # Extract meaningful words (filter out very short words and common stop words)
+        stop_words = {'a', 'an', 'the', 'is', 'are', 'was', 'were', 'be', 'been', 
+                      'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will',
+                      'would', 'should', 'could', 'may', 'might', 'must', 'can',
+                      'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between',
+                      'into', 'through', 'during', 'before', 'after', 'above', 'below',
+                      'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over',
+                      'under', 'again', 'further', 'then', 'once'}
+        
+        # Split and clean words
+        words = re.findall(r'\b[a-z0-9]+\b', answer_text)
+        
+        for word in words:
+            # Keep words longer than 2 chars and not in stop words
+            if len(word) > 2 and word not in stop_words:
+                keywords.add(word)
+            # Also keep numbers and short important words (years, etc)
+            elif word.isdigit():
+                keywords.add(word)
+    
+    return keywords
+
+def validate_keywords_in_output(output: str, keywords: Set[str], threshold: float = 0.3) -> bool:
+    """
+    Check if the output contains enough keywords from answers.
+    
+    Args:
+        output: Generated infographic description
+        keywords: Set of keywords to check for
+        threshold: Minimum fraction of keywords that should appear (default 0.3 = 30%)
+        
+    Returns:
+        True if output contains at least threshold fraction of keywords
+    """
+    if not keywords:
+        return True  # No keywords to check, consider valid
+    
+    output_lower = output.lower()
+    found_keywords = sum(1 for keyword in keywords if keyword in output_lower)
+    
+    coverage = found_keywords / len(keywords)
+    return coverage >= threshold
 
 def group_qa_by_context(data):
     """
@@ -88,7 +173,7 @@ def load_input_data(dataset_type, input_path, deduplicate_context=False, group_b
                     all_data.append({
                         'context': context,
                         'question': item['question'],
-                        'answer': item.get('answer', ''),
+                        'answer': item.get('answers', ''),
                         'id': item.get('id', None),
                         'title': item.get('title', None)
                     })
@@ -244,7 +329,6 @@ def main():
     chunk_size = 50
     total_processed = 0
     successful_count = 0
-    failed_count = 0
     total_batches = (len(input_data) + args.batch_size - 1) // args.batch_size
 
     for batch_idx in tqdm(range(0, len(input_data), args.batch_size), 
@@ -284,25 +368,38 @@ def main():
                 rendered_prompt = template.render(brief_input=item.get("generated_summary", ""))
             batch_prompts.append(rendered_prompt)
 
-        if batch_idx == 0:
-            print(batch_prompts[0])
+        # if batch_idx == 0:
+        #     print(batch_prompts[0])
 
-        # Generate and parse responses for batch
-        parsed_responses = qwen_inference.generate_and_parse_json(
+        # Generate responses for batch (now as strings, not JSON)
+        responses = qwen_inference.generate(
             batch_prompts, 
             enable_thinking=False
         )
 
         # Process outputs
-        for i, (item, parsed) in enumerate(zip(batch, parsed_responses)):
+        for i, (item, response) in enumerate(zip(batch, responses)):
             # Calculate global infographic_id based on start index
             infographic_id = args.start + total_processed + 1
             
+            # Extract keywords from answers for validation
+            if group_by_context:
+                keywords = extract_keywords_from_answers(item.get("qa_list", []))
+            else:
+                # For single QA items, create a list with one item
+                qa_list = [{"question": item.get("question", ""), "answer": item.get("answer", "")}]
+                keywords = extract_keywords_from_answers(qa_list)
+            
+            # Validate if output contains enough keywords
+            keyword_coverage = validate_keywords_in_output(response, keywords, threshold=0.3)
+            
             # Base result structure
             result = {
-                "generated_infographic": parsed["response"],
-                "success": parsed["success"],
-                "infographic_id": infographic_id
+                "generated_infographic": response,
+                "infographic_id": infographic_id,
+                "keyword_coverage": keyword_coverage,
+                "keywords_found": len([k for k in keywords if k in response.lower()]) if keywords else 0,
+                "keywords_total": len(keywords)
             }
             
             # Add different fields based on data structure
@@ -321,13 +418,10 @@ def main():
                     "title": item.get("title", None)
                 })
             
-            if not parsed["success"]:
-                result["error"] = parsed["error"]
-                failed_count += 1
-            else:
-                successful_count += 1
+            successful_count += 1
             results.append(result)
             total_processed += 1
+            
             # Save to file when we have enough results
             if len(results) >= chunk_size:
                 # Calculate file index based on first infographic_id in chunk
@@ -362,14 +456,8 @@ def main():
     
     print(f"Total samples processed: {total_processed}")
     print(f"Total files saved: {len(saved_files)}")
-    print(f"Successful: {successful_count} ({successful_count/total_processed*100:.1f}%)")
-    print(f"Failed: {failed_count} ({failed_count/total_processed*100:.1f}%)")
+    print(f"Successful: {successful_count}")
     print(f"Output directory: {output_dir}")
-    
-    # Save a summary of failed cases if any
-    if failed_count > 0:
-        print(f"\nNote: Failed cases were distributed across multiple files.")
-        print(f"Check individual files for 'success': false entries.")
     
     print(f"\nFiles saved:")
     for filename in saved_files:

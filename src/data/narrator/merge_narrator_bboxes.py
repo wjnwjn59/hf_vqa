@@ -167,27 +167,46 @@ def extract_text_from_caption(caption: str) -> str:
     return ""
 
 
-def extract_images_from_caption(full_caption: str) -> List[str]:
+def extract_images_from_caption(full_caption: str) -> List[Dict]:
     """
     Extract image descriptions from caption using new format.
-    Format: Figure: description.
+    Format: "description" (figure)
     
     Args:
         full_caption: The full image caption text
         
     Returns:
-        List of image descriptions (without "Figure: " prefix)
+        List of dicts with 'description' key
     """
     image_elements = []
     
-    # Pattern to match "Figure: " followed by description up to a period
-    pattern = r'Figure:\s+([^.]+\.)'
+    # Pattern to match "content" (figure)
+    pattern = r'"([^"]+)"\s*\(figure\)'
     matches = re.findall(pattern, full_caption, re.IGNORECASE)
     
     for description in matches:
-        # Remove "Figure: " prefix, keep only the description
+        description = description.strip()
+        
+        # Check if description already starts with proper prefix
+        description_lower = description.lower()
+        figure_prefixes = [
+            'a visual', 'an illustration', 'the picture', 'a picture', 'an image',
+            'the image', 'a graphic', 'the graphic', 'a diagram', 'the diagram',
+            'an icon', 'the icon', 'a chart', 'the chart', 'a figure', 'the figure',
+            'a photo', 'the photo', 'a drawing', 'the drawing', 'a representation',
+            'the representation', 'a silhouette', 'the silhouette', 'a composition',
+            'the composition', 'a design', 'the design', 'a cover', 'the cover',
+            'a map', 'the map', 'a stylized'
+        ]
+        
+        has_prefix = any(description_lower.startswith(prefix) for prefix in figure_prefixes)
+        
+        # If no prefix found, add a generic one
+        if not has_prefix:
+            description = f"An illustration of {description}"
+        
         image_elements.append({
-            'description': description.strip()
+            'description': description
         })
     
     return image_elements
@@ -195,8 +214,8 @@ def extract_images_from_caption(full_caption: str) -> List[str]:
 
 def extract_text_elements(full_caption: str) -> List[str]:
     """
-    Extract text content from caption (quoted text).
-    Format: "text content"
+    Extract text content from caption (quoted text with (text) tag).
+    Format: "text content" (text)
     
     Args:
         full_caption: The full image caption text
@@ -206,9 +225,9 @@ def extract_text_elements(full_caption: str) -> List[str]:
     """
     text_elements = []
     
-    # Pattern to match quoted text
-    pattern = r'"([^"]+)"'
-    matches = re.findall(pattern, full_caption)
+    # Pattern to match "content" (text)
+    pattern = r'"([^"]+)"\s*\(text\)'
+    matches = re.findall(pattern, full_caption, re.IGNORECASE)
     
     for text_content in matches:
         text_elements.append(text_content.strip())
@@ -218,13 +237,26 @@ def extract_text_elements(full_caption: str) -> List[str]:
 
 def clean_caption_text(caption: str) -> str:
     """
-    Clean up caption text - remove "Figure: " prefix and normalize spacing.
+    Clean up caption text - remove (text) and (figure) tags along with their quoted content.
+    This creates a clean narrative without the tagged elements.
+    
+    Args:
+        caption: The full image caption with tags
+        
+    Returns:
+        Cleaned caption text
     """
-    # Remove "Figure: " prefix and the description up to period
-    caption = re.sub(r'Figure:\s+[^.]+\.', '', caption, flags=re.IGNORECASE)
+    # Remove "content" (figure) - remove both quotes and tag
+    caption = re.sub(r'"[^"]+"\s*\(figure\)', '', caption, flags=re.IGNORECASE)
+    
+    # Remove (text) tag but keep the quoted text content
+    caption = re.sub(r'\(text\)', '', caption, flags=re.IGNORECASE)
     
     # Clean up extra whitespace and normalize spacing
     caption = re.sub(r'\s+', ' ', caption).strip()
+    
+    # Clean up multiple spaces around punctuation
+    caption = re.sub(r'\s+([.,;:!?])', r'\1', caption)
     
     return caption
 
@@ -495,19 +527,18 @@ def merge_narrator_data(
         # Generate unique wiki index based on start_wiki_idx
         wiki_id = start_wiki_idx + wiki_idx + 1  # Start from 1, not 0
         
-        # Get the caption data from generated_infographic structure
-        generated_infographic = infographic.get('generated_infographic', {})
+        # Get the caption data from generated_infographic field
+        generated_infographic = infographic.get('generated_infographic', '')
         
-        # Handle case where generated_infographic is a JSON string instead of dict
+        # New format: generated_infographic is directly the full_image_caption string
         if isinstance(generated_infographic, str):
-            try:
-                generated_infographic = json.loads(generated_infographic)
-            except:
-                print(f"Warning: Could not parse generated_infographic for wiki {wiki_id}")
-                continue
-        
-        full_image_caption = generated_infographic.get('full_image_caption', '')
-        background_caption = generated_infographic.get('background_caption', '')
+            full_image_caption = generated_infographic
+        elif isinstance(generated_infographic, dict):
+            # Old format compatibility: dict with full_image_caption key
+            full_image_caption = generated_infographic.get('full_image_caption', '')
+        else:
+            print(f"Warning: Unexpected generated_infographic type for wiki {wiki_id}")
+            continue
         
         if not full_image_caption:
             print(f"Warning: No full_image_caption for wiki {wiki_id}, skipping")
@@ -718,25 +749,25 @@ def main():
     parser.add_argument(
         '--extracted-bboxes',
         type=str,
-        default="./src/data/narrator/extracted_bboxes.json",
+        default="src/data/narrator/extracted_bboxes.json",
         help='Path to extracted_bboxes.json'
     )
     parser.add_argument(
         '--infographic-dir',
         type=str,
-        default="src/data/create_data/output/infographic",
+        default="./src/data/create_data/output/infographic",
         help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic)'
     )
     parser.add_argument(
         '--color-idx',
         type=str,
-        default="./src/data/narrator/glyph/color_idx.json",
+        default="src/data/narrator/glyph/color_idx.json",
         help='Path to color_idx.json'
     )
     parser.add_argument(
         '--font-idx',
         type=str,
-        default="./src/data/narrator/glyph/font_idx.json",
+        default="src/data/narrator/glyph/font_idx.json",
         help='Path to font_idx.json'
     )
     parser.add_argument(
