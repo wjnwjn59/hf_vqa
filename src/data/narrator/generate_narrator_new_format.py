@@ -47,10 +47,10 @@ class ChatGPTInference:
         if self.system_prompt:
             messages.append({"role": "system", "content": self.system_prompt})
         messages.append({"role": "user", "content": prompt})
+        print(prompt)
 
         resp = self.client.responses.create(
             model=self.model_name,
-            input=messages,
             temperature=self.temperature,
             max_output_tokens=self.max_tokens,
         )
@@ -288,7 +288,9 @@ def generate_full_caption_new_format(
     layouts: List[Dict],
     n_figures: int,
     m_texts: int,
-    prompt_template_text: str
+    prompt_template_text: str,
+    res_w: int,
+    res_h: int,
 ) -> str:
     """
     Generate full image caption using the new format with context, QAs, background, and selected template
@@ -304,7 +306,9 @@ def generate_full_caption_new_format(
         background=background_caption,
         layouts=layouts,
         n_figures=n_figures,
-        m_texts=m_texts
+        m_texts=m_texts,
+        res_w=res_w,             
+        res_h=res_h,            
     )
     
     # Generate response
@@ -383,7 +387,9 @@ def create_wiki_layout_from_new_format(
     infographic_id: int,
     original_context: str = None,
     original_qa_pairs: List[Dict] = None,
-    original_id: str = None
+    original_id: str = None,
+    res_w: int = 896,
+    res_h: int = 2240,
 ) -> Dict:
     """
     Create wiki layout structure from new format similar to merge_narrator_bboxes.py
@@ -401,7 +407,7 @@ def create_wiki_layout_from_new_format(
     base_layer = {
         'category': 'base',
         'top_left': [0, 0],
-        'bottom_right': [896, 2240],
+        'bottom_right': [res_w, res_h],  
         'caption': full_image_caption
     }
     output_layers.append(base_layer)
@@ -410,7 +416,7 @@ def create_wiki_layout_from_new_format(
     background_element = {
         'category': 'element',
         'top_left': [0, 0],
-        'bottom_right': [896, 2240],
+        'bottom_right': [res_w, res_h],   # was [896, 2240]
         'caption': "Clean white background with professional layout"
     }
     output_layers.append(background_element)
@@ -477,7 +483,9 @@ def process_sample_new_format(
     extracted_bboxes: List[Dict],
     color_mapping: Dict[str, int],
     infographic_id: int,
-    min_text_area: int = 10000
+    min_text_area: int = 10000,
+    res_w: int = 896,
+    res_h: int = 2240,
 ) -> Optional[Dict]:
     """
     Process a single sample through the new format pipeline
@@ -514,7 +522,9 @@ def process_sample_new_format(
             layouts,
             n_figures,
             m_texts,
-            prompt_template_text
+            prompt_template_text,
+            res_w=res_w,                
+            res_h=res_h,                    
         )
         
         # Extract original information for tracking
@@ -535,7 +545,9 @@ def process_sample_new_format(
             infographic_id,
             original_context=context,
             original_qa_pairs=qa_pairs,
-            original_id=str(original_id)
+            original_id=str(original_id),
+            res_w=res_w,       
+            res_h=res_h
         )
         
         return {
@@ -634,7 +646,7 @@ def main():
 
     # Data / templates / IO
     parser.add_argument('--input_data', type=str,
-                        default='/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl',
+                        default='/data/thangdd_workspace/InfographicDataPaper/info_squadv2/squad_v2_train.jsonl',
                         help='Path to Squad v2 JSONL file')
     parser.add_argument('--prompt_template', type=str,
                         default='./src/prompts/new_format_template.jinja',
@@ -660,6 +672,11 @@ def main():
                         help='Number of samples to process (None for all)')
     parser.add_argument('--min_text_area', type=int, default=10000,
                         help='Minimum area (in pixels^2) for text bboxes to be included')
+    parser.add_argument('--res_w', type=int, default=896,
+                        help='Canvas/image width in pixels')
+    parser.add_argument('--res_h', type=int, default=2240,
+                        help='Canvas/image height in pixels')
+
 
     args = parser.parse_args()
 
@@ -765,7 +782,9 @@ def main():
             extracted_bboxes,
             color_mapping,
             infographic_id,
-            args.min_text_area
+            args.min_text_area,
+            res_w=args.res_w,               
+            res_h=args.res_h,           
         )
 
         if result and result.get("success", False):
