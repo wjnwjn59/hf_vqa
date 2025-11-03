@@ -11,6 +11,13 @@ import torch
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from config import DATASET_CONFIGS
+from typing import Optional
+
+try:
+    from torch.profiler import profile, ProfilerActivity
+    _PROFILER_AVAILABLE = True
+except Exception:
+    _PROFILER_AVAILABLE = False
 
 
 
@@ -95,6 +102,8 @@ def main():
     parser.add_argument("--output-dir", type=str, 
                         default="./outputs/vlm_results/",
                         help="Output directory for results")
+    parser.add_argument("--report-flops", action="store_true",
+                        help="Measure and report FLOPs using PyTorch profiler")
     
     args = parser.parse_args()
     set_seed()
@@ -116,13 +125,37 @@ def main():
     # Datasets that use most common answer for ground truth
     vqa_datasets = {"vqav2_restval", "textvqa_val", "vqav2_val"}
     
+    total_flops: int = 0
+    total_samples: int = 0
+
     for i in tqdm(range(0, len(questions), args.batch_size), desc="Processing batches"):
         batch_slice = slice(i, i + args.batch_size)
         batch_questions = questions[batch_slice]
         batch_images = img_paths[batch_slice]
         batch_gts = gts[batch_slice]
         
-        batch_answers = inference_fn(batch_questions, batch_images, config=config)
+        batch_answers: Optional[List[str]] = None
+        batch_flops: Optional[int] = None
+
+        if args.report_flops and _PROFILER_AVAILABLE and torch.cuda.is_available():
+            torch.cuda.synchronize()
+            with profile(
+                activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
+                record_shapes=True,
+                with_flops=True,
+                profile_memory=False,
+                with_modules=False,
+            ) as prof:
+                batch_answers = inference_fn(batch_questions, batch_images, config=config)
+            torch.cuda.synchronize()
+
+            # Sum FLOPs across all recorded operators (CUDA ops typically carry FLOPs)
+            try:
+                batch_flops = int(sum([e.flops for e in prof.key_averages() if hasattr(e, "flops") and e.flops is not None]))
+            except Exception:
+                batch_flops = None
+        else:
+            batch_answers = inference_fn(batch_questions, batch_images, config=config)
         
         print(f"Predictions: {batch_answers}")
         if dataset_name in vqa_datasets:
@@ -131,6 +164,19 @@ def main():
             gt_display = batch_gts
         print(f"Ground Truth: {gt_display}")
         
+        # Compute per-sample FLOPs if available
+        per_sample_flops: Optional[float] = None
+        if args.report_flops:
+            if not _PROFILER_AVAILABLE:
+                print("[FLOPs] Torch profiler not available; skipping FLOPs measurement.")
+            elif not torch.cuda.is_available():
+                print("[FLOPs] CUDA not available; FLOPs metrics may be unavailable; skipping.")
+            elif batch_flops is not None and len(batch_answers) > 0:
+                per_sample_flops = float(batch_flops) / float(len(batch_answers))
+                total_flops += batch_flops
+                total_samples += len(batch_answers)
+                print(f"[FLOPs] Batch total: {batch_flops:,} | Per-sample: {int(per_sample_flops):,}")
+
         # Update data with results
         for j, answer in enumerate(batch_answers):
             idx = i + j
@@ -139,11 +185,17 @@ def main():
                 "gt": data[idx]["answer"],
                 "image_id": img_ids[idx]
             })
+            if per_sample_flops is not None:
+                data[idx]["flops"] = int(per_sample_flops)
             # Remove unnecessary fields
             data[idx].pop("image", None)
             data[idx].pop("answer", None)
     
     save_results(data, args.model, dataset_name, args.output_dir)
+
+    if args.report_flops and total_samples > 0:
+        avg_per_sample = total_flops / total_samples if total_samples > 0 else 0
+        print(f"[FLOPs] Total: {total_flops:,} | Samples: {total_samples} | Average per-sample: {int(avg_per_sample):,}")
 
 
 if __name__ == "__main__":
