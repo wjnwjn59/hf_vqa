@@ -12,6 +12,39 @@ def load_json(filepath: str) -> Any:
         return json.load(f)
 
 
+def load_squad_jsonl(filepath: str) -> Dict[str, Dict]:
+    """
+    Load SQuAD v2 JSONL file and create a mapping from ID to QA pairs.
+    
+    Args:
+        filepath: Path to squad_v2_train.jsonl file
+        
+    Returns:
+        Dictionary mapping question ID to QA data
+    """
+    id_to_qa = {}
+    
+    print(f"Loading SQuAD data from {filepath}...")
+    
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line_num, line in enumerate(f, 1):
+            try:
+                data = json.loads(line.strip())
+                qa_id = data.get('id')
+                if qa_id:
+                    id_to_qa[qa_id] = {
+                        'question': data.get('question', ''),
+                        'answers': data.get('answers', {'text': [], 'answer_start': []}),
+                        'id': qa_id
+                    }
+            except json.JSONDecodeError:
+                print(f"Warning: Failed to parse line {line_num}")
+                continue
+    
+    print(f"Loaded {len(id_to_qa)} QA pairs from SQuAD dataset")
+    return id_to_qa
+
+
 def save_json(data: Any, filepath: str):
     """Save data to JSON file."""
     with open(filepath, 'w', encoding='utf-8') as f:
@@ -114,7 +147,6 @@ def select_largest_non_overlapping_bboxes(
     # For text category, apply minimum area filter
     if category == 'text' and min_area > 0:
         filtered = [b for b in filtered if calculate_bbox_area(b) >= min_area]
-        print(f"  Filtered text bboxes by area >= {min_area}: {len(filtered)} remaining")
     
     # Sort by area (largest first)
     filtered.sort(key=calculate_bbox_area, reverse=True)
@@ -170,7 +202,7 @@ def extract_text_from_caption(caption: str) -> str:
 def extract_images_from_caption(full_caption: str) -> List[Dict]:
     """
     Extract image descriptions from caption using new format.
-    Format: "description" (figure)
+    Format: "description" (figure) or "description" (figure). or "description" (figure),
     
     Args:
         full_caption: The full image caption text
@@ -180,8 +212,9 @@ def extract_images_from_caption(full_caption: str) -> List[Dict]:
     """
     image_elements = []
     
-    # Pattern to match "content" (figure)
-    pattern = r'"([^"]+)"\s*\(figure\)'
+    # Pattern to match "content" (figure) with optional punctuation after
+    # Matches: (figure), (figure). (figure), (figure); etc.
+    pattern = r'"([^"]+)"\s*\(figure\)[.,;:!?]?'
     matches = re.findall(pattern, full_caption, re.IGNORECASE)
     
     for description in matches:
@@ -215,7 +248,7 @@ def extract_images_from_caption(full_caption: str) -> List[Dict]:
 def extract_text_elements(full_caption: str) -> List[str]:
     """
     Extract text content from caption (quoted text with (text) tag).
-    Format: "text content" (text)
+    Format: "text content" (text) or "text content" (text). or "text content" (text),
     
     Args:
         full_caption: The full image caption text
@@ -225,8 +258,9 @@ def extract_text_elements(full_caption: str) -> List[str]:
     """
     text_elements = []
     
-    # Pattern to match "content" (text)
-    pattern = r'"([^"]+)"\s*\(text\)'
+    # Pattern to match "content" (text) with optional punctuation after
+    # Matches: (text), (text). (text), (text); etc.
+    pattern = r'"([^"]+)"\s*\(text\)[.,;:!?]?'
     matches = re.findall(pattern, full_caption, re.IGNORECASE)
     
     for text_content in matches:
@@ -239,6 +273,7 @@ def clean_caption_text(caption: str) -> str:
     """
     Clean up caption text - remove (text) and (figure) tags along with their quoted content.
     This creates a clean narrative without the tagged elements.
+    Handles tags with optional punctuation: (figure). (figure), (text). (text), etc.
     
     Args:
         caption: The full image caption with tags
@@ -246,11 +281,11 @@ def clean_caption_text(caption: str) -> str:
     Returns:
         Cleaned caption text
     """
-    # Remove "content" (figure) - remove both quotes and tag
-    caption = re.sub(r'"[^"]+"\s*\(figure\)', '', caption, flags=re.IGNORECASE)
+    # Remove "content" (figure) with optional punctuation - remove both quotes and tag
+    caption = re.sub(r'"[^"]+"\s*\(figure\)[.,;:!?]?', '', caption, flags=re.IGNORECASE)
     
-    # Remove (text) tag but keep the quoted text content
-    caption = re.sub(r'\(text\)', '', caption, flags=re.IGNORECASE)
+    # Remove (text) tag with optional punctuation but keep the quoted text content
+    caption = re.sub(r'\(text\)[.,;:!?]?', '', caption, flags=re.IGNORECASE)
     
     # Clean up extra whitespace and normalize spacing
     caption = re.sub(r'\s+', ' ', caption).strip()
@@ -533,9 +568,6 @@ def find_suitable_layouts_for_content(
                 'element_capacity': element_capacity,
                 'text_capacity': text_capacity
             })
-            print(f"    Layout {bbox_data['index']}: elements={element_capacity}/{image_count}, texts={text_capacity}/{text_count}, score={total_score:.3f} ✓")
-        else:
-            print(f"    Layout {bbox_data['index']}: elements={element_capacity}/{image_count}, texts={text_capacity}/{text_count}, score={total_score:.3f} ✗")
     
     # Sort by score (best first)
     suitable_layouts.sort(key=lambda x: x['score'], reverse=True)
@@ -550,6 +582,7 @@ def merge_narrator_data(
     extracted_bboxes: List[Dict],
     color_idx: Dict,
     font_idx: Dict,
+    squad_id_to_qa: Dict[str, Dict],
     start_wiki_idx: int = 0
 ) -> List[Dict]:
     """
@@ -561,12 +594,22 @@ def merge_narrator_data(
         extracted_bboxes: List of bbox data from extracted_bboxes.json
         color_idx: Color index mapping
         font_idx: Font index mapping
+        squad_id_to_qa: Mapping from question ID to QA pairs
         start_wiki_idx: Starting wiki index for generating unique IDs
     
     Returns:
         List of merged infographic data (full layout version only)
     """
     result = []
+    
+    # Statistics tracking
+    stats = {
+        'total_infographics': len(infographic_generated),
+        'successful': 0,
+        'skipped': 0,
+        'fallback_used': 0,
+        'skipped_wiki_ids': []
+    }
     
     # Group infographics by their content requirements for better layout distribution
     # Create a shuffled list of suitable layouts for each infographic
@@ -607,9 +650,46 @@ def merge_narrator_data(
             min_text_area=10000  # Changed from 24000 to 10000
         )
         
+        # Fallback mechanism if no suitable layout found
         if not suitable_layouts:
-            print(f"  Warning: No suitable layout found for wiki {wiki_id}, skipping")
-            continue
+            print(f"  ⚠️ Warning: No suitable layout found for wiki {wiki_id}")
+            print(f"    Trying fallback: reducing text area requirement to 5000 px²")
+            
+            # Try with lower text area threshold
+            suitable_layouts = find_suitable_layouts_for_content(
+                len(image_elements), 
+                len(text_elements), 
+                extracted_bboxes, 
+                min_text_area=5000  # Reduced threshold
+            )
+            
+            if not suitable_layouts:
+                print(f"    Still no layout found, trying with relaxed constraints...")
+                
+                # Last resort: find layouts that can fit at least some of the content
+                for bbox_data in extracted_bboxes:
+                    bboxes = bbox_data['bboxes']
+                    element_bboxes = [b for b in bboxes if b.get('category') == 'element']
+                    text_bboxes = [b for b in bboxes if b.get('category') == 'text']
+                    
+                    # Accept if layout has at least 50% capacity
+                    if len(element_bboxes) >= len(image_elements) * 0.5 and len(text_bboxes) >= len(text_elements) * 0.5:
+                        suitable_layouts.append({
+                            'layout': bbox_data,
+                            'score': 0.5,  # Low score indicates fallback
+                            'element_capacity': len(element_bboxes),
+                            'text_capacity': len(text_bboxes)
+                        })
+                
+                if suitable_layouts:
+                    print(f"    ✓ Found {len(suitable_layouts)} fallback layouts (50% capacity)")
+                    stats['fallback_used'] += 1
+                else:
+                    print(f"    ❌ ERROR: No fallback layout found, SKIPPING wiki {wiki_id}")
+                    print(f"    This infographic will be MISSING from output!")
+                    stats['skipped'] += 1
+                    stats['skipped_wiki_ids'].append(wiki_id)
+                    continue
         
         # Store for second pass
         layout_assignments.append({
@@ -844,7 +924,15 @@ def merge_narrator_data(
         
         # Extract context and QA from infographic data
         context = infographic.get('context', '')
-        qa_pairs = infographic.get('qa', [])
+        qa_ids = infographic.get('ids', [])
+        
+        # Map IDs to original QA pairs from SQuAD dataset
+        original_qa_pairs = []
+        for qa_id in qa_ids:
+            if qa_id in squad_id_to_qa:
+                original_qa_pairs.append(squad_id_to_qa[qa_id])
+            else:
+                print(f"  Warning: QA ID {qa_id} not found in SQuAD dataset")
         
         # Create the final structure with unique wiki ID
         result_item = {
@@ -853,9 +941,32 @@ def merge_narrator_data(
             'full_image_caption': full_image_caption,  # Keep original caption without cleaning
             'original_bbox_index': selected_bbox_index,
             'context': context,
-            'qa': qa_pairs
+            'original_qa_pairs': original_qa_pairs
         }
         result.append(result_item)
+        stats['successful'] += 1
+    
+    # Print statistics summary
+    print("\n" + "="*60)
+    print("PROCESSING STATISTICS")
+    print("="*60)
+    print(f"Total input infographics: {stats['total_infographics']}")
+    print(f"Successfully processed: {stats['successful']} ({stats['successful']/stats['total_infographics']*100:.1f}%)")
+    print(f"Fallback layouts used: {stats['fallback_used']} ({stats['fallback_used']/stats['total_infographics']*100:.1f}%)")
+    print(f"Skipped (no layout): {stats['skipped']} ({stats['skipped']/stats['total_infographics']*100:.1f}%)")
+    
+    if stats['skipped'] > 0:
+        print(f"\n⚠️ WARNING: {stats['skipped']} infographics were SKIPPED!")
+        print(f"Skipped wiki IDs: {stats['skipped_wiki_ids'][:10]}")
+        if len(stats['skipped_wiki_ids']) > 10:
+            print(f"... and {len(stats['skipped_wiki_ids']) - 10} more")
+        print("\nThese infographics will be MISSING from the output files.")
+        print("Consider:")
+        print("  1. Using layouts with more flexibility")
+        print("  2. Reducing text/image requirements")
+        print("  3. Adding more diverse layouts to extracted_bboxes.json")
+    
+    print("="*60 + "\n")
     
     return result
 
@@ -913,6 +1024,12 @@ def main():
         default=None,
         help='Output directory (default: src/data/create_data/output/narrator_format)'
     )
+    parser.add_argument(
+        '--squad-file',
+        type=str,
+        default="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl",
+        help='Path to squad_v2_train.jsonl file (default: /mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl)'
+    )
 
     args = parser.parse_args()
     
@@ -952,10 +1069,12 @@ def main():
     print(f"  - Bboxes: {extracted_bboxes_path}")
     print(f"  - Colors: {color_idx_path}")
     print(f"  - Fonts: {font_idx_path}")
+    print(f"  - SQuAD: {args.squad_file}")
     
     extracted_bboxes = load_json(extracted_bboxes_path)
     color_idx = load_json(color_idx_path)
     font_idx = load_json(font_idx_path)
+    squad_id_to_qa = load_squad_jsonl(args.squad_file)
     
     # Load infographic data
     end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
@@ -978,6 +1097,7 @@ def main():
     print(f"\nLoaded {len(extracted_bboxes)} bbox entries")
     print(f"Loaded {len(color_idx)} colors")
     print(f"Loaded {len(font_idx)} fonts")
+    print(f"Loaded {len(squad_id_to_qa)} SQuAD QA pairs")
     
     # Process data
     print("\nProcessing data...")
@@ -989,6 +1109,7 @@ def main():
         extracted_bboxes,
         color_idx,
         font_idx,
+        squad_id_to_qa,
         start_wiki_idx=start_wiki_idx
     )
     

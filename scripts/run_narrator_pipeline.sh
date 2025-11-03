@@ -25,23 +25,25 @@ set -e  # Exit on error
 if [ $# -ne 3 ]; then
     echo "Error: Invalid number of arguments"
     echo ""
-    echo "Usage: $0 <GPU_ID> <START_SUBSET> <END_SUBSET>"
+    echo "Usage: $0 <GPU_ID> <START_FILE> <END_FILE>"
     echo ""
     echo "Arguments:"
-    echo "  GPU_ID       : GPU device ID (0, 1, 2, ...)"
-    echo "  START_SUBSET : Start subset number (inclusive, 1-based)"
-    echo "  END_SUBSET   : End subset number (exclusive, 1-based)"
+    echo "  GPU_ID     : GPU device ID (0, 1, 2, ...)"
+    echo "  START_FILE : Start file index (inclusive, 1-based)"
+    echo "  END_FILE   : End file index (exclusive, 1-based)"
+    echo ""
+    echo "Note: Each file contains 50 infographics"
     echo ""
     echo "Example:"
-    echo "  $0 0 1 3      # GPU 0: process subsets 1-2 (files infographic000001.json, infographic000002.json)"
-    echo "  $0 1 3 6      # GPU 1: process subsets 3-5 (files infographic000003.json - infographic000005.json)"
+    echo "  $0 0 1 3      # GPU 0: files 1-2 (infographic000001.json, infographic000002.json = 100 infographics)"
+    echo "  $0 1 3 6      # GPU 1: files 3-5 (infographic000003.json - infographic000005.json = 150 infographics)"
     echo ""
     exit 1
 fi
 
 GPU_ID=$1
-START_SUBSET=$2
-END_SUBSET=$3
+START_FILE=$2
+END_FILE=$3
 
 # ============================================================================
 # Configuration
@@ -55,8 +57,8 @@ CONDA_BIZGEN="/opt/miniconda3/envs/bizgen/bin/python"
 # Paths
 SQUAD_TRAIN="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl"
 TEMPLATE_PATH="./src/prompts/content_des_all.jinja"
-INFOGRAPHIC_DIR="src/data/create_data/output/infographic"
-NARRATOR_FORMAT_DIR="src/data/create_data/output/narrator_format"
+INFOGRAPHIC_DIR="src/data/narrator/infographic"
+NARRATOR_FORMAT_DIR="src/data/narrator/wiki"
 BIZGEN_DIR="./src/data/bizgen"
 CKPT_DIR="checkpoints/lora/infographic"
 
@@ -66,23 +68,22 @@ BATCH_SIZE=8
 DATASET_TYPE="squad_v2"
 SEED=42
 
-# Calculate parameters based on subset numbers
-NUM_SUBSETS=$((END_SUBSET - START_SUBSET))
-FIRST_FILE_IDX=$START_SUBSET
-LAST_FILE_IDX=$((END_SUBSET - 1))
+# Calculate parameters based on file indices
+NUM_FILES=$((END_FILE - START_FILE))
+NUM_INFOGRAPHICS=$((NUM_FILES * 50))
 
-# File indices for merge step are the same as subset numbers
-MERGE_START_FILE=$START_SUBSET
-MERGE_END_FILE=$END_SUBSET
+# File indices for both generate and merge steps (same values)
+GENERATE_START_FILE=$START_FILE
+GENERATE_END_FILE=$END_FILE
+MERGE_START_FILE=$START_FILE
+MERGE_END_FILE=$END_FILE
 
-# Calculate data indices for Step 1 (0-based for data processing)
-DATA_START_IDX=$(((START_SUBSET - 1) * 50))
-DATA_END_IDX=$(((END_SUBSET - 1) * 50))
+# Calculate infographic ID range (corrected formula)
+FIRST_INFOGRAPHIC_ID=$(((START_FILE - 1) * 50 + 1))
+LAST_INFOGRAPHIC_ID=$(((END_FILE - 1) * 50))  # Changed: (END_FILE - 1) * 50 instead of END_FILE * 50
 
-# Calculate subset for bizgen (1-based indexing)
-BIZGEN_START=$(((START_SUBSET - 1) * 50 + 1))
-BIZGEN_END=$((END_SUBSET * 50))
-SUBSET="${BIZGEN_START}:${BIZGEN_END}"
+# Calculate subset for bizgen (using infographic IDs, exclusive end)
+SUBSET="${GENERATE_START_FILE}:${GENERATE_END_FILE}"
 
 # ============================================================================
 # Print Configuration
@@ -93,12 +94,12 @@ echo "======================================================================"
 echo ""
 echo "Configuration:"
 echo "  GPU ID              : $GPU_ID"
-echo "  Start Subset        : $START_SUBSET"
-echo "  End Subset          : $END_SUBSET"
-echo "  Number of Subsets   : $NUM_SUBSETS"
-echo "  Data Index Range    : [$DATA_START_IDX, $DATA_END_IDX)"
-echo "  Expected Files      : infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json"
-echo "  Merge File Range    : $MERGE_START_FILE - $MERGE_END_FILE"
+echo "  Start File Index    : $START_FILE"
+echo "  End File Index      : $END_FILE (exclusive)"
+echo "  Number of Files     : $NUM_FILES"
+echo "  Total Infographics  : $NUM_INFOGRAPHICS"
+echo "  Infographic ID Range: $FIRST_INFOGRAPHIC_ID - $LAST_INFOGRAPHIC_ID"
+echo "  Expected Files      : infographic$(printf '%06d' $START_FILE).json - infographic$(printf '%06d' $((END_FILE - 1))).json"
 echo "  BizGen Subset       : $SUBSET"
 echo ""
 echo "Paths:"
@@ -123,18 +124,21 @@ echo ""
 export PYTHONPATH="./:$PYTHONPATH"
 
 $CONDA_WIKI src/data/narrator/generate_infographic_data.py \
-    --model_name "$MODEL_NAME" \
-    --input_data "$SQUAD_TRAIN" \
-    --template_path "$TEMPLATE_PATH" \
-    --dataset_type "$DATASET_TYPE" \
-    --start $DATA_START_IDX \
-    --end $DATA_END_IDX \
-    --batch_size $BATCH_SIZE
+    --backend qwen \
+    --model-name "$MODEL_NAME" \
+    --input-data "$SQUAD_TRAIN" \
+    --template-path "$TEMPLATE_PATH" \
+    --dataset-type "$DATASET_TYPE" \
+    --output-dir "$INFOGRAPHIC_DIR" \
+    --start $GENERATE_START_FILE \
+    --end $GENERATE_END_FILE \
+    --batch-size $BATCH_SIZE
 
 if [ $? -eq 0 ]; then
     echo ""
     echo "✓ Step 1 completed successfully!"
-    echo "  Generated files: infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json"
+    echo "  Generated files: infographic$(printf '%06d' $START_FILE).json - infographic$(printf '%06d' $((END_FILE - 1))).json"
+    echo "  Infographic IDs: $FIRST_INFOGRAPHIC_ID - $LAST_INFOGRAPHIC_ID"
 else
     echo ""
     echo "✗ Step 1 failed!"
@@ -148,11 +152,13 @@ echo ""
 echo "======================================================================"
 echo "Step 2/3: Merging Bounding Boxes"
 echo "======================================================================"
-echo "Using file range: $MERGE_START_FILE to $MERGE_END_FILE"
+echo "Using file range: $MERGE_START_FILE to $MERGE_END_FILE (exclusive)"
 echo ""
 
 python src/data/narrator/merge_narrator_bboxes.py \
     --infographic-dir "$INFOGRAPHIC_DIR" \
+    --output-dir "$NARRATOR_FORMAT_DIR" \
+    --squad-file "$SQUAD_TRAIN" \
     --start $MERGE_START_FILE \
     --end $MERGE_END_FILE \
     --seed $SEED
@@ -160,7 +166,8 @@ python src/data/narrator/merge_narrator_bboxes.py \
 if [ $? -eq 0 ]; then
     echo ""
     echo "✓ Step 2 completed successfully!"
-    echo "  Generated wiki files in: $NARRATOR_FORMAT_DIR"
+    echo "  Generated wiki files: wiki$(printf '%06d' $MERGE_START_FILE).json - wiki$(printf '%06d' $((MERGE_END_FILE - 1))).json"
+    echo "  Output directory: $NARRATOR_FORMAT_DIR"
 else
     echo ""
     echo "✗ Step 2 failed!"
@@ -184,21 +191,22 @@ cd "$BIZGEN_DIR"
 
 $CONDA_BIZGEN inference.py \
     --ckpt_dir "$CKPT_DIR" \
-    --wiki_dir "../create_data/output/narrator_format/" \
+    --wiki_dir "../narrator/wiki/" \
     --subset "$SUBSET" \
-    --device "cuda:$GPU_ID"
+    --device "cuda:$GPU_ID" \
+    --dataset_name "squad_v2"
 
 if [ $? -eq 0 ]; then
     echo ""
     echo "✓ Step 3 completed successfully!"
     
-    # Calculate output directory
-    OUTPUT_SUBSET_DIR="output/subset_${BIZGEN_START}_${BIZGEN_END}"
-    echo "  Generated images in: $BIZGEN_DIR/$OUTPUT_SUBSET_DIR"
+    # Calculate output directory based on dataset_name
+    OUTPUT_DATASET_DIR="output/squad_v2"
+    echo "  Generated images in: $BIZGEN_DIR/$OUTPUT_DATASET_DIR/"
     
     # Count generated images
-    if [ -d "$OUTPUT_SUBSET_DIR" ]; then
-        NUM_GENERATED=$(find "$OUTPUT_SUBSET_DIR" -name "*.png" -o -name "*.jpg" | wc -l)
+    if [ -d "$OUTPUT_DATASET_DIR" ]; then
+        NUM_GENERATED=$(find "$OUTPUT_DATASET_DIR" -name "*.png" -o -name "*.jpg" | wc -l)
         echo "  Total images generated: $NUM_GENERATED"
     fi
 else
@@ -220,15 +228,16 @@ echo "======================================================================"
 echo ""
 echo "Summary:"
 echo "  GPU                 : $GPU_ID"
-echo "  Processed Subsets   : [$START_SUBSET, $END_SUBSET)"
-echo "  Number of Subsets   : $NUM_SUBSETS"
-echo "  Data Range          : [$DATA_START_IDX, $DATA_END_IDX)"
+echo "  Processed Files     : [$START_FILE, $END_FILE)"
+echo "  Number of Files     : $NUM_FILES"
+echo "  Total Infographics  : $NUM_INFOGRAPHICS"
+echo "  Infographic ID Range: $FIRST_INFOGRAPHIC_ID - $LAST_INFOGRAPHIC_ID"
 echo "  BizGen Subset       : $SUBSET"
 echo ""
 echo "Output Locations:"
-echo "  1. Infographic JSON : $INFOGRAPHIC_DIR/infographic$(printf '%06d' $FIRST_FILE_IDX).json - infographic$(printf '%06d' $LAST_FILE_IDX).json"
-echo "  2. Narrator Format  : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $MERGE_START_FILE).json - wiki$(printf '%06d' $((MERGE_END_FILE-1))).json"
-echo "  3. Generated Images : $BIZGEN_DIR/output/subset_${BIZGEN_START}_${BIZGEN_END}/"
+echo "  1. Infographic JSON : $INFOGRAPHIC_DIR/infographic$(printf '%06d' $START_FILE).json - infographic$(printf '%06d' $((END_FILE - 1))).json"
+echo "  2. Narrator Format  : $NARRATOR_FORMAT_DIR/wiki$(printf '%06d' $START_FILE).json - wiki$(printf '%06d' $((END_FILE - 1))).json"
+echo "  3. Generated Images : $BIZGEN_DIR/output/squad_v2/narrator*/"
 echo ""
 echo "======================================================================"
 echo "All Done! 🎉"

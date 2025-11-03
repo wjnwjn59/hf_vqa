@@ -15,6 +15,27 @@ After downloading and extracting the [Squad 2 dataset](https://rajpurkar.github.
 /mnt/VLAI_data/NarrativeQA
 ```
 
+## Using GPT to generate layout
+
+```bash
+conda activate wiki
+
+export PYTHONPATH="./:$PYTHONPATH"
+export OPENAI_API_KEY="your-api-key-here"
+
+python src/data/narrator/generate_infographic_data.py \
+  --backend openai \
+  --openai-model "gpt-4o" \
+  --input-data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
+  --dataset-type "squad_v2" \
+  --template-path "./src/prompts/content_des_all.jinja" \
+  --output-dir "./src/data/create_data/output/infographic" \
+  --batch-size 4 \
+  --max-retries 3 \
+  --start 1 \
+  --end 2 
+```
+
 ## Using Qwen to generate layout
 
 ```bash
@@ -23,16 +44,16 @@ conda activate wiki
 
 export PYTHONPATH="./:$PYTHONPATH"
 
-CUDA_VISIBLE_DEVICE=1 python src/data/narrator/generate_infographic_data.py \
-  --model_name "unsloth/Qwen3-8B" \
-  --input_data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
-  --dataset_type "squad_v2" \
-  --template_path "./src/prompts/content_des_all.jinja" \
-  --output_dir "./src/data/create_data/output/infographic" \
-  --batch_size 8 \
-  --num-samples 8 \
-  --start 0 \
-  --end 10
+CUDA_VISIBLE_DEVICES=0 python src/data/narrator/generate_infographic_data.py \
+  --backend qwen \
+  --model-name "unsloth/Qwen3-8B" \
+  --input-data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
+  --dataset-type "squad_v2" \
+  --template-path "./src/prompts/content_des_all.jinja" \
+  --output-dir "./src/data/create_data/output/infographic" \
+  --batch-size 8 \
+  --start 1 \
+  --end 2
 ```
 
 ## Choose bbox for image caption
@@ -43,6 +64,7 @@ conda activate wiki
 export PYTHONPATH="./:$PYTHONPATH"
 
 python src/data/narrator/merge_narrator_bboxes.py \
+    --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
     --infographic-dir "./src/data/create_data/output/infographic"
 ```
 
