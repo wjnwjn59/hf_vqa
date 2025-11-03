@@ -322,6 +322,46 @@ def get_color_name_from_id(color_id: int, color_idx: Dict) -> str:
     return 'black'  # fallback
 
 
+def is_white_or_light_color(color_name: str) -> bool:
+    """
+    Check if a color is white or very light (near-white).
+    These colors are hard to read on white/light backgrounds.
+    
+    Args:
+        color_name: Name of the color
+        
+    Returns:
+        True if color is white or near-white
+    """
+    # List of white and near-white colors that should be replaced
+    white_like_colors = {
+        'white', 'whitesmoke', 'snow', 'ghostwhite', 'floralwhite',
+        'linen', 'oldlace', 'ivory', 'seashell', 'beige',
+        'cornsilk', 'lavenderblush', 'mistyrose', 'papayawhip',
+        'blanchedalmond', 'bisque', 'antiquewhite', 'lemonchiffon',
+        'lightgoldenrodyellow', 'lightyellow', 'honeydew', 'mintcream',
+        'azure', 'aliceblue', 'lavender', 'lightcyan', 'gainsboro'
+    }
+    
+    return color_name.lower() in white_like_colors
+
+
+def replace_white_color_with_black(color_name: str, color_idx: Dict) -> str:
+    """
+    Replace white or near-white colors with black for better readability.
+    
+    Args:
+        color_name: Original color name
+        color_idx: Color index mapping
+        
+    Returns:
+        Color name (black if original was white-like, otherwise unchanged)
+    """
+    if is_white_or_light_color(color_name):
+        return 'black'
+    return color_name
+
+
 def calculate_bbox_center_y(bbox: Dict) -> float:
     """Calculate the vertical center of a bounding box."""
     return (bbox['top_left'][1] + bbox['bottom_right'][1]) / 2
@@ -415,30 +455,29 @@ def select_spatially_distributed_bboxes(
     return selected[:target_count]
 
 
-def find_best_layout_for_content(
+def find_suitable_layouts_for_content(
     image_count: int,
     text_count: int,
     extracted_bboxes: List[Dict],
-    min_text_area: int = 24000
-) -> Dict:
+    min_text_area: int = 10000
+) -> List[Dict]:
     """
-    Find the best layout that can accommodate the required number of images and text elements.
-    Uses greedy algorithm to score each layout based on capacity.
-    Note: Title (first text) can use any text bbox, other texts need area >= min_text_area.
+    Find all suitable layouts that can accommodate the required number of images and text elements.
+    Returns a list of suitable layouts sorted by score.
+    Note: Title (first text) uses largest text bbox, other texts need area >= min_text_area.
     
     Args:
         image_count: Number of image elements needed
         text_count: Number of text elements needed
         extracted_bboxes: List of all available layouts
-        min_text_area: Minimum area for non-title text bboxes (default 24000)
+        min_text_area: Minimum area for non-title text bboxes (default 10000 pixels²)
     
     Returns:
-        Best layout dict or None if no suitable layout found
+        List of suitable layout dicts sorted by score (best first)
     """
-    best_score = -1
-    best_layout = None
+    suitable_layouts = []
     
-    print(f"  Searching for layout: need {image_count} images, {text_count} texts (title: any size, others: >= {min_text_area})")
+    print(f"  Searching for layouts: need {image_count} images, {text_count} texts (title: largest bbox, others: >= {min_text_area} px²)")
     
     for bbox_data in extracted_bboxes:
         bboxes = bbox_data['bboxes']
@@ -452,7 +491,7 @@ def find_best_layout_for_content(
         
         # For capacity calculation, simulate the new selection logic
         if text_count > 0:
-            # Title can use any text bbox (select largest)
+            # Title uses largest text bbox
             title_available = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
             
             # Other texts need min_area threshold
@@ -486,18 +525,24 @@ def find_best_layout_for_content(
         # Combined score (weighted towards text since it has area constraints)
         total_score = (element_score * 0.4 + text_score * 0.6) + (element_bonus * 0.2 + text_bonus * 0.3)
         
-        if total_score > best_score:
-            best_score = total_score
-            best_layout = bbox_data
-            
-        print(f"    Layout {bbox_data['index']}: elements={element_capacity}/{image_count}, texts={text_capacity}/{text_count}, score={total_score:.3f}")
+        # Only include layouts that can meet the requirements (score >= 1.0 means it can fit)
+        if element_capacity >= image_count and text_capacity >= text_count:
+            suitable_layouts.append({
+                'layout': bbox_data,
+                'score': total_score,
+                'element_capacity': element_capacity,
+                'text_capacity': text_capacity
+            })
+            print(f"    Layout {bbox_data['index']}: elements={element_capacity}/{image_count}, texts={text_capacity}/{text_count}, score={total_score:.3f} ✓")
+        else:
+            print(f"    Layout {bbox_data['index']}: elements={element_capacity}/{image_count}, texts={text_capacity}/{text_count}, score={total_score:.3f} ✗")
     
-    if best_layout:
-        print(f"  Selected layout {best_layout['index']} with score {best_score:.3f}")
-    else:
-        print(f"  Warning: No suitable layout found!")
+    # Sort by score (best first)
+    suitable_layouts.sort(key=lambda x: x['score'], reverse=True)
     
-    return best_layout
+    print(f"  Found {len(suitable_layouts)} suitable layouts")
+    
+    return suitable_layouts
 
 
 def merge_narrator_data(
@@ -509,7 +554,7 @@ def merge_narrator_data(
 ) -> List[Dict]:
     """
     Process narrator-generated infographic data and merge with bboxes.
-    Uses greedy algorithm to find best layout for each infographic.
+    Uses round-robin with shuffling to distribute layouts evenly.
     
     Args:
         infographic_generated: List of infographic data with full_image_caption and background_caption
@@ -523,18 +568,21 @@ def merge_narrator_data(
     """
     result = []
     
+    # Group infographics by their content requirements for better layout distribution
+    # Create a shuffled list of suitable layouts for each infographic
+    layout_assignments = []
+    
+    # First pass: find suitable layouts for each infographic
+    print("\n=== Phase 1: Finding suitable layouts for each infographic ===")
     for wiki_idx, infographic in enumerate(infographic_generated):
-        # Generate unique wiki index based on start_wiki_idx
-        wiki_id = start_wiki_idx + wiki_idx + 1  # Start from 1, not 0
+        wiki_id = start_wiki_idx + wiki_idx + 1
         
-        # Get the caption data from generated_infographic field
+        # Get the caption data
         generated_infographic = infographic.get('generated_infographic', '')
         
-        # New format: generated_infographic is directly the full_image_caption string
         if isinstance(generated_infographic, str):
             full_image_caption = generated_infographic
         elif isinstance(generated_infographic, dict):
-            # Old format compatibility: dict with full_image_caption key
             full_image_caption = generated_infographic.get('full_image_caption', '')
         else:
             print(f"Warning: Unexpected generated_infographic type for wiki {wiki_id}")
@@ -548,21 +596,90 @@ def merge_narrator_data(
         image_elements = extract_images_from_caption(full_image_caption)
         text_elements = extract_text_elements(full_image_caption)
         
-        print(f"\nProcessing wiki {wiki_id}:")
+        print(f"\nInfographic {wiki_idx + 1}/{len(infographic_generated)} (wiki {wiki_id}):")
         print(f"  Found {len(image_elements)} image elements, {len(text_elements)} text elements")
         
-        # Find best layout using greedy algorithm
-        best_layout = find_best_layout_for_content(
+        # Find all suitable layouts
+        suitable_layouts = find_suitable_layouts_for_content(
             len(image_elements), 
             len(text_elements), 
             extracted_bboxes, 
-            min_text_area=24000
+            min_text_area=10000  # Changed from 24000 to 10000
         )
         
-        if not best_layout:
+        if not suitable_layouts:
             print(f"  Warning: No suitable layout found for wiki {wiki_id}, skipping")
             continue
+        
+        # Store for second pass
+        layout_assignments.append({
+            'wiki_idx': wiki_idx,
+            'wiki_id': wiki_id,
+            'infographic': infographic,
+            'image_elements': image_elements,
+            'text_elements': text_elements,
+            'full_image_caption': full_image_caption,
+            'suitable_layouts': suitable_layouts
+        })
+    
+    # Second pass: assign layouts using round-robin with shuffling
+    print("\n=== Phase 2: Assigning layouts using round-robin with shuffling ===")
+    
+    # Create a pool of layout indices with their capabilities
+    # We'll create a shuffled round-robin queue
+    layout_pool = {}  # Key: (image_count, text_count), Value: list of suitable layout indices
+    
+    # Group by requirements
+    for assignment in layout_assignments:
+        key = (len(assignment['image_elements']), len(assignment['text_elements']))
+        if key not in layout_pool:
+            layout_pool[key] = []
+        layout_pool[key].append(assignment)
+    
+    # For each group, shuffle and assign layouts in round-robin fashion
+    for key, assignments in layout_pool.items():
+        image_count, text_count = key
+        print(f"\nProcessing group: {image_count} images, {text_count} texts ({len(assignments)} infographics)")
+        
+        # Get all suitable layout indices from first assignment (they should be similar)
+        if assignments:
+            all_suitable_layout_indices = [sl['layout']['index'] for sl in assignments[0]['suitable_layouts']]
             
+            # Shuffle the layout pool for randomness
+            shuffled_layouts = all_suitable_layout_indices.copy()
+            random.shuffle(shuffled_layouts)
+            
+            print(f"  Available layouts: {len(shuffled_layouts)} layouts")
+            print(f"  Layout pool (shuffled): {shuffled_layouts[:20]}{'...' if len(shuffled_layouts) > 20 else ''}")
+            
+            # Assign layouts in round-robin fashion
+            for idx, assignment in enumerate(assignments):
+                # Use modulo to cycle through the shuffled layout pool
+                layout_idx_in_pool = idx % len(shuffled_layouts)
+                selected_layout_index = shuffled_layouts[layout_idx_in_pool]
+                
+                # Find the actual layout data
+                selected_layout = next(
+                    (sl['layout'] for sl in assignment['suitable_layouts'] 
+                     if sl['layout']['index'] == selected_layout_index),
+                    assignment['suitable_layouts'][0]['layout']  # Fallback to best layout
+                )
+                
+                assignment['selected_layout'] = selected_layout
+                print(f"  Wiki {assignment['wiki_id']}: assigned layout {selected_layout_index}")
+    
+    # Third pass: process each infographic with assigned layout
+    print("\n=== Phase 3: Building infographic data ===")
+    for assignment in layout_assignments:
+        wiki_id = assignment['wiki_id']
+        infographic = assignment['infographic']
+        image_elements = assignment['image_elements']
+        text_elements = assignment['text_elements']
+        full_image_caption = assignment['full_image_caption']
+        best_layout = assignment['selected_layout']
+        
+        print(f"\nProcessing wiki {wiki_id}:")
+        
         selected_bbox_index = best_layout['index']
         bboxes = best_layout['bboxes']
         
@@ -656,24 +773,24 @@ def merge_narrator_data(
             }
             output_layers.append(output_layer)
 
-        # Select bboxes for text elements with spatial distribution and title priority
+        # Select bboxes for text elements with title priority
         text_count = len(text_elements)
         
         if text_count > 0:
-            # Get all text bboxes meeting area requirements
+            # Get all text bboxes
             all_text_bboxes = [b for b in bboxes if b.get('category') == 'text']
             
             if text_count == 1:
                 # Only title: Select the largest text bbox
                 selected_text_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
             else:
-                # Multiple texts: Title + spatially distributed others
+                # Multiple texts: Title (largest) + others (area >= 10000)
                 # Step 1: Get title (largest bbox)
                 title_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
                 
-                # Step 2: Get other text candidates (area >= 24000, excluding title area)
+                # Step 2: Get other text candidates (area >= 10000, excluding title)
                 other_candidates = [b for b in all_text_bboxes 
-                                  if calculate_bbox_area(b) >= 24000]
+                                  if calculate_bbox_area(b) >= 10000]  # Changed from 24000 to 10000
                 
                 # Remove title bbox from candidates if it exists
                 if title_bboxes:
@@ -693,7 +810,7 @@ def merge_narrator_data(
         else:
             selected_text_bboxes = []
         
-        print(f"  Selected {len(selected_text_bboxes)}/{text_count} text bboxes (title: no min area, others: >= 24k)")
+        print(f"  Selected {len(selected_text_bboxes)}/{text_count} text bboxes (title: largest, others: >= 10k px²)")
 
         # Add text elements as 'text' category
         for idx, text_content in enumerate(text_elements):
@@ -702,6 +819,8 @@ def merge_narrator_data(
                 
                 # Chọn màu từ layout_colors (không có thì random, đã loại màu trắng)
                 color_name = random.choice(layout_colors) if layout_colors else 'black'
+                # Replace white/near-white colors with black for readability
+                color_name = replace_white_color_with_black(color_name, color_idx)
                 color_id = color_idx[color_name]
 
                 # Dùng font_token cho toàn bộ layout

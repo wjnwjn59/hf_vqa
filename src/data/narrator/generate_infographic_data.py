@@ -253,10 +253,10 @@ def main():
     # Slicing/limiting
     parser.add_argument('--num-samples', type=int, default=None,
                         help='Number of samples to process (None for all)')
-    parser.add_argument('--start', type=int, default=0,
-                        help='Start index for data processing (inclusive)')
+    parser.add_argument('--start', type=int, default=1,
+                        help='Start file index (1-based). --start 1 produces infographic000001.json with IDs 1-50')
     parser.add_argument('--end', type=int, default=None,
-                        help='End index for data processing (exclusive)')
+                        help='End file index (exclusive, 1-based). --start 1 --end 3 produces 2 files (000001, 000002)')
     parser.add_argument('--output-dir', type=str, default=None,
                         help='Output dir for infographic files (default: src/data/create_data/output/infographic)')
 
@@ -290,10 +290,23 @@ def main():
                                       group_by_context=group_by_context)
     print(f"Total entries loaded: {len(input_data_full)}")
 
-    # Apply slicing
-    end_idx = args.end if args.end is not None else len(input_data_full)
-    input_data_sliced = input_data_full[args.start:end_idx]
-    print(f"Sliced data from index {args.start} to {end_idx}: {len(input_data_sliced)} samples")
+    # Calculate how many samples to process based on --start and --end
+    # --start is 1-based file index, each file has 50 samples
+    # Example: --start 1 --end 3 means files 1 and 2, which is 100 samples (indices 0-99)
+    if args.end is not None:
+        num_files = args.end - args.start
+        start_sample_idx = (args.start - 1) * 50
+        end_sample_idx = start_sample_idx + (num_files * 50)
+        input_data_sliced = input_data_full[start_sample_idx:end_sample_idx]
+        print(f"File range: {args.start} to {args.end-1} ({num_files} files = {len(input_data_sliced)} samples)")
+        print(f"Sample indices: {start_sample_idx} to {end_sample_idx-1}")
+    else:
+        # Legacy behavior: use args.start as sample index
+        start_sample_idx = (args.start - 1) * 50 if args.start >= 1 else 0
+        end_sample_idx = len(input_data_full)
+        input_data_sliced = input_data_full[start_sample_idx:end_sample_idx]
+        print(f"Processing from file {args.start} onwards ({len(input_data_sliced)} samples)")
+        print(f"Sample indices: {start_sample_idx} to {end_sample_idx-1}")
 
     num_samples = args.num_samples if getattr(args, "num_samples", None) is not None else args.__dict__.get('num-samples')
     if num_samples:
@@ -379,7 +392,9 @@ def main():
 
         # Process outputs
         for i, (item, response) in enumerate(zip(batch, responses)):
-            infographic_id = args.start + total_processed + 1
+            # Calculate infographic_id starting from (args.start - 1) * 50 + 1
+            # This ensures --start 1 produces IDs starting from 1, not 2
+            infographic_id = (args.start - 1) * 50 + total_processed + 1
             if group_by_context:
                 keywords = extract_keywords_from_answers(item.get("qa_list", []))
             else:
@@ -437,8 +452,8 @@ def main():
     print("Generation Complete - Final Statistics")
     print("="*60)
     if total_processed > 0:
-        first_id = args.start + 1
-        last_id = args.start + total_processed
+        first_id = (args.start - 1) * 50 + 1
+        last_id = (args.start - 1) * 50 + total_processed
         print(f"Infographic ID range: {first_id:06d} - {last_id:06d}")
     print(f"Total samples processed: {total_processed}")
     print(f"Total files saved: {len(saved_files)}")
