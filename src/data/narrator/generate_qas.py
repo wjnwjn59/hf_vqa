@@ -1,11 +1,16 @@
 import os
 import torch
 import json
+import argparse
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
+try:
+    from openai import OpenAI
+except ImportError:
+    OpenAI = None
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
@@ -18,7 +23,7 @@ except NameError:
     print(f"Set 'src_dir' to: {src_dir}")
 
 template_dir = src_dir / "prompts"
-template_name = "qa_generation.jinja"
+template_name = "qa_generation.jinja" 
 
 try:
     jinja_env = Environment(loader=FileSystemLoader(template_dir))
@@ -28,34 +33,51 @@ except Exception as e:
     print(f"❌ Error loading Jinja template '{template_name}' from '{template_dir}': {e}")
     print("Please make sure the file exists and paths are correct.")
     exit(1)
-    
-MODEL_NAME = "/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B"
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"🚀 Loading model '{MODEL_NAME}' on {DEVICE}...")
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_NAME,
-    torch_dtype=torch.bfloat16,
-    device_map="auto"
-)
-print("✅ Model and tokenizer loaded successfully.")
+class OpenAIInference:
+    def __init__(
+        self,
+        model_name: str = "gpt-4o",
+        api_key: Optional[str] = None,
+        temperature: float = 0.7,
+        top_p: float = 0.9,
+    ):
+        if OpenAI is None:
+            raise ImportError(
+                "openai package not found. Please `pip install openai`."
+            )
+        key = api_key or os.environ.get("OPENAI_API_KEY")
+        if not key:
+            raise ValueError(
+                "Missing OpenAI API key. Provide --openai_api_key or set OPENAI_API_KEY env var."
+            )
+        self.client = OpenAI(api_key=key)
+        self.model = model_name
+        self.temperature = temperature
+        self.top_p = top_p
 
+    def generate(self, prompt: str, max_tokens: int) -> Tuple[str, str]:
+        messages = [{"role": "user", "content": prompt}]
+        try:
+            resp = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=self.temperature,
+                top_p=self.top_p,
+                max_tokens=max_tokens
+            )
+            content = (resp.choices[0].message.content or "").strip()
+            return ("", content)
+        except Exception as e:
+            print(f"❌ OpenAI API call failed: {e}")
+            return ("", f"[] # API Error: {e}") 
 
-def generate_new_qas(
-    layout_data: Dict[str, Any],
-    qa_samples: List[Dict[str, Any]], 
-    k: int                                  
+def generate_qas_qwen(
+    prompt: str,
+    model: AutoModelForCausalLM,
+    tokenizer: AutoTokenizer,
+    max_tokens: int
 ) -> tuple[str, str]:
-    
-    layout_json_string = json.dumps(layout_data, indent=2)
-    
-    prompt = PROMPT_TEMPLATE_JINJA.render(
-        layout_json_string=layout_json_string,
-        qa_samples=qa_samples,
-        k=k
-    )
-    
     messages = [{"role": "user", "content": prompt}]
     text = tokenizer.apply_chat_template(
         messages,   tokenize=False,
@@ -66,7 +88,7 @@ def generate_new_qas(
 
     generated_ids = model.generate(
         **model_inputs,
-        max_new_tokens=5000
+        max_new_tokens=max_tokens
     )
     output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
     try:
@@ -79,12 +101,110 @@ def generate_new_qas(
 
     return thinking_content.strip(), content.strip()
 
+def generate_qas_gpt(
+    layout_data: Dict[str, Any],
+    qa_samples: List[Dict[str, Any]], 
+    k: int,
+    client: OpenAIInference,
+    max_tokens: int
+) -> tuple[str, str]:
+    """
+    Hàm render prompt và gọi client OpenAI.
+    """
+    layout_json_string = json.dumps(layout_data, indent=2)
+    
+    prompt = PROMPT_TEMPLATE_JINJA.render(
+        layout_json_string=layout_json_string,
+        qa_samples=qa_samples,
+        k=k
+    )
+    
+    # Client 'generate' đã trả về (think, content)
+    return client.generate(prompt, max_tokens)
+
 if __name__ == '__main__':
-    LAYOUT_DIR = Path("/home/binhdt/hf_vqa/src/data/wiki/")
-    K_VALUE = 3 
+    parser = argparse.ArgumentParser(
+        description='Generate Question-Answers with selectable backend (Qwen or GPT)'
+    )
+    # Backend selection
+    parser.add_argument('--backend', type=str, default='qwen', choices=['qwen', 'gpt'],
+                        help="Inference backend: 'qwen' (local) or 'gpt' (OpenAI API)")
+
+    # Qwen args
+    parser.add_argument('--model_name', type=str, default='/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B',
+                        help='Qwen model name or path (used when --backend qwen)')
+
+    # GPT args
+    parser.add_argument('--openai_model', type=str, default='gpt-4o',
+                        help='OpenAI model name (used when --backend gpt)')
+    parser.add_argument('--openai_api_key', type=str, default=None,
+                        help='OpenAI API key (falls back to OPENAI_API_KEY env var)')
+
+    # Data/template args
+    parser.add_argument('--layout_dir', type=str,
+                        default='/home/binhdt/hf_vqa/src/data/wiki/',
+                        help='Path to source/target directory for wiki*.json files')
+    parser.add_argument('--k_value', type=int, default=3,
+                        help='Number of new QAs to generate per item')
+
+    # Inference sampling args
+    parser.add_argument('--temperature', type=float, default=0.7,
+                        help='Sampling temperature')
+    parser.add_argument('--top_p', type=float, default=0.9,
+                        help='Top-p sampling parameter')
+    parser.add_argument('--max_tokens', type=int, default=5000,
+                        help='Maximum new tokens to generate')
+
+    args = parser.parse_args()
+
+    generate_fn = None
+    if args.backend == 'qwen':
+        print(f"🚀 Loading Qwen model '{args.model_name}'...")
+        tokenizer = AutoTokenizer.from_pretrained(args.model_name)
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_name,
+            torch_dtype=torch.bfloat16,
+            device_map="auto"
+        )
+        print("✅ Qwen model and tokenizer loaded successfully.")
+        
+        def qwen_fn_wrapper(layout, samples, k):
+            layout_json_string = json.dumps(layout, indent=2)
+            prompt = PROMPT_TEMPLATE_JINJA.render(
+                layout_json_string=layout_json_string,
+                qa_samples=samples,
+                k=k
+            )
+            return generate_qas_qwen(prompt, model, tokenizer, args.max_tokens)
+        
+        generate_fn = qwen_fn_wrapper
+        
+    else: # args.backend == 'gpt'
+        print(f"🚀 Initializing OpenAI client for model '{args.openai_model}'...")
+        try:
+            client = OpenAIInference(
+                model_name=args.openai_model,
+                api_key=args.openai_api_key,
+                temperature=args.temperature,
+                top_p=args.top_p
+            )
+            print("✅ OpenAI client initialized successfully.")
+            
+            def gpt_fn_wrapper(layout, samples, k):
+                return generate_qas_gpt(layout, samples, k, client, args.max_tokens)
+                
+            generate_fn = gpt_fn_wrapper
+            
+        except (ImportError, ValueError) as e:
+            print(f"❌ {e}")
+            exit(1)
+
+    # --- Bắt đầu xử lý ---
+    LAYOUT_DIR = Path(args.layout_dir)
+    K_VALUE = args.k_value
 
     print("\n" + "="*80)
-    print(f"🚀 Starting QA generation...")
+    print(f"🚀 Starting QA generation using [Backend: {args.backend}]")
     print(f"Source Directory (Read/Write): {LAYOUT_DIR}")
     print(f"New QAs to generate per item: {K_VALUE}")
 
@@ -147,12 +267,12 @@ if __name__ == '__main__':
             tqdm.write("\n" + "="*50)
             tqdm.write(f"Processing: Wiki: {wiki_id}, Index: {layout_index}")
             tqdm.write(f"Found {len(qa_samples_list)} existing QAs to use as samples.")
-            tqdm.write(f"⏳ Generating {K_VALUE} new QAs...")
-
-            thinking, content = generate_new_qas(
-                layout_data=layout_for_prompt,
-                qa_samples=qa_samples_list,
-                k=K_VALUE
+            tqdm.write(f"⏳ Generating {K_VALUE} new QAs (Backend: {args.backend})...")
+            
+            thinking, content = generate_fn(
+                layout_for_prompt,
+                qa_samples_list,
+                K_VALUE
             )
             
             tqdm.write(f"✅ Think Output: {thinking}")
@@ -166,7 +286,7 @@ if __name__ == '__main__':
                 tqdm.write("✅ Raw Generated JSON Array (Cleaned):\n")
                 tqdm.write(json.dumps(generated_qa_list, indent=2))
 
-                item['generated_qa_pairs'] = generated_qa_list
+                item['generated_qa_pairs'] = generated_qa_list 
                 data_was_modified = True
 
             except json.JSONDecodeError:
