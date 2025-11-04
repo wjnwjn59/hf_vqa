@@ -1,9 +1,23 @@
 # Data Generation Pipeline Overview
 
-The workflow is as follows:
+This document outlines the two-step pipeline used to generate question-answer pairs and their corresponding reasoning chains. The pipeline consists of two main scripts that must be run sequentially.
 
-1.  **Run `qa_generation.py`**: This script reads the base JSON files, generates new Q\&A pairs, and overwrites the original JSON files to include this new data.
+**The workflow is as follows:**
+
+1.  **Run `qa_generation.py`**: This script reads the base JSON files, generates new Q\&A pairs using a specified backend (Qwen or GPT), and overwrites the original JSON files to include this new data.
 2.  **Run `reasoning_generation.py`**: This script reads the *enriched* JSON files (from Step 1) and generates detailed reasoning for *all* Q\&A pairs (both original and newly generated), saving the final output to a separate `.jsonl` file.
+
+-----
+
+## 🚀 Backend Support
+
+Both scripts now support selectable inference backends via the `--backend` argument:
+
+  * **`--backend qwen`** (Default): Uses a locally loaded Qwen3-8B model.
+      * Specify the model path with `--model_name`.
+  * **`--backend gpt`**: Uses the OpenAI API (e.g., GPT-4o).
+      * Specify the model with `--openai_model`.
+      * Requires an API key via `--openai_api_key` or the `OPENAI_API_KEY` environment variable.
 
 -----
 
@@ -13,7 +27,7 @@ This script's purpose is to enrich the dataset by generating *new* question-answ
 
 ### 📜 Input
 
-  * **Source Directory**: `hf_vqa/src/data/reasoning/`
+  * **Source Directory**: `hf_vqa/src/data/wiki/` (configurable via `--layout_dir`)
   * **Input Files**: Reads all `wiki*.json` files from the source directory.
   * **Data Structure**: For each JSON object (item) in a file, it uses:
       * `layers_all` and `full_image_caption`: As the visual context for generation.
@@ -38,11 +52,32 @@ This script's purpose is to enrich the dataset by generating *new* question-answ
     ],
     "generated_qa_pairs": [
       {"question": "Q_new_1", "answer": "A_new_1"},
-      {"question": "Q_new_2", "answer": "A_new_2"},
-      {"question": "Q_new_3", "answer": "A_new_3"}
+      {"question": "Q_new_2", "answer": "A_new_2"}
     ]
   }
 ]
+```
+
+### 🏃 Usage Examples
+
+**Using Qwen (default):**
+
+```bash
+python qa_generation.py \
+    --model_name "/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B" \
+    --layout_dir "/home/binhdt/hf_vqa/src/data/wiki/" \
+    --k_value 3
+```
+
+**Using GPT (OpenAI):**
+
+```bash
+python qa_generation.py \
+    --backend gpt \
+    --openai_model "gpt-4o" \
+    --openai_api_key "sk-..." \
+    --layout_dir "/home/binhdt/hf_vqa/src/data/wiki/" \
+    --k_value 3
 ```
 
 -----
@@ -53,8 +88,8 @@ This script's purpose is to generate a detailed, step-by-step logical reasoning 
 
 ### 📜 Input
 
-  * **Source Directory**: `hf_vqa/src/data/reasoning/`
-  * **Input Files**: Reads all `wiki*.json` files from the source directory (which *must* have already been processed by the `qa_generation.py` script).
+  * **Source Directory**: `hf_vqa/src/data/wiki/` (configurable via `--layout_dir`)
+  * **Input Files**: Reads all `wiki*.json` files from the source directory (which *must* have already been processed by `qa_generation.py`).
   * **Data Structure**: For each JSON object (item) in a file, it reads:
       * `layers_all` and `full_image_caption`: As the visual context for reasoning.
       * `original_qa_pairs`: The list of original Q\&A pairs.
@@ -62,8 +97,8 @@ This script's purpose is to generate a detailed, step-by-step logical reasoning 
 
 ### 💾 Output
 
-  * **Output File**: `../narrator/reasonings.jsonl`
-  * **Output Format**: A **JSON Lines** (`.jsonl`) file. Each line in this file is a *single, complete* JSON object representing the reasoning for one Q\&A pair.
+  * **Output File**: `../narrator/generated_reasonings.jsonl` (configurable via `--output_file_path`)
+  * **Output Format**: A **JSON Lines** (`.jsonl`) file. Each line is a complete JSON object representing the reasoning for one Q\&A pair.
   * **Data Structure (per line)**:
 
 <!-- end list -->
@@ -88,4 +123,26 @@ This script's purpose is to generate a detailed, step-by-step logical reasoning 
   },
   "merged_reasoning": "The question asks for when Beyoncé became popular. The infographic contains a text block [U1]... Therefore, the answer is in the late 1990s."
 }
+```
+
+### 🏃 Usage Examples
+
+**Using Qwen (default):**
+
+```bash
+python reasoning_generation.py \
+    --model_name "/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B" \
+    --layout_dir "/home/binhdt/hf_vqa/src/data/wiki/" \
+    --output_file_path "../narrator/generated_reasonings.jsonl"
+```
+
+**Using GPT (OpenAI):**
+
+```bash
+python reasoning_generation.py \
+    --backend gpt \
+    --openai_model "gpt-4o" \
+    --openai_api_key "sk-..." \
+    --layout_dir "/home/binhdt/hf_vqa/src/data/wiki/" \
+    --output_file_path "../narrator/generated_reasonings_gpt.jsonl"
 ```
