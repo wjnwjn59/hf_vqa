@@ -7,10 +7,8 @@ from pathlib import Path
 from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
 
-# Cấu hình PyTorch CUDA
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
-# --- Tải Jinja Template ---
 try:
     script_file_path = Path(__file__).resolve()
     src_dir = script_file_path.parent.parent.parent
@@ -20,7 +18,7 @@ except NameError:
     print(f"Set 'src_dir' to: {src_dir}")
 
 template_dir = src_dir / "prompts"
-template_name = "qa_generation.jinja" # Đảm bảo file này tồn tại
+template_name = "qa_generation.jinja"
 
 try:
     jinja_env = Environment(loader=FileSystemLoader(template_dir))
@@ -31,7 +29,6 @@ except Exception as e:
     print("Please make sure the file exists and paths are correct.")
     exit(1)
     
-# --- Tải Model và Processor ---
 MODEL_NAME = "/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"🚀 Loading model '{MODEL_NAME}' on {DEVICE}...")
@@ -50,10 +47,6 @@ def generate_new_qas(
     qa_samples: List[Dict[str, Any]], 
     k: int                                  
 ) -> tuple[str, str]:
-    """
-    Sinh các cặp Q&A mới (dưới dạng JSON array string)
-    sử dụng model Qwen3-8B.
-    """
     
     layout_json_string = json.dumps(layout_data, indent=2)
     
@@ -87,8 +80,7 @@ def generate_new_qas(
     return thinking_content.strip(), content.strip()
 
 if __name__ == '__main__':
-    # Thư mục chứa các file wiki*.json sẽ được ĐỌC và GHI ĐÈ
-    LAYOUT_DIR = Path("/home/binhdt/hf_vqa/src/data/reasoning/")
+    LAYOUT_DIR = Path("/home/binhdt/hf_vqa/src/data/wiki/")
     K_VALUE = 3 
 
     print("\n" + "="*80)
@@ -156,8 +148,7 @@ if __name__ == '__main__':
             tqdm.write(f"Processing: Wiki: {wiki_id}, Index: {layout_index}")
             tqdm.write(f"Found {len(qa_samples_list)} existing QAs to use as samples.")
             tqdm.write(f"⏳ Generating {K_VALUE} new QAs...")
-            
-            # 3. Gọi hàm sinh Q&A
+
             thinking, content = generate_new_qas(
                 layout_data=layout_for_prompt,
                 qa_samples=qa_samples_list,
@@ -167,7 +158,6 @@ if __name__ == '__main__':
             tqdm.write(f"✅ Think Output: {thinking}")
 
             try:
-                # 'content' nên là một string chứa JSON array: '[{"question":...}, ...]'
                 generated_qa_list = json.loads(content)
                 if not isinstance(generated_qa_list, list):
                     tqdm.write(f"❌ Error: Model output was valid JSON but not a LIST. Skipping item.")
@@ -176,8 +166,7 @@ if __name__ == '__main__':
                 tqdm.write("✅ Raw Generated JSON Array (Cleaned):\n")
                 tqdm.write(json.dumps(generated_qa_list, indent=2))
 
-                # 5. GHI DỮ LIỆU MỚI VÀO ITEM (TRONG BỘ NHỚ)
-                item['generated_qa_pairs'] = generated_qa_list # Đây là key mà script kia mong đợi
+                item['generated_qa_pairs'] = generated_qa_list
                 data_was_modified = True
 
             except json.JSONDecodeError:

@@ -115,7 +115,7 @@ class OpenAIInference:
                     best_response = response_text
                     best_score = current_score
                 
-                # Success conditions: >= 3 figures AND no missing keywords
+                # Success conditions: >= 3 figures AND 100% keywords (no missing keywords)
                 if figure_count >= 3 and not missing_keywords:
                     outputs.append(response_text)
                     break
@@ -252,10 +252,11 @@ def extract_keywords_from_answers(qa_list: List[Dict], debug: bool = False) -> S
     
     return keywords
 
-def validate_keywords_in_output(output: str, keywords: Set[str], threshold: float = 0.3, debug: bool = False) -> bool:
+def validate_keywords_in_output(output: str, keywords: Set[str], threshold: float = 1.0, debug: bool = False) -> bool:
     """
     Check if the output contains enough keywords from answers.
     Uses word boundary matching to avoid false positives (e.g., 'son' in 'person').
+    Default threshold is 1.0 (100% keywords must be present).
     """
     if not keywords:
         if debug:
@@ -661,7 +662,7 @@ def main():
                 print(f"  {response[:200]}...")
                 print(f"\n  Figure count: {figure_count}")
 
-            keyword_coverage = validate_keywords_in_output(response, keywords, threshold=0.9, debug=args.debug_keywords)
+            keyword_coverage = validate_keywords_in_output(response, keywords, threshold=1.0, debug=args.debug_keywords)
 
             # Count keywords using word boundary matching (consistent with validation)
             keywords_found_count = 0

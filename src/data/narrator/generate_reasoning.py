@@ -6,11 +6,9 @@ from typing import Dict, Any, List
 from pathlib import Path
 from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
-
-# Cấu hình PyTorch CUDA
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
-# --- Tải Model và Processor ---
+
 MODEL_NAME = "/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"🚀 Loading model '{MODEL_NAME}' on {DEVICE}...")
@@ -21,9 +19,7 @@ model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )
-print("✅ Model and tokenizer loaded successfully.") # Đã sửa processor -> tokenizer
-
-# --- Tải Jinja Template ---
+print("✅ Model and tokenizer loaded successfully.") 
 try:
     script_file_path = Path(__file__).resolve()
     src_dir = script_file_path.parent.parent.parent
@@ -50,7 +46,7 @@ def generate_reasoning_chain(
     layout_data: Dict[str, Any],
     question: str,
     ground_truth_answer: str
-) -> (str, str): # Trả về (think, content)
+) -> (str, str): 
     
     layout_json_string = json.dumps(layout_data, indent=2)
     
@@ -73,10 +69,9 @@ def generate_reasoning_chain(
     )
     output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
     try:
-        # 151668 là token ID cho <|fim_middle|> (có thể là token 'think' đặc biệt)
         index = len(output_ids) - output_ids[::-1].index(151668)
     except ValueError:
-        index = 0 # Không tìm thấy token, toàn bộ là content
+        index = 0 
 
     thinking_content = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
     content = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
@@ -84,10 +79,6 @@ def generate_reasoning_chain(
     return thinking_content.strip(), content.strip()
 
 def stitch_reasoning_json(data: Dict[str, Any]) -> str:
-    """
-    Sửa lại: Hàm này nhận dictionary đã được parse, 
-    không cần try/except JSONDecodeError.
-    """
     stitched_understand = "Error: Could not parse dictionary."
     stitched_think = "Error: Could not parse dictionary."
     stitched_answer = "Error: No answer found."
@@ -130,7 +121,6 @@ def stitch_reasoning_json(data: Dict[str, Any]) -> str:
         stitched_answer = data.get('answer', 'Error: Missing "answer" key.')
 
     except Exception as e:
-        # Bắt lỗi chung khi xử lý dictionary
         stitched_understand = f"Error during stitching: {e}"
         stitched_think = f"Error during stitching: {e}"
         stitched_answer = f"Error during stitching: {e}"
@@ -142,9 +132,9 @@ def stitch_reasoning_json(data: Dict[str, Any]) -> str:
     )
 
 if __name__ == '__main__':
-    LAYOUT_DIR = Path("/home/binhdt/hf_vqa/src/data/reasoning/")
-    OUTPUT_FILE_PATH = Path("../narrator/reasonings.jsonl")
-
+    LAYOUT_DIR = Path("/home/binhdt/hf_vqa/src/data/wiki/")
+    OUTPUT_FILE_PATH = Path("../narrator/generated_reasonings.jsonl")
+    
     print("\n" + "="*80)
     print(f"💾 Saving results to: {OUTPUT_FILE_PATH} (appending)")
     
@@ -235,7 +225,6 @@ if __name__ == '__main__':
                     
                     tqdm.write(f"✅ Think Output (token 151668): {think}")
                     
-                    # Xử lý JSON content
                     try:
                         content_json = json.loads(content)
                         tqdm.write("✅ Reasoning JSON Output:\n")
@@ -252,10 +241,10 @@ if __name__ == '__main__':
                     result_item = {
                         "wiki_id": wiki_id,
                         "layout_index": layout_index,
-                        "squad_id": qa_id, # Lưu ID đã chuẩn hóa
+                        "squad_id": qa_id, 
                         "question": question,
                         "ground_truth_answer": ground_truth_answer,
-                        "generated_reasoning": content_json, # Lưu dictionary đã parse
+                        "generated_reasoning": content_json, 
                         "merged_reasoning": stitched_reasoning 
                     }
                     
