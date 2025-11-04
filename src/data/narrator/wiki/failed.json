@@ -1,0 +1,3931 @@
+[
+  {
+    "index": 1,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Journey\" focused on \"Rise to Fame\". At the top, a cartoon silhouette of a young Beyoncé stands near a stylized microphone, symbolizing her early career. Below the silhouette, a text line reads \"Born in Houston, Texas (1981)\", positioned adjacent to a small cityscape icon. In the middle, a figure caption describes, placed near the text \"Lead singer of Destiny's Child (1990s–2003)\". To the right of this, a figure caption reads, with the text \"Released 'Dangerously in Love' (2003)\" nearby. Below that, a text line states \"Won five Grammy Awards for her debut album\", placed near a figure caption of. At the bottom, the text \"Rise to fame in the late 1990s\" is positioned near a figure of. The overall style of the image is minimalist and illustrative."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no discernible features. It's a plain, unadorned white space with no content to describe."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          27,
+          830
+        ],
+        "bottom_right": [
+          868,
+          1213
+        ],
+        "caption": "An illustration of A cartoon depiction of Beyoncé performing with Destiny's Child"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          27,
+          1307
+        ],
+        "bottom_right": [
+          868,
+          1690
+        ],
+        "caption": "A stylized representation of a music album cover"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          27,
+          1794
+        ],
+        "bottom_right": [
+          868,
+          2177
+        ],
+        "caption": "An illustration of A cartoon of a Grammy Award ceremony"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          27,
+          349
+        ],
+        "bottom_right": [
+          868,
+          731
+        ],
+        "caption": "A stylized timeline showing her career progression"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          111,
+          41
+        ],
+        "bottom_right": [
+          784,
+          202
+        ],
+        "caption": "Text \"Beyoncé's Journey\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé's Journey"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          359,
+          1918
+        ],
+        "bottom_right": [
+          836,
+          2107
+        ],
+        "caption": "Text \"Rise to Fame\" in <color-1>, <en-font-15>. ",
+        "text": "Rise to Fame"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          359,
+          473
+        ],
+        "bottom_right": [
+          836,
+          661
+        ],
+        "caption": "Text \"Born in Houston, Texas (1981)\" in <color-1>, <en-font-15>. ",
+        "text": "Born in Houston, Texas (1981)"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          359,
+          954
+        ],
+        "bottom_right": [
+          836,
+          1142
+        ],
+        "caption": "Text \"Lead singer of Destiny's Child (1990s–2003)\" in <color-1>, <en-font-15>. ",
+        "text": "Lead singer of Destiny's Child (1990s–2003)"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          359,
+          1455
+        ],
+        "bottom_right": [
+          853,
+          1596
+        ],
+        "caption": "Text \"Released 'Dangerously in Love' (2003)\" in <color-1>, <en-font-15>. ",
+        "text": "Released 'Dangerously in Love' (2003)"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          143,
+          338
+        ],
+        "bottom_right": [
+          752,
+          375
+        ],
+        "caption": "Text \"Won five Grammy Awards for her debut album\" in <color-1>, <en-font-15>. ",
+        "text": "Won five Grammy Awards for her debut album"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          147,
+          799
+        ],
+        "bottom_right": [
+          756,
+          873
+        ],
+        "caption": "Text \"Rise to fame in the late 1990s\" in <color-1>, <en-font-15>. ",
+        "text": "Rise to fame in the late 1990s"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Journey\" (text) focused on \"Rise to Fame\" (text). At the top, a cartoon silhouette of a young Beyoncé stands near a stylized microphone, symbolizing her early career. Below the silhouette, a text line reads \"Born in Houston, Texas (1981)\" (text), positioned adjacent to a small cityscape icon. In the middle, a figure caption describes \"A cartoon depiction of Beyoncé performing with Destiny's Child\" (figure), placed near the text \"Lead singer of Destiny's Child (1990s–2003)\" (text). To the right of this, a figure caption reads \"A stylized representation of a music album cover\" (figure), with the text \"Released 'Dangerously in Love' (2003)\" (text) nearby. Below that, a text line states \"Won five Grammy Awards for her debut album\" (text), placed near a figure caption of \"A cartoon of a Grammy Award ceremony\" (figure). At the bottom, the text \"Rise to fame in the late 1990s\" (text) is positioned near a figure of \"A stylized timeline showing her career progression\" (figure). The overall style of the image is minimalist and illustrative.",
+    "original_bbox_index": 36,
+    "context": "Beyoncé Giselle Knowles-Carter (/biːˈjɒnseɪ/ bee-YON-say) (born September 4, 1981) is an American singer, songwriter, record producer and actress. Born and raised in Houston, Texas, she performed in various singing and dancing competitions as a child, and rose to fame in the late 1990s as lead singer of R&B girl-group Destiny's Child. Managed by her father, Mathew Knowles, the group became one of the world's best-selling girl groups of all time. Their hiatus saw the release of Beyoncé's debut album, Dangerously in Love (2003), which established her as a solo artist worldwide, earned five Grammy Awards and featured the Billboard Hot 100 number-one singles \"Crazy in Love\" and \"Baby Boy\".",
+    "original_qa_pairs": [
+      {
+        "question": "When did Beyonce start becoming popular?",
+        "answers": {
+          "text": [
+            "in the late 1990s"
+          ],
+          "answer_start": [
+            269
+          ]
+        },
+        "id": "56be85543aeaaa14008c9063"
+      },
+      {
+        "question": "What areas did Beyonce compete in when she was growing up?",
+        "answers": {
+          "text": [
+            "singing and dancing"
+          ],
+          "answer_start": [
+            207
+          ]
+        },
+        "id": "56be85543aeaaa14008c9065"
+      },
+      {
+        "question": "When did Beyonce leave Destiny's Child and become a solo singer?",
+        "answers": {
+          "text": [
+            "2003"
+          ],
+          "answer_start": [
+            526
+          ]
+        },
+        "id": "56be85543aeaaa14008c9066"
+      },
+      {
+        "question": "In what city and state did Beyonce  grow up? ",
+        "answers": {
+          "text": [
+            "Houston, Texas"
+          ],
+          "answer_start": [
+            166
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9601"
+      },
+      {
+        "question": "In which decade did Beyonce become famous?",
+        "answers": {
+          "text": [
+            "late 1990s"
+          ],
+          "answer_start": [
+            276
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9602"
+      },
+      {
+        "question": "In what R&B group was she the lead singer?",
+        "answers": {
+          "text": [
+            "Destiny's Child"
+          ],
+          "answer_start": [
+            320
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9603"
+      },
+      {
+        "question": "What album made her a worldwide known artist?",
+        "answers": {
+          "text": [
+            "Dangerously in Love"
+          ],
+          "answer_start": [
+            505
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9604"
+      },
+      {
+        "question": "Who managed the Destiny's Child group?",
+        "answers": {
+          "text": [
+            "Mathew Knowles"
+          ],
+          "answer_start": [
+            360
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9605"
+      },
+      {
+        "question": "When did Beyoncé rise to fame?",
+        "answers": {
+          "text": [
+            "late 1990s"
+          ],
+          "answer_start": [
+            276
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830a9"
+      },
+      {
+        "question": "What role did Beyoncé have in Destiny's Child?",
+        "answers": {
+          "text": [
+            "lead singer"
+          ],
+          "answer_start": [
+            290
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830aa"
+      },
+      {
+        "question": "What was the first album Beyoncé released as a solo artist?",
+        "answers": {
+          "text": [
+            "Dangerously in Love"
+          ],
+          "answer_start": [
+            505
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830ab"
+      },
+      {
+        "question": "When did Beyoncé release Dangerously in Love?",
+        "answers": {
+          "text": [
+            "2003"
+          ],
+          "answer_start": [
+            526
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830ac"
+      },
+      {
+        "question": "How many Grammy awards did Beyoncé win for her first solo album?",
+        "answers": {
+          "text": [
+            "five"
+          ],
+          "answer_start": [
+            590
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830ad"
+      },
+      {
+        "question": "What was Beyoncé's role in Destiny's Child?",
+        "answers": {
+          "text": [
+            "lead singer"
+          ],
+          "answer_start": [
+            290
+          ]
+        },
+        "id": "56d43ce42ccc5a1400d830b4"
+      },
+      {
+        "question": "What was the name of Beyoncé's first solo album?",
+        "answers": {
+          "text": [
+            "Dangerously in Love"
+          ],
+          "answer_start": [
+            505
+          ]
+        },
+        "id": "56d43ce42ccc5a1400d830b5"
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"\\\"Destiny's Child: From Name to Fame\\\" \" focused on \"Group History and Achievements\". At the top, a cartoon illustration of a group of four young women stands out, symbolizing the formation of the group. Below the illustration, a text line reads \"\\\"Formed in 1996, named after the Book of Isaiah\\\" \". Adjacent to this, another text line states \"\\\"Debut single 'Killing Time' on Men in Black soundtrack\\\" \". In the middle, a stylized scene of a music studio features a group of musicians, with a text line above it reading \"\\\"Multi-platinum album 'The Writing's on the Wall'\\\" \". Below the studio scene, a text line reads \"\\\"Grammy-winning song 'Say My Name'\\\" \". Near the bottom, a cartoon image of two women singing together is accompanied by the caption \"\\\". The overall style of the image is minimalist and illustrative, using symbolic visuals to support key facts."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a plain, solid color with no distinguishable features or objects. It appears to be a uniform, light pink or peach color, with no variations or patterns. The background is completely unadorned and lacks any text or additional elements. It's a simple, minimalist image with no context or action depicted."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          79,
+          620
+        ],
+        "bottom_right": [
+          816,
+          2096
+        ],
+        "caption": "An illustration of Beyoncé duets with Marc Nelson on 'The Best Man'\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          113,
+          98
+        ],
+        "bottom_right": [
+          782,
+          443
+        ],
+        "caption": "Text \"Destiny's Child: From Name to Fame\\\" in <color-2>, <en-font-179>. ",
+        "text": "Destiny's Child: From Name to Fame\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          135,
+          394
+        ],
+        "bottom_right": [
+          775,
+          510
+        ],
+        "caption": "Text \"Group History and Achievements\" in <color-2>, <en-font-179>. ",
+        "text": "Group History and Achievements"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          370,
+          1849
+        ],
+        "bottom_right": [
+          744,
+          2030
+        ],
+        "caption": "Text \"Formed in 1996, named after the Book of Isaiah\\\" in <color-2>, <en-font-179>. ",
+        "text": "Formed in 1996, named after the Book of Isaiah\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          370,
+          749
+        ],
+        "bottom_right": [
+          698,
+          870
+        ],
+        "caption": "Text \"Debut single 'Killing Time' on Men in Black soundtrack\\\" in <color-2>, <en-font-179>. ",
+        "text": "Debut single 'Killing Time' on Men in Black soundtrack\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          377,
+          1330
+        ],
+        "bottom_right": [
+          705,
+          1451
+        ],
+        "caption": "Text \"Multi-platinum album 'The Writing's on the Wall'\\\" in <color-2>, <en-font-179>. ",
+        "text": "Multi-platinum album 'The Writing's on the Wall'\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          178,
+          484
+        ],
+        "bottom_right": [
+          717,
+          585
+        ],
+        "caption": "Text \"Grammy-winning song 'Say My Name'\\\" in <color-2>, <en-font-179>. ",
+        "text": "Grammy-winning song 'Say My Name'\\"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"\\\"Destiny's Child: From Name to Fame\\\" (text)\" (text) focused on \"Group History and Achievements\" (text). At the top, a cartoon illustration of a group of four young women stands out, symbolizing the formation of the group. Below the illustration, a text line reads \"\\\"Formed in 1996, named after the Book of Isaiah\\\" (text)\" (text). Adjacent to this, another text line states \"\\\"Debut single 'Killing Time' on Men in Black soundtrack\\\" (text)\" (text). In the middle, a stylized scene of a music studio features a group of musicians, with a text line above it reading \"\\\"Multi-platinum album 'The Writing's on the Wall'\\\" (text)\" (text). Below the studio scene, a text line reads \"\\\"Grammy-winning song 'Say My Name'\\\" (text)\" (text). Near the bottom, a cartoon image of two women singing together is accompanied by the caption \"\\\"Beyoncé duets with Marc Nelson on 'The Best Man'\\\" (figure)\". The overall style of the image is minimalist and illustrative, using symbolic visuals to support key facts.",
+    "original_bbox_index": 91,
+    "context": "The group changed their name to Destiny's Child in 1996, based upon a passage in the Book of Isaiah. In 1997, Destiny's Child released their major label debut song \"Killing Time\" on the soundtrack to the 1997 film, Men in Black. The following year, the group released their self-titled debut album, scoring their first major hit \"No, No, No\". The album established the group as a viable act in the music industry, with moderate sales and winning the group three Soul Train Lady of Soul Awards for Best R&B/Soul Album of the Year, Best R&B/Soul or Rap New Artist, and Best R&B/Soul Single for \"No, No, No\". The group released their multi-platinum second album The Writing's on the Wall in 1999. The record features some of the group's most widely known songs such as \"Bills, Bills, Bills\", the group's first number-one single, \"Jumpin' Jumpin'\" and \"Say My Name\", which became their most successful song at the time, and would remain one of their signature songs. \"Say My Name\" won the Best R&B Performance by a Duo or Group with Vocals and the Best R&B Song at the 43rd Annual Grammy Awards. The Writing's on the Wall sold more than eight million copies worldwide. During this time, Beyoncé recorded a duet with Marc Nelson, an original member of Boyz II Men, on the song \"After All Is Said and Done\" for the soundtrack to the 1999 film, The Best Man.",
+    "original_qa_pairs": [
+      {
+        "question": "Which film featured Destiny's Child's first major single?",
+        "answers": {
+          "text": [
+            "Men in Black"
+          ],
+          "answer_start": [
+            215
+          ]
+        },
+        "id": "56be8c8a3aeaaa14008c90a9"
+      },
+      {
+        "question": "For which song, did Destiny's Child take home the grammy award for best R&B performance?",
+        "answers": {
+          "text": [
+            "\"Say My Name\""
+          ],
+          "answer_start": [
+            848
+          ]
+        },
+        "id": "56be8c8a3aeaaa14008c90ab"
+      },
+      {
+        "question": "Who did Beyonce record with for the movie \"The Best Man?\"",
+        "answers": {
+          "text": [
+            "Marc Nelson"
+          ],
+          "answer_start": [
+            1212
+          ]
+        },
+        "id": "56be8c8a3aeaaa14008c90ac"
+      },
+      {
+        "question": "Beyonce's group changed their name to Destiny's Child in what year?",
+        "answers": {
+          "text": [
+            "1996"
+          ],
+          "answer_start": [
+            51
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c9677"
+      },
+      {
+        "question": "The name Destiny's Child was based on a quote in which book of the Bible?",
+        "answers": {
+          "text": [
+            "Book of Isaiah"
+          ],
+          "answer_start": [
+            85
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c9678"
+      },
+      {
+        "question": "Debut song, \"Killing Time\" was featured on what movie's sound track?",
+        "answers": {
+          "text": [
+            "Men in Black"
+          ],
+          "answer_start": [
+            215
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c9679"
+      },
+      {
+        "question": "What song won Best R&B Performance in the 43 Annual Grammy Awards?",
+        "answers": {
+          "text": [
+            "Say My Name"
+          ],
+          "answer_start": [
+            849
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c967a"
+      },
+      {
+        "question": "What singer did Beyonce record a song with for the movie, ''The Best Man\"?",
+        "answers": {
+          "text": [
+            "Marc Nelson"
+          ],
+          "answer_start": [
+            1212
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c967b"
+      },
+      {
+        "question": "Where did Destiny's Child get their name from?",
+        "answers": {
+          "text": [
+            "Book of Isaiah."
+          ],
+          "answer_start": [
+            85
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830f9"
+      },
+      {
+        "question": "Destiny's Child song, Killing Time, was included in which film's soundtrack?",
+        "answers": {
+          "text": [
+            "Men in Black."
+          ],
+          "answer_start": [
+            215
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fa"
+      },
+      {
+        "question": "What was Destiny's Child's first major song hit?",
+        "answers": {
+          "text": [
+            "No, No, No"
+          ],
+          "answer_start": [
+            330
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fb"
+      },
+      {
+        "question": "When did Destiny's Child release their second album?",
+        "answers": {
+          "text": [
+            "1999"
+          ],
+          "answer_start": [
+            688
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fc"
+      },
+      {
+        "question": "Who did Beyoncé sing a duet with for \"The Best Man\" film?",
+        "answers": {
+          "text": [
+            "Marc Nelson"
+          ],
+          "answer_start": [
+            1212
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fd"
+      }
+    ]
+  },
+  {
+    "index": 9,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Destiny's Child's Legacy\" focused on \"Music Career and Key Events\". At the top, a cartoon scene depicts the group performing on stage, symbolizing their musical success. Below the scene, a stylized timeline begins, showing key moments in their career. Adjacent to the timeline, a visual text item reads \"Destiny's Child's third album, Survivor, sold 663,000 copies in its first week\". Near the timeline, another text item states \"Their single 'Independent Women Part I' topped the Billboard Hot 100 for eleven weeks\". Below the timeline, a figure caption reads. To the right of the timeline, a text item mentions \"Beyoncé starred in 'Carmen: A Hip Hopera' alongside Mekhi Phifer\". A figure caption below this text reads. At the bottom, a final text item states \"Destiny's Child announced a hiatus in October 2001\". The overall style of the image is clean, illustrative, and focused on storytelling through visual metaphors."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely white. There are no objects, no text, no colors, and no discernible features. It's a blank, uniform white space."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          39,
+          586
+        ],
+        "bottom_right": [
+          896,
+          1492
+        ],
+        "caption": "A stylized representation of a music chart with 'Independent Women Part I' at the top"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          380,
+          1531
+        ],
+        "bottom_right": [
+          469,
+          1618
+        ],
+        "caption": "An illustration of A cartoon of Beyoncé and Mekhi Phifer in a dramatic scene"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          511,
+          1825
+        ],
+        "bottom_right": [
+          832,
+          2155
+        ],
+        "caption": "Text \"Destiny's Child's Legacy\" in <color-123>, <en-font-22>. ",
+        "text": "Destiny's Child's Legacy"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          145,
+          1825
+        ],
+        "bottom_right": [
+          431,
+          2132
+        ],
+        "caption": "Text \"Music Career and Key Events\" in <color-2>, <en-font-22>. ",
+        "text": "Music Career and Key Events"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          46,
+          141
+        ],
+        "bottom_right": [
+          850,
+          222
+        ],
+        "caption": "Text \"Destiny's Child's third album, Survivor, sold 663,000 copies in its first week\" in <color-2>, <en-font-22>. ",
+        "text": "Destiny's Child's third album, Survivor, sold 663,000 copies in its first week"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          630,
+          1638
+        ],
+        "bottom_right": [
+          851,
+          1694
+        ],
+        "caption": "Text \"Their single 'Independent Women Part I' topped the Billboard Hot 100 for eleven weeks\" in <color-123>, <en-font-22>. ",
+        "text": "Their single 'Independent Women Part I' topped the Billboard Hot 100 for eleven weeks"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          82,
+          247
+        ],
+        "bottom_right": [
+          813,
+          299
+        ],
+        "caption": "Text \"Beyoncé starred in 'Carmen: A Hip Hopera' alongside Mekhi Phifer\" in <color-123>, <en-font-22>. ",
+        "text": "Beyoncé starred in 'Carmen: A Hip Hopera' alongside Mekhi Phifer"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          107,
+          1780
+        ],
+        "bottom_right": [
+          141,
+          2130
+        ],
+        "caption": "Text \"Destiny's Child announced a hiatus in October 2001\" in <color-123>, <en-font-22>. ",
+        "text": "Destiny's Child announced a hiatus in October 2001"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Destiny's Child's Legacy\" (text) focused on \"Music Career and Key Events\" (text). At the top, a cartoon scene depicts the group performing on stage, symbolizing their musical success. Below the scene, a stylized timeline begins, showing key moments in their career. Adjacent to the timeline, a visual text item reads \"Destiny's Child's third album, Survivor, sold 663,000 copies in its first week\" (text). Near the timeline, another text item states \"Their single 'Independent Women Part I' topped the Billboard Hot 100 for eleven weeks\" (text). Below the timeline, a figure caption reads \"A stylized representation of a music chart with 'Independent Women Part I' at the top\" (figure). To the right of the timeline, a text item mentions \"Beyoncé starred in 'Carmen: A Hip Hopera' alongside Mekhi Phifer\" (text). A figure caption below this text reads \"A cartoon of Beyoncé and Mekhi Phifer in a dramatic scene\" (figure). At the bottom, a final text item states \"Destiny's Child announced a hiatus in October 2001\" (text). The overall style of the image is clean, illustrative, and focused on storytelling through visual metaphors.",
+    "original_bbox_index": 32,
+    "context": "The remaining band members recorded \"Independent Women Part I\", which appeared on the soundtrack to the 2000 film, Charlie's Angels. It became their best-charting single, topping the U.S. Billboard Hot 100 chart for eleven consecutive weeks. In early 2001, while Destiny's Child was completing their third album, Beyoncé landed a major role in the MTV made-for-television film, Carmen: A Hip Hopera, starring alongside American actor Mekhi Phifer. Set in Philadelphia, the film is a modern interpretation of the 19th century opera Carmen by French composer Georges Bizet. When the third album Survivor was released in May 2001, Luckett and Roberson filed a lawsuit claiming that the songs were aimed at them. The album debuted at number one on the U.S. Billboard 200, with first-week sales of 663,000 copies sold. The album spawned other number-one hits, \"Bootylicious\" and the title track, \"Survivor\", the latter of which earned the group a Grammy Award for Best R&B Performance by a Duo or Group with Vocals. After releasing their holiday album 8 Days of Christmas in October 2001, the group announced a hiatus to further pursue solo careers.",
+    "original_qa_pairs": [
+      {
+        "question": "\"Charlie's Angels\" featured which single from the band members?",
+        "answers": {
+          "text": [
+            "Independent Women Part I"
+          ],
+          "answer_start": [
+            37
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c6"
+      },
+      {
+        "question": "How many weeks did their single \"Independent Women Part I\" stay on top?",
+        "answers": {
+          "text": [
+            "eleven"
+          ],
+          "answer_start": [
+            216
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c7"
+      },
+      {
+        "question": "For what network, did Beyonce land a major movie role in?",
+        "answers": {
+          "text": [
+            "MTV"
+          ],
+          "answer_start": [
+            348
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c8"
+      },
+      {
+        "question": "Their third album, Survivor, sold how many during its first week?",
+        "answers": {
+          "text": [
+            "663,000 copies"
+          ],
+          "answer_start": [
+            793
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c9"
+      },
+      {
+        "question": "What French composer wrote the original opera ''Carmen'' in the 19th century?",
+        "answers": {
+          "text": [
+            "Georges Bizet"
+          ],
+          "answer_start": [
+            557
+          ]
+        },
+        "id": "56bf89cfa10cfb1400551162"
+      },
+      {
+        "question": "What album caused a lawsuit to be filed in 2001?",
+        "answers": {
+          "text": [
+            "Survivor"
+          ],
+          "answer_start": [
+            593
+          ]
+        },
+        "id": "56bf89cfa10cfb1400551163"
+      },
+      {
+        "question": "Independent Women Part I was on which 2000 film's soundtrack?",
+        "answers": {
+          "text": [
+            "Charlie's Angels."
+          ],
+          "answer_start": [
+            115
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83154"
+      },
+      {
+        "question": "Which film did Beyoncé star in 2001 with Mekhi Phifer?",
+        "answers": {
+          "text": [
+            "Carmen: A Hip Hopera"
+          ],
+          "answer_start": [
+            378
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83155"
+      },
+      {
+        "question": "What was the name of Destiny Child's third album?",
+        "answers": {
+          "text": [
+            "Survivor"
+          ],
+          "answer_start": [
+            593
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83156"
+      },
+      {
+        "question": "Who filed a lawsuit over Survivor?",
+        "answers": {
+          "text": [
+            "Luckett and Roberson"
+          ],
+          "answer_start": [
+            628
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83157"
+      },
+      {
+        "question": "When did Destiny's Child announce their hiatus?",
+        "answers": {
+          "text": [
+            "October 2001"
+          ],
+          "answer_start": [
+            1070
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83158"
+      }
+    ]
+  },
+  {
+    "index": 10,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "\"The image is an infographic titled \\\"Beyoncé's Film and Music Contributions\\\" focused on \\\"Acting and Music Career\\\". At the top, a cartoon illustration of Beyoncé as Foxxy Cleopatra (figure) appears above the title. Below the title, a stylized text line reads \\\"Beyoncé's Film and Music Contributions\\\". Adjacent to the illustration, a short phrase states \\\"Played Foxxy Cleopatra in Austin Powers in Goldmember\\\". In the middle, a cartoon scene depicts Beyoncé and Cuba Gooding, Jr. in a musical comedy setting (figure) with the text \\\"Starred with Cuba Gooding, Jr. in The Fighting Temptations\\\" to its right. Below the middle section, a visual of a music note and a chart symbolizes the success of her songs (figure) with the text \\\"'Work It Out' reached top ten in UK, Norway, and Belgium\\\" nearby. At the bottom, a text line reads \\\"'Summertime' performed better on US charts\\\". The overall style of the image is cartoonish and illustrative with minimal text and symbolic visuals.\""
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a plain, solid color with no distinguishable features or objects. It appears to be a uniform, light beige or peach color, filling the entire frame without any variation or texture. There are no texts, shapes, or other elements that can be discerned. The image is quite simple and lacks any complexity or detail that would allow for a more descriptive analysis."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          103,
+          173
+        ],
+        "bottom_right": [
+          792,
+          269
+        ],
+        "caption": "Text \"Beyoncé's Film and Music Contributions\\\" in <color-1>, <en-font-282>. ",
+        "text": "Beyoncé's Film and Music Contributions\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          49,
+          521
+        ],
+        "bottom_right": [
+          398,
+          628
+        ],
+        "caption": "Text \"Acting and Music Career\\\" in <color-1>, <en-font-282>. ",
+        "text": "Acting and Music Career\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          49,
+          932
+        ],
+        "bottom_right": [
+          398,
+          1039
+        ],
+        "caption": "Text \"Beyoncé's Film and Music Contributions\\\" in <color-1>, <en-font-282>. ",
+        "text": "Beyoncé's Film and Music Contributions\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          511,
+          719
+        ],
+        "bottom_right": [
+          861,
+          825
+        ],
+        "caption": "Text \"Played Foxxy Cleopatra in Austin Powers in Goldmember\\\" in <color-1>, <en-font-282>. ",
+        "text": "Played Foxxy Cleopatra in Austin Powers in Goldmember\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          509,
+          1141
+        ],
+        "bottom_right": [
+          859,
+          1247
+        ],
+        "caption": "Text \"Starred with Cuba Gooding, Jr. in The Fighting Temptations\\\" in <color-1>, <en-font-282>. ",
+        "text": "Starred with Cuba Gooding, Jr. in The Fighting Temptations\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          273,
+          281
+        ],
+        "bottom_right": [
+          622,
+          368
+        ],
+        "caption": "Text \"'Work It Out' reached top ten in UK, Norway, and Belgium\\\" in <color-1>, <en-font-282>. ",
+        "text": "'Work It Out' reached top ten in UK, Norway, and Belgium\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          334,
+          541
+        ],
+        "bottom_right": [
+          817,
+          608
+        ],
+        "caption": "Text \"'Summertime' performed better on US charts\\\" in <color-1>, <en-font-282>. ",
+        "text": "'Summertime' performed better on US charts\\"
+      }
+    ],
+    "full_image_caption": "\"The image is an infographic titled \\\"Beyoncé's Film and Music Contributions\\\" (text) focused on \\\"Acting and Music Career\\\" (text). At the top, a cartoon illustration of Beyoncé as Foxxy Cleopatra (figure) appears above the title. Below the title, a stylized text line reads \\\"Beyoncé's Film and Music Contributions\\\" (text). Adjacent to the illustration, a short phrase states \\\"Played Foxxy Cleopatra in Austin Powers in Goldmember\\\" (text). In the middle, a cartoon scene depicts Beyoncé and Cuba Gooding, Jr. in a musical comedy setting (figure) with the text \\\"Starred with Cuba Gooding, Jr. in The Fighting Temptations\\\" (text) to its right. Below the middle section, a visual of a music note and a chart symbolizes the success of her songs (figure) with the text \\\"'Work It Out' reached top ten in UK, Norway, and Belgium\\\" (text) nearby. At the bottom, a text line reads \\\"'Summertime' performed better on US charts\\\" (text). The overall style of the image is cartoonish and illustrative with minimal text and symbolic visuals.\"",
+    "original_bbox_index": 5,
+    "context": "In July 2002, Beyoncé continued her acting career playing Foxxy Cleopatra alongside Mike Myers in the comedy film, Austin Powers in Goldmember, which spent its first weekend atop the US box office and grossed $73 million. Beyoncé released \"Work It Out\" as the lead single from its soundtrack album which entered the top ten in the UK, Norway, and Belgium. In 2003, Beyoncé starred opposite Cuba Gooding, Jr., in the musical comedy The Fighting Temptations as Lilly, a single mother whom Gooding's character falls in love with. The film received mixed reviews from critics but grossed $30 million in the U.S. Beyoncé released \"Fighting Temptation\" as the lead single from the film's soundtrack album, with Missy Elliott, MC Lyte, and Free which was also used to promote the film. Another of Beyoncé's contributions to the soundtrack, \"Summertime\", fared better on the US charts.",
+    "original_qa_pairs": [
+      {
+        "question": "Who did Beyonce star with in the movie, \"Austin Powers in Goldmember\"?",
+        "answers": {
+          "text": [
+            "Mike Myers"
+          ],
+          "answer_start": [
+            84
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90da"
+      },
+      {
+        "question": "Which three countries did Beyonce's song \"Work It Out\" achieve top ten status?",
+        "answers": {
+          "text": [
+            "UK, Norway, and Belgium"
+          ],
+          "answer_start": [
+            331
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90db"
+      },
+      {
+        "question": "Beyonce starred with Cuba Gooding Jr. in which film?",
+        "answers": {
+          "text": [
+            "The Fighting Temptations"
+          ],
+          "answer_start": [
+            431
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90dc"
+      },
+      {
+        "question": "Who did Beyonce record the lead single with in the movie \"The Fighting Temptations\"?",
+        "answers": {
+          "text": [
+            "Missy Elliott"
+          ],
+          "answer_start": [
+            705
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90dd"
+      },
+      {
+        "question": "Which other song from the soundtrack did better in the charts?",
+        "answers": {
+          "text": [
+            "Summertime"
+          ],
+          "answer_start": [
+            834
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90de"
+      },
+      {
+        "question": "What film did Beyonce appear in with Mike Myers?",
+        "answers": {
+          "text": [
+            "Austin Powers in Goldmember"
+          ],
+          "answer_start": [
+            115
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116b"
+      },
+      {
+        "question": "What large amount did the movie \"Goldmember\" gross?",
+        "answers": {
+          "text": [
+            "73 million"
+          ],
+          "answer_start": [
+            210
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116c"
+      },
+      {
+        "question": "What genre of movie did Beyonce star in with Cuba Gooding, Jr?",
+        "answers": {
+          "text": [
+            "musical comedy"
+          ],
+          "answer_start": [
+            416
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116d"
+      },
+      {
+        "question": "What song was the lead single from the film's sound track?",
+        "answers": {
+          "text": [
+            "Fighting Temptations"
+          ],
+          "answer_start": [
+            435
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116e"
+      },
+      {
+        "question": "How did the critics view the movie, ''The Fighting Temptations''?",
+        "answers": {
+          "text": [
+            "mixed reviews"
+          ],
+          "answer_start": [
+            545
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116f"
+      },
+      {
+        "question": "What film did Beyoncé star in with Mike Myers in 2002?",
+        "answers": {
+          "text": [
+            "Austin Powers in Goldmember"
+          ],
+          "answer_start": [
+            115
+          ]
+        },
+        "id": "56d484312ccc5a1400d8315e"
+      },
+      {
+        "question": "What was Beyoncé's character called in Austin Powers in Goldmember?",
+        "answers": {
+          "text": [
+            "Foxxy Cleopatra"
+          ],
+          "answer_start": [
+            58
+          ]
+        },
+        "id": "56d484312ccc5a1400d8315f"
+      },
+      {
+        "question": "Which song did Beyoncé release as the lead single for Austin Powers in Goldmember's soundtrack?",
+        "answers": {
+          "text": [
+            "Work It Out"
+          ],
+          "answer_start": [
+            240
+          ]
+        },
+        "id": "56d484312ccc5a1400d83160"
+      },
+      {
+        "question": "What musical comedy did Beyoncé star in along with Cuba Gooding, Jr. in 2003?",
+        "answers": {
+          "text": [
+            "The Fighting Temptations"
+          ],
+          "answer_start": [
+            431
+          ]
+        },
+        "id": "56d484312ccc5a1400d83161"
+      },
+      {
+        "question": "What song did Beyoncé release as the lead single from The Fighting Tempations?",
+        "answers": {
+          "text": [
+            "Fighting Temptations"
+          ],
+          "answer_start": [
+            435
+          ]
+        },
+        "id": "56d484312ccc5a1400d83162"
+      }
+    ]
+  },
+  {
+    "index": 28,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Pregnancy Announcement\" focused on \"2011 MTV Video Music Awards\". At the top, a cartoon of Beyoncé performing on stage is placed, with a stylized microphone and a blazer near it. Below the cartoon, a text line reads \"Beyoncé performed 'Love on Top' at the 2011 MTV Video Music Awards\". Adjacent to this text, a figure caption describes. Near the bottom, a text line states \"Her appearance made the broadcast the most-watched in MTV history\". Below that, a figure caption explains. A text line near the middle reads \"Beyoncé confirmed her pregnancy during the performance\". To the right of this text, a figure caption illustrates. At the bottom, a text line mentions \"The event was recorded in Guinness World Records for most tweets per second\". Finally, a figure caption describes. The overall style of the image is a cartoon and illustrative style with no letters, numerals, words, acronyms, or logos."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and devoid of any content. It appears to be a solid, uniform color with no distinguishable features, objects, or text. The color is a light pink or beige, and there are no shadows, textures, or patterns visible. The image does not contain any information that can be described or analyzed."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          57,
+          514
+        ],
+        "bottom_right": [
+          838,
+          783
+        ],
+        "caption": "An illustration of Beyoncé performing 'Love on Top' and starting with a call to feel the love"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          57,
+          842
+        ],
+        "bottom_right": [
+          838,
+          1111
+        ],
+        "caption": "An illustration of The event attracted 12.4 million viewers, setting a record"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          57,
+          1170
+        ],
+        "bottom_right": [
+          838,
+          1439
+        ],
+        "caption": "An illustration of Beyoncé dropping her microphone and rubbing her stomach"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          57,
+          1821
+        ],
+        "bottom_right": [
+          838,
+          2090
+        ],
+        "caption": "An illustration of The hashtag 'Beyonce pregnant' was the most Googled term that week"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          444,
+          0
+        ],
+        "bottom_right": [
+          896,
+          514
+        ],
+        "caption": "Text \"Beyoncé's Pregnancy Announcement\" in <color-1>, <en-font-0>. ",
+        "text": "Beyoncé's Pregnancy Announcement"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          103,
+          105
+        ],
+        "bottom_right": [
+          791,
+          323
+        ],
+        "caption": "Text \"2011 MTV Video Music Awards\" in <color-1>, <en-font-0>. ",
+        "text": "2011 MTV Video Music Awards"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          96,
+          323
+        ],
+        "bottom_right": [
+          793,
+          424
+        ],
+        "caption": "Text \"Beyoncé performed 'Love on Top' at the 2011 MTV Video Music Awards\" in <color-1>, <en-font-0>. ",
+        "text": "Beyoncé performed 'Love on Top' at the 2011 MTV Video Music Awards"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          1630
+        ],
+        "bottom_right": [
+          796,
+          1735
+        ],
+        "caption": "Text \"Her appearance made the broadcast the most-watched in MTV history\" in <color-2>, <en-font-0>. ",
+        "text": "Her appearance made the broadcast the most-watched in MTV history"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          639
+        ],
+        "bottom_right": [
+          796,
+          718
+        ],
+        "caption": "Text \"Beyoncé confirmed her pregnancy during the performance\" in <color-1>, <en-font-0>. ",
+        "text": "Beyoncé confirmed her pregnancy during the performance"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          1319
+        ],
+        "bottom_right": [
+          796,
+          1398
+        ],
+        "caption": "Text \"The event was recorded in Guinness World Records for most tweets per second\" in <color-2>, <en-font-0>. ",
+        "text": "The event was recorded in Guinness World Records for most tweets per second"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Pregnancy Announcement\" (text) focused on \"2011 MTV Video Music Awards\" (text). At the top, a cartoon of Beyoncé performing on stage is placed, with a stylized microphone and a blazer near it. Below the cartoon, a text line reads \"Beyoncé performed 'Love on Top' at the 2011 MTV Video Music Awards\" (text). Adjacent to this text, a figure caption describes \"Beyoncé performing 'Love on Top' and starting with a call to feel the love\" (figure). Near the bottom, a text line states \"Her appearance made the broadcast the most-watched in MTV history\" (text). Below that, a figure caption explains \"The event attracted 12.4 million viewers, setting a record\" (figure). A text line near the middle reads \"Beyoncé confirmed her pregnancy during the performance\" (text). To the right of this text, a figure caption illustrates \"Beyoncé dropping her microphone and rubbing her stomach\" (figure). At the bottom, a text line mentions \"The event was recorded in Guinness World Records for most tweets per second\" (text). Finally, a figure caption describes \"The hashtag 'Beyonce pregnant' was the most Googled term that week\" (figure). The overall style of the image is a cartoon and illustrative style with no letters, numerals, words, acronyms, or logos.",
+    "original_bbox_index": 58,
+    "context": "In August, the couple attended the 2011 MTV Video Music Awards, at which Beyoncé performed \"Love on Top\" and started the performance saying \"Tonight I want you to stand up on your feet, I want you to feel the love that's growing inside of me\". At the end of the performance, she dropped her microphone, unbuttoned her blazer and rubbed her stomach, confirming her pregnancy she had alluded to earlier in the evening. Her appearance helped that year's MTV Video Music Awards become the most-watched broadcast in MTV history, pulling in 12.4 million viewers; the announcement was listed in Guinness World Records for \"most tweets per second recorded for a single event\" on Twitter, receiving 8,868 tweets per second and \"Beyonce pregnant\" was the most Googled term the week of August 29, 2011.",
+    "original_qa_pairs": [
+      {
+        "question": "Jay Z and Beyonce attended which event together in August of 2011?",
+        "answers": {
+          "text": [
+            "MTV Video Music Awards"
+          ],
+          "answer_start": [
+            40
+          ]
+        },
+        "id": "56bea8463aeaaa14008c91a9"
+      },
+      {
+        "question": "Beyonce confirmed what after performing one of her songs?",
+        "answers": {
+          "text": [
+            "her pregnancy"
+          ],
+          "answer_start": [
+            360
+          ]
+        },
+        "id": "56bea8463aeaaa14008c91aa"
+      },
+      {
+        "question": "How many people watched the 2011 MTV Music Awards?",
+        "answers": {
+          "text": [
+            "12.4 million"
+          ],
+          "answer_start": [
+            535
+          ]
+        },
+        "id": "56bea8463aeaaa14008c91ac"
+      },
+      {
+        "question": "Where did she announce her pregnancy?",
+        "answers": {
+          "text": [
+            "2011 MTV Video Music Awards"
+          ],
+          "answer_start": [
+            35
+          ]
+        },
+        "id": "56bfab98a10cfb140055121f"
+      },
+      {
+        "question": "Why was the broadcast the most-watched in history?",
+        "answers": {
+          "text": [
+            "Her appearance"
+          ],
+          "answer_start": [
+            417
+          ]
+        },
+        "id": "56bfab98a10cfb1400551220"
+      },
+      {
+        "question": "What even was recorded in the Guinness World Records?",
+        "answers": {
+          "text": [
+            "most tweets per second"
+          ],
+          "answer_start": [
+            616
+          ]
+        },
+        "id": "56bfab98a10cfb1400551221"
+      },
+      {
+        "question": "What was the most searched term in week of Aug 29, 2011?",
+        "answers": {
+          "text": [
+            "Beyonce pregnant"
+          ],
+          "answer_start": [
+            719
+          ]
+        },
+        "id": "56bfab98a10cfb1400551222"
+      },
+      {
+        "question": "What song did she perform at the MTV Awards?",
+        "answers": {
+          "text": [
+            "Love on Top"
+          ],
+          "answer_start": [
+            92
+          ]
+        },
+        "id": "56bfab98a10cfb1400551223"
+      },
+      {
+        "question": "Where did Beyoncé announce her pregnancy?",
+        "answers": {
+          "text": [
+            "2011 MTV Video Music Awards"
+          ],
+          "answer_start": [
+            35
+          ]
+        },
+        "id": "56d4d18d2ccc5a1400d83258"
+      },
+      {
+        "question": "What song did Beyoncé sing prior to announcing her pregnancy?",
+        "answers": {
+          "text": [
+            "Love on Top"
+          ],
+          "answer_start": [
+            92
+          ]
+        },
+        "id": "56d4d18d2ccc5a1400d83259"
+      },
+      {
+        "question": "How many people watched the 2011 MTV Video Music Awards?",
+        "answers": {
+          "text": [
+            "12.4 million"
+          ],
+          "answer_start": [
+            535
+          ]
+        },
+        "id": "56d4d18d2ccc5a1400d8325a"
+      },
+      {
+        "question": "What was the most searched term on Google for the week of August 29, 2011?",
+        "answers": {
+          "text": [
+            "Beyonce pregnant"
+          ],
+          "answer_start": [
+            719
+          ]
+        },
+        "id": "56d4d18d2ccc5a1400d8325c"
+      }
+    ]
+  },
+  {
+    "index": 29,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé and Jay Z's Blue Ivy Carter\" focused on \"A Family Milestone\". At the top, a cartoon illustration of a family with a newborn baby (figure) is placed, symbolizing the birth event. Below the illustration, a text line states \"Beyoncé gave birth to Blue Ivy Carter on January 7, 2012\". Adjacent to this text, a figure caption reads. Near the middle of the image, a stylized representation of a website icon (figure) is shown, with the text \"Jay Z's website is called Lifeandtimes.com\" placed to its right. Below this, a figure caption reads. Further down, a text line states \"Jay Z released 'Glory' two days after Blue Ivy was born\", with a figure caption describing. To the right of this, a text line reads \"Blue Ivy's cries are included at the end of 'Glory'\", and a figure caption explains. At the bottom, a text line states \"Blue Ivy was credited as 'B.I.C.' on the song\", with a figure caption reading. The overall style of the image is a cartoon and illustrative style with no letters, numerals, words, acronyms, or logos."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features. It's a plain, unadorned white space."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          438
+        ],
+        "caption": "An illustration of A cartoon depiction of Beyoncé and Jay Z with their newborn daughter"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          72,
+          923
+        ],
+        "bottom_right": [
+          496,
+          1662
+        ],
+        "caption": "A stylized website icon representing Jay Z's online presence"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          524,
+          921
+        ],
+        "bottom_right": [
+          823,
+          1213
+        ],
+        "caption": "An illustration of A symbolic musical note with the title 'Glory' and a baby's cry icon"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          72,
+          1774
+        ],
+        "bottom_right": [
+          325,
+          2006
+        ],
+        "caption": "An illustration of A cartoon of a baby crying with a music note"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          524,
+          1242
+        ],
+        "bottom_right": [
+          823,
+          1662
+        ],
+        "caption": "A stylized abbreviation 'B.I.C.' with a baby symbol"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          120,
+          87
+        ],
+        "bottom_right": [
+          775,
+          356
+        ],
+        "caption": "Text \"Beyoncé and Jay Z's Blue Ivy Carter\" in <color-1>, <en-font-0>. ",
+        "text": "Beyoncé and Jay Z's Blue Ivy Carter"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          365,
+          1797
+        ],
+        "bottom_right": [
+          823,
+          1986
+        ],
+        "caption": "Text \"A Family Milestone\" in <color-1>, <en-font-0>. ",
+        "text": "A Family Milestone"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          125,
+          982
+        ],
+        "bottom_right": [
+          441,
+          1186
+        ],
+        "caption": "Text \"Beyoncé gave birth to Blue Ivy Carter on January 7, 2012\" in <color-1>, <en-font-0>. ",
+        "text": "Beyoncé gave birth to Blue Ivy Carter on January 7, 2012"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          573,
+          974
+        ],
+        "bottom_right": [
+          774,
+          1164
+        ],
+        "caption": "Text \"Jay Z's website is called Lifeandtimes.com\" in <color-1>, <en-font-0>. ",
+        "text": "Jay Z's website is called Lifeandtimes.com"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          127,
+          1251
+        ],
+        "bottom_right": [
+          443,
+          1288
+        ],
+        "caption": "Text \"Jay Z released 'Glory' two days after Blue Ivy was born\" in <color-1>, <en-font-0>. ",
+        "text": "Jay Z released 'Glory' two days after Blue Ivy was born"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          227,
+          2158
+        ],
+        "bottom_right": [
+          668,
+          2195
+        ],
+        "caption": "Text \"Blue Ivy's cries are included at the end of 'Glory'\" in <color-1>, <en-font-0>. ",
+        "text": "Blue Ivy's cries are included at the end of 'Glory'"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          127,
+          1355
+        ],
+        "bottom_right": [
+          443,
+          1392
+        ],
+        "caption": "Text \"Blue Ivy was credited as 'B.I.C.' on the song\" in <color-1>, <en-font-0>. ",
+        "text": "Blue Ivy was credited as 'B.I.C.' on the song"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé and Jay Z's Blue Ivy Carter\" (text) focused on \"A Family Milestone\" (text). At the top, a cartoon illustration of a family with a newborn baby (figure) is placed, symbolizing the birth event. Below the illustration, a text line states \"Beyoncé gave birth to Blue Ivy Carter on January 7, 2012\" (text). Adjacent to this text, a figure caption reads \"A cartoon depiction of Beyoncé and Jay Z with their newborn daughter\" (figure).  \n\nNear the middle of the image, a stylized representation of a website icon (figure) is shown, with the text \"Jay Z's website is called Lifeandtimes.com\" (text) placed to its right. Below this, a figure caption reads \"A stylized website icon representing Jay Z's online presence\" (figure).  \n\nFurther down, a text line states \"Jay Z released 'Glory' two days after Blue Ivy was born\" (text), with a figure caption describing \"A symbolic musical note with the title 'Glory' and a baby's cry icon\" (figure). To the right of this, a text line reads \"Blue Ivy's cries are included at the end of 'Glory'\" (text), and a figure caption explains \"A cartoon of a baby crying with a music note\" (figure).  \n\nAt the bottom, a text line states \"Blue Ivy was credited as 'B.I.C.' on the song\" (text), with a figure caption reading \"A stylized abbreviation 'B.I.C.' with a baby symbol\" (figure). The overall style of the image is a cartoon and illustrative style with no letters, numerals, words, acronyms, or logos.",
+    "original_bbox_index": 28,
+    "context": "On January 7, 2012, Beyoncé gave birth to a daughter, Blue Ivy Carter, at Lenox Hill Hospital in New York under heavy security. Two days later, Jay Z released \"Glory\", a song dedicated to their child, on his website Lifeandtimes.com. The song detailed the couple's pregnancy struggles, including a miscarriage Beyoncé suffered before becoming pregnant with Blue Ivy. Blue Ivy's cries are included at the end of the song, and she was officially credited as \"B.I.C.\" on it. At two days old, she became the youngest person ever to appear on a Billboard chart when \"Glory\" debuted on the Hot R&B/Hip-Hop Songs chart.",
+    "original_qa_pairs": [
+      {
+        "question": "Jay Z has a website called what?",
+        "answers": {
+          "text": [
+            "Lifeandtimes.com"
+          ],
+          "answer_start": [
+            216
+          ]
+        },
+        "id": "56bea9043aeaaa14008c91b1"
+      },
+      {
+        "question": "Which song by Jay Z talked about the pregnancy struggles?",
+        "answers": {
+          "text": [
+            "Glory"
+          ],
+          "answer_start": [
+            160
+          ]
+        },
+        "id": "56bea9043aeaaa14008c91b3"
+      },
+      {
+        "question": "What was the name of Beyonce's daughter?",
+        "answers": {
+          "text": [
+            "Blue Ivy Carter"
+          ],
+          "answer_start": [
+            54
+          ]
+        },
+        "id": "56bfacdda10cfb1400551229"
+      },
+      {
+        "question": "At what hospital was the baby delivered?",
+        "answers": {
+          "text": [
+            "Lenox Hill Hospital"
+          ],
+          "answer_start": [
+            74
+          ]
+        },
+        "id": "56bfacdda10cfb140055122a"
+      },
+      {
+        "question": "What was the named of the song  dedicated to the child?",
+        "answers": {
+          "text": [
+            "Glory"
+          ],
+          "answer_start": [
+            160
+          ]
+        },
+        "id": "56bfacdda10cfb140055122b"
+      },
+      {
+        "question": "What does B.I.C. stand for?",
+        "answers": {
+          "text": [
+            "Blue Ivy Carter"
+          ],
+          "answer_start": [
+            54
+          ]
+        },
+        "id": "56bfacdda10cfb140055122c"
+      },
+      {
+        "question": "Who was credited for her cries on the song?",
+        "answers": {
+          "text": [
+            "B.I.C."
+          ],
+          "answer_start": [
+            457
+          ]
+        },
+        "id": "56bfacdda10cfb140055122d"
+      },
+      {
+        "question": "When did Beyoncé give birth to her daughter?",
+        "answers": {
+          "text": [
+            "January 7, 2012"
+          ],
+          "answer_start": [
+            3
+          ]
+        },
+        "id": "56d4d2232ccc5a1400d83262"
+      },
+      {
+        "question": "What did Beyoncé and Jay Z name their daughter?",
+        "answers": {
+          "text": [
+            "Blue Ivy Carter"
+          ],
+          "answer_start": [
+            54
+          ]
+        },
+        "id": "56d4d2232ccc5a1400d83263"
+      },
+      {
+        "question": "What song did Jay Z release two days after Blue Ivy was born?",
+        "answers": {
+          "text": [
+            "Glory"
+          ],
+          "answer_start": [
+            160
+          ]
+        },
+        "id": "56d4d2232ccc5a1400d83264"
+      },
+      {
+        "question": "What is included at the end of Glory?",
+        "answers": {
+          "text": [
+            "Blue Ivy's cries"
+          ],
+          "answer_start": [
+            367
+          ]
+        },
+        "id": "56d4d2232ccc5a1400d83265"
+      },
+      {
+        "question": "How was Blue Ivy credited on Glory?",
+        "answers": {
+          "text": [
+            "B.I.C."
+          ],
+          "answer_start": [
+            457
+          ]
+        },
+        "id": "56d4d2232ccc5a1400d83266"
+      }
+    ]
+  },
+  {
+    "index": 43,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Stage Presence and Voice\" focused on \"Celebrity Praise and Recognition\". At the top, a cartoon illustration of Beyoncé performing on stage (figure) is placed, capturing her dynamic energy. Below the illustration, a text line reads \"Critics and industry figures have praised Beyoncé for her exceptional stage presence and voice\". Adjacent to this text, a stylized microphone icon (figure) symbolizes her vocal talent. Near the microphone, a text line states \"Jarett Wieselman of the New York Post ranked her number one on his list of the Five Best Singer/Dancers\". Below that, a text line reads \"L.A. Reid, former president of Def Jam, called her the greatest entertainer alive\". To the right of this line, a figure caption describes. At the bottom, a text line states \"Alice Jones of The Independent noted she 'takes her role as entertainer so seriously she's almost too good'\". The overall style of the image is a cartoon or illustrative style with no letters, numerals, words, acronyms, or logos."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a black and white grid pattern. It consists of a series of squares arranged in a grid-like fashion. The squares are uniformly sized and are either filled with black or white, creating a repetitive pattern across the entire image. There are no texts, objects, or other elements visible in the image. The pattern is simple and does not depict any recognizable shapes or forms."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          996
+        ],
+        "bottom_right": [
+          896,
+          1851
+        ],
+        "caption": "An illustration of a cartoon of Beyoncé with a crown and a microphone, symbolizing her status as a top entertainer"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          128,
+          129
+        ],
+        "bottom_right": [
+          767,
+          277
+        ],
+        "caption": "Text \"Beyoncé's Stage Presence and Voice\" in <color-1>, <en-font-0>. ",
+        "text": "Beyoncé's Stage Presence and Voice"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          415,
+          391
+        ],
+        "bottom_right": [
+          758,
+          484
+        ],
+        "caption": "Text \"Celebrity Praise and Recognition\" in <color-1>, <en-font-0>. ",
+        "text": "Celebrity Praise and Recognition"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          415,
+          906
+        ],
+        "bottom_right": [
+          758,
+          999
+        ],
+        "caption": "Text \"Critics and industry figures have praised Beyoncé for her exceptional stage presence and voice\" in <color-1>, <en-font-0>. ",
+        "text": "Critics and industry figures have praised Beyoncé for her exceptional stage presence and voice"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          310,
+          1244
+        ],
+        "bottom_right": [
+          722,
+          1321
+        ],
+        "caption": "Text \"Jarett Wieselman of the New York Post ranked her number one on his list of the Five Best Singer/Dancers\" in <color-1>, <en-font-0>. ",
+        "text": "Jarett Wieselman of the New York Post ranked her number one on his list of the Five Best Singer/Dancers"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          274,
+          2014
+        ],
+        "bottom_right": [
+          493,
+          2112
+        ],
+        "caption": "Text \"L.A. Reid, former president of Def Jam, called her the greatest entertainer alive\" in <color-1>, <en-font-0>. ",
+        "text": "L.A. Reid, former president of Def Jam, called her the greatest entertainer alive"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          415,
+          566
+        ],
+        "bottom_right": [
+          762,
+          635
+        ],
+        "caption": "Text \"Alice Jones of The Independent noted she 'takes her role as entertainer so seriously she's almost too good'\" in <color-1>, <en-font-0>. ",
+        "text": "Alice Jones of The Independent noted she 'takes her role as entertainer so seriously she's almost too good'"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Stage Presence and Voice\" (text) focused on \"Celebrity Praise and Recognition\" (text). At the top, a cartoon illustration of Beyoncé performing on stage (figure) is placed, capturing her dynamic energy. Below the illustration, a text line reads \"Critics and industry figures have praised Beyoncé for her exceptional stage presence and voice\" (text). Adjacent to this text, a stylized microphone icon (figure) symbolizes her vocal talent. Near the microphone, a text line states \"Jarett Wieselman of the New York Post ranked her number one on his list of the Five Best Singer/Dancers\" (text). Below that, a text line reads \"L.A. Reid, former president of Def Jam, called her the greatest entertainer alive\" (text). To the right of this line, a figure caption describes \"a cartoon of Beyoncé with a crown and a microphone, symbolizing her status as a top entertainer\" (figure). At the bottom, a text line states \"Alice Jones of The Independent noted she 'takes her role as entertainer so seriously she's almost too good'\" (text). The overall style of the image is a cartoon or illustrative style with no letters, numerals, words, acronyms, or logos.",
+    "original_bbox_index": 15,
+    "context": "Beyoncé has received praise for her stage presence and voice during live performances. Jarett Wieselman of the New York Post placed her at number one on her list of the Five Best Singer/Dancers. According to Barbara Ellen of The Guardian Beyoncé is the most in-charge female artist she's seen onstage, while Alice Jones of The Independent wrote she \"takes her role as entertainer so seriously she's almost too good.\" The ex-President of Def Jam L.A. Reid has described Beyoncé as the greatest entertainer alive. Jim Farber of the Daily News and Stephanie Classen of Star Phoenix both praised her strong voice and her stage presence.",
+    "original_qa_pairs": [
+      {
+        "question": "What characteristics has Beyonce received acclaim for?",
+        "answers": {
+          "text": [
+            "stage presence and voice"
+          ],
+          "answer_start": [
+            36
+          ]
+        },
+        "id": "56bec3303aeaaa14008c9391"
+      },
+      {
+        "question": "Which former president of Def Jam called Beyonce the greatest entertainer alive?",
+        "answers": {
+          "text": [
+            "L.A. Reid"
+          ],
+          "answer_start": [
+            445
+          ]
+        },
+        "id": "56bec3303aeaaa14008c9393"
+      },
+      {
+        "question": "For what does Beyonce receive praise?",
+        "answers": {
+          "text": [
+            "stage presence"
+          ],
+          "answer_start": [
+            36
+          ]
+        },
+        "id": "56bfc281a10cfb14005512b5"
+      },
+      {
+        "question": "Who chose her as number one on his list of Best singers/ Dancers?",
+        "answers": {
+          "text": [
+            "Jarett Wieselman"
+          ],
+          "answer_start": [
+            87
+          ]
+        },
+        "id": "56bfc281a10cfb14005512b6"
+      },
+      {
+        "question": "How has L.A. Reid described her?",
+        "answers": {
+          "text": [
+            "greatest entertainer alive"
+          ],
+          "answer_start": [
+            484
+          ]
+        },
+        "id": "56bfc281a10cfb14005512b8"
+      },
+      {
+        "question": "How does Alice Jones describe her?",
+        "answers": {
+          "text": [
+            "she's almost too good"
+          ],
+          "answer_start": [
+            393
+          ]
+        },
+        "id": "56bfc281a10cfb14005512b9"
+      },
+      {
+        "question": "Who has Beyoncé at number one on her Five Best Singer/Dancers?",
+        "answers": {
+          "text": [
+            "Jarett Wieselman"
+          ],
+          "answer_start": [
+            87
+          ]
+        },
+        "id": "56d4e2142ccc5a1400d832ec"
+      },
+      {
+        "question": "Who has said that Beyoncé is the best entertainer alive?",
+        "answers": {
+          "text": [
+            "L.A. Reid"
+          ],
+          "answer_start": [
+            445
+          ]
+        },
+        "id": "56d4e2142ccc5a1400d832ed"
+      }
+    ]
+  },
+  {
+    "index": 44,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Alter Ego\" focused on \"Sasha Fierce\". At the top, a cartoon illustration of Beyoncé with a stylized split face, one side representing her real self and the other as Sasha Fierce, appears above a section header. Below the illustration, a text line reads \"Beyoncé created an alter ego named Sasha Fierce\". Adjacent to this text, a figure caption describes. Near the middle, a text line states \"Sasha was conceived during the making of 'Crazy in Love'\". To the right of this text, a figure caption reads. Below this, a text line says \"Beyoncé introduced Sasha Fierce in 2008\", and adjacent to it, a figure caption describes. At the bottom, a text line reads \"She described Sasha as 'too aggressive, too strong, too sassy [and] too sexy'\". To the right of this, a figure caption states. The overall style of the image is minimalist, cartoonish, and stylized."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is a blank, white canvas with no visible content or objects. It appears to be a simple, unadorned background with no text or additional elements. The color is uniform and there are no distinguishable features or patterns."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          600,
+          805
+        ],
+        "bottom_right": [
+          896,
+          1500
+        ],
+        "caption": "An illustration of a cartoon of Beyoncé with a split face, one side representing her real self and the other as Sasha Fierce"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          1783
+        ],
+        "bottom_right": [
+          354,
+          2240
+        ],
+        "caption": "a stylized scene of a studio with a microphone and notes labeled 'Crazy in Love'"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          427
+        ],
+        "bottom_right": [
+          242,
+          1087
+        ],
+        "caption": "a stylized album cover with the title 'I Am... Sasha Fierce'"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          86,
+          378
+        ],
+        "bottom_right": [
+          805,
+          561
+        ],
+        "caption": "An illustration of a cartoon of a confident, stylized figure with exaggerated features"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          144,
+          183
+        ],
+        "bottom_right": [
+          740,
+          357
+        ],
+        "caption": "Text \"Beyoncé's Alter Ego\" in <color-2>, <en-font-326>. ",
+        "text": "Beyoncé's Alter Ego"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          244,
+          481
+        ],
+        "bottom_right": [
+          896,
+          603
+        ],
+        "caption": "Text \"Sasha Fierce\" in <color-2>, <en-font-326>. ",
+        "text": "Sasha Fierce"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          244,
+          686
+        ],
+        "bottom_right": [
+          896,
+          807
+        ],
+        "caption": "Text \"Beyoncé created an alter ego named Sasha Fierce\" in <color-2>, <en-font-326>. ",
+        "text": "Beyoncé created an alter ego named Sasha Fierce"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          244,
+          1715
+        ],
+        "bottom_right": [
+          896,
+          1835
+        ],
+        "caption": "Text \"Sasha was conceived during the making of 'Crazy in Love'\" in <color-2>, <en-font-326>. ",
+        "text": "Sasha was conceived during the making of 'Crazy in Love'"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          244,
+          1309
+        ],
+        "bottom_right": [
+          896,
+          1428
+        ],
+        "caption": "Text \"Beyoncé introduced Sasha Fierce in 2008\" in <color-2>, <en-font-326>. ",
+        "text": "Beyoncé introduced Sasha Fierce in 2008"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          244,
+          1510
+        ],
+        "bottom_right": [
+          896,
+          1629
+        ],
+        "caption": "Text \"She described Sasha as 'too aggressive, too strong, too sassy [and] too sexy'\" in <color-2>, <en-font-326>. ",
+        "text": "She described Sasha as 'too aggressive, too strong, too sassy [and] too sexy'"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Alter Ego\" (text) focused on \"Sasha Fierce\" (text). At the top, a cartoon illustration of Beyoncé with a stylized split face, one side representing her real self and the other as Sasha Fierce, appears above a section header. Below the illustration, a text line reads \"Beyoncé created an alter ego named Sasha Fierce\" (text). Adjacent to this text, a figure caption describes \"a cartoon of Beyoncé with a split face, one side representing her real self and the other as Sasha Fierce\" (figure).  \n\nNear the middle, a text line states \"Sasha was conceived during the making of 'Crazy in Love'\" (text). To the right of this text, a figure caption reads \"a stylized scene of a studio with a microphone and notes labeled 'Crazy in Love'\" (figure). Below this, a text line says \"Beyoncé introduced Sasha Fierce in 2008\" (text), and adjacent to it, a figure caption describes \"a stylized album cover with the title 'I Am... Sasha Fierce'\" (figure).  \n\nAt the bottom, a text line reads \"She described Sasha as 'too aggressive, too strong, too sassy [and] too sexy'\" (text). To the right of this, a figure caption states \"a cartoon of a confident, stylized figure with exaggerated features\" (figure). The overall style of the image is minimalist, cartoonish, and stylized.",
+    "original_bbox_index": 24,
+    "context": "Described as being \"sexy, seductive and provocative\" when performing on stage, Beyoncé has said that she originally created the alter ego \"Sasha Fierce\" to keep that stage persona separate from who she really is. She described Sasha as being \"too aggressive, too strong, too sassy [and] too sexy\", stating, \"I'm not like her in real life at all.\" Sasha was conceived during the making of \"Crazy in Love\", and Beyoncé introduced her with the release of her 2008 album I Am... Sasha Fierce. In February 2010, she announced in an interview with Allure magazine that she was comfortable enough with herself to no longer need Sasha Fierce. However, Beyoncé announced in May 2012 that she would bring her back for her Revel Presents: Beyoncé Live shows later that month.",
+    "original_qa_pairs": [
+      {
+        "question": "Beyonce self proclaimed alter ego is named what?",
+        "answers": {
+          "text": [
+            "Sasha Fierce"
+          ],
+          "answer_start": [
+            139
+          ]
+        },
+        "id": "56bec3ea3aeaaa14008c939f"
+      },
+      {
+        "question": "Her alter ego was born when according to Beyonce?",
+        "answers": {
+          "text": [
+            "making of \"Crazy in Love\""
+          ],
+          "answer_start": [
+            378
+          ]
+        },
+        "id": "56bec3ea3aeaaa14008c93a0"
+      },
+      {
+        "question": "What year did Beyonce do away with Sasha Fierce?",
+        "answers": {
+          "text": [
+            "2010"
+          ],
+          "answer_start": [
+            501
+          ]
+        },
+        "id": "56bec3ea3aeaaa14008c93a2"
+      },
+      {
+        "question": "Beyonce brought back Sasha Fierce during which event?",
+        "answers": {
+          "text": [
+            "Revel Presents: Beyoncé Live"
+          ],
+          "answer_start": [
+            712
+          ]
+        },
+        "id": "56bec3ea3aeaaa14008c93a3"
+      },
+      {
+        "question": "How does she describe Sasha?",
+        "answers": {
+          "text": [
+            "too aggressive, too strong"
+          ],
+          "answer_start": [
+            243
+          ]
+        },
+        "id": "56bfc420a10cfb14005512c0"
+      },
+      {
+        "question": "Later what did she say about Sasha?",
+        "answers": {
+          "text": [
+            "she would bring her back"
+          ],
+          "answer_start": [
+            679
+          ]
+        },
+        "id": "56bfc420a10cfb14005512c2"
+      },
+      {
+        "question": "What is the name of Beyoncé's alter ego?",
+        "answers": {
+          "text": [
+            "Sasha Fierce."
+          ],
+          "answer_start": [
+            475
+          ]
+        },
+        "id": "56d4e2e12ccc5a1400d832f0"
+      },
+      {
+        "question": "When did Beyoncé introduce Sasha Fierce?",
+        "answers": {
+          "text": [
+            "2008"
+          ],
+          "answer_start": [
+            456
+          ]
+        },
+        "id": "56d4e2e12ccc5a1400d832f1"
+      },
+      {
+        "question": "Sasha Fierce was created during the making of what song?",
+        "answers": {
+          "text": [
+            "Crazy in Love"
+          ],
+          "answer_start": [
+            389
+          ]
+        },
+        "id": "56d4e2e12ccc5a1400d832f2"
+      },
+      {
+        "question": "Who did Beyoncé tell in February 2010 that Sasha Fierce was no longer needed?",
+        "answers": {
+          "text": [
+            "Allure magazine"
+          ],
+          "answer_start": [
+            542
+          ]
+        },
+        "id": "56d4e2e12ccc5a1400d832f3"
+      }
+    ]
+  },
+  {
+    "index": 45,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Sex Appeal and Cultural Impact\" focused on \"Media Perception and Public Image\". At the top, a cartoon illustration of Beyoncé in a stylized pose (figure) captures her onstage presence. Below the illustration, a short phrase reads \"Beyoncé's onstage dress is for the stage\". Adjacent to this text, another line states \"Offstage, she likes to dress sexily\". In the middle, a figure shows a stylized representation of the term with a caption explaining it is a portmanteau of \"booty\" and \"delicious\". Below that, a text line reads \"Media often used 'Bootylicious' to describe Beyoncé in the 2000s\". Near the bottom, a cartoon scene illustrates a dictionary entry (figure) with the caption \"Added to the Oxford English Dictionary in 2006\". A final line at the bottom states \"Music journalist Touré called her a 'crossover sex symbol'\". The overall style of the image is cartoonish and illustrative, emphasizing symbolic visuals over literal depictions."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, texts, or any other discernible features present in the image. It's a simple, unadorned white space with no additional context or content."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          522
+        ],
+        "caption": "An illustration of Bootylicious"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          62,
+          121
+        ],
+        "bottom_right": [
+          823,
+          375
+        ],
+        "caption": "Text \"Beyoncé's Sex Appeal and Cultural Impact\" in <color-6>, <en-font-491>. ",
+        "text": "Beyoncé's Sex Appeal and Cultural Impact"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          431,
+          1087
+        ],
+        "bottom_right": [
+          789,
+          1239
+        ],
+        "caption": "Text \"Media Perception and Public Image\" in <color-2>, <en-font-491>. ",
+        "text": "Media Perception and Public Image"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          95,
+          735
+        ],
+        "bottom_right": [
+          454,
+          886
+        ],
+        "caption": "Text \"Beyoncé's onstage dress is for the stage\" in <color-6>, <en-font-491>. ",
+        "text": "Beyoncé's onstage dress is for the stage"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          95,
+          1435
+        ],
+        "bottom_right": [
+          454,
+          1586
+        ],
+        "caption": "Text \"Offstage, she likes to dress sexily\" in <color-2>, <en-font-491>. ",
+        "text": "Offstage, she likes to dress sexily"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          431,
+          1751
+        ],
+        "bottom_right": [
+          789,
+          1902
+        ],
+        "caption": "Text \"delicious\" in <color-2>, <en-font-491>. ",
+        "text": "delicious"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          95,
+          1349
+        ],
+        "bottom_right": [
+          327,
+          1422
+        ],
+        "caption": "Text \"Media often used 'Bootylicious' to describe Beyoncé in the 2000s\" in <color-6>, <en-font-491>. ",
+        "text": "Media often used 'Bootylicious' to describe Beyoncé in the 2000s"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          431,
+          1005
+        ],
+        "bottom_right": [
+          649,
+          1078
+        ],
+        "caption": "Text \"Added to the Oxford English Dictionary in 2006\" in <color-6>, <en-font-491>. ",
+        "text": "Added to the Oxford English Dictionary in 2006"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          211,
+          2034
+        ],
+        "bottom_right": [
+          677,
+          2067
+        ],
+        "caption": "Text \"Music journalist Touré called her a 'crossover sex symbol'\" in <color-2>, <en-font-491>. ",
+        "text": "Music journalist Touré called her a 'crossover sex symbol'"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Sex Appeal and Cultural Impact\" (text) focused on \"Media Perception and Public Image\" (text). At the top, a cartoon illustration of Beyoncé in a stylized pose (figure) captures her onstage presence. Below the illustration, a short phrase reads \"Beyoncé's onstage dress is for the stage\" (text). Adjacent to this text, another line states \"Offstage, she likes to dress sexily\" (text). In the middle, a figure shows a stylized representation of the term \"Bootylicious\" (figure) with a caption explaining it is a portmanteau of \"booty\" and \"delicious\" (text). Below that, a text line reads \"Media often used 'Bootylicious' to describe Beyoncé in the 2000s\" (text). Near the bottom, a cartoon scene illustrates a dictionary entry (figure) with the caption \"Added to the Oxford English Dictionary in 2006\" (text). A final line at the bottom states \"Music journalist Touré called her a 'crossover sex symbol'\" (text). The overall style of the image is cartoonish and illustrative, emphasizing symbolic visuals over literal depictions.",
+    "original_bbox_index": 11,
+    "context": "Beyoncé has been described as a having a wide-ranging sex appeal, with music journalist Touré writing that since the release of Dangerously in Love, she has \"become a crossover sex symbol\". Offstage Beyoncé says that while she likes to dress sexily, her onstage dress \"is absolutely for the stage.\" Due to her curves and the term's catchiness, in the 2000s, the media often used the term \"Bootylicious\" (a portmanteau of the words booty and delicious) to describe Beyoncé, the term popularized by Destiny's Child's single of the same name. In 2006, it was added to the Oxford English Dictionary.",
+    "original_qa_pairs": [
+      {
+        "question": "Beyonce's sex appeal is characterized as what?",
+        "answers": {
+          "text": [
+            "wide-ranging"
+          ],
+          "answer_start": [
+            41
+          ]
+        },
+        "id": "56bec4de3aeaaa14008c93bb"
+      },
+      {
+        "question": "Which music journalist described Beyonce as a \"crossover sex symbol?\"",
+        "answers": {
+          "text": [
+            "Touré"
+          ],
+          "answer_start": [
+            88
+          ]
+        },
+        "id": "56bec4de3aeaaa14008c93bc"
+      },
+      {
+        "question": "Which word spawned from a term used to describe Beyonce in 2006?",
+        "answers": {
+          "text": [
+            "Bootylicious"
+          ],
+          "answer_start": [
+            389
+          ]
+        },
+        "id": "56bec4de3aeaaa14008c93bd"
+      },
+      {
+        "question": "Bootylicious was a song from which act that Beyonce performed with?",
+        "answers": {
+          "text": [
+            "Destiny's Child"
+          ],
+          "answer_start": [
+            497
+          ]
+        },
+        "id": "56bec4de3aeaaa14008c93be"
+      },
+      {
+        "question": "Oxford Dictionary added which word from the 2000s dedicated to Beyonce?",
+        "answers": {
+          "text": [
+            "Bootylicious"
+          ],
+          "answer_start": [
+            389
+          ]
+        },
+        "id": "56bec4de3aeaaa14008c93bf"
+      },
+      {
+        "question": "What word is often used to describe Beyonce/",
+        "answers": {
+          "text": [
+            "Bootylicious"
+          ],
+          "answer_start": [
+            389
+          ]
+        },
+        "id": "56bfc563a10cfb14005512ca"
+      },
+      {
+        "question": "When was the term added to the dictionary?",
+        "answers": {
+          "text": [
+            "2006"
+          ],
+          "answer_start": [
+            543
+          ]
+        },
+        "id": "56bfc563a10cfb14005512cc"
+      },
+      {
+        "question": "What journalist wrote that Beyoncé was a \"sex symbol\"?",
+        "answers": {
+          "text": [
+            "Touré"
+          ],
+          "answer_start": [
+            88
+          ]
+        },
+        "id": "56d4e5022ccc5a1400d832fa"
+      },
+      {
+        "question": "Because of Beyoncé's physical shape, what slang term has been used to describe her?",
+        "answers": {
+          "text": [
+            "Bootylicious"
+          ],
+          "answer_start": [
+            389
+          ]
+        },
+        "id": "56d4e5022ccc5a1400d832fb"
+      },
+      {
+        "question": "In what year was the slang term from a title of a Destiny's Child song that is also used to describe Beyoncé put in the dictionary?",
+        "answers": {
+          "text": [
+            "2006"
+          ],
+          "answer_start": [
+            543
+          ]
+        },
+        "id": "56d4e5022ccc5a1400d832fc"
+      },
+      {
+        "question": "How does Beyoncé say she likes to dress off-stage?",
+        "answers": {
+          "text": [
+            "sexily"
+          ],
+          "answer_start": [
+            242
+          ]
+        },
+        "id": "56d4e5022ccc5a1400d832fd"
+      }
+    ]
+  },
+  {
+    "index": 46,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Career and Recognition\" focused on \"Celebrity Achievements and Media Presence\". At the top, a stylized silhouette of Beyoncé is shown with a caption. Below the silhouette, the text \"Beyoncé's modelling debut in September 2010\" is placed. Adjacent to this, the text \"Tom Ford's Spring/Summer 2011 fashion show\" is positioned. Near the top, the text \"Named 'World's Most Beautiful Woman' by People\" appears. Below that, the text \"Hottest Female Singer of All Time by Complex\" is placed. In the middle, a cartoon representation of a magazine cover features the text. Below the magazine cover, the text \"January 2013\" is positioned. A figure of a TV channel logo with the caption is placed adjacent to the magazine cover. Near the bottom, a cartoon of a wax figure is shown with the caption. The overall style of the image is minimalist and illustrative."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely white. There are no objects, no text, and no discernible features. It's a blank, uniform color with no variation or detail."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          448
+        ],
+        "caption": "An illustration of GQ's 100 Sexiest Women of the 21st Century"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          77,
+          500
+        ],
+        "bottom_right": [
+          818,
+          652
+        ],
+        "caption": "An illustration of VH1 listed her as number 1 on its 100 Sexiest Artists list"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          77,
+          1342
+        ],
+        "bottom_right": [
+          818,
+          1494
+        ],
+        "caption": "An illustration of Madame Tussauds Wax Museums"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          104,
+          113
+        ],
+        "bottom_right": [
+          791,
+          334
+        ],
+        "caption": "Text \"Beyoncé's Career and Recognition\" in <color-2>, <en-font-0>. ",
+        "text": "Beyoncé's Career and Recognition"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          377,
+          685
+        ],
+        "bottom_right": [
+          805,
+          866
+        ],
+        "caption": "Text \"Celebrity Achievements and Media Presence\" in <color-2>, <en-font-0>. ",
+        "text": "Celebrity Achievements and Media Presence"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          377,
+          1109
+        ],
+        "bottom_right": [
+          805,
+          1290
+        ],
+        "caption": "Text \"Beyoncé's modelling debut in September 2010\" in <color-2>, <en-font-0>. ",
+        "text": "Beyoncé's modelling debut in September 2010"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          377,
+          1551
+        ],
+        "bottom_right": [
+          805,
+          1697
+        ],
+        "caption": "Text \"Tom Ford's Spring/Summer 2011 fashion show\" in <color-2>, <en-font-0>. ",
+        "text": "Tom Ford's Spring/Summer 2011 fashion show"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          377,
+          1983
+        ],
+        "bottom_right": [
+          805,
+          2129
+        ],
+        "caption": "Text \"Named 'World's Most Beautiful Woman' by People\" in <color-2>, <en-font-0>. ",
+        "text": "Named 'World's Most Beautiful Woman' by People"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          104,
+          969
+        ],
+        "bottom_right": [
+          791,
+          1019
+        ],
+        "caption": "Text \"Hottest Female Singer of All Time by Complex\" in <color-2>, <en-font-0>. ",
+        "text": "Hottest Female Singer of All Time by Complex"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          104,
+          1393
+        ],
+        "bottom_right": [
+          791,
+          1443
+        ],
+        "caption": "Text \"January 2013\" in <color-2>, <en-font-0>. ",
+        "text": "January 2013"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Career and Recognition\" (text) focused on \"Celebrity Achievements and Media Presence\" (text). At the top, a stylized silhouette of Beyoncé is shown with a caption. Below the silhouette, the text \"Beyoncé's modelling debut in September 2010\" (text) is placed. Adjacent to this, the text \"Tom Ford's Spring/Summer 2011 fashion show\" (text) is positioned. Near the top, the text \"Named 'World's Most Beautiful Woman' by People\" (text) appears. Below that, the text \"Hottest Female Singer of All Time by Complex\" (text) is placed. In the middle, a cartoon representation of a magazine cover features the text \"GQ's 100 Sexiest Women of the 21st Century\" (figure). Below the magazine cover, the text \"January 2013\" (text) is positioned. A figure of a TV channel logo with the caption \"VH1 listed her as number 1 on its 100 Sexiest Artists list\" (figure) is placed adjacent to the magazine cover. Near the bottom, a cartoon of a wax figure is shown with the caption \"Madame Tussauds Wax Museums\" (figure). The overall style of the image is minimalist and illustrative.",
+    "original_bbox_index": 51,
+    "context": "In September 2010, Beyoncé made her runway modelling debut at Tom Ford's Spring/Summer 2011 fashion show. She was named \"World's Most Beautiful Woman\" by People and the \"Hottest Female Singer of All Time\" by Complex in 2012. In January 2013, GQ placed her on its cover, featuring her atop its \"100 Sexiest Women of the 21st Century\" list. VH1 listed her at number 1 on its 100 Sexiest Artists list. Several wax figures of Beyoncé are found at Madame Tussauds Wax Museums in major cities around the world, including New York, Washington, D.C., Amsterdam, Bangkok, Hollywood and Sydney.",
+    "original_qa_pairs": [
+      {
+        "question": "in September 2010, what career area did Beyonce start exploring?",
+        "answers": {
+          "text": [
+            "modelling"
+          ],
+          "answer_start": [
+            43
+          ]
+        },
+        "id": "56bec5d53aeaaa14008c93d9"
+      },
+      {
+        "question": "Beyonce's first modelling event was at where?",
+        "answers": {
+          "text": [
+            "Tom Ford's Spring/Summer 2011 fashion show"
+          ],
+          "answer_start": [
+            62
+          ]
+        },
+        "id": "56bec5d53aeaaa14008c93da"
+      },
+      {
+        "question": "\"World's Most Beautiful woman\" was declared to Beyonce by which national magazine?",
+        "answers": {
+          "text": [
+            "People"
+          ],
+          "answer_start": [
+            154
+          ]
+        },
+        "id": "56bec5d53aeaaa14008c93db"
+      },
+      {
+        "question": "Which month and year did GQ feature Beyonce on its cover?",
+        "answers": {
+          "text": [
+            "January 2013"
+          ],
+          "answer_start": [
+            228
+          ]
+        },
+        "id": "56bec5d53aeaaa14008c93dc"
+      },
+      {
+        "question": "What TV network listed Beyonce as number 1 on its 100 Sexiest Artists list?",
+        "answers": {
+          "text": [
+            "VH1"
+          ],
+          "answer_start": [
+            339
+          ]
+        },
+        "id": "56bec5d53aeaaa14008c93dd"
+      },
+      {
+        "question": "Who called Beyonce the World's most Beautiful Woman?",
+        "answers": {
+          "text": [
+            "People"
+          ],
+          "answer_start": [
+            154
+          ]
+        },
+        "id": "56bfc6a6a10cfb14005512d3"
+      },
+      {
+        "question": "Who called her Hottest Female Singer of all Time?",
+        "answers": {
+          "text": [
+            "Complex"
+          ],
+          "answer_start": [
+            208
+          ]
+        },
+        "id": "56bfc6a6a10cfb14005512d4"
+      },
+      {
+        "question": "When did she appear on the cover of GQ?",
+        "answers": {
+          "text": [
+            "2013"
+          ],
+          "answer_start": [
+            236
+          ]
+        },
+        "id": "56bfc6a6a10cfb14005512d5"
+      },
+      {
+        "question": "VH1 listed her at what number on their 100 Sexiest Artists list?",
+        "answers": {
+          "text": [
+            "number 1"
+          ],
+          "answer_start": [
+            357
+          ]
+        },
+        "id": "56bfc6a6a10cfb14005512d6"
+      },
+      {
+        "question": "What year did Beyoncé first model for Tom Ford?",
+        "answers": {
+          "text": [
+            "2010"
+          ],
+          "answer_start": [
+            13
+          ]
+        },
+        "id": "56d4e5922ccc5a1400d83302"
+      },
+      {
+        "question": "What magazine said Beyoncé was the \"World's Most Beautiful Woman\"?",
+        "answers": {
+          "text": [
+            "People"
+          ],
+          "answer_start": [
+            154
+          ]
+        },
+        "id": "56d4e5922ccc5a1400d83303"
+      },
+      {
+        "question": "What title did Complex award Beyoncé?",
+        "answers": {
+          "text": [
+            "Hottest Female Singer of All Time"
+          ],
+          "answer_start": [
+            170
+          ]
+        },
+        "id": "56d4e5922ccc5a1400d83304"
+      },
+      {
+        "question": "What museum has made several models of Beyoncé in wax?",
+        "answers": {
+          "text": [
+            "Madame Tussauds Wax Museums"
+          ],
+          "answer_start": [
+            443
+          ]
+        },
+        "id": "56d4e5922ccc5a1400d83306"
+      }
+    ]
+  },
+  {
+    "index": 47,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Fashion Influence\" focused on \"Fashion and Celebrity Impact\". At the top, a cartoon illustration of Beyoncé in a stylish outfit (figure) is placed near the title. Below the title, a short phrase reads \"Beyoncé's mother co-wrote a book titled Destiny's Style\". Adjacent to this text, a stylized book icon (figure) is shown. In the middle, a visual of a video album cover with fashion-oriented footage (figure) is placed near the text \"The B'Day Anthology Video Album showcased classic to contemporary fashion styles\". Below this, a brief phrase states \"Beyoncé was featured on Sports Illustrated Swimsuit Issue in 2007\". To the right of this text, a cartoon image of Beyoncé on the magazine cover (figure) is positioned. Near the bottom, a text line reads \"People magazine recognized Beyoncé as the best-dressed celebrity\". A stylized magazine icon (figure) is placed adjacent to this text. The overall style of the image is minimalistic and illustrative, using cartoon and symbolic visuals to support the textual information."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely white. There are no objects, texts, or any other discernible features present in the image. The background is also white, creating a uniform and blank appearance."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          84,
+          35
+        ],
+        "bottom_right": [
+          802,
+          305
+        ],
+        "caption": "Text \"Beyoncé's Fashion Influence\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé's Fashion Influence"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          343,
+          1471
+        ],
+        "bottom_right": [
+          802,
+          1635
+        ],
+        "caption": "Text \"Fashion and Celebrity Impact\" in <color-1>, <en-font-154>. ",
+        "text": "Fashion and Celebrity Impact"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          359,
+          1017
+        ],
+        "bottom_right": [
+          802,
+          1181
+        ],
+        "caption": "Text \"Beyoncé's mother co-wrote a book titled Destiny's Style\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé's mother co-wrote a book titled Destiny's Style"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          361,
+          1982
+        ],
+        "bottom_right": [
+          796,
+          2149
+        ],
+        "caption": "Text \"The B'Day Anthology Video Album showcased classic to contemporary fashion styles\" in <color-1>, <en-font-154>. ",
+        "text": "The B'Day Anthology Video Album showcased classic to contemporary fashion styles"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          306,
+          406
+        ],
+        "bottom_right": [
+          774,
+          525
+        ],
+        "caption": "Text \"Beyoncé was featured on Sports Illustrated Swimsuit Issue in 2007\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé was featured on Sports Illustrated Swimsuit Issue in 2007"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          306,
+          1819
+        ],
+        "bottom_right": [
+          774,
+          1941
+        ],
+        "caption": "Text \"People magazine recognized Beyoncé as the best-dressed celebrity\" in <color-1>, <en-font-154>. ",
+        "text": "People magazine recognized Beyoncé as the best-dressed celebrity"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Fashion Influence\" (text) focused on \"Fashion and Celebrity Impact\" (text). At the top, a cartoon illustration of Beyoncé in a stylish outfit (figure) is placed near the title. Below the title, a short phrase reads \"Beyoncé's mother co-wrote a book titled Destiny's Style\" (text). Adjacent to this text, a stylized book icon (figure) is shown. In the middle, a visual of a video album cover with fashion-oriented footage (figure) is placed near the text \"The B'Day Anthology Video Album showcased classic to contemporary fashion styles\" (text). Below this, a brief phrase states \"Beyoncé was featured on Sports Illustrated Swimsuit Issue in 2007\" (text). To the right of this text, a cartoon image of Beyoncé on the magazine cover (figure) is positioned. Near the bottom, a text line reads \"People magazine recognized Beyoncé as the best-dressed celebrity\" (text). A stylized magazine icon (figure) is placed adjacent to this text. The overall style of the image is minimalistic and illustrative, using cartoon and symbolic visuals to support the textual information.",
+    "original_bbox_index": 45,
+    "context": "According to Italian fashion designer Roberto Cavalli, Beyoncé uses different fashion styles to work with her music while performing. Her mother co-wrote a book, published in 2002, titled Destiny's Style an account of how fashion had an impact on the trio's success. The B'Day Anthology Video Album showed many instances of fashion-oriented footage, depicting classic to contemporary wardrobe styles. In 2007, Beyoncé was featured on the cover of the Sports Illustrated Swimsuit Issue, becoming the second African American woman after Tyra Banks, and People magazine recognized Beyoncé as the best-dressed celebrity.",
+    "original_qa_pairs": [
+      {
+        "question": "Which parent of Beyonce's help co-write a book?",
+        "answers": {
+          "text": [
+            "Her mother"
+          ],
+          "answer_start": [
+            134
+          ]
+        },
+        "id": "56bec6763aeaaa14008c93f4"
+      },
+      {
+        "question": "Which African-American woman before Beyonce had posed for SI Swimsuit issue?",
+        "answers": {
+          "text": [
+            "Tyra Banks"
+          ],
+          "answer_start": [
+            535
+          ]
+        },
+        "id": "56bec6763aeaaa14008c93f7"
+      },
+      {
+        "question": "What was the title of Beyonce's mother's book?",
+        "answers": {
+          "text": [
+            "Destiny's Style"
+          ],
+          "answer_start": [
+            188
+          ]
+        },
+        "id": "56bfc87ca10cfb14005512dd"
+      },
+      {
+        "question": "When was she on the Sports Illustrated cover?",
+        "answers": {
+          "text": [
+            "2007"
+          ],
+          "answer_start": [
+            404
+          ]
+        },
+        "id": "56bfc87ca10cfb14005512e0"
+      },
+      {
+        "question": "Who was she the second  African American on the cover after?",
+        "answers": {
+          "text": [
+            "Tyra Banks"
+          ],
+          "answer_start": [
+            535
+          ]
+        },
+        "id": "56bfc87ca10cfb14005512e1"
+      },
+      {
+        "question": "Beyoncé was the second African American woman featured as a swimsuit cover on the magazine, who was first?",
+        "answers": {
+          "text": [
+            "Tyra Banks"
+          ],
+          "answer_start": [
+            535
+          ]
+        },
+        "id": "56d4e62e2ccc5a1400d8330f"
+      },
+      {
+        "question": "What magazine said Beyoncé was the \"best-dressed celebrity\"?",
+        "answers": {
+          "text": [
+            "People"
+          ],
+          "answer_start": [
+            551
+          ]
+        },
+        "id": "56d4e62e2ccc5a1400d83310"
+      }
+    ]
+  },
+  {
+    "index": 48,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Fan Base Evolution\" focused on \"Fan Base Terminology\". At the top, a cartoon illustration of a beehive (figure) symbolizes the origin of the term. Below the illustration, a text line reads \"The Bey Hive: A Misspelled Beehive\", explaining the name's derivation. Adjacent to this, a stylized Twitter logo (figure) supports the question about the social media platform. Below the Twitter logo, a text line states \"Previously Known as The Beyontourage\", referencing the former name of the fan base. In the middle, a visual of a group of fans (figure) represents the community. Near the group, a text line reads \"Fans Evolved from Beyontourage to Bey Hive\", summarizing the transition. At the bottom, a text line says \"Bey Hive: The Latest Fan Base Name\", emphasizing the current term. The overall style of the image is clean, illustrative, and focused on visual storytelling."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features. It's a plain, empty canvas with no content to describe."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          87,
+          678
+        ],
+        "bottom_right": [
+          808,
+          988
+        ],
+        "caption": "Text \"Beyoncé's Fan Base Evolution\" in <color-6>, <en-font-7>. ",
+        "text": "Beyoncé's Fan Base Evolution"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          256,
+          1117
+        ],
+        "bottom_right": [
+          639,
+          1243
+        ],
+        "caption": "Text \"Fan Base Terminology\" in <color-6>, <en-font-7>. ",
+        "text": "Fan Base Terminology"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          264,
+          1395
+        ],
+        "bottom_right": [
+          647,
+          1522
+        ],
+        "caption": "Text \"The Bey Hive: A Misspelled Beehive\" in <color-7>, <en-font-7>. ",
+        "text": "The Bey Hive: A Misspelled Beehive"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          272,
+          1690
+        ],
+        "bottom_right": [
+          656,
+          1774
+        ],
+        "caption": "Text \"Previously Known as The Beyontourage\" in <color-6>, <en-font-7>. ",
+        "text": "Previously Known as The Beyontourage"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          245,
+          1969
+        ],
+        "bottom_right": [
+          650,
+          2053
+        ],
+        "caption": "Text \"Fans Evolved from Beyontourage to Bey Hive\" in <color-6>, <en-font-7>. ",
+        "text": "Fans Evolved from Beyontourage to Bey Hive"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          45,
+          47
+        ],
+        "bottom_right": [
+          233,
+          127
+        ],
+        "caption": "Text \"Bey Hive: The Latest Fan Base Name\" in <color-6>, <en-font-7>. ",
+        "text": "Bey Hive: The Latest Fan Base Name"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Fan Base Evolution\" (text) focused on \"Fan Base Terminology\" (text). At the top, a cartoon illustration of a beehive (figure) symbolizes the origin of the term. Below the illustration, a text line reads \"The Bey Hive: A Misspelled Beehive\" (text), explaining the name's derivation. Adjacent to this, a stylized Twitter logo (figure) supports the question about the social media platform. Below the Twitter logo, a text line states \"Previously Known as The Beyontourage\" (text), referencing the former name of the fan base. In the middle, a visual of a group of fans (figure) represents the community. Near the group, a text line reads \"Fans Evolved from Beyontourage to Bey Hive\" (text), summarizing the transition. At the bottom, a text line says \"Bey Hive: The Latest Fan Base Name\" (text), emphasizing the current term. The overall style of the image is clean, illustrative, and focused on visual storytelling.",
+    "original_bbox_index": 31,
+    "context": "The Bey Hive is the name given to Beyoncé's fan base. Fans were previously titled \"The Beyontourage\", (a portmanteau of Beyoncé and entourage). The name Bey Hive derives from the word beehive, purposely misspelled to resemble her first name, and was penned by fans after petitions on the online social networking service Twitter and online news reports during competitions.",
+    "original_qa_pairs": [
+      {
+        "question": "Beyonce has a fan base that is referred to as what?",
+        "answers": {
+          "text": [
+            "The Bey Hive"
+          ],
+          "answer_start": [
+            0
+          ]
+        },
+        "id": "56bec6de3aeaaa14008c9407"
+      },
+      {
+        "question": "Before the Bey Hive, fans of Beyonce were called what?",
+        "answers": {
+          "text": [
+            "The Beyontourage"
+          ],
+          "answer_start": [
+            83
+          ]
+        },
+        "id": "56bec6de3aeaaa14008c9408"
+      },
+      {
+        "question": "Which social media company proclaimed Beyonce fans are know as the Bey Hive?",
+        "answers": {
+          "text": [
+            "Twitter"
+          ],
+          "answer_start": [
+            321
+          ]
+        },
+        "id": "56bec6de3aeaaa14008c9409"
+      },
+      {
+        "question": "What is Beyonce's fan base called?",
+        "answers": {
+          "text": [
+            "Bey Hive"
+          ],
+          "answer_start": [
+            4
+          ]
+        },
+        "id": "56bfcaf0a10cfb14005512e7"
+      },
+      {
+        "question": "What did the fans used to be called?",
+        "answers": {
+          "text": [
+            "Beyontourage"
+          ],
+          "answer_start": [
+            87
+          ]
+        },
+        "id": "56bfcaf0a10cfb14005512e8"
+      },
+      {
+        "question": "What is the latest term used to describe Beyoncé fans?",
+        "answers": {
+          "text": [
+            "Bey Hive"
+          ],
+          "answer_start": [
+            4
+          ]
+        },
+        "id": "56d4e7eb2ccc5a1400d83316"
+      },
+      {
+        "question": "What was the former word given to Beyoncé fans?",
+        "answers": {
+          "text": [
+            "Beyontourage"
+          ],
+          "answer_start": [
+            87
+          ]
+        },
+        "id": "56d4e7eb2ccc5a1400d83317"
+      },
+      {
+        "question": "What word does \"Bey Hive\" derive from?",
+        "answers": {
+          "text": [
+            "beehive"
+          ],
+          "answer_start": [
+            184
+          ]
+        },
+        "id": "56d4e7eb2ccc5a1400d83318"
+      }
+    ]
+  },
+  {
+    "index": 49,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Controversial Moments\" focused on \"Fashion and Public Image\". At the top, a cartoon illustration depicts Beyoncé in a stylized pose, surrounded by symbolic elements representing her fashion choices and public reactions. Below the illustration, a text line states \"Beyoncé's Controversial Fashion Choices\". Near the illustration, a text line reads \"PETA criticized Beyoncé in 2006\". \"\\\"PETA criticized Beyoncé for wearing and using fur\\\" \" \"\\\"Beyoncé's clothing line is called House of Deréon\\\" \" \"\\\"L'Officiel is a French fashion magazine\\\" \" \"\\\"Beyoncé appeared on L'Officiel in blackface and tribal makeup\\\" \" \"\\\"A spokesperson called her look 'a return to her African roots'\\\" \" \"\\\" \"\\\" \"\\\" The overall style of the image is a cartoon or illustrative style with no letters, numerals, words, acronyms, or logos."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a plain, solid color with no distinguishable features or objects. It appears to be a uniform, flat surface with a single color, which is a shade of orange or brown. There are no texts, patterns, or other elements that can be identified within this image. The simplicity of the image suggests it might be used as a background or a placeholder for other content."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          36,
+          1688
+        ],
+        "bottom_right": [
+          857,
+          2087
+        ],
+        "caption": "An illustration of A cartoon illustration of Beyoncé in a stylized pose\\"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          460,
+          976
+        ],
+        "bottom_right": [
+          859,
+          1657
+        ],
+        "caption": "An illustration of A symbolic representation of PETA's criticism\\"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          460,
+          263
+        ],
+        "bottom_right": [
+          859,
+          944
+        ],
+        "caption": "A visual of a magazine cover with Beyoncé in blackface\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          136,
+          68
+        ],
+        "bottom_right": [
+          759,
+          198
+        ],
+        "caption": "Text \"Beyoncé's Controversial Moments\" in <color-3>, <en-font-458>. ",
+        "text": "Beyoncé's Controversial Moments"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          100,
+          1826
+        ],
+        "bottom_right": [
+          451,
+          2028
+        ],
+        "caption": "Text \"Fashion and Public Image\" in <color-3>, <en-font-458>. ",
+        "text": "Fashion and Public Image"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          483,
+          756
+        ],
+        "bottom_right": [
+          835,
+          924
+        ],
+        "caption": "Text \"Beyoncé's Controversial Fashion Choices\" in <color-1>, <en-font-458>. ",
+        "text": "Beyoncé's Controversial Fashion Choices"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          60,
+          1454
+        ],
+        "bottom_right": [
+          412,
+          1622
+        ],
+        "caption": "Text \"PETA criticized Beyoncé in 2006\" in <color-1>, <en-font-458>. ",
+        "text": "PETA criticized Beyoncé in 2006"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          483,
+          1454
+        ],
+        "bottom_right": [
+          835,
+          1622
+        ],
+        "caption": "Text \"PETA criticized Beyoncé for wearing and using fur\\\" in <color-1>, <en-font-458>. ",
+        "text": "PETA criticized Beyoncé for wearing and using fur\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          66,
+          756
+        ],
+        "bottom_right": [
+          417,
+          924
+        ],
+        "caption": "Text \"Beyoncé's clothing line is called House of Deréon\\\" in <color-1>, <en-font-458>. ",
+        "text": "Beyoncé's clothing line is called House of Deréon\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          463,
+          1313
+        ],
+        "bottom_right": [
+          856,
+          1434
+        ],
+        "caption": "Text \"L'Officiel is a French fashion magazine\\\" in <color-1>, <en-font-458>. ",
+        "text": "L'Officiel is a French fashion magazine\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          474,
+          625
+        ],
+        "bottom_right": [
+          845,
+          706
+        ],
+        "caption": "Text \"Beyoncé appeared on L'Officiel in blackface and tribal makeup\\\" in <color-3>, <en-font-458>. ",
+        "text": "Beyoncé appeared on L'Officiel in blackface and tribal makeup\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          66,
+          625
+        ],
+        "bottom_right": [
+          417,
+          706
+        ],
+        "caption": "Text \"A spokesperson called her look 'a return to her African roots'\\\" in <color-1>, <en-font-458>. ",
+        "text": "A spokesperson called her look 'a return to her African roots'\\"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Controversial Moments\" (text) focused on \"Fashion and Public Image\" (text). At the top, a cartoon illustration depicts Beyoncé in a stylized pose, surrounded by symbolic elements representing her fashion choices and public reactions. Below the illustration, a text line states \"Beyoncé's Controversial Fashion Choices\" (text). Near the illustration, a text line reads \"PETA criticized Beyoncé in 2006\" (text). \n\n\"\\\"PETA criticized Beyoncé for wearing and using fur\\\" (text)\"  \n\"\\\"Beyoncé's clothing line is called House of Deréon\\\" (text)\"  \n\"\\\"L'Officiel is a French fashion magazine\\\" (text)\"  \n\"\\\"Beyoncé appeared on L'Officiel in blackface and tribal makeup\\\" (text)\"  \n\"\\\"A spokesperson called her look 'a return to her African roots'\\\" (text)\"  \n\n\"\\\"A cartoon illustration of Beyoncé in a stylized pose\\\" (figure)\"  \n\"\\\"A symbolic representation of PETA's criticism\\\" (figure)\"  \n\"\\\"A visual of a magazine cover with Beyoncé in blackface\\\" (figure)\"  \n\nThe overall style of the image is a cartoon or illustrative style with no letters, numerals, words, acronyms, or logos.",
+    "original_bbox_index": 90,
+    "context": "In 2006, the animal rights organization People for the Ethical Treatment of Animals (PETA), criticized Beyoncé for wearing and using fur in her clothing line House of Deréon. In 2011, she appeared on the cover of French fashion magazine L'Officiel, in blackface and tribal makeup that drew criticism from the media. A statement released from a spokesperson for the magazine said that Beyoncé's look was \"far from the glamorous Sasha Fierce\" and that it was \"a return to her African roots\".",
+    "original_qa_pairs": [
+      {
+        "question": "Beyonce has a clothing line known as what?",
+        "answers": {
+          "text": [
+            "House of Deréon"
+          ],
+          "answer_start": [
+            158
+          ]
+        },
+        "id": "56bec7b63aeaaa14008c9422"
+      },
+      {
+        "question": "Which French magazine did Beyonce show up on the cover of?",
+        "answers": {
+          "text": [
+            "L'Officiel"
+          ],
+          "answer_start": [
+            237
+          ]
+        },
+        "id": "56bec7b63aeaaa14008c9423"
+      },
+      {
+        "question": "Beyonce was seen wearing what on the french magazine that caused controversy?",
+        "answers": {
+          "text": [
+            "blackface and tribal makeup"
+          ],
+          "answer_start": [
+            252
+          ]
+        },
+        "id": "56bec7b63aeaaa14008c9424"
+      },
+      {
+        "question": "Which year did PETA spark controversy with Beyonce?",
+        "answers": {
+          "text": [
+            "2006"
+          ],
+          "answer_start": [
+            3
+          ]
+        },
+        "id": "56bec7b63aeaaa14008c9425"
+      },
+      {
+        "question": "What did PETA criticize Beyonce for in 2006?",
+        "answers": {
+          "text": [
+            "for wearing and using fur"
+          ],
+          "answer_start": [
+            111
+          ]
+        },
+        "id": "56bfcd33a10cfb14005512f1"
+      },
+      {
+        "question": "What French Magazine cover did the media criticize?",
+        "answers": {
+          "text": [
+            "L'Officiel"
+          ],
+          "answer_start": [
+            237
+          ]
+        },
+        "id": "56bfcd33a10cfb14005512f2"
+      },
+      {
+        "question": "How was she dressed on the cover of L'Officiel?",
+        "answers": {
+          "text": [
+            "in blackface and tribal makeup"
+          ],
+          "answer_start": [
+            249
+          ]
+        },
+        "id": "56bfcd33a10cfb14005512f4"
+      },
+      {
+        "question": "What French magazine did Beyoncé appear in wearing blackface and tribal makeup?",
+        "answers": {
+          "text": [
+            "L'Officiel"
+          ],
+          "answer_start": [
+            237
+          ]
+        },
+        "id": "56d4e8472ccc5a1400d8331f"
+      },
+      {
+        "question": "What clothing line of Beyoncé drew PETA criticism?",
+        "answers": {
+          "text": [
+            "House of Deréon."
+          ],
+          "answer_start": [
+            158
+          ]
+        },
+        "id": "56d4e8472ccc5a1400d83320"
+      },
+      {
+        "question": "What type of magazine is L'Officiel?",
+        "answers": {
+          "text": [
+            "French fashion magazine"
+          ],
+          "answer_start": [
+            213
+          ]
+        },
+        "id": "56d4e8472ccc5a1400d83321"
+      }
+    ]
+  },
+  {
+    "index": 50,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé and Racial Criticism\" focused on \"Media Representation and Race\". At the top, a cartoon illustration depicts Beyoncé in a stylized pose, surrounded by symbolic elements representing media and race. Below the illustration, a text line reads \"Beyoncé's lighter skin color and costuming drew criticism\". Adjacent to this text, a figure caption describes. Near the middle, a text line states \"Emmett Price, a music professor, argued race plays a role in these criticisms\". Below this, a figure caption explains. Further down, a text line reads \"L’Oréal denied accusations of altering her skin tone in ads\". To the right of this, a figure caption describes. At the bottom, a text line states \"Vogue requested natural pictures of Beyoncé be used\". Adjacent to this, a figure caption reads. The overall style of the image is minimalist and illustrative, using symbolic visuals to convey complex ideas without direct representation."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is a plain, solid color with no distinguishable features or objects. It appears to be a uniform, light beige or cream color, with no text or patterns visible. The image is simple and lacks any complexity or detail."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          695,
+          1370
+        ],
+        "bottom_right": [
+          896,
+          1783
+        ],
+        "caption": "An illustration of a cartoon of Beyoncé with a subtle lightening effect on her skin"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          576
+        ],
+        "bottom_right": [
+          238,
+          914
+        ],
+        "caption": "a stylized scene showing a professor writing in a notebook"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          777,
+          116
+        ],
+        "bottom_right": [
+          896,
+          786
+        ],
+        "caption": "An illustration of a symbolic image of a hair color advertisement with a blurred face"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          1881
+        ],
+        "bottom_right": [
+          201,
+          2240
+        ],
+        "caption": "a stylized image of a magazine page with a checkmark on 'natural pictures'"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          128,
+          85
+        ],
+        "bottom_right": [
+          756,
+          284
+        ],
+        "caption": "Text \"Beyoncé and Racial Criticism\" in <color-1>, <en-font-278>. ",
+        "text": "Beyoncé and Racial Criticism"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          99,
+          1537
+        ],
+        "bottom_right": [
+          613,
+          1717
+        ],
+        "caption": "Text \"Media Representation and Race\" in <color-1>, <en-font-278>. ",
+        "text": "Media Representation and Race"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          324,
+          891
+        ],
+        "bottom_right": [
+          802,
+          1026
+        ],
+        "caption": "Text \"Beyoncé's lighter skin color and costuming drew criticism\" in <color-1>, <en-font-278>. ",
+        "text": "Beyoncé's lighter skin color and costuming drew criticism"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          315,
+          1912
+        ],
+        "bottom_right": [
+          789,
+          2046
+        ],
+        "caption": "Text \"Emmett Price, a music professor, argued race plays a role in these criticisms\" in <color-1>, <en-font-278>. ",
+        "text": "Emmett Price, a music professor, argued race plays a role in these criticisms"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          184,
+          284
+        ],
+        "bottom_right": [
+          701,
+          326
+        ],
+        "caption": "Text \"L’Oréal denied accusations of altering her skin tone in ads\" in <color-1>, <en-font-278>. ",
+        "text": "L’Oréal denied accusations of altering her skin tone in ads"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          324,
+          564
+        ],
+        "bottom_right": [
+          758,
+          700
+        ],
+        "caption": "Text \"Vogue requested natural pictures of Beyoncé be used\" in <color-1>, <en-font-278>. ",
+        "text": "Vogue requested natural pictures of Beyoncé be used"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé and Racial Criticism\" (text) focused on \"Media Representation and Race\" (text). At the top, a cartoon illustration depicts Beyoncé in a stylized pose, surrounded by symbolic elements representing media and race. Below the illustration, a text line reads \"Beyoncé's lighter skin color and costuming drew criticism\" (text). Adjacent to this text, a figure caption describes \"a cartoon of Beyoncé with a subtle lightening effect on her skin\" (figure). Near the middle, a text line states \"Emmett Price, a music professor, argued race plays a role in these criticisms\" (text). Below this, a figure caption explains \"a stylized scene showing a professor writing in a notebook\" (figure). Further down, a text line reads \"L’Oréal denied accusations of altering her skin tone in ads\" (text). To the right of this, a figure caption describes \"a symbolic image of a hair color advertisement with a blurred face\" (figure). At the bottom, a text line states \"Vogue requested natural pictures of Beyoncé be used\" (text). Adjacent to this, a figure caption reads \"a stylized image of a magazine page with a checkmark on 'natural pictures'\" (figure). The overall style of the image is minimalist and illustrative, using symbolic visuals to convey complex ideas without direct representation.",
+    "original_bbox_index": "it_9",
+    "context": "Beyoncé's lighter skin color and costuming has drawn criticism from some in the African-American community. Emmett Price, a professor of music at Northeastern University, wrote in 2007, that he thinks race plays a role in many of these criticisms, saying white celebrities who dress similarly do not attract as many comments. In 2008, L'Oréal was accused of whitening her skin in their Feria hair color advertisements, responding that \"it is categorically untrue\", and in 2013, Beyoncé herself criticized H&M for their proposed \"retouching\" of promotional images of her, and according to Vogue requested that only \"natural pictures be used\".",
+    "original_qa_pairs": [
+      {
+        "question": "Which racial community gave criticism to Beyonce?",
+        "answers": {
+          "text": [
+            "African-American"
+          ],
+          "answer_start": [
+            80
+          ]
+        },
+        "id": "56bec8a13aeaaa14008c943f"
+      },
+      {
+        "question": "Which professor from Northeastern University wrote about how race correlates with these criticisms of Beyonce?",
+        "answers": {
+          "text": [
+            "Emmett Price"
+          ],
+          "answer_start": [
+            108
+          ]
+        },
+        "id": "56bec8a13aeaaa14008c9440"
+      },
+      {
+        "question": "Which company was accused of coloring Beyonce's hair?",
+        "answers": {
+          "text": [
+            "L'Oréal"
+          ],
+          "answer_start": [
+            335
+          ]
+        },
+        "id": "56bec8a13aeaaa14008c9441"
+      },
+      {
+        "question": "What did Vogue request?",
+        "answers": {
+          "text": [
+            "natural pictures be used"
+          ],
+          "answer_start": [
+            615
+          ]
+        },
+        "id": "56bfcf98a10cfb14005512fd"
+      },
+      {
+        "question": "How did L'Oreal respond to accusations of changing pictures?",
+        "answers": {
+          "text": [
+            "it is categorically untrue"
+          ],
+          "answer_start": [
+            436
+          ]
+        },
+        "id": "56bfcf98a10cfb14005512fe"
+      },
+      {
+        "question": "In addition to her light skin color, what else has made part of the African American community criticize Beyoncé?",
+        "answers": {
+          "text": [
+            "costuming"
+          ],
+          "answer_start": [
+            33
+          ]
+        },
+        "id": "56d4e8512ccc5a1400d83326"
+      },
+      {
+        "question": "In 2007, which music professor said he believes this criticism does involve race as well?",
+        "answers": {
+          "text": [
+            "Emmett Price"
+          ],
+          "answer_start": [
+            108
+          ]
+        },
+        "id": "56d4e8512ccc5a1400d83327"
+      },
+      {
+        "question": "Who was accused of lightening Beyoncé's skin for an advertisement?",
+        "answers": {
+          "text": [
+            "L'Oréal"
+          ],
+          "answer_start": [
+            335
+          ]
+        },
+        "id": "56d4e8512ccc5a1400d83328"
+      },
+      {
+        "question": "What advertisement was Beyoncé's skin supposedly lightened in?",
+        "answers": {
+          "text": [
+            "Feria hair color advertisements"
+          ],
+          "answer_start": [
+            386
+          ]
+        },
+        "id": "56d4e8512ccc5a1400d83329"
+      },
+      {
+        "question": "Who did Beyoncé tell in 2013 to only use natural pictures of her rather than retouched images?",
+        "answers": {
+          "text": [
+            "H&M"
+          ],
+          "answer_start": [
+            505
+          ]
+        },
+        "id": "56d4e8512ccc5a1400d8332a"
+      }
+    ]
+  }
+]

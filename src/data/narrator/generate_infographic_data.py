@@ -195,6 +195,84 @@ def count_figures_in_output(output: str) -> int:
     return figure_count
 
 
+def normalize_image_caption(caption: str) -> str:
+    """
+    Normalize image caption by adding "the image features" prefix if it doesn't 
+    already start with common image description phrases.
+    
+    Args:
+        caption: The original image caption text
+        
+    Returns:
+        Normalized caption with appropriate prefix
+        
+    Examples:
+        "a red apple" -> "the image features a red apple"
+        "the illustration shows a tree" -> "the illustration shows a tree" (unchanged)
+        "an icon of a house" -> "an icon of a house" (unchanged)
+    """
+    if not caption or not caption.strip():
+        return caption
+    
+    caption = caption.strip()
+    caption_lower = caption.lower()
+    
+    # List of prefixes that indicate the caption already describes an image properly
+    image_description_prefixes = [
+        'the illustration',
+        'an illustration',
+        'the image',
+        'an image',
+        'the picture',
+        'a picture',
+        'the photo',
+        'a photo',
+        'the silhouette',
+        'a silhouette',
+        'an silhouette',
+        'the icon',
+        'an icon',
+        'the graphic',
+        'a graphic',
+        'the drawing',
+        'a drawing',
+        'the diagram',
+        'a diagram',
+        'the chart',
+        'a chart',
+        'the figure',
+        'a figure',
+        'the logo',
+        'a logo',
+        'the symbol',
+        'a symbol',
+        'the sketch',
+        'a sketch',
+        'this image',
+        'this illustration',
+        'this shows',
+        'this depicts',
+        'depicts',
+        'shows',
+        'features',
+        'displays',
+        'presents',
+        'illustrates',
+    ]
+    
+    # Check if caption starts with any of the description prefixes
+    for prefix in image_description_prefixes:
+        if caption_lower.startswith(prefix):
+            return caption
+    
+    # If no prefix found, add "the image features" at the beginning
+    # Ensure first letter of original caption is lowercase (unless it's a proper noun)
+    if caption[0].isupper() and len(caption) > 1 and not caption.split()[0].isupper():
+        caption = caption[0].lower() + caption[1:]
+    
+    return f"the image features {caption}"
+
+
 def load_bizgen_template(template_path):
     """Load the bizgen.jinja template"""
     with open(template_path, 'r', encoding='utf-8') as f:
