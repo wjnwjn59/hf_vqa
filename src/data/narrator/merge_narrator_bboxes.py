@@ -853,7 +853,7 @@ def merge_narrator_data(
             }
             output_layers.append(output_layer)
 
-        # Select bboxes for text elements with title priority
+        # Select bboxes for text elements with title priority and smart text-to-bbox matching
         text_count = len(text_elements)
         
         if text_count > 0:
@@ -863,14 +863,33 @@ def merge_narrator_data(
             if text_count == 1:
                 # Only title: Select the largest text bbox
                 selected_text_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
+                text_to_bbox_mapping = [(0, selected_text_bboxes[0])] if selected_text_bboxes else []
             else:
-                # Multiple texts: Title (largest) + others (area >= 10000)
-                # Step 1: Get title (largest bbox)
+                # Multiple texts: Smart matching based on text length
+                
+                # Step 1: Classify texts by word count (title is always index 0)
+                title_text = text_elements[0]
+                other_texts = text_elements[1:]
+                
+                # Classify other texts: long (>15 words) vs short (≤15 words)
+                long_texts = []  # (original_index, text)
+                short_texts = []  # (original_index, text)
+                
+                for i, text in enumerate(other_texts, start=1):  # start=1 because index 0 is title
+                    word_count = len(text.split())
+                    if word_count > 15:
+                        long_texts.append((i, text))
+                    else:
+                        short_texts.append((i, text))
+                
+                print(f"    Text classification: 1 title, {len(long_texts)} long texts (>15 words), {len(short_texts)} short texts (≤15 words)")
+                
+                # Step 2: Get title bbox (largest bbox)
                 title_bboxes = select_largest_non_overlapping_bboxes(bboxes, 'text', 1, min_area=0)
                 
-                # Step 2: Get other text candidates (area >= 10000, excluding title)
+                # Step 3: Get other text candidates (area >= 10000, excluding title)
                 other_candidates = [b for b in all_text_bboxes 
-                                  if calculate_bbox_area(b) >= 10000]  # Changed from 24000 to 10000
+                                  if calculate_bbox_area(b) >= 10000]
                 
                 # Remove title bbox from candidates if it exists
                 if title_bboxes:
@@ -879,43 +898,94 @@ def merge_narrator_data(
                                       if not (bbox['top_left'] == title_bbox['top_left'] and 
                                             bbox['bottom_right'] == title_bbox['bottom_right'])]
                 
-                # Step 3: Select remaining texts with spatial distribution
-                other_text_count = text_count - 1
-                other_selected = select_spatially_distributed_bboxes(
-                    other_candidates, other_text_count, canvas_height=2240
-                )
+                # Step 4: Assign bboxes to texts based on size matching and spatial distribution
+                text_to_bbox_mapping = []
                 
-                # Combine: title first, then spatially distributed others
-                selected_text_bboxes = title_bboxes + other_selected
+                # Title gets largest bbox
+                if title_bboxes:
+                    text_to_bbox_mapping.append((0, title_bboxes[0]))
+                
+                # Step 4a: Long texts get larger bboxes (sort by area, take largest ones)
+                other_candidates.sort(key=calculate_bbox_area, reverse=True)
+                num_long_bboxes = min(len(long_texts), len(other_candidates))
+                
+                # Track which bboxes have been assigned
+                assigned_bboxes = set()
+                if title_bboxes:
+                    assigned_bboxes.add((tuple(title_bboxes[0]['top_left']), tuple(title_bboxes[0]['bottom_right'])))
+                
+                # Assign largest bboxes to long texts
+                long_bbox_assignments = []
+                for i, (text_idx, _) in enumerate(long_texts[:num_long_bboxes]):
+                    bbox = other_candidates[i]
+                    bbox_key = (tuple(bbox['top_left']), tuple(bbox['bottom_right']))
+                    assigned_bboxes.add(bbox_key)
+                    long_bbox_assignments.append((text_idx, bbox))
+                    text_to_bbox_mapping.append((text_idx, bbox))
+                
+                # Step 4b: Short texts get spatially distributed bboxes from remaining candidates
+                # Get remaining unassigned candidates
+                remaining_candidates = [bbox for bbox in other_candidates 
+                                       if (tuple(bbox['top_left']), tuple(bbox['bottom_right'])) not in assigned_bboxes]
+                
+                if short_texts and remaining_candidates:
+                    # Use spatial distribution algorithm for short texts
+                    num_short_needed = len(short_texts)
+                    
+                    print(f"    Selecting {num_short_needed} spatially distributed bboxes for short texts from {len(remaining_candidates)} candidates")
+                    
+                    spatially_distributed_bboxes = select_spatially_distributed_bboxes(
+                        remaining_candidates,
+                        num_short_needed,
+                        canvas_height=2240
+                    )
+                    
+                    # Assign spatially distributed bboxes to short texts
+                    for i, (text_idx, _) in enumerate(short_texts[:len(spatially_distributed_bboxes)]):
+                        text_to_bbox_mapping.append((text_idx, spatially_distributed_bboxes[i]))
+                
+                # Sort mapping by original text index to maintain order
+                text_to_bbox_mapping.sort(key=lambda x: x[0])
+                
+                # Extract just the bboxes for backward compatibility with existing code
+                selected_text_bboxes = [bbox for _, bbox in text_to_bbox_mapping]
+                
+                num_short_assigned = len([idx for idx, _ in text_to_bbox_mapping if idx > 0 and idx in [t[0] for t in short_texts]])
+                print(f"    Bbox assignment: {len(long_texts)} long texts → {num_long_bboxes} large bboxes, "
+                      f"{len(short_texts)} short texts → {num_short_assigned} spatially distributed bboxes")
         else:
             selected_text_bboxes = []
+            text_to_bbox_mapping = []
         
-        print(f"  Selected {len(selected_text_bboxes)}/{text_count} text bboxes (title: largest, others: >= 10k px²)")
+        print(f"  Selected {len(selected_text_bboxes)}/{text_count} text bboxes (title: largest, long texts: larger bboxes, short texts: smaller bboxes)")
 
-        # Add text elements as 'text' category
-        for idx, text_content in enumerate(text_elements):
-            if idx < len(selected_text_bboxes):
-                bbox = selected_text_bboxes[idx]
-                
-                # Chọn màu từ layout_colors (không có thì random, đã loại màu trắng)
-                color_name = random.choice(layout_colors) if layout_colors else 'black'
-                # Replace white/near-white colors with black for readability
-                color_name = replace_white_color_with_black(color_name, color_idx)
-                color_id = color_idx[color_name]
+        # Add text elements as 'text' category using the smart mapping
+        for text_idx, bbox in text_to_bbox_mapping:
+            text_content = text_elements[text_idx]
+            
+            # Chọn màu từ layout_colors (không có thì random, đã loại màu trắng)
+            color_name = random.choice(layout_colors) if layout_colors else 'black'
+            # Replace white/near-white colors with black for readability
+            color_name = replace_white_color_with_black(color_name, color_idx)
+            color_id = color_idx[color_name]
 
-                # Dùng font_token cho toàn bộ layout
-                caption = f'Text "{text_content}" in <color-{color_id}>, <{font_token}>. '
+            # Dùng font_token cho toàn bộ layout
+            caption = f'Text "{text_content}" in <color-{color_id}>, <{font_token}>. '
 
-                output_layer = {
-                    'category': 'text',
-                    'top_left': bbox['top_left'],
-                    'bottom_right': bbox['bottom_right'],
-                    'caption': caption,
-                    'text': text_content
-                }
-                output_layers.append(output_layer)
-            else:
-                print(f"    Warning: No bbox available for text element {idx+1}: '{text_content[:50]}...'")
+            output_layer = {
+                'category': 'text',
+                'top_left': bbox['top_left'],
+                'bottom_right': bbox['bottom_right'],
+                'caption': caption,
+                'text': text_content
+            }
+            output_layers.append(output_layer)
+        
+        # Report warnings for texts without bboxes
+        assigned_indices = {text_idx for text_idx, _ in text_to_bbox_mapping}
+        for idx in range(text_count):
+            if idx not in assigned_indices:
+                print(f"    Warning: No bbox available for text element {idx+1}: '{text_elements[idx][:50]}...'")
         
         # Report final counts
         final_elements = len([l for l in output_layers if l['category'] == 'element' and 'background' not in l.get('caption', '').lower()])

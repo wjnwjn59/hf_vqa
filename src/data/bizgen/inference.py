@@ -161,11 +161,14 @@ def main():
     parser.add_argument('--ckpt_dir', type=str,
                         default="checkpoints/lora/infographic")
     parser.add_argument('--device', type=str, default='cuda:0')
-    parser.add_argument('--wiki_dir', type=str, default='../create_data/output/bizgen_format')
+    parser.add_argument('--wiki_dir', type=str, default='../create_data/output/bizgen_format',
+                        help='Directory containing wiki files (wikixxxxxx.json format). Ignored if --wiki_path is specified.')
+    parser.add_argument('--wiki_path', type=str, default=None,
+                        help='Path to a single wiki JSON file (e.g., failed.json). If specified, --wiki_dir and --subset are ignored.')
     parser.add_argument('--output_dir', type=str, default='output',
                         help='Base output directory name')
     parser.add_argument('--subset', type=str, default='1:2', 
-                        help='File range to process (1-based): "start:end". Each file contains 50 layouts. Example: "1:10" processes wiki000001.json to wiki000010.json')
+                        help='File range to process (1-based): "start:end". Each file contains 50 layouts. Example: "1:10" processes wiki000001.json to wiki000010.json. Ignored if --wiki_path is specified.')
     parser.add_argument('--dataset_name', type=str, default='squad_v2',
                         help='Dataset name for output folder structure')
     parser.add_argument('--seed', type=int, default=1234)
@@ -180,8 +183,15 @@ def main():
     args = parser.parse_args()
     config = parse_config(args.config_dir)
 
-    # Parse subset as file numbers (1-based), not item indices
-    start_file_subset, end_file_subset = [int(idx) for idx in args.subset.split(':')]
+    # Determine processing mode: single file or directory with subset
+    use_single_file = args.wiki_path is not None
+    
+    if use_single_file:
+        print(f"Running in single-file mode with: {args.wiki_path}")
+    else:
+        # Parse subset as file numbers (1-based), not item indices
+        start_file_subset, end_file_subset = [int(idx) for idx in args.subset.split(':')]
+        print(f"Running in directory mode with subset: {args.subset}")
     
     # Create output directory with dataset name
     args.output_dir = osp.join(args.output_dir, args.dataset_name)
@@ -394,16 +404,24 @@ def main():
     # load layouts and captions
     file_subset = []
     
-    # Load wiki files based on subset numbers (1-based file indices)
-    print(f"Loading wiki files: wiki{start_file_subset:06d}.json to wiki{end_file_subset:06d}.json")
-    
-    for file_num in range(start_file_subset, end_file_subset + 1):
-        wiki_file = f"wiki{file_num:06d}.json"
-        wiki_path = os.path.join(args.wiki_dir, wiki_file)
-        if os.path.exists(wiki_path):
-            file_subset.append(wiki_path)
+    if use_single_file:
+        # Single file mode: load the specified wiki file
+        if os.path.exists(args.wiki_path):
+            file_subset.append(args.wiki_path)
+            print(f"Loading single wiki file: {args.wiki_path}")
         else:
-            print(f"Warning: {wiki_file} not found, skipping")
+            raise FileNotFoundError(f"Wiki file not found: {args.wiki_path}")
+    else:
+        # Directory mode: load wiki files based on subset numbers (1-based file indices)
+        print(f"Loading wiki files: wiki{start_file_subset:06d}.json to wiki{end_file_subset:06d}.json")
+        
+        for file_num in range(start_file_subset, end_file_subset + 1):
+            wiki_file = f"wiki{file_num:06d}.json"
+            wiki_path = os.path.join(args.wiki_dir, wiki_file)
+            if os.path.exists(wiki_path):
+                file_subset.append(wiki_path)
+            else:
+                print(f"Warning: {wiki_file} not found, skipping")
     
     # Count total items to process (all items in selected files)
     tot = 0
@@ -411,6 +429,8 @@ def main():
         with open(file, 'r') as f:
             data = json.load(f)
             tot += len(data)  # Count all items in each file
+    
+    print(f"Total items to process: {tot}")
     
     with tqdm(total=tot, desc="Total items", unit="item", dynamic_ncols=True) as pbar:
         for file in file_subset:

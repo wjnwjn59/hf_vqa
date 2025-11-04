@@ -123,6 +123,35 @@ def calculate_text_similarity_ratio(json_texts: List[str], ocr_texts: List[str])
     return intersection / union
 
 
+def contains_suspicious_patterns(ocr_texts: List[str]) -> Tuple[bool, str]:
+    """
+    Check if OCR texts contain suspicious patterns like URLs (www) or repeated characters.
+    
+    Args:
+        ocr_texts: List of OCR text strings
+    
+    Returns:
+        Tuple of (has_suspicious_pattern, pattern_description)
+    """
+    for text in ocr_texts:
+        text_lower = text.lower()
+        
+        # Check for 4 consecutive 'w' characters (like www or wwww)
+        if 'wwww' in text_lower:
+            return True, f"Detected 4+ consecutive 'w' characters (URL pattern): '{text[:50]}...'"
+        
+        # Optional: Check for common URL patterns
+        if re.search(r'www\.[a-z]+', text_lower):
+            return True, f"Detected URL pattern (www.xxx): '{text[:50]}...'"
+        
+        # Optional: Check for excessive character repetition (like 'aaaaa', 'bbbbb')
+        # This catches other OCR errors with repeated characters
+        if re.search(r'([a-z])\1{4,}', text_lower):
+            return True, f"Detected 5+ repeated characters: '{text[:50]}...'"
+    
+    return False, ""
+
+
 def process_single_image(
     image_path: str, 
     image_id: int, 
@@ -179,6 +208,18 @@ def process_single_image(
     # Perform OCR
     ocr_texts, ocr_word_count = perform_ocr(image_path, ocr_model)
     
+    # Check for suspicious patterns (www, repeated characters, etc.)
+    has_suspicious, suspicious_reason = contains_suspicious_patterns(ocr_texts)
+    
+    if has_suspicious:
+        return {
+            'wiki_entry': wiki_entry,  # Complete bizgen format entry
+            'image_id': image_id,
+            'image_filename': os.path.basename(image_path),
+            'similarity_ratio': 0.0,  # Mark as 0 for pattern-based failure
+            'reason': f'Suspicious pattern: {suspicious_reason}'
+        }
+    
     # Calculate similarity ratio
     similarity_ratio = calculate_text_similarity_ratio(json_texts, ocr_texts)
     
@@ -191,39 +232,14 @@ def process_single_image(
     print(f"  Should filter: {should_filter} (Jaccard similarity {similarity_ratio:.3f} < threshold {threshold:.3f})")
     
     if should_filter:
-        # Rename the image file to add a _faults suffix before the extension
-        try:
-            image_dir = os.path.dirname(image_path)
-            image_base = os.path.basename(image_path)
-            name, ext = os.path.splitext(image_base)
-            # Avoid double-appending if already suffixed
-            if not name.endswith('_faults'):
-                new_name = f"{name}_faults{ext}"
-                new_path = os.path.join(image_dir, new_name)
-                # If target exists, append a counter
-                counter = 1
-                while os.path.exists(new_path):
-                    new_name = f"{name}_faults_{counter}{ext}"
-                    new_path = os.path.join(image_dir, new_name)
-                    counter += 1
-                os.rename(image_path, new_path)
-                print(f"  Renamed image: {image_base} -> {os.path.basename(new_path)}")
-                # Update local variables so returned paths point to the new file
-                image_path = new_path
-                image_base = os.path.basename(new_path)
-        except Exception as e:
-            print(f"  Warning: failed to rename image {image_path}: {e}")
-
+        # Return the wiki entry (bizgen format) for failed images
+        print(f"  ✗ Image {image_id} failed OCR check - will be added to failed.json for regeneration")
         return {
+            'wiki_entry': wiki_entry,  # Complete bizgen format entry
             'image_id': image_id,
             'image_filename': os.path.basename(image_path),
-            'image_path': image_path,
-            'wiki_file': os.path.basename(wiki_file_path),
-            'text_similarity_ratio': similarity_ratio,
-            'ocr_percentage': round(similarity_ratio * 100.0, 2),
-            'json_texts': json_texts,
-            'ocr_texts': ocr_texts,
-            'reason': f'Jaccard similarity ({similarity_ratio:.3f}) between JSON and OCR texts is below threshold ({threshold:.3f})'
+            'similarity_ratio': similarity_ratio,
+            'reason': f'Jaccard similarity ({similarity_ratio:.3f}) < threshold ({threshold:.3f})'
         }
     
     return None
@@ -235,16 +251,16 @@ def main():
         description='OCR filter script to find images with low Jaccard text similarity between JSON and OCR'
     )
     parser.add_argument(
-        '--start-id',
+        '--start',
         type=int,
         default=1,
-        help='Start image ID (default: 1)'
+        help='Start file index (1-based). --start 1 processes images 1-50 from wiki000001.json'
     )
     parser.add_argument(
-        '--end-id',
+        '--end',
         type=int,
         default=None,
-        help='End image ID (default: auto-detect from images)'
+        help='End file index (exclusive, 1-based). --start 1 --end 3 processes 2 files (wiki000001, wiki000002) = images 1-100'
     )
     parser.add_argument(
         '--threshold',
@@ -276,6 +292,16 @@ def main():
     # Ensure output directory exists
     os.makedirs(args.output_dir, exist_ok=True)
     
+    # Calculate image ID range based on file indices
+    if args.end is not None:
+        num_files = args.end - args.start
+        start_image_id = (args.start - 1) * 50 + 1
+        end_image_id = (args.end - 1) * 50  # Exclusive end
+    else:
+        # If no end specified, process from start file onwards (auto-detect max)
+        start_image_id = (args.start - 1) * 50 + 1
+        end_image_id = None  # Will be determined from available images
+    
     # Get list of image files (search recursively in subdirectories)
     if not os.path.exists(args.images_dir):
         print(f"Error: Images directory not found: {args.images_dir}")
@@ -296,13 +322,25 @@ def main():
     image_files.sort(key=lambda x: x[0])
     
     # Filter by ID range
-    if args.end_id is None:
-        args.end_id = max(img_id for img_id, _ in image_files) if image_files else args.start_id
+    if end_image_id is None:
+        # Auto-detect max image ID
+        end_image_id = max(img_id for img_id, _ in image_files) if image_files else start_image_id
     
     image_files = [(img_id, full_path) for img_id, full_path in image_files 
-                   if args.start_id <= img_id <= args.end_id]
+                   if start_image_id <= img_id <= end_image_id]
     
-    print(f"Found {len(image_files)} images to process (ID range: {args.start_id}-{args.end_id})")
+    # Calculate file range for display
+    if args.end is not None:
+        first_file = args.start
+        last_file = args.end - 1
+        num_files = args.end - args.start
+        print(f"File range: {first_file} to {last_file} ({num_files} files)")
+        print(f"Image ID range: {start_image_id} to {end_image_id}")
+    else:
+        print(f"File range: {args.start} onwards")
+        print(f"Image ID range: {start_image_id} to {end_image_id}")
+    
+    print(f"Found {len(image_files)} images to process")
     if len(image_files) > 0:
         print("Sample images found:")
         for img_id, img_path in image_files[:5]:  # Show first 5 as examples
@@ -321,6 +359,7 @@ def main():
     
     # Process each image
     filtered_results = []
+    failed_wiki_entries = []  # Collect bizgen format entries for failed images
     processed_count = 0
     
     for image_id, full_path in image_files:
@@ -336,43 +375,62 @@ def main():
         
         if result:
             filtered_results.append(result)
-            print(f"  ✓ Image {image_id} filtered")
+            # Add wiki entry to failed list for regeneration
+            failed_wiki_entries.append(result['wiki_entry'])
+            print(f"  ✓ Image {image_id} filtered (will regenerate)")
         else:
             print(f"  - Image {image_id} passed")
         
         processed_count += 1
         print()
     
-    # Save results
-    output_file = os.path.join(args.output_dir, 'filtered_images.json')
+    # Save failed.json with bizgen format (list of wiki entries)
+    failed_json_path = os.path.join(args.output_dir, 'failed.json')
+    with open(failed_json_path, 'w', encoding='utf-8') as f:
+        json.dump(failed_wiki_entries, f, indent=2, ensure_ascii=False)
+    
+    # Save summary report (metadata + failed image info)
+    summary_file = os.path.join(args.output_dir, 'filtered_summary.json')
     
     summary = {
         'metadata': {
             'total_images_processed': processed_count,
             'total_images_filtered': len(filtered_results),
             'filter_threshold': args.threshold,
-            'start_id': args.start_id,
-            'end_id': args.end_id,
+            'start_file': args.start,
+            'end_file': args.end if args.end else 'auto',
+            'start_image_id': start_image_id,
+            'end_image_id': end_image_id,
             'images_directory': os.path.abspath(args.images_dir),
             'bizgen_directory': os.path.abspath(args.bizgen_dir),
             'filter_ratio': len(filtered_results) / processed_count if processed_count > 0 else 0.0
         },
-        'filtered_images': filtered_results
+        'filtered_images': [
+            {
+                'image_id': r['image_id'],
+                'image_filename': r['image_filename'],
+                'similarity_ratio': r['similarity_ratio'],
+                'reason': r['reason']
+            } for r in filtered_results
+        ]
     }
     
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(summary_file, 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
     
     print("=== SUMMARY ===")
     print(f"Total images processed: {processed_count}")
     print(f"Images filtered: {len(filtered_results)}")
     print(f"Filter rate: {len(filtered_results)/processed_count:.1%}" if processed_count > 0 else "0%")
-    print(f"Results saved to: {output_file}")
+    print(f"\nOutput files:")
+    print(f"  - Bizgen format (for regeneration): {failed_json_path}")
+    print(f"  - Summary report: {summary_file}")
     
     if filtered_results:
-        print("\nFiltered images:")
+        print(f"\nFiltered images ({len(filtered_results)} total):")
         for result in filtered_results:
             print(f"  - {result['image_filename']} (ID: {result['image_id']}) - {result['reason']}")
+        print(f"\n✓ Use {failed_json_path} with BizGen to regenerate these images")
 
 
 if __name__ == '__main__':
