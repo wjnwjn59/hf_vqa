@@ -29,7 +29,7 @@ python src/data/narrator/generate_infographic_data.py \
   --input-data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
   --dataset-type "squad_v2" \
   --template-path "./src/prompts/content_des_all.jinja" \
-  --output-dir "./src/data/create_data/output/infographic" \
+  --output-dir "./src/data/narrator/infographic" \
   --batch-size 4 \
   --max-retries 3 \
   --start 1 \
@@ -39,7 +39,7 @@ python src/data/narrator/generate_infographic_data.py \
 ## Using Qwen to generate layout
 
 ```bash
-conda env create -f ./src/data/create_data/bizgen/wiki.yaml
+conda env create -f wiki.yaml
 conda activate wiki
 
 export PYTHONPATH="./:$PYTHONPATH"
@@ -50,7 +50,7 @@ CUDA_VISIBLE_DEVICES=0 python src/data/narrator/generate_infographic_data.py \
   --input-data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
   --dataset-type "squad_v2" \
   --template-path "./src/prompts/content_des_all.jinja" \
-  --output-dir "./src/data/create_data/output/infographic" \
+  --output-dir "./src/data/narrator/infographic" \
   --batch-size 8 \
   --start 1 \
   --end 2
@@ -77,7 +77,7 @@ cd ./src/data/bizgen/
 
 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
-    --wiki_dir ../create_data/output/narrator_format/ \
+    --wiki_dir ../narrator/wiki/ \
     --subset 1:10 \
     --device cuda:2 \
     --dataset_name squad_v2
@@ -91,11 +91,23 @@ export PYTHONPATH="./:$PYTHONPATH"
 
 CUDA_VISIBLE_DEVICES=0 python src/data/ocr/ocr_filter.py \
     --images-dir "./src/data/bizgen/output/squad_v2" \
-    --bizgen-dir "./src/data/narrator/wiki/" \
-    --output-dir "./src/data/narrator/wiki/" \
+    --infographic-dir "./src/data/narrator/infographic" \
+    --output-dir "./src/data/narrator/infographic" \
     --threshold 0.5 \
     --start 1 \
     --end 2
+```
+
+## Run merge file again
+
+```bash
+conda activate wiki
+export PYTHONPATH="./:$PYTHONPATH"
+
+python src/data/narrator/merge_narrator_bboxes.py \
+    --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
+    --infor_path "./src/data/narrator/infographic/failed.json" \
+    --output-dir "./src/data/narrator/wiki_retry"
 ```
 
 ## Regenerate Failed Images
@@ -108,7 +120,7 @@ cd ./src/data/bizgen/
 
 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
-    --wiki_path ../narrator/wiki/failed.json \
+    --wiki_path ../narrator/wiki_retry \
     --device cuda:0 \
     --dataset_name squad_v2
 ```

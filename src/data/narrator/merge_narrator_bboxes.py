@@ -583,7 +583,8 @@ def merge_narrator_data(
     color_idx: Dict,
     font_idx: Dict,
     squad_id_to_qa: Dict[str, Dict],
-    start_wiki_idx: int = 0
+    start_wiki_idx: int = 0,
+    use_infographic_id: bool = False
 ) -> List[Dict]:
     """
     Process narrator-generated infographic data and merge with bboxes.
@@ -595,7 +596,8 @@ def merge_narrator_data(
         color_idx: Color index mapping
         font_idx: Font index mapping
         squad_id_to_qa: Mapping from question ID to QA pairs
-        start_wiki_idx: Starting wiki index for generating unique IDs
+        start_wiki_idx: Starting wiki index for generating unique IDs (used when use_infographic_id=False)
+        use_infographic_id: If True, use infographic_id from each entry instead of calculating from start_wiki_idx
     
     Returns:
         List of merged infographic data (full layout version only)
@@ -618,7 +620,16 @@ def merge_narrator_data(
     # First pass: find suitable layouts for each infographic
     print("\n=== Phase 1: Finding suitable layouts for each infographic ===")
     for wiki_idx, infographic in enumerate(infographic_generated):
-        wiki_id = start_wiki_idx + wiki_idx + 1
+        # Determine wiki_id based on mode
+        if use_infographic_id:
+            # Single file mode: use infographic_id from the entry
+            wiki_id = infographic.get('infographic_id')
+            if wiki_id is None:
+                print(f"Warning: infographic at index {wiki_idx} missing 'infographic_id', skipping")
+                continue
+        else:
+            # Directory mode: calculate from start_wiki_idx
+            wiki_id = start_wiki_idx + wiki_idx + 1
         
         # Get the caption data
         generated_infographic = infographic.get('generated_infographic', '')
@@ -1056,7 +1067,13 @@ def main():
         '--infographic-dir',
         type=str,
         default="./src/data/create_data/output/infographic",
-        help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic)'
+        help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic). Ignored if --infor_path is specified.'
+    )
+    parser.add_argument(
+        '--infor_path',
+        type=str,
+        default=None,
+        help='Path to a single infographic JSON file (e.g., failed.json). If specified, --infographic-dir, --start, and --end are ignored.'
     )
     parser.add_argument(
         '--color-idx',
@@ -1080,13 +1097,13 @@ def main():
         '--start',
         type=int,
         default=1,
-        help='Start file index for infographic generation (inclusive, 1-based)'
+        help='Start file index for infographic generation (inclusive, 1-based). Ignored if --infor_path is specified.'
     )
     parser.add_argument(
         '--end',
         type=int,
         default=None,
-        help='End file index for infographic generation (exclusive, 1-based)'
+        help='End file index for infographic generation (exclusive, 1-based). Ignored if --infor_path is specified.'
     )
     parser.add_argument(
         '--output-dir',
@@ -1124,6 +1141,9 @@ def main():
         repo_root = os.path.abspath(os.path.join(script_dir, '../../../'))
         infographic_dir = os.path.join(repo_root, 'src/data/create_data/output/infographic')
     
+    # Check if we're using single file mode
+    use_single_file = args.infor_path is not None
+    
     # Set base output directory
     if args.output_dir:
         output_dir = args.output_dir
@@ -1146,23 +1166,45 @@ def main():
     font_idx = load_json(font_idx_path)
     squad_id_to_qa = load_squad_jsonl(args.squad_file)
     
-    # Load infographic data
-    end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
-    
-    # Validate file indices
-    if args.start < 1:
-        raise ValueError("Start file index must be >= 1")
-    if args.end is not None and args.end <= args.start:
-        raise ValueError("End file index must be > start file index")
-    
-    print(f"  - Infographics: {infographic_dir} (directory)")
-    print(f"  - File index range: {args.start} to {end_file_idx-1} (files: {end_file_idx - args.start})")
-    
-    infographic_generated = load_infographic_files_from_directory(
-        infographic_dir, 
-        args.start, 
-        end_file_idx
-    )
+    # Load infographic data based on mode
+    if use_single_file:
+        # Single file mode: load from --infor_path
+        print(f"  - Infographics: {args.infor_path} (single file)")
+        
+        if not os.path.exists(args.infor_path):
+            raise FileNotFoundError(f"Infographic file not found: {args.infor_path}")
+        
+        infographic_generated = load_json(args.infor_path)
+        
+        # Ensure it's a list
+        if not isinstance(infographic_generated, list):
+            raise ValueError(f"Expected a list of infographic entries, got {type(infographic_generated)}")
+        
+        print(f"Loaded {len(infographic_generated)} infographic entries from single file")
+        
+        # In single file mode, use the infographic_id from each entry directly
+        start_wiki_idx = 0
+    else:
+        # Directory mode: load from --infographic-dir with --start and --end
+        end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
+        
+        # Validate file indices
+        if args.start < 1:
+            raise ValueError("Start file index must be >= 1")
+        if args.end is not None and args.end <= args.start:
+            raise ValueError("End file index must be > start file index")
+        
+        print(f"  - Infographics: {infographic_dir} (directory)")
+        print(f"  - File index range: {args.start} to {end_file_idx-1} (files: {end_file_idx - args.start})")
+        
+        infographic_generated = load_infographic_files_from_directory(
+            infographic_dir, 
+            args.start, 
+            end_file_idx
+        )
+        
+        # Calculate starting wiki index based on start file index
+        start_wiki_idx = (args.start - 1) * 50
     
     print(f"\nLoaded {len(extracted_bboxes)} bbox entries")
     print(f"Loaded {len(color_idx)} colors")
@@ -1171,8 +1213,6 @@ def main():
     
     # Process data
     print("\nProcessing data...")
-    # Calculate starting wiki index based on start file index
-    start_wiki_idx = (args.start - 1) * 50
     
     merged_data = merge_narrator_data(
         infographic_generated,
@@ -1180,7 +1220,8 @@ def main():
         color_idx,
         font_idx,
         squad_id_to_qa,
-        start_wiki_idx=start_wiki_idx
+        start_wiki_idx=start_wiki_idx,
+        use_infographic_id=use_single_file  # Use infographic_id when in single file mode
     )
     
     print(f"Generated {len(merged_data)} infographics")
