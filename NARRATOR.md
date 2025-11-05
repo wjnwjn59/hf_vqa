@@ -29,7 +29,7 @@ python src/data/narrator/generate_infographic_data.py \
   --input-data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
   --dataset-type "squad_v2" \
   --template-path "./src/prompts/content_des_all.jinja" \
-  --output-dir "./src/data/create_data/output/infographic" \
+  --output-dir "./src/data/narrator/infographic" \
   --batch-size 4 \
   --max-retries 3 \
   --start 1 \
@@ -39,7 +39,7 @@ python src/data/narrator/generate_infographic_data.py \
 ## Using Qwen to generate layout
 
 ```bash
-conda env create -f ./src/data/create_data/bizgen/wiki.yaml
+conda env create -f wiki.yaml
 conda activate wiki
 
 export PYTHONPATH="./:$PYTHONPATH"
@@ -50,7 +50,7 @@ CUDA_VISIBLE_DEVICES=0 python src/data/narrator/generate_infographic_data.py \
   --input-data "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
   --dataset-type "squad_v2" \
   --template-path "./src/prompts/content_des_all.jinja" \
-  --output-dir "./src/data/create_data/output/infographic" \
+  --output-dir "./src/data/narrator/infographic" \
   --batch-size 8 \
   --start 1 \
   --end 2
@@ -65,7 +65,7 @@ export PYTHONPATH="./:$PYTHONPATH"
 
 python src/data/narrator/merge_narrator_bboxes.py \
     --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
-    --infographic-dir "./src/data/create_data/output/infographic"
+    --infographic-dir "./src/data/narrator/infographic"
 ```
 
 ## Create bizgen data
@@ -77,7 +77,7 @@ cd ./src/data/bizgen/
 
 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
-    --wiki_dir ../create_data/output/narrator_format/ \
+    --wiki_dir ../narrator/wiki/ \
     --subset 1:10 \
     --device cuda:2 \
     --dataset_name squad_v2
@@ -91,10 +91,105 @@ export PYTHONPATH="./:$PYTHONPATH"
 
 CUDA_VISIBLE_DEVICES=0 python src/data/ocr/ocr_filter.py \
     --images-dir "./src/data/bizgen/output/squad_v2" \
-    --bizgen-dir "./src/data/create_data/output/narrator_format" \
-    --output-dir "./src/data/bizgen/output/squad_v2/ocr_result" \
-    --threshold 0.5
+    --infographic-dir "./src/data/narrator/infographic" \
+    --output-dir "./src/data/narrator/infographic" \
+    --threshold 0.5 \
+    --start 1 \
+    --end 2
 ```
+
+## Run merge file again
+
+```bash
+conda activate wiki
+export PYTHONPATH="./:$PYTHONPATH"
+
+python src/data/narrator/merge_narrator_bboxes.py \
+    --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
+    --infor_path "./src/data/narrator/infographic/failed.json" \
+    --output-dir "./src/data/narrator/wiki_retry" \
+    --original-wiki-dir "./src/data/narrator/wiki"
+```
+
+## Regenerate Failed Images
+
+After running OCR filter, regenerate failed images using the `failed.json` file:
+
+```bash
+conda activate bizgen
+cd ./src/data/bizgen/
+
+python inference.py \
+    --ckpt_dir checkpoints/lora/infographic \
+    --wiki_path ../narrator/wiki_retry \
+    --device cuda:0 \
+    --dataset_name squad_v2
+```
+
+## Convert to Training Format
+
+After generating images with BizGen, convert the data to training format for Qwen2-VL:
+
+```bash
+conda activate wiki
+export PYTHONPATH="./:$PYTHONPATH"
+
+python src/data/narrator/convert_to_training_format.py \
+    --wiki-dir "src/data/narrator/wiki" \
+    --image-base-dir "./src/data/bizgen/output" \
+    --dataset-name "squad_v2" \
+    --output-file "./training_data/squad_v2_train.json" \
+    --seed 42
+```
+
+### Arguments
+
+- `--wiki-dir`: Directory containing wiki*.json files (e.g., `src/data/narrator/wiki`)
+- `--image-base-dir`: Base directory containing generated images (default: `./src/data/bizgen/output`)
+- `--dataset-name`: Dataset folder name (e.g., `squad_v2`, `squad_v2_new`)
+- `--output-file`: Output JSON file path (JSONL will be auto-generated)
+- `--output-jsonl-file`: (Optional) Custom JSONL output path
+- `--max-samples`: (Optional) Limit number of samples
+- `--seed`: (Optional) Random seed for shuffling
+
+### Output Format
+
+The script generates training data in Qwen2-VL format. **Each QA pair becomes a separate training sample**:
+
+```json
+{
+  "id": "56be85543aeaaa14008c9063",
+  "image": "narrator000001/1.png",
+  "conversations": [
+    {
+      "from": "human",
+      "value": "<image>When did Beyonce start becoming popular?"
+    },
+    {
+      "from": "gpt",
+      "value": "in the late 1990s"
+    }
+  ]
+}
+```
+
+### Key Features
+
+- **One QA pair per sample**: Each training sample contains exactly one question-answer pair
+- **Image token per sample**: Each sample gets its own `<image>` token
+- **Wiki-based**: Reads directly from wiki*.json files (no need for original Squad v2 file)
+- **Automatic image lookup**: Uses `index` field from wiki files to find corresponding images
+- **Filters unanswerable questions**: Automatically skips questions without valid answers
+- **Both JSON and JSONL formats**: Generates both formats automatically
+- **Image paths**: Relative paths without dataset prefix (e.g., `narrator000001/1.png`)
+
+### Notes
+
+- The script reads wiki files that contain `index` and `qa_pairs` fields
+- Image path format: `narrator000001/1.png` (without dataset name prefix)
+- Each narrator folder contains 50 images (narrator000001 → images 1-50, narrator000002 → images 51-100, etc.)
+- Unanswerable questions are automatically filtered out
+- If an image is missing for a wiki entry, that entry is skipped with a warning
 
 ## Running Full Pipeline on Multiple GPUs
 

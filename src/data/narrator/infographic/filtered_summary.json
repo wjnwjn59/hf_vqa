@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "total_images_processed": 50,
+    "total_images_filtered": 14,
+    "filter_threshold": 0.5,
+    "start_file": 1,
+    "end_file": 2,
+    "start_image_id": 1,
+    "end_image_id": 50,
+    "images_directory": "/home/thinhnp/hf_vqa/src/data/bizgen/output/squad_v2",
+    "infographic_directory": "/home/thinhnp/hf_vqa/src/data/narrator/infographic",
+    "filter_ratio": 0.28
+  },
+  "filtered_images": [
+    {
+      "image_id": 1,
+      "image_filename": "1.png",
+      "similarity_ratio": 0.45614035087719296,
+      "reason": "Jaccard similarity (0.456) < threshold (0.500)"
+    },
+    {
+      "image_id": 7,
+      "image_filename": "7.png",
+      "similarity_ratio": 0.34615384615384615,
+      "reason": "Jaccard similarity (0.346) < threshold (0.500)"
+    },
+    {
+      "image_id": 9,
+      "image_filename": "9.png",
+      "similarity_ratio": 0.2268041237113402,
+      "reason": "Jaccard similarity (0.227) < threshold (0.500)"
+    },
+    {
+      "image_id": 10,
+      "image_filename": "10.png",
+      "similarity_ratio": 0.42592592592592593,
+      "reason": "Jaccard similarity (0.426) < threshold (0.500)"
+    },
+    {
+      "image_id": 28,
+      "image_filename": "28.png",
+      "similarity_ratio": 0.46774193548387094,
+      "reason": "Jaccard similarity (0.468) < threshold (0.500)"
+    },
+    {
+      "image_id": 29,
+      "image_filename": "29.png",
+      "similarity_ratio": 0.40625,
+      "reason": "Jaccard similarity (0.406) < threshold (0.500)"
+    },
+    {
+      "image_id": 43,
+      "image_filename": "43.png",
+      "similarity_ratio": 0.2857142857142857,
+      "reason": "Jaccard similarity (0.286) < threshold (0.500)"
+    },
+    {
+      "image_id": 44,
+      "image_filename": "44.png",
+      "similarity_ratio": 0.26865671641791045,
+      "reason": "Jaccard similarity (0.269) < threshold (0.500)"
+    },
+    {
+      "image_id": 45,
+      "image_filename": "45.png",
+      "similarity_ratio": 0.31746031746031744,
+      "reason": "Jaccard similarity (0.317) < threshold (0.500)"
+    },
+    {
+      "image_id": 46,
+      "image_filename": "46.png",
+      "similarity_ratio": 0.3076923076923077,
+      "reason": "Jaccard similarity (0.308) < threshold (0.500)"
+    },
+    {
+      "image_id": 47,
+      "image_filename": "47.png",
+      "similarity_ratio": 0.21428571428571427,
+      "reason": "Jaccard similarity (0.214) < threshold (0.500)"
+    },
+    {
+      "image_id": 48,
+      "image_filename": "48.png",
+      "similarity_ratio": 0.3870967741935484,
+      "reason": "Jaccard similarity (0.387) < threshold (0.500)"
+    },
+    {
+      "image_id": 49,
+      "image_filename": "49.png",
+      "similarity_ratio": 0.32786885245901637,
+      "reason": "Jaccard similarity (0.328) < threshold (0.500)"
+    },
+    {
+      "image_id": 50,
+      "image_filename": "50.png",
+      "similarity_ratio": 0.1323529411764706,
+      "reason": "Jaccard similarity (0.132) < threshold (0.500)"
+    }
+  ]
+}
