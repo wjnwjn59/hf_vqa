@@ -107,7 +107,8 @@ export PYTHONPATH="./:$PYTHONPATH"
 python src/data/narrator/merge_narrator_bboxes.py \
     --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
     --infor_path "./src/data/narrator/infographic/failed.json" \
-    --output-dir "./src/data/narrator/wiki_retry"
+    --output-dir "./src/data/narrator/wiki_retry" \
+    --original-wiki-dir "./src/data/narrator/wiki"
 ```
 
 ## Regenerate Failed Images
