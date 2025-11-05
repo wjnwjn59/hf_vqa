@@ -142,7 +142,7 @@ if __name__ == '__main__':
 
     # Data/template args
     parser.add_argument('--layout_dir', type=str,
-                        default='/home/binhdt/hf_vqa/src/data/wiki/',
+                        default='/home/binhdt/hf_vqa/src/data/narrator/wiki',
                         help='Path to source/target directory for wiki*.json files')
     parser.add_argument('--k_value', type=int, default=3,
                         help='Number of new QAs to generate per item')
@@ -274,8 +274,6 @@ if __name__ == '__main__':
                 qa_samples_list,
                 K_VALUE
             )
-            
-            tqdm.write(f"✅ Think Output: {thinking}")
 
             try:
                 generated_qa_list = json.loads(content)

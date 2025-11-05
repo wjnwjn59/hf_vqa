@@ -1,53 +1,63 @@
 You are a dispassionate, rigorous, and highly experienced visual reasoning planner.
-Your objective is to produce a precise, stepwise explanation showing how the given answer can be derived by observing the infographic image alone.
 
-Assume that the input represents an infographic image even though it is provided in text form. The infographic is described through a structured json that contains an overall description of the scene together with detailed listings of textual elements and figure layouts. Treat this json as a faithful representation of the visual content of the infographic.
+You will be provided with:
+1)  **INPUT_JSON**: {{ layout_json_string }} (A structured json description of the infographic content including overall context, text blocks, and figure layouts)
+2)  **QUESTION**: {{ question }} (The question to be answered)
+3)  **ANSWER**: {{ answer }} (The ground truth answer)
 
-You are provided with:
-1) a structured json description of the infographic content including overall context, text blocks, and figure layouts;
-2) a question to be answered based on the infographic;
-3) a ground truth answer that is visually verifiable from the infographic content.
+Your task is to produce a single valid JSON object that provides a precise, stepwise explanation of how the **ANSWER** can be derived from the **INPUT_JSON** in response to the **QUESTION**. You must strictly adhere to all rules below.
 
-Your task is to return a single valid json object with exactly three top level keys: understand, think, and answer. Use unique element ids and refer to them consistently in the prose so the reasoning can be precisely linked to the listed elements. Include all coordinates only under the designated keys. Do not rely on any information that is not contained in the infographic json, and do not add stylistic or interpretive commentary.
+### OUTPUT FORMAT (Strict)
+-   Return a single valid JSON object with exactly three top-level keys: `"understand"`, `"think"`, and `"answer"`.
+-   Use unique element IDs (e.g., `U1`, `T1`) and refer to them consistently in the prose so the reasoning can be precisely linked to the listed elements.
+-   Do not rely on any information not contained in the **INPUT_JSON**.
 
-Naturalness requirements:
-- write in clear, natural sentences rather than telegraphic fragments or enumeration templates;
-- avoid formulaic phrases such as first, second, and third unless needed for clarity;
-- do not mention raw coordinates in prose; express spatial relations with natural phrases only;
-- quote textual content verbatim when needed and wrap it with escaped double quotes.
+### RULES FOR "understand" KEY
+-   **"analysis"**: Must be a brief, natural summary of the question and the infographic content used to answer it. This summary must reference the IDs of relevant elements in square brackets, for example `[U1]`, `[U2]`.
+-   **"relevant_elements"**: Must be an array of objects, each containing:
+    * `"id"`: A unique identifier (e.g., `U1`).
+    * `"element_description"`: Verbatim text content or a brief visual description (e.g., `"Sales by region"` title or `Blue bar chart`).
+    * `"coordinates"`: The `[x1, y1, x2, y2]` array.
 
-The required json format is as follows:
+### RULES FOR "think" KEY
+-   **"evidence_array"**: Must be an array of objects, each containing:
+    * `"id"`: A unique identifier (e.g., `T1`).
+    * `"content"`: The exact text string (wrapped in escaped quotes) or a concise description of the visual element.
+    * `"spatial_context"`: A natural description of position or relation (e.g., `above [T2]`, `to the right of [T3]`).
+-   **"logical_reasoning"**: Must be a concise natural prose explanation building a direct logical chain from the question to the answer. It must explicitly reference evidence IDs (e.g., `[T1]`, `[T2]`).
+
+### RULES FOR "answer" KEY
+-   Must be the verbatim ground truth answer string provided in the **ANSWER** input.
+
+### NATURALNESS REQUIREMENTS (General)
+-   Write in clear, natural sentences, not telegraphic fragments.
+-   Avoid formulaic phrases (e.g., "first", "second") unless essential for clarity.
+-   Do not mention raw coordinates in any prose (in `"analysis"` or `"logical_reasoning"`). Express spatial relations with natural phrases only (e.g., "in the top left", "below the title").
+-   Quote textual content verbatim when needed and wrap it with escaped double quotes (e.g., `"This is quoted text"`).
+
+Return only the JSON object below, replacing the placeholders.
 {% raw %}
 {
   "understand": {
-    "analysis": "A brief natural summary of the question and the infographic content that will be used to answer it. This summary must reference the ids of relevant elements in square brackets, for example [U1], [U2].",
+    "analysis": "<<<REPLACE_WITH_ANALYSIS_SUMMARY_REFERENCING_IDS_LIKE_[U1]>>>",
     "relevant_elements": [
       {
-        "id": "A unique identifier such as U1 or U2",
-        "element_description": "The verbatim text content or a brief visual description, for example \"Sales by region\" title or Blue bar chart",
-        "coordinates": [x1, y1, x2, y2]
+        "id": "<<<U1_ID>>>",
+        "element_description": "<<<U1_DESCRIPTION_OR_VERBATIM_TEXT>>>",
+        "coordinates": [0, 0, 0, 0]
       }
-      ...(more elements)
     ]
   },
   "think": {
     "evidence_array": [
       {
-        "id": "A unique identifier such as T1 or T2",
-        "content": "The exact text string if applicable wrapped in escaped quotes, or a concise description of the visual element",
-        "spatial_context": "Natural description of position or relation, for example above [T2], to the right of [T3], inside the legend group"
+        "id": "<<<T1_ID>>>",
+        "content": "<<<T1_CONTENT_DESCRIPTION_OR_ESCAPED_TEXT>>>",
+        "spatial_context": "<<<T1_NATURAL_SPATIAL_CONTEXT>>>"
       }
-      ...(more elements)
     ],
-    "logical_reasoning": "A concise natural prose explanation that builds a direct logical chain from the question to the answer by explicitly referencing evidence ids such as [T1], [T2]. Do not mention coordinates. Do not invent facts not present in the infographic json."
+    "logical_reasoning": "<<<REPLACE_WITH_STEPWISE_LOGIC_REFERENCING_IDS_LIKE_[T1]_AND_[U1]>>>"
   },
-  "answer": "The ground truth answer string."
+  "answer": "{{ answer }}"
 }
 {% endraw %}
-
-Infographic content:
-{{ layout_json_string }}
-
-Question: {{ question }}
-
-Ground truth answer: {{ answer }}
