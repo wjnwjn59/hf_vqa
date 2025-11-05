@@ -1,0 +1,9 @@
+Model	Overall	Calculation	Comparison	Counting	Identification	Trend Analysis	Visual Analysis	Composite Understanding	Data Understanding	Visual Understanding	Chart Classification	Data Comparison	Data Counting With Condition	Data Extraction With Condition	Data Identification	Fact Checking	Style Detection	Visual Elements Retrieval
+InternVL3_5-2B	32.21	15.95	56.61	12.37	47.88	75.0	12.42	22.98	45.64	19.89	43.33	14.4	13.83	17.61	49.3	58.79	5.25	15.01
+InternVL3_5-8B	50.61	31.98	69.03	25.95	62.5	82.76	53.27	28.85	61.31	57.93	78.18	30.77	22.04	33.27	57.59	70.65	45.68	53.51
+LLaVA-OneVision-1.5-4B-Instruct	52.17	30.28	77.38	27.94	62.7	82.76	54.55	31.57	62.56	58.64	79.09	28.81	25.45	31.87	57.55	78.02	50.62	51.88
+LLaVA-OneVision-1.5-8B-Instruct	50.17	31.81	66.24	26.56	61.88	85.34	54.03	25.36	62.71	57.93	78.79	29.62	24.45	34.15	56.57	68.51	49.07	51.39
+Ovis2.5-2B	48.16	27.65	64.04	19.39	65.83	78.45	49.94	32.5	55.17	54.62	86.67	25.2	22.24	30.28	59.29	65.75	38.89	45.68
+Ovis2.5-9B	53.43	36.05	65.55	30.38	67.17	87.93	56.21	26.23	66.49	63.14	90.3	34.37	27.25	37.85	59.92	68.2	48.46	56.28
+Qwen2.5-VL-3B-Instruct	47.5	27.91	71.46	22.9	60.37	78.45	43.92	28.17	59.57	49.57	73.03	26.84	21.24	29.05	56.4	72.29	28.09	48.29
+Qwen2.5-VL-7B-Instruct	50.74	40.63	64.04	29.47	61.1	81.9	46.22	24.67	69.29	49.57	68.18	38.13	30.26	43.31	58.88	66.16	29.32	50.24

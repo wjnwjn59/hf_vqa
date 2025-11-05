@@ -237,6 +237,10 @@ if __name__ == '__main__':
                 tqdm.write(f"Skipping item in {wiki_file}: Missing 'index'.")
                 continue
             
+            if 'generated_qa_pairs' in item:
+                tqdm.write(f"Skipping ({wiki_id}, {layout_index}): 'generated_qa_pairs' already exists.")
+                continue
+
             layout_for_prompt = {
                 "layers_all": item.get("layers_all", []),
                 "full_image_caption": item.get("full_image_caption", "")

@@ -1,0 +1,2887 @@
+[
+  {
+    "index": 1,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\". The theme explores the journey of Beyoncé's career with a vibrant and engaging tone, seamlessly integrating text and visuals. At the top, the infographic features the text \"Dangerously in Love, released in 2003, made Beyoncé a worldwide known artist and won five Grammy Awards.\" Just below, the text \"Managed by her father Mathew Knowles, Destiny's Child became one of the best-selling girl groups, with Beyoncé as the lead singer.\" is positioned near the upper section, setting the early context. Alongside these texts, a cartoon of a young girl dancing and singing energetically in a vibrant, playful setting appears, capturing Beyoncé's childhood talent. Below this, a silhouette of a group performing on stage with a spotlight on the lead singer illustrates her pivotal role in Destiny's Child. Further down, the text \"Beyoncé left Destiny's Child in 2003 to become a solo singer, releasing her debut album Dangerously in Love.\" is placed, marking her solo career's beginning. At the center of the infographic, the title \"Beyoncé's Rise to Fame\" is prominently displayed. Just beneath, the narrative continues with \"As a child in Houston, Texas, Beyoncé competed in singing and dancing competitions.\" and \"Beyoncé Giselle Knowles-Carter, born September 4, 1981, in Houston, Texas, became popular in the late 1990s as the lead singer of Destiny's Child.\" Near the lower margin, a stylized map highlighting a city with musical notes indicating a rise in popularity represents her growing influence. The overall style of the image is dynamic and informative, effectively blending storytelling with visual elements to illustrate Beyoncé's illustrious career path."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a solid, uniform color with no distinguishable features or objects. It appears to be a plain, flat surface with a consistent shade of purple. There are no texts, patterns, or other elements that can be discerned from this image. The background is not visible as the image is a solid color."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          1671
+        ],
+        "bottom_right": [
+          896,
+          1959
+        ],
+        "caption": "A stylized map highlighting a city with musical notes indicating a rise in popularity."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          554
+        ],
+        "bottom_right": [
+          896,
+          816
+        ],
+        "caption": "A cartoon of a young girl dancing and singing energetically in a vibrant, playful setting."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          849
+        ],
+        "bottom_right": [
+          896,
+          1111
+        ],
+        "caption": "A silhouette of a group performing on stage with a spotlight on the lead singer."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          299,
+          1212
+        ],
+        "bottom_right": [
+          779,
+          1352
+        ],
+        "caption": "Text \"Beyoncé's Rise to Fame\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's Rise to Fame"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          224,
+          1503
+        ],
+        "bottom_right": [
+          779,
+          1596
+        ],
+        "caption": "Text \"Beyoncé Giselle Knowles-Carter, born September 4, 1981, in Houston, Texas, became popular in the late 1990s as the lead singer of Destiny's Child.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé Giselle Knowles-Carter, born September 4, 1981, in Houston, Texas, became popular in the late 1990s as the lead singer of Destiny's Child."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          229,
+          1428
+        ],
+        "bottom_right": [
+          802,
+          1495
+        ],
+        "caption": "Text \"As a child in Houston, Texas, Beyoncé competed in singing and dancing competitions.\" in <color-1>, <en-font-154>. ",
+        "text": "As a child in Houston, Texas, Beyoncé competed in singing and dancing competitions."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          32,
+          408
+        ],
+        "bottom_right": [
+          856,
+          491
+        ],
+        "caption": "Text \"Managed by her father Mathew Knowles, Destiny's Child became one of the best-selling girl groups, with Beyoncé as the lead singer.\" in <color-1>, <en-font-101>. ",
+        "text": "Managed by her father Mathew Knowles, Destiny's Child became one of the best-selling girl groups, with Beyoncé as the lead singer."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          299,
+          1135
+        ],
+        "bottom_right": [
+          779,
+          1202
+        ],
+        "caption": "Text \"Beyoncé left Destiny's Child in 2003 to become a solo singer, releasing her debut album Dangerously in Love.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé left Destiny's Child in 2003 to become a solo singer, releasing her debut album Dangerously in Love."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          20,
+          323
+        ],
+        "bottom_right": [
+          883,
+          387
+        ],
+        "caption": "Text \"Dangerously in Love, released in 2003, made Beyoncé a worldwide known artist and won five Grammy Awards.\" in <color-1>, <en-font-154>. ",
+        "text": "Dangerously in Love, released in 2003, made Beyoncé a worldwide known artist and won five Grammy Awards."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Rise to Fame\". The theme explores the journey of Beyoncé's career with a vibrant and engaging tone, seamlessly integrating text and visuals. At the top, the infographic features the text \"Dangerously in Love, released in 2003, made Beyoncé a worldwide known artist and won five Grammy Awards.\" Just below, the text \"Managed by her father Mathew Knowles, Destiny's Child became one of the best-selling girl groups, with Beyoncé as the lead singer.\" is positioned near the upper section, setting the early context. Alongside these texts, a cartoon of a young girl dancing and singing energetically in a vibrant, playful setting appears, capturing Beyoncé's childhood talent. Below this, a silhouette of a group performing on stage with a spotlight on the lead singer illustrates her pivotal role in Destiny's Child. Further down, the text \"Beyoncé left Destiny's Child in 2003 to become a solo singer, releasing her debut album Dangerously in Love.\" is placed, marking her solo career's beginning. At the center of the infographic, the title \"Beyoncé's Rise to Fame\" is prominently displayed. Just beneath, the narrative continues with \"As a child in Houston, Texas, Beyoncé competed in singing and dancing competitions.\" and \"Beyoncé Giselle Knowles-Carter, born September 4, 1981, in Houston, Texas, became popular in the late 1990s as the lead singer of Destiny's Child.\" Near the lower margin, a stylized map highlighting a city with musical notes indicating a rise in popularity represents her growing influence. The overall style of the image is dynamic and informative, effectively blending storytelling with visual elements to illustrate Beyoncé's illustrious career path.",
+    "original_bbox_index": "cn_1",
+    "original_context": "Beyoncé Giselle Knowles-Carter (/biːˈjɒnseɪ/ bee-YON-say) (born September 4, 1981) is an American singer, songwriter, record producer and actress. Born and raised in Houston, Texas, she performed in various singing and dancing competitions as a child, and rose to fame in the late 1990s as lead singer of R&B girl-group Destiny's Child. Managed by her father, Mathew Knowles, the group became one of the world's best-selling girl groups of all time. Their hiatus saw the release of Beyoncé's debut album, Dangerously in Love (2003), which established her as a solo artist worldwide, earned five Grammy Awards and featured the Billboard Hot 100 number-one singles \"Crazy in Love\" and \"Baby Boy\".",
+    "original_qa_pairs": [
+      {
+        "question": "When did Beyonce start becoming popular?",
+        "answers": {
+          "text": [
+            "in the late 1990s"
+          ],
+          "answer_start": [
+            269
+          ]
+        },
+        "id": "56be85543aeaaa14008c9063"
+      },
+      {
+        "question": "What areas did Beyonce compete in when she was growing up?",
+        "answers": {
+          "text": [
+            "singing and dancing"
+          ],
+          "answer_start": [
+            207
+          ]
+        },
+        "id": "56be85543aeaaa14008c9065"
+      },
+      {
+        "question": "When did Beyonce leave Destiny's Child and become a solo singer?",
+        "answers": {
+          "text": [
+            "2003"
+          ],
+          "answer_start": [
+            526
+          ]
+        },
+        "id": "56be85543aeaaa14008c9066"
+      },
+      {
+        "question": "In what city and state did Beyonce  grow up? ",
+        "answers": {
+          "text": [
+            "Houston, Texas"
+          ],
+          "answer_start": [
+            166
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9601"
+      },
+      {
+        "question": "In which decade did Beyonce become famous?",
+        "answers": {
+          "text": [
+            "late 1990s"
+          ],
+          "answer_start": [
+            276
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9602"
+      },
+      {
+        "question": "In what R&B group was she the lead singer?",
+        "answers": {
+          "text": [
+            "Destiny's Child"
+          ],
+          "answer_start": [
+            320
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9603"
+      },
+      {
+        "question": "What album made her a worldwide known artist?",
+        "answers": {
+          "text": [
+            "Dangerously in Love"
+          ],
+          "answer_start": [
+            505
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9604"
+      },
+      {
+        "question": "Who managed the Destiny's Child group?",
+        "answers": {
+          "text": [
+            "Mathew Knowles"
+          ],
+          "answer_start": [
+            360
+          ]
+        },
+        "id": "56bf6b0f3aeaaa14008c9605"
+      },
+      {
+        "question": "When did Beyoncé rise to fame?",
+        "answers": {
+          "text": [
+            "late 1990s"
+          ],
+          "answer_start": [
+            276
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830a9"
+      },
+      {
+        "question": "What role did Beyoncé have in Destiny's Child?",
+        "answers": {
+          "text": [
+            "lead singer"
+          ],
+          "answer_start": [
+            290
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830aa"
+      },
+      {
+        "question": "What was the first album Beyoncé released as a solo artist?",
+        "answers": {
+          "text": [
+            "Dangerously in Love"
+          ],
+          "answer_start": [
+            505
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830ab"
+      },
+      {
+        "question": "When did Beyoncé release Dangerously in Love?",
+        "answers": {
+          "text": [
+            "2003"
+          ],
+          "answer_start": [
+            526
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830ac"
+      },
+      {
+        "question": "How many Grammy awards did Beyoncé win for her first solo album?",
+        "answers": {
+          "text": [
+            "five"
+          ],
+          "answer_start": [
+            590
+          ]
+        },
+        "id": "56d43c5f2ccc5a1400d830ad"
+      },
+      {
+        "question": "What was Beyoncé's role in Destiny's Child?",
+        "answers": {
+          "text": [
+            "lead singer"
+          ],
+          "answer_start": [
+            290
+          ]
+        },
+        "id": "56d43ce42ccc5a1400d830b4"
+      },
+      {
+        "question": "What was the name of Beyoncé's first solo album?",
+        "answers": {
+          "text": [
+            "Dangerously in Love"
+          ],
+          "answer_start": [
+            505
+          ]
+        },
+        "id": "56d43ce42ccc5a1400d830b5"
+      }
+    ],
+    "original_id": "56be85543aeaaa14008c9063"
+  },
+  {
+    "index": 2,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé: A Journey in Music and Acting\". The infographic presents a comprehensive narrative of Beyoncé's career in music and acting, with a balanced combination of text and visuals. At the top, a stylized depiction of three singers with microphones, one stepping forward, symbolizes Beyoncé's transition to a solo career. Adjacent to this, on the upper-right corner, is a cartoon of a film set with a spotlight and a figure holding a trophy, representing her acting achievements. Below these visuals, the text \"Destiny's Child disbanded in June 2005. Beyoncé released her second solo album, B'Day (2006), with hits 'Déjà Vu', 'Irreplaceable', and 'Beautiful Liar'.\" is centered. To the left of this, another text block reads \"Sasha Fierce earned Beyoncé a record-setting six Grammy Awards in 2010, including Song of the Year for 'Single Ladies (Put a Ring on It)'.\" Continuing downward, the text \"In 2010, Beyoncé took a hiatus from music and managed her career. Her fourth album 4 (2011) explored 1970s funk, 1980s pop, and 1990s soul.\" is placed. Below this, the narrative notes \"After B'Day, Beyoncé explored acting, earning a Golden Globe nomination for Dreamgirls (2006) and starring in The Pink Panther (2006) and Obsessed (2009).\" At a slightly lower position, the text \"Her fifth album, Beyoncé (2013), was acclaimed for its experimental production and darker themes.\" follows. Near the lower section, the text \"Beyoncé married rapper Jay Z and portrayed Etta James in Cadillac Records (2008), influencing her third album, I Am... Sasha Fierce (2008), which introduced her alter-ego Sasha Fierce.\" completes the chronology. The overall style of the image is vibrant and engaging, blending artistic visuals with informative text in a clear, flowing layout."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no discernible features. It's a simple, unadorned white background with no additional elements."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          119,
+          53
+        ],
+        "bottom_right": [
+          776,
+          711
+        ],
+        "caption": "A stylized depiction of three singers with microphones, one stepping forward, symbolizing a solo debut."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          693,
+          0
+        ],
+        "bottom_right": [
+          896,
+          138
+        ],
+        "caption": "A cartoon of a film set with a spotlight and a figure holding a trophy, representing acting achievements."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          44,
+          711
+        ],
+        "bottom_right": [
+          851,
+          916
+        ],
+        "caption": "Text \"Beyoncé: A Journey in Music and Acting\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé: A Journey in Music and Acting"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          173,
+          1222
+        ],
+        "bottom_right": [
+          722,
+          1378
+        ],
+        "caption": "Text \"Destiny's Child disbanded in June 2005. Beyoncé released her second solo album, B'Day (2006), with hits 'Déjà Vu', 'Irreplaceable', and 'Beautiful Liar'.\" in <color-1>, <en-font-15>. ",
+        "text": "Destiny's Child disbanded in June 2005. Beyoncé released her second solo album, B'Day (2006), with hits 'Déjà Vu', 'Irreplaceable', and 'Beautiful Liar'."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          173,
+          1605
+        ],
+        "bottom_right": [
+          722,
+          1761
+        ],
+        "caption": "Text \"After B'Day, Beyoncé explored acting, earning a Golden Globe nomination for Dreamgirls (2006) and starring in The Pink Panther (2006) and Obsessed (2009).\" in <color-1>, <en-font-154>. ",
+        "text": "After B'Day, Beyoncé explored acting, earning a Golden Globe nomination for Dreamgirls (2006) and starring in The Pink Panther (2006) and Obsessed (2009)."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          173,
+          1988
+        ],
+        "bottom_right": [
+          722,
+          2144
+        ],
+        "caption": "Text \"Beyoncé married rapper Jay Z and portrayed Etta James in Cadillac Records (2008), influencing her third album, I Am... Sasha Fierce (2008), which introduced her alter-ego Sasha Fierce.\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé married rapper Jay Z and portrayed Etta James in Cadillac Records (2008), influencing her third album, I Am... Sasha Fierce (2008), which introduced her alter-ego Sasha Fierce."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          408,
+          1092
+        ],
+        "bottom_right": [
+          487,
+          1154
+        ],
+        "caption": "Text \"Sasha Fierce earned Beyoncé a record-setting six Grammy Awards in 2010, including Song of the Year for 'Single Ladies (Put a Ring on It)'.\" in <color-1>, <en-font-15>. ",
+        "text": "Sasha Fierce earned Beyoncé a record-setting six Grammy Awards in 2010, including Song of the Year for 'Single Ladies (Put a Ring on It)'."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          408,
+          1476
+        ],
+        "bottom_right": [
+          487,
+          1538
+        ],
+        "caption": "Text \"In 2010, Beyoncé took a hiatus from music and managed her career. Her fourth album 4 (2011) explored 1970s funk, 1980s pop, and 1990s soul.\" in <color-1>, <en-font-154>. ",
+        "text": "In 2010, Beyoncé took a hiatus from music and managed her career. Her fourth album 4 (2011) explored 1970s funk, 1980s pop, and 1990s soul."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          408,
+          1859
+        ],
+        "bottom_right": [
+          487,
+          1921
+        ],
+        "caption": "Text \"Her fifth album, Beyoncé (2013), was acclaimed for its experimental production and darker themes.\" in <color-1>, <en-font-101>. ",
+        "text": "Her fifth album, Beyoncé (2013), was acclaimed for its experimental production and darker themes."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé: A Journey in Music and Acting\". The infographic presents a comprehensive narrative of Beyoncé's career in music and acting, with a balanced combination of text and visuals. At the top, a stylized depiction of three singers with microphones, one stepping forward, symbolizes Beyoncé's transition to a solo career. Adjacent to this, on the upper-right corner, is a cartoon of a film set with a spotlight and a figure holding a trophy, representing her acting achievements. Below these visuals, the text \"Destiny's Child disbanded in June 2005. Beyoncé released her second solo album, B'Day (2006), with hits 'Déjà Vu', 'Irreplaceable', and 'Beautiful Liar'.\" is centered. To the left of this, another text block reads \"Sasha Fierce earned Beyoncé a record-setting six Grammy Awards in 2010, including Song of the Year for 'Single Ladies (Put a Ring on It)'.\" Continuing downward, the text \"In 2010, Beyoncé took a hiatus from music and managed her career. Her fourth album 4 (2011) explored 1970s funk, 1980s pop, and 1990s soul.\" is placed. Below this, the narrative notes \"After B'Day, Beyoncé explored acting, earning a Golden Globe nomination for Dreamgirls (2006) and starring in The Pink Panther (2006) and Obsessed (2009).\" At a slightly lower position, the text \"Her fifth album, Beyoncé (2013), was acclaimed for its experimental production and darker themes.\" follows. Near the lower section, the text \"Beyoncé married rapper Jay Z and portrayed Etta James in Cadillac Records (2008), influencing her third album, I Am... Sasha Fierce (2008), which introduced her alter-ego Sasha Fierce.\" completes the chronology. The overall style of the image is vibrant and engaging, blending artistic visuals with informative text in a clear, flowing layout.",
+    "original_bbox_index": "cn_0",
+    "original_context": "Following the disbandment of Destiny's Child in June 2005, she released her second solo album, B'Day (2006), which contained hits \"Déjà Vu\", \"Irreplaceable\", and \"Beautiful Liar\". Beyoncé also ventured into acting, with a Golden Globe-nominated performance in Dreamgirls (2006), and starring roles in The Pink Panther (2006) and Obsessed (2009). Her marriage to rapper Jay Z and portrayal of Etta James in Cadillac Records (2008) influenced her third album, I Am... Sasha Fierce (2008), which saw the birth of her alter-ego Sasha Fierce and earned a record-setting six Grammy Awards in 2010, including Song of the Year for \"Single Ladies (Put a Ring on It)\". Beyoncé took a hiatus from music in 2010 and took over management of her career; her fourth album 4 (2011) was subsequently mellower in tone, exploring 1970s funk, 1980s pop, and 1990s soul. Her critically acclaimed fifth studio album, Beyoncé (2013), was distinguished from previous releases by its experimental production and exploration of darker themes.",
+    "original_qa_pairs": [
+      {
+        "question": "After her second solo album, what other entertainment venture did Beyonce explore?",
+        "answers": {
+          "text": [
+            "acting"
+          ],
+          "answer_start": [
+            207
+          ]
+        },
+        "id": "56be86cf3aeaaa14008c9076"
+      },
+      {
+        "question": "Which artist did Beyonce marry?",
+        "answers": {
+          "text": [
+            "Jay Z"
+          ],
+          "answer_start": [
+            369
+          ]
+        },
+        "id": "56be86cf3aeaaa14008c9078"
+      },
+      {
+        "question": "To set the record for Grammys, how many did Beyonce win?",
+        "answers": {
+          "text": [
+            "six"
+          ],
+          "answer_start": [
+            565
+          ]
+        },
+        "id": "56be86cf3aeaaa14008c9079"
+      },
+      {
+        "question": "For what movie did Beyonce receive  her first Golden Globe nomination?",
+        "answers": {
+          "text": [
+            "Dreamgirls"
+          ],
+          "answer_start": [
+            260
+          ]
+        },
+        "id": "56bf6e823aeaaa14008c9627"
+      },
+      {
+        "question": "When did Beyonce take a hiatus in her career and take control of her management?",
+        "answers": {
+          "text": [
+            "2010"
+          ],
+          "answer_start": [
+            586
+          ]
+        },
+        "id": "56bf6e823aeaaa14008c9629"
+      },
+      {
+        "question": "Which album was darker in tone from her previous work?",
+        "answers": {
+          "text": [
+            "Beyoncé"
+          ],
+          "answer_start": [
+            180
+          ]
+        },
+        "id": "56bf6e823aeaaa14008c962a"
+      },
+      {
+        "question": "After what movie portraying Etta James, did Beyonce create Sasha Fierce?",
+        "answers": {
+          "text": [
+            "Cadillac Records"
+          ],
+          "answer_start": [
+            406
+          ]
+        },
+        "id": "56bf6e823aeaaa14008c962b"
+      },
+      {
+        "question": "When did Destiny's Child end their group act?",
+        "answers": {
+          "text": [
+            "June 2005"
+          ],
+          "answer_start": [
+            48
+          ]
+        },
+        "id": "56d43da72ccc5a1400d830bd"
+      },
+      {
+        "question": "What was the name of Beyoncé's second solo album?",
+        "answers": {
+          "text": [
+            "B'Day"
+          ],
+          "answer_start": [
+            95
+          ]
+        },
+        "id": "56d43da72ccc5a1400d830be"
+      },
+      {
+        "question": "What was Beyoncé's first acting job, in 2006?",
+        "answers": {
+          "text": [
+            "Dreamgirls"
+          ],
+          "answer_start": [
+            260
+          ]
+        },
+        "id": "56d43da72ccc5a1400d830bf"
+      },
+      {
+        "question": "Who is Beyoncé married to?",
+        "answers": {
+          "text": [
+            "Jay Z"
+          ],
+          "answer_start": [
+            369
+          ]
+        },
+        "id": "56d43da72ccc5a1400d830c0"
+      },
+      {
+        "question": "What is the name of Beyoncé's alter-ego?",
+        "answers": {
+          "text": [
+            "Sasha Fierce"
+          ],
+          "answer_start": [
+            466
+          ]
+        },
+        "id": "56d43da72ccc5a1400d830c1"
+      }
+    ],
+    "original_id": "56be86cf3aeaaa14008c9076"
+  },
+  {
+    "index": 3,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé: A Modern-Day Icon\". Against a backdrop that celebrates the multifaceted achievements of a global superstar, the composition integrates text and visual elements to highlight Beyoncé's influence and accomplishments. At the top left, the title boldly introduces the subject. Moving down to the center-left, the text \"Beyoncé's career spans 19 years with over 118 million records sold as a solo artist, plus 60 million with Destiny's Child.\" emphasizes her commercial success. To the right, the narrative continues with \"Beyoncé, a self-described modern-day feminist, creates music with themes of love, relationships, and monogamy, along with female sexuality and empowerment.\" Below, on the left, another text reads, \"She has won 20 Grammy Awards and is the most nominated woman in the award's history,\" underscoring her critical acclaim. To the right, it states, \"Known for dynamic, choreographed performances, Beyoncé is hailed as one of the best entertainers in contemporary popular music,\" highlighting her performance prowess. Near the lower section, a stylized representation of a woman is depicted with musical notes, hearts, and empowerment symbols surrounding her, visually encapsulating the themes discussed. The overall style of the image is vibrant and celebratory, with a clear focus on both textual information and supporting visual iconography."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely white. There are no objects, no text, and no discernible features. It's a blank canvas with no content to describe."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          176,
+          1638
+        ],
+        "bottom_right": [
+          719,
+          2181
+        ],
+        "caption": "A stylized representation of a woman with musical notes, hearts, and empowerment symbols around her."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          84,
+          97
+        ],
+        "bottom_right": [
+          812,
+          395
+        ],
+        "caption": "Text \"Beyoncé: A Modern-Day Icon\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé: A Modern-Day Icon"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          499,
+          791
+        ],
+        "bottom_right": [
+          854,
+          992
+        ],
+        "caption": "Text \"Beyoncé, a self-described modern-day feminist, creates music with themes of love, relationships, and monogamy, along with female sexuality and empowerment.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé, a self-described modern-day feminist, creates music with themes of love, relationships, and monogamy, along with female sexuality and empowerment."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          499,
+          1296
+        ],
+        "bottom_right": [
+          854,
+          1497
+        ],
+        "caption": "Text \"Known for dynamic, choreographed performances, Beyoncé is hailed as one of the best entertainers in contemporary popular music.\" in <color-1>, <en-font-154>. ",
+        "text": "Known for dynamic, choreographed performances, Beyoncé is hailed as one of the best entertainers in contemporary popular music."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          41,
+          791
+        ],
+        "bottom_right": [
+          396,
+          992
+        ],
+        "caption": "Text \"Beyoncé's career spans 19 years with over 118 million records sold as a solo artist, plus 60 million with Destiny's Child.\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's career spans 19 years with over 118 million records sold as a solo artist, plus 60 million with Destiny's Child."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          41,
+          1296
+        ],
+        "bottom_right": [
+          396,
+          1497
+        ],
+        "caption": "Text \"She has won 20 Grammy Awards and is the most nominated woman in the award's history.\" in <color-1>, <en-font-15>. ",
+        "text": "She has won 20 Grammy Awards and is the most nominated woman in the award's history."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé: A Modern-Day Icon\". Against a backdrop that celebrates the multifaceted achievements of a global superstar, the composition integrates text and visual elements to highlight Beyoncé's influence and accomplishments. At the top left, the title boldly introduces the subject. Moving down to the center-left, the text \"Beyoncé's career spans 19 years with over 118 million records sold as a solo artist, plus 60 million with Destiny's Child.\" emphasizes her commercial success. To the right, the narrative continues with \"Beyoncé, a self-described modern-day feminist, creates music with themes of love, relationships, and monogamy, along with female sexuality and empowerment.\" Below, on the left, another text reads, \"She has won 20 Grammy Awards and is the most nominated woman in the award's history,\" underscoring her critical acclaim. To the right, it states, \"Known for dynamic, choreographed performances, Beyoncé is hailed as one of the best entertainers in contemporary popular music,\" highlighting her performance prowess. Near the lower section, a stylized representation of a woman is depicted with musical notes, hearts, and empowerment symbols surrounding her, visually encapsulating the themes discussed. The overall style of the image is vibrant and celebratory, with a clear focus on both textual information and supporting visual iconography.",
+    "original_bbox_index": 105,
+    "original_context": "A self-described \"modern-day feminist\", Beyoncé creates songs that are often characterized by themes of love, relationships, and monogamy, as well as female sexuality and empowerment. On stage, her dynamic, highly choreographed performances have led to critics hailing her as one of the best entertainers in contemporary popular music. Throughout a career spanning 19 years, she has sold over 118 million records as a solo artist, and a further 60 million with Destiny's Child, making her one of the best-selling music artists of all time. She has won 20 Grammy Awards and is the most nominated woman in the award's history. The Recording Industry Association of America recognized her as the Top Certified Artist in America during the 2000s decade. In 2009, Billboard named her the Top Radio Songs Artist of the Decade, the Top Female Artist of the 2000s and their Artist of the Millennium in 2011. Time listed her among the 100 most influential people in the world in 2013 and 2014. Forbes magazine also listed her as the most powerful female musician of 2015.",
+    "original_qa_pairs": [
+      {
+        "question": "In her music, what are some recurring elements in them?",
+        "answers": {
+          "text": [
+            "love, relationships, and monogamy"
+          ],
+          "answer_start": [
+            104
+          ]
+        },
+        "id": "56be88473aeaaa14008c9080"
+      },
+      {
+        "question": "Time magazine named her one of the most 100 what people of the century?",
+        "answers": {
+          "text": [
+            "influential"
+          ],
+          "answer_start": [
+            935
+          ]
+        },
+        "id": "56be88473aeaaa14008c9083"
+      },
+      {
+        "question": "Which magazine declared her the most dominant woman musician?",
+        "answers": {
+          "text": [
+            "Forbes"
+          ],
+          "answer_start": [
+            985
+          ]
+        },
+        "id": "56be88473aeaaa14008c9084"
+      },
+      {
+        "question": "In which decade did the Recording Industry Association of America recognize Beyonce as the The Top Certified Artist?",
+        "answers": {
+          "text": [
+            "2000s"
+          ],
+          "answer_start": [
+            736
+          ]
+        },
+        "id": "56bf725c3aeaaa14008c9643"
+      },
+      {
+        "question": "What magazine rated Beyonce as the most powerful female musician in 2015?",
+        "answers": {
+          "text": [
+            "Forbes"
+          ],
+          "answer_start": [
+            985
+          ]
+        },
+        "id": "56bf725c3aeaaa14008c9644"
+      },
+      {
+        "question": "How did Beyonce describe herself as a feminist?",
+        "answers": {
+          "text": [
+            "modern-day feminist"
+          ],
+          "answer_start": [
+            18
+          ]
+        },
+        "id": "56bf725c3aeaaa14008c9645"
+      },
+      {
+        "question": "In which years did Time rate Beyonce in the 100 most influential people in the world?",
+        "answers": {
+          "text": [
+            "2013 and 2014"
+          ],
+          "answer_start": [
+            970
+          ]
+        },
+        "id": "56bf725c3aeaaa14008c9646"
+      },
+      {
+        "question": "How many records has Beyonce sold in her 19 year career?",
+        "answers": {
+          "text": [
+            "118 million"
+          ],
+          "answer_start": [
+            393
+          ]
+        },
+        "id": "56bf725c3aeaaa14008c9647"
+      },
+      {
+        "question": "How many records did Beyoncé sell as part of Destiny's Child?",
+        "answers": {
+          "text": [
+            "60 million"
+          ],
+          "answer_start": [
+            445
+          ]
+        },
+        "id": "56d43f7e2ccc5a1400d830c7"
+      },
+      {
+        "question": "After leaving Destiny's Child, how many records did Beyoncé release under her own name?",
+        "answers": {
+          "text": [
+            "118 million"
+          ],
+          "answer_start": [
+            393
+          ]
+        },
+        "id": "56d43f7e2ccc5a1400d830c8"
+      },
+      {
+        "question": "How many Grammy awards has Beyoncé won?",
+        "answers": {
+          "text": [
+            "20"
+          ],
+          "answer_start": [
+            552
+          ]
+        },
+        "id": "56d43f7e2ccc5a1400d830c9"
+      },
+      {
+        "question": "What magazine named Beyoncé as the most powerful female musician for 2015?",
+        "answers": {
+          "text": [
+            "Forbes"
+          ],
+          "answer_start": [
+            985
+          ]
+        },
+        "id": "56d43f7e2ccc5a1400d830cb"
+      }
+    ],
+    "original_id": "56be88473aeaaa14008c9080"
+  },
+  {
+    "index": 4,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Origins and Family\". This infographic provides a detailed look at Beyoncé's family background and ancestry, set against a clean, informative backdrop. At the top left, the title \"Beyoncé's Origins and Family\" introduces the theme. Moving down to the center-left, the text \"Beyoncé's name is a tribute to her mother's maiden name, Beyincé.\" is placed, highlighting the significance of her name. To the right of this, the statement \"Beyoncé's father, Mathew Knowles, was an African-American Xerox sales manager.\" complements the narrative by providing information about her father's profession. Just below, the text \"Beyoncé was raised in a Methodist household.\" is located, offering insight into her upbringing. On the lower left, \"Through her mother, Beyoncé is a descendant of Acadian leader Joseph Broussard.\" adds a historical dimension to her maternal lineage. Below this, the text \"Her mother, Tina Knowles, was a hairdresser and salon owner.\" is positioned, giving a glimpse into her mother's career. Finally, near the lower center, \"Her younger sister, Solange, was also a member of Destiny's Child.\" is situated, connecting her family to her musical heritage. The overall style of the image is structured and educational, with a focus on clear, factual presentation."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features. It's a plain, unadorned white space with no context or content."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          68,
+          47
+        ],
+        "bottom_right": [
+          839,
+          128
+        ],
+        "caption": "Text \"Beyoncé's Origins and Family\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's Origins and Family"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          208,
+          547
+        ],
+        "bottom_right": [
+          366,
+          605
+        ],
+        "caption": "Text \"Beyoncé's name is a tribute to her mother's maiden name, Beyincé.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé's name is a tribute to her mother's maiden name, Beyincé."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          394,
+          1087
+        ],
+        "bottom_right": [
+          502,
+          1169
+        ],
+        "caption": "Text \"Her younger sister, Solange, was also a member of Destiny's Child.\" in <color-1>, <en-font-154>. ",
+        "text": "Her younger sister, Solange, was also a member of Destiny's Child."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          596,
+          547
+        ],
+        "bottom_right": [
+          737,
+          605
+        ],
+        "caption": "Text \"Beyoncé's father, Mathew Knowles, was an African-American Xerox sales manager.\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's father, Mathew Knowles, was an African-American Xerox sales manager."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          393,
+          1006
+        ],
+        "bottom_right": [
+          486,
+          1064
+        ],
+        "caption": "Text \"Her mother, Tina Knowles, was a hairdresser and salon owner.\" in <color-1>, <en-font-15>. ",
+        "text": "Her mother, Tina Knowles, was a hairdresser and salon owner."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          595,
+          632
+        ],
+        "bottom_right": [
+          793,
+          682
+        ],
+        "caption": "Text \"Beyoncé was raised in a Methodist household.\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé was raised in a Methodist household."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          208,
+          632
+        ],
+        "bottom_right": [
+          378,
+          682
+        ],
+        "caption": "Text \"Through her mother, Beyoncé is a descendant of Acadian leader Joseph Broussard.\" in <color-1>, <en-font-101>. ",
+        "text": "Through her mother, Beyoncé is a descendant of Acadian leader Joseph Broussard."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Origins and Family\". This infographic provides a detailed look at Beyoncé's family background and ancestry, set against a clean, informative backdrop. At the top left, the title \"Beyoncé's Origins and Family\" introduces the theme. Moving down to the center-left, the text \"Beyoncé's name is a tribute to her mother's maiden name, Beyincé.\" is placed, highlighting the significance of her name. To the right of this, the statement \"Beyoncé's father, Mathew Knowles, was an African-American Xerox sales manager.\" complements the narrative by providing information about her father's profession. Just below, the text \"Beyoncé was raised in a Methodist household.\" is located, offering insight into her upbringing. On the lower left, \"Through her mother, Beyoncé is a descendant of Acadian leader Joseph Broussard.\" adds a historical dimension to her maternal lineage. Below this, the text \"Her mother, Tina Knowles, was a hairdresser and salon owner.\" is positioned, giving a glimpse into her mother's career. Finally, near the lower center, \"Her younger sister, Solange, was also a member of Destiny's Child.\" is situated, connecting her family to her musical heritage. The overall style of the image is structured and educational, with a focus on clear, factual presentation.",
+    "original_bbox_index": 20,
+    "original_context": "Beyoncé Giselle Knowles was born in Houston, Texas, to Celestine Ann \"Tina\" Knowles (née Beyincé), a hairdresser and salon owner, and Mathew Knowles, a Xerox sales manager. Beyoncé's name is a tribute to her mother's maiden name. Beyoncé's younger sister Solange is also a singer and a former member of Destiny's Child. Mathew is African-American, while Tina is of Louisiana Creole descent (with African, Native American, French, Cajun, and distant Irish and Spanish ancestry). Through her mother, Beyoncé is a descendant of Acadian leader Joseph Broussard. She was raised in a Methodist household.",
+    "original_qa_pairs": [
+      {
+        "question": "Beyonce's younger sibling also sang with her in what band?",
+        "answers": {
+          "text": [
+            "Destiny's Child"
+          ],
+          "answer_start": [
+            303
+          ]
+        },
+        "id": "56be892d3aeaaa14008c908b"
+      },
+      {
+        "question": "Where did Beyonce get her name from?",
+        "answers": {
+          "text": [
+            "her mother's maiden name"
+          ],
+          "answer_start": [
+            204
+          ]
+        },
+        "id": "56be892d3aeaaa14008c908c"
+      },
+      {
+        "question": "What race was Beyonce's father?",
+        "answers": {
+          "text": [
+            "African-American"
+          ],
+          "answer_start": [
+            330
+          ]
+        },
+        "id": "56be892d3aeaaa14008c908d"
+      },
+      {
+        "question": "Beyonce's childhood home believed in what religion?",
+        "answers": {
+          "text": [
+            "Methodist"
+          ],
+          "answer_start": [
+            578
+          ]
+        },
+        "id": "56be892d3aeaaa14008c908e"
+      },
+      {
+        "question": "Beyonce's father worked as a sales manager for what company?",
+        "answers": {
+          "text": [
+            "Xerox"
+          ],
+          "answer_start": [
+            152
+          ]
+        },
+        "id": "56bf74d53aeaaa14008c9659"
+      },
+      {
+        "question": "Beyonce's mother worked in what industry?",
+        "answers": {
+          "text": [
+            "hairdresser and salon owner"
+          ],
+          "answer_start": [
+            101
+          ]
+        },
+        "id": "56bf74d53aeaaa14008c965a"
+      },
+      {
+        "question": "What younger sister of Beyonce also appeared in Destiny's Child?",
+        "answers": {
+          "text": [
+            "Solange"
+          ],
+          "answer_start": [
+            255
+          ]
+        },
+        "id": "56bf74d53aeaaa14008c965b"
+      },
+      {
+        "question": "Beyonce is a descendent of what Arcadian leader?",
+        "answers": {
+          "text": [
+            "Joseph Broussard"
+          ],
+          "answer_start": [
+            540
+          ]
+        },
+        "id": "56bf74d53aeaaa14008c965d"
+      },
+      {
+        "question": "What company did Beyoncé's father work for when she was a child?",
+        "answers": {
+          "text": [
+            "Xerox"
+          ],
+          "answer_start": [
+            152
+          ]
+        },
+        "id": "56d440df2ccc5a1400d830d1"
+      },
+      {
+        "question": "What did Beyoncé's mother own when Beyoncé was a child?",
+        "answers": {
+          "text": [
+            "salon"
+          ],
+          "answer_start": [
+            117
+          ]
+        },
+        "id": "56d440df2ccc5a1400d830d2"
+      },
+      {
+        "question": "What is the name of Beyoncé's younger sister?",
+        "answers": {
+          "text": [
+            "Solange"
+          ],
+          "answer_start": [
+            255
+          ]
+        },
+        "id": "56d440df2ccc5a1400d830d3"
+      },
+      {
+        "question": "Beyoncé is a descendant of which Acadian leader?",
+        "answers": {
+          "text": [
+            "Joseph Broussard."
+          ],
+          "answer_start": [
+            540
+          ]
+        },
+        "id": "56d440df2ccc5a1400d830d4"
+      },
+      {
+        "question": "Beyoncé was raised in what religion?",
+        "answers": {
+          "text": [
+            "Methodist"
+          ],
+          "answer_start": [
+            578
+          ]
+        },
+        "id": "56d440df2ccc5a1400d830d5"
+      }
+    ],
+    "original_id": "56be892d3aeaaa14008c908b"
+  },
+  {
+    "index": 5,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Early Education and Musical Journey\". This infographic details the initial stages of Beyoncé's life, focusing on her education and emerging musical talent. Positioned at the top left, the title sets the theme of the piece. Just below, \"In fall 1990, Beyoncé moved to Houston and enrolled in Parker Elementary School, a music magnet school, where she performed with the choir.\" To the right of this text, \"Beyoncé attended St. Mary's Elementary School in Fredericksburg, Texas, where her singing talent was discovered by dance instructor Darlette Johnson.\" Centered in the middle section, \"Beyoncé was a member and soloist in the choir at St. John's United Methodist Church for two years.\" Adjacent to this is a cartoon depicting a young girl in a school setting with a dance instructor, musical notes floating to symbolize her discovered singing talent. Below, \"At age seven, Beyoncé won a school talent show by singing John Lennon's 'Imagine' against older students.\" Finally, near the lower margin, \"Beyoncé attended the High School for the Performing and Visual Arts, then Alief Elsik High School in Houston.\" The overall style of the image is educational and narrative, using a mix of text and playful illustrations to convey Beyoncé's formative years."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided appears to be a blank, textured background with a soft, faded color palette. It has a textured appearance, possibly resembling a wall or a piece of paper with a rough, uneven surface. The color is a blend of light pink and white, giving it a gentle and neutral look. There are no distinguishable objects, texts, or other elements that can be confidently identified within this image. It's a simple, minimalist background that could be used for various purposes, such as graphic design, photography, or as a backdrop for other elements."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          408,
+          922
+        ],
+        "bottom_right": [
+          800,
+          1293
+        ],
+        "caption": "A cartoon of a young girl in a school setting with a dance instructor, highlighting musical notes to symbolize discovered singing talent."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          86,
+          74
+        ],
+        "bottom_right": [
+          805,
+          287
+        ],
+        "caption": "Text \"Beyoncé's Early Education and Musical Journey\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's Early Education and Musical Journey"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          84,
+          525
+        ],
+        "bottom_right": [
+          481,
+          792
+        ],
+        "caption": "Text \"Beyoncé attended St. Mary's Elementary School in Fredericksburg, Texas, where her singing talent was discovered by dance instructor Darlette Johnson.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé attended St. Mary's Elementary School in Fredericksburg, Texas, where her singing talent was discovered by dance instructor Darlette Johnson."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          84,
+          1415
+        ],
+        "bottom_right": [
+          481,
+          1681
+        ],
+        "caption": "Text \"At age seven, Beyoncé won a school talent show by singing John Lennon's 'Imagine' against older students.\" in <color-1>, <en-font-154>. ",
+        "text": "At age seven, Beyoncé won a school talent show by singing John Lennon's 'Imagine' against older students."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          193,
+          387
+        ],
+        "bottom_right": [
+          463,
+          520
+        ],
+        "caption": "Text \"In fall 1990, Beyoncé moved to Houston and enrolled in Parker Elementary School, a music magnet school, where she performed with the choir.\" in <color-1>, <en-font-101>. ",
+        "text": "In fall 1990, Beyoncé moved to Houston and enrolled in Parker Elementary School, a music magnet school, where she performed with the choir."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          442,
+          1713
+        ],
+        "bottom_right": [
+          656,
+          1842
+        ],
+        "caption": "Text \"Beyoncé attended the High School for the Performing and Visual Arts, then Alief Elsik High School in Houston.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé attended the High School for the Performing and Visual Arts, then Alief Elsik High School in Houston."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          229,
+          1267
+        ],
+        "bottom_right": [
+          442,
+          1397
+        ],
+        "caption": "Text \"Beyoncé was a member and soloist in the choir at St. John's United Methodist Church for two years.\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé was a member and soloist in the choir at St. John's United Methodist Church for two years."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Early Education and Musical Journey\". This infographic details the initial stages of Beyoncé's life, focusing on her education and emerging musical talent. Positioned at the top left, the title sets the theme of the piece. Just below, \"In fall 1990, Beyoncé moved to Houston and enrolled in Parker Elementary School, a music magnet school, where she performed with the choir.\" To the right of this text, \"Beyoncé attended St. Mary's Elementary School in Fredericksburg, Texas, where her singing talent was discovered by dance instructor Darlette Johnson.\" Centered in the middle section, \"Beyoncé was a member and soloist in the choir at St. John's United Methodist Church for two years.\" Adjacent to this is a cartoon depicting a young girl in a school setting with a dance instructor, musical notes floating to symbolize her discovered singing talent. Below, \"At age seven, Beyoncé won a school talent show by singing John Lennon's 'Imagine' against older students.\" Finally, near the lower margin, \"Beyoncé attended the High School for the Performing and Visual Arts, then Alief Elsik High School in Houston.\" The overall style of the image is educational and narrative, using a mix of text and playful illustrations to convey Beyoncé's formative years.",
+    "original_bbox_index": 99,
+    "original_context": "Beyoncé attended St. Mary's Elementary School in Fredericksburg, Texas, where she enrolled in dance classes. Her singing talent was discovered when dance instructor Darlette Johnson began humming a song and she finished it, able to hit the high-pitched notes. Beyoncé's interest in music and performing continued after winning a school talent show at age seven, singing John Lennon's \"Imagine\" to beat 15/16-year-olds. In fall of 1990, Beyoncé enrolled in Parker Elementary School, a music magnet school in Houston, where she would perform with the school's choir. She also attended the High School for the Performing and Visual Arts and later Alief Elsik High School. Beyoncé was also a member of the choir at St. John's United Methodist Church as a soloist for two years.",
+    "original_qa_pairs": [
+      {
+        "question": "What town did Beyonce go to school in?",
+        "answers": {
+          "text": [
+            "Fredericksburg"
+          ],
+          "answer_start": [
+            49
+          ]
+        },
+        "id": "56be8a583aeaaa14008c9094"
+      },
+      {
+        "question": "Who was the first person to notice Beyonce's singing ability?",
+        "answers": {
+          "text": [
+            "Darlette Johnson"
+          ],
+          "answer_start": [
+            165
+          ]
+        },
+        "id": "56be8a583aeaaa14008c9095"
+      },
+      {
+        "question": "Beyonce moved to which town after she left her first elementary school?",
+        "answers": {
+          "text": [
+            "Houston"
+          ],
+          "answer_start": [
+            507
+          ]
+        },
+        "id": "56be8a583aeaaa14008c9097"
+      },
+      {
+        "question": "Which of her teachers discovered Beyonce's musical talent?",
+        "answers": {
+          "text": [
+            "dance instructor Darlette Johnson"
+          ],
+          "answer_start": [
+            148
+          ]
+        },
+        "id": "56bf76ef3aeaaa14008c9664"
+      },
+      {
+        "question": "I which church was Beyonce  a member and soloist  in the choir?",
+        "answers": {
+          "text": [
+            "St. John's United Methodist Church"
+          ],
+          "answer_start": [
+            711
+          ]
+        },
+        "id": "56bf76ef3aeaaa14008c9665"
+      },
+      {
+        "question": "What type of school was Parker Elementary School?",
+        "answers": {
+          "text": [
+            "music magnet school"
+          ],
+          "answer_start": [
+            484
+          ]
+        },
+        "id": "56bf76ef3aeaaa14008c9666"
+      },
+      {
+        "question": "Which song did Beyonce sing to win a competition at age 7?",
+        "answers": {
+          "text": [
+            "Imagine"
+          ],
+          "answer_start": [
+            385
+          ]
+        },
+        "id": "56bf76ef3aeaaa14008c9667"
+      },
+      {
+        "question": "What city was Beyoncé's elementary school located in?",
+        "answers": {
+          "text": [
+            "Fredericksburg"
+          ],
+          "answer_start": [
+            49
+          ]
+        },
+        "id": "56d443ef2ccc5a1400d830db"
+      },
+      {
+        "question": "What was the name of Beyoncé's first dance instructor?",
+        "answers": {
+          "text": [
+            "Darlette Johnson"
+          ],
+          "answer_start": [
+            165
+          ]
+        },
+        "id": "56d443ef2ccc5a1400d830dc"
+      },
+      {
+        "question": "How old was Beyoncé when she won a school talent show?",
+        "answers": {
+          "text": [
+            "seven"
+          ],
+          "answer_start": [
+            355
+          ]
+        },
+        "id": "56d443ef2ccc5a1400d830dd"
+      },
+      {
+        "question": "What choir did Beyoncé sing in for two years?",
+        "answers": {
+          "text": [
+            "St. John's United Methodist Church"
+          ],
+          "answer_start": [
+            711
+          ]
+        },
+        "id": "56d443ef2ccc5a1400d830df"
+      }
+    ],
+    "original_id": "56be8a583aeaaa14008c9094"
+  },
+  {
+    "index": 6,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Early Music Journey.\" This infographic narrates the formative years of Beyoncé's music career with a blend of textual and visual elements. At the top left, \"On October 5, 1995, Dwayne Wiggins's Grass Roots Entertainment signed the group. In 1996, they began recording their debut album with Sony Music\" introduces the timeline. Below, \"In 1995, Beyoncé's father resigned from his job to manage the group, reducing the family's income by half and causing her parents to live separately\" highlights the personal sacrifices made. Centered in the upper section, a stylized stage depicts a spotlight on a performing group, with a silhouette of a director pointing toward a TV screen, illustrating their participation in Star Search. Further down, \"Elektra Records was the first to sign the group, but they were later cut by the company, which strained Beyoncé's family further\" situates above a cartoon where a man hands over a briefcase as a family is shown split between two small homes, emphasizing financial strain. Just below, \"Beyoncé's Early Music Journey\" takes center stage as the title. To the right, \"R&B producer Arne Frager brought Girl's Tyme to California and placed them in Star Search, the largest national TV talent show\" continues the narrative. Further right, \"At age eight, Beyoncé met LaTavia Roberson and formed Girl's Tyme with Kelly Rowland. They performed on the talent show circuit in Houston\" accompanies a cartoon of three young girls forming a music group, set against a city skyline with musical notes. The overall style of the image is a blend of narrative and illustrative elements, capturing the essence of Beyoncé's early career with a vibrant and informative layout."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a solid, uniform color with no distinguishable features or objects. It appears to be a plain, flat surface with a consistent shade of purple. There are no texts, patterns, or other elements that can be discerned from this image. The background is not visible as the image is a solid color."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          1671
+        ],
+        "bottom_right": [
+          896,
+          1959
+        ],
+        "caption": "A cartoon of three young girls meeting and forming a music group, with musical notes and a backdrop of a city skyline."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          554
+        ],
+        "bottom_right": [
+          896,
+          816
+        ],
+        "caption": "A stylized stage with a spotlight highlighting a group performing, with a silhouette of a director gesturing towards a large TV screen."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          849
+        ],
+        "bottom_right": [
+          896,
+          1111
+        ],
+        "caption": "A cartoon of a man handing over a briefcase while a family split across two small homes shows financial strain."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          299,
+          1212
+        ],
+        "bottom_right": [
+          779,
+          1352
+        ],
+        "caption": "Text \"Beyoncé's Early Music Journey\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's Early Music Journey"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          224,
+          1503
+        ],
+        "bottom_right": [
+          779,
+          1596
+        ],
+        "caption": "Text \"At age eight, Beyoncé met LaTavia Roberson and formed Girl's Tyme with Kelly Rowland. They performed on the talent show circuit in Houston.\" in <color-1>, <en-font-15>. ",
+        "text": "At age eight, Beyoncé met LaTavia Roberson and formed Girl's Tyme with Kelly Rowland. They performed on the talent show circuit in Houston."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          229,
+          1428
+        ],
+        "bottom_right": [
+          802,
+          1495
+        ],
+        "caption": "Text \"R&B producer Arne Frager brought Girl's Tyme to California and placed them in Star Search, the largest national TV talent show.\" in <color-1>, <en-font-154>. ",
+        "text": "R&B producer Arne Frager brought Girl's Tyme to California and placed them in Star Search, the largest national TV talent show."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          32,
+          408
+        ],
+        "bottom_right": [
+          856,
+          491
+        ],
+        "caption": "Text \"In 1995, Beyoncé's father resigned from his job to manage the group, reducing the family's income by half and causing her parents to live separately.\" in <color-1>, <en-font-101>. ",
+        "text": "In 1995, Beyoncé's father resigned from his job to manage the group, reducing the family's income by half and causing her parents to live separately."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          299,
+          1135
+        ],
+        "bottom_right": [
+          779,
+          1202
+        ],
+        "caption": "Text \"Elektra Records was the first to sign the group, but they were later cut by the company, which strained Beyoncé's family further.\" in <color-1>, <en-font-15>. ",
+        "text": "Elektra Records was the first to sign the group, but they were later cut by the company, which strained Beyoncé's family further."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          20,
+          323
+        ],
+        "bottom_right": [
+          883,
+          387
+        ],
+        "caption": "Text \"On October 5, 1995, Dwayne Wiggins's Grass Roots Entertainment signed the group. In 1996, they began recording their debut album with Sony Music.\" in <color-1>, <en-font-154>. ",
+        "text": "On October 5, 1995, Dwayne Wiggins's Grass Roots Entertainment signed the group. In 1996, they began recording their debut album with Sony Music."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Early Music Journey.\" This infographic narrates the formative years of Beyoncé's music career with a blend of textual and visual elements. At the top left, \"On October 5, 1995, Dwayne Wiggins's Grass Roots Entertainment signed the group. In 1996, they began recording their debut album with Sony Music\" introduces the timeline. Below, \"In 1995, Beyoncé's father resigned from his job to manage the group, reducing the family's income by half and causing her parents to live separately\" highlights the personal sacrifices made. Centered in the upper section, a stylized stage depicts a spotlight on a performing group, with a silhouette of a director pointing toward a TV screen, illustrating their participation in Star Search. Further down, \"Elektra Records was the first to sign the group, but they were later cut by the company, which strained Beyoncé's family further\" situates above a cartoon where a man hands over a briefcase as a family is shown split between two small homes, emphasizing financial strain. Just below, \"Beyoncé's Early Music Journey\" takes center stage as the title. To the right, \"R&B producer Arne Frager brought Girl's Tyme to California and placed them in Star Search, the largest national TV talent show\" continues the narrative. Further right, \"At age eight, Beyoncé met LaTavia Roberson and formed Girl's Tyme with Kelly Rowland. They performed on the talent show circuit in Houston\" accompanies a cartoon of three young girls forming a music group, set against a city skyline with musical notes. The overall style of the image is a blend of narrative and illustrative elements, capturing the essence of Beyoncé's early career with a vibrant and informative layout.",
+    "original_bbox_index": 19,
+    "original_context": "At age eight, Beyoncé and childhood friend Kelly Rowland met LaTavia Roberson while in an audition for an all-girl entertainment group. They were placed into a group with three other girls as Girl's Tyme, and rapped and danced on the talent show circuit in Houston. After seeing the group, R&B producer Arne Frager brought them to his Northern California studio and placed them in Star Search, the largest talent show on national TV at the time. Girl's Tyme failed to win, and Beyoncé later said the song they performed was not good. In 1995 Beyoncé's father resigned from his job to manage the group. The move reduced Beyoncé's family's income by half, and her parents were forced to move into separated apartments. Mathew cut the original line-up to four and the group continued performing as an opening act for other established R&B girl groups. The girls auditioned before record labels and were finally signed to Elektra Records, moving to Atlanta Records briefly to work on their first recording, only to be cut by the company. This put further strain on the family, and Beyoncé's parents separated. On October 5, 1995, Dwayne Wiggins's Grass Roots Entertainment signed the group. In 1996, the girls began recording their debut album under an agreement with Sony Music, the Knowles family reunited, and shortly after, the group got a contract with Columbia Records.",
+    "original_qa_pairs": [
+      {
+        "question": "Who decided to place Beyonce's group in Star Search the talent show?",
+        "answers": {
+          "text": [
+            "Arne Frager"
+          ],
+          "answer_start": [
+            303
+          ]
+        },
+        "id": "56be8bab3aeaaa14008c909f"
+      },
+      {
+        "question": "In 1995, who decided to manage the girls singing group?",
+        "answers": {
+          "text": [
+            "Beyoncé's father"
+          ],
+          "answer_start": [
+            542
+          ]
+        },
+        "id": "56be8bab3aeaaa14008c90a0"
+      },
+      {
+        "question": "Who was the first record label to give the girls a record deal?",
+        "answers": {
+          "text": [
+            "Elektra Records"
+          ],
+          "answer_start": [
+            918
+          ]
+        },
+        "id": "56be8bab3aeaaa14008c90a1"
+      },
+      {
+        "question": "Who brought Beyonce to California and enter her group in Star Search?",
+        "answers": {
+          "text": [
+            "Arne Frager"
+          ],
+          "answer_start": [
+            303
+          ]
+        },
+        "id": "56bf79c73aeaaa14008c966d"
+      },
+      {
+        "question": "In what year did Beyonce's father quit his job to manage her group?",
+        "answers": {
+          "text": [
+            "1995"
+          ],
+          "answer_start": [
+            537
+          ]
+        },
+        "id": "56bf79c73aeaaa14008c966e"
+      },
+      {
+        "question": "What large record company recorded Beyonce's group's first album?",
+        "answers": {
+          "text": [
+            "Sony Music"
+          ],
+          "answer_start": [
+            1264
+          ]
+        },
+        "id": "56bf79c73aeaaa14008c966f"
+      },
+      {
+        "question": "What record company first signed Beyonce's group and later cut them?",
+        "answers": {
+          "text": [
+            "Elektra Records"
+          ],
+          "answer_start": [
+            918
+          ]
+        },
+        "id": "56bf79c73aeaaa14008c9670"
+      },
+      {
+        "question": "At what age did Beyonce meet LaTavia Robertson?",
+        "answers": {
+          "text": [
+            "age eight"
+          ],
+          "answer_start": [
+            3
+          ]
+        },
+        "id": "56bf79c73aeaaa14008c9671"
+      },
+      {
+        "question": "How old was Beyoncé when she met LaTavia Roberson?",
+        "answers": {
+          "text": [
+            "eight"
+          ],
+          "answer_start": [
+            7
+          ]
+        },
+        "id": "56d45abf2ccc5a1400d830e5"
+      },
+      {
+        "question": "What was the name of the first group Beyoncé was a part of?",
+        "answers": {
+          "text": [
+            "Girl's Tyme"
+          ],
+          "answer_start": [
+            192
+          ]
+        },
+        "id": "56d45abf2ccc5a1400d830e6"
+      },
+      {
+        "question": "Who placed Girl's Tyme in Star Search?",
+        "answers": {
+          "text": [
+            "Arne Frager"
+          ],
+          "answer_start": [
+            303
+          ]
+        },
+        "id": "56d45abf2ccc5a1400d830e7"
+      },
+      {
+        "question": "When did Beyoncé begin to manage the girl group?",
+        "answers": {
+          "text": [
+            "1995"
+          ],
+          "answer_start": [
+            537
+          ]
+        },
+        "id": "56d45abf2ccc5a1400d830e8"
+      },
+      {
+        "question": "Who signed the girl group on October 5, 1995?",
+        "answers": {
+          "text": [
+            "Dwayne Wiggins's Grass Roots Entertainment"
+          ],
+          "answer_start": [
+            1126
+          ]
+        },
+        "id": "56d45abf2ccc5a1400d830e9"
+      }
+    ],
+    "original_id": "56be8bab3aeaaa14008c909f"
+  },
+  {
+    "index": 7,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Destiny's Child: Key Milestones.\" This visual narrative chronicles significant events in the career of the iconic music group, set against a backdrop that conveys a sense of historical progression. At the top left, the title \"Destiny's Child: Key Milestones\" introduces the theme. Just below, \"Beyoncé recorded a duet with Marc Nelson for the 1999 film The Best Man\" is positioned. Moving down, \"In 1997, Destiny's Child released their debut song 'Killing Time' on the Men in Black soundtrack\" is placed prominently. Beneath that, \"The second album, The Writing's on the Wall, released in 1999, included hits like 'Bills, Bills, Bills' and 'Say My Name'\" is situated, followed closely by \"Their first major hit 'No, No, No' came from their 1998 self-titled debut album\" near the center. Further below, \"'Say My Name' won Best R&B Performance by a Duo or Group with Vocals at the 43rd Annual Grammy Awards\" is highlighted. Near the lower section, \"Destiny's Child changed their name in 1996, inspired by a passage in the Book of Isaiah\" is prominently displayed. The overall style of the image is sleek and informative, with a linear arrangement that guides the viewer through the milestones of Destiny's Child's illustrious career."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features to describe. It's a plain, unadorned white space."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          117,
+          176
+        ],
+        "bottom_right": [
+          778,
+          478
+        ],
+        "caption": "Text \"Destiny's Child: Key Milestones\" in <color-1>, <en-font-101>. ",
+        "text": "Destiny's Child: Key Milestones"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          156,
+          1295
+        ],
+        "bottom_right": [
+          759,
+          1463
+        ],
+        "caption": "Text \"Destiny's Child changed their name in 1996, inspired by a passage in the Book of Isaiah.\" in <color-1>, <en-font-15>. ",
+        "text": "Destiny's Child changed their name in 1996, inspired by a passage in the Book of Isaiah."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          147,
+          712
+        ],
+        "bottom_right": [
+          750,
+          852
+        ],
+        "caption": "Text \"In 1997, Destiny's Child released their debut song 'Killing Time' on the Men in Black soundtrack.\" in <color-1>, <en-font-154>. ",
+        "text": "In 1997, Destiny's Child released their debut song 'Killing Time' on the Men in Black soundtrack."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          147,
+          1004
+        ],
+        "bottom_right": [
+          750,
+          1144
+        ],
+        "caption": "Text \"Their first major hit 'No, No, No' came from their 1998 self-titled debut album.\" in <color-1>, <en-font-101>. ",
+        "text": "Their first major hit 'No, No, No' came from their 1998 self-titled debut album."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          117,
+          950
+        ],
+        "bottom_right": [
+          778,
+          1000
+        ],
+        "caption": "Text \"The second album, The Writing's on the Wall, released in 1999, included hits like 'Bills, Bills, Bills' and 'Say My Name'.\" in <color-1>, <en-font-15>. ",
+        "text": "The second album, The Writing's on the Wall, released in 1999, included hits like 'Bills, Bills, Bills' and 'Say My Name'."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          117,
+          1243
+        ],
+        "bottom_right": [
+          778,
+          1293
+        ],
+        "caption": "Text \"'Say My Name' won Best R&B Performance by a Duo or Group with Vocals at the 43rd Annual Grammy Awards.\" in <color-1>, <en-font-154>. ",
+        "text": "'Say My Name' won Best R&B Performance by a Duo or Group with Vocals at the 43rd Annual Grammy Awards."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          115,
+          650
+        ],
+        "bottom_right": [
+          776,
+          700
+        ],
+        "caption": "Text \"Beyoncé recorded a duet with Marc Nelson for the 1999 film The Best Man.\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé recorded a duet with Marc Nelson for the 1999 film The Best Man."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Destiny's Child: Key Milestones.\" This visual narrative chronicles significant events in the career of the iconic music group, set against a backdrop that conveys a sense of historical progression. At the top left, the title \"Destiny's Child: Key Milestones\" introduces the theme. Just below, \"Beyoncé recorded a duet with Marc Nelson for the 1999 film The Best Man\" is positioned. Moving down, \"In 1997, Destiny's Child released their debut song 'Killing Time' on the Men in Black soundtrack\" is placed prominently. Beneath that, \"The second album, The Writing's on the Wall, released in 1999, included hits like 'Bills, Bills, Bills' and 'Say My Name'\" is situated, followed closely by \"Their first major hit 'No, No, No' came from their 1998 self-titled debut album\" near the center. Further below, \"'Say My Name' won Best R&B Performance by a Duo or Group with Vocals at the 43rd Annual Grammy Awards\" is highlighted. Near the lower section, \"Destiny's Child changed their name in 1996, inspired by a passage in the Book of Isaiah\" is prominently displayed. The overall style of the image is sleek and informative, with a linear arrangement that guides the viewer through the milestones of Destiny's Child's illustrious career.",
+    "original_bbox_index": 48,
+    "original_context": "The group changed their name to Destiny's Child in 1996, based upon a passage in the Book of Isaiah. In 1997, Destiny's Child released their major label debut song \"Killing Time\" on the soundtrack to the 1997 film, Men in Black. The following year, the group released their self-titled debut album, scoring their first major hit \"No, No, No\". The album established the group as a viable act in the music industry, with moderate sales and winning the group three Soul Train Lady of Soul Awards for Best R&B/Soul Album of the Year, Best R&B/Soul or Rap New Artist, and Best R&B/Soul Single for \"No, No, No\". The group released their multi-platinum second album The Writing's on the Wall in 1999. The record features some of the group's most widely known songs such as \"Bills, Bills, Bills\", the group's first number-one single, \"Jumpin' Jumpin'\" and \"Say My Name\", which became their most successful song at the time, and would remain one of their signature songs. \"Say My Name\" won the Best R&B Performance by a Duo or Group with Vocals and the Best R&B Song at the 43rd Annual Grammy Awards. The Writing's on the Wall sold more than eight million copies worldwide. During this time, Beyoncé recorded a duet with Marc Nelson, an original member of Boyz II Men, on the song \"After All Is Said and Done\" for the soundtrack to the 1999 film, The Best Man.",
+    "original_qa_pairs": [
+      {
+        "question": "Which film featured Destiny's Child's first major single?",
+        "answers": {
+          "text": [
+            "Men in Black"
+          ],
+          "answer_start": [
+            215
+          ]
+        },
+        "id": "56be8c8a3aeaaa14008c90a9"
+      },
+      {
+        "question": "For which song, did Destiny's Child take home the grammy award for best R&B performance?",
+        "answers": {
+          "text": [
+            "\"Say My Name\""
+          ],
+          "answer_start": [
+            848
+          ]
+        },
+        "id": "56be8c8a3aeaaa14008c90ab"
+      },
+      {
+        "question": "Who did Beyonce record with for the movie \"The Best Man?\"",
+        "answers": {
+          "text": [
+            "Marc Nelson"
+          ],
+          "answer_start": [
+            1212
+          ]
+        },
+        "id": "56be8c8a3aeaaa14008c90ac"
+      },
+      {
+        "question": "Beyonce's group changed their name to Destiny's Child in what year?",
+        "answers": {
+          "text": [
+            "1996"
+          ],
+          "answer_start": [
+            51
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c9677"
+      },
+      {
+        "question": "The name Destiny's Child was based on a quote in which book of the Bible?",
+        "answers": {
+          "text": [
+            "Book of Isaiah"
+          ],
+          "answer_start": [
+            85
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c9678"
+      },
+      {
+        "question": "Debut song, \"Killing Time\" was featured on what movie's sound track?",
+        "answers": {
+          "text": [
+            "Men in Black"
+          ],
+          "answer_start": [
+            215
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c9679"
+      },
+      {
+        "question": "What song won Best R&B Performance in the 43 Annual Grammy Awards?",
+        "answers": {
+          "text": [
+            "Say My Name"
+          ],
+          "answer_start": [
+            849
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c967a"
+      },
+      {
+        "question": "What singer did Beyonce record a song with for the movie, ''The Best Man\"?",
+        "answers": {
+          "text": [
+            "Marc Nelson"
+          ],
+          "answer_start": [
+            1212
+          ]
+        },
+        "id": "56bf7cb63aeaaa14008c967b"
+      },
+      {
+        "question": "Where did Destiny's Child get their name from?",
+        "answers": {
+          "text": [
+            "Book of Isaiah."
+          ],
+          "answer_start": [
+            85
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830f9"
+      },
+      {
+        "question": "Destiny's Child song, Killing Time, was included in which film's soundtrack?",
+        "answers": {
+          "text": [
+            "Men in Black."
+          ],
+          "answer_start": [
+            215
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fa"
+      },
+      {
+        "question": "What was Destiny's Child's first major song hit?",
+        "answers": {
+          "text": [
+            "No, No, No"
+          ],
+          "answer_start": [
+            330
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fb"
+      },
+      {
+        "question": "When did Destiny's Child release their second album?",
+        "answers": {
+          "text": [
+            "1999"
+          ],
+          "answer_start": [
+            688
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fc"
+      },
+      {
+        "question": "Who did Beyoncé sing a duet with for \"The Best Man\" film?",
+        "answers": {
+          "text": [
+            "Marc Nelson"
+          ],
+          "answer_start": [
+            1212
+          ]
+        },
+        "id": "56d45fcb2ccc5a1400d830fd"
+      }
+    ],
+    "original_id": "56be8c8a3aeaaa14008c90a9"
+  },
+  {
+    "index": 8,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Journey Through Challenges\". This visual narrative explores the personal and professional obstacles faced by Beyoncé during her time with Destiny's Child. At the top, a stylized depiction of a band with two members being replaced by two new ones sets the stage for the ensuing challenges. Centered below this, \"Beyoncé's Journey Through Challenges\" anchors the theme. A cartoon of a person surrounded by pointing fingers is positioned just beneath, capturing the public scrutiny she endured. To the right, \"LeToya Luckett and Roberson were replaced by Farrah Franklin and Michelle Williams in Destiny's Child due to dissatisfaction with Mathew's management.\" Below, a stylized image of a broken heart next to a solitary figure visually represents the emotional toll, complemented by the text, \"Beyoncé was publicly blamed for Luckett and Roberson's departure, leading to her depression.\" Further down, \"Beyoncé's depression lasted a couple of years, during which she isolated herself in her bedroom and refused to eat,\" highlights her struggle, with \"Beyoncé's mother was the main support in helping her overcome her depression during the difficult years following the Destiny's Child split,\" showcasing familial support. Near the lower margin, \"Beyoncé's boyfriend left her after she faced public criticism, worsening her depression,\" adds another layer of personal adversity. Finally, \"Farrah Franklin was eventually dismissed, leaving Beyoncé, Kelly Rowland, and Michelle Williams as the final members of Destiny's Child,\" concludes this transformative journey. The overall style of the image is a blend of illustrative elements and direct quotations, effectively conveying a narrative of resilience and support amidst personal and public challenges."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and does not contain any visible content. It appears to be a solid, uniform color with no distinguishable features, objects, or text. The color is a light beige or off-white, and there are no shadows, textures, or patterns that can be discerned. The image is devoid of any information that would allow for a detailed description."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          504
+        ],
+        "caption": "A stylized depiction of a band with two members being replaced by two new ones."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          85,
+          717
+        ],
+        "bottom_right": [
+          810,
+          842
+        ],
+        "caption": "A cartoon of a person surrounded by pointing fingers."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          85,
+          1069
+        ],
+        "bottom_right": [
+          810,
+          1193
+        ],
+        "caption": "A stylized image of a broken heart next to a solitary figure."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          347,
+          863
+        ],
+        "bottom_right": [
+          827,
+          1031
+        ],
+        "caption": "Text \"Beyoncé's Journey Through Challenges\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's Journey Through Challenges"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          347,
+          1214
+        ],
+        "bottom_right": [
+          827,
+          1382
+        ],
+        "caption": "Text \"LeToya Luckett and Roberson were replaced by Farrah Franklin and Michelle Williams in Destiny's Child due to dissatisfaction with Mathew's management.\" in <color-1>, <en-font-15>. ",
+        "text": "LeToya Luckett and Roberson were replaced by Farrah Franklin and Michelle Williams in Destiny's Child due to dissatisfaction with Mathew's management."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          347,
+          1567
+        ],
+        "bottom_right": [
+          827,
+          1735
+        ],
+        "caption": "Text \"Beyoncé was publicly blamed for Luckett and Roberson's departure, leading to her depression.\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé was publicly blamed for Luckett and Roberson's departure, leading to her depression."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          347,
+          1919
+        ],
+        "bottom_right": [
+          827,
+          2053
+        ],
+        "caption": "Text \"Beyoncé's boyfriend left her after she faced public criticism, worsening her depression.\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's boyfriend left her after she faced public criticism, worsening her depression."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          127,
+          1450
+        ],
+        "bottom_right": [
+          768,
+          1506
+        ],
+        "caption": "Text \"Beyoncé's depression lasted a couple of years, during which she isolated herself in her bedroom and refused to eat.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé's depression lasted a couple of years, during which she isolated herself in her bedroom and refused to eat."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          127,
+          1808
+        ],
+        "bottom_right": [
+          768,
+          1864
+        ],
+        "caption": "Text \"Beyoncé's mother was the main support in helping her overcome her depression during the difficult years following the Destiny's Child split.\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé's mother was the main support in helping her overcome her depression during the difficult years following the Destiny's Child split."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          127,
+          2179
+        ],
+        "bottom_right": [
+          768,
+          2229
+        ],
+        "caption": "Text \"Farrah Franklin was eventually dismissed, leaving Beyoncé, Kelly Rowland, and Michelle Williams as the final members of Destiny's Child.\" in <color-1>, <en-font-101>. ",
+        "text": "Farrah Franklin was eventually dismissed, leaving Beyoncé, Kelly Rowland, and Michelle Williams as the final members of Destiny's Child."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Journey Through Challenges\". This visual narrative explores the personal and professional obstacles faced by Beyoncé during her time with Destiny's Child. At the top, a stylized depiction of a band with two members being replaced by two new ones sets the stage for the ensuing challenges. Centered below this, \"Beyoncé's Journey Through Challenges\" anchors the theme. A cartoon of a person surrounded by pointing fingers is positioned just beneath, capturing the public scrutiny she endured. To the right, \"LeToya Luckett and Roberson were replaced by Farrah Franklin and Michelle Williams in Destiny's Child due to dissatisfaction with Mathew's management.\" Below, a stylized image of a broken heart next to a solitary figure visually represents the emotional toll, complemented by the text, \"Beyoncé was publicly blamed for Luckett and Roberson's departure, leading to her depression.\" Further down, \"Beyoncé's depression lasted a couple of years, during which she isolated herself in her bedroom and refused to eat,\" highlights her struggle, with \"Beyoncé's mother was the main support in helping her overcome her depression during the difficult years following the Destiny's Child split,\" showcasing familial support. Near the lower margin, \"Beyoncé's boyfriend left her after she faced public criticism, worsening her depression,\" adds another layer of personal adversity. Finally, \"Farrah Franklin was eventually dismissed, leaving Beyoncé, Kelly Rowland, and Michelle Williams as the final members of Destiny's Child,\" concludes this transformative journey. The overall style of the image is a blend of illustrative elements and direct quotations, effectively conveying a narrative of resilience and support amidst personal and public challenges.",
+    "original_bbox_index": 82,
+    "original_context": "LeToya Luckett and Roberson became unhappy with Mathew's managing of the band and eventually were replaced by Farrah Franklin and Michelle Williams. Beyoncé experienced depression following the split with Luckett and Roberson after being publicly blamed by the media, critics, and blogs for its cause. Her long-standing boyfriend left her at this time. The depression was so severe it lasted for a couple of years, during which she occasionally kept herself in her bedroom for days and refused to eat anything. Beyoncé stated that she struggled to speak about her depression because Destiny's Child had just won their first Grammy Award and she feared no one would take her seriously. Beyoncé would later speak of her mother as the person who helped her fight it. Franklin was dismissed, leaving just Beyoncé, Rowland, and Williams.",
+    "original_qa_pairs": [
+      {
+        "question": "What mental health issue did Beyonce go through?",
+        "answers": {
+          "text": [
+            "depression"
+          ],
+          "answer_start": [
+            169
+          ]
+        },
+        "id": "56be8d423aeaaa14008c90b2"
+      },
+      {
+        "question": "What event occured after she was publicly criticized?",
+        "answers": {
+          "text": [
+            "boyfriend left her"
+          ],
+          "answer_start": [
+            320
+          ]
+        },
+        "id": "56be8d423aeaaa14008c90b3"
+      },
+      {
+        "question": "Who supported Beyonce through her depression?",
+        "answers": {
+          "text": [
+            "her mother"
+          ],
+          "answer_start": [
+            714
+          ]
+        },
+        "id": "56be8d423aeaaa14008c90b6"
+      },
+      {
+        "question": "What event caused Beyonce's depression?",
+        "answers": {
+          "text": [
+            "split with Luckett and Rober"
+          ],
+          "answer_start": [
+            194
+          ]
+        },
+        "id": "56bf7e603aeaaa14008c9681"
+      },
+      {
+        "question": "How long was Beyonce depressed?",
+        "answers": {
+          "text": [
+            "a couple of years"
+          ],
+          "answer_start": [
+            396
+          ]
+        },
+        "id": "56bf7e603aeaaa14008c9682"
+      },
+      {
+        "question": "Who helped Beyonce fight her depression the most?",
+        "answers": {
+          "text": [
+            "her mother"
+          ],
+          "answer_start": [
+            714
+          ]
+        },
+        "id": "56bf7e603aeaaa14008c9685"
+      },
+      {
+        "question": "Who replaced Luckett and Roberson in Destiny's Child?",
+        "answers": {
+          "text": [
+            "Farrah Franklin and Michelle Williams."
+          ],
+          "answer_start": [
+            110
+          ]
+        },
+        "id": "56d462f82ccc5a1400d8311f"
+      },
+      {
+        "question": "Who was blamed for Luckett and Roberson leaving Destiny's Child?",
+        "answers": {
+          "text": [
+            "Beyoncé"
+          ],
+          "answer_start": [
+            149
+          ]
+        },
+        "id": "56d462f82ccc5a1400d83120"
+      },
+      {
+        "question": "Who helped Beyoncé overcome her depression during the years following the Destiny's Child split?",
+        "answers": {
+          "text": [
+            "her mother"
+          ],
+          "answer_start": [
+            714
+          ]
+        },
+        "id": "56d462f82ccc5a1400d83121"
+      },
+      {
+        "question": "Which newest member was removed from Destiny's Child?",
+        "answers": {
+          "text": [
+            "Farrah Franklin"
+          ],
+          "answer_start": [
+            110
+          ]
+        },
+        "id": "56d462f82ccc5a1400d83123"
+      }
+    ],
+    "original_id": "56be8d423aeaaa14008c90b2"
+  },
+  {
+    "index": 9,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Destiny's Child: Key Moments\". The theme centers around significant milestones in the career of Destiny's Child, presented with a balanced mix of text and visual elements. At the very top, the text \"After releasing the holiday album 8 Days of Christmas, Destiny's Child announced a hiatus in October 2001 to pursue solo careers.\" sets the context. Just below, a stylized illustration of a music chart with a highlighted song at the top depicts a long streak, suggesting musical success. Further down, the text \"Destiny's Child released their third album, Survivor, in May 2001. It debuted at number one on the U.S. Billboard 200 with 663,000 copies sold in the first week.\" is positioned to the left of a cartoon depiction of a film scene with two actors holding a script marked with musical notes and a city skyline in the background, capturing a cinematic moment. Below this, the text \"Survivor included hits like 'Bootylicious' and the title track 'Survivor', which won a Grammy. Luckett and Roberson filed a lawsuit over the album in 2001.\" is placed centrally, emphasizing the album's impact and controversies. Near the center of the infographic, the title \"Destiny's Child: Key Moments\" stands out, anchoring the theme of the layout. Moving further down, the text \"The band recorded 'Independent Women Part I' for the 2000 film Charlie's Angels. It was their best-charting single, topping the U.S. Billboard Hot 100 for eleven weeks.\" appears to the left of an abstract representation of an album cover with musical notes and an arrow pointing upwards, symbolizing achievement. Near the bottom, \"In early 2001, Beyoncé starred in the MTV film Carmen: A Hip Hopera with Mekhi Phifer. The film is a modern take on the opera Carmen by Georges Bizet set in Philadelphia.\" concludes the narrative. The overall style of the image is vibrant and dynamic, combining informative text with engaging visuals to highlight key career moments visually."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank. It's a solid, uniform color with no distinguishable features, objects, or text. The color appears to be a light pink or peach hue. There are no shadows, textures, or any other visual elements that can be described. It's a simple, minimalist image with no complexity or detail."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          146,
+          245
+        ],
+        "bottom_right": [
+          749,
+          453
+        ],
+        "caption": "A stylized illustration of a music chart with a highlighted song at the top, depicting a long streak."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          540,
+          660
+        ],
+        "bottom_right": [
+          869,
+          916
+        ],
+        "caption": "A cartoon depiction of a film scene with two actors holding a script marked with musical notes and a city skyline in the background."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          578,
+          1665
+        ],
+        "bottom_right": [
+          869,
+          1914
+        ],
+        "caption": "An abstract representation of an album cover with musical notes and an arrow pointing upwards to indicate success."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          217,
+          1254
+        ],
+        "bottom_right": [
+          678,
+          1335
+        ],
+        "caption": "Text \"Destiny's Child: Key Moments\" in <color-1>, <en-font-101>. ",
+        "text": "Destiny's Child: Key Moments"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          221,
+          1584
+        ],
+        "bottom_right": [
+          674,
+          1665
+        ],
+        "caption": "Text \"The band recorded 'Independent Women Part I' for the 2000 film Charlie's Angels. It was their best-charting single, topping the U.S. Billboard Hot 100 for eleven weeks.\" in <color-1>, <en-font-15>. ",
+        "text": "The band recorded 'Independent Women Part I' for the 2000 film Charlie's Angels. It was their best-charting single, topping the U.S. Billboard Hot 100 for eleven weeks."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          192,
+          1934
+        ],
+        "bottom_right": [
+          703,
+          1984
+        ],
+        "caption": "Text \"In early 2001, Beyoncé starred in the MTV film Carmen: A Hip Hopera with Mekhi Phifer. The film is a modern take on the opera Carmen by Georges Bizet set in Philadelphia.\" in <color-1>, <en-font-154>. ",
+        "text": "In early 2001, Beyoncé starred in the MTV film Carmen: A Hip Hopera with Mekhi Phifer. The film is a modern take on the opera Carmen by Georges Bizet set in Philadelphia."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          200,
+          615
+        ],
+        "bottom_right": [
+          695,
+          665
+        ],
+        "caption": "Text \"Destiny's Child released their third album, Survivor, in May 2001. It debuted at number one on the U.S. Billboard 200 with 663,000 copies sold in the first week.\" in <color-1>, <en-font-101>. ",
+        "text": "Destiny's Child released their third album, Survivor, in May 2001. It debuted at number one on the U.S. Billboard 200 with 663,000 copies sold in the first week."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          230,
+          944
+        ],
+        "bottom_right": [
+          665,
+          994
+        ],
+        "caption": "Text \"Survivor included hits like 'Bootylicious' and the title track 'Survivor', which won a Grammy. Luckett and Roberson filed a lawsuit over the album in 2001.\" in <color-1>, <en-font-15>. ",
+        "text": "Survivor included hits like 'Bootylicious' and the title track 'Survivor', which won a Grammy. Luckett and Roberson filed a lawsuit over the album in 2001."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          269,
+          62
+        ],
+        "bottom_right": [
+          626,
+          112
+        ],
+        "caption": "Text \"After releasing the holiday album 8 Days of Christmas, Destiny's Child announced a hiatus in October 2001 to pursue solo careers.\" in <color-1>, <en-font-154>. ",
+        "text": "After releasing the holiday album 8 Days of Christmas, Destiny's Child announced a hiatus in October 2001 to pursue solo careers."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Destiny's Child: Key Moments\". The theme centers around significant milestones in the career of Destiny's Child, presented with a balanced mix of text and visual elements. At the very top, the text \"After releasing the holiday album 8 Days of Christmas, Destiny's Child announced a hiatus in October 2001 to pursue solo careers.\" sets the context. Just below, a stylized illustration of a music chart with a highlighted song at the top depicts a long streak, suggesting musical success. Further down, the text \"Destiny's Child released their third album, Survivor, in May 2001. It debuted at number one on the U.S. Billboard 200 with 663,000 copies sold in the first week.\" is positioned to the left of a cartoon depiction of a film scene with two actors holding a script marked with musical notes and a city skyline in the background, capturing a cinematic moment. Below this, the text \"Survivor included hits like 'Bootylicious' and the title track 'Survivor', which won a Grammy. Luckett and Roberson filed a lawsuit over the album in 2001.\" is placed centrally, emphasizing the album's impact and controversies. Near the center of the infographic, the title \"Destiny's Child: Key Moments\" stands out, anchoring the theme of the layout. Moving further down, the text \"The band recorded 'Independent Women Part I' for the 2000 film Charlie's Angels. It was their best-charting single, topping the U.S. Billboard Hot 100 for eleven weeks.\" appears to the left of an abstract representation of an album cover with musical notes and an arrow pointing upwards, symbolizing achievement. Near the bottom, \"In early 2001, Beyoncé starred in the MTV film Carmen: A Hip Hopera with Mekhi Phifer. The film is a modern take on the opera Carmen by Georges Bizet set in Philadelphia.\" concludes the narrative. The overall style of the image is vibrant and dynamic, combining informative text with engaging visuals to highlight key career moments visually.",
+    "original_bbox_index": 108,
+    "original_context": "The remaining band members recorded \"Independent Women Part I\", which appeared on the soundtrack to the 2000 film, Charlie's Angels. It became their best-charting single, topping the U.S. Billboard Hot 100 chart for eleven consecutive weeks. In early 2001, while Destiny's Child was completing their third album, Beyoncé landed a major role in the MTV made-for-television film, Carmen: A Hip Hopera, starring alongside American actor Mekhi Phifer. Set in Philadelphia, the film is a modern interpretation of the 19th century opera Carmen by French composer Georges Bizet. When the third album Survivor was released in May 2001, Luckett and Roberson filed a lawsuit claiming that the songs were aimed at them. The album debuted at number one on the U.S. Billboard 200, with first-week sales of 663,000 copies sold. The album spawned other number-one hits, \"Bootylicious\" and the title track, \"Survivor\", the latter of which earned the group a Grammy Award for Best R&B Performance by a Duo or Group with Vocals. After releasing their holiday album 8 Days of Christmas in October 2001, the group announced a hiatus to further pursue solo careers.",
+    "original_qa_pairs": [
+      {
+        "question": "\"Charlie's Angels\" featured which single from the band members?",
+        "answers": {
+          "text": [
+            "Independent Women Part I"
+          ],
+          "answer_start": [
+            37
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c6"
+      },
+      {
+        "question": "How many weeks did their single \"Independent Women Part I\" stay on top?",
+        "answers": {
+          "text": [
+            "eleven"
+          ],
+          "answer_start": [
+            216
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c7"
+      },
+      {
+        "question": "For what network, did Beyonce land a major movie role in?",
+        "answers": {
+          "text": [
+            "MTV"
+          ],
+          "answer_start": [
+            348
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c8"
+      },
+      {
+        "question": "Their third album, Survivor, sold how many during its first week?",
+        "answers": {
+          "text": [
+            "663,000 copies"
+          ],
+          "answer_start": [
+            793
+          ]
+        },
+        "id": "56be8e353aeaaa14008c90c9"
+      },
+      {
+        "question": "What French composer wrote the original opera ''Carmen'' in the 19th century?",
+        "answers": {
+          "text": [
+            "Georges Bizet"
+          ],
+          "answer_start": [
+            557
+          ]
+        },
+        "id": "56bf89cfa10cfb1400551162"
+      },
+      {
+        "question": "What album caused a lawsuit to be filed in 2001?",
+        "answers": {
+          "text": [
+            "Survivor"
+          ],
+          "answer_start": [
+            593
+          ]
+        },
+        "id": "56bf89cfa10cfb1400551163"
+      },
+      {
+        "question": "Independent Women Part I was on which 2000 film's soundtrack?",
+        "answers": {
+          "text": [
+            "Charlie's Angels."
+          ],
+          "answer_start": [
+            115
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83154"
+      },
+      {
+        "question": "Which film did Beyoncé star in 2001 with Mekhi Phifer?",
+        "answers": {
+          "text": [
+            "Carmen: A Hip Hopera"
+          ],
+          "answer_start": [
+            378
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83155"
+      },
+      {
+        "question": "What was the name of Destiny Child's third album?",
+        "answers": {
+          "text": [
+            "Survivor"
+          ],
+          "answer_start": [
+            593
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83156"
+      },
+      {
+        "question": "Who filed a lawsuit over Survivor?",
+        "answers": {
+          "text": [
+            "Luckett and Roberson"
+          ],
+          "answer_start": [
+            628
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83157"
+      },
+      {
+        "question": "When did Destiny's Child announce their hiatus?",
+        "answers": {
+          "text": [
+            "October 2001"
+          ],
+          "answer_start": [
+            1070
+          ]
+        },
+        "id": "56d4831f2ccc5a1400d83158"
+      }
+    ],
+    "original_id": "56be8e353aeaaa14008c90c6"
+  },
+  {
+    "index": 10,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Beyoncé's Early 2000s Film and Music Highlights.\" This piece captures key moments from Beyoncé's career in the early 2000s, blending text and visuals to illustrate her impact in music and film. At the top, the text \"In 2003, Beyoncé appeared with Cuba Gooding, Jr. in the musical comedy 'The Fighting Temptations,' which earned mixed reviews and grossed $30 million.\" sets the stage. Just below, another text states, \"In 2002, Beyoncé starred as Foxxy Cleopatra with Mike Myers in 'Austin Powers in Goldmember,' which grossed $73 million and led the US box office.\" Further down, the text \"Beyoncé released 'Fighting Temptations' with Missy Elliott, MC Lyte, and Free as the lead single from 'The Fighting Temptations' soundtrack.\" provides additional details. Continuing downward, the text \"Another song by Beyoncé, 'Summertime,' from 'The Fighting Temptations' soundtrack, performed better on the US charts.\" appears just above the center. Below that, the text \"Beyoncé released 'Work It Out' as the lead single from 'Goldmember's soundtrack, achieving top ten status in the UK, Norway, and Belgium.\" is positioned slightly lower. A visual element featuring a stylized depiction of a glamorous character with a large afro alongside a comedic spy character suggests a blockbuster film and a large audience, stretching from the middle to the lower section. Near the bottom, an abstract representation of music notes traveling across a globe with emphasis on three distant locations visually ties into the international success theme. The overall style of the image is vibrant and dynamic, blending textual information with thematic visuals to create an engaging narrative."
+      },
+      {
+        "category": "background",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely white. There are no objects, no text, and no discernible features to describe. It's a blank canvas with no content."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          866
+        ],
+        "bottom_right": [
+          896,
+          1390
+        ],
+        "caption": "A stylized depiction of a glamorous character with a large afro and a comedic spy character, suggesting a blockbuster film and a large audience."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          1443
+        ],
+        "bottom_right": [
+          896,
+          1924
+        ],
+        "caption": "An abstract representation of music notes traveling across a globe, with emphasis on three distant locations."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          84,
+          403
+        ],
+        "bottom_right": [
+          802,
+          481
+        ],
+        "caption": "Text \"Beyoncé's Early 2000s Film and Music Highlights\" in <color-1>, <en-font-101>. ",
+        "text": "Beyoncé's Early 2000s Film and Music Highlights"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          205,
+          193
+        ],
+        "bottom_right": [
+          667,
+          259
+        ],
+        "caption": "Text \"In 2002, Beyoncé starred as Foxxy Cleopatra with Mike Myers in 'Austin Powers in Goldmember,' which grossed $73 million and led the US box office.\" in <color-1>, <en-font-15>. ",
+        "text": "In 2002, Beyoncé starred as Foxxy Cleopatra with Mike Myers in 'Austin Powers in Goldmember,' which grossed $73 million and led the US box office."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          431,
+          730
+        ],
+        "bottom_right": [
+          774,
+          800
+        ],
+        "caption": "Text \"Beyoncé released 'Work It Out' as the lead single from 'Goldmember's soundtrack, achieving top ten status in the UK, Norway, and Belgium.\" in <color-1>, <en-font-154>. ",
+        "text": "Beyoncé released 'Work It Out' as the lead single from 'Goldmember's soundtrack, achieving top ten status in the UK, Norway, and Belgium."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          278,
+          103
+        ],
+        "bottom_right": [
+          610,
+          165
+        ],
+        "caption": "Text \"In 2003, Beyoncé appeared with Cuba Gooding, Jr. in the musical comedy 'The Fighting Temptations,' which earned mixed reviews and grossed $30 million.\" in <color-1>, <en-font-101>. ",
+        "text": "In 2003, Beyoncé appeared with Cuba Gooding, Jr. in the musical comedy 'The Fighting Temptations,' which earned mixed reviews and grossed $30 million."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          333,
+          284
+        ],
+        "bottom_right": [
+          553,
+          350
+        ],
+        "caption": "Text \"Beyoncé released 'Fighting Temptations' with Missy Elliott, MC Lyte, and Free as the lead single from 'The Fighting Temptations' soundtrack.\" in <color-1>, <en-font-15>. ",
+        "text": "Beyoncé released 'Fighting Temptations' with Missy Elliott, MC Lyte, and Free as the lead single from 'The Fighting Temptations' soundtrack."
+      },
+      {
+        "category": "text",
+        "top_left": [
+          449,
+          660
+        ],
+        "bottom_right": [
+          576,
+          710
+        ],
+        "caption": "Text \"Another song by Beyoncé, 'Summertime,' from 'The Fighting Temptations' soundtrack, performed better on the US charts.\" in <color-1>, <en-font-154>. ",
+        "text": "Another song by Beyoncé, 'Summertime,' from 'The Fighting Temptations' soundtrack, performed better on the US charts."
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Beyoncé's Early 2000s Film and Music Highlights.\" This piece captures key moments from Beyoncé's career in the early 2000s, blending text and visuals to illustrate her impact in music and film. At the top, the text \"In 2003, Beyoncé appeared with Cuba Gooding, Jr. in the musical comedy 'The Fighting Temptations,' which earned mixed reviews and grossed $30 million.\" sets the stage. Just below, another text states, \"In 2002, Beyoncé starred as Foxxy Cleopatra with Mike Myers in 'Austin Powers in Goldmember,' which grossed $73 million and led the US box office.\" Further down, the text \"Beyoncé released 'Fighting Temptations' with Missy Elliott, MC Lyte, and Free as the lead single from 'The Fighting Temptations' soundtrack.\" provides additional details. Continuing downward, the text \"Another song by Beyoncé, 'Summertime,' from 'The Fighting Temptations' soundtrack, performed better on the US charts.\" appears just above the center. Below that, the text \"Beyoncé released 'Work It Out' as the lead single from 'Goldmember's soundtrack, achieving top ten status in the UK, Norway, and Belgium.\" is positioned slightly lower. A visual element featuring a stylized depiction of a glamorous character with a large afro alongside a comedic spy character suggests a blockbuster film and a large audience, stretching from the middle to the lower section. Near the bottom, an abstract representation of music notes traveling across a globe with emphasis on three distant locations visually ties into the international success theme. The overall style of the image is vibrant and dynamic, blending textual information with thematic visuals to create an engaging narrative.",
+    "original_bbox_index": 44,
+    "original_context": "In July 2002, Beyoncé continued her acting career playing Foxxy Cleopatra alongside Mike Myers in the comedy film, Austin Powers in Goldmember, which spent its first weekend atop the US box office and grossed $73 million. Beyoncé released \"Work It Out\" as the lead single from its soundtrack album which entered the top ten in the UK, Norway, and Belgium. In 2003, Beyoncé starred opposite Cuba Gooding, Jr., in the musical comedy The Fighting Temptations as Lilly, a single mother whom Gooding's character falls in love with. The film received mixed reviews from critics but grossed $30 million in the U.S. Beyoncé released \"Fighting Temptation\" as the lead single from the film's soundtrack album, with Missy Elliott, MC Lyte, and Free which was also used to promote the film. Another of Beyoncé's contributions to the soundtrack, \"Summertime\", fared better on the US charts.",
+    "original_qa_pairs": [
+      {
+        "question": "Who did Beyonce star with in the movie, \"Austin Powers in Goldmember\"?",
+        "answers": {
+          "text": [
+            "Mike Myers"
+          ],
+          "answer_start": [
+            84
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90da"
+      },
+      {
+        "question": "Which three countries did Beyonce's song \"Work It Out\" achieve top ten status?",
+        "answers": {
+          "text": [
+            "UK, Norway, and Belgium"
+          ],
+          "answer_start": [
+            331
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90db"
+      },
+      {
+        "question": "Beyonce starred with Cuba Gooding Jr. in which film?",
+        "answers": {
+          "text": [
+            "The Fighting Temptations"
+          ],
+          "answer_start": [
+            431
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90dc"
+      },
+      {
+        "question": "Who did Beyonce record the lead single with in the movie \"The Fighting Temptations\"?",
+        "answers": {
+          "text": [
+            "Missy Elliott"
+          ],
+          "answer_start": [
+            705
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90dd"
+      },
+      {
+        "question": "Which other song from the soundtrack did better in the charts?",
+        "answers": {
+          "text": [
+            "Summertime"
+          ],
+          "answer_start": [
+            834
+          ]
+        },
+        "id": "56be8fdf3aeaaa14008c90de"
+      },
+      {
+        "question": "What film did Beyonce appear in with Mike Myers?",
+        "answers": {
+          "text": [
+            "Austin Powers in Goldmember"
+          ],
+          "answer_start": [
+            115
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116b"
+      },
+      {
+        "question": "What large amount did the movie \"Goldmember\" gross?",
+        "answers": {
+          "text": [
+            "73 million"
+          ],
+          "answer_start": [
+            210
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116c"
+      },
+      {
+        "question": "What genre of movie did Beyonce star in with Cuba Gooding, Jr?",
+        "answers": {
+          "text": [
+            "musical comedy"
+          ],
+          "answer_start": [
+            416
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116d"
+      },
+      {
+        "question": "What song was the lead single from the film's sound track?",
+        "answers": {
+          "text": [
+            "Fighting Temptations"
+          ],
+          "answer_start": [
+            435
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116e"
+      },
+      {
+        "question": "How did the critics view the movie, ''The Fighting Temptations''?",
+        "answers": {
+          "text": [
+            "mixed reviews"
+          ],
+          "answer_start": [
+            545
+          ]
+        },
+        "id": "56bf8c8aa10cfb140055116f"
+      },
+      {
+        "question": "What film did Beyoncé star in with Mike Myers in 2002?",
+        "answers": {
+          "text": [
+            "Austin Powers in Goldmember"
+          ],
+          "answer_start": [
+            115
+          ]
+        },
+        "id": "56d484312ccc5a1400d8315e"
+      },
+      {
+        "question": "What was Beyoncé's character called in Austin Powers in Goldmember?",
+        "answers": {
+          "text": [
+            "Foxxy Cleopatra"
+          ],
+          "answer_start": [
+            58
+          ]
+        },
+        "id": "56d484312ccc5a1400d8315f"
+      },
+      {
+        "question": "Which song did Beyoncé release as the lead single for Austin Powers in Goldmember's soundtrack?",
+        "answers": {
+          "text": [
+            "Work It Out"
+          ],
+          "answer_start": [
+            240
+          ]
+        },
+        "id": "56d484312ccc5a1400d83160"
+      },
+      {
+        "question": "What musical comedy did Beyoncé star in along with Cuba Gooding, Jr. in 2003?",
+        "answers": {
+          "text": [
+            "The Fighting Temptations"
+          ],
+          "answer_start": [
+            431
+          ]
+        },
+        "id": "56d484312ccc5a1400d83161"
+      },
+      {
+        "question": "What song did Beyoncé release as the lead single from The Fighting Tempations?",
+        "answers": {
+          "text": [
+            "Fighting Temptations"
+          ],
+          "answer_start": [
+            435
+          ]
+        },
+        "id": "56d484312ccc5a1400d83162"
+      }
+    ],
+    "original_id": "56be8fdf3aeaaa14008c90da"
+  }
+]
