@@ -779,7 +779,8 @@ def merge_narrator_data(
     color_idx: Dict,
     font_idx: Dict,
     squad_id_to_qa: Dict[str, Dict],
-    start_wiki_idx: int = 0
+    start_wiki_idx: int = 0,
+    use_infographic_id: bool = False
 ) -> List[Dict]:
     """
     Process narrator-generated infographic data and merge with bboxes.
@@ -791,7 +792,8 @@ def merge_narrator_data(
         color_idx: Color index mapping
         font_idx: Font index mapping
         squad_id_to_qa: Mapping from question ID to QA pairs
-        start_wiki_idx: Starting wiki index for generating unique IDs
+        start_wiki_idx: Starting wiki index for generating unique IDs (used when use_infographic_id=False)
+        use_infographic_id: If True, use infographic_id from each entry instead of calculating from start_wiki_idx
     
     Returns:
         List of merged infographic data (full layout version only)
@@ -814,7 +816,16 @@ def merge_narrator_data(
     # First pass: find suitable layouts for each infographic
     print("\n=== Phase 1: Finding suitable layouts for each infographic ===")
     for wiki_idx, infographic in enumerate(infographic_generated):
-        wiki_id = start_wiki_idx + wiki_idx + 1
+        # Determine wiki_id based on mode
+        if use_infographic_id:
+            # Single file mode: use infographic_id from the entry
+            wiki_id = infographic.get('infographic_id')
+            if wiki_id is None:
+                print(f"Warning: infographic at index {wiki_idx} missing 'infographic_id', skipping")
+                continue
+        else:
+            # Directory mode: calculate from start_wiki_idx
+            wiki_id = start_wiki_idx + wiki_idx + 1
         
         # Get the caption data
         generated_infographic = infographic.get('generated_infographic', '')
@@ -864,7 +875,7 @@ def merge_narrator_data(
         
         # Fallback mechanism if no suitable layout found
         if not suitable_layouts:
-            print(f"  ⚠️ Warning: No suitable layout found for wiki {wiki_id}")
+            print(f"  Warning: No suitable layout found for wiki {wiki_id}")
             print(f"    Trying fallback: reducing text area requirement to 5000 px²")
             
             # Try with lower text area threshold
@@ -894,10 +905,10 @@ def merge_narrator_data(
                         })
                 
                 if suitable_layouts:
-                    print(f"    ✓ Found {len(suitable_layouts)} fallback layouts (50% capacity)")
+                    print(f"    Found {len(suitable_layouts)} fallback layouts (50% capacity)")
                     stats['fallback_used'] += 1
                 else:
-                    print(f"    ❌ ERROR: No fallback layout found, SKIPPING wiki {wiki_id}")
+                    print(f"    ERROR: No fallback layout found, SKIPPING wiki {wiki_id}")
                     print(f"    This infographic will be MISSING from output!")
                     stats['skipped'] += 1
                     stats['skipped_wiki_ids'].append(wiki_id)
@@ -1251,7 +1262,7 @@ def merge_narrator_data(
     print(f"Skipped (no layout): {stats['skipped']} ({stats['skipped']/stats['total_infographics']*100:.1f}%)")
     
     if stats['skipped'] > 0:
-        print(f"\n⚠️ WARNING: {stats['skipped']} infographics were SKIPPED!")
+        print(f"\nWARNING: {stats['skipped']} infographics were SKIPPED!")
         print(f"Skipped wiki IDs: {stats['skipped_wiki_ids'][:10]}")
         if len(stats['skipped_wiki_ids']) > 10:
             print(f"... and {len(stats['skipped_wiki_ids']) - 10} more")
@@ -1264,6 +1275,109 @@ def merge_narrator_data(
     print("="*60 + "\n")
     
     return result
+
+
+def update_original_wiki_files(merged_data: List[Dict], original_wiki_dir: str):
+    """
+    Update original wiki files by replacing entries that match the indices in merged_data.
+    
+    Args:
+        merged_data: List of merged infographic data with 'index' field
+        original_wiki_dir: Path to directory containing original wiki*.json files
+    """
+    if not os.path.exists(original_wiki_dir):
+        print(f"\nWarning: Original wiki directory does not exist: {original_wiki_dir}")
+        print("Skipping original file updates.")
+        return
+    
+    print("\n" + "="*60)
+    print("UPDATING ORIGINAL WIKI FILES")
+    print("="*60)
+    print(f"Original wiki directory: {original_wiki_dir}")
+    
+    # Group updates by file
+    updates_by_file = {}  # file_index -> list of (position_in_array, new_entry)
+    
+    for entry in merged_data:
+        wiki_id = entry['index']
+        
+        # Calculate which file this entry belongs to
+        # wiki_id 1-50 → file 1, wiki_id 51-100 → file 2, etc.
+        file_index = ((wiki_id - 1) // 50) + 1
+        position_in_array = (wiki_id - 1) % 50
+        
+        if file_index not in updates_by_file:
+            updates_by_file[file_index] = []
+        
+        updates_by_file[file_index].append((position_in_array, entry))
+    
+    print(f"Total entries to update: {len(merged_data)}")
+    print(f"Files to be modified: {len(updates_by_file)}")
+    
+    # Update each file
+    updated_files = 0
+    updated_entries = 0
+    
+    for file_index in sorted(updates_by_file.keys()):
+        filename = f"wiki{file_index:06d}.json"
+        filepath = os.path.join(original_wiki_dir, filename)
+        
+        if not os.path.exists(filepath):
+            print(f"\nWarning: Original file not found: {filename}")
+            print(f"   Skipping updates for file index {file_index}")
+            continue
+        
+        try:
+            # Load original file
+            original_data = load_json(filepath)
+            
+            if not isinstance(original_data, list):
+                print(f"\nError: {filename} is not a JSON array, skipping")
+                continue
+            
+            # Apply updates
+            entries_updated_in_file = 0
+            updates_for_file = updates_by_file[file_index]
+            
+            for position, new_entry in updates_for_file:
+                if position >= len(original_data):
+                    print(f"   Warning: Position {position} out of range in {filename} (size: {len(original_data)})")
+                    continue
+                
+                # Verify the index matches
+                old_entry = original_data[position]
+                old_index = old_entry.get('index')
+                new_index = new_entry['index']
+                
+                if old_index != new_index:
+                    print(f"   Warning: Index mismatch at position {position} in {filename}")
+                    print(f"            Expected index {new_index}, found {old_index}")
+                    continue
+                
+                # Replace the entry
+                original_data[position] = new_entry
+                entries_updated_in_file += 1
+                updated_entries += 1
+            
+            # Save updated file
+            save_json(original_data, filepath)
+            updated_files += 1
+            
+            # Get list of updated indices for this file
+            updated_indices = [entry['index'] for _, entry in updates_for_file]
+            print(f"\nUpdated {filename}: {entries_updated_in_file} entries")
+            print(f"  Wiki IDs: {updated_indices[:5]}{'...' if len(updated_indices) > 5 else ''}")
+            
+        except Exception as e:
+            print(f"\nError updating {filename}: {e}")
+            continue
+    
+    print("\n" + "="*60)
+    print("UPDATE SUMMARY")
+    print("="*60)
+    print(f"Files modified: {updated_files}/{len(updates_by_file)}")
+    print(f"Entries updated: {updated_entries}/{len(merged_data)}")
+    print("="*60 + "\n")
 
 
 def main():
@@ -1281,7 +1395,13 @@ def main():
         '--infographic-dir',
         type=str,
         default="./src/data/create_data/output/infographic",
-        help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic)'
+        help='Directory containing infographic*.json files (default: src/data/create_data/output/infographic). Ignored if --infor_path is specified.'
+    )
+    parser.add_argument(
+        '--infor_path',
+        type=str,
+        default=None,
+        help='Path to a single infographic JSON file (e.g., failed.json). If specified, --infographic-dir, --start, and --end are ignored.'
     )
     parser.add_argument(
         '--color-idx',
@@ -1305,13 +1425,13 @@ def main():
         '--start',
         type=int,
         default=1,
-        help='Start file index for infographic generation (inclusive, 1-based)'
+        help='Start file index for infographic generation (inclusive, 1-based). Ignored if --infor_path is specified.'
     )
     parser.add_argument(
         '--end',
         type=int,
         default=None,
-        help='End file index for infographic generation (exclusive, 1-based)'
+        help='End file index for infographic generation (exclusive, 1-based). Ignored if --infor_path is specified.'
     )
     parser.add_argument(
         '--output-dir',
@@ -1324,6 +1444,12 @@ def main():
         type=str,
         default="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl",
         help='Path to squad_v2_train.jsonl file (default: /mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl)'
+    )
+    parser.add_argument(
+        '--original-wiki-dir',
+        type=str,
+        default="./src/data/narrator/wiki",
+        help='Path to original wiki directory for updating entries when using --infor_path (default: ./src/data/narrator/wiki)'
     )
 
     args = parser.parse_args()
@@ -1349,6 +1475,9 @@ def main():
         repo_root = os.path.abspath(os.path.join(script_dir, '../../../'))
         infographic_dir = os.path.join(repo_root, 'src/data/create_data/output/infographic')
     
+    # Check if we're using single file mode
+    use_single_file = args.infor_path is not None
+    
     # Set base output directory
     if args.output_dir:
         output_dir = args.output_dir
@@ -1371,23 +1500,45 @@ def main():
     font_idx = load_json(font_idx_path)
     squad_id_to_qa = load_squad_jsonl(args.squad_file)
     
-    # Load infographic data
-    end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
-    
-    # Validate file indices
-    if args.start < 1:
-        raise ValueError("Start file index must be >= 1")
-    if args.end is not None and args.end <= args.start:
-        raise ValueError("End file index must be > start file index")
-    
-    print(f"  - Infographics: {infographic_dir} (directory)")
-    print(f"  - File index range: {args.start} to {end_file_idx-1} (files: {end_file_idx - args.start})")
-    
-    infographic_generated = load_infographic_files_from_directory(
-        infographic_dir, 
-        args.start, 
-        end_file_idx
-    )
+    # Load infographic data based on mode
+    if use_single_file:
+        # Single file mode: load from --infor_path
+        print(f"  - Infographics: {args.infor_path} (single file)")
+        
+        if not os.path.exists(args.infor_path):
+            raise FileNotFoundError(f"Infographic file not found: {args.infor_path}")
+        
+        infographic_generated = load_json(args.infor_path)
+        
+        # Ensure it's a list
+        if not isinstance(infographic_generated, list):
+            raise ValueError(f"Expected a list of infographic entries, got {type(infographic_generated)}")
+        
+        print(f"Loaded {len(infographic_generated)} infographic entries from single file")
+        
+        # In single file mode, use the infographic_id from each entry directly
+        start_wiki_idx = 0
+    else:
+        # Directory mode: load from --infographic-dir with --start and --end
+        end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
+        
+        # Validate file indices
+        if args.start < 1:
+            raise ValueError("Start file index must be >= 1")
+        if args.end is not None and args.end <= args.start:
+            raise ValueError("End file index must be > start file index")
+        
+        print(f"  - Infographics: {infographic_dir} (directory)")
+        print(f"  - File index range: {args.start} to {end_file_idx-1} (files: {end_file_idx - args.start})")
+        
+        infographic_generated = load_infographic_files_from_directory(
+            infographic_dir, 
+            args.start, 
+            end_file_idx
+        )
+        
+        # Calculate starting wiki index based on start file index
+        start_wiki_idx = (args.start - 1) * 50
     
     print(f"\nLoaded {len(extracted_bboxes)} bbox entries")
     print(f"Loaded {len(color_idx)} colors")
@@ -1396,8 +1547,6 @@ def main():
     
     # Process data
     print("\nProcessing data...")
-    # Calculate starting wiki index based on start file index
-    start_wiki_idx = (args.start - 1) * 50
     
     merged_data = merge_narrator_data(
         infographic_generated,
@@ -1405,7 +1554,8 @@ def main():
         color_idx,
         font_idx,
         squad_id_to_qa,
-        start_wiki_idx=start_wiki_idx
+        start_wiki_idx=start_wiki_idx,
+        use_infographic_id=use_single_file  # Use infographic_id when in single file mode
     )
     
     print(f"Generated {len(merged_data)} infographics")
@@ -1432,6 +1582,17 @@ def main():
         print(f"  Saved {len(chunk)} infographics to {filename} (wiki IDs: {chunk[0]['index']}-{chunk[-1]['index']})")
     
     print(f"\nSaved {len(saved_files)} files total")
+    
+    # Update original wiki files if in single file mode (--infor_path)
+    if use_single_file:
+        print("\n" + "="*60)
+        print("SINGLE FILE MODE DETECTED")
+        print("="*60)
+        print(f"Output saved to: {output_dir}")
+        print(f"Now updating original wiki files...")
+        
+        update_original_wiki_files(merged_data, args.original_wiki_dir)
+    
     print("Done!")
     
     # Print summary statistics
@@ -1447,6 +1608,9 @@ def main():
     print(f"Total files saved: {len(saved_files)}")
     print(f"Total layers: {total_layers}")
     print(f"Output directory: {output_dir}")
+    
+    if use_single_file:
+        print(f"Original wiki directory updated: {args.original_wiki_dir}")
 
 
 if __name__ == '__main__':

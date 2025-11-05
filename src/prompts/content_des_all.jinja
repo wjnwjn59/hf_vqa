@@ -1,42 +1,24 @@
-You are a dispassionate, rigorous, highly experienced infographic design planner. Your objective is to transform content from a text-based Question Answering (QA) dataset into a structured description for an infographic that will later be used in a Visual Question Answering (VQA) dataset.
+You are a rigorous infographic design planner. Turn a text QA sample into a single paragraph caption that specifies everything shown in the infographic, so it can later be generated and used for VQA.
 
-Generate a single, detailed caption for an infographic image from a context and its question–answer pairs. Describe the layout from top to middle to bottom and enumerate all planned visible text and figures that will appear in the infographic. For downstream generation, express every planned element as a double-quoted line with a tag: write visual text items as "\"<text>\" (text)" and figure captions as "\"<caption>\" (figure)", including the title and the topic. Use only relative placement terms, and avoid exact colors, font names, and precise coordinates. Choose a minimal, non-redundant set so the total number of visual text items is between 4 and 8 (inclusive) and there are 2 to 5 figure captions. If more than 8 text items would be needed, merge related facts into composite, natural phrases.
-
-You are given:
-1) A short paragraph ("CONTEXT") describing an event, profile, definition, or story.
-2) A list of question–answer pairs ("QA LIST"), each answerable from the CONTEXT.
-Use only these inputs and do not invent facts.
-
-Return only the full image caption as a single string.
-
-A) Opening and format
-- Start with exactly: "The image is an infographic titled \"<TITLE>\" (text) focused on \"<TOPIC>\" (text)."
-- After the opening sentence, you may write short narrative sentences only for flow and relative placement (top, middle, bottom). Do not describe any visual content, objects, scenes, icons, illustrations, or actions in narrative sentences. Any description of a visual must appear only as a standalone caption line formatted as "\"<caption>\" (figure)".
-- Every planned element must be on its own line containing only a double-quoted string immediately followed by the tag: (text) for visual text items or (figure) for figure captions. Do not embed a tagged line inside a longer sentence.
-- Keep 4–8 visual text items in total (including title and topic). Include 2–5 figure captions. Prefer figures to carry supporting evidence so text stays within budget.
-- Use only relative placement terms (near, adjacent, above, below, left of, right of).
-- Do not mention exact colors or font names. End the final sentence with: "The overall style of the image is ..." and complete it concisely.
-- Write the overall output as a natural, flowing paragraph that integrates short narrative sentences and the standalone tagged lines smoothly (avoid a bullet-list feel).
-
-B) Figure captions — quoted and ending with (figure)
-- Format each figure line exactly as: "\"<caption>\" (figure)"; nothing else on that line.
-- Do not include quoted strings inside a figure caption.
-- Do not include numbers or proper nouns (no years, counts, percentages, named people, organizations, places, or product titles).
-- Do not depict numerical charts or diagrams; avoid bars, lines, axes, ticks, scales, or data encodings. Prefer icons, illustrations, scenes, or symbolic visuals that support the questions.
-- Use a cartoon or illustrative style with no letters, numerals, words, acronyms, or logos. If humans appear, begin with phrasing such as "a cartoon…", "a stylized…", or "a silhouette…" to avoid identity cues.
-
-C) Visual text items — quoted and ending with (text)
-- Write each text line as a natural short phrase (about 6 or more words), not bare keywords.
-- Stay within the 4–8 budget by consolidating overlapping facts (combine related dates, roles, or outcomes into one clear phrase).
-- Draw wording primarily from the CONTEXT; use words from QUESTIONS for salience and ANSWER tokens only as factual anchors (exact dates, years, counts, proper names).
-- Reproduce numbers, dates, and units exactly; keep casing and terms consistent with the CONTEXT.
-- Indicate roles naturally (title, section header, label, list entry, footnote, URL) and describe placement only in relative terms.
-
-D) Evidence and safety
-- Ensure each QA is answerable using the limited set of visual text items together with nearby figure captions; when uncertain, prefer concise text paired with supportive figures rather than adding more text lines.
-- Place high-importance keywords near their supporting visuals using only relative terms.
-- Do not contradict the CONTEXT; omit unsupported details. Exclude hateful, sexual, self-harm, or dangerous content. Do not mention URLs or sources.
-
-Inputs:
+Return only the caption string. Use only the inputs and do not invent facts:
 – CONTEXT: {{ context }}
 – QA_LIST: {% for qa in qa_list %}Q: {{ qa.question }} | A: {{ qa.answer }}{% if not loop.last %} || {% endif %}{% endfor %}
+
+OPENING
+- Start with exactly: "The image is an infographic titled \"<TITLE>\" (text) focused on \"<TOPIC>\" (text)."
+- State the title and topic only in this opening sentence; do not repeat them anywhere else.
+
+FLOW & PLACEMENT (smooth prose, no lists)
+- Write a cohesive top→middle→bottom narrative using connective phrases (e.g., “At the top…”, “In the middle…”, “At the bottom…”).
+- Integrate the tagged elements seamlessly into natural sentences so the caption reads as continuous prose; avoid list-like enumeration or itemization.
+
+TAGGED LINES (quoted, standalone content only)
+- Every visible element must appear as a quoted tag: "\"<caption>\" (figure)" or "\"<text>\" (text)". Keep each tag self-contained and grammatically integrated into the surrounding sentence.
+- Do **not** include placement/spatial terms (top, bottom, near, adjacent, above, below, left, right) **inside** the quotes; express all spatial relations only in the surrounding narrative.
+- (figure) tags: ALWAYS double-quoted exactly as "\"<caption>\" (figure)"; keep generic (no numbers, proper nouns, words, or logos). Avoid charts/axes; prefer symbolic/cartoon visuals.
+- (text) tags: write natural phrases of **6–10 words** each. **No single words, bare names, lone years, or naked numbers**—pair numbers/proper nouns with informative descriptors. Consolidate overlaps. Preserve numbers/dates/casing from CONTEXT/answers. Ensure each QA answer appears verbatim or smoothly integrated so all questions are answerable from the image.
+- Keep **4–8 (text)** tags in total (including the title and the topic) and **2–5 (figure)** tags.
+- Use only relative placement terms in the narrative (not inside quotes). Avoid exact colors, fonts, or coordinates.
+- End the last sentence with: "The overall style of the image is ..."
+
+Now, please start generating the infographic caption, strictly respecting all the aforementioned rules.

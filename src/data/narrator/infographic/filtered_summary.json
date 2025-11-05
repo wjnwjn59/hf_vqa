@@ -8,7 +8,7 @@
     "start_image_id": 1,
     "end_image_id": 50,
     "images_directory": "/home/thinhnp/hf_vqa/src/data/bizgen/output/squad_v2",
-    "bizgen_directory": "/home/thinhnp/hf_vqa/src/data/narrator/wiki",
+    "infographic_directory": "/home/thinhnp/hf_vqa/src/data/narrator/infographic",
     "filter_ratio": 0.28
   },
   "filtered_images": [

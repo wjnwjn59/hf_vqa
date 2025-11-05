@@ -16,18 +16,17 @@ def get_image_id_from_filename(filename: str) -> Optional[int]:
     return None
 
 
-def get_wiki_file_path(image_id: int, bizgen_format_dir: str) -> str:
+def get_infographic_file_path(image_id: int, infographic_dir: str) -> str:
     """
-    Get the path to the wiki JSON file containing data for the given image ID.
-    Based on merge_infographic_bboxes.py logic:
-    - Wiki ID starts from 1 (image_id)
+    Get the path to the infographic JSON file containing data for the given image ID.
+    - Infographic ID starts from 1 (image_id)
     - Files are chunked into groups of 50
-    - File naming: wiki{file_index:06d}.json
+    - File naming: infographic{file_index:06d}.json
     """
-    wiki_id = image_id  # Image ID directly maps to wiki ID
-    file_index = (wiki_id - 1) // 50 + 1  # Calculate which file chunk it belongs to
-    filename = f"wiki{file_index:06d}.json"
-    return os.path.join(bizgen_format_dir, filename)
+    infographic_id = image_id  # Image ID directly maps to infographic ID
+    file_index = (infographic_id - 1) // 50 + 1  # Calculate which file chunk it belongs to
+    filename = f"infographic{file_index:06d}.json"
+    return os.path.join(infographic_dir, filename)
 
 
 def load_json(filepath: str) -> Any:
@@ -40,10 +39,10 @@ def load_json(filepath: str) -> Any:
         return None
 
 
-def find_wiki_entry_by_id(wiki_data: List[Dict], target_id: int) -> Optional[Dict]:
-    """Find wiki entry with matching index (wiki ID)."""
-    for entry in wiki_data:
-        if entry.get('index') == target_id:
+def find_infographic_entry_by_id(infographic_data: List[Dict], target_id: int) -> Optional[Dict]:
+    """Find infographic entry with matching infographic_id."""
+    for entry in infographic_data:
+        if entry.get('infographic_id') == target_id:
             return entry
     return None
 
@@ -155,7 +154,7 @@ def contains_suspicious_patterns(ocr_texts: List[str]) -> Tuple[bool, str]:
 def process_single_image(
     image_path: str, 
     image_id: int, 
-    bizgen_format_dir: str,
+    infographic_dir: str,
     ocr_model: PaddleOCR,
     threshold: float = 0.5
 ) -> Optional[Dict]:
@@ -167,43 +166,34 @@ def process_single_image(
     """
     print(f"Processing image {image_id} ({os.path.basename(image_path)})...")
     
-    # Get corresponding wiki file
-    wiki_file_path = get_wiki_file_path(image_id, bizgen_format_dir)
+    # Get corresponding infographic file
+    infographic_file_path = get_infographic_file_path(image_id, infographic_dir)
     
-    if not os.path.exists(wiki_file_path):
-        print(f"  Warning: Wiki file not found: {wiki_file_path}")
+    if not os.path.exists(infographic_file_path):
+        print(f"  Warning: Infographic file not found: {infographic_file_path}")
         return None
     
-    # Load wiki data
-    wiki_data = load_json(wiki_file_path)
-    if not wiki_data:
-        print(f"  Error: Could not load wiki data from {wiki_file_path}")
+    # Load infographic data
+    infographic_data = load_json(infographic_file_path)
+    if not infographic_data:
+        print(f"  Error: Could not load infographic data from {infographic_file_path}")
         return None
     
-    # Find the specific wiki entry
-    wiki_entry = find_wiki_entry_by_id(wiki_data, image_id)
-    if not wiki_entry:
-        print(f"  Warning: No wiki entry found for image ID {image_id}")
+    # Find the specific infographic entry
+    infographic_entry = find_infographic_entry_by_id(infographic_data, image_id)
+    if not infographic_entry:
+        print(f"  Warning: No infographic entry found for image ID {image_id}")
         return None
     
-    # Extract text content directly from text layers
+    # Extract text content from generated_infographic field
     json_texts = []
     
-    if 'layers_all' in wiki_entry:
-        for layer in wiki_entry['layers_all']:
-            if layer.get('category') == 'text':
-                # Try to get text from 'text' field first, then from 'caption'
-                text_content = layer.get('text', '')
-                if not text_content and 'caption' in layer:
-                    # Extract text from caption like 'Text "content" in <color-x>, <font-y>'
-                    caption = layer['caption']
-                    # Find text between quotes
-                    match = re.search(r'Text "([^"]*)"', caption)
-                    if match:
-                        text_content = match.group(1)
-                
-                if text_content.strip():
-                    json_texts.append(text_content.strip())
+    if 'generated_infographic' in infographic_entry:
+        generated_text = infographic_entry['generated_infographic']
+        # Extract text content from patterns like (text) markers
+        # Find all text marked as (text)
+        text_matches = re.findall(r'"([^"]+)"\s*\(text\)', generated_text)
+        json_texts.extend([text.strip() for text in text_matches if text.strip()])
     
     # Perform OCR
     ocr_texts, ocr_word_count = perform_ocr(image_path, ocr_model)
@@ -213,7 +203,7 @@ def process_single_image(
     
     if has_suspicious:
         return {
-            'wiki_entry': wiki_entry,  # Complete bizgen format entry
+            'infographic_entry': infographic_entry,  # Complete infographic format entry
             'image_id': image_id,
             'image_filename': os.path.basename(image_path),
             'similarity_ratio': 0.0,  # Mark as 0 for pattern-based failure
@@ -232,10 +222,10 @@ def process_single_image(
     print(f"  Should filter: {should_filter} (Jaccard similarity {similarity_ratio:.3f} < threshold {threshold:.3f})")
     
     if should_filter:
-        # Return the wiki entry (bizgen format) for failed images
+        # Return the infographic entry for failed images
         print(f"  ✗ Image {image_id} failed OCR check - will be added to failed.json for regeneration")
         return {
-            'wiki_entry': wiki_entry,  # Complete bizgen format entry
+            'infographic_entry': infographic_entry,  # Complete infographic format entry
             'image_id': image_id,
             'image_filename': os.path.basename(image_path),
             'similarity_ratio': similarity_ratio,
@@ -254,13 +244,13 @@ def main():
         '--start',
         type=int,
         default=1,
-        help='Start file index (1-based). --start 1 processes images 1-50 from wiki000001.json'
+        help='Start file index (1-based). --start 1 processes images 1-50 from infographic000001.json'
     )
     parser.add_argument(
         '--end',
         type=int,
         default=None,
-        help='End file index (exclusive, 1-based). --start 1 --end 3 processes 2 files (wiki000001, wiki000002) = images 1-100'
+        help='End file index (exclusive, 1-based). --start 1 --end 3 processes 2 files (infographic000001, infographic000002) = images 1-100'
     )
     parser.add_argument(
         '--threshold',
@@ -271,20 +261,20 @@ def main():
     parser.add_argument(
         '--images-dir',
         type=str,
-        default='src/data/create_data/bizgen/output/infographic_data_no_parse',
+        default='src/data/bizgen/output/squad_v2',
         help='Directory containing images'
     )
     parser.add_argument(
-        '--bizgen-dir',
+        '--infographic-dir',
         type=str,
-        default='src/data/create_data/output/bizgen_format',
-        help='Directory containing bizgen_format JSON files'
+        default='src/data/narrator/infographic',
+        help='Directory containing infographic JSON files'
     )
     parser.add_argument(
         '--output-dir',
         type=str,
-        default='src/data/create_data/output/ocr_filter',
-        help='Output directory for filtered results'
+        default='src/data/narrator/infographic',
+        help='Output directory for filtered results (failed.json)'
     )
     
     args = parser.parse_args()
@@ -347,7 +337,7 @@ def main():
             print(f"  ID {img_id}: {os.path.relpath(img_path, args.images_dir)}")
     print(f"Using Jaccard similarity threshold: {args.threshold:.3f}")
     print(f"Images directory: {args.images_dir}")
-    print(f"Bizgen directory: {args.bizgen_dir}")
+    print(f"Infographic directory: {args.infographic_dir}")
     print(f"Output directory: {args.output_dir}")
     print()
     
@@ -359,7 +349,7 @@ def main():
     
     # Process each image
     filtered_results = []
-    failed_wiki_entries = []  # Collect bizgen format entries for failed images
+    failed_infographic_entries = []  # Collect infographic format entries for failed images
     processed_count = 0
     
     for image_id, full_path in image_files:
@@ -368,15 +358,15 @@ def main():
         result = process_single_image(
             image_path, 
             image_id, 
-            args.bizgen_dir, 
+            args.infographic_dir, 
             ocr_model,
             args.threshold
         )
         
         if result:
             filtered_results.append(result)
-            # Add wiki entry to failed list for regeneration
-            failed_wiki_entries.append(result['wiki_entry'])
+            # Add infographic entry to failed list for regeneration
+            failed_infographic_entries.append(result['infographic_entry'])
             print(f"  ✓ Image {image_id} filtered (will regenerate)")
         else:
             print(f"  - Image {image_id} passed")
@@ -384,10 +374,10 @@ def main():
         processed_count += 1
         print()
     
-    # Save failed.json with bizgen format (list of wiki entries)
+    # Save failed.json with infographic format (list of infographic entries)
     failed_json_path = os.path.join(args.output_dir, 'failed.json')
     with open(failed_json_path, 'w', encoding='utf-8') as f:
-        json.dump(failed_wiki_entries, f, indent=2, ensure_ascii=False)
+        json.dump(failed_infographic_entries, f, indent=2, ensure_ascii=False)
     
     # Save summary report (metadata + failed image info)
     summary_file = os.path.join(args.output_dir, 'filtered_summary.json')
@@ -402,7 +392,7 @@ def main():
             'start_image_id': start_image_id,
             'end_image_id': end_image_id,
             'images_directory': os.path.abspath(args.images_dir),
-            'bizgen_directory': os.path.abspath(args.bizgen_dir),
+            'infographic_directory': os.path.abspath(args.infographic_dir),
             'filter_ratio': len(filtered_results) / processed_count if processed_count > 0 else 0.0
         },
         'filtered_images': [
@@ -423,14 +413,14 @@ def main():
     print(f"Images filtered: {len(filtered_results)}")
     print(f"Filter rate: {len(filtered_results)/processed_count:.1%}" if processed_count > 0 else "0%")
     print(f"\nOutput files:")
-    print(f"  - Bizgen format (for regeneration): {failed_json_path}")
+    print(f"  - Infographic format (for regeneration): {failed_json_path}")
     print(f"  - Summary report: {summary_file}")
     
     if filtered_results:
         print(f"\nFiltered images ({len(filtered_results)} total):")
         for result in filtered_results:
             print(f"  - {result['image_filename']} (ID: {result['image_id']}) - {result['reason']}")
-        print(f"\n✓ Use {failed_json_path} with BizGen to regenerate these images")
+        print(f"\n✓ Use {failed_json_path} to regenerate infographic descriptions for these images")
 
 
 if __name__ == '__main__':

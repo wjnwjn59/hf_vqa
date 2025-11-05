@@ -1,53 +1,40 @@
 You are a dispassionate, rigorous, and highly experienced visual reasoning planner.
-Your objective is to generate new question–answer pairs that can be answered solely by observing the infographic image. Each question must rely only on the visible textual or graphical information within the infographic layout.
 
-Assume that the input represents an infographic image even though it is provided as text. The infographic is described through a structured json that includes an overall description, textual elements, and figure layouts such as charts, icons, legends, and diagrams. Treat this json as a faithful rendering of the visual content.
+You will be provided with:
+1)  **INPUT_JSON**: {{ layout_json_string }} (A structured json description of the infographic content including overall context, text blocks, and figure layouts)
+2)  **EXISTING_QA**: {% for qa in qa_samples -%} Q{{ qa.id }}: {{ qa.question }} | A{{ qa.id }}: {{ qa.answer }} {% endfor %} (A list of existing question–answer pairs already associated with the same infographic)
+3)  **K**: {{ k }} (The number of new pairs to generate)
 
-You are provided with:
-1) a structured json description of the infographic content including overall context, text blocks, and figure layouts;
-2) a list of existing question–answer pairs already associated with the same infographic.
+Your task is to produce exactly **K** new and distinct question–answer pairs, returned as a single JSON array, strictly adhering to all rules below.
 
-Your task is to produce k new and distinct question–answer pairs that are not duplicates or trivial rephrasings of the existing ones. Each new pair must stay aligned with the infographic’s overall topic and main message, and must focus on factual, observable aspects such as labels, quantities, comparisons, colors, or layout relationships.
+### CORE REQUIREMENT (Mandatory)
+-   Each question must force a visual reasoning step that connects a specific `"figure_layout"` (e.g., 'the diagram of people around a record player') to a specific `"text_content"` block (e.g., 'the text about musical influence').
+-   Questions answerable by *only* text or *only* a figure are forbidden.
+-   Do not reuse, rephrase, or slightly modify the provided **EXISTING_QA** pairs. Each new pair must reference a different aspect or reasoning step.
 
-Naturalness requirements:
-- Write clear, natural questions that read like ordinary language rather than templates.
-- Vary interrogative forms when appropriate, for example what, which, where, how many, which side, and yes–no questions.
-- Avoid awkward phrasing, stilted repetition, meta commentary, and unnecessary verbosity.
-- Use natural spatial phrases rather than numeric coordinates when referring to positions.
+### QUESTION NATURALNESS (Rules for "question" key)
+-   Write clear, natural questions that read like ordinary language.
+-   Vary interrogative forms (what, which, where, how many, yes–no).
+-   Phrase questions naturally to ask about the text-figure connection, for example: "What text does the illustration of [figure description] relate to?" or "Which piece of text explains the diagram showing [figure description]?"
+-   Avoid awkward phrasing, stilted repetition, and meta commentary.
 
-Answer fidelity rules:
-- Answers must be directly visible or derivable by simple visual reasoning such as counting, comparison, or spatial relation.
-- Each answer must be a single concise word, label, yes or no, or a number as displayed in the infographic; use digits for counts unless the display uses words.
-- If the answer is textual, reproduce the string verbatim with original casing and spacing.
+### ANSWER FIDELITY (Rules for "answer" key)
+-   Each answer must be a **single factoid word or a very short, concise phrase** (like a name, label, or number) taken directly from the infographic.
+-   Answers like 'yes or no' are acceptable *only* if the question is a yes/no question.
+-   If the answer is textual, reproduce the single word or short phrase verbatim with original casing and spacing.
 
-Explanation requirements:
-- Include a brief natural explanation that justifies the answer using only evidence present in the infographic json.
-- Do not reveal chain of thought or stepwise internal reasoning; provide only a short evidence based justification.
+### EXPLANATION RULES (Rules for "explanation" key)
+-   Include a brief natural explanation that justifies the concise, factoid answer.
+-   The explanation **must** explicitly mention both the `"figure_layout"` (e.g., "the illustration of soda cans") and the `"text_content"` (e.g., "the text mentioning a Pepsi campaign") that are being connected.
+-   Do not reveal chain of thought; provide only a short evidence-based justification.
 
-Output format:
-- Return a single valid json array containing exactly k objects.
-- Each object must include three keys: "question", "answer", and "explanation".
-- Use standard json with double quotes, no comments, and no trailing commas.
-- Do not include additional formatting outside the json array.
+### OUTPUT FORMAT (Strict)
+-   Return a single valid json array containing exactly **K** objects.
+-   Each object must include three keys: `"question"`, `"answer"`, and `"explanation"`.
+-   Use standard json with double quotes, no comments, and no trailing commas.
+-   Do not include additional formatting outside the json array.
 
-Quality requirements:
-- Each question must be topically relevant to the infographic’s main subject, not peripheral decoration or unrelated text.
-- Do not reuse, rephrase, or slightly modify the provided question–answer pairs; each new pair must reference a different aspect, region, or reasoning step while remaining on topic.
-- Use a variety of reasoning types across the set, such as counting, comparison, lookup, spatial relation, trend, or simple aggregation.
-- Avoid ambiguity and redundancy.
-
-Input infographic content (structured json):
-{{ layout_json_string }}
-
-Existing question–answer pairs:
-{% for qa in qa_samples -%}
-Q{{ qa.id }}: {{ qa.question }}
-A{{ qa.id }}: {{ qa.answer }}
-{% endfor %}
-
-Number of new pairs to generate: {{ k }}
-
-Return only the json array below, replacing the placeholders with your generated pairs. Do not add or remove keys or items.
+Return only the json array below, replacing the placeholders.
 
 [
 {% for i in range(1, k+1) -%}

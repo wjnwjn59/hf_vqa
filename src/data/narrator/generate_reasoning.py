@@ -220,10 +220,10 @@ if __name__ == '__main__':
 
     # Data/template args
     parser.add_argument('--layout_dir', type=str,
-                        default='/home/binhdt/hf_vqa/src/data/wiki/',
+                        default='/home/binhdt/hf_vqa/src/data/narrator/wiki',
                         help='Path to source directory for wiki*.json files')
     parser.add_argument('--output_file_path', type=str,
-                        default='../narrator/generated_reasonings.jsonl',
+                        default='src/data/narrator/generated_reasonings.jsonl',
                         help='Path to the output .jsonl file')
 
     # Inference sampling args
