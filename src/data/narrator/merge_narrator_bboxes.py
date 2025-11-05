@@ -870,7 +870,7 @@ def merge_narrator_data(
             len(image_elements), 
             len(text_elements), 
             extracted_bboxes, 
-            min_text_area=10000  # Changed from 24000 to 10000
+            min_text_area=15000
         )
         
         # Fallback mechanism if no suitable layout found
@@ -883,7 +883,7 @@ def merge_narrator_data(
                 len(image_elements), 
                 len(text_elements), 
                 extracted_bboxes, 
-                min_text_area=5000  # Reduced threshold
+                min_text_area=10000
             )
             
             if not suitable_layouts:

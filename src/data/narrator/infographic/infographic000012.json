@@ -1,0 +1,855 @@
+[
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City active travel and bike-share highlights\" (text) focused on \"city walking, cycling, and bike-share support\" (text). Near the top is a concise summary header and below it supporting visuals and captions relate to daily cycling counts, modal share, sponsorship, survey support, and walkability rankings, with figures placed adjacent to the text items for clarity. \"New York City reports about 200,000 daily bicycle riders and many pedestrian commuters\" (text)\n\"Walk and bicycle travel together account for 21% of all trips in the city, compared to a national metro rate near 8%\" (text)\n\"Citibank sponsored the introduction of 10,000 public bicycles for the city's bike-share project in the summer of 2013\" (text)\n\"Research by Quinnipiac University showed majority support among New Yorkers for the bike-share initiative, and Walk Score named the city the most walkable large US city in two separate rankings\" (text)\n\"a stylized map-like illustration showing many bicycle and walking icons clustered in a dense urban grid\" (figure)\n\"a cartoon of a station with rows of identical public bicycles and a prominent sponsor plaque on a nearby sign\" (figure)\n\"a stylized group of people with speech-bubble shapes indicating general support without text inside the bubbles\" (figure)\n\"a simplified emblem-like badge indicating top walkability with laurel-style decoration and no text\" (figure) The overall style of the image is clean, schematic, and infographic-like with illustrative cartoons and clear typographic hierarchy.",
+    "infographic_id": 551,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "New York's high rate of public transit use, over 200,000 daily cyclists as of 2014, and many pedestrian commuters make it the most energy-efficient major city in the United States. Walk and bicycle modes of travel account for 21% of all modes for trips in the city; nationally the rate for metro regions is about 8%. In both its 2011 and 2015 rankings, Walk Score named New York City the most walkable large city in the United States. Citibank sponsored the introduction of 10,000 public bicycles for the city's bike-share project in the summer of 2013. Research conducted by Quinnipiac University showed that a majority of New Yorkers support the initiative. New York City's numerical \"in-season cycling indicator\" of bicycling in the city hit an all-time high in 2013.",
+    "qa_count": 6,
+    "ids": [
+      "56d00beb234ae51400d9c2d3",
+      "56d11cb517492d1400aab9b5",
+      "56d11cb517492d1400aab9b6",
+      "56d11cb517492d1400aab9b7",
+      "56d11cb517492d1400aab9b8",
+      "56d11cb517492d1400aab9b9"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City Water Sources and Projects\" (text) focused on \"regional watersheds and major infrastructure projects supplying city drinking water\" (text). At the top, a concise header summarizes source and protection; near it display a supporting illustration of the protected mountain watershed that supplies the city. \"New York City drinking water is supplied by the protected Catskill Mountains watershed\" (text)\n\"a cartoon illustrative mountain watershed with trees and streams, shown above a stylized city silhouette\" (figure)\nBelow that, a middle section explains augmentation projects with a nearby figure representing construction activity north of the city. \"A major purification plant under construction at the Croton Watershed north of the city costing US$3.2 billion\" (text)\n\"a stylized construction site on a reservoir shoreline, shown below and right of the mountain figure\" (figure)\nAdjacent to the construction figure, list the added capacity impact and percent increase with a supporting visual of flowing water into the city. \"The new plant will add 290 million gallons daily, representing a greater than 20% increase in supply\" (text)\n\"a symbolic flowing-water illustration showing increased flow toward the city, placed below and left of the construction figure\" (figure)\nAt the bottom, note ongoing tunnel work with a small supporting tunnel illustration near the city silhouette. \"Ongoing expansion of Water Tunnel No. 3 is the city's largest capital construction project\" (text)\n\"a stylized tunnel cross-section illustration placed below the city silhouette and adjacent to the flowing-water illustration\" (figure)\nThe overall style of the image is clear, informative, and illustrative with clean icons and concise labels.",
+    "infographic_id": 552,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 11,
+    "keywords_total": 11,
+    "context": "New York City is supplied with drinking water by the protected Catskill Mountains watershed. As a result of the watershed's integrity and undisturbed natural water filtration system, New York is one of only four major cities in the United States the majority of whose drinking water is pure enough not to require purification by water treatment plants. The Croton Watershed north of the city is undergoing construction of a US$3.2 billion water purification plant to augment New York City's water supply by an estimated 290 million gallons daily, representing a greater than 20% addition to the city's current availability of water. The ongoing expansion of New York City Water Tunnel No. 3, an integral part of the New York City water supply system, is the largest capital construction project in the city's history.",
+    "qa_count": 6,
+    "ids": [
+      "56d00c3f234ae51400d9c2d6",
+      "56d11dd317492d1400aab9c9",
+      "56d11dd317492d1400aab9ca",
+      "56d11dd317492d1400aab9cb",
+      "56d11dd317492d1400aab9cc",
+      "56d11dd317492d1400aab9cd"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"City Leadership and Local Law Overview\" (text) focused on \"local government terms and legal references\" (text). At the top is a concise header summarizing term lengths and limits, near an illustrative figure of elected officials, and below that a mid section lists the council composition adjacent to an illustrative district map, with a bottom section noting the local legal publications near an illustrative journal icon.\n\n\"City officials serve four-year terms with a three consecutive-term limit and eligibility to resume after a four-year break\" (text)\n\"The City Council is a unicameral body made up of 51 members representing geographic population districts\" (text)\n\"The official local law sources are the New York City Administrative Code, the New York City Rules, and the City Record\" (text)\n\"a cartoon of a mayor and council members standing on a simple podium, symbolic and without text\" (figure)\n\"a stylized map showing many district-shaped areas to indicate geographic population boundaries, symbolic and without text\" (figure)\n\"a cartoon of an open journal labeled only by its form to represent an official municipal journal, symbolic and without text\" (figure)\n\nThe overall style of the image is clean, illustrative, and informational.",
+    "infographic_id": 553,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "The Mayor and council members are elected to four-year terms. The City Council is a unicameral body consisting of 51 council members whose districts are defined by geographic population boundaries. Each term for the mayor and council members lasts four years and has a three consecutive-term limit, but can resume after a four-year break. The New York City Administrative Code, the New York City Rules, and the City Record are the code of local laws, compilation of regulations, and official journal, respectively.",
+    "qa_count": 7,
+    "ids": [
+      "56d00cce234ae51400d9c2de",
+      "56d00cce234ae51400d9c2df",
+      "56d11f3717492d1400aab9e0",
+      "56d11f3717492d1400aab9e1",
+      "56d11f3717492d1400aab9e2",
+      "56d11f3717492d1400aab9e3",
+      "56d11f3717492d1400aab9e4"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City Political Landscape\" (text) focused on \"New York City party dominance and historic election milestones\" (text). At the top, a concise header and summary introduce party control and voter registration; below, a central timeline area with two historic election callouts appears adjacent to illustrative figures; at the bottom a brief platform summary and labor note is placed near a supportive scene.  \n\"New York City political control: most public officials are members of the Democratic Party\" (text)  \n\"As of November 2008, 67% of registered voters in the city were Democrats\" (text)  \n\"Historic milestone: the last time a Republican won the city in a presidential contest was 1924, won by Calvin Coolidge\" (text)  \n\"Historic milestone: in 2012, Barack Obama became the first presidential candidate to exceed 80% of the citywide vote and won all five boroughs\" (text)  \n\"a stylized map of a city skyline with five simplified borough shapes arranged together\" (figure)  \n\"a cartoon portrait suggestion of a man in vintage attire representing a past presidential figure standing beside a simple city outline\" (figure)  \n\"a stylized portrait suggestion of a contemporary man in a suit celebrating a broad citywide victory with five small emblematic borough markers\" (figure)  \n\"a simple illustration of a neighborhood scene with symbolic elements for housing, a school, and a factory to represent affordable housing, education, and economic development\" (figure) The overall style of the image is clear, illustrative, and informational with minimalistic, label-focused text.",
+    "infographic_id": 554,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 11,
+    "keywords_total": 11,
+    "context": "The Democratic Party holds the majority of public offices. As of November 2008, 67% of registered voters in the city are Democrats. New York City has not been carried by a Republican in a statewide or presidential election since President Calvin Coolidge won the five boroughs in 1924. In 2012, Democrat Barack Obama became the first presidential candidate of any party to receive more than 80% of the overall vote in New York City, sweeping all five boroughs. Party platforms center on affordable housing, education, and economic development, and labor politics are of importance in the city.",
+    "qa_count": 10,
+    "ids": [
+      "56d00d6d234ae51400d9c2e4",
+      "56d00d6d234ae51400d9c2e5",
+      "56d00d6d234ae51400d9c2e6",
+      "56d00d6d234ae51400d9c2e7",
+      "56d00d6d234ae51400d9c2e8",
+      "56d120c117492d1400aaba0d",
+      "56d120c117492d1400aaba0e",
+      "56d120c117492d1400aaba0f",
+      "56d120c117492d1400aaba10",
+      "56d120c117492d1400aaba11"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City biomedical research overview\" (text) focused on \"major life sciences institutions and workforce figures\" (text). At the top, a succinct header sets the topic and highlights the most notable historical and workforce numbers, with supporting illustrations placed near related text. In the middle, institutional names are grouped with an illustrative campus scene; below, workforce and laureate figures sit adjacent to symbolic figures to support the numeric facts.\n\n\"New York City biomedical research overview\" (text)\n\"major life sciences institutions and workforce figures\" (text)\n\"Major biomedical institutions grouped together near an illustrative campus scene\" (text)\n\"127 Nobel laureates had roots in local institutions as of 2004\" (text)\n\"43,523 licensed physicians were practicing in New York City as of 2012\" (text)\n\"Roosevelt Island noted as the site of the Cornell University and Technion venture\" (text)\n\"a stylized cluster of academic buildings and a small research lab scene\" (figure)\n\"a cartoon scientist silhouette with a stethoscope standing near stylized hospital buildings\" (figure)\n\"a stylized island scene with a small campus building to indicate location\" (figure)\n\nThe overall style of the image is clean, illustrative, and informational.",
+    "infographic_id": 555,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 5,
+    "keywords_total": 5,
+    "context": "Much of the scientific research in the city is done in medicine and the life sciences. New York City has the most post-graduate life sciences degrees awarded annually in the United States, with 127 Nobel laureates having roots in local institutions as of 2004; while in 2012, 43,523 licensed physicians were practicing in New York City. Major biomedical research institutions include Memorial Sloan–Kettering Cancer Center, Rockefeller University, SUNY Downstate Medical Center, Albert Einstein College of Medicine, Mount Sinai School of Medicine, and Weill Cornell Medical College, being joined by the Cornell University/Technion-Israel Institute of Technology venture on Roosevelt Island.",
+    "qa_count": 3,
+    "ids": [
+      "56d101b117492d1400aab712",
+      "56d101b117492d1400aab713",
+      "56d101b117492d1400aab714"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"HHC Annual Service Summary\" (text) focused on \"citywide patient volumes and share of care\" (text). At the top is a concise title and summary statement, the middle pairs numeric highlights with illustrative figures, and the bottom presents share-of-care phrases adjacent to supportive icons. \n\n\"Annual HHC admissions are about 225,000 people\" (text)\n\"Annual HHC emergency room visits are about one million people\" (text)\n\"Annual HHC clinic visits are about five million people\" (text)\n\"HHC treats about one-fifth of general hospital discharges\" (text)\n\"HHC treats more than one third of emergency room and hospital-based clinic visits\" (text)\n\"a stylized cluster of hospital building icons with a patient entering\" (figure)\n\"a cartoon emergency room scene showing staff and a waiting area\" (figure)\n\"a stylized clinic hallway with multiple patient figures\" (figure)\n\nThe overall style of the image is clean, infographic-focused, and illustrative.",
+    "infographic_id": 556,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 7,
+    "keywords_total": 7,
+    "context": "Each year HHC's facilities provide about 225,000 admissions, one million emergency room visits and five million clinic visits to New Yorkers. HHC facilities treat nearly one-fifth of all general hospital discharges and more than one third of emergency room and hospital-based clinic visits in New York City.",
+    "qa_count": 5,
+    "ids": [
+      "56d104d117492d1400aab73e",
+      "56d104d117492d1400aab73f",
+      "56d104d117492d1400aab740",
+      "56d104d117492d1400aab741",
+      "56d104d117492d1400aab742"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Explanations for the city's crime decline\" (text) focused on \"theories linking pollution, policing, drugs, demographics, and climate to falling urban crime\" (text). At the top a concise header introduces competing explanations; near the middle paired visuals illustrate environmental and social theories; near the bottom a summary phrase ties key causes to observed crime decline.  \n\"Explanations remain contested among sociologists and criminologists\" (text)  \n\"a stylized city street scene showing traffic and smog to represent lead pollution exposure\" (figure)  \n\"Lead pollution from automobile exhaust has been theorized to lower intelligence and increase aggression\" (text)  \n\"a cartoon of a small cluster of people with visible briefcases and newcomers to represent immigration and demographic change\" (figure)  \n\"a stylized depiction of a syringe-shaped symbol crossed out to represent the decline of the crack epidemic\" (figure)  \n\"New policing tactics like CompStat and broken windows theory are cited alongside demographic and climate changes\" (text)  \n\"a simplified scene of a rain-shaded city skyline to suggest a wetter climate correlated with fewer murders\" (figure)  \nThe overall style of the image is clear, informative, and illustrative with clean labels and supportive cartoon-style figures.",
+    "infographic_id": 557,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 2,
+    "keywords_total": 2,
+    "context": "Sociologists and criminologists have not reached consensus on the explanation for the dramatic decrease in the city's crime rate. Some attribute the phenomenon to new tactics used by the NYPD, including its use of CompStat and the broken windows theory. Others cite the end of the crack epidemic and demographic changes, including from immigration. Another theory is that widespread exposure to lead pollution from automobile exhaust, which can lower intelligence and increase aggression levels, incited the initial crime wave in the mid-20th century, most acutely affecting heavily trafficked cities like New York. A strong correlation was found demonstrating that violent crime rates in New York and other big cities began to fall after lead was removed from American gasoline in the 1970s. Another theory cited to explain New York City's falling homicide rate is the inverse correlation between the number of murders and the increasingly wetter climate in the city.",
+    "qa_count": 2,
+    "ids": [
+      "56d106be17492d1400aab774",
+      "56d106be17492d1400aab775"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York described as the cultural capital of the world\" (text) focused on \"who and where made the description\" (text). At the top a concise header names the claim and its sources, near illustrative figures in the middle show the types of sources, and at the bottom a quoted highlight and author attribution appear adjacent to supporting figures.\n\n\"New York has been described as the cultural capital of the world by diplomatic consulates and local institutions\" (text)\n\"Baruch College is listed as a local higher education institution making the description\" (text)\n\"The consulates of Iceland and Latvia are cited as diplomatic sources for the description\" (text)\n\"A book titled New York, culture capital of the world, 1940–1965 is showcased in the National Library of Australia\" (text)\n\"Tom Wolfe is credited for the comment that culture seems to be in the air like part of the weather\" (text)\n\"a stylized open book on a library shelf without words\" (figure)\n\"a cartoon building resembling a college facade without text\" (figure)\n\"a silhouette of two embassy-like flags to represent consular sources\" (figure)\n\"a small portrait figure speaking with an empty speech bubble to represent the quoted author\" (figure)\nThe overall style of the image is clean, informational, and illustrative with clear spatial grouping of text and figures.",
+    "infographic_id": 558,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "New York City has been described as the cultural capital of the world by the diplomatic consulates of Iceland and Latvia and by New York's Baruch College. A book containing a series of essays titled New York, culture capital of the world, 1940–1965 has also been published as showcased by the National Library of Australia. In describing New York, author Tom Wolfe said, \"Culture just seems to be in the air, like part of the weather.\"",
+    "qa_count": 4,
+    "ids": [
+      "56d1089117492d1400aab7ac",
+      "56d1089117492d1400aab7ad",
+      "56d1089117492d1400aab7ae",
+      "56d1089117492d1400aab7af"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Lincoln Center and Related New York Arts Sites\" (text) focused on \"locations and neighborhood connections of major performing arts institutions\" (text). At the top there is a compact title and topic, near which a brief locator phrase appears; in the middle, illustrative figures show each site with neighboring labels; near the bottom a short summary ties the institutions to nearby neighborhoods and parks.  \n\"Lincoln Center anchors Lincoln Square on the Upper West Side of Manhattan and houses major performing arts organizations\" (text)  \n\"The Lee Strasberg Theatre and Film Institute is located in Union Square, adjacent to separate New York arts clusters\" (text)  \n\"The Tisch School of the Arts is based at New York University, highlighted near downtown campus areas\" (text)  \n\"Central Park hosts free performances presented by the summer stage program, noted as public park events\" (text)  \n\"a stylized map fragment showing a complex of theaters and concert halls arranged as a campus\" (figure)  \n\"a cartoon of a small urban plaza with a marquee labeled as a separate theater district\" (figure)  \n\"a stylized campus illustration with an academic building and a labeled school entrance\" (figure)  \n\"a silhouette of a park stage with a small audience gathered on grass\" (figure) The overall style of the image is clean, illustrative, and informative.",
+    "infographic_id": 559,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 11,
+    "keywords_total": 11,
+    "context": "Lincoln Center for the Performing Arts, anchoring Lincoln Square on the Upper West Side of Manhattan, is home to numerous influential arts organizations, including the Metropolitan Opera, New York City Opera, New York Philharmonic, and New York City Ballet, as well as the Vivian Beaumont Theater, the Juilliard School, Jazz at Lincoln Center, and Alice Tully Hall. The Lee Strasberg Theatre and Film Institute is in Union Square, and Tisch School of the Arts is based at New York University, while Central Park SummerStage presents performances of free plays and music in Central Park.",
+    "qa_count": 5,
+    "ids": [
+      "56d10b9a17492d1400aab7f8",
+      "56d10b9a17492d1400aab7f9",
+      "56d10b9a17492d1400aab7fa",
+      "56d10b9a17492d1400aab7fb",
+      "56d10b9a17492d1400aab7fc"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Museum Mile on Fifth Avenue\" (text) focused on \"location and milestones of a famous cultural stretch in Manhattan\" (text). At the top is a concise header and below it a short location summary, with a timeline area in the middle showing key construction and opening years, supported by illustrations, and a festival note toward the bottom. \n\"Title: Museum Mile on Fifth Avenue\" (text)\n\"Overview near top: a section of Fifth Avenue running from 82nd to 105th streets on the Upper East Side of Manhattan\" (text)\n\"Timeline area adjacent to middle: notable museum milestones including an earlier landmark built in 1959 and a new museum opening in 2012\" (text)\n\"Festival and collaboration note below middle: museums collaborate annually for a June Museum Mile Festival to promote visitation\" (text)\n\"a stylized row of simple museum building icons suggesting a dense cultural corridor\" (figure)\n\"a cartoon of a map slice showing a vertical avenue with labeled street markers and a highlighted three‑block extension\" (figure)\n\"a stylized illustration of two museum entrances, one representing an earlier landmark and one representing a recent new opening\" (figure)\nThe overall style of the image is clean, illustrative infographic with clear typographic hierarchy and simple cartoon-like figures.",
+    "infographic_id": 560,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "New York City is home to hundreds of cultural institutions and historic sites, many of which are internationally known. Museum Mile is the name for a section of Fifth Avenue running from 82nd to 105th streets on the Upper East Side of Manhattan, in an area sometimes called Upper Carnegie Hill. The Mile, which contains one of the densest displays of culture in the world, is actually three blocks longer than one mile (1.6 km). Ten museums occupy the length of this section of Fifth Avenue. The tenth museum, the Museum for African Art, joined the ensemble in 2009, however its Museum at 110th Street, the first new museum constructed on the Mile since the Guggenheim in 1959, opened in late 2012. In addition to other programming, the museums collaborate for the annual Museum Mile Festival, held each year in June, to promote the museums and increase visitation. Many of the world's most lucrative art auctions are held in New York City.",
+    "qa_count": 5,
+    "ids": [
+      "56d10c1f17492d1400aab806",
+      "56d10c1f17492d1400aab807",
+      "56d10c1f17492d1400aab808",
+      "56d10c1f17492d1400aab809",
+      "56d10c1f17492d1400aab80a"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York regional speech overview\" (text) focused on \"the New York dialect and its alternate names\" (text). At the top is a concise header giving the dialect identity and alternate names, near a supporting illustration that evokes speech in the region. In the middle is a brief description of the classic speaker community adjacent to an illustration showing diverse arrival of new speakers, and below is a short note about recent change and reduced prevalence with a related figure.\n\n\"New York regional speech overview\" (text)\n\"the New York dialect and its alternate names\" (text)\n\"Also known as Brooklynese or New Yorkese for the region\" (text)\n\"Classic form centered on middle and working-class people of European descent\" (text)\n\"The influx of non-European immigrants has changed the dialect and reduced traditional prevalence\" (text)\n\"a stylized illustration of a speech bubble cluster representing local accent identity\" (figure)\n\"a cartoon of a group symbolizing classic regional speakers in everyday settings\" (figure)\n\"a stylized illustration of diverse newcomers arriving and blending with local speech\" (figure)\n\nThe overall style of the image is clean, informative, and illustrative.",
+    "infographic_id": 561,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 1,
+    "keywords_total": 1,
+    "context": "The New York area is home to a distinctive regional speech pattern called the New York dialect, alternatively known as Brooklynese or New Yorkese. It has generally been considered one of the most recognizable accents within American English. The classic version of this dialect is centered on middle and working-class people of European descent. However, the influx of non-European immigrants in recent decades has led to changes in this distinctive dialect, and the traditional form of this speech pattern is no longer as prevalent among general New Yorkers as in the past.",
+    "qa_count": 1,
+    "ids": [
+      "56d10ccf17492d1400aab820"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York accent features and famous example\" (text) focused on \"traditional New York area non-rhotic accent and its caricatured vowel shifts\" (text). At the top is a concise summary of the accent and its media example, near which an explanatory caption and an illustrative character portrait appear, and below are examples of affected words adjacent to a panel showing stereotyped pronunciations, with a concluding credit near the bottom naming the sitcom and actor.\n\n\"Traditional New York accent is non-rhotic and shows the low-back chain shift, producing tensed and raised vowels in words like talk, law, and coffee\" (text)\n\"Older extreme variants diphthongize vowels so girl sounds like goil and oil sounds like erl, producing caricatures such as Joizey and Toidy-Toid Street\" (text)\n\"'New Yawk' is the common transliteration used to represent the city name under this accent\" (text)\n\"Notable media example: the character appeared in the sitcom All in the Family, portrayed by Carroll O'Connor\" (text)\n\n\"a stylized cartoon bust of a speaking character with accent-mark lines radiating from the mouth to indicate distinctive vowel sounds\" (figure)\n\"a simplified illustrative strip showing paired word bubbles with standard pronunciation on the left and caricatured variant on the right, without letters or numerals\" (figure)\n\"a silhouette of a television set with a speech bubble implying a famous sitcom scene, placed below the character panel\" (figure)\n\"a stylized silhouette portrait of an actor in a neutral pose positioned near the sitcom silhouette as a casting credit\" (figure)\n\nThe overall style of the image is clear, educational, and schematic with illustrated icons and concise labels.",
+    "infographic_id": 562,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "The traditional New York area accent is characterized as non-rhotic, so that the sound [ɹ] does not appear at the end of a syllable or immediately before a consonant; hence the pronunciation of the city name as \"New Yawk.\" There is no [ɹ] in words like park [pɑək] or [pɒək] (with vowel backed and diphthongized due to the low-back chain shift), butter [bʌɾə], or here [hiə]. In another feature called the low back chain shift, the [ɔ] vowel sound of words like talk, law, cross, chocolate, and coffee and the often homophonous [ɔr] in core and more are tensed and usually raised more than in General American. In the most old-fashioned and extreme versions of the New York dialect, the vowel sounds of words like \"girl\" and of words like \"oil\" became a diphthong [ɜɪ]. This would often be misperceived by speakers of other accents as a reversal of the er and oy sounds, so that girl is pronounced \"goil\" and oil is pronounced \"erl\"; this leads to the caricature of New Yorkers saying things like \"Joizey\" (Jersey), \"Toidy-Toid Street\" (33rd St.) and \"terlet\" (toilet). The character Archie Bunker from the 1970s sitcom All in the Family (played by Carroll O'Connor) was a notable example of having used this pattern of speech, which continues to fade in its overall presence.",
+    "qa_count": 3,
+    "ids": [
+      "56d10d4e17492d1400aab828",
+      "56d10d4e17492d1400aab829",
+      "56d10d4e17492d1400aab82a"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York area professional soccer overview\" (text) focused on \"where local teams play and historic highlights\" (text). At the top there is a clear title and topic, near the top-left a concise team and stadium summary, and below it middle figures show team locations and a historic player highlight, with a bottom caption identifying a collegiate stadium site. \n\"New York City FC is the Major League Soccer franchise that plays home games at Yankee Stadium\" (text)\n\"The New York Red Bulls are based in Harrison, New Jersey and play at their nearby arena\" (text)\n\"The New version of the New York Cosmos began play in the second division and is known for its historic association with Pelé\" (text)\n\"James M. Shuart Stadium is located on the campus of Hofstra University just outside the city limits\" (text)\n\"a stylized map showing three local stadium markers with simple stadium icons placed near a stylized city outline\" (figure)\n\"a cartoon stadium facade labeled simply by placement near a city stadium text block\" (figure)\n\"a stylized silhouette of a famous soccer player in a classic pose adjacent to the Cosmos text\" (figure)\nThe overall style of the image is clean, illustrative, and informational.",
+    "infographic_id": 563,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 9,
+    "keywords_total": 9,
+    "context": "In soccer, New York City is represented by New York City FC of Major League Soccer, who play their home games at Yankee Stadium. The New York Red Bulls play their home games at Red Bull Arena in nearby Harrison, New Jersey. Historically, the city is known for the New York Cosmos, the highly successful former professional soccer team which was the American home of Pelé, one of the world's most famous soccer players. A new version of the New York Cosmos was formed in 2010, and began play in the second division North American Soccer League in 2013. The Cosmos play their home games at James M. Shuart Stadium on the campus of Hofstra University, just outside the New York City limits in Hempstead, New York.",
+    "qa_count": 5,
+    "ids": [
+      "56d10f6117492d1400aab86c",
+      "56d10f6117492d1400aab86d",
+      "56d10f6117492d1400aab86e",
+      "56d10f6117492d1400aab86f",
+      "56d10f6117492d1400aab870"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City Mass Transit Snapshot\" (text) focused on \"New York City share of United States mass transit and rail ridership\" (text). At the top a concise headline states the focus, above a central visual supporting the key fraction, and below a short supporting note connects overall mass transit use to the city.\n\n\"New York City mass transit operates largely twenty-four hours a day and serves a major portion of national ridership\" (text)\n\"Two-thirds of United States rail riders live in the New York City Metropolitan Area\" (text)\n\"One in every three mass transit users in the United States is from New York City\" (text)\n\"A compact explanatory note placed below the main visual connecting 24‑hour operation to high ridership\" (text)\n\n\"a stylized map-like illustration suggesting a dense metropolitan area with many transit lines and clusters of commuters\" (figure)\n\"a cartoon scene of a subway platform with diverse silhouettes boarding trains to imply continuous, round‑the‑clock service\" (figure)\n\"a symbolic grouping of rail rider silhouettes clustered near the metropolitan area to illustrate the concentration of rail riders\" (figure)\n\nThe overall style of the image is clean, infographic-focused, illustrative, and data-supportive.",
+    "infographic_id": 564,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 2,
+    "keywords_total": 2,
+    "context": "Mass transit in New York City, most of which runs 24 hours a day, accounts for one in every three users of mass transit in the United States, and two-thirds of the nation's rail riders live in the New York City Metropolitan Area.",
+    "qa_count": 1,
+    "ids": [
+      "56d1109d17492d1400aab894"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City Commuter Rail Overview\" (text) focused on \"the commuter and intercity rail connections serving New York City\" (text). At the top, a concise header summarizes the network and key figures, with supporting illustrative panels below and an intercity panel near the bottom. \"New York City's commuter rail network is the largest in North America, connecting the city to surrounding suburbs\" (text)\n\"System summary near the top: more than 250 stations and 20 rail lines converge at central terminals\" (text)\n\"Local connection panel adjacent to the middle: Long Island Rail Road, Metro-North Railroad, and New Jersey Transit link into city terminals\" (text)\n\"Airport link panel below that: an elevated AirTrain connects JFK International Airport to the subway and Long Island Rail Road, and a planned people mover is proposed near Grand Central Parkway for LaGuardia\" (text)\n\"Intercity rail note near the bottom: Amtrak's busiest station is Pennsylvania Station on the West Side of Manhattan, providing Northeast Corridor and long‑distance connections\" (text)\n\"a stylized map vignette showing suburban rail lines converging at two major terminals\" (figure)\n\"a cartoon elevated people mover with a stylized airport terminal to imply an airport connection\" (figure)\n\"a silhouette of a large terminal building adjacent to a skyline element to indicate Pennsylvania Station as the busiest intercity hub\" (figure)\n\"a simplified train icon scene suggesting long‑distance travel along a coastal corridor\" (figure) The overall style of the image is clean, illustrative, and informative with clear hierarchical typography and simple cartoonish figures.",
+    "infographic_id": 565,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "New York City's commuter rail network is the largest in North America. The rail network, connecting New York City to its suburbs, consists of the Long Island Rail Road, Metro-North Railroad, and New Jersey Transit. The combined systems converge at Grand Central Terminal and Pennsylvania Station and contain more than 250 stations and 20 rail lines. In Queens, the elevated AirTrain people mover system connects JFK International Airport to the New York City Subway and the Long Island Rail Road; a separate AirTrain system is planned alongside the Grand Central Parkway to connect LaGuardia Airport to these transit systems. For intercity rail, New York City is served by Amtrak, whose busiest station by a significant margin is Pennsylvania Station on the West Side of Manhattan, from which Amtrak provides connections to Boston, Philadelphia, and Washington, D.C. along the Northeast Corridor, as well as long-distance train service to other North American cities.",
+    "qa_count": 5,
+    "ids": [
+      "56d115a317492d1400aab8d4",
+      "56d115a317492d1400aab8d5",
+      "56d115a317492d1400aab8d6",
+      "56d115a317492d1400aab8d7",
+      "56d115a317492d1400aab8d8"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York area 24-hour transit overview\" (text) focused on \"quick facts about 24-hour rapid transit systems mentioned in the context\" (text). At the top is a concise title and topic, near that a single summary line states the New York count and highlights examples, while the middle contains illustrative figures for each system and the bottom includes a labeled agency name and an overseas example. \n\"New York area 24-hour transit overview\" (text)\n\"quick facts about 24-hour rapid transit systems mentioned in the context\" (text)\n\"three 24-hour systems in New York, including a local island rail line and a cross-harbor regional link\" (text)\n\"Port Authority Trans-Hudson spelled out as the full agency name adjacent to its illustrative symbol\" (text)\n\"PATCO Speedline noted as the 24-hour system serving the Philadelphia corridor\" (text)\n\"Copenhagen Metro shown as the 24-hour system located outside the United States\" (text)\n\"a cartoon map-like cluster showing a local island rail line operating nonstop\" (figure)\n\"a stylized commuter train scene representing the regional line linking midtown and lower city to nearby cities\" (figure)\n\"a silhouette of a regional rapid transit train labeled as serving a major northeastern metropolitan corridor\" (figure)\n\"a simple illustrative metro train to represent the international system outside the country\" (figure)\nThe overall style of the image is clean, informative, and schematic.",
+    "infographic_id": 566,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 9,
+    "keywords_total": 9,
+    "context": "The Staten Island Railway rapid transit system solely serves Staten Island, operating 24 hours a day. The Port Authority Trans-Hudson (PATH train) links Midtown and Lower Manhattan to northeastern New Jersey, primarily Hoboken, Jersey City, and Newark. Like the New York City Subway, the PATH operates 24 hours a day; meaning three of the six rapid transit systems in the world which operate on 24-hour schedules are wholly or partly in New York (the others are a portion of the Chicago 'L', the PATCO Speedline serving Philadelphia, and the Copenhagen Metro).",
+    "qa_count": 4,
+    "ids": [
+      "56d1170417492d1400aab8fc",
+      "56d1170417492d1400aab8fd",
+      "56d1170417492d1400aab8fe",
+      "56d1170417492d1400aab8ff"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Major heavy-rail transit projects under construction\" (text) focused on \"ongoing heavy-rail projects in New York City\" (text). At the top is a clear headline and a short introductory line, the middle shows three illustrative project panels with matching labels near each illustration, and the bottom provides a compact summary linking the three named projects.\n\n\"Major heavy-rail transit projects under construction\" (text)\n\"ongoing heavy-rail projects in New York City\" (text)\n\"Three projects highlighted together: East Side Access, 7 Subway Extension, and the Second Avenue Subway\" (text)\n\"a stylized underground rail tunnel being excavated, with a train silhouette nearby\" (figure)\n\"a stylized commuter rail terminal with an arched roof and tracks approaching\" (figure)\n\"a stylized elevated subway platform under construction with scaffolding\" (figure)\n\"Summary label below the illustrations noting these projects are currently under construction\" (text) The overall style of the image is clear, illustrative, and informational.",
+    "infographic_id": 567,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 3,
+    "keywords_total": 3,
+    "context": "Multibillion US$ heavy-rail transit projects under construction in New York City include the Second Avenue Subway, the East Side Access project, and the 7 Subway Extension.",
+    "qa_count": 1,
+    "ids": [
+      "56d1174417492d1400aab904"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"City Transportation Snapshot\" (text) focused on \"major transit options and a notable aerial tramway\" (text). At the top, a concise headline introduces the city's transportation mix, with a left-aligned summary and a right-aligned focal note about the tramway. Near the middle, an illustrated block highlights the scale of street taxis, and below that an illustration shows the tramway route between islands. At the bottom a short note ties competing networks into the overview.\n\n\"City Transportation Snapshot\" (text)\n\"Overview of major transit options and a notable aerial tramway\" (text)\n\"More than 12,000 yellow taxicabs operate across the city, indicating large street-hail capacity\" (text)\n\"Aerial tramway that starts on Roosevelt Island and terminates on Manhattan Island\" (text)\n\"a cartoon cluster of many stylized taxi icons arranged to suggest large numbers\" (figure)\n\"a stylized map illustration showing a tram car traveling between a small island and a larger island\" (figure)\n\"a cartoon grouping of simple vehicle icons representing competing startup transportation network companies\" (figure)\n\nThe overall style of the image is clean, infographic-oriented, illustrative, and informational.",
+    "infographic_id": 568,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 4,
+    "keywords_total": 4,
+    "context": "Other features of the city's transportation infrastructure encompass more than 12,000 yellow taxicabs; various competing startup transportation network companies; and an aerial tramway that transports commuters between Roosevelt Island and Manhattan Island.",
+    "qa_count": 2,
+    "ids": [
+      "56d1191d17492d1400aab932",
+      "56d1191d17492d1400aab933"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Streets as Symbols of New York Industries\" (text) focused on \"how select Manhattan streets stand for national industries\" (text). At the top a concise header introduces the concept, in the middle three paired street callouts explain the industry metonyms adjacent to supporting illustrations, and at the bottom a brief note links the grid to the city's development.  \n\"Streets as Symbols of New York Industries\" (text)  \n\"how select Manhattan streets stand for national industries\" (text)  \n\"a cartoon street with a classic theater marquee nearby\" (figure)  \n\"Broadway represents the theater industry\" (text)  \n\"a stylized city street with a group of tall buildings and a bank-like doorway\" (figure)  \n\"Wall Street represents the finance industry\" (text)  \n\"a silhouetted avenue scene with advertising posters on building facades\" (figure)  \n\"Madison Avenue represents the advertising industry\" (text)  \n\"a stylized fashion-focused avenue scene with a simple clothing display\" (figure)  \n\"Seventh Avenue represents the fashion industry\" (text)  \n\"a simple diagrammatic street grid fragment\" (figure)  \n\"Manhattan's street grid shaped the city's physical development\" (text) The overall style of the image is clean, illustrative, and informational.",
+    "infographic_id": 569,
+    "figure_count": 5,
+    "keyword_coverage": true,
+    "keywords_found": 5,
+    "keywords_total": 5,
+    "context": "Despite New York's heavy reliance on its vast public transit system, streets are a defining feature of the city. Manhattan's street grid plan greatly influenced the city's physical development. Several of the city's streets and avenues, like Broadway, Wall Street, Madison Avenue, and Seventh Avenue are also used as metonyms for national industries there: the theater, finance, advertising, and fashion organizations, respectively.",
+    "qa_count": 4,
+    "ids": [
+      "56d1196917492d1400aab93f",
+      "56d1196917492d1400aab940",
+      "56d1196917492d1400aab941",
+      "56d1196917492d1400aab942"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City highway links and commuter impacts\" (text) focused on \"regional connections and common commuter delays\" (text). At the top is a concise header describing the main idea, near a simple illustrative map figure, and the middle shows commuters and typical congestion with nearby labels, while the bottom summarizes linked regions and a common time when jams occur. \n\"New York City expressways and parkways link boroughs and nearby regions\" (text)\n\"a stylized map showing roadway links to adjacent regions without labels\" (figure)\n\"Motorists from outer boroughs and suburbs are commonly stranded for hours in traffic\" (text)\n\"a cartoon of a highway with stalled cars and people waiting\" (figure)\n\"Linked regions include northern New Jersey, Westchester County, Long Island, and southwestern Connecticut\" (text)\n\"a silhouette of a bridge and a tunnel indicating connection across water\" (figure)\n\"Traffic jams are a daily occurrence, particularly during rush hour\" (text)\nThe overall style of the image is clean, illustrative, and informative.",
+    "infographic_id": 570,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 4,
+    "keywords_total": 4,
+    "context": "New York City also has an extensive web of expressways and parkways, which link the city's boroughs to each other as well as to northern New Jersey, Westchester County, Long Island, and southwestern Connecticut through various bridges and tunnels. Because these highways serve millions of outer borough and suburban residents who commute into Manhattan, it is quite common for motorists to be stranded for hours in traffic jams that are a daily occurrence, particularly during rush hour.",
+    "qa_count": 3,
+    "ids": [
+      "56d119ec17492d1400aab947",
+      "56d119ec17492d1400aab948",
+      "56d119ec17492d1400aab949"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City borough islands and water connections\" (text) focused on \"which landforms each borough occupies and how water separates them\" (text). At the top, a concise header explains the city's island and mainland arrangement and why bridges and tunnels developed. \"New York City sits on one of the world's largest natural harbors, so boroughs are separated by water and connected by many bridges and tunnels\" (text)\n\"a stylized map showing an island labeled 'Long Island' and its west end adjacent to a borough marker\" (figure)\n\"Brooklyn occupies Long Island's land near the west end, adjacent to Queens on the same island\" (text)\n\"Queens occupies the west end of Long Island, adjacent to Brooklyn on the same landmass\" (text)\n\"a cartoon depiction of two small islands each labeled as matching borough names, with a silhouette of Staten Island aligned to one of them\" (figure)\n\"Staten Island borough primarily coterminous with an island of the same name\" (text)\n\"an illustrative scene showing a mainland tip with a borough marker and stylized connecting bridges and tunnels pointing toward nearby islands\" (figure)\nAt the bottom, a short note summarizes the mainland borough placement. The overall style of the image is clean, illustrative, and didactic.",
+    "infographic_id": 571,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 5,
+    "keywords_total": 5,
+    "context": "New York City is located on one of the world's largest natural harbors, and the boroughs of Manhattan and Staten Island are (primarily) coterminous with islands of the same names, while Queens and Brooklyn are located at the west end of the larger Long Island, and The Bronx is located at the southern tip of New York State's mainland. This situation of boroughs separated by water led to the development of an extensive infrastructure of bridges and tunnels. Nearly all of the city's major bridges and tunnels are notable, and several have broken or set records.",
+    "qa_count": 3,
+    "ids": [
+      "56d11a7617492d1400aab96f",
+      "56d11a7617492d1400aab970",
+      "56d11a7617492d1400aab971"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Bridge Architecture Overview\" (text) focused on \"bridge styles and construction types\" (text). At the top is a concise header and a short lead; near the middle are illustrative figures paired with labels; below are summary labels linking specific bridges to their styles and construction type. \n\"Bridge Architecture Overview\" (text)\n\"bridge styles and construction types\" (text)\n\"The Queensboro Bridge used cantilever construction\" (text)\n\"Manhattan Bridge, Throgs Neck Bridge, Triborough Bridge, and Verrazano-Narrows Bridge reflect Structural Expressionism\" (text)\n\"a stylized cartoon of a long cantilever bridge span viewed in profile above water\" (figure)\n\"a cartoon cluster showing four different expressive bridge silhouettes side by side\" (figure)\n\"a stylized silhouette of a single bridge with an arrow pointing to a cantilevered arm detail\" (figure)\nThe overall style of the image is clean, educational, and illustrative.",
+    "infographic_id": 572,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 3,
+    "keywords_total": 3,
+    "context": "The Queensboro Bridge is an important piece of cantilever architecture. The Manhattan Bridge, Throgs Neck Bridge, Triborough Bridge, and Verrazano-Narrows Bridge are all examples of Structural Expressionism.",
+    "qa_count": 2,
+    "ids": [
+      "56d11b4a17492d1400aab993",
+      "56d11b4a17492d1400aab994"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City taxi clean vehicle adoption\" (text) focused on \"urban transit and fleet cleaner vehicles\" (text). At the top there is a concise statement summarizing the city's environmental focus, and the middle highlights the two key 2010 fleet facts adjacent to supporting illustrations, while the bottom reiterates transit context near a comparative scene.  \n\"New York City focused on reducing environmental impact and carbon footprint\" (text)  \n\"By 2010 the city had 3,715 hybrid taxis and clean diesel vehicles in service\" (text)  \n\"These vehicles represented 28% of the city's taxi fleet in service in 2010\" (text)  \n\"Mass transit use in New York City is the highest in the United States\" (text)  \n\"a cartoon scene showing a line of stylized taxis clustered near a city curb with eco symbols and no letters\" (figure)  \n\"a stylized group of transit riders boarding a subway train silhouette without any text\" (figure)  \n\"a cartoon comparison scene showing a dense urban street with many small transit icons and fewer private car silhouettes\" (figure)  \nThe overall style of the image is clean, illustrative, and informational.",
+    "infographic_id": 573,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 3,
+    "keywords_total": 3,
+    "context": "New York City has focused on reducing its environmental impact and carbon footprint. Mass transit use in New York City is the highest in the United States. Also, by 2010, the city had 3,715 hybrid taxis and other clean diesel vehicles, representing around 28% of New York's taxi fleet in service, the most of any city in North America.",
+    "qa_count": 2,
+    "ids": [
+      "56d11c0717492d1400aab9ab",
+      "56d11c0717492d1400aab9ac"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"City climate leadership and green buildings\" (text) focused on \"local policy, legal action, and landmark green projects\" (text). At the top is a concise statement of the legal action and its effect, near a supporting image; below that a policy goal and linked plan are presented, adjacent to an illustrative office building image; at the bottom a civic leadership note and example project sit near a building illustration.\n\n\"Massachusetts v. Environmental Protection Agency compelled regulation of greenhouse gases\" (text)\n\"a cartoon courthouse scene showing a legal petition on climate\" (figure)\n\"Mayor committed to an 80% reduction in greenhouse gas emissions between 2014 and 2050 under a Green Buildings plan\" (text)\n\"a stylized silhouette of a mayor speaking beside an eco-plan document\" (figure)\n\"City leader in construction of energy-efficient green office buildings, highlighted by the Hearst Tower\" (text)\n\"a simplified illustrative skyline with a distinctive office tower labeled by position only\" (figure)\n\nThe overall style of the image is clean, informative, and schematic with clear typographic hierarchy and simple illustrative icons.",
+    "infographic_id": 574,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 7,
+    "keywords_total": 7,
+    "context": "The city government was a petitioner in the landmark Massachusetts v. Environmental Protection Agency Supreme Court case forcing the EPA to regulate greenhouse gases as pollutants. The city is also a leader in the construction of energy-efficient green office buildings, including the Hearst Tower among others. Mayor Bill de Blasio has committed to an 80% reduction in greenhouse gas emissions between 2014 and 2050 to reduce the city's contributions to climate change, beginning with a comprehensive \"Green Buildings\" plan.",
+    "qa_count": 3,
+    "ids": [
+      "56d11d3317492d1400aab9c3",
+      "56d11d3317492d1400aab9c4",
+      "56d11d3317492d1400aab9c5"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Newtown Creek contamination overview\" (text) focused on \"environmental damage and cleanup of an urban estuary\" (text). At the top is a brief header and a compact factual summary, in the middle are supportive illustrative figures with nearby labels, and at the bottom is a concise remediation note.\n\n\"Newtown Creek is a 3.5-mile (6-kilometer) estuary forming a borough border\" (text)\n\"Site designated for Superfund cleanup of waterway, recreation, and economic resources\" (text)\n\"a stylized map-like cartoon of an urban waterway with industrial shorelines\" (figure)\n\"a stylized illustration of a large oil slick and buried tanks to indicate spilled fossil fuel\" (figure)\n\"an illustrative scene of urban sewer outflow and polluted water entering the creek\" (figure)\n\"label adjacent to the oil illustration naming the notable accidental discharge as the Greenpoint oil spill\" (text)\n\"estimated 30 million US gallons (110,000 m3) of spilled oil depicted conceptually near the oil figure\" (text)\n\"small caption near bottom describing ongoing remediation efforts and community impact\" (text)\n\nThe overall style of the image is clear, informative, and illustrative with a clean, educational infographic aesthetic.",
+    "infographic_id": 575,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "Newtown Creek, a 3.5-mile (6-kilometer) a long estuary that forms part of the border between the boroughs of Brooklyn and Queens, has been designated a Superfund site for environmental clean-up and remediation of the waterway's recreational and economic resources for many communities. One of the most heavily used bodies of water in the Port of New York and New Jersey, it had been one of the most contaminated industrial sites in the country, containing years of discarded toxins, an estimated 30 million US gallons (110,000 m3) of spilled oil, including the Greenpoint oil spill, raw sewage from New York City's sewer system, and other accumulation.",
+    "qa_count": 3,
+    "ids": [
+      "56d11e7b17492d1400aab9d3",
+      "56d11e7b17492d1400aab9d4",
+      "56d11e7b17492d1400aab9d5"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City Government Structure Overview\" (text) focused on \"the city's mayor-council form and responsibilities\" (text). At the top is the title and a short descriptor, near it a clear label naming the government form, and below are illustrative scenes showing responsibilities with a contextual note about when this form began.\n\n\"New York City uses a mayor-council form of government responsible for many city services\" (text)\n\"Adopted this mayor-council form in 1898 at consolidation\" (text)\n\"Key city responsibilities shown below include public education, corrections, public safety, recreation, sanitation, water supply, and welfare services\" (text)\n\"Label near the title noting that the city's government is more centralized than most other U.S. cities\" (text)\n\n\"a stylized illustration of a civic building with a mayoral figure and a council table placed just below the title\" (figure)\n\"a cartoon scene of a school, a correctional facility silhouette, and a police officer grouped near the education and safety labels\" (figure)\n\"a stylized cluster showing a playground, a sanitation truck, and a water tower near the services list\" (figure)\n\nThe overall style of the image is clear, educational, and infographic-like with simple illustrative icons and clean typographic hierarchy.",
+    "infographic_id": 576,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 3,
+    "keywords_total": 3,
+    "context": "New York City has been a metropolitan municipality with a mayor-council form of government since its consolidation in 1898. The government of New York is more centralized than that of most other U.S. cities. In New York City, the city government is responsible for public education, correctional institutions, public safety, recreational facilities, sanitation, water supply, and welfare services.",
+    "qa_count": 2,
+    "ids": [
+      "56d11eb317492d1400aab9d9",
+      "56d11eb317492d1400aab9da"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Court structure across boroughs and judicial departments\" (text) focused on \"which courts sit where and which branch oversees administrative courts\" (text). At the top a concise header introduces the court system layout, and below it a middle band highlights borough-specific appellate locations adjacent to supporting illustrations, while the bottom notes the status of administrative courts and their oversight.\n\n\"Overview of the state Unified Court System and local courts, with major trial and appellate roles noted\" (text)\n\"Manhattan hosts the First Department of the Supreme Court, Appellate Division, placed near an illustrative courtroom figure\" (text)\n\"Brooklyn hosts the Second Department of the Supreme Court, Appellate Division, placed adjacent to a stylized courthouse figure\" (text)\n\"Criminal Court and Civil Court serve as the local courts in each borough, positioned below the header\" (text)\n\"a stylized map-like illustration showing two labeled borough markers with a courthouse icon near one marker and an appellate gavel icon near the other\" (figure)\n\"a cartoon courtroom interior to support the note about the First Department being in one borough\" (figure)\n\"a stylized courthouse illustration to support the note about the Second Department being in another borough\" (figure)\n\"a symbolic administrative office illustration indicating courts that are executive agencies and not part of the state court system\" (figure)\n\nThe overall style of the image is clean, schematic, and illustrative.",
+    "infographic_id": 577,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 3,
+    "keywords_total": 3,
+    "context": "Each borough is coextensive with a judicial district of the state Unified Court System, of which the Criminal Court and the Civil Court are the local courts, while the New York Supreme Court conducts major trials and appeals. Manhattan hosts the First Department of the Supreme Court, Appellate Division while Brooklyn hosts the Second Department. There are also several extrajudicial administrative courts, which are executive agencies and not part of the state Unified Court System.",
+    "qa_count": 3,
+    "ids": [
+      "56d11faa17492d1400aab9eb",
+      "56d11faa17492d1400aab9ec",
+      "56d11faa17492d1400aab9ed"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Federal Courts and Jurisdictions in New York City\" (text) focused on \"which courts sit where and which boroughs they serve\" (text). At the top, an overview header names the two district courts and other federal courts and where their main courthouses are located. Near the middle, paired illustrations show court buildings with labels and nearby borough lists. Below, a small map-style montage connects courthouses to the boroughs they cover. \"Federal courts with main courthouses split across the city and their borough jurisdictions\" (text)\n\"a concise header listing the Southern District and the Eastern District plus two other federal courts\" (text)\n\"a location note stating the main courthouse for the Southern District of New York is on Foley Square in Manhattan near City Hall\" (text)\n\"a location note stating the main courthouse for the Eastern District of New York is in Brooklyn and that it covers Brooklyn, Queens, and Staten Island\" (text)\n\"a location note stating Foley Square is home to the US Court of International Trade and the US Court of Appeals for the Second Circuit\" (text)\n\"a stylized illustration of a courthouse labeled as Manhattan courthouse on a small plaza with a nearby city hall silhouette\" (figure)\n\"a stylized illustration of a courthouse set among brownstone-like buildings labeled as Brooklyn courthouse with three small borough icons nearby\" (figure)\n\"a simplified montage showing three borough symbols connected to the Brooklyn courthouse and two borough symbols connected to the Manhattan courthouse\" (figure)\nThe overall style of the image is clean, schematic, and illustrative.",
+    "infographic_id": 578,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "Uniquely among major American cities, New York is divided between, and is host to the main branches of, two different US district courts: the District Court for the Southern District of New York, whose main courthouse is on Foley Square near City Hall in Manhattan and whose jurisdiction includes Manhattan and the Bronx, and the District Court for the Eastern District of New York, whose main courthouse is in Brooklyn and whose jurisdiction includes Brooklyn, Queens, and Staten Island. The US Court of Appeals for the Second Circuit and US Court of International Trade are also based in New York, also on Foley Square in Manhattan.",
+    "qa_count": 5,
+    "ids": [
+      "56d1204617492d1400aab9f9",
+      "56d1204617492d1400aab9fa",
+      "56d1204617492d1400aab9fb",
+      "56d1204617492d1400aab9fc",
+      "56d1204617492d1400aab9fd"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York fundraising and fiscal flows\" (text) focused on \"political contributions and net payments to higher governments\" (text). At the top, a concise header states the political fundraising finding, with an adjacent figure illustrating zip code concentration; in the middle, a central panel shows the top ZIP code and contribution note alongside a small supportive figure; below, a fiscal balance panel lists the federal and state net outflows with an accompanying figure.\n\n\"Four of the top five ZIP codes for political contributions are in Manhattan\" (text)\n\"a stylized map inset showing clustered address markers over a downtown island shape\" (figure)\n\"Top ZIP code 10021 generated the most contributions in the 2004 presidential campaigns\" (text)\n\"a cartoon street scene suggesting an affluent neighborhood with no letters or numerals\" (figure)\n\"New York City receives 83 cents in services for every dollar sent in federal taxes, a net federal outflow of $11.4 billion annually\" (text)\n\"a symbolic scale tipping away from a city silhouette toward a larger government silhouette\" (figure)\n\"City sends $11 billion more each year to the state than it receives back\" (text)\n\"a stylized stacked-pile icon pairing a small city block with a larger state outline to indicate imbalance\" (figure)\n\nThe overall style of the image is clean, illustrative, and data-focused with simple icons and clear, concise labels.",
+    "infographic_id": 579,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "New York is the most important source of political fundraising in the United States, as four of the top five ZIP codes in the nation for political contributions are in Manhattan. The top ZIP code, 10021 on the Upper East Side, generated the most money for the 2004 presidential campaigns of George W. Bush and John Kerry. The city has a strong imbalance of payments with the national and state governments. It receives 83 cents in services for every $1 it sends to the federal government in taxes (or annually sends $11.4 billion more than it receives back). The city also sends an additional $11 billion more each year to the state of New York than it receives back.",
+    "qa_count": 5,
+    "ids": [
+      "56d1218c17492d1400aaba1d",
+      "56d1218c17492d1400aaba1e",
+      "56d1218c17492d1400aaba1f",
+      "56d1218c17492d1400aaba20",
+      "56d1218c17492d1400aaba21"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"New York City Global Partners: program renaming and global outreach\" (text) focused on \"the restructuring and renaming of the Sister City Program\" (text). At the top a concise title and topic appear, and near the middle a brief timeline phrase sits above supporting illustrations, with a bottom label linking the new name to international exchange.  \n\"New York City Global Partners is the restructured name of the sister city program\" (text)  \n\"The name change occurred in 2006 during program restructuring\" (text)  \n\"a stylized globe with interconnecting city markers to suggest global network and outreach\" (figure)  \n\"a cartoon of two silhouetted figures exchanging folded papers to suggest exchange of ideas between citizens and policymakers\" (figure)  \n\"a stylized row of simple city skylines labeled as historic sister cities placed below the timeline phrase\" (figure)  \n\"Bottom note adjacent to a globe figure: program promotes exchange of ideas and innovation between cities\" (text) The overall style of the image is clean, illustrative, and informative.",
+    "infographic_id": 580,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "In 2006, the Sister City Program of the City of New York, Inc. was restructured and renamed New York City Global Partners. New York City has expanded its international outreach via this program to a network of cities worldwide, promoting the exchange of ideas and innovation between their citizenry and policymakers, according to the city's website. New York's historic sister cities are denoted below by the year they joined New York City's partnership network.",
+    "qa_count": 2,
+    "ids": [
+      "56d121d817492d1400aaba2d",
+      "56d121d817492d1400aaba2e"
+    ],
+    "title": "New_York_City"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"To Kill a Mockingbird: publication and inspiration\" (text) focused on \"key facts about the novel and its author\" (text). At the top is the title and a brief authorship note, near the middle are publication and award details adjacent to an illustrative scene, and at the bottom is a note about the character inspirations near a supporting illustration. \n\"To Kill a Mockingbird: publication and inspiration\" (text)\n\"A novel written by Harper Lee, introduced above the timeline\" (text)\n\"First published in 1960 and widely circulated from that year\" (text)\n\"Winner of the Pulitzer Prize soon after publication, placed near award illustration\" (text)\n\"Characters inspired by her family and neighbors and an event from when she was ten\" (text)\n\"a stylized open book resting on a simple podium suggesting first publication and circulation\" (figure)\n\"a cartoon laurel wreath held above a small stage suggesting a major literary prize\" (figure)\n\"a silhouette of a residential street with simple houses suggesting the author's hometown influences\" (figure)\nThe overall style of the image is clean, illustrative, and didactic with clear, legible layout and concise labels.",
+    "infographic_id": 581,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 9,
+    "keywords_total": 9,
+    "context": "To Kill a Mockingbird is a novel by Harper Lee published in 1960. It was immediately successful, winning the Pulitzer Prize, and has become a classic of modern American literature. The plot and characters are loosely based on the author's observations of her family and neighbors, as well as on an event that occurred near her hometown in 1936, when she was 10 years old.",
+    "qa_count": 6,
+    "ids": [
+      "56ce30f5aab44d1400b88520",
+      "56ce30f5aab44d1400b88521",
+      "56ce30f5aab44d1400b88523",
+      "56d1073817492d1400aab786",
+      "56d1073817492d1400aab787",
+      "56d1073817492d1400aab788"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"To Kill a Mockingbird overview\" (text) focused on \"themes, setting, teaching, and controversies\" (text). At the top is a concise header summarizing genre and broad themes, near a supporting illustration; in the middle are teaching and regional context elements adjacent to related illustrations; and at the bottom is a note on classroom challenges placed near an illustrative scene.  \n\"To Kill a Mockingbird is presented as a Southern Gothic novel and a coming-of-age story\" (text)  \n\"Themes highlighted include racial injustice and the destruction of innocence, with attention to class, courage, compassion, and gender roles\" (text)  \n\"The novel is set in the American Deep South and is widely taught in United States schools\" (text)  \n\"Classroom use has been challenged and removal campaigns often cite the novel's use of racial epithets\" (text)  \n\"a stylized small-town main street scene suggesting historical Southern setting\" (figure)  \n\"a cartoon classroom scene with students and a book on a desk, placed near the teaching text\" (figure)  \n\"a silhouette of two figures symbolizing innocence and moral lessons, adjacent to the themes text\" (figure)  \n\"a simple illustrative notice symbolizing book challenges and debate, positioned near the controversy text\" (figure) The overall style of the image is clean, illustrative, and educational.",
+    "infographic_id": 582,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 13,
+    "keywords_total": 13,
+    "context": "As a Southern Gothic novel and a Bildungsroman, the primary themes of To Kill a Mockingbird involve racial injustice and the destruction of innocence. Scholars have noted that Lee also addresses issues of class, courage, compassion, and gender roles in the American Deep South. The book is widely taught in schools in the United States with lessons that emphasize tolerance and decry prejudice. Despite its themes, To Kill a Mockingbird has been subject to campaigns for removal from public classrooms, often challenged for its use of racial epithets.",
+    "qa_count": 5,
+    "ids": [
+      "56ce31f5aab44d1400b8854a",
+      "56ce31f5aab44d1400b8854b",
+      "56ce31f5aab44d1400b8854c",
+      "56d10cda17492d1400aab823",
+      "56d10cda17492d1400aab824"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Legacy and Adaptations of a Noted Novel\" (text) focused on \"cultural impact and adaptations\" (text). At the top, a concise header introduces the novel's varied reception and notable endorsements; near the middle, a timeline-style summary lists major adaptations and ongoing performances; below, a note highlights collected impressions and a landmark ranking by librarians. \n\"Legacy and Adaptations of a Noted Novel\" (text)\n\"cultural impact and adaptations\" (text)\n\"collected impressions compiled by Mary McDonough Murphy\" (text)\n\"adapted into an Oscar-winning film in 1962 directed by Robert Mulligan with a screenplay by Horton Foote\" (text)\n\"stage play performed annually in Harper Lee's hometown of Monroeville, Alabama since 1990\" (text)\n\"ranked ahead of the Bible by British librarians in 2006 as a must-read for adults\" (text)\n\"a stylized illustration of readers sharing impressions around a table\" (figure)\n\"a cartoon of a classic film camera pointing toward a small stage\" (figure)\n\"a silhouette of a simple stage with an audience to suggest annual performances\" (figure)\n\"a stylized pair of hands holding two books side by side to imply comparative ranking\" (figure) The overall style of the image is clean, illustrative, and informational.",
+    "infographic_id": 583,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 13,
+    "keywords_total": 13,
+    "context": "Reaction to the novel varied widely upon publication. Literary analysis of it is sparse, considering the number of copies sold and its widespread use in education. Author Mary McDonough Murphy, who collected individual impressions of To Kill a Mockingbird by several authors and public figures, calls the book, \"an astonishing phenomenon\". In 2006, British librarians ranked the book ahead of the Bible as one \"every adult should read before they die\". It was adapted into an Oscar-winning film in 1962 by director Robert Mulligan, with a screenplay by Horton Foote. Since 1990, a play based on the novel has been performed annually in Harper Lee's hometown of Monroeville, Alabama.",
+    "qa_count": 9,
+    "ids": [
+      "56ce330daab44d1400b88556",
+      "56ce330daab44d1400b88557",
+      "56ce330daab44d1400b88558",
+      "56ce330daab44d1400b88559",
+      "56ce330daab44d1400b8855a",
+      "56d114b117492d1400aab8c4",
+      "56d114b117492d1400aab8c5",
+      "56d114b117492d1400aab8c6",
+      "56d114b117492d1400aab8c7"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Harper Lee publication and later life timeline\" (text) focused on \"the publication of a second book and the author's later years\" (text). At the top a concise header summarizes the key publication facts and the timing of the author's death. \"To Kill a Mockingbird was Lee's only published book until Go Set a Watchman was released\" (text)\n\"Go Set a Watchman — published July 14, 2015 — is an earlier draft of the earlier novel\" (text)\n\"Lee continued to respond to the work's impact while refusing personal publicity since 1964\" (text)\n\"Lee died in February 2016\" (text)\n\"A stylized closed book with a small draft manuscript beside it, suggesting an earlier version\" (figure)\n\"A cartoon calendar page showing a marked date without numerals, placed near the manuscript figure\" (figure)\n\"A silhouette of an older person shown reflective and reserved, positioned below the publication visuals\" (figure)\nThe overall style of the image is clear, minimal, and documentary with illustrative, nonphotorealistic visuals.",
+    "infographic_id": 584,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 7,
+    "keywords_total": 7,
+    "context": "To Kill a Mockingbird was Lee's only published book until Go Set a Watchman, an earlier draft of To Kill a Mockingbird, was published on July 14, 2015. Lee continued to respond to her work's impact until her death in February 2016, although she had refused any personal publicity for herself or the novel since 1964.",
+    "qa_count": 5,
+    "ids": [
+      "56ce3363aab44d1400b88565",
+      "56ce3363aab44d1400b88566",
+      "56d1161117492d1400aab8de",
+      "56d1161117492d1400aab8df",
+      "56d1161117492d1400aab8e0"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Harper Lee early life and path to publication\" (text) focused on \"biography and formative steps toward publication\" (text). At the top, a concise header summarizes birth and childhood; near it a supporting illustration evokes a small Southern town. In the middle, a college and writing timeline is shown adjacent to an illustration of campus life and campus magazines. Below that, New York move, early career, and the agent-to-publisher step are summarized above an illustration of a travel and writing transition and a publishing handoff.\n\n\"Harper Lee was born in 1926 and raised in Monroeville, Alabama\" (text)\n\"She became childhood friends with Truman Capote\" (text)\n\"Attended Huntingdon College (1944–45) then University of Alabama law (1945–49) while writing for campus magazines\" (text)\n\"In 1950 she moved to New York City, worked as a reservation clerk, and later presented her manuscript to an agent that led to a publisher deal with J. B. Lippincott\" (text)\n\"a stylized small Southern town with a writer's notebook on a bench\" (figure)\n\"a cartoon college campus scene showing two student magazines labeled as campus publications\" (figure)\n\"a silhouette of a commuter with a suitcase and a notepad in a city setting\" (figure)\n\"a stylized scene of a literary agent handing a manuscript to a publishing editor\" (figure)\n\nThe overall style of the image is clean, illustrative, and informational.",
+    "infographic_id": 585,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 11,
+    "keywords_total": 11,
+    "context": "Born in 1926, Harper Lee grew up in the Southern town of Monroeville, Alabama, where she became close friends with soon-to-be famous writer Truman Capote. She attended Huntingdon College in Montgomery (1944–45), and then studied law at the University of Alabama (1945–49). While attending college, she wrote for campus literary magazines: Huntress at Huntingdon and the humor magazine Rammer Jammer at the University of Alabama. At both colleges, she wrote short stories and other works about racial injustice, a rarely mentioned topic on such campuses at the time. In 1950, Lee moved to New York City, where she worked as a reservation clerk for British Overseas Airways Corporation; there, she began writing a collection of essays and short stories about people in Monroeville. Hoping to be published, Lee presented her writing in 1957 to a literary agent recommended by Capote. An editor at J. B. Lippincott , who bought the manuscript, advised her to quit the airline and concentrate on writing. Donations from friends allowed her to write uninterrupted for a year.",
+    "qa_count": 9,
+    "ids": [
+      "56ce349aaab44d1400b8858a",
+      "56ce349aaab44d1400b8858c",
+      "56ce349aaab44d1400b8858d",
+      "56ce349aaab44d1400b8858e",
+      "56d11a1217492d1400aab953",
+      "56d11a1217492d1400aab954",
+      "56d11a1217492d1400aab955",
+      "56d11a1217492d1400aab956",
+      "56d11a1217492d1400aab957"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Editing a first draft into a classic\" (text) focused on \"the manuscript's revision and the editor who guided it\" (text). At the top is the context-setting title and topic, near a short summary line about the manuscript's initial state and later retitling, and below are labels identifying the editor and the original manuscript title adjacent to illustrative figures that support the story, while the bottom has a brief note about the editor's view of the draft.\n\n\"Editing a first draft into a classic\" (text)\n\"the manuscript was first titled Go Set a Watchman and later retitled To Kill a Mockingbird\" (text)\n\"Therese von Hohoff Torrey was the veteran editor who worked closely with the author\" (text)\n\"Tay Hohoff was the editor who first received the manuscript and guided multiple drafts\" (text)\n\"a stylized cartoon of a woman in mid career reviewing a manuscript\" (figure)\n\"a cartoon of an open manuscript with visible paragraphs to imply a draft\" (figure)\n\"a stylized cartoon of two simplified figures suggesting collaboration over pages\" (figure)\n\"a cartoon of a closed book with a label suggesting its final title without text\" (figure) The overall style of the image is clean, illustrative, and educational.",
+    "infographic_id": 586,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 7,
+    "keywords_total": 7,
+    "context": "After finishing the first draft and returning it to Lippincott, the manuscript, at that point titled \"Go Set a Watchman\", fell into the hands of Therese von Hohoff Torrey — known professionally as Tay Hohoff — a small, wiry veteran editor in her late 50s. Hohoff was impressed. “[T]he spark of the true writer flashed in every line,” she would later recount in a corporate history of Lippincott. But as Hohoff saw it, the manuscript was by no means fit for publication. It was, as she described it, “more a series of anecdotes than a fully conceived novel.” During the next couple of years, she led Lee from one draft to the next until the book finally achieved its finished form and was retitled To Kill a Mockingbird.",
+    "qa_count": 3,
+    "ids": [
+      "56ce355eaab44d1400b8859e",
+      "56ce355eaab44d1400b8859f",
+      "56d11b1c17492d1400aab991"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Harper Lee family and influences\" (text) focused on \"family background that informed a key character\" (text). Near the top a brief header introduces the personal losses and family profession that shaped Lee's work. \n\"Harper Lee lost her mother six years before meeting an editor at a publishing office\" (text)\n\"Her mother suffered from mental illness, which affected Lee's life\" (text)\n\"Her father was a lawyer and served as the model for the fictional Atticus\" (text)\n\"Her father died two years after the publication of the novel\" (text)\nBelow the header, a figure shows a stylized side profile of a contemplative woman next to a small office desk to suggest a personal meeting setting (figure)\nAdjacent to the middle, a figure shows a stylized older woman with an ambiguous expression to represent prolonged illness without medical labels (figure)\nNear the bottom, a figure shows a stylized silhouette of a man in a suit holding a legal brief to symbolize the father's profession and his influence on a fictional lawyer character (figure)\nThe overall style of the image is clear, informative, and gently illustrative.",
+    "infographic_id": 587,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 5,
+    "keywords_total": 5,
+    "context": "Lee had lost her mother, who suffered from mental illness, six years before she met Hohoff at Lippincott’s offices. Her father, a lawyer on whom Atticus was modeled, would die two years after the publication of To Kill a Mockingbird.",
+    "qa_count": 3,
+    "ids": [
+      "56ce35b2aab44d1400b885b4",
+      "56ce35b2aab44d1400b885b5",
+      "56d11b8d17492d1400aab997"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"To Kill a Mockingbird publication and reception\" (text) focused on \"writing time, publication date, and early broad exposure\" (text). At the top the title and topic set the subject, near the middle key facts are presented with supportive visuals, and near the bottom a scene emphasizes lasting availability.\n\n\"To Kill a Mockingbird was written over two and a half years\" (text)\n\"The book was published on July 11, 1960\" (text)\n\"Early expectation was modest, but public encouragement grew rapidly\" (text)\n\"Partial reprinting by Reader's Digest Condensed Books gave the book wide readership\" (text)\n\"a stylized author at a desk writing pages\" (figure)\n\"a cartoon stack of books with one being selected for a condensed reprint\" (figure)\n\"a silhouette of an open book shown continuously on a simple shelf to indicate never out of print\" (figure)\n\nThe overall style of the image is clear, informational, and illustrative.",
+    "infographic_id": 588,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 11,
+    "keywords_total": 11,
+    "context": "Ultimately, Lee spent over two and a half years writing To Kill a Mockingbird. The book was published on July 11, 1960. After rejecting the \"Watchman\" title, it was initially re-titled Atticus, but Lee renamed it \"To Kill a Mockingbird\" to reflect that the story went beyond just a character portrait. The editorial team at Lippincott warned Lee that she would probably sell only several thousand copies. In 1964, Lee recalled her hopes for the book when she said, \"I never expected any sort of success with 'Mockingbird.' ... I was hoping for a quick and merciful death at the hands of the reviewers but, at the same time, I sort of hoped someone would like it enough to give me encouragement. Public encouragement. I hoped for a little, as I said, but I got rather a whole lot, and in some ways this was just about as frightening as the quick, merciful death I'd expected.\" Instead of a \"quick and merciful death\", Reader's Digest Condensed Books chose the book for reprinting in part, which gave it a wide readership immediately. Since the original publication, the book has never been out of print.",
+    "qa_count": 3,
+    "ids": [
+      "56ce3631aab44d1400b885d1",
+      "56d11d0f17492d1400aab9bf",
+      "56d11d0f17492d1400aab9c0"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"To Kill a Mockingbird overview\" (text) focused on \"setting, characters, and key childhood events\" (text). At the top, a compact header introduces the time and place; near the middle, character notes appear adjacent to supporting illustrations; below, a short events summary sits near a scene figure.\n\n\"To Kill a Mockingbird overview\" (text)\n\"A story set during the Great Depression in Maycomb, Alabama over three years\" (text)\n\"Main character: Jean Louise Finch (Scout), a six-year-old girl who narrates events\" (text)\n\"Family and friends: Atticus Finch is the widowed father with two children, and the children befriend Dill\" (text)\n\n\"a stylized illustration of a sleepy small town with a courthouse silhouette to represent the county seat\" (figure)\n\"a cartoon of three children playing together near a house to represent Scout, Jem, and Dill\" (figure)\n\"a silhouette of a loner at a porch window to represent the reclusive neighbor who leaves gifts\" (figure)\n\"a small illustrative scene of children finding items in a tree near a house\" (figure)\n\nThe overall style of the image is clear, educational, and gently whimsical.",
+    "infographic_id": 589,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 11,
+    "keywords_total": 11,
+    "context": "The story takes place during three years (1933–35) of the Great Depression in the fictional \"tired old town\" of Maycomb, Alabama, the seat of Maycomb County. It focuses on six-year-old Jean Louise Finch (Scout), who lives with her older brother, Jem, and their widowed father, Atticus, a middle-aged lawyer. Jem and Scout befriend a boy named Dill, who visits Maycomb to stay with his aunt each summer. The three children are terrified of, and fascinated by, their neighbor, the reclusive Arthur \"Boo\" Radley. The adults of Maycomb are hesitant to talk about Boo, and, for many years few have seen him. The children feed one another's imagination with rumors about his appearance and reasons for remaining hidden, and they fantasize about how to get him out of his house. After two summers of friendship with Dill, Scout and Jem find that someone leaves them small gifts in a tree outside the Radley place. Several times the mysterious Boo makes gestures of affection to the children, but, to their disappointment, he never appears in person.",
+    "qa_count": 7,
+    "ids": [
+      "56ce623aaab44d1400b88721",
+      "56ce623aaab44d1400b88722",
+      "56ce623aaab44d1400b88723",
+      "56ce623aaab44d1400b88724",
+      "56d11fcf17492d1400aab9f1",
+      "56d11fcf17492d1400aab9f2",
+      "56d11fcf17492d1400aab9f3"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Atticus defends a black man in a controversial trial\" (text) focused on \"the events surrounding the accusation and the courthouse mob\" (text). At the top is a clear title and topic, near a short summary, followed in the middle by character and event labels adjacent to illustrative scenes, and at the bottom by the resolution and who intervened.\n\n\"Atticus agrees to defend his client to the best of his ability despite local disapproval\" (text)\n\"Tom Robinson is the defendant accused of raping a young white woman\" (text)\n\"Mayella Ewell is the young white woman who made the accusation\" (text)\n\"Scout, Jem, and Dill shame the lynch mob and force it to disperse\" (text)\n\n\"a stylized illustration of a courtroom scene with a solitary defense figure facing a crowd\" (figure)\n\"a cartoon of a tense crowd of men gathered outside a building confronting a lone seated man\" (figure)\n\"a stylized scene of three children standing together looking up at the crowd, prompting the crowd to lower their heads\" (figure)\n\"a simple silhouette of a small town street to suggest local disapproval and gossip\" (figure)\n\nThe overall style of the image is documentary‑style illustration with clear, readable labels and simple, expressive cartoons.",
+    "infographic_id": 590,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "Judge Taylor appoints Atticus to defend Tom Robinson, a black man who has been accused of raping a young white woman, Mayella Ewell. Although many of Maycomb's citizens disapprove, Atticus agrees to defend Tom to the best of his ability. Other children taunt Jem and Scout for Atticus's actions, calling him a \"nigger-lover\". Scout is tempted to stand up for her father's honor by fighting, even though he has told her not to. Atticus faces a group of men intent on lynching Tom. This danger is averted when Scout, Jem, and Dill shame the mob into dispersing by forcing them to view the situation from Atticus' and Tom's points of view.",
+    "qa_count": 3,
+    "ids": [
+      "56ce6318aab44d1400b8872d",
+      "56d121d317492d1400aaba27",
+      "56d121d317492d1400aaba29"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Tom Robinson Trial: Key Moments\" (text) focused on \"children's perspective and trial outcome\" (text). At the top, a concise headline frames the scene and above the middle the setting and characters are summarized, while the bottom emphasizes the aftermath and emotional impact.\n\n\"Tom Robinson trial seen through the children's perspective, focusing on key places and outcomes\" (text)\n\"Atticus asks Jem and Scout not to attend the trial; Jem and Scout are the children named Jem and Scout\" (text)\n\"Jem, Scout, and Dill watch the trial from the colored balcony by invitation\" (text)\n\"a stylized illustration of three children seated together on an elevated balcony looking toward a courtroom interior\" (figure)\n\"a cartoon depiction of a courtroom witness stand with two silhouettes representing the accusers\" (figure)\n\"an illustrative scene of a man isolated in a prison yard attempting to run, with an implied tragic outcome\" (figure)\n\"Outcome emphasized below: despite evidence of innocence, the accused is convicted and later shot and killed while escaping prison, shaking faith in justice\" (text)\n\nThe overall style of the image is clear, illustrative, and documentary, combining concise text blocks with supportive cartoon-style figures.",
+    "infographic_id": 591,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 7,
+    "keywords_total": 7,
+    "context": "Atticus does not want Jem and Scout to be present at Tom Robinson's trial. No seat is available on the main floor, so by invitation of Rev. Sykes, Jem, Scout, and Dill watch from the colored balcony. Atticus establishes that the accusers—Mayella and her father, Bob Ewell, the town drunk—are lying. It also becomes clear that the friendless Mayella made sexual advances toward Tom, and that her father caught her and beat her. Despite significant evidence of Tom's innocence, the jury convicts him. Jem's faith in justice becomes badly shaken, as is Atticus', when the hapless Tom is shot and killed while trying to escape from prison.",
+    "qa_count": 4,
+    "ids": [
+      "56ce63f7aab44d1400b88735",
+      "56ce63f7aab44d1400b88736",
+      "56d1232217492d1400aaba45",
+      "56d1232217492d1400aaba47"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Attack and Rescue on a Dark Night\" (text) focused on \"the nighttime attack after the school pageant and the mysterious rescuer\" (text). At the top, a concise header introduces the incident and the lead-up; near the middle, a small sequence names the attacker and shows the struggle and rescue; below, a short summary notes the aftermath and identity revelation. \n\"Attack and Rescue on a Dark Night\" (text)\n\"the nighttime attack after the school pageant and the mysterious rescuer\" (text)\n\"Jem and Scout were attacked while walking home after a Halloween pageant by Bob Ewell\" (text)\n\"a cartoon scene of two children walking on a dark path with a threatening figure approaching\" (figure)\n\"a stylized image of a broken arm to indicate injury during the struggle\" (figure)\n\"a silhouette of a mysterious man carrying a child home\" (figure)\n\"Scout recognizes the rescuer as Boo Radley after they reach home\" (text)\nThe overall style of the image is clear, illustrative, and narrative-focused.",
+    "infographic_id": 592,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 9,
+    "keywords_total": 9,
+    "context": "Despite Tom's conviction, Bob Ewell is humiliated by the events of the trial, Atticus explaining that he \"destroyed [Ewell's] last shred of credibility at that trial.\" Ewell vows revenge, spitting in Atticus' face, trying to break into the judge's house, and menacing Tom Robinson's widow. Finally, he attacks the defenseless Jem and Scout while they walk home on a dark night after the school Halloween pageant. One of Jem's arms is broken in the struggle, but amid the confusion someone comes to the children's rescue. The mysterious man carries Jem home, where Scout realizes that he is Boo Radley.",
+    "qa_count": 5,
+    "ids": [
+      "56ce6488aab44d1400b8873e",
+      "56ce6488aab44d1400b8873f",
+      "56ce6488aab44d1400b88740",
+      "56d123c417492d1400aaba4b",
+      "56d123c417492d1400aaba4c"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Sheriff Tate and the Radley Porch Incident\" (text) focused on \"the discovery and aftermath of Bob Ewell's death\" (text). The top summarizes the discovery and the conflicting decisions, the middle shows the ethical disagreement between the two men, and the bottom follows Scout and Boo on the Radley porch and Scout's final realization.\n\n\"Sheriff Tate discovers the body and reports that Ewell fell on his own knife\" (text)\n\"Debate over whether to charge Jem or to protect a reclusive neighbor\" (text)\n\"Atticus ultimately accepts the sheriff's protective account instead of prosecuting a child\" (text)\n\"Scout walks a quiet recluse to his door, says goodbye, and imagines life from his perspective\" (text)\n\n\"a cartoon depiction of a uniformed older man standing near a simple rural house, looking down\" (figure)\n\"a stylized scene of two men in conversation at night near a home's entrance with one gesturing as if explaining\" (figure)\n\"a silhouette of a child on a porch looking contemplative while an older figure steps away\" (figure)\n\"a small illustrative close-up of a wrapped set of small gifts left on a porch step\" (figure)\n\nThe overall style of the image is calm, narrative infographic illustration with clear labeled sections and simple cartoon figures.",
+    "infographic_id": 593,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "Sheriff Tate arrives and discovers that Bob Ewell has died during the fight. The sheriff argues with Atticus about the prudence and ethics of charging Jem (whom Atticus believes to be responsible) or Boo (whom Tate believes to be responsible). Atticus eventually accepts the sheriff's story that Ewell simply fell on his own knife. Boo asks Scout to walk him home, and after she says goodbye to him at his front door he disappears again. While standing on the Radley porch, Scout imagines life from Boo's perspective, and regrets that they had never repaid him for the gifts he had given them.",
+    "qa_count": 2,
+    "ids": [
+      "56ce6635aab44d1400b8874f",
+      "56d1255017492d1400aaba75"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Harper Lee and real-life echoes in her novel\" (text) focused on \"biographical parallels between Lee's life and the novel\" (text). At the top a concise header states the author's intent and book context, near it a portrait-style illustration, and below clustered fact labels sit adjacent to illustrative vignettes that support each question and answer. Near the middle a vignette links the father's legal work to the pivotal year and further down family details are grouped with a domestic scene.\n\n\"Harper Lee emphasized the novel is not an autobiography but shows truthful writing about what an author knows\" (text)\n\"a cartoon of an author at a desk, head bowed over a manuscript\" (figure)\n\"Lee's father worked as editor and publisher of the local newspaper and in 1919 he represented two black men accused of murder\" (text)\n\"a stylized courtroom scene showing a lawyer standing outside a courthouse\" (figure)\n\"a simple courthouse doorway labeled with the year 1919 beside it\" (figure)\n\"Lee's mother died when Lee was 25 after a long-term nervous condition left her emotionally absent\" (text)\n\"a domestic interior showing a household with a daily visiting housekeeper\" (figure)\n\nThe overall style of the image is clear, informative, and illustrative.",
+    "infographic_id": 594,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "Lee has said that To Kill a Mockingbird is not an autobiography, but rather an example of how an author \"should write about what he knows and write truthfully\". Nevertheless, several people and events from Lee's childhood parallel those of the fictional Scout. Lee's father, Amasa Coleman Lee, was an attorney, similar to Atticus Finch, and in 1919, he defended two black men accused of murder. After they were convicted, hanged and mutilated, he never tried another criminal case. Lee's father was also the editor and publisher of the Monroeville newspaper. Although more of a proponent of racial segregation than Atticus, he gradually became more liberal in his later years. Though Scout's mother died when she was a baby, Lee was 25 when her mother, Frances Cunningham Finch, died. Lee's mother was prone to a nervous condition that rendered her mentally and emotionally absent. Lee had a brother named Edwin, who—like the fictional Jem—was four years older than his sister. As in the novel, a black housekeeper came daily to care for the Lee house and family.",
+    "qa_count": 4,
+    "ids": [
+      "56ce67f4aab44d1400b88761",
+      "56ce67f4aab44d1400b88762",
+      "56ce67f4aab44d1400b88764",
+      "56d126c117492d1400aaba94"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Childhood Origins of a Fictional Friend\" (text) focused on \"how a real childhood friend inspired a fictional character\" (text). At the top a concise header introduces the connection, the middle area pairs short labeled facts with simple illustrative scenes, and the bottom provides a closing note about their later collaboration.\n\n\"Dill was modeled on Truman Capote, a childhood next-door friend\" (text)\n\"They wrote and acted out stories together on an old Underwood typewriter\" (text)\n\"Both were atypical children who loved to read and felt alienated as apart people\" (text)\n\"In 1960 they traveled together to investigate murders that inspired In Cold Blood\" (text)\n\n\"a stylized cartoon of two neighboring houses with two children meeting at the shared fence\" (figure)\n\"a cartoon of two children using an old typewriter on a small table\" (figure)\n\"a silhouette illustration of two children sitting together reading and whispering\" (figure)\n\"a stylized illustration of two adults traveling on a rural road toward a small town\" (figure)\n\nThe overall style of the image is clean, illustrative, and documentary in tone.",
+    "infographic_id": 595,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 12,
+    "keywords_total": 12,
+    "context": "Lee modeled the character of Dill on her childhood friend, Truman Capote, known then as Truman Persons. Just as Dill lived next door to Scout during the summer, Capote lived next door to Lee with his aunts while his mother visited New York City. Like Dill, Capote had an impressive imagination and a gift for fascinating stories. Both Lee and Capote were atypical children: both loved to read. Lee was a scrappy tomboy who was quick to fight, but Capote was ridiculed for his advanced vocabulary and lisp. She and Capote made up and acted out stories they wrote on an old Underwood typewriter Lee's father gave them. They became good friends when both felt alienated from their peers; Capote called the two of them \"apart people\". In 1960, Capote and Lee traveled to Kansas together to investigate the multiple murders that were the basis for Capote's nonfiction novel In Cold Blood.",
+    "qa_count": 6,
+    "ids": [
+      "56ce68dcaab44d1400b8876c",
+      "56ce68dcaab44d1400b8876d",
+      "56ce68dcaab44d1400b8876e",
+      "56d128d017492d1400aabace",
+      "56d128d017492d1400aabacf",
+      "56d128d017492d1400aabad0"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Origins of Tom Robinson in Lee's life and history\" (text) focused on \"real events and models informing a fictional trial\" (text). At the top is a concise header and an overview phrase, near illustrative scenes that support the key historical links, and below are paired text labels adjacent to figures that connect names, ages, and impacts.\n\n\"Origins of Tom Robinson in Lee's life and history\" (text)\n\"real events and models informing a fictional trial\" (text)\n\"When Lee was 10 a local accusation of rape influenced her perspective and writing\" (text)\n\"Walter Lett was the black man accused near Lee's hometown whose sentence was later commuted and who died in custody\" (text)\n\"Scholars link the fictional trial to a notorious multi-defendant case and to Emmett Till to display Southern prejudices and catalyze the Civil Rights Movement\" (text)\n\"a stylized courtroom silhouette showing a tense small-town trial scene without text\" (figure)\n\"a stylized group of figures representing a famous multi-defendant trial to suggest mass injustice\" (figure)\n\"a cartoon of a young boy standing alone to symbolize a lynching-era murder that sparked national outrage\" (figure)\n\"a simple memorial-style illustration suggesting a commuted sentence and a death in custody\" (figure)\n\nThe overall style of the image is clean, informative, and illustrative with clear typographic hierarchy and supportive cartoon-style figures.",
+    "infographic_id": 596,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 11,
+    "keywords_total": 11,
+    "context": "The origin of Tom Robinson is less clear, although many have speculated that his character was inspired by several models. When Lee was 10 years old, a white woman near Monroeville accused a black man named Walter Lett of raping her. The story and the trial were covered by her father's newspaper which reported that Lett was convicted and sentenced to death. After a series of letters appeared claiming Lett had been falsely accused, his sentence was commuted to life in prison. He died there of tuberculosis in 1937. Scholars believe that Robinson's difficulties reflect the notorious case of the Scottsboro Boys, in which nine black men were convicted of raping two white women on negligible evidence. However, in 2005, Lee stated that she had in mind something less sensational, although the Scottsboro case served \"the same purpose\" to display Southern prejudices. Emmett Till, a black teenager who was murdered for flirting with a white woman in Mississippi in 1955, and whose death is credited as a catalyst for the Civil Rights Movement, is also considered a model for Tom Robinson.",
+    "qa_count": 6,
+    "ids": [
+      "56ce6aabaab44d1400b88775",
+      "56ce6aabaab44d1400b88776",
+      "56ce6aabaab44d1400b88777",
+      "56ce6aabaab44d1400b88778",
+      "56d12cb517492d1400aabb54",
+      "56d12cb517492d1400aabb55"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Lee's Use of Humor in a Tragic Story\" (text) focused on \"how parody, satire, and irony shape perspective\" (text). At the top, a concise summary introduces the theme and main techniques; near the middle, supporting quotes and scenes illustrate how the child viewpoint and satirical school episode function; below, an interpretive note connects the humor to critique of society.\n\n\"Lee's Use of Humor in a Tragic Story\" (text)\n\"how parody, satire, and irony shape perspective\" (text)\n\"Lee uses parody, satire, and irony through a child's perspective to address complex issues\" (text)\n\"Satire and irony are the most prominent forms of humor in the work\" (text)\n\"a stylized cartoon of a child observing adults with a speechless expression, suggesting mockery of adult systems\" (figure)\n\"a stylized cartoon of a classroom scene with a stern teacher gesturing to a child holding a book, suggesting satirical treatment of education\" (figure)\n\"a stylized silhouette scene of two children tussling on a path to imply the child's blunt solutions to social dynamics\" (figure)\n\"a small captioned figure of a broken courtroom bench suggested by a silhouette to imply critique of the justice system\" (figure)\n\nThe overall style of the image is clear, illustrative, and didactic.",
+    "infographic_id": 597,
+    "figure_count": 4,
+    "keyword_coverage": true,
+    "keywords_found": 4,
+    "keywords_total": 4,
+    "context": "Writing about Lee's style and use of humor in a tragic story, scholar Jacqueline Tavernier-Courbin states: \"Laughter ... [exposes] the gangrene under the beautiful surface but also by demeaning it; one can hardly ... be controlled by what one is able to laugh at.\" Scout's precocious observations about her neighbors and behavior inspire National Endowment of the Arts director David Kipen to call her \"hysterically funny\". To address complex issues, however, Tavernier-Courbin notes that Lee uses parody, satire, and irony effectively by using a child's perspective. After Dill promises to marry her, then spends too much time with Jem, Scout reasons the best way to get him to pay attention to her is to beat him up, which she does several times. Scout's first day in school is a satirical treatment of education; her teacher says she must undo the damage Atticus has wrought in teaching her to read and write, and forbids Atticus from teaching her further. Lee treats the most unfunny situations with irony, however, as Jem and Scout try to understand how Maycomb embraces racism and still tries sincerely to remain a decent society. Satire and irony are used to such an extent that Tavernier-Courbin suggests one interpretation for the book's title: Lee is doing the mocking—of education, the justice system, and her own society by using them as subjects of her humorous disapproval.",
+    "qa_count": 2,
+    "ids": [
+      "56ce6d47aab44d1400b8877d",
+      "56d13b3ae7d4791d00902049"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Plot moments that change the children's lives\" (text) focused on \"key scenes from a coming-of-age narrative\" (text). At the top, a short header introduces the scenes, and middle panels show linked events with visual supports, while the bottom summarizes outcomes and feelings. \n\"Plot moments that change the children's lives\" (text)\n\"Key scenes from a coming-of-age narrative\" (text)\n\"Jem locks a classmate in a church basement during a risky game\" (text)\n\"Calpurnia escorts the children to her church, revealing personal life glimpses\" (text)\n\"Scout is distracted and embarrassed after a late, sleepy pageant entrance\" (text)\n\"Scout's ham costume unexpectedly saves her life when she goes home\" (text)\n\"a cartoon depiction of a simple church interior with a closed basement door and a child silhouette near the door\" (figure)\n\"a stylized illustration of a woman guiding two children into a small community church\" (figure)\n\"a cartoon stage scene showing a sleepy child in a chunky costume entering amid an amused audience\" (figure)\nThe overall style of the image is clear, illustrative, and educational with concise labels and supportive cartoons.",
+    "infographic_id": 598,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "Critics also note the entertaining methods used to drive the plot. When Atticus is out of town, Jem locks a Sunday school classmate in the church basement with the furnace during a game of Shadrach. This prompts their black housekeeper Calpurnia to escort Scout and Jem to her church, which allows the children a glimpse into her personal life, as well as Tom Robinson's. Scout falls asleep during the Halloween pageant and makes a tardy entrance onstage, causing the audience to laugh uproariously. She is so distracted and embarrassed that she prefers to go home in her ham costume, which saves her life.",
+    "qa_count": 4,
+    "ids": [
+      "56ce6dabaab44d1400b8877f",
+      "56ce6dabaab44d1400b88780",
+      "56d14361e7d4791d00902051",
+      "56d14361e7d4791d00902052"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"To Kill a Mockingbird: Genre, Gothic Elements, and Authority\" (text) focused on \"Scholarly characterizations and themes in the novel\" (text). At the top, a concise headline and subtitle introduce the novel's classifications and key tensions, near an illustrative panel that highlights Gothic atmosphere and outsider perspective. In the middle, a section connects debated interpretations to specific examples, adjacent to a vignette showing protective behavior that nuances the Gothic label. At the bottom, a conclusion panel emphasizes the novel's moral center and Scout's view of authority, below a supporting scene that anchors that claim.\n\n\"To Kill a Mockingbird is characterized as a Southern Gothic and coming-of-age or Bildungsroman novel\" (text)\n\"Lee described the town courthouse as Gothic, and the story includes grotesque and near-supernatural elements\" (text)\n\"Scholarly debate notes the benevolent and human nature of an isolated character who is protective rather than monstrous\" (text)\n\"Scout reveres Atticus as an authority who values following one's conscience despite social ostracism\" (text)\n\"a stylized illustration of an imposing old house with exaggerated, mysterious features suggesting a Gothic aura\" (figure)\n\"a cartoon of a shy, protective figure standing outside a house offering a small helping gesture\" (figure)\n\"a stylized scene showing a parent figure calmly advising a child, implying moral authority and conscience\" (figure)\nThe overall style of the image is clean, educational, and illustrative with clear typographic hierarchy and simple cartoon-like figures.",
+    "infographic_id": 599,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 8,
+    "keywords_total": 8,
+    "context": "Scholars have characterized To Kill a Mockingbird as both a Southern Gothic and coming-of-age or Bildungsroman novel. The grotesque and near-supernatural qualities of Boo Radley and his house, and the element of racial injustice involving Tom Robinson contribute to the aura of the Gothic in the novel. Lee used the term \"Gothic\" to describe the architecture of Maycomb's courthouse and in regard to Dill's exaggeratedly morbid performances as Boo Radley. Outsiders are also an important element of Southern Gothic texts and Scout and Jem's questions about the hierarchy in the town cause scholars to compare the novel to Catcher in the Rye and Adventures of Huckleberry Finn. Despite challenging the town's systems, Scout reveres Atticus as an authority above all others, because he believes that following one's conscience is the highest priority, even when the result is social ostracism. However, scholars debate about the Southern Gothic classification, noting that Boo Radley is in fact human, protective, and benevolent. Furthermore, in addressing themes such as alcoholism, incest, rape, and racial violence, Lee wrote about her small town realistically rather than melodramatically. She portrays the problems of individual characters as universal underlying issues in every society.",
+    "qa_count": 3,
+    "ids": [
+      "56ce6f81aab44d1400b8878b",
+      "56d147d5e7d4791d00902057",
+      "56d147d5e7d4791d00902058"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  },
+  {
+    "generated_infographic": "The image is an infographic titled \"Coming of Age and Community Disillusionment\" (text) focused on \"how childhood lessons reveal social separations and emerging female identity\" (text). Near the top is a headline summarizing the children's lesson, and below that a compact scene-supporting image accompanies the neighbor interaction; near the middle a reflective phrase about social divisions sits adjacent to a symbolic illustration of social separation; toward the bottom a concluding phrase about the girl's emerging identity appears near a final illustrative figure. \n\"Coming of age shows hard realities and changed views after a traumatic trial\" (text)\n\"a compact scene of a child speaking with a kindly neighbor on a porch\" (figure)\n\"Jem speaks to his neighbor Miss Maudie the day after the trial\" (text)\n\"a stylized depiction of two groups separated by an abstract gap to suggest social boundaries\" (figure)\n\"Jem struggles to understand the separations of race and class\" (text)\n\"a silhouetted child figure moving toward a simple doorway to suggest growing awareness\" (figure)\n\"Scout's emerging sense of place and potential power as the woman she will become\" (text) The overall style of the image is illustrative, clear, and thoughtful.",
+    "infographic_id": 600,
+    "figure_count": 3,
+    "keyword_coverage": true,
+    "keywords_found": 6,
+    "keywords_total": 6,
+    "context": "As children coming of age, Scout and Jem face hard realities and learn from them. Lee seems to examine Jem's sense of loss about how his neighbors have disappointed him more than Scout's. Jem says to their neighbor Miss Maudie the day after the trial, \"It's like bein' a caterpillar wrapped in a cocoon ... I always thought Maycomb folks were the best folks in the world, least that's what they seemed like\". This leads him to struggle with understanding the separations of race and class. Just as the novel is an illustration of the changes Jem faces, it is also an exploration of the realities Scout must face as an atypical girl on the verge of womanhood. As one scholar writes, \"To Kill a Mockingbird can be read as a feminist Bildungsroman, for Scout emerges from her childhood experiences with a clear sense of her place in her community and an awareness of her potential power as the woman she will one day be.\"",
+    "qa_count": 2,
+    "ids": [
+      "56ce70aaaab44d1400b8878f",
+      "56d18bcde7d4791d0090205e"
+    ],
+    "title": "To_Kill_a_Mockingbird"
+  }
+]
