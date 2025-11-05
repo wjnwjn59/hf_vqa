@@ -663,7 +663,7 @@ def merge_narrator_data(
         
         # Fallback mechanism if no suitable layout found
         if not suitable_layouts:
-            print(f"  ⚠️ Warning: No suitable layout found for wiki {wiki_id}")
+            print(f"  Warning: No suitable layout found for wiki {wiki_id}")
             print(f"    Trying fallback: reducing text area requirement to 5000 px²")
             
             # Try with lower text area threshold
@@ -693,10 +693,10 @@ def merge_narrator_data(
                         })
                 
                 if suitable_layouts:
-                    print(f"    ✓ Found {len(suitable_layouts)} fallback layouts (50% capacity)")
+                    print(f"    Found {len(suitable_layouts)} fallback layouts (50% capacity)")
                     stats['fallback_used'] += 1
                 else:
-                    print(f"    ❌ ERROR: No fallback layout found, SKIPPING wiki {wiki_id}")
+                    print(f"    ERROR: No fallback layout found, SKIPPING wiki {wiki_id}")
                     print(f"    This infographic will be MISSING from output!")
                     stats['skipped'] += 1
                     stats['skipped_wiki_ids'].append(wiki_id)
@@ -1037,7 +1037,7 @@ def merge_narrator_data(
     print(f"Skipped (no layout): {stats['skipped']} ({stats['skipped']/stats['total_infographics']*100:.1f}%)")
     
     if stats['skipped'] > 0:
-        print(f"\n⚠️ WARNING: {stats['skipped']} infographics were SKIPPED!")
+        print(f"\nWARNING: {stats['skipped']} infographics were SKIPPED!")
         print(f"Skipped wiki IDs: {stats['skipped_wiki_ids'][:10]}")
         if len(stats['skipped_wiki_ids']) > 10:
             print(f"... and {len(stats['skipped_wiki_ids']) - 10} more")
@@ -1050,6 +1050,109 @@ def merge_narrator_data(
     print("="*60 + "\n")
     
     return result
+
+
+def update_original_wiki_files(merged_data: List[Dict], original_wiki_dir: str):
+    """
+    Update original wiki files by replacing entries that match the indices in merged_data.
+    
+    Args:
+        merged_data: List of merged infographic data with 'index' field
+        original_wiki_dir: Path to directory containing original wiki*.json files
+    """
+    if not os.path.exists(original_wiki_dir):
+        print(f"\nWarning: Original wiki directory does not exist: {original_wiki_dir}")
+        print("Skipping original file updates.")
+        return
+    
+    print("\n" + "="*60)
+    print("UPDATING ORIGINAL WIKI FILES")
+    print("="*60)
+    print(f"Original wiki directory: {original_wiki_dir}")
+    
+    # Group updates by file
+    updates_by_file = {}  # file_index -> list of (position_in_array, new_entry)
+    
+    for entry in merged_data:
+        wiki_id = entry['index']
+        
+        # Calculate which file this entry belongs to
+        # wiki_id 1-50 → file 1, wiki_id 51-100 → file 2, etc.
+        file_index = ((wiki_id - 1) // 50) + 1
+        position_in_array = (wiki_id - 1) % 50
+        
+        if file_index not in updates_by_file:
+            updates_by_file[file_index] = []
+        
+        updates_by_file[file_index].append((position_in_array, entry))
+    
+    print(f"Total entries to update: {len(merged_data)}")
+    print(f"Files to be modified: {len(updates_by_file)}")
+    
+    # Update each file
+    updated_files = 0
+    updated_entries = 0
+    
+    for file_index in sorted(updates_by_file.keys()):
+        filename = f"wiki{file_index:06d}.json"
+        filepath = os.path.join(original_wiki_dir, filename)
+        
+        if not os.path.exists(filepath):
+            print(f"\nWarning: Original file not found: {filename}")
+            print(f"   Skipping updates for file index {file_index}")
+            continue
+        
+        try:
+            # Load original file
+            original_data = load_json(filepath)
+            
+            if not isinstance(original_data, list):
+                print(f"\nError: {filename} is not a JSON array, skipping")
+                continue
+            
+            # Apply updates
+            entries_updated_in_file = 0
+            updates_for_file = updates_by_file[file_index]
+            
+            for position, new_entry in updates_for_file:
+                if position >= len(original_data):
+                    print(f"   Warning: Position {position} out of range in {filename} (size: {len(original_data)})")
+                    continue
+                
+                # Verify the index matches
+                old_entry = original_data[position]
+                old_index = old_entry.get('index')
+                new_index = new_entry['index']
+                
+                if old_index != new_index:
+                    print(f"   Warning: Index mismatch at position {position} in {filename}")
+                    print(f"            Expected index {new_index}, found {old_index}")
+                    continue
+                
+                # Replace the entry
+                original_data[position] = new_entry
+                entries_updated_in_file += 1
+                updated_entries += 1
+            
+            # Save updated file
+            save_json(original_data, filepath)
+            updated_files += 1
+            
+            # Get list of updated indices for this file
+            updated_indices = [entry['index'] for _, entry in updates_for_file]
+            print(f"\nUpdated {filename}: {entries_updated_in_file} entries")
+            print(f"  Wiki IDs: {updated_indices[:5]}{'...' if len(updated_indices) > 5 else ''}")
+            
+        except Exception as e:
+            print(f"\nError updating {filename}: {e}")
+            continue
+    
+    print("\n" + "="*60)
+    print("UPDATE SUMMARY")
+    print("="*60)
+    print(f"Files modified: {updated_files}/{len(updates_by_file)}")
+    print(f"Entries updated: {updated_entries}/{len(merged_data)}")
+    print("="*60 + "\n")
 
 
 def main():
@@ -1116,6 +1219,12 @@ def main():
         type=str,
         default="/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl",
         help='Path to squad_v2_train.jsonl file (default: /mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl)'
+    )
+    parser.add_argument(
+        '--original-wiki-dir',
+        type=str,
+        default="./src/data/narrator/wiki",
+        help='Path to original wiki directory for updating entries when using --infor_path (default: ./src/data/narrator/wiki)'
     )
 
     args = parser.parse_args()
@@ -1248,6 +1357,17 @@ def main():
         print(f"  Saved {len(chunk)} infographics to {filename} (wiki IDs: {chunk[0]['index']}-{chunk[-1]['index']})")
     
     print(f"\nSaved {len(saved_files)} files total")
+    
+    # Update original wiki files if in single file mode (--infor_path)
+    if use_single_file:
+        print("\n" + "="*60)
+        print("SINGLE FILE MODE DETECTED")
+        print("="*60)
+        print(f"Output saved to: {output_dir}")
+        print(f"Now updating original wiki files...")
+        
+        update_original_wiki_files(merged_data, args.original_wiki_dir)
+    
     print("Done!")
     
     # Print summary statistics
@@ -1263,6 +1383,9 @@ def main():
     print(f"Total files saved: {len(saved_files)}")
     print(f"Total layers: {total_layers}")
     print(f"Output directory: {output_dir}")
+    
+    if use_single_file:
+        print(f"Original wiki directory updated: {args.original_wiki_dir}")
 
 
 if __name__ == '__main__':
