@@ -375,7 +375,11 @@ def is_white_or_light_color(color_name: str) -> bool:
         'cornsilk', 'lavenderblush', 'mistyrose', 'papayawhip',
         'blanchedalmond', 'bisque', 'antiquewhite', 'lemonchiffon',
         'lightgoldenrodyellow', 'lightyellow', 'honeydew', 'mintcream',
-        'azure', 'aliceblue', 'lavender', 'lightcyan', 'gainsboro'
+        'azure', 'aliceblue', 'lavender', 'lightcyan', 'gainsboro',
+        'wheat', 'navajowhite', 'moccasin', 'peachpuff', 'palegoldenrod',
+        'khaki', 'lightgray', 'lightpink', 'powderblue', 'lightblue',
+        'lightsteelblue', 'lightskyblue', 'lightgreen', 'paleturquoise',
+        'palegreen', 'thistle'
     }
     
     return color_name.lower() in white_like_colors
@@ -395,6 +399,198 @@ def replace_white_color_with_black(color_name: str, color_idx: Dict) -> str:
     if is_white_or_light_color(color_name):
         return 'black'
     return color_name
+
+
+def extract_background_color_keywords(bg_caption: str) -> List[str]:
+    """
+    Extract color keywords from background caption.
+    
+    Args:
+        bg_caption: Background caption text
+        
+    Returns:
+        List of detected color names
+    """
+    bg_caption_lower = bg_caption.lower()
+    
+    # All possible color keywords from color_idx.json
+    all_colors = [
+        'white', 'black', 'darkslategray', 'dimgray', 'darkolivegreen', 'midnightblue',
+        'saddlebrown', 'sienna', 'whitesmoke', 'darkslateblue', 'indianred', 'linen',
+        'maroon', 'khaki', 'sandybrown', 'gray', 'gainsboro', 'teal', 'peru', 'gold',
+        'snow', 'firebrick', 'crimson', 'chocolate', 'tomato', 'brown', 'goldenrod',
+        'antiquewhite', 'rosybrown', 'steelblue', 'floralwhite', 'seashell', 'darkgreen',
+        'oldlace', 'darkkhaki', 'burlywood', 'red', 'darkgray', 'orange', 'royalblue',
+        'seagreen', 'lightgray', 'tan', 'coral', 'beige', 'palevioletred', 'wheat',
+        'lavender', 'darkcyan', 'slateblue', 'slategray', 'orangered', 'silver',
+        'olivedrab', 'forestgreen', 'darkgoldenrod', 'ivory', 'darkorange', 'yellow',
+        'hotpink', 'ghostwhite', 'lightcoral', 'indigo', 'bisque', 'darkred',
+        'darksalmon', 'lightslategray', 'dodgerblue', 'lightpink', 'mistyrose',
+        'mediumvioletred', 'cadetblue', 'deeppink', 'salmon', 'palegoldenrod',
+        'blanchedalmond', 'lightseagreen', 'cornflowerblue', 'yellowgreen', 'greenyellow',
+        'navajowhite', 'papayawhip', 'mediumslateblue', 'purple', 'blueviolet', 'pink',
+        'cornsilk', 'lightsalmon', 'mediumpurple', 'moccasin', 'turquoise',
+        'mediumseagreen', 'lavenderblush', 'mediumblue', 'darkseagreen', 'mediumturquoise',
+        'paleturquoise', 'skyblue', 'lemonchiffon', 'olive', 'peachpuff', 'lightyellow',
+        'lightsteelblue', 'mediumorchid', 'plum', 'darkturquoise', 'aliceblue',
+        'mediumaquamarine', 'orchid', 'powderblue', 'blue', 'darkorchid', 'violet',
+        'lightskyblue', 'lightcyan', 'lightgoldenrodyellow', 'navy', 'thistle', 'honeydew',
+        'mintcream', 'lightblue', 'darkblue', 'darkmagenta', 'deepskyblue', 'magenta',
+        'limegreen', 'darkviolet', 'cyan', 'palegreen', 'aquamarine', 'lawngreen',
+        'lightgreen', 'azure', 'chartreuse', 'green', 'mediumspringgreen', 'lime', 'springgreen'
+    ]
+    
+    # Also check for common color mentions without exact match
+    # e.g., "light purple" should detect "purple"
+    base_colors = ['purple', 'blue', 'black', 'white', 'pink', 'orange', 'brown', 
+                   'green', 'red', 'yellow', 'gray', 'grey']
+    
+    detected_colors = []
+    
+    # Check for exact color name matches
+    for color in all_colors:
+        if color in bg_caption_lower:
+            detected_colors.append(color)
+    
+    # Check for base color mentions (e.g., "light purple" contains "purple")
+    for base_color in base_colors:
+        if base_color in bg_caption_lower and base_color not in detected_colors:
+            # Find the exact color name variant in all_colors
+            for color in all_colors:
+                if base_color in color and color not in detected_colors:
+                    detected_colors.append(color)
+                    break
+    
+    return detected_colors
+
+
+def replace_conflicting_colors(text_colors: List[str], bg_colors: List[str], color_idx: Dict) -> List[str]:
+    """
+    Replace text colors that conflict with background colors.
+    
+    Args:
+        text_colors: List of current text color names
+        bg_colors: List of background color names detected
+        color_idx: Color index mapping
+        
+    Returns:
+        Updated list of text colors with conflicts resolved
+    """
+    if not bg_colors or not text_colors:
+        return text_colors
+    
+    # Normalize background colors to lowercase
+    bg_colors_lower = [c.lower() for c in bg_colors]
+    
+    # Define high-contrast alternatives
+    # If background contains black/dark colors, use white/light colors
+    # If background contains white/light colors, use black/dark colors
+    dark_bg_colors = {'black', 'darkslategray', 'dimgray', 'darkolivegreen', 'midnightblue',
+                      'saddlebrown', 'darkslateblue', 'maroon', 'darkgreen', 'darkkhaki',
+                      'darkgray', 'darkcyan', 'darkred', 'indigo', 'darkblue', 'darkmagenta',
+                      'darkviolet', 'navy'}
+    
+    # Check if background is predominantly dark
+    is_dark_bg = any(bg_color in dark_bg_colors for bg_color in bg_colors_lower)
+    
+    updated_colors = []
+    replaced_count = 0
+    
+    for color in text_colors:
+        color_lower = color.lower()
+        
+        # Check if this color conflicts with any background color
+        conflicts = False
+        for bg_color in bg_colors_lower:
+            # Direct match or similar color (e.g., "purple" conflicts with "darkpurple")
+            if color_lower == bg_color or color_lower in bg_color or bg_color in color_lower:
+                conflicts = True
+                break
+        
+        if conflicts:
+            # Replace with high-contrast color
+            if is_dark_bg:
+                replacement = 'white'
+            else:
+                replacement = 'black'
+            
+            # Make sure replacement is in color_idx
+            if replacement not in color_idx:
+                replacement = 'black'  # Final fallback
+            
+            updated_colors.append(replacement)
+            replaced_count += 1
+        else:
+            updated_colors.append(color)
+    
+    return updated_colors
+
+
+def remove_duplicate_texts(text_elements: List[str]) -> List[str]:
+    """
+    Remove duplicate text elements while preserving order (keep first occurrence).
+    
+    Args:
+        text_elements: List of text strings
+        
+    Returns:
+        List with duplicates removed
+    """
+    seen = set()
+    unique_texts = []
+    
+    for text in text_elements:
+        text_normalized = text.strip().lower()
+        if text_normalized not in seen:
+            seen.add(text_normalized)
+            unique_texts.append(text)
+    
+    return unique_texts
+
+
+def filter_redundant_title_topic(text_elements: List[str], full_caption: str) -> List[str]:
+    """
+    Filter out text elements starting with "Title:" or "Topic:" if they duplicate
+    content from the first sentence of full_caption.
+    
+    Args:
+        text_elements: List of text strings
+        full_caption: Full image caption
+        
+    Returns:
+        Filtered list of text elements
+    """
+    # Extract the first sentence (up to first period after a closing parenthesis or quote)
+    first_sentence_match = re.search(r'^[^.]+[.)"][.]\s', full_caption)
+    if not first_sentence_match:
+        # Fallback: take everything up to first ". " or just return all texts
+        first_sentence_match = re.search(r'^[^.]+\.\s', full_caption)
+    
+    first_sentence = first_sentence_match.group(0) if first_sentence_match else full_caption[:200]
+    first_sentence_lower = first_sentence.lower()
+    
+    filtered_texts = []
+    
+    for text in text_elements:
+        text_stripped = text.strip()
+        
+        # Check if text starts with "Title:" or "Topic:"
+        if text_stripped.startswith("Title:") or text_stripped.startswith("Topic:"):
+            # Extract content after "Title:" or "Topic:"
+            if text_stripped.startswith("Title:"):
+                content = text_stripped[6:].strip()
+            else:  # Topic:
+                content = text_stripped[6:].strip()
+            
+            # Check if this content appears in the first sentence
+            content_lower = content.lower()
+            if content_lower in first_sentence_lower:
+                # This is a duplicate, skip it
+                continue
+        
+        filtered_texts.append(text)
+    
+    return filtered_texts
 
 
 def calculate_bbox_center_y(bbox: Dict) -> float:
@@ -639,8 +835,24 @@ def merge_narrator_data(
         image_elements = extract_images_from_caption(full_image_caption)
         text_elements = extract_text_elements(full_image_caption)
         
+        # Validate and clean text elements
+        original_text_count = len(text_elements)
+        
+        # 1. Remove duplicates
+        text_elements = remove_duplicate_texts(text_elements)
+        duplicates_removed = original_text_count - len(text_elements)
+        
+        # 2. Filter redundant Title:/Topic: texts
+        text_elements_before_filter = len(text_elements)
+        text_elements = filter_redundant_title_topic(text_elements, full_image_caption)
+        redundant_filtered = text_elements_before_filter - len(text_elements)
+        
         print(f"\nInfographic {wiki_idx + 1}/{len(infographic_generated)} (wiki {wiki_id}):")
         print(f"  Found {len(image_elements)} image elements, {len(text_elements)} text elements")
+        if duplicates_removed > 0:
+            print(f"  Removed {duplicates_removed} duplicate text elements")
+        if redundant_filtered > 0:
+            print(f"  Filtered {redundant_filtered} redundant title/topic texts")
         
         # Find all suitable layouts
         suitable_layouts = find_suitable_layouts_for_content(
@@ -803,24 +1015,37 @@ def merge_narrator_data(
 
         # Layer 1: Add background layer from extracted_bboxes (always second)
         # Background should use the background bbox from the layout
+        bg_caption = ""
         if len(background_bboxes) > 0:
             bg_bbox = background_bboxes[0]
+            bg_caption = bg_bbox.get('caption', '')
             bg_layer = {
                 'category': 'element',
                 'top_left': bg_bbox['top_left'],
                 'bottom_right': bg_bbox['bottom_right'],
-                'caption': bg_bbox.get('caption', '')  # Use caption from extracted background
+                'caption': bg_caption
             }
             output_layers.append(bg_layer)
         else:
             # Fallback: if no background bbox found, use a default full image background with default caption
+            bg_caption = "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no discernible features. It's a simple, unadorned white background with no additional elements."
             bg_layer = {
                 'category': 'element',
                 'top_left': [0, 0],
                 'bottom_right': [896, 2240],
-                'caption': "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no discernible features. It's a simple, unadorned white background with no additional elements."
+                'caption': bg_caption
             }
             output_layers.append(bg_layer)
+        
+        # Extract background colors from caption and check for conflicts with text colors
+        bg_colors = extract_background_color_keywords(bg_caption)
+        if bg_colors:
+            original_layout_colors = layout_colors.copy()
+            layout_colors = replace_conflicting_colors(layout_colors, bg_colors, color_idx)
+            colors_replaced = sum(1 for i in range(len(original_layout_colors)) 
+                                if i < len(layout_colors) and original_layout_colors[i] != layout_colors[i])
+            if colors_replaced > 0:
+                print(f"  Replaced {colors_replaced} text colors conflicting with background ({', '.join(bg_colors[:3])}{'...' if len(bg_colors) > 3 else ''})")
 
         # Select figure bboxes to match all image elements with better canvas coverage
         num_figures_needed = len(image_elements)

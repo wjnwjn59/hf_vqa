@@ -65,7 +65,8 @@ export PYTHONPATH="./:$PYTHONPATH"
 
 python src/data/narrator/merge_narrator_bboxes.py \
     --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
-    --infographic-dir "./src/data/narrator/infographic"
+    --infographic-dir "./src/data/narrator/infographic" \
+    --output-dir "./src/data/narrator/wiki" 
 ```
 
 ## Create bizgen data
@@ -111,6 +112,21 @@ python inference.py \
     --wiki_path ../narrator/wiki/failed.json \
     --device cuda:0 \
     --dataset_name squad_v2
+```
+
+## Prepair the data for training
+
+```bash
+conda activate wiki
+export PYTHONPATH="./:$PYTHONPATH"
+
+python src/data/narrator/prepare_dataset.py \
+    --wiki-dir src/data/narrator/wiki \
+    --image-source-dir src/data/bizgen/output \
+    --reasoning-file src/data/narrator/generated_reasonings.jsonl \
+    --dataset-name squad_v2 \
+    --output-dir dataset \
+    --type train
 ```
 
 ## Convert to Training Format
