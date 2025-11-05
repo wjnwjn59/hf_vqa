@@ -203,6 +203,7 @@ def extract_images_from_caption(full_caption: str) -> List[Dict]:
     """
     Extract image descriptions from caption using new format.
     Format: "description" (figure) or "description" (figure). or "description" (figure),
+    Also supports: "'description' (figure)" with single quotes inside double quotes
     
     Args:
         full_caption: The full image caption text
@@ -212,12 +213,20 @@ def extract_images_from_caption(full_caption: str) -> List[Dict]:
     """
     image_elements = []
     
-    # Pattern to match "content" (figure) with optional punctuation after
+    # Pattern 1: Match "content" (figure) with optional punctuation after
     # Matches: (figure), (figure). (figure), (figure); etc.
-    pattern = r'"([^"]+)"\s*\(figure\)[.,;:!?]?'
-    matches = re.findall(pattern, full_caption, re.IGNORECASE)
+    pattern1 = r'"([^"]+)"\s*\(figure\)[.,;:!?]?'
+    matches1 = re.findall(pattern1, full_caption, re.IGNORECASE)
     
-    for description in matches:
+    # Pattern 2: Match "'content' (figure)" - single quotes inside double quotes
+    # Matches: "'content' (figure)", "'content' (figure).", etc.
+    pattern2 = r"\"'([^']+)'\s*\(figure\)\s*\"[.,;:!?]?"
+    matches2 = re.findall(pattern2, full_caption, re.IGNORECASE)
+    
+    # Combine matches from both patterns
+    all_matches = matches1 + matches2
+    
+    for description in all_matches:
         description = description.strip()
         
         # Check if description already starts with proper prefix
@@ -249,6 +258,7 @@ def extract_text_elements(full_caption: str) -> List[str]:
     """
     Extract text content from caption (quoted text with (text) tag).
     Format: "text content" (text) or "text content" (text). or "text content" (text),
+    Also supports: "'text content' (text)" with single quotes inside double quotes
     
     Args:
         full_caption: The full image caption text
@@ -258,12 +268,20 @@ def extract_text_elements(full_caption: str) -> List[str]:
     """
     text_elements = []
     
-    # Pattern to match "content" (text) with optional punctuation after
+    # Pattern 1: Match "content" (text) with optional punctuation after
     # Matches: (text), (text). (text), (text); etc.
-    pattern = r'"([^"]+)"\s*\(text\)[.,;:!?]?'
-    matches = re.findall(pattern, full_caption, re.IGNORECASE)
+    pattern1 = r'"([^"]+)"\s*\(text\)[.,;:!?]?'
+    matches1 = re.findall(pattern1, full_caption, re.IGNORECASE)
     
-    for text_content in matches:
+    # Pattern 2: Match "'content' (text)" - single quotes inside double quotes
+    # Matches: "'content' (text)", "'content' (text).", etc.
+    pattern2 = r"\"'([^']+)'\s*\(text\)\s*\"[.,;:!?]?"
+    matches2 = re.findall(pattern2, full_caption, re.IGNORECASE)
+    
+    # Combine matches from both patterns
+    all_matches = matches1 + matches2
+    
+    for text_content in all_matches:
         text_elements.append(text_content.strip())
     
     return text_elements
@@ -274,6 +292,7 @@ def clean_caption_text(caption: str) -> str:
     Clean up caption text - remove (text) and (figure) tags along with their quoted content.
     This creates a clean narrative without the tagged elements.
     Handles tags with optional punctuation: (figure). (figure), (text). (text), etc.
+    Also handles: "'content' (text)" and "'content' (figure)" formats
     
     Args:
         caption: The full image caption with tags
@@ -284,8 +303,19 @@ def clean_caption_text(caption: str) -> str:
     # Remove "content" (figure) with optional punctuation - remove both quotes and tag
     caption = re.sub(r'"[^"]+"\s*\(figure\)[.,;:!?]?', '', caption, flags=re.IGNORECASE)
     
+    # Remove "'content' (figure)" format - single quotes inside double quotes
+    caption = re.sub(r"\"'[^']+'\s*\(figure\)\s*\"[.,;:!?]?", '', caption, flags=re.IGNORECASE)
+    
     # Remove (text) tag with optional punctuation but keep the quoted text content
     caption = re.sub(r'\(text\)[.,;:!?]?', '', caption, flags=re.IGNORECASE)
+    
+    # Remove "'content' (text)" format - single quotes inside double quotes (keep content)
+    # First extract and replace with just the content
+    def replace_single_quote_text(match):
+        content = match.group(1)
+        return f'"{content}"'
+    
+    caption = re.sub(r"\"'([^']+)'\s*\(text\)\s*\"[.,;:!?]?", replace_single_quote_text, caption, flags=re.IGNORECASE)
     
     # Clean up extra whitespace and normalize spacing
     caption = re.sub(r'\s+', ' ', caption).strip()
@@ -673,6 +703,7 @@ def select_spatially_distributed_bboxes(
     
     # If we still don't have enough, fill with largest remaining non-overlapping bboxes
     if len(selected) < target_count:
+        # Fill remaining slots with any non-overlapping bboxes
         for candidate in sorted_bboxes:
             if len(selected) >= target_count:
                 break
