@@ -77,13 +77,16 @@ class OpenAIInference:
             return figs, missing_k, missing_pairs, coverage, score
 
         def _answer_text(answer: Any) -> str:
+            """Extract answer text, preferring the SHORTEST answer when multiple exist."""
             if isinstance(answer, dict):
                 val = answer.get("text", "")
-                if isinstance(val, list):
-                    return str(val[0]) if val else ""
+                if isinstance(val, list) and val:
+                    # Return SHORTEST answer instead of first one
+                    return str(min(val, key=len))
                 return str(val)
-            if isinstance(answer, list):
-                return str(answer[0]) if answer else ""
+            if isinstance(answer, list) and answer:
+                # Return SHORTEST answer instead of first one
+                return str(min(answer, key=len))
             return str(answer)
 
         def _build_feedback(figs: int, missing_pairs: List[Dict]) -> str:
@@ -198,6 +201,7 @@ def load_bizgen_template(template_path):
     return Template(template_content)
 
 def extract_keywords_from_answers(qa_list: List[Dict], debug: bool = False) -> Set[str]:
+    """Extract keywords from answers, using SHORTEST answer when multiple exist."""
     keywords = set()
     for qa_idx, qa in enumerate(qa_list):
         answer = qa.get('answer', '')
@@ -207,12 +211,14 @@ def extract_keywords_from_answers(qa_list: List[Dict], debug: bool = False) -> S
         if isinstance(answer, dict):
             if 'text' in answer:
                 if isinstance(answer['text'], list) and answer['text']:
-                    answer_text = answer['text'][0]
+                    # Use SHORTEST answer instead of first one
+                    answer_text = min(answer['text'], key=len)
                 else:
                     answer_text = str(answer['text'])
         elif isinstance(answer, list):
             if answer:
-                answer_text = str(answer[0])
+                # Use SHORTEST answer instead of first one
+                answer_text = str(min(answer, key=len))
         else:
             answer_text = str(answer)
         if not answer_text:
@@ -259,6 +265,7 @@ def validate_keywords_in_output(output: str, keywords: Set[str], threshold: floa
     return passed
 
 def find_missing_keyword_answers(output: str, keywords: Set[str], qa_list: List[Dict]) -> Tuple[Set[str], List[Dict]]:
+    """Find missing keywords and their QA pairs, using SHORTEST answer when multiple exist."""
     if not keywords:
         return set(), []
     output_lower = output.lower()
@@ -276,12 +283,14 @@ def find_missing_keyword_answers(output: str, keywords: Set[str], qa_list: List[
         if isinstance(answer, dict):
             if 'text' in answer:
                 if isinstance(answer['text'], list) and answer['text']:
-                    answer_text = answer['text'][0]
+                    # Use SHORTEST answer instead of first one
+                    answer_text = min(answer['text'], key=len)
                 else:
                     answer_text = str(answer['text'])
         elif isinstance(answer, list):
             if answer:
-                answer_text = str(answer[0])
+                # Use SHORTEST answer instead of first one
+                answer_text = str(min(answer, key=len))
         else:
             answer_text = str(answer)
         if not answer_text:

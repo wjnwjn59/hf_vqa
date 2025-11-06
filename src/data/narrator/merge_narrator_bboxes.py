@@ -389,17 +389,18 @@ def get_color_name_from_id(color_id: int, color_idx: Dict) -> str:
 
 def is_white_or_light_color(color_name: str) -> bool:
     """
-    Check if a color is white or very light (near-white).
+    Check if a color is white, very light (near-white), or pink.
     These colors are hard to read on white/light backgrounds.
     
     Args:
         color_name: Name of the color
         
     Returns:
-        True if color is white or near-white
+        True if color is white, near-white, or pink
     """
-    # List of white and near-white colors that should be replaced
+    # List of white, near-white, and pink colors that should be replaced with black
     white_like_colors = {
+        # White and near-white colors
         'white', 'whitesmoke', 'snow', 'ghostwhite', 'floralwhite',
         'linen', 'oldlace', 'ivory', 'seashell', 'beige',
         'cornsilk', 'lavenderblush', 'mistyrose', 'papayawhip',
@@ -409,7 +410,11 @@ def is_white_or_light_color(color_name: str) -> bool:
         'wheat', 'navajowhite', 'moccasin', 'peachpuff', 'palegoldenrod',
         'khaki', 'lightgray', 'lightpink', 'powderblue', 'lightblue',
         'lightsteelblue', 'lightskyblue', 'lightgreen', 'paleturquoise',
-        'palegreen', 'thistle'
+        'palegreen', 'thistle',
+        # Pink colors (all variants)
+        'pink', 'lightpink', 'hotpink', 'deeppink', 'palevioletred',
+        'mediumvioletred', 'lightcoral', 'salmon', 'lightsalmon', 
+        'darksalmon', 'rosybrown'
     }
     
     return color_name.lower() in white_like_colors
@@ -417,14 +422,14 @@ def is_white_or_light_color(color_name: str) -> bool:
 
 def replace_white_color_with_black(color_name: str, color_idx: Dict) -> str:
     """
-    Replace white or near-white colors with black for better readability.
+    Replace white, near-white, or pink colors with black for better readability.
     
     Args:
         color_name: Original color name
         color_idx: Color index mapping
         
     Returns:
-        Color name (black if original was white-like, otherwise unchanged)
+        Color name (black if original was white-like or pink, otherwise unchanged)
     """
     if is_white_or_light_color(color_name):
         return 'black'
@@ -777,7 +782,7 @@ def find_suitable_layouts_for_content(
         element_capacity = len(available_elements)
         
         # Calculate score based on how well this layout matches requirements
-        element_score = min(element_capacity, image_count) / max(image_count, 1)
+        element_score = min(element_capacity, simage_count) / max(image_count, 1)
         text_score = min(text_capacity, text_count) / max(text_count, 1)
         
         # Bonus for exact match or having more capacity than needed
@@ -901,7 +906,7 @@ def merge_narrator_data(
             len(image_elements), 
             len(text_elements), 
             extracted_bboxes, 
-            min_text_area=15000
+            min_text_area=20000
         )
         
         # Fallback mechanism if no suitable layout found
@@ -914,7 +919,7 @@ def merge_narrator_data(
                 len(image_elements), 
                 len(text_elements), 
                 extracted_bboxes, 
-                min_text_area=10000
+                min_text_area=15000
             )
             
             if not suitable_layouts:

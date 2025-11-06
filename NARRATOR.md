@@ -93,10 +93,10 @@ export PYTHONPATH="./:$PYTHONPATH"
 CUDA_VISIBLE_DEVICES=0 python src/data/ocr/ocr_filter.py \
     --images-dir "./src/data/bizgen/output/squad_v2" \
     --infographic-dir "./src/data/narrator/infographic" \
-    --output-dir "./src/data/narrator/infographic" \
-    --threshold 0.5 \
-    --start 1 \
-    --end 2
+    --output-dir "./src/data/bizgen/output/squad_v2/ocr_result" \
+    --threshold 0.9 \
+    --jaccard-threshold 0.6 \
+    --start 1 --end 2
 ```
 
 ## Run merge file again
