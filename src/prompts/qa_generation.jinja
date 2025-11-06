@@ -1,38 +1,35 @@
 You are a dispassionate, rigorous, and highly experienced visual reasoning planner.
 
+Your objective is to produce exactly **K** new and distinct question–answer pairs, returned as a single JSON array. Each question must force a visual reasoning step that connects a specific `"figure_layout"` (e.g., 'the diagram of people around a record player') to a specific `"text_content"` block (e.g., 'the text about musical influence'). Questions answerable by *only* text or *only* a figure are forbidden. Do not reuse, rephrase, or slightly modify the provided **EXISTING_QA** pairs; each new pair must reference a different aspect or reasoning step. You must strictly adhere to all rules below.
+
 You will be provided with:
-1)  **INPUT_JSON**: {{ layout_json_string }} (A structured json description of the infographic content including overall context, text blocks, and figure layouts)
-2)  **EXISTING_QA**: {% for qa in qa_samples -%} Q{{ qa.id }}: {{ qa.question }} | A{{ qa.id }}: {{ qa.answer }} {% endfor %} (A list of existing question–answer pairs already associated with the same infographic)
-3)  **K**: {{ k }} (The number of new pairs to generate)
+- **INPUT_JSON**: {{ layout_json_string }} (A structured json description of the infographic content including overall context, text blocks, and figure layouts)
+- **EXISTING_QA**: {% for qa in qa_samples -%} Q{{ qa.id }}: {{ qa.question }} | A{{ qa.id }}: {{ qa.answer }} {% endfor %} (A list of existing question–answer pairs already associated with the same infographic)
+- **K**: {{ k }} (The number of new pairs to generate)
 
-Your task is to produce exactly **K** new and distinct question–answer pairs, returned as a single JSON array, strictly adhering to all rules below.
+Your generated output must adhere to the following rules:
 
-### CORE REQUIREMENT (Mandatory)
--   Each question must force a visual reasoning step that connects a specific `"figure_layout"` (e.g., 'the diagram of people around a record player') to a specific `"text_content"` block (e.g., 'the text about musical influence').
--   Questions answerable by *only* text or *only* a figure are forbidden.
--   Do not reuse, rephrase, or slightly modify the provided **EXISTING_QA** pairs. Each new pair must reference a different aspect or reasoning step.
+- Rules for the "question" key:
+  - Write clear, natural questions that read like ordinary language.
+  - Vary interrogative forms (what, which, where, how many, yes–no).
+  - Phrase questions naturally to ask about the text-figure connection. For example: "What text does the illustration of [figure description] relate to?" or "Which piece of text explains the diagram showing [figure description]?"
+  - Avoid awkward phrasing, stilted repetition, and meta commentary.
 
-### QUESTION NATURALNESS (Rules for "question" key)
--   Write clear, natural questions that read like ordinary language.
--   Vary interrogative forms (what, which, where, how many, yes–no).
--   Phrase questions naturally to ask about the text-figure connection, for example: "What text does the illustration of [figure description] relate to?" or "Which piece of text explains the diagram showing [figure description]?"
--   Avoid awkward phrasing, stilted repetition, and meta commentary.
+- Rules for the "answer" key:
+  - Each answer must be a **single factoid word or a very short, concise phrase** (like a name, label, or number) taken directly from the infographic.
+  - Answers like 'yes or no' are acceptable *only* if the question is a yes/no question.
+  - If the answer is textual, reproduce the single word or short phrase verbatim with original casing and spacing.
 
-### ANSWER FIDELITY (Rules for "answer" key)
--   Each answer must be a **single factoid word or a very short, concise phrase** (like a name, label, or number) taken directly from the infographic.
--   Answers like 'yes or no' are acceptable *only* if the question is a yes/no question.
--   If the answer is textual, reproduce the single word or short phrase verbatim with original casing and spacing.
+- Rules for the "explanation" key:
+  - Include a brief natural explanation that justifies the concise, factoid answer.
+  - The explanation **must** explicitly mention both the `"figure_layout"` (e.g., "the illustration of soda cans") and the `"text_content"` (e.g., "the text mentioning a Pepsi campaign") that are being connected.
+  - Do not reveal chain of thought; provide only a short evidence-based justification.
 
-### EXPLANATION RULES (Rules for "explanation" key)
--   Include a brief natural explanation that justifies the concise, factoid answer.
--   The explanation **must** explicitly mention both the `"figure_layout"` (e.g., "the illustration of soda cans") and the `"text_content"` (e.g., "the text mentioning a Pepsi campaign") that are being connected.
--   Do not reveal chain of thought; provide only a short evidence-based justification.
-
-### OUTPUT FORMAT (Strict)
--   Return a single valid json array containing exactly **K** objects.
--   Each object must include three keys: `"question"`, `"answer"`, and `"explanation"`.
--   Use standard json with double quotes, no comments, and no trailing commas.
--   Do not include additional formatting outside the json array.
+- Rules for the Output Format (Strict):
+  - Return a single valid json array containing exactly **K** objects.
+  - Each object must include three keys: `"question"`, `"answer"`, and `"explanation"`.
+  - Use standard json with double quotes, no comments, and no trailing commas.
+  - Do not include additional formatting outside the json array.
 
 Return only the json array below, replacing the placeholders.
 
