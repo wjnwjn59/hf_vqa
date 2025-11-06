@@ -1930,6 +1930,23 @@
         },
         "id": "56d4ec422ccc5a1400d83365"
       }
+    ],
+    "generated_qa_pairs": [
+      {
+        "question": "Which text explains the illustration of a long-term brand partnership represented by a symbolic handshake?",
+        "answer": "Beyoncé partnered with Pepsi beginning in 2002 and appeared in a 2004 gladiator-themed commercial with Britney Spears, Pink, and Enrique Iglesias",
+        "explanation": "The handshake figure symbolizes the long-term partnership, which is detailed in the text describing the 2002 start and 2004 commercial."
+      },
+      {
+        "question": "What text describes the cartoon scene depicting a staged gladiator-themed commercial with multiple performers together?",
+        "answer": "Beyoncé partnered with Pepsi beginning in 2002 and appeared in a 2004 gladiator-themed commercial with Britney Spears, Pink, and Enrique Iglesias",
+        "explanation": "The gladiator-themed commercial figure directly corresponds to the text mentioning the 2004 commercial and its participants."
+      },
+      {
+        "question": "Which text explains the silhouette of a person writing a formal open letter to a public figure?",
+        "answer": "The Center for Science in the Public Interest wrote an open letter asking her to reconsider the deal and donate proceeds because of product health concerns",
+        "explanation": "The silhouette figure of writing a letter matches the text about the Center for Science in the Public Interest's open letter."
+      }
     ]
   },
   {
@@ -5663,6 +5680,23 @@
           ]
         },
         "id": "56d1cd98e7d4791d009021e8"
+      }
+    ],
+    "generated_qa_pairs": [
+      {
+        "question": "Which text corresponds to the figure of a coastal scene with a small house and musical manuscript?",
+        "answer": "Majorca",
+        "explanation": "The illustration of a coastal scene with a small house and musical manuscript relates to the text about Chopin's productive composition period in Majorca."
+      },
+      {
+        "question": "Which text explains the figure showing a portrait silhouette with a medical symbol?",
+        "answer": "tuberculosis",
+        "explanation": "The figure showing a portrait silhouette with a medical symbol relates to the text mentioning Chopin's probable cause of death, tuberculosis."
+      },
+      {
+        "question": "What text does the illustration of two friends in conversation relate to?",
+        "answer": "Franz Liszt",
+        "explanation": "The illustration of two friends in conversation relates to the text about Chopin's friendship with fellow composer Franz Liszt."
       }
     ]
   },
@@ -9679,6 +9713,23 @@
           ]
         },
         "id": "56d3148359d6e4140014621c"
+      }
+    ],
+    "generated_qa_pairs": [
+      {
+        "question": "Which text explains the diagram of an aristocratic residence?",
+        "answer": "accomplished composer and aspiring cellist",
+        "explanation": "The diagram of an aristocratic residence relates to the text describing Prince Antoni Radziwiłł as an accomplished composer and aspiring cellist."
+      },
+      {
+        "question": "Which opera director is mentioned in the text related to the opera house diagram?",
+        "answer": "Gaspare Spontini",
+        "explanation": "The diagram of an opera house interior relates to the text mentioning Gaspare Spontini as the opera director."
+      },
+      {
+        "question": "What is the opus number of the composition related to the pianist and cellist diagram?",
+        "answer": "Op. 3",
+        "explanation": "The diagram of a pianist and cellist relates to the text mentioning the composition's opus number, Op. 3."
       }
     ]
   },

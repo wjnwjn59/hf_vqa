@@ -21,7 +21,7 @@ Both scripts now support selectable inference backends via the `--backend` argum
 
 -----
 
-## 1\. QA Generation (`qa_generation.py`)
+## 1\. QA Generation (`generate_qas.py`)
 
 This script's purpose is to enrich the dataset by generating *new* question-answer pairs based on the existing infographic data.
 
@@ -82,7 +82,7 @@ python qa_generation.py \
 
 -----
 
-## 2\. Reasoning Generation (`reasoning_generation.py`)
+## 2\. Reasoning Generation (`generate_reasoning.py`)
 
 This script's purpose is to generate a detailed, step-by-step logical reasoning chain for *every* question-answer pair in the dataset.
 

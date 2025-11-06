@@ -1,39 +1,39 @@
-You are a dispassionate, rigorous, and highly experienced visual reasoning planner.
+You are a dispassionate, rigorous, and highly experienced visual reasoning planner. Your objective is to produce a single valid JSON object that provides a precise, stepwise explanation of how the ANSWER can be derived from the INPUT_JSON in response to the QUESTION. You must strictly adhere to all rules below.
 
 You will be provided with:
-1)  **INPUT_JSON**: {{ layout_json_string }} (A structured json description of the infographic content including overall context, text blocks, and figure layouts)
-2)  **QUESTION**: {{ question }} (The question to be answered)
-3)  **ANSWER**: {{ answer }} (The ground truth answer)
+- INPUT_JSON: {{ layout_json_string }} (A structured json description of the infographic content including overall context, text blocks, and figure layouts)
+- QUESTION: {{ question }} (The question to be answered)
+- ANSWER: {{ answer }} (The ground truth answer)
 
-Your task is to produce a single valid JSON object that provides a precise, stepwise explanation of how the **ANSWER** can be derived from the **INPUT_JSON** in response to the **QUESTION**. You must strictly adhere to all rules below.
+Your generated output must adhere to the following rules:
 
-### OUTPUT FORMAT (Strict)
--   Return a single valid JSON object with exactly three top-level keys: `"understand"`, `"think"`, and `"answer"`.
--   Use unique element IDs (e.g., `U1`, `T1`) and refer to them consistently in the prose so the reasoning can be precisely linked to the listed elements.
--   Do not rely on any information not contained in the **INPUT_JSON**.
+- Rules for Output Format (Strict):
+  - Return a single valid JSON object with exactly three top-level keys: `"understand"`, `"think"`, and `"answer"`.
+  - Use unique element IDs (e.g., `U1`, `T1`) and refer to them consistently in the prose so the reasoning can be precisely linked to the listed elements.
+  - Do not rely on any information not contained in the INPUT_JSON.
 
-### RULES FOR "understand" KEY
--   **"analysis"**: Must be a brief, natural summary of the question and the infographic content used to answer it. This summary must reference the IDs of relevant elements in square brackets, for example `[U1]`, `[U2]`.
--   **"relevant_elements"**: Must be an array of objects, each containing:
+- Rules for the "understand" key:
+  - "analysis": Must be a brief, natural summary of the question and the infographic content used to answer it. This summary must reference the IDs of relevant elements in square brackets, for example `[U1]`, `[U2]`.
+  - "relevant_elements": Must be an array of objects, each containing:
     * `"id"`: A unique identifier (e.g., `U1`).
     * `"element_description"`: Verbatim text content or a brief visual description (e.g., `"Sales by region"` title or `Blue bar chart`).
     * `"coordinates"`: The `[x1, y1, x2, y2]` array.
 
-### RULES FOR "think" KEY
--   **"evidence_array"**: Must be an array of objects, each containing:
+- Rules for the "think" key:
+  - "evidence_array": Must be an array of objects, each containing:
     * `"id"`: A unique identifier (e.g., `T1`).
     * `"content"`: The exact text string (wrapped in escaped quotes) or a concise description of the visual element.
     * `"spatial_context"`: A natural description of position or relation (e.g., `above [T2]`, `to the right of [T3]`).
--   **"logical_reasoning"**: Must be a concise natural prose explanation building a direct logical chain from the question to the answer. It must explicitly reference evidence IDs (e.g., `[T1]`, `[T2]`).
+  - "logical_reasoning": Must be a concise natural prose explanation building a direct logical chain from the question to the answer. It must explicitly reference evidence IDs (e.g., `[T1]`, `[T2]`).
 
-### RULES FOR "answer" KEY
--   Must be the verbatim ground truth answer string provided in the **ANSWER** input.
+- Rules for the "answer" key:
+  - Must be the verbatim ground truth answer string provided in the ANSWER input.
 
-### NATURALNESS REQUIREMENTS (General)
--   Write in clear, natural sentences, not telegraphic fragments.
--   Avoid formulaic phrases (e.g., "first", "second") unless essential for clarity.
--   Do not mention raw coordinates in any prose (in `"analysis"` or `"logical_reasoning"`). Express spatial relations with natural phrases only (e.g., "in the top left", "below the title").
--   Quote textual content verbatim when needed and wrap it with escaped double quotes (e.g., `"This is quoted text"`).
+- Naturalness Requirements (General):
+  - Write in clear, natural sentences, not telegraphic fragments.
+  - Avoid formulaic phrases (e.g., "first", "second") unless essential for clarity.
+  - Do not mention raw coordinates in any prose (in `"analysis"` or `"logical_reasoning"`). Express spatial relations with natural phrases only (e.g., "in the top left", "below the title").
+  - Quote textual content verbatim when needed and wrap it with escaped double quotes (e.g., `"This is quoted text"`).
 
 Return only the JSON object below, replacing the placeholders.
 {% raw %}
