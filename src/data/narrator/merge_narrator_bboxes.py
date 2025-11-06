@@ -51,6 +51,32 @@ def save_json(data: Any, filepath: str):
         json.dump(data, f, indent=4, ensure_ascii=False)
 
 
+def count_infographic_files_in_directory(directory_path: str) -> int:
+    """
+    Count the number of infographic*.json files in the directory.
+    
+    Args:
+        directory_path: Path to directory containing infographic*.json files
+    
+    Returns:
+        Number of infographic files found (max file index)
+    """
+    if not os.path.exists(directory_path):
+        return 0
+    
+    max_file_idx = 0
+    for filename in os.listdir(directory_path):
+        if filename.startswith('infographic') and filename.endswith('.json'):
+            # Extract file index from filename (e.g., infographic000001.json -> 1)
+            try:
+                file_idx = int(filename.replace('infographic', '').replace('.json', ''))
+                max_file_idx = max(max_file_idx, file_idx)
+            except ValueError:
+                continue
+    
+    return max_file_idx
+
+
 def load_infographic_files_from_directory(directory_path: str, start_file_idx: int, end_file_idx: int) -> List[Dict]:
     """
     Load infographic files from directory based on file index range.
@@ -782,7 +808,7 @@ def find_suitable_layouts_for_content(
         element_capacity = len(available_elements)
         
         # Calculate score based on how well this layout matches requirements
-        element_score = min(element_capacity, simage_count) / max(image_count, 1)
+        element_score = min(element_capacity, image_count) / max(image_count, 1)
         text_score = min(text_capacity, text_count) / max(text_count, 1)
         
         # Bonus for exact match or having more capacity than needed
@@ -1467,7 +1493,10 @@ def main():
         '--end',
         type=int,
         default=None,
-        help='End file index for infographic generation (exclusive, 1-based). Ignored if --infor_path is specified.'
+        help='End file index for infographic generation (exclusive, 1-based). '
+             'If not specified, will auto-detect and process ALL files in the directory. '
+             'Example: if directory has 380 files, --end will default to 381 (process all 19,000 contexts). '
+             'Ignored if --infor_path is specified.'
     )
     parser.add_argument(
         '--output-dir',
@@ -1556,13 +1585,25 @@ def main():
         start_wiki_idx = 0
     else:
         # Directory mode: load from --infographic-dir with --start and --end
-        end_file_idx = args.end if args.end is not None else (args.start + 100)  # Default to 100 files
+        # If --end is not specified, calculate based on total files in directory
+        if args.end is None:
+            # Count total files in directory to determine max end index
+            max_file_idx = count_infographic_files_in_directory(infographic_dir)
+            if max_file_idx > 0:
+                end_file_idx = max_file_idx + 1  # +1 because end is exclusive
+                print(f"  Auto-detected {max_file_idx} infographic files in directory")
+            else:
+                # Fallback: default to 100 files if directory is empty or doesn't exist
+                end_file_idx = args.start + 100
+                print(f"  Warning: Could not detect files, defaulting to {end_file_idx - args.start} files")
+        else:
+            end_file_idx = args.end
         
         # Validate file indices
         if args.start < 1:
             raise ValueError("Start file index must be >= 1")
-        if args.end is not None and args.end <= args.start:
-            raise ValueError("End file index must be > start file index")
+        if end_file_idx <= args.start:
+            raise ValueError(f"End file index ({end_file_idx}) must be > start file index ({args.start})")
         
         print(f"  - Infographics: {infographic_dir} (directory)")
         print(f"  - File index range: {args.start} to {end_file_idx-1} (files: {end_file_idx - args.start})")
