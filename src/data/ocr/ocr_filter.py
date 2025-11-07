@@ -291,16 +291,16 @@ def match_texts_with_bert(
     if total_expected == 0:
         return 0, 0, []
     
-    # Apply spell correction to ALL OCR texts FIRST
-    ocr_words_raw = []
+    # Apply spell correction to each OCR text fragment while preserving structure
+    ocr_texts_corrected = []
+    all_corrected_words = []  # Keep all corrected words for word-level matching
+    
     for text in ocr_texts:
-        ocr_words_raw.extend(text.split())
-    
-    # Correct all OCR words
-    ocr_words_corrected = apply_spell_correction(ocr_words_raw, spell_checker)
-    
-    # Use corrected OCR texts for all subsequent operations
-    ocr_texts_corrected = ocr_words_corrected  # Now use corrected version
+        words = text.split()
+        corrected_words = apply_spell_correction(words, spell_checker)
+        # Reconstruct the text with corrected words
+        ocr_texts_corrected.append(' '.join(corrected_words))
+        all_corrected_words.extend(corrected_words)
     
     # Group corrected OCR texts into sentences
     ocr_sentences = group_ocr_texts_to_sentences(ocr_texts_corrected)
@@ -351,7 +351,7 @@ def match_texts_with_bert(
         
         # If BERT fails, try Jaccard fallback with FULL OCR text (already spell-corrected)
         if not is_matched:
-            # Concatenate ALL corrected OCR texts (not grouped sentences)
+            # Concatenate ALL corrected OCR texts (reconstructed sentences)
             full_ocr_text = ' '.join(ocr_texts_corrected)
             
             # Calculate Jaccard similarity with full OCR text
@@ -371,7 +371,8 @@ def match_texts_with_bert(
                 # Tier 3: Try word-level coverage (OCR already spell-corrected above)
                 # Just check word intersection
                 expected_words = set(expected_text.lower().split())
-                ocr_word_set = set(ocr_texts_corrected)
+                # Use all corrected words from OCR
+                ocr_word_set = set(word.lower() for word in all_corrected_words)
                 words_found_count = len(expected_words.intersection(ocr_word_set))
                 words_expected_count = len(expected_words)
                 coverage = words_found_count / words_expected_count if words_expected_count > 0 else 0.0

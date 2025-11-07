@@ -63,16 +63,16 @@ This script's purpose is to enrich the dataset by generating *new* question-answ
 **Using Qwen (default):**
 
 ```bash
-python qa_generation.py \
+python src/data/narrator/generate_qas.py \
     --model_name "/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B" \
-    --layout_dir "/home/binhdt/hf_vqa/src/data/wiki/" \
+    --layout_dir "/home/thinhnp/hf_vqa/src/data/narrator/wiki" \
     --k_value 3
 ```
 
 **Using GPT (OpenAI):**
 
 ```bash
-python qa_generation.py \
+python src/data/narrator/generate_qas.py \
     --backend gpt \
     --openai_model "gpt-4o" \
     --openai_api_key "sk-..." \

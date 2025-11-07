@@ -96,7 +96,7 @@ CUDA_VISIBLE_DEVICES=0 python src/data/ocr/ocr_filter.py \
     --output-dir "./src/data/bizgen/output/squad_v2/ocr_result" \
     --threshold 0.9 \
     --jaccard-threshold 0.6 \
-    --start 1 --end 2
+    --start 1 --end 16
 ```
 
 ## Run merge file again
@@ -130,7 +130,7 @@ python inference.py \
 ## Prepair the data for training
 
 ```bash
-conda activate wiki
+conda activate wik
 export PYTHONPATH="./:$PYTHONPATH"
 
 python src/data/narrator/prepare_dataset.py \

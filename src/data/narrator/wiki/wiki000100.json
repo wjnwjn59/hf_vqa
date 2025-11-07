@@ -1,0 +1,235 @@
+[
+  {
+    "index": 5001,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Yuan Dynasty Overview\" focused on \"Mongol rule in China and interpretations\" At the top there is a simple emblematic map showing a stylized empire boundary represented by a generic imperial icon, described as and the headline is supported by a key phrase rendered as \"A Mongol dynasty of China\" In the middle a portrait-like silhouette of a mounted ruler appears as a symbolic scene, labeled with the explanatory phrase \"the line of Mongol rulers in China\" and paired with a second illustrative figure captioned as Further down a smaller academic quote appears as \"a non-Chinese polity\" next to a scholarly icon shown as Near the lower middle a concise historiographical summary is given as \"Kublai adopted Chinese trappings and institutions\" alongside an author credit phrase reading \"Rossabi wrote Kublai Khan biography\" At the bottom a final dating line states \"1271 to 1368 as Yuan dynasty years\" The overall style of the image is clean, informative, and museum-exhibit like, mixing clear labeled text blocks with simple symbolic figures."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and devoid of any content. It appears to be a solid, uniform color with no distinguishable features, objects, or text. The color is a light pink or beige, and there are no shadows, textures, or patterns visible. The image does not contain any information that can be described or analyzed."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          57,
+          514
+        ],
+        "bottom_right": [
+          838,
+          783
+        ],
+        "caption": "An illustration of Imperial seal-style emblem"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          57,
+          1170
+        ],
+        "bottom_right": [
+          838,
+          1439
+        ],
+        "caption": "An illustration of Ruler on horseback silhouette"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          57,
+          1821
+        ],
+        "bottom_right": [
+          838,
+          2090
+        ],
+        "caption": "An illustration of Open book symbol"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          444,
+          0
+        ],
+        "bottom_right": [
+          896,
+          514
+        ],
+        "caption": "An illustration of warlord on horse ride"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          103,
+          105
+        ],
+        "bottom_right": [
+          791,
+          323
+        ],
+        "caption": "Text \"Mongol rule in China and interpretations\" in <color-1>, <en-font-0>. ",
+        "text": "Mongol rule in China and interpretations"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          96,
+          323
+        ],
+        "bottom_right": [
+          793,
+          424
+        ],
+        "caption": "Text \"A Mongol dynasty of China\" in <color-1>, <en-font-0>. ",
+        "text": "A Mongol dynasty of China"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          1630
+        ],
+        "bottom_right": [
+          796,
+          1735
+        ],
+        "caption": "Text \"the line of Mongol rulers in China\" in <color-1>, <en-font-0>. ",
+        "text": "the line of Mongol rulers in China"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          639
+        ],
+        "bottom_right": [
+          796,
+          718
+        ],
+        "caption": "Text \"a non-Chinese polity\" in <color-1>, <en-font-0>. ",
+        "text": "a non-Chinese polity"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          1319
+        ],
+        "bottom_right": [
+          796,
+          1398
+        ],
+        "caption": "Text \"Kublai adopted Chinese trappings and institutions\" in <color-1>, <en-font-0>. ",
+        "text": "Kublai adopted Chinese trappings and institutions"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          891
+        ],
+        "bottom_right": [
+          796,
+          970
+        ],
+        "caption": "Text \"Rossabi wrote Kublai Khan biography\" in <color-2>, <en-font-0>. ",
+        "text": "Rossabi wrote Kublai Khan biography"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          312,
+          1216
+        ],
+        "bottom_right": [
+          796,
+          1294
+        ],
+        "caption": "Text \"1271 to 1368 as Yuan dynasty years\" in <color-1>, <en-font-0>. ",
+        "text": "1271 to 1368 as Yuan dynasty years"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Yuan Dynasty Overview\" (text) focused on \"Mongol rule in China and interpretations\" (text). At the top there is a simple emblematic map showing a stylized empire boundary represented by a generic imperial icon, described as \"Imperial seal-style emblem\" (figure), and the headline is supported by a key phrase rendered as \"A Mongol dynasty of China\" (text). In the middle a portrait-like silhouette of a mounted ruler appears as a symbolic scene, labeled with the explanatory phrase \"the line of Mongol rulers in China\" (text) and paired with a second illustrative figure captioned as \"Ruler on horseback silhouette\" (figure). Further down a smaller academic quote appears as \"a non-Chinese polity\" (text) next to a scholarly icon shown as \"Open book symbol\" (figure). Near the lower middle a concise historiographical summary is given as \"Kublai adopted Chinese trappings and institutions\" (text) alongside an author credit phrase reading \"Rossabi wrote Kublai Khan biography\" (text). At the bottom a final dating line states \"1271 to 1368 as Yuan dynasty years\" (text). The overall style of the image is clean, informative, and museum-exhibit like, mixing clear labeled text blocks with simple symbolic figures.",
+    "original_bbox_index": 58,
+    "context": "The Columbia Encyclopedia distinguishes between the Yuan dynasty and the other Mongol Empire khanates of Ilkhanate, Chagatai Khanate and the Golden Horde. It describes the Yuan dynasty as \"A Mongol dynasty of China that ruled from 1271 to 1368, and a division of the great empire conquered by the Mongols. Founded by Kublai Khan, who adopted the Chinese dynastic name of Yüan in 1271.\" The Encyclopedia Americana describes the Yuan dynasty as \"the line of Mongol rulers in China\" and adds that the Mongols \"proclaimed a Chinese-style Yüan dynasty at Khanbaliq (Beijing).\" The Metropolitan Museum of Art writes that the Mongol rulers of the Yuan dynasty \"adopted Chinese political and cultural models; ruling from their capitals in Dadu, they assumed the role of Chinese emperors,\" although Tibetologist Thomas Laird dismissed the Yuan dynasty as a non-Chinese polity and plays down its Chinese characteristics. The Metropolitan Museum of Art also noted that in spite of the gradual assimilation of Yuan monarchs, the Mongol rulers largely ignored the literati and imposed harsh policies discriminating against southern Chinese. In his Kublai Khan: His Life and Times, Rossabi explains that Kublai \"created government institutions that either resembled or were the same as the traditional Chinese ones\", and he \"wished to signal to the Chinese that he intended to adopt the trappings and style of a Chinese ruler\".",
+    "original_qa_pairs": [
+      {
+        "question": "How did the The Columbia Encyclopedia describe the Yuan dynasty?",
+        "answers": {
+          "text": [
+            "A Mongol dynasty of China"
+          ],
+          "answer_start": [
+            189
+          ]
+        },
+        "id": "56ccf12b62d2951400fa64f2"
+      },
+      {
+        "question": "How did the Encyclopedia Americana describe the Yuan Dynasty?",
+        "answers": {
+          "text": [
+            "the line of Mongol rulers in China"
+          ],
+          "answer_start": [
+            444
+          ]
+        },
+        "id": "56ccf12b62d2951400fa64f3"
+      },
+      {
+        "question": "What did Thomas Laird dismiss the Yuan dynasty as?",
+        "answers": {
+          "text": [
+            "a non-Chinese polity"
+          ],
+          "answer_start": [
+            846
+          ]
+        },
+        "id": "56ccf12b62d2951400fa64f4"
+      },
+      {
+        "question": "Who wrote the book Khubilai Khan?",
+        "answers": {
+          "text": [
+            "Rossabi"
+          ],
+          "answer_start": [
+            1168
+          ]
+        },
+        "id": "56ccf12b62d2951400fa64f5"
+      },
+      {
+        "question": "When did the yuan dynasty start and end?",
+        "answers": {
+          "text": [
+            "1271 to 1368"
+          ],
+          "answer_start": [
+            231
+          ]
+        },
+        "id": "56ccf12b62d2951400fa64f6"
+      }
+    ]
+  }
+]
