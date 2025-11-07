@@ -3263,18 +3263,6 @@
         "caption": "The image you've provided is completely blank and white. There are no objects, no text, and no discernible features to describe. It's a plain, unadorned white space with no content."
       },
       {
-        "category": "text",
-        "top_left": [
-          879,
-          46
-        ],
-        "bottom_right": [
-          896,
-          2240
-        ],
-        "font_color_info": "in <color-20>, <en-font-27>."
-      },
-      {
         "category": "element",
         "top_left": [
           548,
@@ -4988,7 +4976,7 @@
         ]
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           102,
           596
@@ -4996,10 +4984,11 @@
         "bottom_right": [
           287,
           733
-        ]
+        ],
+        "font_color_info": "in <color-0>, <en-font-50>."
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           623,
           550
@@ -5007,10 +4996,11 @@
         "bottom_right": [
           813,
           733
-        ]
+        ],
+        "font_color_info": "in <color-0>, <en-font-50>."
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           380,
           584
@@ -5018,7 +5008,8 @@
         "bottom_right": [
           540,
           735
-        ]
+        ],
+        "font_color_info": "in <color-0>, <en-font-50>."
       },
       {
         "category": "element",
@@ -5511,7 +5502,7 @@
         ]
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           291,
           827
@@ -5519,7 +5510,8 @@
         "bottom_right": [
           502,
           983
-        ]
+        ],
+        "font_color_info": "in <color-114>, <en-font-421>."
       },
       {
         "category": "text",
@@ -5800,17 +5792,6 @@
         "bottom_right": [
           678,
           624
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
-          88,
-          975
-        ],
-        "bottom_right": [
-          238,
-          1085
         ]
       },
       {
@@ -6230,7 +6211,7 @@
         ]
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           53,
           981
@@ -6238,7 +6219,8 @@
         "bottom_right": [
           343,
           1275
-        ]
+        ],
+        "font_color_info": "in <color-9>, <en-font-79>."
       },
       {
         "category": "text",
@@ -6253,7 +6235,7 @@
         "font_color_info": "in <color-9>, <en-font-79>."
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           637,
           1036
@@ -6261,7 +6243,8 @@
         "bottom_right": [
           817,
           1218
-        ]
+        ],
+        "font_color_info": "in <color-9>, <en-font-79>."
       },
       {
         "category": "element",
@@ -6992,7 +6975,7 @@
         ]
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           176,
           500
@@ -7000,7 +6983,8 @@
         "bottom_right": [
           719,
           620
-        ]
+        ],
+        "font_color_info": "in <color-2>, <en-font-400>."
       },
       {
         "category": "element",
@@ -7036,7 +7020,7 @@
         ]
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           176,
           921
@@ -7044,7 +7028,8 @@
         "bottom_right": [
           719,
           1041
-        ]
+        ],
+        "font_color_info": "in <color-2>, <en-font-400>."
       },
       {
         "category": "element",
@@ -7080,7 +7065,7 @@
         ]
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           181,
           1325
@@ -7088,7 +7073,8 @@
         "bottom_right": [
           724,
           1445
-        ]
+        ],
+        "font_color_info": "in <color-2>, <en-font-400>."
       },
       {
         "category": "element",
@@ -7124,7 +7110,7 @@
         ]
       },
       {
-        "category": "element",
+        "category": "text",
         "top_left": [
           181,
           1745
@@ -7132,7 +7118,8 @@
         "bottom_right": [
           724,
           1865
-        ]
+        ],
+        "font_color_info": "in <color-2>, <en-font-400>."
       },
       {
         "category": "element",
@@ -7250,36 +7237,12 @@
       {
         "category": "text",
         "top_left": [
-          235,
-          535
-        ],
-        "bottom_right": [
-          668,
-          586
-        ],
-        "font_color_info": "in <color-2>, <en-font-342>."
-      },
-      {
-        "category": "text",
-        "top_left": [
           30,
           656
         ],
         "bottom_right": [
           865,
           782
-        ],
-        "font_color_info": "in <color-2>, <en-font-342>."
-      },
-      {
-        "category": "text",
-        "top_left": [
-          235,
-          955
-        ],
-        "bottom_right": [
-          668,
-          1005
         ],
         "font_color_info": "in <color-2>, <en-font-342>."
       },
@@ -7298,36 +7261,12 @@
       {
         "category": "text",
         "top_left": [
-          240,
-          1360
-        ],
-        "bottom_right": [
-          673,
-          1410
-        ],
-        "font_color_info": "in <color-2>, <en-font-342>."
-      },
-      {
-        "category": "text",
-        "top_left": [
           40,
           1480
         ],
         "bottom_right": [
           865,
           1607
-        ],
-        "font_color_info": "in <color-2>, <en-font-342>."
-      },
-      {
-        "category": "text",
-        "top_left": [
-          240,
-          1779
-        ],
-        "bottom_right": [
-          673,
-          1829
         ],
         "font_color_info": "in <color-2>, <en-font-342>."
       },
@@ -12754,34 +12693,12 @@
       {
         "category": "element",
         "top_left": [
-          160,
-          942
-        ],
-        "bottom_right": [
-          835,
-          1111
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
           60,
           916
         ],
         "bottom_right": [
           252,
           1138
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
-          160,
-          1182
-        ],
-        "bottom_right": [
-          835,
-          1350
         ]
       },
       {
@@ -12798,17 +12715,6 @@
       {
         "category": "element",
         "top_left": [
-          160,
-          1421
-        ],
-        "bottom_right": [
-          835,
-          1589
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
           60,
           1395
         ],
@@ -12820,34 +12726,12 @@
       {
         "category": "element",
         "top_left": [
-          160,
-          1660
-        ],
-        "bottom_right": [
-          835,
-          1829
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
           60,
           1634
         ],
         "bottom_right": [
           252,
           1856
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
-          160,
-          1899
-        ],
-        "bottom_right": [
-          835,
-          2067
         ]
       },
       {
@@ -18488,28 +18372,6 @@
       {
         "category": "element",
         "top_left": [
-          582,
-          202
-        ],
-        "bottom_right": [
-          732,
-          411
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
-          277,
-          219
-        ],
-        "bottom_right": [
-          448,
-          395
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
           338,
           701
         ],
@@ -18815,17 +18677,6 @@
       {
         "category": "element",
         "top_left": [
-          135,
-          831
-        ],
-        "bottom_right": [
-          603,
-          926
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
           652,
           1120
         ],
@@ -18859,17 +18710,6 @@
       {
         "category": "element",
         "top_left": [
-          289,
-          1279
-        ],
-        "bottom_right": [
-          756,
-          1376
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
           0,
           1248
         ],
@@ -18881,34 +18721,12 @@
       {
         "category": "element",
         "top_left": [
-          302,
-          383
-        ],
-        "bottom_right": [
-          765,
-          478
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
           86,
           1778
         ],
         "bottom_right": [
           652,
           2076
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
-          135,
-          1744
-        ],
-        "bottom_right": [
-          603,
-          1836
         ]
       },
       {
@@ -22436,17 +22254,6 @@
         "bottom_right": [
           322,
           699
-        ]
-      },
-      {
-        "category": "element",
-        "top_left": [
-          133,
-          296
-        ],
-        "bottom_right": [
-          756,
-          414
         ]
       },
       {

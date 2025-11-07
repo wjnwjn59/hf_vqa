@@ -130,10 +130,10 @@ This script's purpose is to generate a detailed, step-by-step logical reasoning 
 **Using Qwen (default):**
 
 ```bash
-python reasoning_generation.py \
+python src/data/narrator/generate_reasoning.py \
     --model_name "/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B" \
-    --layout_dir "/home/binhdt/hf_vqa/src/data/wiki/" \
-    --output_file_path "../narrator/generated_reasonings.jsonl"
+    --layout_dir "/home/thinhnp/hf_vqa/src/data/narrator/wiki_temp" \
+    --output_file_path "/home/thinhnp/hf_vqa/src/data/narrator/generated_reasonings.jsonl"
 ```
 
 **Using GPT (OpenAI):**

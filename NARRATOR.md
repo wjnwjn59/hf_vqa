@@ -79,8 +79,8 @@ cd ./src/data/bizgen/
 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
     --wiki_dir ../narrator/wiki/ \
-    --subset 1:10 \
-    --device cuda:2 \
+    --subset 2:3 \
+    --device cuda:0 \
     --dataset_name squad_v2
 ```
 
@@ -130,7 +130,7 @@ python inference.py \
 ## Prepair the data for training
 
 ```bash
-conda activate wik
+conda activate wiki
 export PYTHONPATH="./:$PYTHONPATH"
 
 python src/data/narrator/prepare_dataset.py \

@@ -1,21 +1,19 @@
 import os
-import torch
 import json
-import argparse # Đã thêm
-from transformers import AutoModelForCausalLM, AutoTokenizer
+import argparse
 from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
+
+# Import Qwen3Inference for vLLM backend
+from src.inference.qwen3_inference import Qwen3Inference
 
 # Import OpenAI (lazy import)
 try:
     from openai import OpenAI
 except ImportError:
     OpenAI = None
-
-# Cấu hình PyTorch CUDA
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 # --- Tải Jinja Template ---
 try:
@@ -84,16 +82,18 @@ class OpenAIInference:
             print(f"❌ OpenAI API call failed: {e}")
             return ("", f"{{\"error\": \"API Error: {e}\"}}") # Trả về JSON lỗi
 
-# --- Hàm sinh Reasoning cho Qwen (Giữ nguyên) ---
+# --- Hàm sinh Reasoning cho Qwen (vLLM) ---
 def generate_reasoning_qwen(
     layout_data: Dict[str, Any],
     question: str,
     ground_truth_answer: str,
-    model: AutoModelForCausalLM,
-    tokenizer: AutoTokenizer,
+    inference: Qwen3Inference,
     max_tokens: int
-) -> (str, str): 
-    
+) -> Tuple[str, str]: 
+    """
+    Generate reasoning using Qwen3 with vLLM backend.
+    Returns: (thinking_content, content)
+    """
     layout_json_string = json.dumps(layout_data, indent=2)
     
     prompt = PROMPT_TEMPLATE_JINJA.render(
@@ -101,28 +101,24 @@ def generate_reasoning_qwen(
         question=question,
         answer=ground_truth_answer
     )
-    messages = [{"role": "user", "content": prompt}]
-    text = tokenizer.apply_chat_template(
-        messages,   tokenize=False,
-        add_generation_prompt=True,
-        enable_thinking=True
+    
+    # Generate using vLLM with thinking mode enabled
+    response = inference.generate_single(
+        prompt=prompt,
+        enable_thinking=True,
+        custom_sampling_params=None  # Use default params from inference object
     )
-    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-
-    generated_ids = model.generate(
-        **model_inputs,
-        max_new_tokens=max_tokens
-    )
-    output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
-    try:
-        index = len(output_ids) - output_ids[::-1].index(151668)
-    except ValueError:
-        index = 0 
-
-    thinking_content = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
-    content = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
-
-    return thinking_content.strip(), content.strip()
+    
+    # Parse the response to extract thinking and content
+    if "</think>" in response:
+        think_end = response.find("</think>")
+        thinking_content = response[:think_end].replace("<think>", "").strip()
+        content = response[think_end + len("</think>"):].strip()
+    else:
+        thinking_content = ""
+        content = response.strip()
+    
+    return thinking_content, content
 
 # --- Hàm sinh Reasoning cho GPT ---
 def generate_reasoning_gpt(
@@ -211,6 +207,10 @@ if __name__ == '__main__':
     # Qwen args
     parser.add_argument('--model_name', type=str, default='/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B',
                         help='Qwen model name or path (used when --backend qwen)')
+    parser.add_argument('--gpu_memory_utilization', type=float, default=0.9,
+                        help='GPU memory utilization (Qwen backend with vLLM)')
+    parser.add_argument('--max_model_len', type=int, default=16384,
+                        help='Maximum model length for vLLM (Qwen backend)')
 
     # GPT args
     parser.add_argument('--openai_model', type=str, default='gpt-4o',
@@ -239,18 +239,21 @@ if __name__ == '__main__':
     # --- Khởi tạo Backend ---
     generate_fn = None
     if args.backend == 'qwen':
-        print(f"🚀 Loading Qwen model '{args.model_name}'...")
-        tokenizer = AutoTokenizer.from_pretrained(args.model_name)
-        model = AutoModelForCausalLM.from_pretrained(
-            args.model_name,
-            torch_dtype=torch.bfloat16,
-            device_map="auto"
+        print(f"🚀 Initializing Qwen model with vLLM: '{args.model_name}'...")
+        inference = Qwen3Inference(
+            model_name=args.model_name,
+            max_model_len=args.max_model_len,
+            gpu_memory_utilization=args.gpu_memory_utilization,
+            dtype="auto",
+            temperature=args.temperature,
+            top_p=args.top_p,
+            max_tokens=args.max_tokens
         )
-        print("✅ Qwen model and tokenizer loaded successfully.")
+        print("✅ Qwen model loaded successfully with vLLM.")
         
         # Tạo hàm generate tương thích
         generate_fn = lambda layout, q, a: generate_reasoning_qwen(
-            layout, q, a, model, tokenizer, args.max_tokens
+            layout, q, a, inference, args.max_tokens
         )
         
     else: # args.backend == 'gpt'
@@ -282,6 +285,29 @@ if __name__ == '__main__':
     print(f"Source Directory: {LAYOUT_DIR}")
     print(f"💾 Saving results to: {OUTPUT_FILE_PATH} (appending)")
     
+    # Load existing processed QAs to skip duplicates
+    processed_qas = set()
+    if OUTPUT_FILE_PATH.exists():
+        print(f"📂 Loading existing results from {OUTPUT_FILE_PATH}...")
+        try:
+            with open(OUTPUT_FILE_PATH, 'r', encoding='utf-8') as f:
+                for line in f:
+                    try:
+                        existing_item = json.loads(line.strip())
+                        wiki_id = existing_item.get('wiki_id')
+                        layout_index = existing_item.get('layout_index')
+                        qa_id = existing_item.get('squad_id')
+                        if wiki_id is not None and layout_index is not None and qa_id is not None:
+                            processed_qas.add((str(wiki_id), int(layout_index), str(qa_id)))
+                    except json.JSONDecodeError:
+                        continue
+            print(f"✅ Found {len(processed_qas)} already processed QAs. Will skip them.")
+        except Exception as e:
+            print(f"⚠️  Warning: Could not read existing output file: {e}")
+            print("   Proceeding without duplicate checking.")
+    else:
+        print("📝 Output file does not exist yet. Will create new file.")
+    
     wiki_files = sorted(list(LAYOUT_DIR.glob("wiki*.json")))
     
     if not wiki_files:
@@ -289,6 +315,7 @@ if __name__ == '__main__':
         exit(1)
 
     print(f"Found {len(wiki_files)} wiki files to process.")
+    print("="*80 + "\n")
 
     with open(OUTPUT_FILE_PATH, 'a', encoding='utf-8') as f_out:
         
@@ -355,7 +382,13 @@ if __name__ == '__main__':
                 for qa_data in qas_to_process:
                     question = qa_data["question"]
                     ground_truth_answer = qa_data["answer"]
-                    qa_id = qa_data["qa_id"] 
+                    qa_id = qa_data["qa_id"]
+                    
+                    # Skip if already processed
+                    qa_key = (str(wiki_id), int(layout_index), str(qa_id))
+                    if qa_key in processed_qas:
+                        tqdm.write(f"⏭️  Skipping already processed: Wiki {wiki_id}, Index {layout_index}, QA ID {qa_id}")
+                        continue
                     
                     tqdm.write("\n" + "="*50)
                     tqdm.write(f"Processing: Wiki: {wiki_id}, Index: {layout_index}, QA ID: {qa_id} (Source: {qa_data['source']})")
@@ -396,5 +429,9 @@ if __name__ == '__main__':
                     }
                     
                     f_out.write(json.dumps(result_item, ensure_ascii=False) + '\n')
+                    f_out.flush()  # Ensure immediate write to disk
+                    
+                    # Add to processed set to avoid re-processing in current run
+                    processed_qas.add(qa_key)
 
     print("\n🎉 All wiki files processed successfully.")
