@@ -18,7 +18,7 @@ USER_PROMPT = (
 )
 
 
-def get_model(model_dir: str = "Qwen/Qwen2.5-VL-7B-Instruct") -> Tuple[Qwen2_5_VLForConditionalGeneration, AutoProcessor]:
+def get_model(model_dir: str = "/mnt/dataset1/pretrained_fm/Qwen_Qwen2.5-VL-7B-Instruct") -> Tuple[Qwen2_5_VLForConditionalGeneration, AutoProcessor]:
     """Initialize and return the QwenVL model and processor."""
     global _model, _processor
     

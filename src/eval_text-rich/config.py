@@ -57,7 +57,7 @@ DATASET_CONFIGS: Dict[str, DatasetConfig] = {
     ),
     "textvqa_val": DatasetConfig(
         qa_file=f"{BASE_DIR}/textvqa/textvqa_val_updated.jsonl",
-        img_folder=f"{BASE_DIR}/textvqa/images",
+        img_folder=f"/mnt/VLAI_data/TextVQA/train_images",
         max_new_tokens=10,
         metric="vqa_score",
         description="TextVQA validation set"
