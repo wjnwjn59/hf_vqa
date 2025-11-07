@@ -352,6 +352,51 @@ def clean_caption_text(caption: str) -> str:
     return caption
 
 
+def split_long_texts(text_elements: List[str], min_words: int = 10) -> List[str]:
+    """
+    Split text elements longer than min_words into two equal parts.
+    
+    Args:
+        text_elements: List of text strings
+        min_words: Minimum word count to trigger split (default: 10)
+    
+    Returns:
+        List of text strings with long texts split into two parts
+    
+    Example:
+        Input: ["short text", "word1 word2 word3 word4 word5 word6 word7 word8 word9 word10 word11"]
+        Output: ["short text", "word1 word2 word3 word4 word5 word6", "word7 word8 word9 word10 word11"]
+    """
+    result = []
+    
+    for text in text_elements:
+        # Skip empty texts
+        if not text or not text.strip():
+            result.append(text)
+            continue
+        
+        # Count words by splitting on spaces
+        words = text.split()
+        
+        # If text has more than min_words, split it into two parts
+        if len(words) > min_words:
+            # Calculate mid point
+            mid = len(words) // 2
+            
+            # Split into two parts
+            first_part = " ".join(words[:mid])
+            second_part = " ".join(words[mid:])
+            
+            # Add both parts to result
+            result.append(first_part)
+            result.append(second_part)
+        else:
+            # Keep original text if not long enough
+            result.append(text)
+    
+    return result
+
+
 def extract_font_color_from_bboxes(bboxes: List[Dict], font_idx: Dict) -> Tuple[str, List[str]]:
     """
     Extract font and colors from text bboxes in the layout.
@@ -613,13 +658,14 @@ def filter_redundant_title_topic(text_elements: List[str], full_caption: str) ->
     """
     Filter out text elements starting with "Title:" or "Topic:" if they duplicate
     content from the first sentence of full_caption.
+    Also removes exact duplicate text elements (case-insensitive).
     
     Args:
         text_elements: List of text strings
         full_caption: Full image caption
         
     Returns:
-        Filtered list of text elements
+        Filtered list of text elements with no duplicates
     """
     # Extract the first sentence (up to first period after a closing parenthesis or quote)
     first_sentence_match = re.search(r'^[^.]+[.)"][.]\s', full_caption)
@@ -631,9 +677,15 @@ def filter_redundant_title_topic(text_elements: List[str], full_caption: str) ->
     first_sentence_lower = first_sentence.lower()
     
     filtered_texts = []
+    seen_texts_lower = set()  # Track seen texts (case-insensitive)
     
     for text in text_elements:
         text_stripped = text.strip()
+        text_lower = text_stripped.lower()
+        
+        # Skip if we've already seen this exact text (case-insensitive)
+        if text_lower in seen_texts_lower:
+            continue
         
         # Check if text starts with "Title:" or "Topic:"
         if text_stripped.startswith("Title:") or text_stripped.startswith("Topic:"):
@@ -649,6 +701,8 @@ def filter_redundant_title_topic(text_elements: List[str], full_caption: str) ->
                 # This is a duplicate, skip it
                 continue
         
+        # Add to seen set and filtered list
+        seen_texts_lower.add(text_lower)
         filtered_texts.append(text)
     
     return filtered_texts
@@ -908,6 +962,15 @@ def merge_narrator_data(
         image_elements = extract_images_from_caption(full_image_caption)
         text_elements = extract_text_elements(full_image_caption)
         
+        # Store original text count before splitting
+        original_text_elements = text_elements.copy()
+        
+        # Split long texts for bbox matching (texts > 10 words become 2 texts)
+        text_elements = split_long_texts(text_elements, min_words=10)
+        
+        # Track split information
+        texts_split = len(text_elements) - len(original_text_elements)
+        
         # Validate and clean text elements
         original_text_count = len(text_elements)
         
@@ -920,8 +983,11 @@ def merge_narrator_data(
         text_elements = filter_redundant_title_topic(text_elements, full_image_caption)
         redundant_filtered = text_elements_before_filter - len(text_elements)
         
+        # Print summary
         print(f"\nInfographic {wiki_idx + 1}/{len(infographic_generated)} (wiki {wiki_id}):")
         print(f"  Found {len(image_elements)} image elements, {len(text_elements)} text elements")
+        if texts_split > 0:
+            print(f"  Split {texts_split} long text(s): {len(original_text_elements)} → {len(original_text_elements) + texts_split} texts")
         if duplicates_removed > 0:
             print(f"  Removed {duplicates_removed} duplicate text elements")
         if redundant_filtered > 0:

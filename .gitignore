@@ -26,3 +26,5 @@ test*
 
 convert_to_infographic.py
 *.mdc
+
+bbox_visualizations/
