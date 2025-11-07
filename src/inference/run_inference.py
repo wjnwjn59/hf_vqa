@@ -40,8 +40,8 @@ def import_model_class(model_key: str):
 def main():
     parser = argparse.ArgumentParser(description="Run VLM inference")
     parser.add_argument("model", type=str, choices=MODELS.keys(), help="Model to run")
-    parser.add_argument("--image_folder", type=str, default=None)
-    parser.add_argument("--data_path", type=str, default=None)
+    parser.add_argument("--image_folder", type=str, default="/mnt/VLAI_data/InfographicVQA/images")
+    parser.add_argument("--data_path", type=str, default="/mnt/VLAI_data/InfographicVQA/infographicvqa_val.jsonl")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--output_dir", type=str, default="src/inference/results")
     args = parser.parse_args()
@@ -58,9 +58,6 @@ def main():
         print(f"❌ Failed to initialize: {e}")
         return 1
     
-    # Set default data path if not provided
-    if args.data_path is None:
-        args.data_path = "/mnt/VLAI_data/InfographicVQA/infographicvqa_val.jsonl"
     
     print(f"📂 Loading data from {args.data_path}...")
     with open(args.data_path, 'r', encoding='utf-8') as f:
@@ -80,8 +77,6 @@ def main():
                 item['image'] = os.path.basename(img_path)
     else:
         dataset_type = 'infographicvqa'
-        if args.image_folder is None:
-            args.image_folder = "/mnt/VLAI_data/InfographicVQA/images"
     
     print(f"📊 Dataset: {dataset_type}")
     print(f"📁 Images: {args.image_folder}")
@@ -100,7 +95,8 @@ def main():
             continue
 
         try:
-            item["predict"] = model.infer(item['question'], img_path)
+            output = model.infer(item['question'], img_path)
+            item["predict"] = output.split("ANSWER:")[-1].strip()
         except Exception as e:
             print(f"❌ Error on {item['image']}: {e}")
             item["predict"] = f"ERROR: {str(e)}"
