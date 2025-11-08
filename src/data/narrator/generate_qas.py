@@ -7,10 +7,7 @@ from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
-try:
-    from openai import OpenAI
-except ImportError:
-    OpenAI = None
+from openai import OpenAI
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
@@ -19,11 +16,11 @@ try:
     src_dir = script_file_path.parent.parent.parent
 except NameError:
     print("⚠️  '__file__' not defined. Assuming relative path for 'src'.")
-    src_dir = Path.cwd().parent.parent 
+    src_dir = Path.cwd().parent.parent
     print(f"Set 'src_dir' to: {src_dir}")
 
 template_dir = src_dir / "prompts"
-template_name = "qa_generation.jinja" 
+template_name = "qa_generation.jinja"
 
 try:
     jinja_env = Environment(loader=FileSystemLoader(template_dir))
@@ -31,10 +28,11 @@ try:
     print(f"✅ Template '{template_name}' loaded from '{template_dir}'.")
 except Exception as e:
     print(f"❌ Error loading Jinja template '{template_name}' from '{template_dir}': {e}")
-    print("Please make sure the file exists and paths are correct.")
     exit(1)
 
+
 class OpenAIInference:
+    """Helper class for OpenAI API calls."""
     def __init__(
         self,
         model_name: str = "gpt-4o",
@@ -42,10 +40,6 @@ class OpenAIInference:
         temperature: float = 0.7,
         top_p: float = 0.9,
     ):
-        if OpenAI is None:
-            raise ImportError(
-                "openai package not found. Please `pip install openai`."
-            )
         key = api_key or os.environ.get("OPENAI_API_KEY")
         if not key:
             raise ValueError(
@@ -67,10 +61,12 @@ class OpenAIInference:
                 max_tokens=max_tokens
             )
             content = (resp.choices[0].message.content or "").strip()
+            # OpenAI API doesn't have a separate 'thinking' response
             return ("", content)
         except Exception as e:
             print(f"❌ OpenAI API call failed: {e}")
-            return ("", f"[] # API Error: {e}") 
+            return ("", f"[] # API Error: {e}")
+
 
 def generate_qas_qwen(
     prompt: str,
@@ -78,9 +74,11 @@ def generate_qas_qwen(
     tokenizer: AutoTokenizer,
     max_tokens: int
 ) -> tuple[str, str]:
+    """Generates QAs using a local Qwen model, separating 'thinking' and 'content'."""
     messages = [{"role": "user", "content": prompt}]
     text = tokenizer.apply_chat_template(
-        messages,   tokenize=False,
+        messages,
+        tokenize=False,
         add_generation_prompt=True,
         enable_thinking=True
     )
@@ -91,7 +89,10 @@ def generate_qas_qwen(
         max_new_tokens=max_tokens
     )
     output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
+    
+    # Separate 'thinking' (logs) from final 'content' (JSON)
     try:
+        # 151668 is the Qwen token_id for '<|end_of_thinking|>'
         index = len(output_ids) - output_ids[::-1].index(151668)
     except ValueError:
         index = 0
@@ -101,16 +102,15 @@ def generate_qas_qwen(
 
     return thinking_content.strip(), content.strip()
 
+
 def generate_qas_gpt(
     layout_data: Dict[str, Any],
-    qa_samples: List[Dict[str, Any]], 
+    qa_samples: List[Dict[str, Any]],
     k: int,
     client: OpenAIInference,
     max_tokens: int
 ) -> tuple[str, str]:
-    """
-    Hàm render prompt và gọi client OpenAI.
-    """
+    """Renders the prompt and calls the OpenAI client."""
     layout_json_string = json.dumps(layout_data, indent=2)
     
     prompt = PROMPT_TEMPLATE_JINJA.render(
@@ -119,42 +119,32 @@ def generate_qas_gpt(
         k=k
     )
     
-    # Client 'generate' đã trả về (think, content)
     return client.generate(prompt, max_tokens)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Generate Question-Answers with selectable backend (Qwen or GPT)'
     )
-    # Backend selection
     parser.add_argument('--backend', type=str, default='qwen', choices=['qwen', 'gpt'],
                         help="Inference backend: 'qwen' (local) or 'gpt' (OpenAI API)")
-
-    # Qwen args
     parser.add_argument('--model_name', type=str, default='/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B',
                         help='Qwen model name or path (used when --backend qwen)')
-
-    # GPT args
     parser.add_argument('--openai_model', type=str, default='gpt-4o',
                         help='OpenAI model name (used when --backend gpt)')
     parser.add_argument('--openai_api_key', type=str, default=None,
                         help='OpenAI API key (falls back to OPENAI_API_KEY env var)')
-
-    # Data/template args
     parser.add_argument('--layout_dir', type=str,
                         default='/home/binhdt/hf_vqa/src/data/narrator/wiki',
                         help='Path to source/target directory for wiki*.json files')
     parser.add_argument('--k_value', type=int, default=3,
                         help='Number of new QAs to generate per item')
-
-    # Inference sampling args
     parser.add_argument('--temperature', type=float, default=0.7,
                         help='Sampling temperature')
     parser.add_argument('--top_p', type=float, default=0.9,
                         help='Top-p sampling parameter')
     parser.add_argument('--max_tokens', type=int, default=32768,
                         help='Maximum new tokens to generate')
-
     args = parser.parse_args()
 
     generate_fn = None
@@ -199,7 +189,6 @@ if __name__ == '__main__':
             print(f"❌ {e}")
             exit(1)
 
-    # --- Bắt đầu xử lý ---
     LAYOUT_DIR = Path(args.layout_dir)
     K_VALUE = args.k_value
 
@@ -216,7 +205,6 @@ if __name__ == '__main__':
 
     print(f"Found {len(wiki_files)} wiki files to process.")
     
-    
     for wiki_file in tqdm(wiki_files, desc="Processing Wiki Files", position=0):
         
         wiki_id = wiki_file.stem.replace("wiki", "")
@@ -227,8 +215,9 @@ if __name__ == '__main__':
         except json.JSONDecodeError:
             tqdm.write(f"Skipping {wiki_file}: Could not parse JSON.")
             continue
-
-        data_was_modified = False
+        except Exception as e:
+            tqdm.write(f"Skipping {wiki_file}: Error reading file: {e}")
+            continue
 
         for item in tqdm(wiki_data_list, desc=f"Wiki {wiki_id}", position=1, leave=False):
             
@@ -238,8 +227,7 @@ if __name__ == '__main__':
                 continue
             
             if 'generated_qa_pairs' in item:
-                tqdm.write(f"Skipping ({wiki_id}, {layout_index}): 'generated_qa_pairs' already exists.")
-                continue
+                continue 
 
             layout_for_prompt = {
                 "layers_all": item.get("layers_all", []),
@@ -288,21 +276,22 @@ if __name__ == '__main__':
                 tqdm.write("✅ Raw Generated JSON Array (Cleaned):\n")
                 tqdm.write(json.dumps(generated_qa_list, indent=2))
 
+                # 1. Update the item in memory
                 item['generated_qa_pairs'] = generated_qa_list 
-                data_was_modified = True
+                
+                # 2. **SAVE IMMEDIATELY**
+                # Overwrite the *entire file* with the updated data list
+                tqdm.write(f"💾 Saving progress for item ({wiki_id}, {layout_index}) to {wiki_file}")
+                try:
+                    with open(wiki_file, 'w', encoding='utf-8') as f_out:
+                        json.dump(wiki_data_list, f_out, indent=2, ensure_ascii=False) 
+                except Exception as e:
+                    tqdm.write(f"❌ FAILED to save progress to {wiki_file}: {e}")
+                    tqdm.write("Stopping processing for this file to prevent data loss.")
+                    break # Exit inner loop, move to next file
 
             except json.JSONDecodeError:
                 tqdm.write(f"❌ Error: Model output was not valid JSON. Raw output: {content}")
                 continue
-
-        if data_was_modified:
-            tqdm.write(f"💾 Data modified. Overwriting file: {wiki_file}")
-            try:
-                with open(wiki_file, 'w', encoding='utf-8') as f_out:
-                    json.dump(wiki_data_list, f_out, indent=2, ensure_ascii=False) 
-            except Exception as e:
-                tqdm.write(f"❌ FAILED to overwrite {wiki_file}: {e}")
-        else:
-            tqdm.write(f"No data modified for {wiki_file}. Skipping write.")
 
     print("\n🎉 All wiki files processed and updated successfully.")

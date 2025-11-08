@@ -6,22 +6,19 @@ from pathlib import Path
 from tqdm import tqdm
 from jinja2 import Environment, FileSystemLoader
 
-# Import Qwen3Inference for vLLM backend
 from src.inference.qwen3_inference import Qwen3Inference
 
-# Import OpenAI (lazy import)
 try:
     from openai import OpenAI
 except ImportError:
     OpenAI = None
 
-# --- Tải Jinja Template ---
 try:
     script_file_path = Path(__file__).resolve()
     src_dir = script_file_path.parent.parent.parent
 except NameError:
     print("⚠️  '__file__' not defined. Assuming relative path for 'src'.")
-    src_dir = Path.cwd().parent.parent 
+    src_dir = Path.cwd().parent.parent
     print(f"Set 'src_dir' to: {src_dir}")
 
 template_dir = src_dir / "prompts"
@@ -38,12 +35,8 @@ except Exception as e:
     print(f"Attempted 'src_dir': {src_dir}")
     exit(1)
 
-# --- Class Wrapper cho OpenAI ---
+
 class OpenAIInference:
-    """
-    Wrapper tối giản để gọi API OpenAI,
-    trả về (think, content) để tương thích.
-    """
     def __init__(
         self,
         model_name: str = "gpt-4o",
@@ -76,24 +69,19 @@ class OpenAIInference:
                 max_tokens=max_tokens
             )
             content = (resp.choices[0].message.content or "").strip()
-            # Trả về (think, content) để tương thích, GPT không có 'think'
             return ("", content)
         except Exception as e:
             print(f"❌ OpenAI API call failed: {e}")
-            return ("", f"{{\"error\": \"API Error: {e}\"}}") # Trả về JSON lỗi
+            return ("", f"{{\"error\": \"API Error: {e}\"}}")
 
-# --- Hàm sinh Reasoning cho Qwen (vLLM) ---
+
 def generate_reasoning_qwen(
     layout_data: Dict[str, Any],
     question: str,
     ground_truth_answer: str,
     inference: Qwen3Inference,
     max_tokens: int
-) -> Tuple[str, str]: 
-    """
-    Generate reasoning using Qwen3 with vLLM backend.
-    Returns: (thinking_content, content)
-    """
+) -> Tuple[str, str]:
     layout_json_string = json.dumps(layout_data, indent=2)
     
     prompt = PROMPT_TEMPLATE_JINJA.render(
@@ -110,7 +98,7 @@ def generate_reasoning_qwen(
         custom_sampling_params=None  # Use default params from inference object
     )
     
-    # Parse the response - should be clean JSON without thinking tags
+    # Parse the resposnse - should be clean JSON without thinking tags
     # since we disabled thinking mode
     response = response.strip()
     
@@ -125,14 +113,14 @@ def generate_reasoning_qwen(
     
     return thinking_content, content
 
-# --- Hàm sinh Reasoning cho GPT ---
+
 def generate_reasoning_gpt(
     layout_data: Dict[str, Any],
     question: str,
     ground_truth_answer: str,
     client: OpenAIInference,
     max_tokens: int
-) -> (str, str): 
+) -> (str, str):
     
     layout_json_string = json.dumps(layout_data, indent=2)
     
@@ -142,11 +130,9 @@ def generate_reasoning_gpt(
         answer=ground_truth_answer
     )
     
-    # Client 'generate' đã trả về (think, content)
     return client.generate(prompt, max_tokens)
 
 
-# --- Hàm Stitch (Giữ nguyên) ---
 def stitch_reasoning_json(data: Dict[str, Any]) -> str:
     stitched_understand = "Error: Could not parse dictionary."
     stitched_think = "Error: Could not parse dictionary."
@@ -200,38 +186,29 @@ def stitch_reasoning_json(data: Dict[str, Any]) -> str:
         f"Therefore, the answer is {stitched_answer}."
     )
 
-# --- Hàm Main Thực Thi ---
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Generate Reasoning with selectable backend (Qwen or GPT)'
     )
-    # Backend selection
     parser.add_argument('--backend', type=str, default='qwen', choices=['qwen', 'gpt'],
                         help="Inference backend: 'qwen' (local) or 'gpt' (OpenAI API)")
-
-    # Qwen args
     parser.add_argument('--model_name', type=str, default='/mnt/dataset1/pretrained_fm/Qwen_Qwen3-8B',
                         help='Qwen model name or path (used when --backend qwen)')
     parser.add_argument('--gpu_memory_utilization', type=float, default=0.9,
                         help='GPU memory utilization (Qwen backend with vLLM)')
     parser.add_argument('--max_model_len', type=int, default=24576,
                         help='Maximum model length for vLLM (Qwen backend)')
-
-    # GPT args
     parser.add_argument('--openai_model', type=str, default='gpt-4o',
                         help='OpenAI model name (used when --backend gpt)')
     parser.add_argument('--openai_api_key', type=str, default=None,
                         help='OpenAI API key (falls back to OPENAI_API_KEY env var)')
-
-    # Data/template args
     parser.add_argument('--layout_dir', type=str,
                         default='/home/binhdt/hf_vqa/src/data/narrator/wiki',
                         help='Path to source directory for wiki*.json files')
     parser.add_argument('--output_file_path', type=str,
                         default='src/data/narrator/generated_reasonings.jsonl',
                         help='Path to the output .jsonl file')
-
-    # Inference sampling args
     parser.add_argument('--temperature', type=float, default=0.7,
                         help='Sampling temperature')
     parser.add_argument('--top_p', type=float, default=0.9,
@@ -241,7 +218,6 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
 
-    # --- Khởi tạo Backend ---
     generate_fn = None
     if args.backend == 'qwen':
         print(f"🚀 Initializing Qwen model with vLLM: '{args.model_name}'...")
@@ -256,12 +232,11 @@ if __name__ == '__main__':
         )
         print("✅ Qwen model loaded successfully with vLLM.")
         
-        # Tạo hàm generate tương thích
         generate_fn = lambda layout, q, a: generate_reasoning_qwen(
             layout, q, a, inference, args.max_tokens
         )
         
-    else: # args.backend == 'gpt'
+    else: 
         print(f"🚀 Initializing OpenAI client for model '{args.openai_model}'...")
         try:
             client = OpenAIInference(
@@ -272,7 +247,6 @@ if __name__ == '__main__':
             )
             print("✅ OpenAI client initialized successfully.")
             
-            # Tạo hàm generate tương thích
             generate_fn = lambda layout, q, a: generate_reasoning_gpt(
                 layout, q, a, client, args.max_tokens
             )
@@ -281,7 +255,6 @@ if __name__ == '__main__':
             print(f"❌ {e}")
             exit(1)
 
-    # --- Bắt đầu xử lý ---
     LAYOUT_DIR = Path(args.layout_dir)
     OUTPUT_FILE_PATH = Path(args.output_file_path)
 
@@ -290,7 +263,6 @@ if __name__ == '__main__':
     print(f"Source Directory: {LAYOUT_DIR}")
     print(f"💾 Saving results to: {OUTPUT_FILE_PATH} (appending)")
     
-    # Load existing processed QAs to skip duplicates
     processed_qas = set()
     if OUTPUT_FILE_PATH.exists():
         print(f"📂 Loading existing results from {OUTPUT_FILE_PATH}...")
@@ -309,7 +281,6 @@ if __name__ == '__main__':
             print(f"✅ Found {len(processed_qas)} already processed QAs. Will skip them.")
         except Exception as e:
             print(f"⚠️  Warning: Could not read existing output file: {e}")
-            print("   Proceeding without duplicate checking.")
     else:
         print("📝 Output file does not exist yet. Will create new file.")
     
@@ -349,7 +320,6 @@ if __name__ == '__main__':
                 
                 qas_to_process = []
                 
-                # 1. Thêm Original QAs
                 original_qas = item.get('original_qa_pairs', [])
                 for qa in original_qas:
                     question = qa.get('question')
@@ -364,14 +334,13 @@ if __name__ == '__main__':
                             "source": "original"
                         })
 
-                # 2. Thêm Generated QAs
                 generated_qas = item.get('generated_qa_pairs', []) 
                 for i, qa in enumerate(generated_qas):
                     question = qa.get('question')
                     answer = qa.get('answer')
                     
                     if question and answer:
-                        gen_id = f"gen_{layout_index}_{i+1}" # Tạo ID duy nhất
+                        gen_id = f"gen_{layout_index}_{i+1}"
                         qas_to_process.append({
                             "question": question,
                             "answer": answer,
@@ -380,19 +349,15 @@ if __name__ == '__main__':
                         })
 
                 if not qas_to_process:
-                    tqdm.write(f"Skipping item {layout_index} in {wiki_file}: No valid QAs found.")
                     continue
 
-                # Vòng lặp duy nhất xử lý tất cả QAs đã gộp
                 for qa_data in qas_to_process:
                     question = qa_data["question"]
                     ground_truth_answer = qa_data["answer"]
                     qa_id = qa_data["qa_id"]
                     
-                    # Skip if already processed
                     qa_key = (str(wiki_id), int(layout_index), str(qa_id))
                     if qa_key in processed_qas:
-                        tqdm.write(f"⏭️  Skipping already processed: Wiki {wiki_id}, Index {layout_index}, QA ID {qa_id}")
                         continue
                     
                     tqdm.write("\n" + "="*50)
@@ -401,7 +366,6 @@ if __name__ == '__main__':
                     tqdm.write(f"🎯 Ground Truth (Provided): {ground_truth_answer}")
                     tqdm.write(f"⏳ Generating reasoning chain (Backend: {args.backend})...")
                     
-                    # Gọi hàm generate_fn (Qwen hoặc GPT)
                     think, content = generate_fn(
                         layout_for_prompt,
                         question,
@@ -434,9 +398,8 @@ if __name__ == '__main__':
                     }
                     
                     f_out.write(json.dumps(result_item, ensure_ascii=False) + '\n')
-                    f_out.flush()  # Ensure immediate write to disk
+                    f_out.flush()
                     
-                    # Add to processed set to avoid re-processing in current run
                     processed_qas.add(qa_key)
 
     print("\n🎉 All wiki files processed successfully.")
