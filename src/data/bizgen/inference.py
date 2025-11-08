@@ -171,7 +171,7 @@ def main():
                         help='File range to process (1-based): "start:end". Each file contains 50 layouts. Example: "1:10" processes wiki000001.json to wiki000010.json. Ignored if --wiki_path is specified.')
     parser.add_argument('--dataset_name', type=str, default='squad_v2',
                         help='Dataset name for output folder structure')
-    parser.add_argument('--seed', type=int, default=1234)
+    parser.add_argument('--seed', type=int, default=59)
     parser.add_argument('--global_ratio', type=float, default=0.2)
     parser.add_argument('--num_inference_steps', type=int, default=50)
     parser.add_argument('--guidance_scale', type=int, default=7)
