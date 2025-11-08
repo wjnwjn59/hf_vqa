@@ -102,21 +102,26 @@ def generate_reasoning_qwen(
         answer=ground_truth_answer
     )
     
-    # Generate using vLLM with thinking mode enabled
+    # Generate using vLLM with thinking mode DISABLED for structured JSON output
+    # The prompt already guides the model to produce structured reasoning
     response = inference.generate_single(
         prompt=prompt,
-        enable_thinking=True,
+        enable_thinking=False,  # Disable thinking mode to get clean JSON
         custom_sampling_params=None  # Use default params from inference object
     )
     
-    # Parse the response to extract thinking and content
+    # Parse the response - should be clean JSON without thinking tags
+    # since we disabled thinking mode
+    response = response.strip()
+    
+    # Just in case model still outputs thinking tags, handle it
     if "</think>" in response:
         think_end = response.find("</think>")
         thinking_content = response[:think_end].replace("<think>", "").strip()
         content = response[think_end + len("</think>"):].strip()
     else:
         thinking_content = ""
-        content = response.strip()
+        content = response
     
     return thinking_content, content
 
@@ -209,7 +214,7 @@ if __name__ == '__main__':
                         help='Qwen model name or path (used when --backend qwen)')
     parser.add_argument('--gpu_memory_utilization', type=float, default=0.9,
                         help='GPU memory utilization (Qwen backend with vLLM)')
-    parser.add_argument('--max_model_len', type=int, default=16384,
+    parser.add_argument('--max_model_len', type=int, default=24576,
                         help='Maximum model length for vLLM (Qwen backend)')
 
     # GPT args
@@ -231,7 +236,7 @@ if __name__ == '__main__':
                         help='Sampling temperature')
     parser.add_argument('--top_p', type=float, default=0.9,
                         help='Top-p sampling parameter')
-    parser.add_argument('--max_tokens', type=int, default=32768,
+    parser.add_argument('--max_tokens', type=int, default=8096,
                         help='Maximum new tokens to generate')
     
     args = parser.parse_args()
