@@ -1,6 +1,7 @@
 import os
 import json
 import argparse
+import re
 from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 from tqdm import tqdm
@@ -30,9 +31,6 @@ try:
     print(f"✅ Template '{template_name}' loaded from '{template_dir}'.")
 except Exception as e:
     print(f"❌ Error loading Jinja template '{template_name}' from '{template_dir}': {e}")
-    print("Please make sure the file exists and paths are correct.")
-    print(f"Current working directory: {Path.cwd()}")
-    print(f"Attempted 'src_dir': {src_dir}")
     exit(1)
 
 
@@ -89,20 +87,15 @@ def generate_reasoning_qwen(
         question=question,
         answer=ground_truth_answer
     )
-    
-    # Generate using vLLM with thinking mode DISABLED for structured JSON output
-    # The prompt already guides the model to produce structured reasoning
+
     response = inference.generate_single(
         prompt=prompt,
-        enable_thinking=False,  # Disable thinking mode to get clean JSON
-        custom_sampling_params=None  # Use default params from inference object
+        enable_thinking=False,
+        custom_sampling_params=None
     )
-    
-    # Parse the resposnse - should be clean JSON without thinking tags
-    # since we disabled thinking mode
+
     response = response.strip()
-    
-    # Just in case model still outputs thinking tags, handle it
+
     if "</think>" in response:
         think_end = response.find("</think>")
         thinking_content = response[:think_end].replace("<think>", "").strip()
@@ -133,10 +126,11 @@ def generate_reasoning_gpt(
     return client.generate(prompt, max_tokens)
 
 
-def stitch_reasoning_json(data: Dict[str, Any]) -> str:
-    stitched_understand = "Error: Could not parse dictionary."
-    stitched_think = "Error: Could not parse dictionary."
-    stitched_answer = "Error: No answer found."
+def generate_reasoning_json(data: Dict[str, Any], no_bbox: bool, no_spatial: bool) -> str:
+    generated_understand = "Error: Could not parse dictionary."
+    generated_think = "Error: Could not parse dictionary."
+    generated_answer = "Error: No answer found."
+    
     try:
         replacement_map = {}
 
@@ -144,46 +138,88 @@ def stitch_reasoning_json(data: Dict[str, Any]) -> str:
             for el in data["understand"].get("relevant_elements", []):
                 if 'id' in el:
                     key = f"[{el['id']}]"
-                    desc = el.get('element_description', 'N/A')
-                    coords = el.get('coordinates', 'N/A')
-                    value = f"({desc} {coords})"
-                    replacement_map[key] = value
+                    parts = []
+                    desc = el.get('element_description')
+                    coords = el.get('coordinates')
+                    
+                    if desc and desc.lower() != 'n/a':
+                        if desc.startswith('"') and desc.endswith('"'):
+                            parts.append(f"the text {desc}")
+                        else:
+                            parts.append(f"the element '{desc}'")
+
+                    if coords and not no_bbox:
+                        parts.append(f"at coordinates {coords}")
+                    
+                    replacement_map[key] = " ".join(parts) if parts else ""
 
         if "think" in data and "evidence_array" in data["think"]:
             for ev in data["think"].get("evidence_array", []):
                 if 'id' in ev:
                     key = f"[{ev['id']}]"
-                    text = ev.get('text', 'N/A')
-                    style = ev.get('text_style', 'N/A')
-                    context = ev.get('spatial_context', 'N/A')
-                    value = f"({text} [Style: {style}; Context: {context}])"
-                    replacement_map[key] = value
+                    parts = []
+                    content = ev.get('content')
+                    context = ev.get('spatial_context')
+                    
+                    if content and content.lower() != 'n/a':
+                        if content.startswith('"') and content.endswith('"'):
+                            parts.append(f"the text {content}")
+                        else:
+                            parts.append(f"the visual '{content}'")
+
+                    if context and context.lower() != 'n/a' and not no_spatial:
+                        parts.append(f"which is {context}")
+                    
+                    replacement_map[key] = " ".join(parts) if parts else ""
 
         if "understand" in data and "analysis" in data["understand"]:
-            stitched_understand = data["understand"]["analysis"]
-            for key, value in replacement_map.items():
-                stitched_understand = stitched_understand.replace(key, value)
+            generated_understand = data["understand"]["analysis"]
+            for _ in range(5):
+                replaced_in_pass = False
+                for key, value in replacement_map.items():
+                    if key in generated_understand:
+                        generated_understand = generated_understand.replace(key, value)
+                        replaced_in_pass = True
+                if not replaced_in_pass:
+                    break
         else:
-            stitched_understand = "Error: Missing 'understand' or 'analysis' structure."
+            generated_understand = "Error: Missing 'understand' or 'analysis' structure."
 
         if "think" in data and "logical_reasoning" in data["think"]:
-            stitched_think = data["think"]["logical_reasoning"]
-            for key, value in replacement_map.items():
-                stitched_think = stitched_think.replace(key, value)
+            generated_think = data["think"]["logical_reasoning"]
+            for _ in range(5):
+                replaced_in_pass = False
+                for key, value in replacement_map.items():
+                    if key in generated_think:
+                        generated_think = generated_think.replace(key, value)
+                        replaced_in_pass = True
+                if not replaced_in_pass:
+                    break
         else:
-            stitched_think = "Error: Missing 'think' or 'logical_reasoning' structure."
+            generated_think = "Error: Missing 'think' or 'logical_reasoning' structure."
 
-        stitched_answer = data.get('answer', 'Error: Missing "answer" key.')
+        generated_answer = data.get('answer', 'Error: Missing "answer" key.')
 
+        unreplaced_key_pattern = re.compile(r'\[\w+(?:_\w+)*\]')
+        generated_understand = unreplaced_key_pattern.sub('', generated_understand)
+        generated_think = unreplaced_key_pattern.sub('', generated_think)
+        
+        cleanup_pattern = re.compile(r'[\(\)\[\]:]')
+        generated_understand = cleanup_pattern.sub('', generated_understand)
+        generated_think = cleanup_pattern.sub('', generated_think)
+
+        generated_understand = re.sub(r'\s+', ' ', generated_understand).strip()
+        generated_think = re.sub(r'\s+', ' ', generated_think).strip()
+            
     except Exception as e:
-        stitched_understand = f"Error during stitching: {e}"
-        stitched_think = f"Error during stitching: {e}"
-        stitched_answer = f"Error during stitching: {e}"
+        generated_understand = f"Error during generating: {e}"
+        generated_think = f"Error during generating: {e}"
+        generated_answer = f"Error during generating: {e}"
 
     return (
-        f"{stitched_understand} "
-        f"{stitched_think} "
-        f"Therefore, the answer is {stitched_answer}."
+        f"{generated_understand} "
+        f"{generated_think} "
+        f"Therefore, the answer is {generated_answer}."
     )
 
 
@@ -215,6 +251,10 @@ if __name__ == '__main__':
                         help='Top-p sampling parameter')
     parser.add_argument('--max_tokens', type=int, default=8096,
                         help='Maximum new tokens to generate')
+    parser.add_argument('--no_bbox', action='store_true',
+                        help='If set, remove bounding box coordinates from the final generated reasoning.')
+    parser.add_argument('--no_spatial', action='store_true',
+                        help='If set, remove spatial context from the final generated reasoning.')
     
     args = parser.parse_args()
 
@@ -262,6 +302,10 @@ if __name__ == '__main__':
     print(f"🚀 Starting Reasoning generation using [Backend: {args.backend}]")
     print(f"Source Directory: {LAYOUT_DIR}")
     print(f"💾 Saving results to: {OUTPUT_FILE_PATH} (appending)")
+    if args.no_bbox:
+        print("⚠️  Ablation: Bounding boxes will be REMOVED from the reasoning output.")
+    if args.no_spatial:
+        print("⚠️  Ablation: Spatial context will be REMOVED from the reasoning output.")
     
     processed_qas = set()
     if OUTPUT_FILE_PATH.exists():
@@ -378,14 +422,18 @@ if __name__ == '__main__':
                         content_json = json.loads(content)
                         tqdm.write("✅ Reasoning JSON Output:\n")
                         tqdm.write(json.dumps(content_json, indent=2))
-                        stitched_reasoning = stitch_reasoning_json(content_json)
+                        generated_reasoning = generate_reasoning_json(
+                            content_json, 
+                            args.no_bbox, 
+                            args.no_spatial
+                        ) 
                     except json.JSONDecodeError:
                         tqdm.write(f"❌ Error: Model output was not valid JSON. Raw output: {content}")
                         content_json = {"error": "Invalid JSON from model", "raw_output": content}
-                        stitched_reasoning = "Error: Failed to decode model output."
+                        generated_reasoning = "Error: Failed to decode model output."
                     
-                    tqdm.write("\n🔍 Merged Reasoning:\n")
-                    tqdm.write(stitched_reasoning)
+                    tqdm.write("\n🔍 Merged Reasoning (Naturalized):\n")
+                    tqdm.write(generated_reasoning)
 
                     result_item = {
                         "wiki_id": wiki_id,
@@ -394,7 +442,7 @@ if __name__ == '__main__':
                         "question": question,
                         "ground_truth_answer": ground_truth_answer,
                         "generated_reasoning": content_json, 
-                        "merged_reasoning": stitched_reasoning 
+                        "merged_reasoning": generated_reasoning 
                     }
                     
                     f_out.write(json.dumps(result_item, ensure_ascii=False) + '\n')
