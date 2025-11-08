@@ -1,6 +1,7 @@
 import os
 import json
 import argparse
+import re  
 from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 from tqdm import tqdm
@@ -30,11 +31,7 @@ try:
     print(f"✅ Template '{template_name}' loaded from '{template_dir}'.")
 except Exception as e:
     print(f"❌ Error loading Jinja template '{template_name}' from '{template_dir}': {e}")
-    print("Please make sure the file exists and paths are correct.")
-    print(f"Current working directory: {Path.cwd()}")
-    print(f"Attempted 'src_dir': {src_dir}")
     exit(1)
-
 
 class OpenAIInference:
     def __init__(
@@ -80,7 +77,6 @@ def generate_reasoning_qwen(
     question: str,
     ground_truth_answer: str,
     inference: Qwen3Inference,
-    max_tokens: int
 ) -> Tuple[str, str]:
     layout_json_string = json.dumps(layout_data, indent=2)
     
@@ -89,20 +85,15 @@ def generate_reasoning_qwen(
         question=question,
         answer=ground_truth_answer
     )
-    
-    # Generate using vLLM with thinking mode DISABLED for structured JSON output
-    # The prompt already guides the model to produce structured reasoning
+
     response = inference.generate_single(
         prompt=prompt,
-        enable_thinking=False,  # Disable thinking mode to get clean JSON
-        custom_sampling_params=None  # Use default params from inference object
+        enable_thinking=False,  
+        custom_sampling_params=None  
     )
-    
-    # Parse the resposnse - should be clean JSON without thinking tags
-    # since we disabled thinking mode
+
     response = response.strip()
-    
-    # Just in case model still outputs thinking tags, handle it
+
     if "</think>" in response:
         think_end = response.find("</think>")
         thinking_content = response[:think_end].replace("<think>", "").strip()
@@ -137,6 +128,7 @@ def stitch_reasoning_json(data: Dict[str, Any]) -> str:
     stitched_understand = "Error: Could not parse dictionary."
     stitched_think = "Error: Could not parse dictionary."
     stitched_answer = "Error: No answer found."
+    
     try:
         replacement_map = {}
 
@@ -144,19 +136,33 @@ def stitch_reasoning_json(data: Dict[str, Any]) -> str:
             for el in data["understand"].get("relevant_elements", []):
                 if 'id' in el:
                     key = f"[{el['id']}]"
-                    desc = el.get('element_description', 'N/A')
-                    coords = el.get('coordinates', 'N/A')
-                    value = f"({desc} {coords})"
+                    parts = []
+                    desc = el.get('element_description')
+                    coords = el.get('coordinates')
+                    
+                    if desc and desc.lower() != 'n/a':
+                        parts.append(desc)
+                    if coords:
+                        parts.append(f"located at {coords}")
+                    
+                    value = f"({', '.join(parts)})" if parts else ""
                     replacement_map[key] = value
 
         if "think" in data and "evidence_array" in data["think"]:
             for ev in data["think"].get("evidence_array", []):
                 if 'id' in ev:
                     key = f"[{ev['id']}]"
-                    text = ev.get('text', 'N/A')
-                    style = ev.get('text_style', 'N/A')
-                    context = ev.get('spatial_context', 'N/A')
-                    value = f"({text} [Style: {style}; Context: {context}])"
+                    parts = []
+                    
+                    content = ev.get('content') 
+                    context = ev.get('spatial_context')
+                    
+                    if content and content.lower() != 'n/a':
+                        parts.append(content) 
+                    if context and context.lower() != 'n/a':
+                        parts.append(f"position: {context}") 
+                    
+                    value = f"({', '.join(parts)})" if parts else ""
                     replacement_map[key] = value
 
         if "understand" in data and "analysis" in data["understand"]:
@@ -175,6 +181,14 @@ def stitch_reasoning_json(data: Dict[str, Any]) -> str:
 
         stitched_answer = data.get('answer', 'Error: Missing "answer" key.')
 
+        unreplaced_key_pattern = re.compile(r'\[\w+\]')
+        
+        stitched_understand = unreplaced_key_pattern.sub('', stitched_understand)
+        stitched_think = unreplaced_key_pattern.sub('', stitched_think)
+        
+        stitched_understand = re.sub(r'\s+', ' ', stitched_understand).strip()
+        stitched_think = re.sub(r'\s+', ' ', stitched_think).strip()
+        
     except Exception as e:
         stitched_understand = f"Error during stitching: {e}"
         stitched_think = f"Error during stitching: {e}"
@@ -378,13 +392,13 @@ if __name__ == '__main__':
                         content_json = json.loads(content)
                         tqdm.write("✅ Reasoning JSON Output:\n")
                         tqdm.write(json.dumps(content_json, indent=2))
-                        stitched_reasoning = stitch_reasoning_json(content_json)
+                        stitched_reasoning = stitch_reasoning_json(content_json) 
                     except json.JSONDecodeError:
                         tqdm.write(f"❌ Error: Model output was not valid JSON. Raw output: {content}")
                         content_json = {"error": "Invalid JSON from model", "raw_output": content}
                         stitched_reasoning = "Error: Failed to decode model output."
                     
-                    tqdm.write("\n🔍 Merged Reasoning:\n")
+                    tqdm.write("\n🔍 Merged Reasoning (Cleaned):\n")
                     tqdm.write(stitched_reasoning)
 
                     result_item = {
