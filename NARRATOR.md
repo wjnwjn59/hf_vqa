@@ -79,7 +79,7 @@ cd ./src/data/bizgen/
 python inference.py \
     --ckpt_dir checkpoints/lora/infographic \
     --wiki_dir ../narrator/wiki/ \
-    --subset 2:3 \
+    --subset 1:10 \
     --device cuda:0 \
     --dataset_name squad_v2
 ```

@@ -33,3 +33,4 @@ dataset/
 # Large training data files
 squad_v2_train.jsonl
 *.jsonl
+wiki_val/
