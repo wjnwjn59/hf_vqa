@@ -189,8 +189,11 @@ def generate_reasoning_json(data: Dict[str, Any], no_bbox: bool, no_spatial: boo
             # 2. Thêm coordinates (nếu có và không bị tắt)
             coords = item.get('coords')
             if coords and not no_bbox:
-                norm_coords = norm_box_xyxy(coords, w=IMG_W, h=IMG_H)
-                parts.append(f"at coordinates {list(norm_coords)}")
+                try:
+                    norm_coords = norm_box_xyxy(coords, w=IMG_W, h=IMG_H)
+                    parts.append(f"at coordinates {list(norm_coords)}")
+                except Exception:
+                    pass # Bỏ qua nếu coords không đúng định dạng
                 
             # 3. Thêm spatial (nếu có và không bị tắt)
             spatial = item.get('spatial')
@@ -226,36 +229,45 @@ def generate_reasoning_json(data: Dict[str, Any], no_bbox: bool, no_spatial: boo
         else:
             generated_think = "Error: Missing 'think' or 'logical_reasoning' structure."
 
-        generated_answer = data.get('answer', 'Error: Missing "answer" key.')
+        generated_answer = data.get('answer', 'Error: Missing "answer" key.').strip()
 
         # --- Pass 5: Dọn dẹp ---
         unreplaced_key_pattern = re.compile(r'\[\w+(?:_\w+)*\]') # Xóa các [ID] còn sót
         generated_understand = unreplaced_key_pattern.sub('', generated_understand)
         generated_think = unreplaced_key_pattern.sub('', generated_think)
         
-        # **SỬA LỖI:** Chỉ xóa ( ) :
+        # Sửa lỗi: Chỉ xóa ( ) :
         cleanup_pattern = re.compile(r'[\(\):]') 
         generated_understand = cleanup_pattern.sub('', generated_understand)
         generated_think = cleanup_pattern.sub('', generated_think)
 
         generated_understand = re.sub(r'\s+', ' ', generated_understand).strip()
         generated_think = re.sub(r'\s+', ' ', generated_think).strip()
+        
+        # **SỬA LỖI: Chống lặp "Therefore..."**
+        if "therefore, the answer is" in generated_think.lower():
+            return f"{generated_understand} {generated_think}"
+        else:
+            return (
+                f"{generated_understand} "
+                f"{generated_think} "
+                f"Therefore, the answer is {generated_answer}."
+            )
             
     except Exception as e:
         generated_understand = f"Error during generating: {e}"
         generated_think = f"Error during generating: {e}"
         generated_answer = f"Error during generating: {e}"
-
-    return (
-        f"{generated_understand} "
-        f"{generated_think} "
-        f"Therefore, the answer is {generated_answer}."
-    )
+        return (
+            f"{generated_understand} "
+            f"{generated_think} "
+            f"Therefore, the answer is {generated_answer}."
+        )
 
 
 def generate_short_reasoning(data: Dict[str, Any]) -> str:
     try:
-        final_answer = data.get('answer', 'Error: Missing "answer" key.')
+        final_answer = data.get('answer', 'Error: Missing "answer" key.').strip()
         evidence_texts = []
 
         if "think" in data and "evidence_array" in data["think"]:
@@ -266,14 +278,18 @@ def generate_short_reasoning(data: Dict[str, Any]) -> str:
                     quote_match = re.search(r'"(.*?)"', content)
                     if quote_match:
                         evidence_texts.append(quote_match.group(0)) # group(0) bao gồm cả dấu ""
+                    else:
+                        # Fallback: nếu không có "", lấy content làm "visual" (như log 3, 4)
+                        evidence_texts.append(f"the element '{content}'")
+
 
         if not evidence_texts:
             return f"Based on the visual evidence in the image, the answer is {final_answer}."
 
         if len(evidence_texts) == 1:
-            evidence_str = f"the text {evidence_texts[0]}"
+            evidence_str = f"{evidence_texts[0]}" # Đã có "the text/element"
         else:
-            evidence_str = f"the texts {', '.join(evidence_texts)}"
+            evidence_str = f"the elements {', '.join(evidence_texts)}"
         
         return f"Based on the image, {evidence_str} contain(s) the key information, so the answer is {final_answer}."
 
@@ -484,6 +500,7 @@ if __name__ == '__main__':
                             content_json, no_bbox=False, no_spatial=True
                         )
                         reasoning_short = generate_short_reasoning(content_json)
+                        
                         
                         tqdm.write("\n🔍 Reasoning Full:")
                         tqdm.write(reasoning_full)
