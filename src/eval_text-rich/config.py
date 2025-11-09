@@ -22,7 +22,8 @@ class DatasetConfig:
 DATASET_CONFIGS: Dict[str, DatasetConfig] = {
     "chartqapro_test": DatasetConfig(
         qa_file=f"{BASE_DIR}/chartqapro/test.jsonl",
-        img_folder=f"{BASE_DIR}/chartqapro/images",
+        # img_folder=f"{BASE_DIR}/chartqapro/images",
+        img_folder=f"/mnt/VLAI_data/ChartQAPro/images",
         max_new_tokens=100,
         metric="chartqapro",
         description="ChartQA-Pro test set"

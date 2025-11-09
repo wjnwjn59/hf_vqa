@@ -303,6 +303,43 @@ def create_template_file(entry: Dict[Any, Any], output_path: Path) -> bool:
         return False
 
 
+def analyze_template_layout(template_path: Path) -> Dict[str, int]:
+    """
+    Analyze template file to count layout elements by category.
+    
+    Args:
+        template_path: Path to template JSON file
+        
+    Returns:
+        Dictionary with counts for each category
+    """
+    try:
+        with open(template_path, 'r', encoding='utf-8') as f:
+            template_data = json.load(f)
+        
+        layers = template_data.get("layers_all", [])
+        
+        # Count by category
+        layout_counts = {
+            "base": 0,
+            "element": 0,
+            "text": 0,
+            "total": 0
+        }
+        
+        for layer in layers:
+            category = layer.get("category", "unknown")
+            if category in layout_counts:
+                layout_counts[category] += 1
+            layout_counts["total"] += 1
+        
+        return layout_counts
+        
+    except Exception as e:
+        logger.warning(f"Failed to analyze template {template_path}: {e}")
+        return {"base": 0, "element": 0, "text": 0, "total": 0}
+
+
 def create_qas_file(entry: Dict[Any, Any], output_path: Path, reasoning_index: Dict, wiki_id: str, generated_reasonings: List[Dict]) -> bool:
     """
     Create QAS JSON file for an image with reasoning data.
@@ -360,7 +397,7 @@ def create_qas_file(entry: Dict[Any, Any], output_path: Path, reasoning_index: D
         return False
 
 
-def create_annotation_entries(entry: Dict[Any, Any], reasoning_index: Dict, wiki_id: str, generated_reasonings: List[Dict]) -> List[Dict[str, Any]]:
+def create_annotation_entries(entry: Dict[Any, Any], reasoning_index: Dict, wiki_id: str, generated_reasonings: List[Dict], layout_stats: Dict[str, int]) -> List[Dict[str, Any]]:
     """
     Create lightweight metadata annotation entries that reference QAS files.
     
@@ -369,6 +406,7 @@ def create_annotation_entries(entry: Dict[Any, Any], reasoning_index: Dict, wiki
         reasoning_index: Indexed reasoning data
         wiki_id: Wiki file ID
         generated_reasonings: List of generated QA reasoning entries
+        layout_stats: Layout statistics from template analysis
         
     Returns:
         List of annotation entries (one per QA pair, including generated)
@@ -386,7 +424,8 @@ def create_annotation_entries(entry: Dict[Any, Any], reasoning_index: Dict, wiki
             "image_id": index,
             "qas_file": f"qas/{index}.json",
             "qa_type": "original",
-            "qa_index": qa_idx
+            "qa_index": qa_idx,
+            "layout_stats": layout_stats
         }
         annotations.append(annotation)
     
@@ -397,7 +436,8 @@ def create_annotation_entries(entry: Dict[Any, Any], reasoning_index: Dict, wiki
             "image_id": index,
             "qas_file": f"qas/{index}.json",
             "qa_type": "generated",
-            "qa_index": gen_idx
+            "qa_index": gen_idx,
+            "layout_stats": layout_stats
         }
         annotations.append(annotation)
     
@@ -462,7 +502,13 @@ def process_dataset(args):
         'total_reasoning_loaded': len(reasoning_index),
         'generated_qa_pairs': 0,
         'original_qa_with_reasoning': 0,
-        'original_qa_without_reasoning': 0
+        'original_qa_without_reasoning': 0,
+        'layout_stats': {
+            'base': 0,
+            'element': 0,
+            'text': 0,
+            'total': 0
+        }
     }
     
     all_annotations = []
@@ -498,6 +544,13 @@ def process_dataset(args):
             if not create_template_file(entry, template_path):
                 continue
             
+            # Analyze template layout
+            layout_stats = analyze_template_layout(template_path)
+            
+            # Accumulate layout statistics
+            for key in ['base', 'element', 'text', 'total']:
+                stats['layout_stats'][key] += layout_stats[key]
+            
             # Find reasoning for this image
             image_reasonings = find_reasonings_for_image(reasoning_index, wiki_id, index)
             generated_reasonings = [r for r in image_reasonings if r['squad_id'].startswith('gen_')]
@@ -526,8 +579,8 @@ def process_dataset(args):
                 stats['processed_entries'] += 1
                 continue
             
-            # Create annotation entries with reasoning
-            annotation_entries = create_annotation_entries(entry, reasoning_index, wiki_id, generated_reasonings)
+            # Create annotation entries with reasoning and layout stats
+            annotation_entries = create_annotation_entries(entry, reasoning_index, wiki_id, generated_reasonings, layout_stats)
             all_annotations.extend(annotation_entries)
             stats['total_annotations'] += len(annotation_entries)
             
@@ -553,6 +606,15 @@ def process_dataset(args):
     logger.info(f"  Generated QA pairs added: {stats['generated_qa_pairs']}")
     logger.info(f"  Original QA pairs with reasoning: {stats['original_qa_with_reasoning']}")
     logger.info(f"  Original QA pairs without reasoning: {stats['original_qa_without_reasoning']}")
+    logger.info(f"\nLayout Statistics:")
+    logger.info(f"  Total base layers: {stats['layout_stats']['base']}")
+    logger.info(f"  Total element layers (images): {stats['layout_stats']['element']}")
+    logger.info(f"  Total text layers: {stats['layout_stats']['text']}")
+    logger.info(f"  Total layers: {stats['layout_stats']['total']}")
+    if stats['processed_entries'] > 0:
+        logger.info(f"  Average layers per infographic: {stats['layout_stats']['total'] / stats['processed_entries']:.2f}")
+        logger.info(f"  Average element layers per infographic: {stats['layout_stats']['element'] / stats['processed_entries']:.2f}")
+        logger.info(f"  Average text layers per infographic: {stats['layout_stats']['text'] / stats['processed_entries']:.2f}")
     logger.info(f"\nTotal annotation entries: {stats['total_annotations']}")
     logger.info(f"\nOutput location: {args.output_dir}")
     logger.info(f"  - Images: {dirs['images']}")
