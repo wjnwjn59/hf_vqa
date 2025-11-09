@@ -126,55 +126,83 @@ def generate_reasoning_gpt(
     return client.generate(prompt, max_tokens)
 
 
+def norm_box_xyxy(box, *, w, h):
+    x1, y1, x2, y2 = box
+    norm_x1 = max(0.0, min(x1 / w, 1.0))
+    norm_y1 = max(0.0, min(y1 / h, 1.0))
+    norm_x2 = max(0.0, min(x2 / w, 1.0))
+    norm_y2 = max(0.0, min(y2 / h, 1.0))
+    normalized_box = (round(norm_x1, 3), round(norm_y1, 3), round(norm_x2, 3), round(norm_y2, 3))
+    return normalized_box
+
+
 def generate_reasoning_json(data: Dict[str, Any], no_bbox: bool, no_spatial: bool) -> str:
     generated_understand = "Error: Could not parse dictionary."
     generated_think = "Error: Could not parse dictionary."
     generated_answer = "Error: No answer found."
     
+    IMG_W, IMG_H = 1000, 1000
+    
     try:
-        replacement_map = {}
+        element_data = {} # { "[ID]": {"desc": ..., "coords": ..., "content": ..., "spatial": ...} }
 
+        # --- Pass 1: Lấy data từ 'understand' (description và coords) ---
         if "understand" in data and "relevant_elements" in data["understand"]:
             for el in data["understand"].get("relevant_elements", []):
                 if 'id' in el:
                     key = f"[{el['id']}]"
-                    parts = []
-                    desc = el.get('element_description')
-                    coords = el.get('coordinates')
-                    
-                    if desc and desc.lower() != 'n/a':
-                        if desc.startswith('"') and desc.endswith('"'):
-                            parts.append(f"the text {desc}")
-                        else:
-                            parts.append(f"the element '{desc}'")
-
-                    if coords and not no_bbox:
-                        parts.append(f"at coordinates {coords}")
-                    
-                    replacement_map[key] = " ".join(parts) if parts else ""
-
+                    element_data[key] = {
+                        "desc": el.get('element_description'),
+                        "coords": el.get('coordinates')
+                    }
+        
+        # --- Pass 2: Lấy data từ 'think' (content và spatial), GHI ĐÈ/BỔ SUNG ---
         if "think" in data and "evidence_array" in data["think"]:
             for ev in data["think"].get("evidence_array", []):
                 if 'id' in ev:
                     key = f"[{ev['id']}]"
-                    parts = []
-                    content = ev.get('content')
-                    context = ev.get('spatial_context')
+                    if key not in element_data:
+                        element_data[key] = {} # Tạo entry mới nếu chỉ có trong 'think'
                     
-                    if content and content.lower() != 'n/a':
-                        if content.startswith('"') and content.endswith('"'):
-                            parts.append(f"the text {content}")
-                        else:
-                            parts.append(f"the visual '{content}'")
+                    element_data[key].update({
+                        "content": ev.get('content'),
+                        "spatial": ev.get('spatial_context')
+                    })
 
-                    if context and context.lower() != 'n/a' and not no_spatial:
-                        parts.append(f"which is {context}")
-                    
-                    replacement_map[key] = " ".join(parts) if parts else ""
+        # --- Pass 3: Xây dựng replacement_map từ data đã gộp ---
+        replacement_map = {}
+        for key, item in element_data.items():
+            parts = []
+            
+            # 1. Xác định text: Ưu tiên 'content' (sạch hơn) từ 'think', nếu không có thì dùng 'desc' từ 'understand'
+            text_base = item.get('content') or item.get('desc')
+            
+            if text_base and text_base.lower() != 'n/a':
+                # Tìm text trong dấu ""
+                quote_match = re.search(r'"(.*?)"', text_base)
+                if quote_match:
+                    parts.append(f"the text {quote_match.group(0)}")
+                else:
+                    # Nếu không có dấu "", dùng toàn bộ text_base làm mô tả
+                    parts.append(f"the element '{text_base}'")
+            
+            # 2. Thêm coordinates (nếu có và không bị tắt)
+            coords = item.get('coords')
+            if coords and not no_bbox:
+                norm_coords = norm_box_xyxy(coords, w=IMG_W, h=IMG_H)
+                parts.append(f"at coordinates {list(norm_coords)}")
+                
+            # 3. Thêm spatial (nếu có và không bị tắt)
+            spatial = item.get('spatial')
+            if spatial and spatial.lower() != 'n/a' and not no_spatial:
+                parts.append(f"which is {spatial}")
+            
+            replacement_map[key] = " ".join(parts) if parts else ""
 
+        # --- Pass 4: Áp dụng replacement_map vào prose ---
         if "understand" in data and "analysis" in data["understand"]:
             generated_understand = data["understand"]["analysis"]
-            for _ in range(5):
+            for _ in range(5): # Lặp 5 lần để xử lý các ID lồng nhau
                 replaced_in_pass = False
                 for key, value in replacement_map.items():
                     if key in generated_understand:
@@ -187,7 +215,7 @@ def generate_reasoning_json(data: Dict[str, Any], no_bbox: bool, no_spatial: boo
 
         if "think" in data and "logical_reasoning" in data["think"]:
             generated_think = data["think"]["logical_reasoning"]
-            for _ in range(5):
+            for _ in range(5): # Lặp 5 lần để xử lý các ID lồng nhau
                 replaced_in_pass = False
                 for key, value in replacement_map.items():
                     if key in generated_think:
@@ -200,11 +228,13 @@ def generate_reasoning_json(data: Dict[str, Any], no_bbox: bool, no_spatial: boo
 
         generated_answer = data.get('answer', 'Error: Missing "answer" key.')
 
-        unreplaced_key_pattern = re.compile(r'\[\w+(?:_\w+)*\]')
+        # --- Pass 5: Dọn dẹp ---
+        unreplaced_key_pattern = re.compile(r'\[\w+(?:_\w+)*\]') # Xóa các [ID] còn sót
         generated_understand = unreplaced_key_pattern.sub('', generated_understand)
         generated_think = unreplaced_key_pattern.sub('', generated_think)
         
-        cleanup_pattern = re.compile(r'[\(\)\[\]:]')
+        # **SỬA LỖI:** Chỉ xóa ( ) :
+        cleanup_pattern = re.compile(r'[\(\):]') 
         generated_understand = cleanup_pattern.sub('', generated_understand)
         generated_think = cleanup_pattern.sub('', generated_think)
 
@@ -221,6 +251,34 @@ def generate_reasoning_json(data: Dict[str, Any], no_bbox: bool, no_spatial: boo
         f"{generated_think} "
         f"Therefore, the answer is {generated_answer}."
     )
+
+
+def generate_short_reasoning(data: Dict[str, Any]) -> str:
+    try:
+        final_answer = data.get('answer', 'Error: Missing "answer" key.')
+        evidence_texts = []
+
+        if "think" in data and "evidence_array" in data["think"]:
+            for ev in data["think"].get("evidence_array", []):
+                content = ev.get('content')
+                if content and content.lower() != 'n/a':
+                    # **SỬA LỖI:** Dùng regex để tìm text, bất kể "Text "
+                    quote_match = re.search(r'"(.*?)"', content)
+                    if quote_match:
+                        evidence_texts.append(quote_match.group(0)) # group(0) bao gồm cả dấu ""
+
+        if not evidence_texts:
+            return f"Based on the visual evidence in the image, the answer is {final_answer}."
+
+        if len(evidence_texts) == 1:
+            evidence_str = f"the text {evidence_texts[0]}"
+        else:
+            evidence_str = f"the texts {', '.join(evidence_texts)}"
+        
+        return f"Based on the image, {evidence_str} contain(s) the key information, so the answer is {final_answer}."
+
+    except Exception as e:
+        return f"Error during short reasoning generation: {e}"
 
 
 if __name__ == '__main__':
@@ -298,7 +356,7 @@ if __name__ == '__main__':
     print(f"🚀 Starting Reasoning generation using [Backend: {args.backend}]")
     print(f"Source Directory: {LAYOUT_DIR}")
     print(f"💾 Saving results to: {OUTPUT_FILE_PATH} (appending)")
-    print("ℹ️  Generating all 4 reasoning versions (full, no_bbox, no_spatial, no_bbox_no_spatial) in a single run.")
+    print("ℹ️  Generating all 5 reasoning versions (full, 3 ablations, 1 short) in a single run.")
 
     processed_qas = set()
     if OUTPUT_FILE_PATH.exists():
@@ -416,7 +474,6 @@ if __name__ == '__main__':
                         tqdm.write("✅ Reasoning JSON Output:\n")
                         tqdm.write(json.dumps(content_json, indent=2))
                         
-                        # Tự động tạo cả 4 phiên bản
                         reasoning_full = generate_reasoning_json(
                             content_json, no_bbox=False, no_spatial=False
                         )
@@ -426,12 +483,17 @@ if __name__ == '__main__':
                         reasoning_no_spatial = generate_reasoning_json(
                             content_json, no_bbox=False, no_spatial=True
                         )
-                        reasoning_no_bbox_no_spatial = generate_reasoning_json(
-                            content_json, no_bbox=True, no_spatial=True
-                        )
+                        reasoning_short = generate_short_reasoning(content_json)
                         
-                        tqdm.write("\n🔍 Merged Reasoning (Full):\n")
+                        tqdm.write("\n🔍 Reasoning Full:")
                         tqdm.write(reasoning_full)
+                        tqdm.write("\n🔍 Reasoning No Bbox:")
+                        tqdm.write(reasoning_no_bbox)
+                        tqdm.write("\n🔍 Reasoning No Spatial:")
+                        tqdm.write(reasoning_no_spatial)
+                        tqdm.write("\n🔍 Reasoning Short:")
+                        tqdm.write(reasoning_short)
+
 
                     except json.JSONDecodeError:
                         tqdm.write(f"❌ Error: Model output was not valid JSON. Raw output: {content}")
@@ -440,9 +502,8 @@ if __name__ == '__main__':
                         reasoning_full = error_msg
                         reasoning_no_bbox = error_msg
                         reasoning_no_spatial = error_msg
-                        reasoning_no_bbox_no_spatial = error_msg
+                        reasoning_short = error_msg
                     
-                    # Lưu cả 4 phiên bản
                     result_item = {
                         "wiki_id": wiki_id,
                         "layout_index": layout_index,
@@ -453,7 +514,7 @@ if __name__ == '__main__':
                         "reasoning_full": reasoning_full,
                         "reasoning_no_bbox": reasoning_no_bbox,
                         "reasoning_no_spatial": reasoning_no_spatial,
-                        "reasoning_no_bbox_no_spatial": reasoning_no_bbox_no_spatial
+                        "reasoning_short": reasoning_short
                     }
                     
                     f_out.write(json.dumps(result_item, ensure_ascii=False) + '\n')
