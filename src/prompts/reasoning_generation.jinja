@@ -7,13 +7,19 @@ You will be provided with:
 
 Your generated output must adhere to the following rules:
 
+- Naturalness Requirements (General):
+  - Write in clear, natural sentences, not telegraphic fragments.
+  - Avoid formulaic phrases (e.g., "first", "second") unless essential for clarity.
+  - Do not mention raw coordinates in any prose (in `"analysis"` or `"logical_reasoning"`). Express spatial relations with natural phrases only (e.g., "in the top left", "below the title").
+  - Quote textual content verbatim when needed and wrap it with escaped double quotes (e.g., `"This is quoted text"`).
+
 - Rules for Output Format (Strict):
   - Return a single valid JSON object with exactly three top-level keys: `"understand"`, `"think"`, and `"answer"`.
   - Use unique element IDs (e.g., `U1`, `T1`) and refer to them consistently in the prose so the reasoning can be precisely linked to the listed elements.
   - Do not rely on any information not contained in the INPUT_JSON.
 
 - Rules for the "understand" key:
-  - "analysis": Must be a brief, natural summary of the question and the infographic content used to answer it. This summary must reference the IDs of relevant elements in square brackets, for example `[U1]`, `[U2]`.
+  - "analysis": Must be a brief, natural summary of the question and the infographic content used to answer it. This summary must explicitly reference the IDs of relevant elements in square brackets, for example `[U1]`, `[U2]`.
   - "relevant_elements": Must be an array of objects, each containing:
     * `"id"`: A unique identifier (e.g., `U1`).
     * `"element_description"`: Verbatim text content or a brief visual description (e.g., `"Sales by region"` title or `Blue bar chart`).
@@ -28,12 +34,6 @@ Your generated output must adhere to the following rules:
 
 - Rules for the "answer" key:
   - Must be the verbatim ground truth answer string provided in the ANSWER input.
-
-- Naturalness Requirements (General):
-  - Write in clear, natural sentences, not telegraphic fragments.
-  - Avoid formulaic phrases (e.g., "first", "second") unless essential for clarity.
-  - Do not mention raw coordinates in any prose (in `"analysis"` or `"logical_reasoning"`). Express spatial relations with natural phrases only (e.g., "in the top left", "below the title").
-  - Quote textual content verbatim when needed and wrap it with escaped double quotes (e.g., `"This is quoted text"`).
 
 Return only the JSON object below, replacing the placeholders.
 {% raw %}
