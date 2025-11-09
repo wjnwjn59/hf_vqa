@@ -168,16 +168,16 @@ python vlms/run_inference.py \
 
 ```bash
 # Đánh giá tất cả kết quả trong thư mục
-python evaluation/evaluator.py --folder ./outputs/vlm_results/ --use_llm
+python evaluation/evaluator.py --folder ./outputs/vlm_results/
 
 # Đánh giá file cụ thể
-python evaluation/evaluator.py --file ./outputs/vlm_results/your_model_chartqapro_test.csv --use_llm
+python evaluation/evaluator.py --file ./outputs/vlm_results/your_model_chartqapro_test.csv
 ```
 
 ### Đánh giá thủ công
 
 ```bash
-python evaluation/metrics.py --file ./outputs/vlm_results/your_model_chartqapro_test.csv --use_llm
+python evaluation/metrics.py --folder ./outputs/vlm_results/
 ```
 
 ## Bước 5: Kiểm tra kết quả
