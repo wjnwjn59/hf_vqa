@@ -239,6 +239,10 @@ def extract_images_from_caption(full_caption: str) -> List[Dict]:
     """
     image_elements = []
     
+    # Preprocessing: Remove multiple consecutive backslashes (\\\ or \\)
+    # This handles escaped quotes like \"text\" that should be "text"
+    full_caption = re.sub(r'\\+', '', full_caption)
+    
     # Pattern 1: Match "content" (figure) with optional punctuation after
     # Matches: (figure), (figure). (figure), (figure); etc.
     pattern1 = r'"([^"]+)"\s*\(figure\)[.,;:!?]?'
@@ -294,6 +298,10 @@ def extract_text_elements(full_caption: str) -> List[str]:
     """
     text_elements = []
     
+    # Preprocessing: Remove multiple consecutive backslashes (\\\ or \\)
+    # This handles escaped quotes like \"text\" that should be "text"
+    full_caption = re.sub(r'\\+', '', full_caption)
+    
     # Pattern 1: Match "content" (text) with optional punctuation after
     # Matches: (text), (text). (text), (text); etc.
     pattern1 = r'"([^"]+)"\s*\(text\)[.,;:!?]?'
@@ -326,6 +334,10 @@ def clean_caption_text(caption: str) -> str:
     Returns:
         Cleaned caption text
     """
+    # Preprocessing: Remove multiple consecutive backslashes (\\\ or \\)
+    # This handles escaped quotes like \"text\" that should be "text"
+    caption = re.sub(r'\\+', '', caption)
+    
     # Remove "content" (figure) with optional punctuation - remove both quotes and tag
     caption = re.sub(r'"[^"]+"\s*\(figure\)[.,;:!?]?', '', caption, flags=re.IGNORECASE)
     
@@ -827,6 +839,11 @@ def find_suitable_layouts_for_content(
     print(f"  Searching for layouts: need {image_count} images, {text_count} texts (title: largest bbox, others: >= {min_text_area} px²)")
     
     for bbox_data in extracted_bboxes:
+        # Skip layout cn_1 (Chinese layout)
+        layout_name = bbox_data.get('name', '')
+        if layout_name == 'cn_1' or layout_name == '86':
+            continue
+        
         bboxes = bbox_data['bboxes']
         
         # Count available element bboxes (excluding background)
@@ -1405,13 +1422,14 @@ def merge_narrator_data(
     return result
 
 
-def update_original_wiki_files(merged_data: List[Dict], original_wiki_dir: str):
+def update_original_wiki_files(merged_data: List[Dict], original_wiki_dir: str, offset: int = 0):
     """
     Update original wiki files by replacing entries that match the indices in merged_data.
     
     Args:
         merged_data: List of merged infographic data with 'index' field
         original_wiki_dir: Path to directory containing original wiki*.json files
+        offset: ID offset to adjust file calculation (default: 0)
     """
     if not os.path.exists(original_wiki_dir):
         print(f"\nWarning: Original wiki directory does not exist: {original_wiki_dir}")
@@ -1429,10 +1447,15 @@ def update_original_wiki_files(merged_data: List[Dict], original_wiki_dir: str):
     for entry in merged_data:
         wiki_id = entry['index']
         
+        # Apply offset to calculate adjusted ID
+        adjusted_id = wiki_id - offset
+        if adjusted_id < 1:
+            adjusted_id = 1
+        
         # Calculate which file this entry belongs to
-        # wiki_id 1-50 → file 1, wiki_id 51-100 → file 2, etc.
-        file_index = ((wiki_id - 1) // 50) + 1
-        position_in_array = (wiki_id - 1) % 50
+        # adjusted_id 1-50 → file 1, adjusted_id 51-100 → file 2, etc.
+        file_index = ((adjusted_id - 1) // 50) + 1
+        position_in_array = (adjusted_id - 1) % 50
         
         if file_index not in updates_by_file:
             updates_by_file[file_index] = []
@@ -1581,6 +1604,12 @@ def main():
         type=str,
         default="./src/data/narrator/wiki",
         help='Path to original wiki directory for updating entries when using --infor_path (default: ./src/data/narrator/wiki)'
+    )
+    parser.add_argument(
+        '--offset',
+        type=int,
+        default=0,
+        help='ID offset for file calculation. Use when IDs do not start from 1. Example: infographic_val with ID 19030 at position 1 needs --offset 19029 (default: 0)'
     )
 
     args = parser.parse_args()
@@ -1733,8 +1762,9 @@ def main():
         print("="*60)
         print(f"Output saved to: {output_dir}")
         print(f"Now updating original wiki files...")
+        print(f"Using offset: {args.offset}")
         
-        update_original_wiki_files(merged_data, args.original_wiki_dir)
+        update_original_wiki_files(merged_data, args.original_wiki_dir, offset=args.offset)
     
     print("Done!")
     

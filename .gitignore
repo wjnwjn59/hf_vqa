@@ -10,9 +10,6 @@ wikipedia_processed.json
 
 src/data/bizgen/output*
 
-src/data/create_data/output/infographic/
-src/data/create_data/output/narrator_format/
-
 output/
 
 *.zip
@@ -34,3 +31,6 @@ dataset/
 squad_v2_train.jsonl
 *.jsonl
 wiki_val/
+
+infographic*/
+wiki*/

@@ -107,10 +107,13 @@ export PYTHONPATH="./:$PYTHONPATH"
 
 python src/data/narrator/merge_narrator_bboxes.py \
     --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_train.jsonl" \
-    --infor_path "./src/data/narrator/infographic/failed.json" \
+    --infor_path "./src/data/narrator/infographic_val/failed.json" \
     --output-dir "./src/data/narrator/wiki_retry" \
-    --original-wiki-dir "./src/data/narrator/wiki"
+    --original-wiki-dir "./src/data/narrator/wiki_val" \
+    --squad-file "/mnt/VLAI_data/Squad_v2/squad_v2_val.jsonl"
 ```
+
+--output-dir have to difference for other path
 
 ## Regenerate Failed Images
 
