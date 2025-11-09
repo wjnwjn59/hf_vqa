@@ -51,17 +51,15 @@ python src/data/narrator/generate_qas.py \
 
 ## 2\. Step 2: Reasoning Generation (`generate_reasoning.py`)
 
-This script's purpose is to generate a detailed, step-by-step logical reasoning chain for *every* question-answer pair in the dataset.
+This script's purpose is to generate a detailed, step-by-step logical reasoning chain for *every* QA pair in the dataset.
 
   * **Input**: Reads all `wiki*.json` files from the `--layout_dir` (which *must* have already been processed by Step 1).
-  * **Output**: Creates a new **JSON Lines** (`.jsonl`) file at the path specified by `--output_file_path`. Each line in this file is a JSON object containing the reasoning for a single Q\&A pair.
-
-### Ablation Options (Natural Language Output)
-
-This script includes flags to control the content of the final `merged_reasoning` string for ablation studies.
-
-  * **`--no_bbox`**: If set, removes bounding box coordinates (e.g., `at coordinates [100, 200, 300, 400]`) from the final naturalized text.
-  * **`--no_spatial`**: If set, removes spatial context descriptions (e.g., `which is below the title`) from the final naturalized text.
+  * **Output**: Creates a new **JSON Lines** (`.jsonl`) file at the path specified by `--output_file_path`.
+      * Each line in this file is a JSON object containing the raw `generated_reasoning` JSON from the model, plus **four** automatically generated natural language versions for ablation studies:
+        1.  `reasoning_full`: The complete reasoning with all details.
+        2.  `reasoning_no_bbox`: Reasoning *without* bounding box coordinates.
+        3.  `reasoning_no_spatial`: Reasoning *without* spatial context (e.g., "below the title").
+        4.  `reasoning_no_bbox_no_spatial`: Reasoning *without* either bbox or spatial info.
 
 ### Usage Examples
 
@@ -82,14 +80,4 @@ python src/data/narrator/generate_reasoning.py \
     --openai_model "gpt-4o" \
     --layout_dir "/path/to/your/data/wiki" \
     --output_file_path "/path/to/your/data/generated_Gpt_reasonings.jsonl"
-```
-
-**Example with Ablation (Removing Bounding Boxes):**
-
-```bash
-python src/data/narrator/generate_reasoning.py \
-    --model_name "/path/to/your/Qwen_Qwen3-8B" \
-    --layout_dir "/path/to/your/data/wiki" \
-    --output_file_path "/path/to/your/data/reasonings_no_bbox.jsonl" \
-    --no_bbox
 ```

@@ -240,7 +240,7 @@ if __name__ == '__main__':
     parser.add_argument('--openai_api_key', type=str, default=None,
                         help='OpenAI API key (falls back to OPENAI_API_KEY env var)')
     parser.add_argument('--layout_dir', type=str,
-                        default='/home/binhdt/hf_vqa/src/data/narrator/wiki',
+                        default='/home/binhdt/hf_vqa/src/data/narrator/wiki_new',
                         help='Path to source directory for wiki*.json files')
     parser.add_argument('--output_file_path', type=str,
                         default='src/data/narrator/generated_reasonings.jsonl',
@@ -251,10 +251,6 @@ if __name__ == '__main__':
                         help='Top-p sampling parameter')
     parser.add_argument('--max_tokens', type=int, default=8096,
                         help='Maximum new tokens to generate')
-    parser.add_argument('--no_bbox', action='store_true',
-                        help='If set, remove bounding box coordinates from the final generated reasoning.')
-    parser.add_argument('--no_spatial', action='store_true',
-                        help='If set, remove spatial context from the final generated reasoning.')
     
     args = parser.parse_args()
 
@@ -302,11 +298,8 @@ if __name__ == '__main__':
     print(f"🚀 Starting Reasoning generation using [Backend: {args.backend}]")
     print(f"Source Directory: {LAYOUT_DIR}")
     print(f"💾 Saving results to: {OUTPUT_FILE_PATH} (appending)")
-    if args.no_bbox:
-        print("⚠️  Ablation: Bounding boxes will be REMOVED from the reasoning output.")
-    if args.no_spatial:
-        print("⚠️  Ablation: Spatial context will be REMOVED from the reasoning output.")
-    
+    print("ℹ️  Generating all 4 reasoning versions (full, no_bbox, no_spatial, no_bbox_no_spatial) in a single run.")
+
     processed_qas = set()
     if OUTPUT_FILE_PATH.exists():
         print(f"📂 Loading existing results from {OUTPUT_FILE_PATH}...")
@@ -422,19 +415,34 @@ if __name__ == '__main__':
                         content_json = json.loads(content)
                         tqdm.write("✅ Reasoning JSON Output:\n")
                         tqdm.write(json.dumps(content_json, indent=2))
-                        generated_reasoning = generate_reasoning_json(
-                            content_json, 
-                            args.no_bbox, 
-                            args.no_spatial
-                        ) 
+                        
+                        # Tự động tạo cả 4 phiên bản
+                        reasoning_full = generate_reasoning_json(
+                            content_json, no_bbox=False, no_spatial=False
+                        )
+                        reasoning_no_bbox = generate_reasoning_json(
+                            content_json, no_bbox=True, no_spatial=False
+                        )
+                        reasoning_no_spatial = generate_reasoning_json(
+                            content_json, no_bbox=False, no_spatial=True
+                        )
+                        reasoning_no_bbox_no_spatial = generate_reasoning_json(
+                            content_json, no_bbox=True, no_spatial=True
+                        )
+                        
+                        tqdm.write("\n🔍 Merged Reasoning (Full):\n")
+                        tqdm.write(reasoning_full)
+
                     except json.JSONDecodeError:
                         tqdm.write(f"❌ Error: Model output was not valid JSON. Raw output: {content}")
                         content_json = {"error": "Invalid JSON from model", "raw_output": content}
-                        generated_reasoning = "Error: Failed to decode model output."
+                        error_msg = "Error: Failed to decode model output."
+                        reasoning_full = error_msg
+                        reasoning_no_bbox = error_msg
+                        reasoning_no_spatial = error_msg
+                        reasoning_no_bbox_no_spatial = error_msg
                     
-                    tqdm.write("\n🔍 Merged Reasoning (Naturalized):\n")
-                    tqdm.write(generated_reasoning)
-
+                    # Lưu cả 4 phiên bản
                     result_item = {
                         "wiki_id": wiki_id,
                         "layout_index": layout_index,
@@ -442,7 +450,10 @@ if __name__ == '__main__':
                         "question": question,
                         "ground_truth_answer": ground_truth_answer,
                         "generated_reasoning": content_json, 
-                        "merged_reasoning": generated_reasoning 
+                        "reasoning_full": reasoning_full,
+                        "reasoning_no_bbox": reasoning_no_bbox,
+                        "reasoning_no_spatial": reasoning_no_spatial,
+                        "reasoning_no_bbox_no_spatial": reasoning_no_bbox_no_spatial
                     }
                     
                     f_out.write(json.dumps(result_item, ensure_ascii=False) + '\n')
