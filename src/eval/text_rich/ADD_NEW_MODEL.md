@@ -7,7 +7,7 @@ This document provides detailed instructions on how to add and integrate a new V
 ## 🗂️ Directory Structure
 
 ```
-src/eval_text-rich/
+src/eval/text_rich/
 ├── vlms/
 │   ├── models/                    # Directory containing model implementations
 │   │   ├── __init__.py
@@ -500,7 +500,7 @@ if __name__ == "__main__":
 
 Run the test:
 ```bash
-cd /home/thinhnp/hf_vqa/src/eval_text-rich
+cd /home/binhdt/hf_vqa/src/eval/text_rich
 python -c "from vlms.models.your_model import inference; ..."
 ```
 
@@ -511,7 +511,7 @@ python -c "from vlms.models.your_model import inference; ..."
 ### Basic Syntax
 
 ```bash
-cd /home/thinhnp/hf_vqa/src/eval_text-rich
+cd /home/binhdt/hf_vqa/src/eval/text_rich
 
 python vlms/run_inference.py \
     --model <model_filename_without_.py> \
