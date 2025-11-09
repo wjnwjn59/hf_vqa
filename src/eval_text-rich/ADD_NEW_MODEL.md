@@ -65,6 +65,14 @@ huggingface-cli download \
     --local-dir-use-symlinks False
 ```
 
+```bash
+# Download Llama-4-Scout
+huggingface-cli download \
+    meta-llama/Llama-4-Scout-17B-16E-Instruct \
+    --local-dir /mnt/dataset1/pretrained_fm/unsloth_Llama-4-Scout-17B-16E-Instruct/ \
+    --local-dir-use-symlinks False
+```
+
 ---
 
 ### Step 2: Create the Model Implementation File
