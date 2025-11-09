@@ -90,7 +90,6 @@ def generate_qas_qwen(
     )
     output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
     
-    # Separate 'thinking' (logs) from final 'content' (JSON)
     try:
         # 151668 is the Qwen token_id for '<|end_of_thinking|>'
         index = len(output_ids) - output_ids[::-1].index(151668)
@@ -135,7 +134,7 @@ if __name__ == '__main__':
     parser.add_argument('--openai_api_key', type=str, default=None,
                         help='OpenAI API key (falls back to OPENAI_API_KEY env var)')
     parser.add_argument('--layout_dir', type=str,
-                        default='/home/binhdt/hf_vqa/src/data/narrator/wiki',
+                        default='/home/binhdt/hf_vqa/src/data/narrator/wiki_new',
                         help='Path to source/target directory for wiki*.json files')
     parser.add_argument('--k_value', type=int, default=3,
                         help='Number of new QAs to generate per item')

@@ -1,0 +1,1202 @@
+[
+  {
+    "index": 20230,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Conservative Forces and Energy Conservation\" focused on \"relationship between potential and kinetic energy\" At the top there is a simple symbolic diagram titled and a short explanatory label \"potential energy can change only into kinetic\" that presents the idea that \"kinetic\" appears as the only form into which potential energy can convert, and a companion label \"kinetic energy converts only into potential\" reiterating that kinetic changes only into \"potential\". In the middle a schematic landscape illustration shows water following contours as an analogy and a concise caption \"difference in potential energy between two different locations in space\" that states the force is related to the potential difference, while another short phrase \"an artifact of the potential field\" explicitly names the force as an artifact. At the bottom a conceptual icon is accompanied by the clarifying label \"net mechanical energy is conserved in closed systems\" summarizing conservation whenever a conservative force acts, and the overall style of the image is clear, educational, and infographic-like."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is completely blank and white. There are no objects, no text, no colors, and no actions taking place. It's a simple, unadorned white space with no discernible features or content."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          73,
+          152
+        ],
+        "bottom_right": [
+          822,
+          443
+        ],
+        "caption": "An illustration of energy interchange cartoon"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          51,
+          1328
+        ],
+        "bottom_right": [
+          844,
+          1525
+        ],
+        "caption": "An illustration of flow contour diagram"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          51,
+          1609
+        ],
+        "bottom_right": [
+          844,
+          1806
+        ],
+        "caption": "An illustration of closed system symbol"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          260,
+          683
+        ],
+        "bottom_right": [
+          635,
+          1047
+        ],
+        "caption": "Text \"Conservative Forces and Energy Conservation\" in <color-1>, <en-font-50>. ",
+        "text": "Conservative Forces and Energy Conservation"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          70,
+          228
+        ],
+        "bottom_right": [
+          826,
+          367
+        ],
+        "caption": "Text \"relationship between potential and kinetic energy\" in <color-1>, <en-font-50>. ",
+        "text": "relationship between potential and kinetic energy"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          29,
+          525
+        ],
+        "bottom_right": [
+          866,
+          643
+        ],
+        "caption": "Text \"potential energy can change only into kinetic\" in <color-1>, <en-font-50>. ",
+        "text": "potential energy can change only into kinetic"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          253,
+          1091
+        ],
+        "bottom_right": [
+          651,
+          1199
+        ],
+        "caption": "Text \"kinetic energy converts only into potential\" in <color-1>, <en-font-50>. ",
+        "text": "kinetic energy converts only into potential"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          253,
+          1654
+        ],
+        "bottom_right": [
+          650,
+          1761
+        ],
+        "caption": "Text \"difference in potential energy between two different locations in space\" in <color-1>, <en-font-50>. ",
+        "text": "difference in potential energy between two different locations in space"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          253,
+          1373
+        ],
+        "bottom_right": [
+          650,
+          1480
+        ],
+        "caption": "Text \"an artifact of the potential field\" in <color-1>, <en-font-50>. ",
+        "text": "an artifact of the potential field"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          253,
+          1935
+        ],
+        "bottom_right": [
+          650,
+          2042
+        ],
+        "caption": "Text \"net mechanical energy is conserved in closed systems\" in <color-1>, <en-font-50>. ",
+        "text": "net mechanical energy is conserved in closed systems"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Conservative Forces and Energy Conservation\" (text) focused on \"relationship between potential and kinetic energy\" (text). At the top there is a simple symbolic diagram titled \"energy interchange cartoon\" (figure) and a short explanatory label \"potential energy can change only into kinetic\" (text) that presents the idea that \"kinetic\" appears as the only form into which potential energy can convert, and a companion label \"kinetic energy converts only into potential\" (text) reiterating that kinetic changes only into \"potential\". In the middle a schematic landscape illustration \"flow contour diagram\" (figure) shows water following contours as an analogy and a concise caption \"difference in potential energy between two different locations in space\" (text) that states the force is related to the potential difference, while another short phrase \"an artifact of the potential field\" (text) explicitly names the force as an artifact. At the bottom a conceptual icon \"closed system symbol\" (figure) is accompanied by the clarifying label \"net mechanical energy is conserved in closed systems\" (text) summarizing conservation whenever a conservative force acts, and the overall style of the image is clear, educational, and infographic-like.",
+    "original_bbox_index": 16,
+    "context": "A conservative force that acts on a closed system has an associated mechanical work that allows energy to convert only between kinetic or potential forms. This means that for a closed system, the net mechanical energy is conserved whenever a conservative force acts on the system. The force, therefore, is related directly to the difference in potential energy between two different locations in space, and can be considered to be an artifact of the potential field in the same way that the direction and amount of a flow of water can be considered to be an artifact of the contour map of the elevation of an area.",
+    "original_qa_pairs": [
+      {
+        "question": "What is the only form potential energy can change into?",
+        "answers": {
+          "text": [
+            "kinetic",
+            "kinetic",
+            "kinetic",
+            "kinetic"
+          ],
+          "answer_start": [
+            127,
+            127,
+            127,
+            127
+          ]
+        },
+        "id": "5737a7351c456719005744f1"
+      },
+      {
+        "question": "What is the only form kinetic energy can change into?",
+        "answers": {
+          "text": [
+            "potential",
+            "potential",
+            "potential",
+            "potential"
+          ],
+          "answer_start": [
+            138,
+            138,
+            138,
+            138
+          ]
+        },
+        "id": "5737a7351c456719005744f2"
+      },
+      {
+        "question": "What is preserved in a closed system of forces when acted upon?",
+        "answers": {
+          "text": [
+            "net mechanical energy",
+            "net mechanical energy",
+            "net mechanical energy",
+            "net mechanical energy"
+          ],
+          "answer_start": [
+            196,
+            196,
+            196,
+            196
+          ]
+        },
+        "id": "5737a7351c456719005744f3"
+      },
+      {
+        "question": "What is the force between two locations related to?",
+        "answers": {
+          "text": [
+            "difference in potential energy",
+            "the difference in potential energy",
+            "the difference in potential energy",
+            "the difference in potential energy between two different locations in space"
+          ],
+          "answer_start": [
+            330,
+            326,
+            326,
+            326
+          ]
+        },
+        "id": "5737a7351c456719005744f4"
+      },
+      {
+        "question": "What is the force called rgarding a potential field between two locations?",
+        "answers": {
+          "text": [
+            "artifact",
+            "artifact of the potential field",
+            "an artifact"
+          ],
+          "answer_start": [
+            434,
+            434,
+            431
+          ]
+        },
+        "id": "5737a7351c456719005744f5"
+      },
+      {
+        "question": "A liberal force that acts on a closed system has what kind of mechanical work?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad2895bd7d075001a429982"
+      },
+      {
+        "question": "Net mechanical energy is what in an open system?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad2895bd7d075001a429983"
+      },
+      {
+        "question": "What can not be considered an artifact of the potential field?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad2895bd7d075001a429984"
+      },
+      {
+        "question": "A flow of water can not be considered an artifact of what?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad2895bd7d075001a429985"
+      }
+    ]
+  },
+  {
+    "index": 20231,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Nonconservative Forces Explained\" focused on \"Macroscopic versus Microscopic Force Origins\" At the top there is a clear header and a small schematic pictogram labeled and a block of explanatory text saying \"For certain physical scenarios it is impossible to model forces as being due to gradient of potentials\" and in the next band a comparative diagram shows a stylized macroscopic object being acted on with an icon captioned while a connected note reads \"Macrophysical considerations give macroscopic statistical averages\" In the central area a detailed inset shows many tiny charges with motion arrows titled accompanied by a line that explicitly states \"Electrostatic gradients between atoms create friction\" and a nearby explanatory label reads \"Friction emerges independent of macroscale position vectors\" Further down a row of succinct statements lists types of nonconservative forces and their classification as \"Nonconservative forces other than friction include contact, tension, compression, and drag\" and a small illustrative icon shows a hand-push and rope-pull labeled At the bottom a concluding caption explains reconciliation with microscopic theory saying \"On sufficient microscopic detail every macroscopic force results from conservative gradients\" The overall style of the image is clear, instructional, and schematic."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a plain, solid color with no distinguishable features or objects. It appears to be a uniform pink or light red color, filling the entire frame without any variation or texture. There are no texts, shapes, or other elements that can be confidently identified within this image."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          51,
+          319
+        ],
+        "bottom_right": [
+          844,
+          519
+        ],
+        "caption": "An illustration of A cartoon of interacting atoms"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          51,
+          559
+        ],
+        "bottom_right": [
+          844,
+          759
+        ],
+        "caption": "A stylized macroscopic contact force"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          51,
+          1281
+        ],
+        "bottom_right": [
+          844,
+          1481
+        ],
+        "caption": "An illustration of A symbolic microstate ensemble"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          51,
+          1764
+        ],
+        "bottom_right": [
+          844,
+          1964
+        ],
+        "caption": "An illustration of A cartoon of macroscopic contact interactions"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          83,
+          58
+        ],
+        "bottom_right": [
+          812,
+          219
+        ],
+        "caption": "Text \"Nonconservative Forces Explained\" in <color-1>, <en-font-382>. ",
+        "text": "Nonconservative Forces Explained"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          81,
+          1556
+        ],
+        "bottom_right": [
+          489,
+          1690
+        ],
+        "caption": "Text \"Macroscopic versus Microscopic Force Origins\" in <color-1>, <en-font-382>. ",
+        "text": "Macroscopic versus Microscopic Force Origins"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          415,
+          1797
+        ],
+        "bottom_right": [
+          819,
+          1931
+        ],
+        "caption": "Text \"For certain physical scenarios it is impossible to\" in <color-1>, <en-font-382>. ",
+        "text": "For certain physical scenarios it is impossible to"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          415,
+          1314
+        ],
+        "bottom_right": [
+          813,
+          1448
+        ],
+        "caption": "Text \"model forces as being due to gradient of potentials\" in <color-1>, <en-font-382>. ",
+        "text": "model forces as being due to gradient of potentials"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          44,
+          2014
+        ],
+        "bottom_right": [
+          851,
+          2072
+        ],
+        "caption": "Text \"Macrophysical considerations give macroscopic statistical averages\" in <color-1>, <en-font-382>. ",
+        "text": "Macrophysical considerations give macroscopic statistical averages"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          81,
+          1091
+        ],
+        "bottom_right": [
+          510,
+          1198
+        ],
+        "caption": "Text \"Electrostatic gradients between atoms create friction\" in <color-1>, <en-font-382>. ",
+        "text": "Electrostatic gradients between atoms create friction"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          81,
+          607
+        ],
+        "bottom_right": [
+          497,
+          714
+        ],
+        "caption": "Text \"Friction emerges independent of macroscale position vectors\" in <color-1>, <en-font-382>. ",
+        "text": "Friction emerges independent of macroscale position vectors"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          415,
+          365
+        ],
+        "bottom_right": [
+          819,
+          473
+        ],
+        "caption": "Text \"Nonconservative forces other than friction\" in <color-1>, <en-font-382>. ",
+        "text": "Nonconservative forces other than friction"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          415,
+          851
+        ],
+        "bottom_right": [
+          808,
+          958
+        ],
+        "caption": "Text \"include contact, tension, compression, and drag\" in <color-1>, <en-font-382>. ",
+        "text": "include contact, tension, compression, and drag"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          50,
+          235
+        ],
+        "bottom_right": [
+          845,
+          269
+        ],
+        "caption": "Text \"On sufficient microscopic detail every\" in <color-1>, <en-font-382>. ",
+        "text": "On sufficient microscopic detail every"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          44,
+          2106
+        ],
+        "bottom_right": [
+          851,
+          2135
+        ],
+        "caption": "Text \"macroscopic force results from conservative gradients\" in <color-1>, <en-font-382>. ",
+        "text": "macroscopic force results from conservative gradients"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Nonconservative Forces Explained\" (text) focused on \"Macroscopic versus Microscopic Force Origins\" (text). At the top there is a clear header and a small schematic pictogram labeled \"A cartoon of interacting atoms\" (figure) and a block of explanatory text saying \"For certain physical scenarios it is impossible to model forces as being due to gradient of potentials\" (text), and in the next band a comparative diagram shows a stylized macroscopic object being acted on with an icon captioned \"A stylized macroscopic contact force\" (figure) while a connected note reads \"Macrophysical considerations give macroscopic statistical averages\" (text). In the central area a detailed inset shows many tiny charges with motion arrows titled \"A symbolic microstate ensemble\" (figure) accompanied by a line that explicitly states \"Electrostatic gradients between atoms create friction\" (text), and a nearby explanatory label reads \"Friction emerges independent of macroscale position vectors\" (text). Further down a row of succinct statements lists types of nonconservative forces and their classification as \"Nonconservative forces other than friction include contact, tension, compression, and drag\" (text) and a small illustrative icon shows a hand-push and rope-pull labeled \"A cartoon of macroscopic contact interactions\" (figure). At the bottom a concluding caption explains reconciliation with microscopic theory saying \"On sufficient microscopic detail every macroscopic force results from conservative gradients\" (text). The overall style of the image is clear, instructional, and schematic.",
+    "original_bbox_index": "kr_13",
+    "context": "For certain physical scenarios, it is impossible to model forces as being due to gradient of potentials. This is often due to macrophysical considerations that yield forces as arising from a macroscopic statistical average of microstates. For example, friction is caused by the gradients of numerous electrostatic potentials between the atoms, but manifests as a force model that is independent of any macroscale position vector. Nonconservative forces other than friction include other contact forces, tension, compression, and drag. However, for any sufficiently detailed description, all these forces are the results of conservative ones since each of these macroscopic forces are the net results of the gradients of microscopic potentials.",
+    "original_qa_pairs": [
+      {
+        "question": "What is sometimes impossible to model?",
+        "answers": {
+          "text": [
+            "forces",
+            "forces as being due to gradient of potentials",
+            "forces",
+            "forces as being due to gradient of potentials"
+          ],
+          "answer_start": [
+            58,
+            58,
+            58,
+            58
+          ]
+        },
+        "id": "5737a84dc3c5551400e51f59"
+      },
+      {
+        "question": "Why are some forces due to that are impossible to model?",
+        "answers": {
+          "text": [
+            "gradient of potentials",
+            "macrophysical considerations that yield forces as arising from a macroscopic statistical average of microstates",
+            "gradient of potentials.",
+            "gradient of potentials"
+          ],
+          "answer_start": [
+            81,
+            126,
+            81,
+            81
+          ]
+        },
+        "id": "5737a84dc3c5551400e51f5a"
+      },
+      {
+        "question": "What do electrostatic gradiient potentials create?",
+        "answers": {
+          "text": [
+            "friction",
+            "friction",
+            "friction",
+            "friction"
+          ],
+          "answer_start": [
+            252,
+            252,
+            252,
+            252
+          ]
+        },
+        "id": "5737a84dc3c5551400e51f5b"
+      },
+      {
+        "question": "Tension, compression, and drag are what kind of forces?",
+        "answers": {
+          "text": [
+            "Nonconservative",
+            "Nonconservative forces other than friction",
+            "Nonconservative",
+            "Nonconservative forces"
+          ],
+          "answer_start": [
+            430,
+            430,
+            430,
+            430
+          ]
+        },
+        "id": "5737a84dc3c5551400e51f5c"
+      },
+      {
+        "question": "It is always possible to model forces as being due to what?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad289c2d7d075001a42999e"
+      },
+      {
+        "question": "Micro-physical considerations yield what?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad289c2d7d075001a42999f"
+      },
+      {
+        "question": "Friction is not caused by the gradients of what?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad289c2d7d075001a4299a0"
+      },
+      {
+        "question": "Conservative forces include what?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad289c2d7d075001a4299a1"
+      }
+    ]
+  },
+  {
+    "index": 20232,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Macroscopic and Microscopic Forces\" focused on \"Connections between nonconservative and conservative forces\" At the top there is a header explaining the analytical framework, shown as \"detailed treatment with statistical mechanics\" and accompanied by a schematic cartoon of a magnifying glass over particles represented as a simplified group of atoms to imply analysis, shown as \"\\\". In the middle a central explanatory panel states \"nonconservative forces change internal energies of the system\" and displays a symbolic cartoon of a piston and heat arrows to indicate heat transfer, shown as \"\\\". Continuing the middle narrative a secondary caption clarifies \"nonconservative forces are often associated with the transfer of heat\" At the bottom a concluding statement cites the thermodynamic principle with the short summary \"Second law of thermodynamics increases entropy in closed systems\" and an abstract cartoon of a rising entropy field represented by dispersed dots, shown as \"\\\". The overall style of the image is clean, didactic, and schematic with clear icons and concise educational typography."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a plain, solid pink background. There are no texts, objects, or any other elements visible in the image. It's a simple, unadorned, and uniform color field."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          68,
+          0
+        ],
+        "bottom_right": [
+          782,
+          507
+        ],
+        "caption": "An illustration of Analytical magnifier over particles\\"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          2031
+        ],
+        "bottom_right": [
+          448,
+          2240
+        ],
+        "caption": "An illustration of Piston and heat flow illustration\\"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          60,
+          916
+        ],
+        "bottom_right": [
+          252,
+          1138
+        ],
+        "caption": "An illustration of Entropy dispersion field\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          30,
+          588
+        ],
+        "bottom_right": [
+          865,
+          910
+        ],
+        "caption": "Text \"Macroscopic and Microscopic Forces\" in <color-1>, <en-font-158>. ",
+        "text": "Macroscopic and Microscopic Forces"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          75,
+          457
+        ],
+        "bottom_right": [
+          821,
+          525
+        ],
+        "caption": "Text \"Connections between nonconservative and conservative forces\" in <color-1>, <en-font-158>. ",
+        "text": "Connections between nonconservative and conservative forces"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          281,
+          1025
+        ],
+        "bottom_right": [
+          814,
+          1085
+        ],
+        "caption": "Text \"detailed treatment with statistical mechanics\" in <color-1>, <en-font-158>. ",
+        "text": "detailed treatment with statistical mechanics"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          281,
+          1264
+        ],
+        "bottom_right": [
+          814,
+          1324
+        ],
+        "caption": "Text \"nonconservative forces change internal energies of the system\" in <color-1>, <en-font-158>. ",
+        "text": "nonconservative forces change internal energies of the system"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          281,
+          1741
+        ],
+        "bottom_right": [
+          814,
+          1800
+        ],
+        "caption": "Text \"nonconservative forces are often associated with the transfer of heat\" in <color-1>, <en-font-158>. ",
+        "text": "nonconservative forces are often associated with the transfer of heat"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          281,
+          1503
+        ],
+        "bottom_right": [
+          814,
+          1562
+        ],
+        "caption": "Text \"Second law of thermodynamics increases entropy in closed systems\" in <color-1>, <en-font-158>. ",
+        "text": "Second law of thermodynamics increases entropy in closed systems"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Macroscopic and Microscopic Forces\" (text) focused on \"Connections between nonconservative and conservative forces\" (text). At the top there is a header explaining the analytical framework, shown as \"detailed treatment with statistical mechanics\" (text) and accompanied by a schematic cartoon of a magnifying glass over particles represented as a simplified group of atoms to imply analysis, shown as \"\\\"Analytical magnifier over particles\\\" (figure)\". In the middle a central explanatory panel states \"nonconservative forces change internal energies of the system\" (text) and displays a symbolic cartoon of a piston and heat arrows to indicate heat transfer, shown as \"\\\"Piston and heat flow illustration\\\" (figure)\". Continuing the middle narrative a secondary caption clarifies \"nonconservative forces are often associated with the transfer of heat\" (text). At the bottom a concluding statement cites the thermodynamic principle with the short summary \"Second law of thermodynamics increases entropy in closed systems\" (text) and an abstract cartoon of a rising entropy field represented by dispersed dots, shown as \"\\\"Entropy dispersion field\\\" (figure)\". The overall style of the image is clean, didactic, and schematic with clear icons and concise educational typography.",
+    "original_bbox_index": 67,
+    "context": "The connection between macroscopic nonconservative forces and microscopic conservative forces is described by detailed treatment with statistical mechanics. In macroscopic closed systems, nonconservative forces act to change the internal energies of the system, and are often associated with the transfer of heat. According to the Second law of thermodynamics, nonconservative forces necessarily result in energy transformations within closed systems from ordered to more random conditions as entropy increases.",
+    "original_qa_pairs": [
+      {
+        "question": "In what treatment are nonconservative and conservative forces described?",
+        "answers": {
+          "text": [
+            "statistical mechanics",
+            "statistical mechanics",
+            "detailed",
+            "detailed treatment with statistical mechanics"
+          ],
+          "answer_start": [
+            134,
+            134,
+            110,
+            110
+          ]
+        },
+        "id": "5737a9afc3c5551400e51f61"
+      },
+      {
+        "question": "What changes macroscopic closed system energies?",
+        "answers": {
+          "text": [
+            "nonconservative forces",
+            "internal energies of the system",
+            "nonconservative forces",
+            "nonconservative forces"
+          ],
+          "answer_start": [
+            188,
+            229,
+            188,
+            188
+          ]
+        },
+        "id": "5737a9afc3c5551400e51f62"
+      },
+      {
+        "question": "What is the exchange of heat associated with?",
+        "answers": {
+          "text": [
+            "nonconservative forces",
+            "nonconservative forces",
+            "nonconservative forces",
+            "nonconservative forces"
+          ],
+          "answer_start": [
+            188,
+            188,
+            188,
+            188
+          ]
+        },
+        "id": "5737a9afc3c5551400e51f63"
+      },
+      {
+        "question": "What is the law of thermodynamics associated with closed system heat exchange?",
+        "answers": {
+          "text": [
+            "Second",
+            "Second law of thermodynamics",
+            "Second law",
+            "Second"
+          ],
+          "answer_start": [
+            331,
+            331,
+            331,
+            331
+          ]
+        },
+        "id": "5737a9afc3c5551400e51f64"
+      },
+      {
+        "question": "What makes energy changes in a closed system?",
+        "answers": {
+          "text": [
+            "nonconservative forces",
+            "nonconservative forces",
+            "nonconservative forces",
+            "nonconservative forces"
+          ],
+          "answer_start": [
+            361,
+            361,
+            361,
+            361
+          ]
+        },
+        "id": "5737a9afc3c5551400e51f65"
+      },
+      {
+        "question": "In macroscopic open systems, non conservative forces act to do what?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28a57d7d075001a4299b0"
+      },
+      {
+        "question": "What are often associated with the transfer of cold?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28a57d7d075001a4299b1"
+      },
+      {
+        "question": "Conservative forces are often associated with the transfer of what?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28a57d7d075001a4299b2"
+      },
+      {
+        "question": "What does not change macroscopic closed systems?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28a57d7d075001a4299b3"
+      }
+    ]
+  },
+  {
+    "index": 20233,
+    "layers_all": [
+      {
+        "category": "base",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image is an infographic titled \"Metric and Imperial Force Units\" focused on \"comparative force units and rare metric mass\" At the top a header displays the title and topic alongside a simple cartoon of a scale and weights labeled \"\\\", and a bold label reading \"\\\"the kilogram-force (kgf) is a deprecated metric force\\\" \"; beneath that a mid-section shows a stylized icon of a single kilogram with a gravity arrow captioned \"\\\"force exerted by standard gravity on one kilogram\\\" \" and a supporting illustration of a piston-like device captioned \"\\\"kilopond as an alternative name for kilogram-force\\\" \" plus a schematic block labeled \"\\ to suggest mechanical tension. Continuing downward, the next band presents a compact depiction of a mass with motion vectors captioned \"\\\"the metric slug accelerates at 1 m·s−2 under 1 kgf\\\" \" and a small cartoon engine and wrench grouped with the text \"\\\"used for aircraft weight and torque wrench settings\\\" \" while two additional simple icons show a heavy beam and a bolt captioned \"\\\"sthène equals 1000 newtons\\\" \" and \"\\\"kip equals 1000 pound-force\\\" \" and a final illustrative icon depicts a rolled-up technical paper captioned \"\\\"archaic units still seen in specialized fields\\\" to tie the information together. The overall style of the image is clean, informative, and schematic with concise labels and friendly flat illustrations."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          0,
+          0
+        ],
+        "bottom_right": [
+          896,
+          2240
+        ],
+        "caption": "The image you've provided is a solid, uniform purple color. There are no objects, texts, or other elements visible in the image. The background is not described, so I can only confirm the color of the image itself."
+      },
+      {
+        "category": "element",
+        "top_left": [
+          217,
+          1638
+        ],
+        "bottom_right": [
+          896,
+          1933
+        ],
+        "caption": "An illustration of balance scale with weights\\"
+      },
+      {
+        "category": "element",
+        "top_left": [
+          217,
+          996
+        ],
+        "bottom_right": [
+          896,
+          1290
+        ],
+        "caption": "An illustration of symbolic force spring\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          53,
+          71
+        ],
+        "bottom_right": [
+          833,
+          320
+        ],
+        "caption": "Text \"Metric and Imperial Force Units\" in <color-23>, <en-font-2>. ",
+        "text": "Metric and Imperial Force Units"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          306,
+          1696
+        ],
+        "bottom_right": [
+          817,
+          1896
+        ],
+        "caption": "Text \"comparative force units and rare metric mass\" in <color-19>, <en-font-2>. ",
+        "text": "comparative force units and rare metric mass"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          305,
+          390
+        ],
+        "bottom_right": [
+          807,
+          590
+        ],
+        "caption": "Text \"the kilogram-force (kgf) is a deprecated metric force\\\" in <color-23>, <en-font-2>. ",
+        "text": "the kilogram-force (kgf) is a deprecated metric force\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          79,
+          1373
+        ],
+        "bottom_right": [
+          571,
+          1573
+        ],
+        "caption": "Text \"force exerted by standard gravity on one kilogram\\\" in <color-23>, <en-font-2>. ",
+        "text": "force exerted by standard gravity on one kilogram\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          79,
+          730
+        ],
+        "bottom_right": [
+          634,
+          889
+        ],
+        "caption": "Text \"kilopond as an alternative name for kilogram-force\\\" in <color-19>, <en-font-2>. ",
+        "text": "kilopond as an alternative name for kilogram-force\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          306,
+          1075
+        ],
+        "bottom_right": [
+          817,
+          1233
+        ],
+        "caption": "Text \"the metric slug accelerates at 1 m·s−2 under 1 kgf\\\" in <color-19>, <en-font-2>. ",
+        "text": "the metric slug accelerates at 1 m·s−2 under 1 kgf\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          315,
+          989
+        ],
+        "bottom_right": [
+          817,
+          1065
+        ],
+        "caption": "Text \"used for aircraft weight and torque wrench settings\\\" in <color-19>, <en-font-2>. ",
+        "text": "used for aircraft weight and torque wrench settings\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          315,
+          1632
+        ],
+        "bottom_right": [
+          817,
+          1708
+        ],
+        "caption": "Text \"sthène equals 1000 newtons\\\" in <color-91>, <en-font-2>. ",
+        "text": "sthène equals 1000 newtons\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          305,
+          317
+        ],
+        "bottom_right": [
+          807,
+          390
+        ],
+        "caption": "Text \"kip equals 1000 pound-force\\\" in <color-23>, <en-font-2>. ",
+        "text": "kip equals 1000 pound-force\\"
+      },
+      {
+        "category": "text",
+        "top_left": [
+          187,
+          2003
+        ],
+        "bottom_right": [
+          701,
+          2067
+        ],
+        "caption": "Text \"archaic units still seen in specialized fields\\\" in <color-19>, <en-font-2>. ",
+        "text": "archaic units still seen in specialized fields\\"
+      }
+    ],
+    "full_image_caption": "The image is an infographic titled \"Metric and Imperial Force Units\" (text) focused on \"comparative force units and rare metric mass\" (text). At the top a header displays the title and topic alongside a simple cartoon of a scale and weights labeled \"\\\"balance scale with weights\\\" (figure)\", and a bold label reading \"\\\"the kilogram-force (kgf) is a deprecated metric force\\\" (text)\"; beneath that a mid-section shows a stylized icon of a single kilogram with a gravity arrow captioned \"\\\"force exerted by standard gravity on one kilogram\\\" (text)\" and a supporting illustration of a piston-like device captioned \"\\\"kilopond as an alternative name for kilogram-force\\\" (text)\" plus a schematic block labeled \"\\\"symbolic force spring\\\" (figure) to suggest mechanical tension. Continuing downward, the next band presents a compact depiction of a mass with motion vectors captioned \"\\\"the metric slug accelerates at 1 m·s−2 under 1 kgf\\\" (text)\" and a small cartoon engine and wrench grouped with the text \"\\\"used for aircraft weight and torque wrench settings\\\" (text)\" while two additional simple icons show a heavy beam and a bolt captioned \"\\\"sthène equals 1000 newtons\\\" (text)\" and \"\\\"kip equals 1000 pound-force\\\" (text)\" and a final illustrative icon depicts a rolled-up technical paper captioned \"\\\"archaic units still seen in specialized fields\\\" (text) to tie the information together. The overall style of the image is clean, informative, and schematic with concise labels and friendly flat illustrations.",
+    "original_bbox_index": 97,
+    "context": "The pound-force has a metric counterpart, less commonly used than the newton: the kilogram-force (kgf) (sometimes kilopond), is the force exerted by standard gravity on one kilogram of mass. The kilogram-force leads to an alternate, but rarely used unit of mass: the metric slug (sometimes mug or hyl) is that mass that accelerates at 1 m·s−2 when subjected to a force of 1 kgf. The kilogram-force is not a part of the modern SI system, and is generally deprecated; however it still sees use for some purposes as expressing aircraft weight, jet thrust, bicycle spoke tension, torque wrench settings and engine output torque. Other arcane units of force include the sthène, which is equivalent to 1000 N, and the kip, which is equivalent to 1000 lbf.",
+    "original_qa_pairs": [
+      {
+        "question": "What is the metric term less used than the Newton?",
+        "answers": {
+          "text": [
+            "kilogram-force",
+            "pound-force",
+            "kilogram-force (kgf)",
+            "kilogram-force",
+            "the kilogram-force ("
+          ],
+          "answer_start": [
+            82,
+            4,
+            82,
+            82,
+            78
+          ]
+        },
+        "id": "5737aafd1c456719005744fb"
+      },
+      {
+        "question": "What is the kilogram-force sometimes reffered to as?",
+        "answers": {
+          "text": [
+            "kilopond",
+            "kilopond",
+            "kilopond",
+            "kilopond",
+            "kilopond"
+          ],
+          "answer_start": [
+            114,
+            114,
+            114,
+            114,
+            114
+          ]
+        },
+        "id": "5737aafd1c456719005744fc"
+      },
+      {
+        "question": "What is a very seldom used unit of mass in the metric system?",
+        "answers": {
+          "text": [
+            "slug",
+            "metric slug",
+            "metric slug",
+            "metric slug",
+            "the metric slug"
+          ],
+          "answer_start": [
+            274,
+            267,
+            267,
+            267,
+            263
+          ]
+        },
+        "id": "5737aafd1c456719005744fd"
+      },
+      {
+        "question": "What seldom used term of a unit of force equal to 1000 pound s of force?",
+        "answers": {
+          "text": [
+            "kip",
+            "kip",
+            "kip",
+            "kip",
+            "kip"
+          ],
+          "answer_start": [
+            712,
+            712,
+            712,
+            712,
+            712
+          ]
+        },
+        "id": "5737aafd1c456719005744fe"
+      },
+      {
+        "question": "What is the seldom used force unit equal to one thousand newtons?",
+        "answers": {
+          "text": [
+            "sthène",
+            "sthène",
+            "sthène",
+            "sthène",
+            "sthène"
+          ],
+          "answer_start": [
+            665,
+            665,
+            665,
+            665,
+            665
+          ]
+        },
+        "id": "5737aafd1c456719005744ff"
+      },
+      {
+        "question": "What does not have a metric counterpart?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28ad0d7d075001a4299cc"
+      },
+      {
+        "question": "What is the force exerted by standard gravity on one ton of mass?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28ad0d7d075001a4299cd"
+      },
+      {
+        "question": "What force leads to a commonly used unit of mass?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28ad0d7d075001a4299ce"
+      },
+      {
+        "question": "What force is part of the modern SI system?",
+        "answers": {
+          "text": [],
+          "answer_start": []
+        },
+        "id": "5ad28ad0d7d075001a4299cf"
+      }
+    ]
+  }
+]
