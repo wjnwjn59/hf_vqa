@@ -1,0 +1,13 @@
+### Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+### model
+model_name_or_path: OpenGVLab/InternVL3_5-2B-HF
+adapter_name_or_path: saves/sft_reasoning_vqaprompt/checkpoint-380
+template: intern_vl
+trust_remote_code: true
+
+### export
+export_dir: output/intern3_5vl_2b_sft_reasoning_vqaprompt
+export_size: 5
+export_device: cpu  # choices: [cpu, auto]
+export_legacy_format: false
