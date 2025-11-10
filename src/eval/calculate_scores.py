@@ -2,9 +2,10 @@ import os
 import json
 import Levenshtein
 from collections import defaultdict
-from src.inference.models.utils import extract_clean_filename
+from eval.utils import extract_clean_filename
 
-RESULTS_DIR = "src/inference/results"
+# RESULTS_DIR = "eval/results"
+RESULTS_DIR = "training/LLaMA-Factory/experiments"
 
 
 def is_numerical(text):
@@ -140,6 +141,9 @@ def analyze_by_categories(preds):
     for item in preds:
         gt_answer = item['answer']
         pred_answer = str(item.get('predict', ''))
+        if pred_answer.count("ANSWER: "):
+            pred_answer = pred_answer.split("ANSWER: ")[-1].strip().lower()
+            
         
         pr_clean = pred_answer.lower().strip().rstrip('.').replace('"', '').rstrip('>').lstrip('<')
         
@@ -362,4 +366,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
