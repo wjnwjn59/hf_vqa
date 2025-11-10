@@ -208,20 +208,32 @@ def find_reasonings_for_image(reasoning_index: Dict, wiki_id: str, layout_index:
 def get_image_source_path(index: int, file_num: int, image_source_dir: str, dataset_name: str) -> Path:
     """
     Get the source path for an image based on its index.
+    Searches for the image in all narrator* subdirectories.
     
     Args:
-        index: Image index (1-50 for file 1, 51-100 for file 2, etc.)
-        file_num: Wiki file number
+        index: Image index (e.g., 19030 for validation data)
+        file_num: Wiki file number (not used for searching, kept for compatibility)
         image_source_dir: Base image directory
         dataset_name: Dataset folder name
         
     Returns:
-        Path to source image
+        Path to source image, or None if not found
     """
-    narrator_folder = f"narrator{file_num:06d}"
     image_name = f"{index}.png"
+    dataset_path = Path(image_source_dir) / dataset_name
     
-    source_path = Path(image_source_dir) / dataset_name / narrator_folder / image_name
+    # Search for the image in all narrator* subdirectories
+    if dataset_path.exists():
+        # Use glob to find the image across all narrator folders
+        image_matches = list(dataset_path.glob(f"narrator*//{image_name}"))
+        
+        if image_matches:
+            # Return the first match found
+            return image_matches[0]
+    
+    # Fallback: try the old method using file_num
+    narrator_folder = f"narrator{file_num:06d}"
+    source_path = dataset_path / narrator_folder / image_name
     return source_path
 
 

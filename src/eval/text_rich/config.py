@@ -21,8 +21,9 @@ class DatasetConfig:
 # Unified dataset configurations
 DATASET_CONFIGS: Dict[str, DatasetConfig] = {
     "chartqapro_test": DatasetConfig(
-        qa_file=f"{BASE_DIR}/chartqapro/test.jsonl",
+        # qa_file=f"{BASE_DIR}/chartqapro/test.jsonl",
         # img_folder=f"{BASE_DIR}/chartqapro/images",
+        qa_file=f"/mnt/VLAI_data/ChartQAPro/test.jsonl",
         img_folder=f"/mnt/VLAI_data/ChartQAPro/images",
         max_new_tokens=100,
         metric="chartqapro",
@@ -76,6 +77,13 @@ DATASET_CONFIGS: Dict[str, DatasetConfig] = {
         max_new_tokens=10,
         metric="vqa_score",
         description="VQAv2 restval set"
+    ),
+    "narrator_val": DatasetConfig(
+        qa_file="/home/thinhnp/hf_vqa/dataset/val_annotations.jsonl",
+        img_folder="/home/thinhnp/hf_vqa/dataset/images",
+        max_new_tokens=100,
+        metric="anls",
+        description="NARRATOR infographic VQA validation set"
     ),
 }
 

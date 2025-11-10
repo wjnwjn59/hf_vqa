@@ -35,6 +35,33 @@ def most_common_answer(answers: List[Dict[str, str]]) -> str:
     return Counter(answer['answer'] for answer in answers).most_common(1)[0][0]
 
 
+def load_narrator_qas_cache(dataset_dir: str) -> Dict[int, Dict[str, Any]]:
+    """
+    Load all QAS files from NARRATOR dataset into memory cache.
+    
+    Args:
+        dataset_dir: Base directory containing qas/ subdirectory
+        
+    Returns:
+        Dict mapping image_id to QAS data containing:
+            - context: str
+            - original_qa_pairs: List[Dict]
+            - generated_qa_pairs: List[Dict]
+    """
+    qas_cache = {}
+    qas_dir = Path(dataset_dir) / "qas"
+    
+    if not qas_dir.exists():
+        raise FileNotFoundError(f"QAS directory not found: {qas_dir}")
+    
+    for qas_file in qas_dir.glob("*.json"):
+        image_id = int(qas_file.stem)
+        with open(qas_file, 'r', encoding='utf-8') as f:
+            qas_cache[image_id] = json.load(f)
+    
+    return qas_cache
+
+
 def load_inference_module(model_name: str) -> Callable:
     """Dynamically load inference function from model file."""
     model_file = Path(__file__).parent / "models" / f"{model_name}.py"
@@ -52,6 +79,10 @@ def load_inference_module(model_name: str) -> Callable:
 
 def extract_image_id(item: Dict[str, Any], dataset: str) -> Any:
     """Extract image ID based on dataset format."""
+    # NARRATOR dataset has image_id directly in metadata
+    if dataset == "narrator_val":
+        return item["image_id"]
+    
     image_name = item["image"]
     
     if dataset == "vqav2_val":
@@ -62,12 +93,46 @@ def extract_image_id(item: Dict[str, Any], dataset: str) -> Any:
         return image_name.split("/")[-1].split(".")[0]
 
 
-def process_batch_data(data: List[Dict], dataset: str, config) -> tuple:
+def process_batch_data(data: List[Dict], dataset: str, config, qas_cache: Optional[Dict[int, Dict[str, Any]]] = None) -> tuple:
     """Process and extract batch data efficiently."""
-    qids = [item["question_id"] for item in data]
+    qids = [item["question_id"] if "question_id" in item else item["id"] for item in data]
     img_ids = [extract_image_id(item, dataset) for item in data]
     
-    # Handle different question formats
+    # Handle NARRATOR dataset format
+    if dataset == "narrator_val":
+        if qas_cache is None:
+            raise ValueError("QAS cache is required for NARRATOR dataset")
+        
+        questions = []
+        gts = []
+        img_paths = []
+        
+        for item in data:
+            image_id = item["image_id"]
+            qa_type = item["qa_type"]
+            qa_index = item["qa_index"]
+            
+            # Fetch QA data from cache
+            qas_data = qas_cache[image_id]
+            qa_pairs_key = f"{qa_type}_qa_pairs"
+            qa = qas_data[qa_pairs_key][qa_index]
+            
+            # Extract question and first answer text
+            questions.append(qa["question"])
+            
+            # Handle cases where answers.text might be empty (unanswerable questions)
+            if qa["answers"]["text"]:
+                gts.append(qa["answers"]["text"][0])
+            else:
+                # For unanswerable questions, use empty string or "unanswerable"
+                gts.append("")
+            
+            # Build image path: {image_id}.png
+            img_paths.append(os.path.join(config.img_folder, f"{image_id}.png"))
+        
+        return qids, img_ids, questions, gts, img_paths
+    
+    # Handle other dataset formats
     is_chartqapro = dataset == "chartqapro_test"
     questions = [item["question"][0] if is_chartqapro else item["question"] for item in data]
     gts = [item["answer"][0] if is_chartqapro else item["answer"] for item in data]
@@ -120,7 +185,15 @@ def main():
     with open(config.qa_file, encoding="utf-8") as f:
         data = [json.loads(line) for line in f]
     
-    qids, img_ids, questions, gts, img_paths = process_batch_data(data, dataset_name, config)
+    # Load QAS cache for NARRATOR dataset
+    qas_cache = None
+    if dataset_name == "narrator_val":
+        print("Loading NARRATOR QAS cache...")
+        dataset_dir = str(Path(config.qa_file).parent)
+        qas_cache = load_narrator_qas_cache(dataset_dir)
+        print(f"Loaded QAS data for {len(qas_cache)} images")
+    
+    qids, img_ids, questions, gts, img_paths = process_batch_data(data, dataset_name, config, qas_cache)
     
     # Datasets that use most common answer for ground truth
     vqa_datasets = {"vqav2_restval", "textvqa_val", "vqav2_val"}
@@ -180,9 +253,23 @@ def main():
         # Update data with results
         for j, answer in enumerate(batch_answers):
             idx = i + j
+            
+            # For NARRATOR dataset, gt is already extracted from QAS cache
+            # For other datasets, gt is in data[idx]["answer"]
+            if dataset_name == "narrator_val":
+                gt_value = gts[idx]
+            else:
+                gt_value = data[idx]["answer"]
+            
+            # For NARRATOR, use "id" field as question_id and add question text
+            if dataset_name == "narrator_val":
+                if "question_id" not in data[idx]:
+                    data[idx]["question_id"] = data[idx]["id"]
+                data[idx]["question"] = questions[idx]
+            
             data[idx].update({
                 "predict": answer,
-                "gt": data[idx]["answer"],
+                "gt": gt_value,
                 "image_id": img_ids[idx]
             })
             if per_sample_flops is not None:
@@ -190,6 +277,11 @@ def main():
             # Remove unnecessary fields
             data[idx].pop("image", None)
             data[idx].pop("answer", None)
+            # Remove NARRATOR-specific metadata fields from output
+            if dataset_name == "narrator_val":
+                data[idx].pop("qas_file", None)
+                data[idx].pop("qa_type", None)
+                data[idx].pop("qa_index", None)
     
     save_results(data, args.model, dataset_name, args.output_dir)
 

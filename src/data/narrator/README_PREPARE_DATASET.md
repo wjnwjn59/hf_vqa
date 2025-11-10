@@ -43,7 +43,7 @@ python src/data/narrator/prepare_dataset.py \
 python src/data/narrator/prepare_dataset.py \
     --wiki-dir src/data/narrator/wiki_val \
     --image-source-dir src/data/bizgen/output \
-    --dataset-name squad_v2_val \
+    --dataset-name squad_v2 \
     --output-dir /home/thinhnp/hf_vqa/dataset \
     --type val
 ```
