@@ -28,12 +28,12 @@ def get_model(model_dir: str = "/mnt/dataset1/pretrained_fm/ahmed-masry_ChartIns
     
     if _model is None or _processor is None:
         # Load processor
-        _processor = AutoProcessor.from_pretrained(model_dir)
+        _processor = AutoProcessor.from_pretrained(model_dir, patch_size=4, use_fast=True)
         
         # Load model
         _model = LlavaForConditionalGeneration.from_pretrained(
             model_dir,
-            torch_dtype=torch.float16
+            dtype=torch.float16
         ).to(device)
         
         _model.eval()

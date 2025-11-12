@@ -17,6 +17,7 @@ USER_PROMPT = (
     "If the answer cannot be determined from the image, respond with 'unanswerable'."
 )
 
+# https://github.com/illuin-tech/colpali/issues/123
 
 def get_model(model_dir: str = "/mnt/dataset1/pretrained_fm/ahmed-masry_chartgemma") -> Tuple[PaliGemmaForConditionalGeneration, AutoProcessor]:
     """

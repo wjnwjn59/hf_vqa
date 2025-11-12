@@ -1,18 +1,8 @@
-#!/usr/bin/env python3
-"""
-Script to prepare NARRATOR VQA dataset in structured format.
-
-This script reorganizes generated infographic data into:
-- Centralized image folder
-- Individual template files per image
-- Individual QA files per image
-- SQuAD v2 format train/val annotation files
-"""
-
 import argparse
 import json
 import shutil
 import logging
+import ast
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
 import glob
@@ -58,8 +48,7 @@ def parse_args():
         "--type",
         type=str,
         required=True,
-        choices=["train", "val"],
-        help="Annotation type: train or val"
+        help="Annotation type: train or val or else"
     )
     parser.add_argument(
         "--squad-file",
@@ -70,7 +59,7 @@ def parse_args():
     parser.add_argument(
         "--reasoning-file",
         type=str,
-        default="src/data/narrator/generated_reasonings.jsonl",
+        default="/home/thinhnp/hf_vqa/src/data/narrator/generated_gpt5_reasonings_final.jsonl",
         help="Path to generated_reasonings.jsonl file (optional)"
     )
     
@@ -287,6 +276,103 @@ def copy_image(source_path: Path, dest_path: Path, index: int) -> bool:
         return False
 
 
+def normalize_answer(answer: Any) -> str:
+    """
+    Normalize answer value, converting empty/None to 'unanswerable'.
+    
+    Args:
+        answer: Answer value (can be string, list, dict, or None)
+        
+    Returns:
+        Normalized answer string
+    """
+    if answer is None:
+        return "unanswerable"
+    
+    # Handle string representation of list (e.g., "['answer']")
+    if isinstance(answer, str) and answer.strip().startswith('[') and answer.strip().endswith(']'):
+        try:
+            answer = ast.literal_eval(answer.strip())
+        except (ValueError, SyntaxError):
+            # If parsing fails, treat as regular string
+            pass
+    
+    # Handle list of answers
+    if isinstance(answer, list):
+        if len(answer) == 0:
+            return "unanswerable"
+        # If list has items, return first non-empty answer
+        for ans in answer:
+            if ans:
+                if isinstance(ans, dict):
+                    text = ans.get('text', '')
+                    if text and str(text).strip():
+                        return str(text).strip()
+                elif str(ans).strip():
+                    return str(ans).strip()
+        return "unanswerable"
+    
+    # Handle dict (e.g., {'text': 'answer', 'answer_start': 0})
+    if isinstance(answer, dict):
+        text = answer.get('text', '')
+        if not text or not str(text).strip():
+            return "unanswerable"
+        return str(text).strip()
+    
+    # Handle string
+    answer_str = str(answer).strip()
+    if not answer_str:
+        return "unanswerable"
+    
+    return answer_str
+
+
+def get_shortest_answer(answer: Any) -> str:
+    """
+    Get the shortest answer from a list of answers, or normalize single answer.
+    
+    Args:
+        answer: Answer value (can be string, list, dict, or None)
+        
+    Returns:
+        Shortest answer string or 'unanswerable'
+    """
+    if answer is None:
+        return "unanswerable"
+    
+    # Handle string representation of list (e.g., "['answer']")
+    if isinstance(answer, str) and answer.strip().startswith('[') and answer.strip().endswith(']'):
+        try:
+            answer = ast.literal_eval(answer.strip())
+        except (ValueError, SyntaxError):
+            # If parsing fails, treat as regular string
+            pass
+    
+    # Handle list of answers - get shortest
+    if isinstance(answer, list):
+        if len(answer) == 0:
+            return "unanswerable"
+        
+        valid_answers = []
+        for ans in answer:
+            if ans:
+                if isinstance(ans, dict):
+                    text = ans.get('text', '')
+                    if text and str(text).strip():
+                        valid_answers.append(str(text).strip())
+                elif str(ans).strip():
+                    valid_answers.append(str(ans).strip())
+        
+        if not valid_answers:
+            return "unanswerable"
+        
+        # Return the shortest answer
+        return min(valid_answers, key=len)
+    
+    # For non-list, use normalize_answer
+    return normalize_answer(answer)
+
+
 def create_template_file(entry: Dict[Any, Any], output_path: Path) -> bool:
     """
     Create template JSON file for an image.
@@ -373,23 +459,43 @@ def create_qas_file(entry: Dict[Any, Any], output_path: Path, reasoning_index: D
         original_qa_pairs = entry.get("original_qa_pairs", [])
         for qa in original_qa_pairs:
             qa_id = qa.get("id", "")
+            
+            # Normalize answer
+            original_answer = qa.get("answer", qa.get("answers", ""))
+            normalized_answer = normalize_answer(original_answer)
+            qa["answer"] = normalized_answer
+            qa["is_unanswerable"] = (normalized_answer == "unanswerable")
+            
             reasoning_entry = find_reasoning(reasoning_index, wiki_id, layout_index, qa_id)
             if reasoning_entry:
                 qa["reasoning"] = {
                     "generated_reasoning": reasoning_entry.get("generated_reasoning", {}),
-                    "merged_reasoning": reasoning_entry.get("merged_reasoning", "")
+                    "merged_reasoning": reasoning_entry.get("merged_reasoning", ""),
+                    "reasoning_full": reasoning_entry.get("reasoning_full", ""),
+                    "reasoning_no_bbox": reasoning_entry.get("reasoning_no_bbox", ""),
+                    "reasoning_no_spatial": reasoning_entry.get("reasoning_no_spatial", ""),
+                    "reasoning_short": reasoning_entry.get("reasoning_short", "")
                 }
         
         # Create generated QA pairs from reasoning
         generated_qa_pairs = []
         for reasoning_entry in generated_reasonings:
+            # Normalize answer
+            gen_answer = reasoning_entry.get("ground_truth_answer", "")
+            normalized_gen_answer = normalize_answer(gen_answer)
+            
             generated_qa_pairs.append({
                 "squad_id": reasoning_entry["squad_id"],
                 "question": reasoning_entry["question"],
-                "answer": reasoning_entry["ground_truth_answer"],
+                "answer": normalized_gen_answer,
+                "is_unanswerable": (normalized_gen_answer == "unanswerable"),
                 "reasoning": {
                     "generated_reasoning": reasoning_entry.get("generated_reasoning", {}),
-                    "merged_reasoning": reasoning_entry.get("merged_reasoning", "")
+                    "merged_reasoning": reasoning_entry.get("merged_reasoning", ""),
+                    "reasoning_full": reasoning_entry.get("reasoning_full", ""),
+                    "reasoning_no_bbox": reasoning_entry.get("reasoning_no_bbox", ""),
+                    "reasoning_no_spatial": reasoning_entry.get("reasoning_no_spatial", ""),
+                    "reasoning_short": reasoning_entry.get("reasoning_short", "")
                 }
             })
         
@@ -474,6 +580,40 @@ def write_annotations(annotations: List[Dict[str, Any]], output_path: Path, anno
     logger.info(f"Successfully wrote {annotation_type} annotations")
 
 
+def create_tsv_file(tsv_entries: List[Dict[str, Any]], output_path: Path, images_dir: Path, annotation_type: str):
+    """
+    Create TSV file with format: index, answer, question, image_path.
+    
+    Args:
+        tsv_entries: List of TSV entry dictionaries
+        output_path: Path to output TSV file
+        images_dir: Directory containing images (for absolute path)
+        annotation_type: Type of annotations (train/val)
+    """
+    logger.info(f"Writing {len(tsv_entries)} entries to TSV file {output_path}")
+    
+    with open(output_path, 'w', encoding='utf-8') as f:
+        # Write header
+        f.write("index\tanswer\tquestion\timage_path\n")
+        
+        # Write data rows
+        for entry in tsv_entries:
+            index = entry['index']
+            answer = entry['answer']
+            question = entry['question']
+            
+            # Create absolute image path
+            image_path = (images_dir / f"{index}.png").resolve()
+            
+            # Escape tabs and newlines in answer and question
+            answer = answer.replace('\t', ' ').replace('\n', ' ').replace('\r', ' ')
+            question = question.replace('\t', ' ').replace('\n', ' ').replace('\r', ' ')
+            
+            f.write(f"{index}\t{answer}\t{question}\t{image_path}\n")
+    
+    logger.info(f"Successfully wrote {annotation_type} TSV file")
+
+
 def process_dataset(args):
     """
     Main processing function.
@@ -515,6 +655,9 @@ def process_dataset(args):
         'generated_qa_pairs': 0,
         'original_qa_with_reasoning': 0,
         'original_qa_without_reasoning': 0,
+        'original_qa_unanswerable': 0,
+        'generated_qa_unanswerable': 0,
+        'total_tsv_entries': 0,
         'layout_stats': {
             'base': 0,
             'element': 0,
@@ -524,6 +667,7 @@ def process_dataset(args):
     }
     
     all_annotations = []
+    all_tsv_entries = []
     
     # Process each wiki file
     for file_num, entries in wiki_data:
@@ -572,7 +716,7 @@ def process_dataset(args):
             if not create_qas_file(entry, qas_path, reasoning_index, wiki_id, generated_reasonings):
                 continue
             
-            # Count reasoning statistics
+            # Count reasoning statistics and collect TSV entries
             original_qa_pairs = entry.get("original_qa_pairs", [])
             for qa in original_qa_pairs:
                 qa_id = qa.get("id", "")
@@ -580,8 +724,36 @@ def process_dataset(args):
                     stats['original_qa_with_reasoning'] += 1
                 else:
                     stats['original_qa_without_reasoning'] += 1
+                
+                # Collect TSV entry for original QA
+                original_answer = qa.get("answer", qa.get("answers", ""))
+                tsv_answer = get_shortest_answer(original_answer)
+                
+                if tsv_answer == "unanswerable":
+                    stats['original_qa_unanswerable'] += 1
+                
+                all_tsv_entries.append({
+                    'index': index,
+                    'answer': tsv_answer,
+                    'question': qa.get("question", "")
+                })
+            
+            # Collect TSV entries for generated QA pairs
+            for reasoning_entry in generated_reasonings:
+                gen_answer = reasoning_entry.get("ground_truth_answer", "")
+                tsv_answer = get_shortest_answer(gen_answer)
+                
+                if tsv_answer == "unanswerable":
+                    stats['generated_qa_unanswerable'] += 1
+                
+                all_tsv_entries.append({
+                    'index': index,
+                    'answer': tsv_answer,
+                    'question': reasoning_entry.get("question", "")
+                })
             
             stats['generated_qa_pairs'] += len(generated_reasonings)
+            stats['total_tsv_entries'] += len(original_qa_pairs) + len(generated_reasonings)
             
             # Check if entry has QA pairs (original or generated)
             if not original_qa_pairs and not generated_reasonings:
@@ -605,6 +777,10 @@ def process_dataset(args):
     annotation_file = dirs['base'] / f"{args.type}_annotations.jsonl"
     write_annotations(all_annotations, annotation_file, args.type)
     
+    # Write TSV file
+    tsv_file = dirs['base'] / f"{args.type}_data.tsv"
+    create_tsv_file(all_tsv_entries, tsv_file, dirs['images'], args.type)
+    
     # Print summary
     logger.info("\n" + "=" * 80)
     logger.info("PROCESSING SUMMARY")
@@ -618,6 +794,10 @@ def process_dataset(args):
     logger.info(f"  Generated QA pairs added: {stats['generated_qa_pairs']}")
     logger.info(f"  Original QA pairs with reasoning: {stats['original_qa_with_reasoning']}")
     logger.info(f"  Original QA pairs without reasoning: {stats['original_qa_without_reasoning']}")
+    logger.info(f"\nUnanswerable Questions Statistics:")
+    logger.info(f"  Original QA pairs unanswerable: {stats['original_qa_unanswerable']}")
+    logger.info(f"  Generated QA pairs unanswerable: {stats['generated_qa_unanswerable']}")
+    logger.info(f"  Total unanswerable: {stats['original_qa_unanswerable'] + stats['generated_qa_unanswerable']}")
     logger.info(f"\nLayout Statistics:")
     logger.info(f"  Total base layers: {stats['layout_stats']['base']}")
     logger.info(f"  Total element layers (images): {stats['layout_stats']['element']}")
@@ -628,11 +808,13 @@ def process_dataset(args):
         logger.info(f"  Average element layers per infographic: {stats['layout_stats']['element'] / stats['processed_entries']:.2f}")
         logger.info(f"  Average text layers per infographic: {stats['layout_stats']['text'] / stats['processed_entries']:.2f}")
     logger.info(f"\nTotal annotation entries: {stats['total_annotations']}")
+    logger.info(f"Total TSV entries: {stats['total_tsv_entries']}")
     logger.info(f"\nOutput location: {args.output_dir}")
     logger.info(f"  - Images: {dirs['images']}")
     logger.info(f"  - Templates: {dirs['templates']}")
     logger.info(f"  - QAS: {dirs['qas']}")
     logger.info(f"  - Annotations: {annotation_file}")
+    logger.info(f"  - TSV Data: {tsv_file}")
     logger.info("=" * 80)
 
 

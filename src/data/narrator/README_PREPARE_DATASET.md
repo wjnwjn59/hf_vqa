@@ -4,6 +4,17 @@
 
 The `prepare_dataset.py` script reorganizes generated NARRATOR VQA infographic data into a structured dataset format compatible with SQuAD v2.
 
+## Key Features
+
+- Loads and integrates reasoning data with 4 reasoning types:
+  - `reasoning_full`: Full reasoning with spatial context and bounding boxes
+  - `reasoning_no_bbox`: Reasoning without bounding box coordinates
+  - `reasoning_no_spatial`: Reasoning without spatial descriptions
+  - `reasoning_short`: Concise reasoning summary
+- Handles unanswerable questions (empty answers → "unanswerable")
+- Generates TSV files for easy data loading
+- Creates lightweight JSONL annotation files with metadata
+
 ## Output Structure
 
 ```
@@ -20,24 +31,27 @@ The `prepare_dataset.py` script reorganizes generated NARRATOR VQA infographic d
 │   ├── 1.json
 │   ├── 2.json
 │   └── ...
-├── train_annotations.json      # SQuAD v2 format train annotations (JSONL)
-└── val_annotations.json        # SQuAD v2 format val annotations (JSONL)
+├── train_annotations.jsonl     # SQuAD v2 format train annotations (JSONL)
+├── train_data.tsv              # TSV format train data
+├── val_annotations.jsonl       # SQuAD v2 format val annotations (JSONL)
+└── val_data.tsv                # TSV format val data
 ```
 
 ## Usage
 
-### For Training Data
+### For Training Data (with reasoning)
 
 ```bash
 python src/data/narrator/prepare_dataset.py \
     --wiki-dir src/data/narrator/wiki \
     --image-source-dir src/data/bizgen/output \
-    --dataset-name squad_v2 \
+    --dataset-name squad_v2_train \
     --output-dir /home/thinhnp/hf_vqa/dataset \
+    --reasoning-file /home/thinhnp/hf_vqa/src/data/narrator/generated_gpt5_reasonings_final.jsonl \
     --type train
 ```
 
-### For Validation Data
+### For Validation Data (without reasoning)
 
 ```bash
 python src/data/narrator/prepare_dataset.py \
@@ -48,6 +62,8 @@ python src/data/narrator/prepare_dataset.py \
     --type val
 ```
 
+**Note:** If `--reasoning-file` is not provided or the file does not exist, QA pairs will be created without reasoning fields. This is useful when you want to generate the dataset structure first and add reasoning later.
+
 ## Arguments
 
 - `--wiki-dir`: Source directory containing wiki*.json files (default: `src/data/narrator/wiki`)
@@ -55,6 +71,7 @@ python src/data/narrator/prepare_dataset.py \
 - `--dataset-name`: Dataset folder name in image source directory (default: `squad_v2`)
 - `--output-dir`: Target dataset directory (default: `/home/thinhnp/hf_vqa/dataset`)
 - `--type`: Annotation type - either `train` or `val` (required)
+- `--reasoning-file`: Path to reasoning JSONL file (default: `/home/thinhnp/hf_vqa/src/data/narrator/generated_gpt5_reasonings_final.jsonl`, optional - if not provided or file doesn't exist, reasoning fields will be empty)
 - `--squad-file`: Path to original SQuAD file for reference (optional)
 
 ## File Formats
@@ -76,9 +93,42 @@ python src/data/narrator/prepare_dataset.py \
 {
   "infographic_id": 1,
   "context": "...",
-  "qa_pairs": [...]
+  "original_qa_pairs": [
+    {
+      "id": "56be85543aeaaa14008c9063",
+      "question": "When did Beyonce start becoming popular?",
+      "answer": "in the late 1990s",
+      "is_unanswerable": false,
+      "reasoning": {
+        "generated_reasoning": {...},
+        "merged_reasoning": "...",
+        "reasoning_full": "Full reasoning with spatial context and bounding boxes...",
+        "reasoning_no_bbox": "Reasoning without coordinates...",
+        "reasoning_no_spatial": "Reasoning without spatial descriptions...",
+        "reasoning_short": "Short summary..."
+      }
+    }
+  ],
+  "generated_qa_pairs": [
+    {
+      "squad_id": "gen_1_1",
+      "question": "What is shown in the image?",
+      "answer": "unanswerable",
+      "is_unanswerable": true,
+      "reasoning": {
+        "generated_reasoning": {...},
+        "merged_reasoning": "...",
+        "reasoning_full": "...",
+        "reasoning_no_bbox": "...",
+        "reasoning_no_spatial": "...",
+        "reasoning_short": "..."
+      }
+    }
+  ]
 }
 ```
+
+**Note:** The `reasoning` field is only present if reasoning data is available. If `--reasoning-file` is not provided, QA pairs will not have the `reasoning` field.
 
 ### Annotation File (Lightweight Metadata JSONL format)
 
@@ -107,18 +157,39 @@ For generated QA pairs:
 
 This format reduces file size by 94% compared to storing full content in annotations.
 
+### TSV File (`{type}_data.tsv`)
+
+Tab-separated values file for easy data loading with format: `index\tanswer\tquestion\timage_path`
+
+```tsv
+index	answer	question	image_path
+1	in the late 1990s	When did Beyonce start becoming popular?	/home/thinhnp/hf_vqa/dataset/images/1.png
+1	singing and dancing	What areas did Beyonce compete in when she was growing up?	/home/thinhnp/hf_vqa/dataset/images/1.png
+2	unanswerable	What is the color of the sky?	/home/thinhnp/hf_vqa/dataset/images/2.png
+```
+
+**Features:**
+- Includes both original and generated QA pairs
+- Uses absolute paths for image locations
+- Unanswerable questions have answer = "unanswerable"
+- For multiple answers, uses the shortest one
+- Tabs and newlines in text are replaced with spaces
+
 ## How It Works
 
 1. Reads all `wiki*.json` files from the wiki directory
-2. Loads reasoning data from `generated_reasonings.jsonl` and indexes it
+2. Loads reasoning data from reasoning file (if provided) and indexes it by (wiki_id, layout_index, squad_id)
 3. For each entry with index N:
    - Copies image from `{image-source-dir}/{dataset-name}/narratorXXXXXX/{N}.png` to `{output-dir}/images/{N}.png`
    - Creates `{output-dir}/templates/{N}.json` with template data
    - Creates `{output-dir}/qas/{N}.json` with:
-     - Original QA pairs with reasoning
-     - Generated QA pairs with reasoning
+     - Original QA pairs with reasoning (if available) and unanswerable handling
+     - Generated QA pairs with reasoning (if available) and unanswerable handling
+     - Each QA includes 6 reasoning fields: generated_reasoning, merged_reasoning, reasoning_full, reasoning_no_bbox, reasoning_no_spatial, reasoning_short
    - Generates lightweight annotation metadata entries
+   - Collects TSV entries with shortest answers
 4. Writes all annotations to `{output-dir}/{type}_annotations.jsonl` (JSONL format)
+5. Writes TSV data to `{output-dir}/{type}_data.tsv` with absolute image paths
 
 ## Loading Annotation Data
 
@@ -164,19 +235,24 @@ with open("train_annotations.jsonl", 'r') as f:
 - Each QA pair becomes a separate entry in the annotations file
 - The `image_id` field links each QA to its corresponding image
 
-## Example Output
+### Reasoning Data (Optional)
 
-After processing 50 images from `wiki000001.json`:
+- If `--reasoning-file` is not provided or the file doesn't exist:
+  - QA pairs will be created **without** the `reasoning` field
+  - All other functionality works normally
+  - This allows you to generate dataset structure first and add reasoning later
+- When reasoning file is provided:
+  - The script loads and indexes reasoning by (wiki_id, layout_index, squad_id)
+  - Matches reasoning to both original and generated QA pairs
+  - Adds 6 reasoning fields: `generated_reasoning`, `merged_reasoning`, `reasoning_full`, `reasoning_no_bbox`, `reasoning_no_spatial`, `reasoning_short`
 
-```
-Dataset Summary:
-- Total entries found: 50
-- Successfully processed: 50
-- Images copied: 50
-- Template files created: 50
-- QAS files created: 50
-- Annotation entries: 574 (multiple QA pairs per image)
-```
+### Unanswerable Questions
+
+- Empty or None answers are automatically converted to "unanswerable"
+- Each QA pair has an `is_unanswerable` field (true/false)
+- In TSV files, unanswerable questions have answer = "unanswerable"
+- For multiple answers, the shortest non-empty answer is selected
+- This follows SQuAD v2 format for unanswerable questions
 
 ## Workflow
 

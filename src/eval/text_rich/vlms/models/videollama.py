@@ -13,7 +13,6 @@ USER_PROMPT_TEMPLATE = (
     "If the answer cannot be determined from the image, respond with 'unanswerable'.\n"
 )
 
-
 def get_model(model_dir="DAMO-NLP-SG/VideoLLaMA3-7B-Image"):
     global _model, _processor
     if _model is None or _processor is None:

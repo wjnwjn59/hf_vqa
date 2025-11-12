@@ -16,7 +16,6 @@ USER_PROMPT = (
     "If the answer cannot be determined from the image, respond with 'unanswerable'."
 )
 
-
 def get_model(model_dir: str = "/mnt/dataset1/pretrained_fm/mistralai_Pixtral-12B-2409") -> LLM:
     """
     Initialize and return the Pixtral model using vLLM.

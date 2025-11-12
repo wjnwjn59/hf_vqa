@@ -19,11 +19,13 @@ DeepSeek-VL2 là Vision-Language Model thế hệ thứ 2 từ DeepSeek AI, kế
 DeepSeek-VL2 yêu cầu thư viện `deepseek-vl` của DeepSeek AI:
 
 ```bash
+conda env create -n deepseek-vl python==3.11
+
 # Option 1: Install from GitHub (recommended)
-pip install git+https://github.com/deepseek-ai/DeepSeek-VL.git
+pip install git+https://github.com/deepseek-ai/DeepSeek-VL2.git
 
 # Option 2: Clone and install locally
-git clone https://github.com/deepseek-ai/DeepSeek-VL.git
+git clone https://github.com/deepseek-ai/DeepSeek-VL2.git
 cd DeepSeek-VL
 pip install -e .
 ```
@@ -66,10 +68,9 @@ pip install huggingface-hub
 huggingface-cli login
 
 # Download model
-huggingface-cli download \
+hf download \
     deepseek-ai/deepseek-vl2-small \
-    --local-dir /mnt/dataset1/pretrained_fm/deepseek-ai_deepseek-vl2-small/ \
-    --local-dir-use-symlinks False
+    --local-dir /mnt/dataset1/pretrained_fm/deepseek-ai_deepseek-vl2-small/ 
 ```
 
 ### Other Available Variants
@@ -116,7 +117,7 @@ cd /home/thinhnp/hf_vqa/src/eval_text-rich
 
 python vlms/run_inference.py \
     --model deepseek_vl2 \
-    --dataset chartqapro_test \
+    --dataset narrator \
     --batch-size 1 \
     --output-dir ./outputs/vlm_results/
 ```
@@ -138,6 +139,7 @@ datasets=(
     "infographicvqa_val"
     "textvqa_val"
     "vqav2_restval"
+    "narrator_val"
 )
 
 for dataset in "${datasets[@]}"; do

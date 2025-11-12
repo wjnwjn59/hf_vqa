@@ -3,8 +3,8 @@
 import torch
 from typing import List, Dict, Any, Tuple, Optional
 from transformers import AutoModelForCausalLM
-from deepseek_vl.models import DeepseekVLV2Processor, DeepseekVLV2ForCausalLM
-from deepseek_vl.utils.io import load_pil_images
+from deepseek_vl2.models import DeepseekVLV2Processor, DeepseekVLV2ForCausalLM
+from deepseek_vl2.utils.io import load_pil_images
 from PIL import Image
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
