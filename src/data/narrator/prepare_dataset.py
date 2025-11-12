@@ -470,7 +470,7 @@ def create_qas_file(entry: Dict[Any, Any], output_path: Path, reasoning_index: D
             if reasoning_entry:
                 qa["reasoning"] = {
                     "generated_reasoning": reasoning_entry.get("generated_reasoning", {}),
-                    "merged_reasoning": reasoning_entry.get("merged_reasoning", ""),
+                    # "merged_reasoning": reasoning_entry.get("merged_reasoning", ""),
                     "reasoning_full": reasoning_entry.get("reasoning_full", ""),
                     "reasoning_no_bbox": reasoning_entry.get("reasoning_no_bbox", ""),
                     "reasoning_no_spatial": reasoning_entry.get("reasoning_no_spatial", ""),
@@ -491,7 +491,7 @@ def create_qas_file(entry: Dict[Any, Any], output_path: Path, reasoning_index: D
                 "is_unanswerable": (normalized_gen_answer == "unanswerable"),
                 "reasoning": {
                     "generated_reasoning": reasoning_entry.get("generated_reasoning", {}),
-                    "merged_reasoning": reasoning_entry.get("merged_reasoning", ""),
+                    # "merged_reasoning": reasoning_entry.get("merged_reasoning", ""),
                     "reasoning_full": reasoning_entry.get("reasoning_full", ""),
                     "reasoning_no_bbox": reasoning_entry.get("reasoning_no_bbox", ""),
                     "reasoning_no_spatial": reasoning_entry.get("reasoning_no_spatial", ""),
