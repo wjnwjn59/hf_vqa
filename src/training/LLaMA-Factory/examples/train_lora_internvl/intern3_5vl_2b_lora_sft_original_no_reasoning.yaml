@@ -1,0 +1,57 @@
+### model
+model_name_or_path: /data/thangdd_workspace/InfographicDataPaper/llm_checkpoints/OpenGVLab_InternVL3_5-2B-HF
+image_max_pixels: 2408448
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_rank: 16
+lora_alpha: 32
+lora_target: all
+
+### dataset
+# narrativeinfovqa_train_both_reasoning_full
+# narrativeinfovqa_train_original_noreasoning
+dataset: narrativeinfovqa_train_original_noreasoning
+
+template: intern_vl
+media_dir: /data/thangdd_workspace/InfographicDataPaper/NarrativeInfoVQA/images
+cutoff_len: 8192
+max_samples: 100000000
+overwrite_cache: true
+
+preprocessing_num_workers: 64
+dataloader_num_workers: 16
+
+### output
+output_dir: saves/internvl3_5_2b_sft_narrative_origin_only_no_reasoning_full_data
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+
+### train
+seed: 59
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 8
+learning_rate: 2.0e-5
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+bf16: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+flash_attn: fa2
+enable_liger_kernel: true
+use_unsloth_gc: true
+deepspeed: examples/deepspeed/ds_z2_config.json
+
+# eval
+eval_dataset: narrativeinfovqa_test_both_reasoning_full
+per_device_eval_batch_size: 32
+eval_strategy: steps
+eval_steps: 200
